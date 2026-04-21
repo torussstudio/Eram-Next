@@ -7,7 +7,7 @@ export default function ExcellenceSection() {
   const [active, setActive] = useState("ACADEMIC");
 
   return (
-    <section className="bg-white py-[120px] max-[900px]:py-[90px] max-[560px]:py-[72px]" id="excellence">
+    <section className="bg-white py-[120px] max-[900px]:py-[90px] max-[560px]:py-[72px]" id="gallery">
       <div
         className="
           max-w-[1180px]

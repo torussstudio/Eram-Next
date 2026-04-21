@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+ 
+@font-face {
+  font-family: "Agency";
+  src: url("/fonts/Agency.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* hide scrollbar but keep scroll working */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

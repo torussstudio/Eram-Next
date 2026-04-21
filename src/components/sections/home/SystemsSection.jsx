@@ -32,7 +32,7 @@ export default function SystemsSection() {
   const cards = cardsData[activeTab];
 
   return (
-    <section className="bg-[#f5efe8] py-[90px] overflow-hidden">
+    <section id="facilities" className="bg-[#f5efe8] py-[90px] overflow-hidden">
       {/* Tabs */}
       <div className="flex justify-center mb-[70px] px-[20px]">
         <div

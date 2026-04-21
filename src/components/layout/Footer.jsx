@@ -1,42 +1,232 @@
-import { shell } from "../../constants/homeStyles"
+import {
+  FaInstagram,
+  FaYoutube,
+  FaLinkedin,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="pb-12 pt-[10px]">
-      <div
-        className={`${shell} flex items-center justify-between gap-[26px] border-t border-[rgba(17,17,17,0.16)] pt-7 max-[920px]:flex-col max-[920px]:items-stretch max-[640px]:pt-5`}
-      >
-        <div>
-          <a className="inline-flex items-center gap-[10px]" href="#hero">
-            <span className="h-6 w-[7px] rounded-full bg-[#111111]" />
-            <span className="font-display text-[1.3rem] font-black tracking-[0.12em] text-[#111111]">
-              ERAM
-            </span>
-          </a>
-          <p className="mt-4 max-w-[32rem] text-base leading-[1.75] text-[#616161] max-[640px]:text-[0.92rem]">
-            Building disciplined, value-based institutions that expand access to quality learning
-            and reach communities that need it most.
-          </p>
+    <footer className="bg-[#b5122b] text-white px-6 py-20">
+      <div className="max-w-[1200px] mx-auto">
+        {/* GRID */}
+
+        <div className="grid md:grid-cols-4 gap-12">
+          {/* LOGO + TEXT */}
+
+          <div>
+            <img src="/education-white.svg" alt="ERAM" className="h-12 mb-6" />
+
+            <p
+              className="
+text-sm
+
+leading-[1.6]
+
+text-white/90
+
+max-w-[280px]
+"
+            >
+              To empower and excel students to acquire value based quality
+              education providing an equal nurturing grounds for the overall
+              growth and development of our students.
+            </p>
+
+            {/* SOCIAL */}
+
+            <h4 className="mt-8 font-semibold tracking-wide">STAY CONNECTED</h4>
+
+            <div className="flex gap-5 mt-4 text-xl">
+              <FaInstagram />
+              <FaYoutube />
+              <FaLinkedin />
+            </div>
+          </div>
+
+          {/* QUICK LINKS */}
+
+          <div>
+            <h4
+              className="
+font-semibold
+
+tracking-wide
+
+relative
+
+inline-block
+
+mb-6
+"
+            >
+              QUICK LINKS
+              <span
+                className="
+absolute
+
+left-0
+bottom-[-6px]
+
+w-10
+h-[2px]
+
+bg-white
+"
+              />
+            </h4>
+
+            <ul className="space-y-2 text-sm text-white/90">
+              <li>About Us</li>
+              <li>Admissions</li>
+              <li>Academics</li>
+              <li>Facilities</li>
+              <li>Faculty</li>
+              <li>Contact Us</li>
+              <li>Download Prospectus</li>
+            </ul>
+          </div>
+
+          {/* RESOURCES */}
+
+          <div>
+            <h4
+              className="
+font-semibold
+
+tracking-wide
+
+relative
+
+inline-block
+
+mb-6
+"
+            >
+              RESOURCES
+              <span
+                className="
+absolute
+
+left-0
+bottom-[-6px]
+
+w-10
+h-[2px]
+
+bg-white
+"
+              />
+            </h4>
+
+            <ul className="space-y-2 text-sm text-white/90">
+              <li>FAQs</li>
+              <li>Gallery</li>
+              <li>News and Updates</li>
+              <li>Parent Portal</li>
+              <li>Privacy Policy</li>
+              <li>Terms & Conditions</li>
+              <li>Safety Guidelines</li>
+            </ul>
+          </div>
+
+          {/* CONTACT */}
+
+          <div>
+            <h4
+              className="
+font-semibold
+
+tracking-wide
+
+relative
+
+inline-block
+
+mb-6
+"
+            >
+              CONTACT
+              <span
+                className="
+absolute
+
+left-0
+bottom-[-6px]
+
+w-10
+h-[2px]
+
+bg-white
+"
+              />
+            </h4>
+
+            <ul className="space-y-3 text-sm text-white/90">
+              <li className="flex gap-3 items-start">
+                <FaPhoneAlt className="mt-1" />
+                90481 66313
+              </li>
+
+              <li className="flex gap-3 items-start">
+                <FaPhoneAlt className="mt-1" />
+                85929 66234
+              </li>
+
+              <li className="flex gap-3 items-start">
+                <FaEnvelope className="mt-1" />
+                eram.edu.in
+              </li>
+
+              <li className="flex gap-3 items-start">
+                <FaEnvelope className="mt-1" />
+                manager@eram.edu.in
+              </li>
+
+              <li className="flex gap-3 items-start">
+                <FaMapMarkerAlt className="mt-1" />
+
+                <span>
+                  Eram Education, Eram nagar, Prabhapuram, Mannengode (PO),
+                  Palakkad-679307
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-[18px] max-[640px]:gap-x-[14px] max-[640px]:gap-y-[10px]">
-          <a className="text-[0.8rem] font-extrabold uppercase tracking-[0.14em] text-[#616161]" href="#about">
-            About
-          </a>
-          <a
-            className="text-[0.8rem] font-extrabold uppercase tracking-[0.14em] text-[#616161]"
-            href="#institutions"
-          >
-            Institutions
-          </a>
-          <a className="text-[0.8rem] font-extrabold uppercase tracking-[0.14em] text-[#616161]" href="#beyond">
-            Student Pathways
-          </a>
-          <a className="text-[0.8rem] font-extrabold uppercase tracking-[0.14em] text-[#616161]" href="#impact">
-            Impact
-          </a>
-        </div>
+        {/* DIVIDER */}
+
+        <div
+          className="
+mt-14
+
+border-t
+
+border-white/40
+"
+        />
+
+        {/* COPYRIGHT */}
+
+        <p
+          className="
+text-center
+
+text-sm
+
+mt-6
+
+tracking-wide
+
+text-white/90
+"
+        >
+          COPYRIGHT © ERAM EDUCATION 2026.
+        </p>
       </div>
     </footer>
-  )
+  );
 }

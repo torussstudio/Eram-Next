@@ -5,7 +5,7 @@ import { shell } from "../../../constants/homeStyles"
 export default function AboutSection() {
   return (
     <section
-      id="about"
+      id="about-us"
       className="bg-[#ae1431] py-[100px]"
     >
       <div className={shell}>

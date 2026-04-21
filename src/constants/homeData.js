@@ -1,4 +1,10 @@
-export const navItems = ['About US', 'Courses', 'Facilities', 'contact', 'Gallery']
+export const navItems = [
+  { label: 'About Us', path: '/about-us' },
+  { label: 'Courses', path: '/courses' },
+  { label: 'Facilities', path: '/facilities' },
+  { label: 'Contact', path: '/contact' },
+  { label: 'Gallery', path: '/gallery' },
+]
 
 export const institutions = [
   {

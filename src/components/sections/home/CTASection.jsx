@@ -3,7 +3,7 @@ import { section, shell, getRevealClass } from "../../../constants/homeStyles";
 
 export default function CTASection() {
   return (
-    <section className={`${section} pt-[90px] pb-[110px] bg-[#ae1431]`}>
+    <section id="contact" className={`${section} pt-[90px] pb-[110px] bg-[#ae1431]`}>
 
       <div
         className={`
