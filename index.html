@@ -3,12 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preconnect to Google Fonts for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Load fonts with display=swap to prevent FOUT (Flash of Unstyled Text) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <title>ERAM Education – Home</title>
     <meta name="description" content="ERAM Education was established to build disciplined, value-based institutions that expand access to quality learning and reach communities that need it most." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

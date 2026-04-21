@@ -1,4 +1,7 @@
-export default function SystemsThatSustainExcellence() {
+import { memo } from 'react'
+import OptimizedImage from '../../../ui/OptimizedImage'
+
+function SystemsThatSustainExcellence() {
   const items = [
     {
       number: "/01",
@@ -161,7 +164,7 @@ rounded-[26px]
 overflow-hidden
 "
           >
-            <img
+            <OptimizedImage
               src="/images/campus.jpg"
               alt="campus"
               className="
@@ -172,6 +175,7 @@ md:h-[380px]
 
 object-cover
 "
+              sizes="100vw"
             />
 
             <div
@@ -217,5 +221,7 @@ mx-auto
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default memo(SystemsThatSustainExcellence)

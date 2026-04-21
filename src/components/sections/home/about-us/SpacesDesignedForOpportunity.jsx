@@ -1,4 +1,7 @@
-export default function SpacesDesignedForOpportunity() {
+import { memo } from 'react'
+import OptimizedImage from '../../../ui/OptimizedImage'
+
+function SpacesDesignedForOpportunity() {
   return (
     <section className="bg-[#F5EFE8] py-16 md:py-24 px-5 sm:px-6">
       <div className="max-w-[1200px] mx-auto">
@@ -66,10 +69,11 @@ overflow-hidden
 shrink-0
 "
           >
-            <img
+            <OptimizedImage
               src="/images/classroom.jpg"
-              alt=""
+              alt="modern classrooms"
               className="w-full h-full object-cover"
+              sizes="(max-width: 1024px) 100vw, 360px"
             />
 
             <div className="absolute inset-0 bg-black/35" />
@@ -125,10 +129,11 @@ md:rounded-[28px]
 overflow-hidden
 "
             >
-              <img
+              <OptimizedImage
                 src="/images/sports.jpg"
-                alt=""
+                alt="sports grounds"
                 className="w-full h-full object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
 
               <div className="absolute inset-0 bg-black/35" />
@@ -185,10 +190,11 @@ md:rounded-[28px]
 overflow-hidden
 "
               >
-                <img
+                <OptimizedImage
                   src="/images/auditorium.jpg"
-                  alt=""
+                  alt="amphitheatre"
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 1024px) 50vw, 33vw"
                 />
 
                 <div className="absolute inset-0 bg-black/35" />
@@ -245,10 +251,11 @@ md:rounded-[28px]
 overflow-hidden
 "
               >
-                <img
+                <OptimizedImage
                   src="/images/bus.jpg"
-                  alt=""
+                  alt="transport system"
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 1024px) 50vw, 33vw"
                 />
 
                 <div className="absolute inset-0 bg-black/35" />
@@ -292,5 +299,7 @@ lg:max-w-[190px]
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default memo(SpacesDesignedForOpportunity)

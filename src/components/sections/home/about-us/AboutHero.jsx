@@ -1,4 +1,7 @@
-export default function AboutHero() {
+import { memo } from 'react'
+import OptimizedImage from '../../../ui/OptimizedImage'
+
+function AboutHero() {
   return (
     <section className="bg-[#F5EFE8] py-9 px-4">
       <div className="max-w-[1400px] mx-auto">
@@ -7,10 +10,12 @@ export default function AboutHero() {
           {/* HERO */}
           <div className="relative h-[560px] md:h-[760px] w-full">
             {/* Background Image */}
-            <img
+            <OptimizedImage
               src="/images/about-hero.jpg"
               alt="students"
               className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+              sizes="100vw"
             />
 
             {/* Dark overlay */}
@@ -43,5 +48,7 @@ export default function AboutHero() {
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default memo(AboutHero)

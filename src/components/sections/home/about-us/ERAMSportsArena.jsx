@@ -1,4 +1,7 @@
-export default function ERAMSportsArena() {
+import { memo } from 'react'
+import OptimizedImage from '../../../ui/OptimizedImage'
+
+function ERAMSportsArena() {
   return (
     <section className="bg-[#F5EFE8] px-5 sm:px-6 py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto">
@@ -58,18 +61,11 @@ md:rounded-[28px]
 overflow-hidden
 "
           >
-            <img
+            <OptimizedImage
               src="/images/sports-ground.jpg"
               alt="sports"
-              className="
-w-full
-
-h-[260px]
-sm:h-[320px]
-md:h-[480px]
-
-object-cover
-"
+              className="w-full h-[260px] sm:h-[320px] md:h-[480px] object-cover"
+              sizes="100vw"
             />
 
             <div className="absolute inset-0 bg-black/30" />
@@ -123,18 +119,11 @@ md:rounded-[28px]
 overflow-hidden
 "
           >
-            <img
+            <OptimizedImage
               src="/images/classroom-dark.jpg"
               alt="cta"
-              className="
-w-full
-
-h-[220px]
-sm:h-[260px]
-md:h-[320px]
-
-object-cover
-"
+              className="w-full h-[220px] sm:h-[260px] md:h-[320px] object-cover"
+              sizes="100vw"
             />
 
             <div className="absolute inset-0 bg-black/60" />
@@ -230,5 +219,7 @@ transition
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default memo(ERAMSportsArena)

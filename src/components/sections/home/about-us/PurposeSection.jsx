@@ -1,4 +1,7 @@
-export default function PurposeSection() {
+import { memo } from 'react'
+import OptimizedImage from '../../../ui/OptimizedImage'
+
+function PurposeSection() {
   const items = [
     {
       title: (
@@ -86,20 +89,11 @@ export default function PurposeSection() {
       "
         >
           {/* image */}
-          <img
+          <OptimizedImage
             src="/images/campus.jpg"
             alt="campus"
-            className="
-        w-full
-
-        h-[420px]
-        sm:h-[360px]
-        md:h-[400px]
-        lg:h-[460px]
-
-        object-cover
-        rounded-[22px]
-        "
+            className="w-full h-[420px] sm:h-[360px] md:h-[400px] lg:h-[460px] object-cover rounded-[22px]"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
 
           {/* right content */}
@@ -126,7 +120,7 @@ export default function PurposeSection() {
                 justify-center
                 "
                   >
-                    <img
+                    <OptimizedImage
                       src={item.icon}
                       alt=""
                       className="
@@ -135,6 +129,7 @@ export default function PurposeSection() {
 
                   object-contain
                   "
+                      sizes="32px"
                     />
                   </div>
 
@@ -179,5 +174,7 @@ export default function PurposeSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default memo(PurposeSection)

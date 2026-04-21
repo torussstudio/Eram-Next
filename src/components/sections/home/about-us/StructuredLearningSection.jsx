@@ -1,4 +1,7 @@
-export default function StructuredLearningSection() {
+import { memo } from 'react'
+import OptimizedImage from '../../../ui/OptimizedImage'
+
+function StructuredLearningSection() {
   return (
     <section className="bg-[#b5122b] text-white px-4 py-20 overflow-hidden">
       <div
@@ -62,10 +65,11 @@ overflow-hidden
 flex-shrink-0
 "
               >
-                <img
+                <OptimizedImage
                   src="/images/student.jpg"
-                  alt=""
+                  alt="student"
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 768px) 100vw, 360px"
                 />
 
                 <div className="absolute inset-0 bg-black/25" />
@@ -114,10 +118,11 @@ overflow-hidden
 flex-shrink-0
 "
               >
-                <img
+                <OptimizedImage
                   src="/images/teacher.jpg"
-                  alt=""
+                  alt="teacher"
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 768px) 100vw, 360px"
                 />
 
                 <div className="absolute inset-0 bg-black/25" />
@@ -166,10 +171,11 @@ overflow-hidden
 flex-shrink-0
 "
               >
-                <img
+                <OptimizedImage
                   src="/images/class.jpg"
-                  alt=""
+                  alt="class"
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 768px) 100vw, 360px"
                 />
 
                 <div className="absolute inset-0 bg-black/25" />
@@ -274,9 +280,9 @@ w-full
 max-w-[460px]
 "
           >
-            <img
+            <OptimizedImage
               src="/images/person1.jpg"
-              alt="person"
+              alt="Dr. Siddeek Ahmed"
               className="
 w-full
 
@@ -288,6 +294,7 @@ object-[75%_center]
 
 grayscale
 "
+              sizes="(max-width: 768px) 100vw, 460px"
             />
 
             <div
@@ -351,9 +358,9 @@ w-full
 max-w-[460px]
 "
           >
-            <img
+            <OptimizedImage
               src="/images/person2.jpg"
-              alt=""
+              alt="Mr. Abdussamod C K"
               className="
 w-full
 
@@ -365,6 +372,7 @@ object-[10%_center]
 
 grayscale
 "
+              sizes="(max-width: 768px) 100vw, 460px"
             />
 
             <div
@@ -488,5 +496,7 @@ xl:ml-[150px]
         </h3>
       </div>
     </section>
-  );
+  )
 }
+
+export default memo(StructuredLearningSection)
