@@ -1,15 +1,35 @@
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ActionButton from "../../ui/ActionButton";
-import { section, shell, getRevealClass } from "../../../constants/homeStyles";
+import { section, shell } from "../../../constants/homeStyles";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CTASection() {
+  const ctaRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.fromTo(ctaRef.current,
+      { opacity: 0, scale: 0.95, y: 30 },
+      {
+        opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: ctaRef.current,
+          start: 'top 85%',
+        }
+      }
+    );
+  });
+
   return (
     <section id="contact" className={`${section} pt-[90px] pb-[110px] bg-[#ae1431]`}>
 
       <div
+        ref={ctaRef}
         className={`
           ${shell}
-
-          ${getRevealClass()}
 
           flex
           flex-col

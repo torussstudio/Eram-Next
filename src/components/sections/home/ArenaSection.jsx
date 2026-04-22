@@ -1,49 +1,134 @@
+import { useRef } from "react";
 import ActionButton from "../../ui/ActionButton";
-import { section, sectionBand, shell, getRevealClass } from "../../../constants/homeStyles";
+import { section, sectionBand, shell } from "../../../constants/homeStyles";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ArenaSection() {
+  const sectionRef      = useRef(null);
+  const heroRef         = useRef(null); // full-card video — z-10
+  const heroVideoRef    = useRef(null);
+  const gridRef         = useRef(null); // normal grid — z-20
+  const leftColRef      = useRef(null);
+  const rightPanelRef   = useRef(null);
+  const eramTextRef     = useRef(null);
+  const arenaOutlineRef = useRef(null);
+
+  useGSAP(() => {
+    /* ── initial states ── */
+
+    // Hero video: fill entire card, slightly zoomed in
+    gsap.set(heroVideoRef.current, {
+      scale: 1.22,
+      transformOrigin: "center center",
+      force3D: true,
+    });
+
+    // Grid content: invisible at start
+    gsap.set(gridRef.current,       { opacity: 0, force3D: true });
+    gsap.set(leftColRef.current,    { x: -36, force3D: true });
+    gsap.set(rightPanelRef.current, { x: 36,  force3D: true });
+    gsap.set(eramTextRef.current,   { opacity: 0, y: 20, force3D: true });
+    gsap.set(arenaOutlineRef.current, { opacity: 0, y: 64, force3D: true });
+
+    /* ── pinned scrub timeline ── */
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "+=100%",
+        scrub: 0.5,
+        pin: true,
+        anticipatePin: 1,
+      },
+      defaults: { ease: "none" },
+    });
+
+    // 0.00 – 0.55 : hero video zooms out
+    tl.to(heroVideoRef.current, { scale: 1, duration: 0.55 }, 0);
+
+    // 0.30 – 0.65 : hero fades out
+    tl.to(heroRef.current, { opacity: 0, duration: 0.35 }, 0.30);
+
+    // 0.35 – 0.70 : grid fades + slides in
+    tl.to(gridRef.current,    { opacity: 1, duration: 0.35 }, 0.35);
+    tl.to(leftColRef.current,    { x: 0, duration: 0.35 }, 0.35);
+    tl.to(rightPanelRef.current, { x: 0, duration: 0.35 }, 0.35);
+
+    // 0.60 – 0.78 : "THE ERAM" fades in
+    tl.to(eramTextRef.current, { opacity: 1, y: 0, duration: 0.18 }, 0.60);
+
+    // 0.70 – 1.00 : "SPORTS ARENA" rises
+    tl.to(arenaOutlineRef.current, { opacity: 1, y: 0, duration: 0.30 }, 0.70);
+  }, { scope: sectionRef });
+
   return (
-    <section id="arena" className={`${section} ${sectionBand} bg-[#ae1431]`}>
+    <section
+      ref={sectionRef}
+      id="arena"
+      className={`${section} ${sectionBand} bg-[#ae1431]`}
+    >
       <div
         className={`
           ${shell}
-
           !max-w-[1580px]
           !w-[calc(100vw-64px)]
           max-[640px]:!w-[calc(100vw-24px)]
-
           bg-white
-
           rounded-[32px]
           max-[640px]:rounded-[22px]
-
           px-[110px]
           py-[120px]
-
           max-[900px]:px-[28px]
           max-[900px]:py-[80px]
           max-[640px]:px-[18px]
           max-[640px]:py-[56px]
-
           relative
           overflow-hidden
         `}
       >
 
+        {/* ── HERO: full-card video, z-10 ── */}
         <div
+          ref={heroRef}
+          className="absolute inset-0 z-[10] overflow-hidden rounded-[32px] max-[640px]:rounded-[22px]"
+          style={{ willChange: "opacity" }}
+        >
+          <video
+            ref={heroVideoRef}
+            autoPlay muted loop playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ willChange: "transform" }}
+          >
+            <source src="/videos/arena.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/35" />
+        </div>
+
+        {/* ── GRID CONTENT, z-20 (above hero, always on top) ── */}
+        <div
+          ref={gridRef}
           className="
+            relative z-[20]
             grid
             gap-[40px]
-
             [grid-template-columns:minmax(0,0.85fr)_minmax(0,1.15fr)]
-
             max-[1000px]:grid-cols-1
             max-[640px]:gap-[28px]
           "
+          style={{ willChange: "opacity" }}
         >
 
           {/* LEFT */}
-          <div className="max-w-[460px]">
+          <div
+            ref={leftColRef}
+            className="max-w-[460px]"
+            style={{ willChange: "transform" }}
+          >
             <h2
               className="
                 font-display
@@ -78,71 +163,44 @@ export default function ArenaSection() {
             </p>
 
             <div className="flex gap-[14px] flex-wrap max-[640px]:gap-[10px]">
-              <ActionButton>
-                Explore The Arena
-              </ActionButton>
-
-              <ActionButton variant="secondary">
-                Discover Our Infrastructure
-              </ActionButton>
+              <ActionButton>Explore The Arena</ActionButton>
+              <ActionButton variant="secondary">Discover Our Infrastructure</ActionButton>
             </div>
           </div>
 
-
           {/* RIGHT */}
           <div
+            ref={rightPanelRef}
             className={`
-              ${getRevealClass()}
               relative
               min-h-[520px]
               max-[1000px]:min-h-[300px]
               max-[640px]:min-h-[200px]
-
               overflow-hidden
               rounded-[24px]
             `}
+            style={{ willChange: "transform" }}
           >
-
-            {/* VIDEO BACKGROUND */}
             <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="
-                absolute
-                inset-0
-                w-full
-                h-full
-                object-cover
-              "
+              autoPlay muted loop playsInline
+              className="absolute inset-0 w-full h-full object-cover"
             >
               <source src="/videos/arena.mp4" type="video/mp4" />
             </video>
-
-
-            {/* optional overlay for better text visibility */}
             <div className="absolute inset-0 bg-black/25" />
 
-
-            {/* THE ERAM TEXT */}
+            {/* THE ERAM */}
             <div
+              ref={eramTextRef}
               className="
                 absolute
-
                 right-[20px]
                 bottom-[10px]
-
                 font-display
-
                 text-[clamp(3.4rem,4.6vw,5.4rem)]
-
                 font-[900]
-
                 tracking-[-0.045em]
-
                 text-white
-
                 max-[640px]:left-1/2
                 max-[640px]:-translate-x-1/2
                 max-[640px]:right-auto
@@ -151,53 +209,40 @@ export default function ArenaSection() {
                 max-[640px]:text-center
                 max-[640px]:whitespace-nowrap
               "
+              style={{ willChange: "transform, opacity" }}
             >
               THE ERAM
             </div>
-
           </div>
-
         </div>
 
-
-        {/* SPORTS ARENA outline */}
+        {/* SPORTS ARENA outline — z-20 */}
         <div
+          ref={arenaOutlineRef}
           className="
-            absolute
-
+            absolute z-[20]
             left-[20px]
-
             bottom-[-48px]
-
             font-display
-
             text-[clamp(7.2rem,13.2vw,14rem)]
-
             font-[700]
-
             tracking-[-0.045em]
-
             leading-[0.88]
-
             text-transparent
-
             [-webkit-text-stroke:1.6px_black]
-
             pointer-events-none
             select-none
-
             whitespace-nowrap
-
             max-[1000px]:left-[10px]
             max-[1000px]:bottom-[-30px]
             max-[1000px]:text-[clamp(4.8rem,15vw,8.2rem)]
-
             max-[640px]:left-1/2
             max-[640px]:-translate-x-1/2
             max-[640px]:bottom-[-14px]
             max-[640px]:text-[clamp(2.2rem,14vw,3.6rem)]
             max-[640px]:[-webkit-text-stroke:1.1px_black]
           "
+          style={{ willChange: "transform, opacity" }}
         >
           SPORTS ARENA
         </div>

@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Footer from "../components/layout/Footer"
 import Navbar from "../components/layout/Navbar"
+import SmoothScrollProvider from "../providers/SmoothScrollProvider"
 
 // Lazy load all pages for route-based code splitting
 const Home = lazy(() => import("../pages/home/Home"))
@@ -27,9 +28,10 @@ function PageLoader() {
 export default function App() {
   return (
     <Router>
-      <div className="overflow-x-clip bg-[#F5EFE8] font-display text-[#111111] leading-[1.4]">
-        <Navbar />
-        <Suspense fallback={<PageLoader />}>
+      <div id="smooth-wrapper" className="overflow-x-clip bg-[#F5EFE8] font-display text-[#111111] leading-[1.4]">
+        <SmoothScrollProvider>
+          <Navbar />
+          <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about-us" element={<About />} />
@@ -40,6 +42,7 @@ export default function App() {
           </Routes>
         </Suspense>
         <Footer />
+        </SmoothScrollProvider>
       </div>
     </Router>
   )

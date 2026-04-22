@@ -16,6 +16,7 @@ export default function OptimizedImage({
   quality = 85,
   loading = 'lazy',
   onLoadingComplete,
+  disableTransition = false,
   ...props
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -38,13 +39,17 @@ export default function OptimizedImage({
   // Note: In production, you'd generate these on your server or use a CDN like Cloudinary/Imgix
   const srcSet = `${src}`
 
+  const transitionClass = disableTransition 
+    ? '' 
+    : `${!isLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`
+
   return (
     <img
       src={src}
       alt={alt}
       sizes={sizes}
       loading={loading}
-      className={`${className} ${!isLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+      className={`${className} transform-gpu ${transitionClass}`}
       onLoad={handleLoad}
       onError={handleError}
       decoding="async"

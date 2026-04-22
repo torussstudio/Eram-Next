@@ -23,8 +23,36 @@ export default function MarqueeText() {
 
   return (
 
-    <div className="relative left-1/2 right-1/2 mb-[70px] w-screen -translate-x-1/2 overflow-hidden border-y-[2px] border-black py-[16px] max-[640px]:mb-[44px] max-[640px]:py-[12px]">
+<div
+className="
 
+relative
+
+left-1/2
+right-1/2
+
+mt-[30px]
+
+mb-[70px]
+
+w-screen
+
+-translate-x-1/2
+
+overflow-hidden
+
+border-y-[2px]
+border-black
+
+py-[16px]
+
+max-[640px]:mt-[20px]
+max-[640px]:mb-[44px]
+
+max-[640px]:py-[12px]
+
+"
+>
       <div
         ref={ref}
         className="flex items-center whitespace-nowrap w-max"

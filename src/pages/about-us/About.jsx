@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react'
 
-const AboutHero = lazy(() => import('../../components/sections/home/about-us/AboutHero'))
-const PurposeSection = lazy(() => import('../../components/sections/home/about-us/PurposeSection'))
-const StructuredLearningSection = lazy(() => import('../../components/sections/home/about-us/StructuredLearningSection'))
-const SystemsThatSustainExcellence = lazy(() => import('../../components/sections/home/about-us/SystemsThatSustainExcellence'))
-const SpacesDesignedForOpportunity = lazy(() => import('../../components/sections/home/about-us/SpacesDesignedForOpportunity'))
-const ERAMSportsArena = lazy(() => import('../../components/sections/home/about-us/ERAMSportsArena'))
+const AboutHero = lazy(() => import('../../components/sections/about/AboutHero'))
+const PurposeSection = lazy(() => import('../../components/sections/about/PurposeSection'))
+const StructuredLearningSection = lazy(() => import('../../components/sections/about/StructuredLearningSection'))
+const SystemsThatSustainExcellence = lazy(() => import('../../components/sections/about/SystemsThatSustainExcellence'))
+const SpacesDesignedForOpportunity = lazy(() => import('../../components/sections/about/SpacesDesignedForOpportunity'))
+const ERAMSportsArena = lazy(() => import('../../components/sections/about/ERAMSportsArena'))
 
 // Loading fallback component
 function LoadingFallback() {

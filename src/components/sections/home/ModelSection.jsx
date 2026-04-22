@@ -1,8 +1,67 @@
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { facultySystems, modelPillars } from "../../../constants/homeData";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ModelSection() {
+  const sectionRef = useRef(null);
+
+  useGSAP(() => {
+    // Animate Triangle
+    gsap.fromTo('.model-triangle',
+      { scale: 0.5, rotate: -15, opacity: 0 },
+      { 
+        scale: 1, rotate: 0, opacity: 0.75, duration: 1.5, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 60%',
+        }
+      }
+    );
+
+    // Animate Heading
+    gsap.fromTo('.model-heading',
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.model-heading',
+          start: 'top 85%',
+        }
+      }
+    );
+
+    // Stagger Pillars
+    gsap.fromTo('.model-pillar',
+      { opacity: 0, scale: 0.8, y: 20 },
+      {
+        opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'back.out(1.5)',
+        scrollTrigger: {
+          trigger: '.model-pillars-container',
+          start: 'top 85%',
+        }
+      }
+    );
+
+    // Stagger Systems
+    gsap.fromTo('.model-system',
+      { opacity: 0, x: -30 },
+      {
+        opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.model-systems-container',
+          start: 'top 80%',
+        }
+      }
+    );
+  }, { scope: sectionRef });
+
   return (
     <section
+      ref={sectionRef}
       className="
         bg-[#ae1431]
         py-[140px]
@@ -16,6 +75,7 @@ export default function ModelSection() {
       {/* triangle background */}
       <div
         className="
+          model-triangle
           absolute
 
           top-[40px]
@@ -38,25 +98,44 @@ export default function ModelSection() {
 
       <div className="max-w-[1180px] mx-auto px-[24px] relative">
         {/* heading block */}
-        <div className="max-w-[640px] ml-auto translate-x-[120px] -translate-y-[40px] max-[1100px]:translate-x-0 max-[900px]:-translate-y-[20px]">
+<div className="
 
-          <h2
-            className="
-            font-display
-              mt-[18px]
+model-heading
 
-              text-[52px]
-              leading-[1.05]
+max-w-[640px]
 
-              
+ml-auto
 
-              tracking-[-0.02em]
+translate-x-[120px]
 
-              text-[#f5efe8]
-              max-[900px]:text-[42px]
-              max-[640px]:text-[32px]
-            "
-          >
+-translate-y-[110px]
+
+max-[1100px]:translate-x-0
+
+max-[900px]:-translate-y-[40px]
+
+">
+        <h2
+className="
+
+font-display
+
+
+
+text-[52px]
+
+leading-[1.05]
+
+tracking-[-0.02em]
+
+text-[#f5efe8]
+
+max-[900px]:text-[42px]
+
+max-[640px]:text-[32px]
+
+"
+>
             The ERAM
             <br />
             Educational Model
@@ -84,6 +163,7 @@ export default function ModelSection() {
         {/* pillars container */}
         <div
           className="
+            model-pillars-container
             mt-[70px]
 
             bg-[#f5efe8]
@@ -109,6 +189,7 @@ export default function ModelSection() {
             <div
               key={i}
               className="
+                model-pillar
                 text-center
               "
             >
@@ -152,12 +233,23 @@ export default function ModelSection() {
         </div>
 
         {/* academic systems */}
-        <div
-          className="
-            mt-[90px]
-            max-[900px]:mt-[70px]
-          "
-        >
+       <div
+className="
+
+model-systems-container
+
+mt-[90px]
+
+ml-[80px]
+
+max-[1100px]:ml-[40px]
+
+max-[900px]:ml-0
+
+max-[900px]:mt-[70px]
+
+"
+>
          <h3
   className="
     text-center
@@ -195,6 +287,7 @@ export default function ModelSection() {
       key={i}
 
       className="
+        model-system
         relative
 
         pl-[26px]

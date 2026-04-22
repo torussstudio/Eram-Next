@@ -1,14 +1,48 @@
 
 
-import { shell } from "../../../constants/homeStyles"
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { shell } from "../../../constants/homeStyles";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
+  const sectionRef = useRef(null);
+
+  useGSAP(() => {
+    // Reveal top text
+    gsap.fromTo('.about-text', 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        }
+      }
+    );
+
+    // Reveal grid items
+    gsap.fromTo('.about-card',
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.about-grid',
+          start: 'top 80%',
+        }
+      }
+    );
+  });
   return (
     <section
+      ref={sectionRef}
       id="about-us"
       className="bg-[#ae1431] py-[100px]"
     >
-      <div className={shell}>
+      <div className="mx-auto w-[min(1320px,calc(100vw-120px))]">
 
         {/* Top Grid */}
         <div className="grid grid-cols-[300px_1fr] gap-x-[100px]
@@ -17,7 +51,7 @@ export default function AboutSection() {
         max-[1100px]:gap-y-[40px]">
 
           {/* label */}
-          <div className="max-[1100px]:pl-0 pl-[100px]">
+          <div className="about-text max-[1100px]:pl-0 pl-[100px]">
             <span className="text-[18px] tracking-[0.15em] uppercase text-[#f5efe8] font-medium">
               ABOUT US
             </span>
@@ -29,7 +63,7 @@ export default function AboutSection() {
           max-[1280px]:pl-[160px]
           max-[1100px]:pl-0">
 
-            <h2 className=" font-display text-[48px] leading-[1.15]  text-[#f5efe8]
+            <h2 className="about-text font-display text-[48px] leading-[1.15]  text-[#f5efe8]
 
             max-w-[600px]
 
@@ -41,7 +75,7 @@ export default function AboutSection() {
 
             </h2>
 
-            <p className="mt-[24px] text-[14.5px] leading-[1.75] text-[#f5efe8]
+            <p className="about-text mt-[24px] text-[14.5px] leading-[1.75] text-[#f5efe8]
 
             max-w-[520px]">
 
@@ -60,7 +94,7 @@ export default function AboutSection() {
 
 
         {/* cards */}
-        <div className="mt-[80px]">
+        <div className="about-grid mt-[80px]">
 
           {/* row 1 */}
           <div className="grid grid-cols-3 gap-[24px]
@@ -69,7 +103,7 @@ export default function AboutSection() {
           max-[640px]:grid-cols-1">
 
             {/* text block */}
-            <div className="flex items-end
+            <div className="about-card flex items-end
 
             min-h-[380px]
 
@@ -100,7 +134,7 @@ export default function AboutSection() {
 
 
             {/* card */}
-            <div className="rounded-[20px] bg-[#d8d8d8]
+            <div className="about-card rounded-[20px] bg-[#d8d8d8]
 
             min-h-[420px]">
 
@@ -125,7 +159,7 @@ export default function AboutSection() {
           max-[1100px]:grid-cols-2
           max-[640px]:grid-cols-1">
 
-            <div className="rounded-[24px] bg-[#d8d8d8]
+            <div className="about-card rounded-[24px] bg-[#d8d8d8]
 
             min-h-[450px]">
 
@@ -133,7 +167,7 @@ export default function AboutSection() {
 
 
 
-            <div className="rounded-[24px] bg-[#d8d8d8]
+            <div className="about-card rounded-[24px] bg-[#d8d8d8]
 
             min-h-[450px]">
 

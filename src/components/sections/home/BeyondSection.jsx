@@ -1,9 +1,14 @@
 
 
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ActionButton from "../../ui/ActionButton";
-import { section, shell, getRevealClass } from "../../../constants/homeStyles";
+import { section, shell } from "../../../constants/homeStyles";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const beyondCards = [
   { code: "/01", title: "STEM CLUBS" },
@@ -13,21 +18,49 @@ const beyondCards = [
 ];
 
 export default function BeyondSection() {
-
+  const sectionRef = useRef(null);
   const [activeCard, setActiveCard] = useState(0);
+
+  useGSAP(() => {
+    // Heading reveal
+    gsap.fromTo('.beyond-heading',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        }
+      }
+    );
+
+    // Cards stagger
+    gsap.fromTo('.beyond-card',
+      { opacity: 0, x: 50 },
+      {
+        opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.beyond-cards-container',
+          start: 'top 85%',
+        }
+      }
+    );
+  }, { scope: sectionRef });
 
   return (
     <section
+      ref={sectionRef}
       id="beyond"
       className={`${section} pt-[90px] pb-[120px] bg-[#ae1431]`}
     >
 
-      <div className={`${shell} text-center`}>
+      <div className="mx-auto w-[min(1200px,calc(100vw-140px))] text-center">
 
 
         {/* title */}
         <h2
           className="
+          beyond-heading
           font-display
           mb-[14px]
 
@@ -53,6 +86,7 @@ export default function BeyondSection() {
         {/* description */}
         <p
           className="
+          beyond-heading
           mx-auto
 
           mb-[26px]
@@ -78,7 +112,7 @@ export default function BeyondSection() {
 
 
         {/* button */}
-        <div className="mb-[48px] max-[640px]:mb-[34px]">
+        <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
 
           <ActionButton
             variant="secondary"
@@ -96,11 +130,12 @@ export default function BeyondSection() {
         {/* cards */}
         <div
           className="
+          beyond-cards-container
           mx-auto
 
           mt-[48px]
 
-          w-[75%]
+          w-[85%]
 
           overflow-hidden
 
@@ -142,6 +177,7 @@ export default function BeyondSection() {
                   onClick={() => setActiveCard(index)}
 
                   className={`
+                  beyond-card
                   cursor-pointer
 
                   flex
@@ -177,10 +213,8 @@ export default function BeyondSection() {
                   ${
                     isActive
                       ? "border-[#f5efe8] bg-[#f5efe8] text-[#ae1431]"
-                      : "border-black/25 bg-transparent text-[#111]"
+                      : "border-black/25 bg-transparent text-[#f5efe8]"
                   }
-
-                  ${getRevealClass(index)}
                   `}
                 >
 
@@ -263,7 +297,7 @@ export default function BeyondSection() {
 
           mt-[60px]
 
-          w-[75%]
+          w-[85%]
 
           border-t-[2px]
 
