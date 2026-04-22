@@ -12,25 +12,36 @@ function SpacesDesignedForOpportunity() {
   useGSAP(() => {
     // Header
     gsap.to('.spaces-text', {
-      y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power3.out',
-      scrollTrigger: { trigger: containerRef.current, start: 'top 75%' }
+      y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { 
+        trigger: containerRef.current, 
+        start: 'top 75%'
+      }
     })
 
-    // Layout cards fade up stagger
+    // Layout cards fade up stagger - optimized
     gsap.to('.spaces-card', {
-      y: 0, opacity: 1, duration: 1.4, stagger: 0.15, ease: 'power3.out',
-      scrollTrigger: { trigger: '.spaces-grid', start: 'top 75%' }
+      y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { 
+        trigger: '.spaces-grid', 
+        start: 'top 75%'
+      }
     })
 
-    // Inner images slow scale down
-    gsap.utils.toArray('.spaces-card').forEach((card) => {
-      const img = card.querySelector('.spaces-img')
-      gsap.to(img, { 
-        scale: 1, 
-        duration: 2, 
-        ease: 'power3.out',
-        scrollTrigger: { trigger: card, start: 'top 85%' }
-      })
+    // Inner images scale with batching
+    ScrollTrigger.batch('.spaces-card', {
+      interval: 0.1,
+      batchMax: 3,
+      onEnter: (batch) => {
+        batch.forEach((element) => {
+          const img = element.querySelector('.spaces-img')
+          gsap.to(img, { 
+            scale: 1, 
+            duration: 1.5, 
+            ease: 'power3.out'
+          })
+        })
+      }
     })
   }, { scope: containerRef })
 
@@ -103,17 +114,20 @@ rounded-[24px]
 md:rounded-[28px]
 
 overflow-hidden
+transform-gpu
 
 shrink-0
 "
           >
-            <OptimizedImage
-              src="/images/classroom.webp"
-              alt="modern classrooms"
-              className="spaces-img w-full h-full object-cover"
-              sizes="(max-width: 1024px) 100vw, 360px"
-              disableTransition
-            />
+            <div className="spaces-img w-full h-full">
+              <OptimizedImage
+                src="/images/classroom.webp"
+                alt="modern classrooms"
+                className="w-full h-full object-cover block"
+                sizes="(max-width: 1024px) 100vw, 360px"
+                disableTransition
+              />
+            </div>
 
             <div className="absolute inset-0 bg-black/35" />
 
@@ -168,15 +182,18 @@ rounded-[24px]
 md:rounded-[28px]
 
 overflow-hidden
+transform-gpu
 "
             >
-              <OptimizedImage
-                src="/images/sports.webp"
-                alt="sports grounds"
-                className="spaces-img w-full h-full object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                disableTransition
-              />
+              <div className="spaces-img w-full h-full">
+                <OptimizedImage
+                  src="/images/sports.webp"
+                  alt="sports grounds"
+                  className="w-full h-full object-cover block"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  disableTransition
+                />
+              </div>
 
               <div className="absolute inset-0 bg-black/35" />
 
@@ -232,15 +249,18 @@ rounded-[24px]
 md:rounded-[28px]
 
 overflow-hidden
+transform-gpu
 "
               >
-                <OptimizedImage
-                  src="/images/auditorium.webp"
-                  alt="amphitheatre"
-                  className="spaces-img w-full h-full object-cover scale-[1.15] "
-                  sizes="(max-width: 1024px) 50vw, 33vw"
-                  disableTransition
-                />
+                <div className="spaces-img w-full h-full scale-[1.15]">
+                  <OptimizedImage
+                    src="/images/auditorium.webp"
+                    alt="amphitheatre"
+                    className="w-full h-full object-cover block"
+                    sizes="(max-width: 1024px) 50vw, 33vw"
+                    disableTransition
+                  />
+                </div>
 
                 <div className="absolute inset-0 bg-black/35" />
 
@@ -296,15 +316,18 @@ rounded-[24px]
 md:rounded-[28px]
 
 overflow-hidden
+transform-gpu
 "
               >
-                <OptimizedImage
-                  src="/images/bus.webp"
-                  alt="transport system"
-                  className="spaces-img w-full h-full object-cover scale-[1.15] "
-                  sizes="(max-width: 1024px) 50vw, 33vw"
-                  disableTransition
-                />
+                <div className="spaces-img w-full h-full scale-[1.15]">
+                  <OptimizedImage
+                    src="/images/bus.webp"
+                    alt="transport system"
+                    className="w-full h-full object-cover block"
+                    sizes="(max-width: 1024px) 50vw, 33vw"
+                    disableTransition
+                  />
+                </div>
 
                 <div className="absolute inset-0 bg-black/35" />
 

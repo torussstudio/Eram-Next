@@ -125,9 +125,9 @@ flex
 
 justify-center
 
-gap-[70px]
-lg:gap-[110px]
-xl:gap-[150px]
+gap-[40px]
+lg:gap-[80px]
+xl:gap-[110px]
 
 max-[920px]:hidden
 

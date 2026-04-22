@@ -2,7 +2,8 @@ import { memo, useRef } from 'react'
 import OptimizedImage from '../../ui/OptimizedImage'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaPlay } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,8 +15,8 @@ function StructuredLearningSection() {
     gsap.to('.structured-text', {
       y: 0,
       opacity: 1,
-      duration: 1.2,
-      stagger: 0.15,
+      duration: 1,
+      stagger: 0.1,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: containerRef.current,
@@ -26,7 +27,7 @@ function StructuredLearningSection() {
     gsap.to('.structured-btn', {
       y: 0,
       opacity: 1,
-      duration: 1,
+      duration: 0.8,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: containerRef.current,
@@ -34,12 +35,12 @@ function StructuredLearningSection() {
       }
     })
 
-    // 2. Horizontal Cards Stagger
+    // 2. Horizontal Cards - batch optimization
     gsap.to('.structured-card', {
       x: 0,
       opacity: 1,
-      duration: 1.2,
-      stagger: 0.2,
+      duration: 1,
+      stagger: 0.12,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: '.structured-scroll-container',
@@ -56,31 +57,29 @@ function StructuredLearningSection() {
     })
 
     leaderTl.to('.leadership-text',
-      { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power3.out' }
+      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }
     )
 
     leaderTl.to('.leadership-profile',
-      { y: 0, opacity: 1, duration: 1.4, stagger: 0.2, ease: 'power3.out' },
-      "-=0.8"
+      { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power3.out' },
+      "-=0.7"
     )
 
-    // Parallax on leader images
-  gsap.utils.toArray('.leadership-profile').forEach((profile) => {
-
-  const img = profile.querySelector('.leadership-img')
-
-  gsap.to(img,{
-    yPercent: 8,
-    ease:"none",
-    scrollTrigger:{
-      trigger: profile,
-      start:"top bottom",
-      end:"bottom top",
-      scrub:0.2
-    }
-  })
-
-})
+    // Parallax on leader images - optimized with fastScrollEnd
+    gsap.utils.toArray('.leadership-profile').forEach((profile) => {
+      const img = profile.querySelector('.leadership-img')
+      gsap.to(img, {
+        yPercent: 8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: profile,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          fastScrollEnd: true
+        }
+      })
+    })
 
     // 4. Bottom Text & Lists
     const listTl = gsap.timeline({
@@ -91,16 +90,16 @@ function StructuredLearningSection() {
     })
 
     listTl.to('.leadership-bottom-heading',
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
     )
 
     listTl.to('.leadership-list-item',
-      { x: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' },
-      "-=0.6"
+      { x: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out' },
+      "-=0.5"
     )
 
-    listTl.to('.structured-final',
-      { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', 
+    gsap.to('.structured-final',
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', 
         scrollTrigger: { trigger: '.structured-final', start: 'top 85%' }
       }
     )
@@ -109,17 +108,7 @@ function StructuredLearningSection() {
 
   return (
     <section ref={containerRef} className="bg-[#b5122b] text-white px-4 py-20 overflow-hidden">
-      <div
-        className="
-max-w-[1200px]
-
-ml-4
-sm:ml-8
-md:ml-16
-lg:ml-[180px]
-xl:ml-[300px]
-"
-      >
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
         {/* TOP GRID */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* LEFT */}
@@ -136,10 +125,10 @@ xl:ml-[300px]
               framework supported by:
             </p>
 
-            <button className="structured-btn opacity-0 translate-y-5 mt-6 border border-white/60 px-5 py-2 rounded-lg text-sm flex items-center gap-2 hover:bg-white hover:text-[#b5122b] transition">
-              EXPLORE MORE
-              <span>▶</span>
-            </button>
+           <button className="structured-btn opacity-0 translate-y-5 mt-6 border border-white/60 px-5 py-2 rounded-lg text-sm flex items-center gap-2 hover:bg-white hover:text-[#b5122b] transition">
+  EXPLORE MORE
+  <FaPlay className="text-xs transition-colors" />
+</button>
           </div>
 
           {/* RIGHT SCROLL CARDS */}
@@ -169,13 +158,12 @@ rounded-[20px]
 overflow-hidden
 
 flex-shrink-0
-will-change-[opacity,transform]
 "
               >
                 <OptimizedImage
                   src="/images/student.webp"
                   alt="student"
-                  className="leadership-img will-change-transform w-full h-[115%] object-cover grayscale"
+                  className="leadership-img w-full h-[115%] object-cover grayscale"
                   sizes="(max-width: 768px) 100vw, 360px"
                   disableTransition
                 />
@@ -231,7 +219,7 @@ flex-shrink-0
                 <OptimizedImage
                   src="/images/teacher.webp"
                   alt="teacher"
-                 className="leadership-img will-change-transform w-full h-[115%] object-cover grayscale"
+                 className="leadership-img w-full h-[115%] object-cover grayscale"
                   sizes="(max-width: 768px) 100vw, 360px"
                   disableTransition
                 />
@@ -261,7 +249,7 @@ text-white
 max-w-[260px]
 "
                 >
-                  Teacher-guided mentorship
+                  Teacher-guided mentorship models
                 </p>
               </div>
 
@@ -280,21 +268,22 @@ md:h-[260px]
 
 rounded-[20px]
 overflow-hidden
+transform-gpu
 
 flex-shrink-0
 "
               >
                 <OptimizedImage
-                  src="/images/class.jpg"
+                  src="/images/student.webp"
                   alt="class"
-                  className="leadership-img will-change-transform w-full h-[115%] object-cover grayscale"
+                  className="leadership-img w-full h-[115%] object-cover grayscale"
                   sizes="(max-width: 768px) 100vw, 360px"
                   disableTransition
                 />
 
                 <div className="absolute inset-0 bg-black/25" />
 
-                <span className="absolute top-5 left-5 text-[13px] text-white/70">
+                <span className="absolute top-10 left-12 text-[18px] text-white">
                   /03
                 </span>
 
@@ -317,9 +306,118 @@ text-white
 max-w-[260px]
 "
                 >
-                  Continuous assessment structure
+                  Continuous evaluation & improvement cycles
                 </p>
               </div>
+
+ <div
+                className="
+structured-card
+relative
+
+min-w-[300px]
+md:min-w-[360px]
+
+h-[220px]
+md:h-[260px]
+
+rounded-[20px]
+overflow-hidden
+
+flex-shrink-0
+"
+              >
+                <OptimizedImage
+                  src="/images/student.webp"
+                  alt="student"
+                  className="leadership-img w-full h-[115%] object-cover grayscale"
+                  sizes="(max-width: 768px) 100vw, 360px"
+                  disableTransition
+                />
+
+                <div className="absolute inset-0 bg-black/25" />
+
+                <span className="absolute top-10 left-12 text-[18px] text-white">
+                  /04
+                </span>
+
+                <p
+                  className="
+absolute
+bottom-6
+left-12
+right-10
+
+text-[18px]
+md:text-[20px]
+
+font-medium
+
+leading-[1.35]
+
+text-white
+
+max-w-[260px]
+"
+                >
+                 Holistic integration of academics, sports, and culture 
+                </p>
+              </div>
+
+ <div
+                className="
+structured-card
+relative
+
+min-w-[300px]
+md:min-w-[360px]
+
+h-[220px]
+md:h-[260px]
+
+rounded-[20px]
+overflow-hidden
+
+flex-shrink-0
+"
+              >
+                <OptimizedImage
+                  src="/images/teacher.webp"
+                  alt="student"
+                  className="leadership-img w-full h-[115%] object-cover grayscale"
+                  sizes="(max-width: 768px) 100vw, 360px"
+                  disableTransition
+                />
+
+                <div className="absolute inset-0 bg-black/25" />
+
+                <span className="absolute top-10 left-12 text-[18px] text-white">
+                  /05
+                </span>
+
+                <p
+                  className="
+absolute
+bottom-6
+left-12
+right-10
+
+text-[18px]
+md:text-[20px]
+
+font-medium
+
+leading-[1.35]
+
+text-white
+
+max-w-[260px]
+"
+                >
+                  Exposure-driven learning beyond textbooks 
+                </p>
+              </div>
+
             </div>
           </div>
         </div>
@@ -395,19 +493,22 @@ opacity-0 translate-y-12
 relative
 rounded-[26px]
 overflow-hidden
+transform-gpu
 
 w-full
 max-w-[460px]
 "
           >
-            <div className="w-full h-[420px] md:h-[520px] overflow-hidden">
-              <OptimizedImage
-                src="/images/person1.webp"
-                alt="Dr. Siddeek Ahmed"
-className="leadership-img will-change-transform w-full h-[115%] object-cover grayscale"
-                sizes="(max-width: 768px) 100vw, 460px"
-                disableTransition
-              />
+            <div className="w-full h-[420px] md:h-[520px] overflow-hidden relative">
+              <div className="leadership-img w-full h-[115%] absolute -top-[7.5%]">
+                <OptimizedImage
+                  src="/images/person1.webp"
+                  alt="Dr. Siddeek Ahmed"
+                 className="w-full h-full object-cover grayscale block object-[72%_center]"
+                  sizes="(max-width: 768px) 100vw, 460px"
+                  disableTransition
+                />
+              </div>
             </div>
 
             <div
@@ -469,19 +570,22 @@ opacity-0 translate-y-12
 relative
 rounded-[26px]
 overflow-hidden
+transform-gpu
 
 w-full
 max-w-[460px]
 "
           >
-            <div className="w-full h-[420px] md:h-[520px] overflow-hidden">
-              <OptimizedImage
-                src="/images/person2.webp"
-                alt="Mr. Abdussamod C K"
-               className="leadership-img will-change-transform w-full h-[115%] object-cover grayscale"
-                sizes="(max-width: 768px) 100vw, 460px"
-                disableTransition
-              />
+            <div className="w-full h-[420px] md:h-[520px] overflow-hidden relative">
+              <div className="leadership-img w-full h-[115%] absolute -top-[7.5%]">
+                <OptimizedImage
+                  src="/images/person2.webp"
+                  alt="Mr. Abdussamod C K"
+                   className="w-full h-full object-cover grayscale block object-[15%_center]"
+                  sizes="(max-width: 768px) 100vw, 460px"
+                  disableTransition
+                />
+              </div>
             </div>
 
             <div
@@ -549,8 +653,7 @@ md:text-[18px]
 font-medium
 text-white
 
-ml-0
-md:ml-[160px]
+ml-22
 "
           >
             This governance structure
@@ -580,34 +683,28 @@ md:ml-[40px]
 
         {/* FINAL LINE */}
         <h3
-          className="
-structured-final
-opacity-0 translate-y-8
-mt-20
+    className="
+      structured-final
+      opacity-0 translate-y-8
+      mt-20
 
-text-[26px]
-sm:text-[30px]
-md:text-[40px]
-lg:text-[48px]
+      text-[26px]
+      sm:text-[30px]
+      md:text-[40px]
+      lg:text-[48px]
 
-font-sm
+      font-medium
+      leading-[1.18]
 
-leading-[1.18]
-
-text-white
-
-max-w-[980px]
-
-
-md:ml-[30px]
-lg:ml-[80px]
-xl:ml-[150px]
-"
-        >
-          The result is a unified educational system
-          <br />
-          supported by accountability and clarity.
-        </h3>
+      text-white
+      max-w-[980px]
+      ml-22
+    "
+  >
+    The result is a unified educational system
+    <br />
+    supported by accountability and clarity.
+  </h3>
       </div>
     </section>
   )

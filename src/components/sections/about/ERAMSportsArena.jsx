@@ -12,44 +12,58 @@ function ERAMSportsArena() {
   useGSAP(() => {
     // Header
     gsap.to('.arena-text', {
-      y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power3.out',
-      scrollTrigger: { trigger: containerRef.current, start: 'top 75%' }
+      y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { 
+        trigger: containerRef.current, 
+        start: 'top 75%'
+      }
     })
 
     // Image card parallax
     gsap.to('.arena-img-wrap', {
-      scale: 1, opacity: 1, duration: 1.5, ease: 'power3.out',
-      scrollTrigger: { trigger: '.arena-img-wrap', start: 'top 85%' }
+      scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { 
+        trigger: '.arena-img-wrap', 
+        start: 'top 85%'
+      }
     })
     
+    // Parallax image with fastScrollEnd
     gsap.to('.arena-img', {
-  yPercent: 10,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '.arena-img-wrap',
-    start: 'top bottom',
-    end: 'bottom top',
-    scrub: 0.2
-  }
-})
-
-    gsap.to('.arena-img-text', {
-      y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '.arena-img-wrap', start: 'top 60%' }
+      yPercent: 10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.arena-img-wrap',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        fastScrollEnd: true
+      }
     })
 
-    // Final CTA Scale and Staggers
+    gsap.to('.arena-img-text', {
+      y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+      scrollTrigger: { 
+        trigger: '.arena-img-wrap', 
+        start: 'top 60%'
+      }
+    })
+
+    // Final CTA Scale and Staggers - optimized
     const ctaTl = gsap.timeline({
-      scrollTrigger: { trigger: '.arena-cta', start: 'top 80%' }
+      scrollTrigger: { 
+        trigger: '.arena-cta', 
+        start: 'top 80%'
+      }
     })
 
     ctaTl.to('.arena-cta',
-      { scale: 1, opacity: 1, duration: 1.5, ease: 'power3.out' }
+      { scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out' }
     )
 
     ctaTl.to('.arena-cta-text',
-      { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power3.out' },
-      "-=1.0"
+      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' },
+      "-=0.8"
     )
   }, { scope: containerRef })
 
@@ -114,15 +128,19 @@ rounded-[24px]
 md:rounded-[28px]
 
 overflow-hidden
+transform-gpu
+h-[320px] sm:h-[400px] md:h-[560px]
 "
           >
-            <OptimizedImage
-              src="/images/sports-ground.webp"
-              alt="sports"
-             className="arena-img will-change-transform w-full h-[320px] sm:h-[400px] md:h-[560px] object-cover"
-              sizes="100vw"
-              disableTransition
-            />
+            <div className="arena-img w-full h-[115%] absolute -top-[7.5%]">
+              <OptimizedImage
+                src="/images/sports-ground.webp"
+                alt="sports"
+                className="w-full h-full object-cover block"
+                sizes="100vw"
+                disableTransition
+              />
+            </div>
 
             <div className="absolute inset-0 bg-black/30" />
 

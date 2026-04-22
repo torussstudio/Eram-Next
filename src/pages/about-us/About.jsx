@@ -1,4 +1,9 @@
 import { lazy, Suspense } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+ScrollTrigger.config({ ignoreMobileResize: true })
 
 const AboutHero = lazy(() => import('../../components/sections/about/AboutHero'))
 const PurposeSection = lazy(() => import('../../components/sections/about/PurposeSection'))

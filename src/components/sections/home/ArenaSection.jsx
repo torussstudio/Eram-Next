@@ -67,11 +67,12 @@ export default function ArenaSection() {
   }, { scope: sectionRef });
 
   return (
-    <section
-      ref={sectionRef}
-      id="arena"
-      className={`${section} ${sectionBand} bg-[#ae1431]`}
-    >
+   <section
+  ref={sectionRef}
+  id="arena"
+  className={`${section} ${sectionBand} bg-[#ae1431] -mb-[1px]`}
+  style={{ transform: "translateZ(0)" }}
+>
       <div
         className={`
           ${shell}

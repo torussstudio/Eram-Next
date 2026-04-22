@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 /**
  * OptimizedImage component provides:
  * - Native lazy loading (loading="lazy")
@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
  * - WebP format support with JPEG fallback
  * - Loading state management
  * - Error handling
+ * - GPU acceleration for transforms
  */
 export default function OptimizedImage({
   src,
@@ -25,6 +26,14 @@ export default function OptimizedImage({
   const handleLoad = () => {
     setIsLoaded(true)
     onLoadingComplete?.()
+    
+    // Assure GSAP picks up exact dimensions to eliminate ScrollTrigger jumps layout shift
+    clearTimeout(window.stImageRefreshTimeout)
+    window.stImageRefreshTimeout = setTimeout(() => {
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh()
+      }
+    }, 150)
   }
 
   const handleError = () => {
@@ -50,6 +59,12 @@ export default function OptimizedImage({
       sizes={sizes}
       loading={loading}
       className={`${className} transform-gpu ${transitionClass}`}
+      style={{
+        willChange: 'transform, opacity',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        ...props.style
+      }}
       onLoad={handleLoad}
       onError={handleError}
       decoding="async"

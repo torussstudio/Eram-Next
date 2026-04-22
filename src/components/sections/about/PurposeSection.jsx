@@ -13,7 +13,7 @@ function PurposeSection() {
     {
       title: (
         <>
-          Expanding <br /> educational access
+          Expanding equitable <br />  access to education
         </>
       ),
       icon: "/icons/access.png",
@@ -21,7 +21,7 @@ function PurposeSection() {
     {
       title: (
         <>
-          Ensuring <br /> academic rigor
+          Upholding uncompromising <br /> academic rigor
         </>
       ),
       icon: "/icons/rigor.png",
@@ -29,7 +29,7 @@ function PurposeSection() {
     {
       title: (
         <>
-          Supporting <br /> holistic development
+          Supporting holistic <br /> student development
         </>
       ),
       icon: "/icons/development.png",
@@ -37,7 +37,7 @@ function PurposeSection() {
     {
       title: (
         <>
-          Serving communities <br /> with responsibility
+          Serving communities <br /> with  institutional responsibility
         </>
       ),
       icon: "/icons/community.png",
@@ -45,16 +45,16 @@ function PurposeSection() {
   ];
 
   useGSAP(() => {
-    // Top text reveal
+    // Top text reveal - faster stagger
     gsap.to('.purpose-text', {
       y: 0,
       opacity: 1,
-      duration: 1.2,
-      stagger: 0.15,
+      duration: 1,
+      stagger: 0.1,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 80%',
+        start: 'top 80%'
       }
     })
 
@@ -62,27 +62,27 @@ function PurposeSection() {
     const gridTl = gsap.timeline({
       scrollTrigger: {
         trigger: '.purpose-grid',
-        start: 'top 75%',
+        start: 'top 75%'
       }
     })
 
     gridTl.to('.purpose-image',
-      { scale: 1, opacity: 1, y: 0, duration: 1.4, ease: 'power3.out' }
+      { scale: 1, opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
     )
     
     gridTl.to('.purpose-items h3',
-      { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' },
-      "-=1.1"
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+      "-=1"
     )
 
     gridTl.to('.purpose-item',
-      { x: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'power3.out' },
-      "-=0.9"
+      { x: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
+      "-=0.8"
     )
 
     gridTl.to('.purpose-btn',
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-      "-=0.8"
+      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+      "-=0.6"
     )
   }, { scope: containerRef })
 
@@ -108,11 +108,11 @@ function PurposeSection() {
           </h2>
 
           <p className="purpose-text opacity-0 translate-y-10 mt-5 md:mt-6 text-[14px] md:text-[15px] leading-relaxed text-black/70">
-            ERAM Educational & Welfare Trust was formed as the educational and
-            social responsibility arm of the Eram Group. Its founding vision was
-            clear: to create structured academic institutions that provide
-            meaningful access to education, particularly for underserved and
-            backward communities.
+          ERAM Educational & Welfare Trust was formed as the educational
+           and social responsibility arm of the Eram Group. Its founding 
+           vision was clear: to create structured academic institutions 
+           that provide meaningful access to education, particularly for
+            underserved and backward communities.
           </p>
 
           <p className="purpose-text opacity-0 translate-y-10 mt-3 md:mt-4 text-[14px] md:text-[15px] leading-relaxed text-black/70">

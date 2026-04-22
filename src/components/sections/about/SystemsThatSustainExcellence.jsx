@@ -58,6 +58,42 @@ function SystemsThatSustainExcellence() {
         </>
       ),
     },
+     {
+      number: "/05",
+      title: (
+        <>
+         SQAAF and
+          <br />
+          quality assessment 
+          <br />
+          frameworks
+        </>
+      ),
+    },
+      {
+      number: "/06",
+      title: (
+        <>
+         Institutional
+          <br />
+          improvement 
+          <br />
+          committees
+        </>
+      ),
+    },
+     {
+      number: "/07",
+      title: (
+        <>
+        Curriculum
+          <br />
+          alignment
+          <br />
+          reviews
+        </>
+      ),
+    },
   ];
 
   useGSAP(
@@ -66,50 +102,63 @@ function SystemsThatSustainExcellence() {
       gsap.to(".systems-text", {
         y: 0,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
+        duration: 1,
+        stagger: 0.1,
         ease: "power3.out",
-        scrollTrigger: { trigger: containerRef.current, start: "top 75%" },
+        scrollTrigger: { 
+          trigger: containerRef.current, 
+          start: "top 75%"
+        },
       });
 
       // Features grid
       gsap.to(".system-item", {
         y: 0,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.15,
+        duration: 1,
+        stagger: 0.1,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".system-grid", start: "top 80%" },
+        scrollTrigger: { 
+          trigger: ".system-grid", 
+          start: "top 80%"
+        },
       });
 
       // Image container reveal
       gsap.to(".system-img-wrap", {
         scale: 1,
         opacity: 1,
-        duration: 1.5,
+        duration: 1.2,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".system-img-wrap", start: "top 85%" },
+        scrollTrigger: { 
+          trigger: ".system-img-wrap", 
+          start: "top 85%"
+        },
       });
 
-      // Image parallax scrub
-    gsap.to(".system-img", {
-  yPercent: 10,
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".system-img-wrap",
-    start: "top bottom",
-    end: "bottom top",
-    scrub: 0.2
-  },
-})
+      // Image parallax scrub - optimized
+      gsap.to(".system-img", {
+        yPercent: 10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".system-img-wrap",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          fastScrollEnd: true
+        },
+      })
 
       // Image overlay description
       gsap.to(".system-desc", {
         y: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 1,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".system-img-wrap", start: "top 60%" },
+        scrollTrigger: { 
+          trigger: ".system-img-wrap", 
+          start: "top 60%"
+        },
       });
     },
     { scope: containerRef },
@@ -152,8 +201,9 @@ text-black/70
 leading-relaxed
 "
           >
-            The Trust integrates comprehensive academic systems that support
-            consistency and continuous improvement, including:
+           Sustained academic performance requires consistent faculty development and institutional review mechanisms.
+ERAM integrates comprehensive academic systems, including:
+
           </p>
         </div>
 
@@ -230,15 +280,19 @@ relative
 rounded-[26px]
 
 overflow-hidden
+transform-gpu
+h-[320px] md:h-[480px]
 "
           >
-            <OptimizedImage
-              src="/images/campus.webp"
-              alt="campus"
-className="system-img will-change-transform w-full h-[320px] md:h-[480px] object-cover"
-              sizes="100vw"
-              disableTransition
-            />
+            <div className="system-img w-full h-[115%] absolute -top-[7.5%]">
+              <OptimizedImage
+                src="/images/campus.webp"
+                alt="campus"
+                className="w-full h-full object-cover block"
+                sizes="100vw"
+                disableTransition
+              />
+            </div>
 
             <div
               className="
