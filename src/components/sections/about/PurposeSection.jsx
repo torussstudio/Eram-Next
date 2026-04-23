@@ -1,20 +1,20 @@
-import { memo, useRef } from 'react'
-import OptimizedImage from '../../ui/OptimizedImage'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { memo, useRef } from "react";
+import OptimizedImage from "../../ui/OptimizedImage";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaPlay } from "react-icons/fa6";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 function PurposeSection() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
   const items = [
     {
       title: (
         <>
-          Expanding equitable <br />  access to education
+          Expanding equitable <br /> access to education
         </>
       ),
       icon: "/icons/access.png",
@@ -38,54 +38,64 @@ function PurposeSection() {
     {
       title: (
         <>
-          Serving communities <br /> with  institutional responsibility
+          Serving communities <br /> with institutional responsibility
         </>
       ),
       icon: "/icons/community.png",
     },
   ];
 
-  useGSAP(() => {
-    // Top text reveal - faster stagger
-    gsap.to('.purpose-text', {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%'
-      }
-    })
+  useGSAP(
+    () => {
+      // Top text reveal - faster stagger
+      gsap.to(".purpose-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      });
 
-    // Grid reveal (image + list)
-    const gridTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.purpose-grid',
-        start: 'top 75%'
-      }
-    })
+      // Grid reveal (image + list)
+      const gridTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".purpose-grid",
+          start: "top 75%",
+        },
+      });
 
-    gridTl.to('.purpose-image',
-      { scale: 1, opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
-    )
-    
-    gridTl.to('.purpose-items h3',
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-      "-=1"
-    )
+      gridTl.to(".purpose-image", {
+        scale: 1,
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      });
 
-    gridTl.to('.purpose-item',
-      { x: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
-      "-=0.8"
-    )
+      gridTl.to(
+        ".purpose-items h3",
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+        "-=1",
+      );
 
-    gridTl.to('.purpose-btn',
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-      "-=0.6"
-    )
-  }, { scope: containerRef })
+      gridTl.to(
+        ".purpose-item",
+        { x: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
+        "-=0.8",
+      );
+
+      gridTl.to(
+        ".purpose-btn",
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.6",
+      );
+    },
+    { scope: containerRef },
+  );
 
   return (
     <section ref={containerRef} className="bg-[#F5EFE8] px-4 py-14 md:py-20">
@@ -109,11 +119,11 @@ function PurposeSection() {
           </h2>
 
           <p className="purpose-text opacity-0 translate-y-10 mt-5 md:mt-6 text-[14px] md:text-[15px] leading-relaxed text-black/70">
-          ERAM Educational & Welfare Trust was formed as the educational
-           and social responsibility arm of the Eram Group. Its founding 
-           vision was clear: to create structured academic institutions 
-           that provide meaningful access to education, particularly for
-            underserved and backward communities.
+            ERAM Educational & Welfare Trust was formed as the educational and
+            social responsibility arm of the Eram Group. Its founding vision was
+            clear: to create structured academic institutions that provide
+            meaningful access to education, particularly for underserved and
+            backward communities.
           </p>
 
           <p className="purpose-text opacity-0 translate-y-10 mt-3 md:mt-4 text-[14px] md:text-[15px] leading-relaxed text-black/70">
@@ -160,7 +170,10 @@ function PurposeSection() {
 
             <div className="space-y-5 md:space-y-6">
               {items.map((item, index) => (
-                <div key={index} className="purpose-item opacity-0 translate-x-8 flex items-center gap-3 md:gap-4">
+                <div
+                  key={index}
+                  className="purpose-item opacity-0 translate-x-8 flex items-center gap-3 md:gap-4"
+                >
                   <div
                     className="
                 w-12 h-12
@@ -195,8 +208,8 @@ function PurposeSection() {
               ))}
             </div>
 
-          <button
-  className="
+            <button
+              className="
     purpose-btn
     opacity-0 translate-y-4
     mt-7 md:mt-8
@@ -223,15 +236,15 @@ function PurposeSection() {
 
     transition
   "
->
-  EXPLORE MORE
-  <FaPlay className="text-xs transition-all duration-300 group-hover:translate-x-1" />
-</button>
+            >
+              EXPLORE MORE
+              <FaPlay className="text-xs transition-all duration-300 group-hover:translate-x-1" />
+            </button>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default memo(PurposeSection)
+export default memo(PurposeSection);

@@ -9,55 +9,78 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ModelSection() {
   const sectionRef = useRef(null);
 
-  useGSAP(() => {
-    // Animate Triangle
-    gsap.fromTo('.model-triangle',
-      { scale: 0.5, rotate: -15, opacity: 0 },
-      { 
-        scale: 1, rotate: 0, opacity: 0.75, duration: 1.5, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 60%',
-        }
-      }
-    );
+  useGSAP(
+    () => {
+      // Animate Triangle
+      gsap.fromTo(
+        ".model-triangle",
+        { scale: 0.5, rotate: -15, opacity: 0 },
+        {
+          scale: 1,
+          rotate: 0,
+          opacity: 0.75,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+          },
+        },
+      );
 
-    // Animate Heading
-    gsap.fromTo('.model-heading',
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.model-heading',
-          start: 'top 85%',
-        }
-      }
-    );
+      // Animate Heading
+      gsap.fromTo(
+        ".model-heading",
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".model-heading",
+            start: "top 85%",
+          },
+        },
+      );
 
-    // Stagger Pillars
-    gsap.fromTo('.model-pillar',
-      { opacity: 0, scale: 0.8, y: 20 },
-      {
-        opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'back.out(1.5)',
-        scrollTrigger: {
-          trigger: '.model-pillars-container',
-          start: 'top 85%',
-        }
-      }
-    );
+      // Stagger Pillars
+      gsap.fromTo(
+        ".model-pillar",
+        { opacity: 0, scale: 0.8, y: 20 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "back.out(1.5)",
+          scrollTrigger: {
+            trigger: ".model-pillars-container",
+            start: "top 85%",
+          },
+        },
+      );
 
-    // Stagger Systems
-    gsap.fromTo('.model-system',
-      { opacity: 0, x: -30 },
-      {
-        opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.model-systems-container',
-          start: 'top 80%',
-        }
-      }
-    );
-  }, { scope: sectionRef });
+      // Stagger Systems
+      gsap.fromTo(
+        ".model-system",
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".model-systems-container",
+            start: "top 80%",
+          },
+        },
+      );
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
@@ -98,7 +121,8 @@ export default function ModelSection() {
 
       <div className="max-w-[1180px] mx-auto px-[24px] relative">
         {/* heading block */}
-<div className="
+        <div
+          className="
 
 model-heading
 
@@ -114,9 +138,10 @@ max-[1100px]:translate-x-0
 
 max-[900px]:-translate-y-[40px]
 
-">
-        <h2
-className="
+"
+        >
+          <h2
+            className="
 
 font-display
 
@@ -135,7 +160,7 @@ max-[900px]:text-[42px]
 max-[640px]:text-[32px]
 
 "
->
+          >
             The ERAM
             <br />
             Educational Model
@@ -233,8 +258,8 @@ max-[640px]:text-[32px]
         </div>
 
         {/* academic systems */}
-       <div
-className="
+        <div
+          className="
 
 model-systems-container
 
@@ -249,9 +274,9 @@ max-[900px]:ml-0
 max-[900px]:mt-[70px]
 
 "
->
-         <h3
-  className="
+        >
+          <h3
+            className="
     text-center
     text-[25px]
 
@@ -262,12 +287,12 @@ max-[900px]:mt-[70px]
     text-[#f5efe8]
     max-[900px]:text-[20px]
   "
->
-  ACADEMIC SYSTEMS & FACULTY DEVELOPMENT
-</h3>
+          >
+            ACADEMIC SYSTEMS & FACULTY DEVELOPMENT
+          </h3>
 
           <div
-  className="
+            className="
     mt-[70px]
 
     grid
@@ -279,25 +304,21 @@ max-[900px]:mt-[70px]
     max-[900px]:grid-cols-2
     max-[560px]:grid-cols-1
   "
->
-
-  {facultySystems.map((item, i) => (
-
-    <div
-      key={i}
-
-      className="
+          >
+            {facultySystems.map((item, i) => (
+              <div
+                key={i}
+                className="
         model-system
         relative
 
         pl-[26px]
         max-[560px]:pl-[18px]
       "
-    >
-
-      {/* divider line */}
-      <span
-        className="
+              >
+                {/* divider line */}
+                <span
+                  className="
           absolute
 
           left-0
@@ -310,12 +331,11 @@ max-[900px]:mt-[70px]
           bg-[#f5efe8]
           max-[560px]:h-[170px]
         "
-      />
+                />
 
-
-      {/* number */}
-      <div
-        className="
+                {/* number */}
+                <div
+                  className="
           text-[25px]
 
           tracking-[0.16em]
@@ -325,15 +345,13 @@ max-[900px]:mt-[70px]
           text-[#f5efe8]
           max-[560px]:text-[20px]
         "
-      >
-        /0{i+1}
-      </div>
+                >
+                  /0{i + 1}
+                </div>
 
-
-
-      {/* text */}
-<p
-  className="
+                {/* text */}
+                <p
+                  className="
     mt-[100px]
     text-[26px]
     leading-[1.15]
@@ -343,15 +361,11 @@ max-[900px]:mt-[70px]
     max-[560px]:mt-[54px]
     max-[560px]:text-[20px]
   "
-  dangerouslySetInnerHTML={{ __html: item }}
-/>
-
-
-    </div>
-
-  ))}
-
-</div>
+                  dangerouslySetInnerHTML={{ __html: item }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

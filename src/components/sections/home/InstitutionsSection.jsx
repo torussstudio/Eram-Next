@@ -1,5 +1,3 @@
-
-
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -10,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function InstitutionsSection() {
   const sectionRef = useRef(null);
-  
+
   const institutions = [
     { title: "EASE (CBSE)" },
     { title: "MMPS (HS)" },
@@ -21,32 +19,47 @@ export default function InstitutionsSection() {
 
   useGSAP(() => {
     // Fade in headlines
-    gsap.fromTo('.institutions-text',
+    gsap.fromTo(
+      ".institutions-text",
       { opacity: 0, y: 30 },
-      { 
-        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 75%',
-        }
-      }
+          start: "top 75%",
+        },
+      },
     );
 
     // Stagger scale for cards
-    gsap.fromTo('.institutions-card',
+    gsap.fromTo(
+      ".institutions-card",
       { opacity: 0, scale: 0.9, y: 40 },
       {
-        opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: '.institutions-grid',
-          start: 'top 85%',
-        }
-      }
+          trigger: ".institutions-grid",
+          start: "top 85%",
+        },
+      },
     );
   });
 
   return (
-    <section ref={sectionRef} id="courses" className="bg-[#f5efe8] pt-[40px] pb-[120px]">
+    <section
+      ref={sectionRef}
+      id="courses"
+      className="bg-[#f5efe8] pt-[40px] pb-[120px]"
+    >
       <div className="mx-auto max-w-[1180px] px-[24px] max-[640px]:px-[16px]">
         <MarqueeText />
 
@@ -58,10 +71,12 @@ export default function InstitutionsSection() {
 
           <p className="institutions-text mx-auto mt-[18px] max-w-[820px] text-[18px] leading-[1.65] text-black max-[640px]:text-[15px]">
             <span className="text-[#111] font-medium">
-              An ecosystem designed to guide students from foundation to formation.
+              An ecosystem designed to guide students from foundation to
+              formation.
             </span>
             <br />
-            From foundational schooling to teacher training, each institution strengthens a different stage of the learner’s journey.
+            From foundational schooling to teacher training, each institution
+            strengthens a different stage of the learner’s journey.
           </p>
         </div>
 
@@ -85,7 +100,7 @@ export default function InstitutionsSection() {
               {/* image */}
               <div className="flex h-[260px] items-center justify-center rounded-[18px] bg-[#f5efe8] max-[640px]:h-[200px] max-[640px]:rounded-[14px]">
                 <svg width="36" height="36" opacity="0.35">
-                  <rect width="36" height="36" fill="#999"/>
+                  <rect width="36" height="36" fill="#999" />
                 </svg>
               </div>
 
@@ -95,9 +110,7 @@ export default function InstitutionsSection() {
               </h3>
 
               {/* link */}
-              <button
-                className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black"
-              >
+              <button className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black">
                 View More
               </button>
             </div>

@@ -1,43 +1,27 @@
-import { getLenis } from "../providers/SmoothScrollProvider"
+import { getLenis } from "../providers/SmoothScrollProvider";
 
 export const useSmoothScroll = () => {
-
   const scrollToElement = (target, offset = 80) => {
-
-    let el
+    let el;
 
     if (typeof target === "string") {
-
-      el = document.getElementById(target)
-
-    } 
-    else if (target?.current) {
-
-      el = target.current
-
-    } 
-    else {
-
-      el = target
-
+      el = document.getElementById(target);
+    } else if (target?.current) {
+      el = target.current;
+    } else {
+      el = target;
     }
 
-    if (!el) return
+    if (!el) return;
 
-    const lenis = getLenis()
+    const lenis = getLenis();
 
     if (lenis) {
-
       lenis.scrollTo(el, {
-
-        offset: -offset
-
-      })
-
+        offset: -offset,
+      });
     }
+  };
 
-  }
-
-  return scrollToElement
-
-}
+  return scrollToElement;
+};

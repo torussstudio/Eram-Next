@@ -1,6 +1,3 @@
-
-
-
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -21,31 +18,43 @@ export default function BeyondSection() {
   const sectionRef = useRef(null);
   const [activeCard, setActiveCard] = useState(0);
 
-  useGSAP(() => {
-    // Heading reveal
-    gsap.fromTo('.beyond-heading',
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        }
-      }
-    );
+  useGSAP(
+    () => {
+      // Heading reveal
+      gsap.fromTo(
+        ".beyond-heading",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        },
+      );
 
-    // Cards stagger
-    gsap.fromTo('.beyond-card',
-      { opacity: 0, x: 50 },
-      {
-        opacity: 1, x: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.beyond-cards-container',
-          start: 'top 85%',
-        }
-      }
-    );
-  }, { scope: sectionRef });
+      // Cards stagger
+      gsap.fromTo(
+        ".beyond-card",
+        { opacity: 0, x: 50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".beyond-cards-container",
+            start: "top 85%",
+          },
+        },
+      );
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
@@ -53,10 +62,7 @@ export default function BeyondSection() {
       id="beyond"
       className={`${section} pt-[90px] pb-[120px] bg-[#ae1431]`}
     >
-
       <div className="mx-auto w-[min(1200px,calc(100vw-140px))] text-center">
-
-
         {/* title */}
         <h2
           className="
@@ -76,12 +82,8 @@ export default function BeyondSection() {
           max-[640px]:text-[28px]
           "
         >
-
           BEYOND THE CLASSROOM
-
         </h2>
-
-
 
         {/* description */}
         <p
@@ -102,30 +104,20 @@ export default function BeyondSection() {
           max-[640px]:text-[13px]
           "
         >
-
-          Clubs, leadership forums, residential programs,
-          state-level participation, curated experiences,
-          learning that extends beyond textbooks.
-
+          Clubs, leadership forums, residential programs, state-level
+          participation, curated experiences, learning that extends beyond
+          textbooks.
         </p>
-
-
 
         {/* button */}
         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
-
           <ActionButton
             variant="secondary"
             className="text-[#f5efe8] max-[640px]:!w-auto"
           >
-
             Explore Student Pathways
-
           </ActionButton>
-
         </div>
-
-
 
         {/* cards */}
         <div
@@ -145,7 +137,6 @@ export default function BeyondSection() {
           max-[640px]:w-full
           "
         >
-
           <div
             className="
             flex
@@ -164,18 +155,13 @@ export default function BeyondSection() {
             max-[640px]:gap-[12px]
             "
           >
-
             {beyondCards.map((card, index) => {
-
               const isActive = activeCard === index;
 
               return (
-
                 <div
                   key={card.title}
-
                   onClick={() => setActiveCard(index)}
-
                   className={`
                   beyond-card
                   cursor-pointer
@@ -217,8 +203,6 @@ export default function BeyondSection() {
                   }
                   `}
                 >
-
-
                   {/* number */}
                   <div
                     className="
@@ -237,17 +221,11 @@ export default function BeyondSection() {
                     max-[640px]:text-[19px]
                     "
                     style={{
-                      color: isActive
-                        ? "#ae1431"
-                        : "#f5efe8"
+                      color: isActive ? "#ae1431" : "#f5efe8",
                     }}
                   >
-
                     {card.code}
-
                   </div>
-
-
 
                   {/* title */}
                   <div
@@ -267,28 +245,16 @@ export default function BeyondSection() {
                     max-[640px]:text-[18px]
                     "
                     style={{
-                      color: isActive
-                        ? "#ae1431"
-                        : "#f5efe8"
+                      color: isActive ? "#ae1431" : "#f5efe8",
                     }}
                   >
-
                     {card.title}
-
                   </div>
-
-
                 </div>
-
               );
-
             })}
-
           </div>
-
         </div>
-
-
 
         {/* divider */}
         <div
@@ -309,11 +275,7 @@ export default function BeyondSection() {
           max-[640px]:w-full
           "
         />
-
-
       </div>
-
     </section>
   );
-
 }

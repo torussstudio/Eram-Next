@@ -1,16 +1,28 @@
-import { lazy, Suspense } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { lazy, Suspense } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger)
-ScrollTrigger.config({ ignoreMobileResize: true })
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
-const AboutHero = lazy(() => import('../../components/sections/about/AboutHero'))
-const PurposeSection = lazy(() => import('../../components/sections/about/PurposeSection'))
-const StructuredLearningSection = lazy(() => import('../../components/sections/about/StructuredLearningSection'))
-const SystemsThatSustainExcellence = lazy(() => import('../../components/sections/about/SystemsThatSustainExcellence'))
-const SpacesDesignedForOpportunity = lazy(() => import('../../components/sections/about/SpacesDesignedForOpportunity'))
-const ERAMSportsArena = lazy(() => import('../../components/sections/about/ERAMSportsArena'))
+const AboutHero = lazy(
+  () => import("../../components/sections/about/AboutHero"),
+);
+const PurposeSection = lazy(
+  () => import("../../components/sections/about/PurposeSection"),
+);
+const StructuredLearningSection = lazy(
+  () => import("../../components/sections/about/StructuredLearningSection"),
+);
+const SystemsThatSustainExcellence = lazy(
+  () => import("../../components/sections/about/SystemsThatSustainExcellence"),
+);
+const SpacesDesignedForOpportunity = lazy(
+  () => import("../../components/sections/about/SpacesDesignedForOpportunity"),
+);
+const ERAMSportsArena = lazy(
+  () => import("../../components/sections/about/ERAMSportsArena"),
+);
 
 // Loading fallback component
 function LoadingFallback() {
@@ -22,7 +34,7 @@ function LoadingFallback() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function About() {
@@ -47,5 +59,5 @@ export default function About() {
         <ERAMSportsArena />
       </Suspense>
     </main>
-  )
+  );
 }

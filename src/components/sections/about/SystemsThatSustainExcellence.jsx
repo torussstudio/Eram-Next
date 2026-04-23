@@ -58,35 +58,35 @@ function SystemsThatSustainExcellence() {
         </>
       ),
     },
-     {
+    {
       number: "/05",
       title: (
         <>
-         SQAAF and
+          SQAAF and
           <br />
-          quality assessment 
+          quality assessment
           <br />
           frameworks
         </>
       ),
     },
-      {
+    {
       number: "/06",
       title: (
         <>
-         Institutional
+          Institutional
           <br />
-          improvement 
+          improvement
           <br />
           committees
         </>
       ),
     },
-     {
+    {
       number: "/07",
       title: (
         <>
-        Curriculum
+          Curriculum
           <br />
           alignment
           <br />
@@ -105,9 +105,9 @@ function SystemsThatSustainExcellence() {
         duration: 1,
         stagger: 0.1,
         ease: "power3.out",
-        scrollTrigger: { 
-          trigger: containerRef.current, 
-          start: "top 75%"
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
         },
       });
 
@@ -118,9 +118,9 @@ function SystemsThatSustainExcellence() {
         duration: 1,
         stagger: 0.1,
         ease: "power3.out",
-        scrollTrigger: { 
-          trigger: ".system-grid", 
-          start: "top 80%"
+        scrollTrigger: {
+          trigger: ".system-grid",
+          start: "top 80%",
         },
       });
 
@@ -130,9 +130,9 @@ function SystemsThatSustainExcellence() {
         opacity: 1,
         duration: 1.2,
         ease: "power3.out",
-        scrollTrigger: { 
-          trigger: ".system-img-wrap", 
-          start: "top 85%"
+        scrollTrigger: {
+          trigger: ".system-img-wrap",
+          start: "top 85%",
         },
       });
 
@@ -145,9 +145,9 @@ function SystemsThatSustainExcellence() {
           start: "top bottom",
           end: "bottom top",
           scrub: true,
-          fastScrollEnd: true
+          fastScrollEnd: true,
         },
-      })
+      });
 
       // Image overlay description
       gsap.to(".system-desc", {
@@ -155,9 +155,9 @@ function SystemsThatSustainExcellence() {
         opacity: 1,
         duration: 1,
         ease: "power3.out",
-        scrollTrigger: { 
-          trigger: ".system-img-wrap", 
-          start: "top 60%"
+        scrollTrigger: {
+          trigger: ".system-img-wrap",
+          start: "top 60%",
         },
       });
     },
@@ -201,9 +201,9 @@ text-black/70
 leading-relaxed
 "
           >
-           Sustained academic performance requires consistent faculty development and institutional review mechanisms.
-ERAM integrates comprehensive academic systems, including:
-
+            Sustained academic performance requires consistent faculty
+            development and institutional review mechanisms. ERAM integrates
+            comprehensive academic systems, including:
           </p>
         </div>
 

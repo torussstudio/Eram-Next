@@ -11,21 +11,28 @@ export default function CTASection() {
   const ctaRef = useRef(null);
 
   useGSAP(() => {
-    gsap.fromTo(ctaRef.current,
+    gsap.fromTo(
+      ctaRef.current,
       { opacity: 0, scale: 0.95, y: 30 },
       {
-        opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power2.out',
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ctaRef.current,
-          start: 'top 85%',
-        }
-      }
+          start: "top 85%",
+        },
+      },
     );
   });
 
   return (
-   <section id="contact" className={`${section} pt-[40px] pb-[110px] bg-[#ae1431]`}>
-
+    <section
+      id="contact"
+      className={`${section} pt-[40px] pb-[110px] bg-[#ae1431]`}
+    >
       <div
         ref={ctaRef}
         className={`
@@ -55,7 +62,6 @@ export default function CTASection() {
           mx-auto
         `}
       >
-
         {/* title */}
         <h2
           className="
@@ -78,7 +84,6 @@ export default function CTASection() {
           Begin the Journey.
         </h2>
 
-
         {/* description */}
         <p
           className="
@@ -93,7 +98,6 @@ export default function CTASection() {
           Admissions are now open across our institutions.
         </p>
 
-
         {/* buttons */}
         <div
           className="
@@ -107,7 +111,6 @@ export default function CTASection() {
             max-[640px]:w-full
           "
         >
-
           {/* primary */}
           <button
             className="
@@ -133,7 +136,6 @@ export default function CTASection() {
           >
             APPLY NOW
           </button>
-
 
           {/* secondary */}
           <button
@@ -163,11 +165,8 @@ export default function CTASection() {
           >
             BOOK A CAMPUS VISIT
           </button>
-
         </div>
-
       </div>
-
     </section>
   );
 }

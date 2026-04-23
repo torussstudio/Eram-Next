@@ -1,113 +1,129 @@
-import { memo, useRef } from 'react'
-import OptimizedImage from '../../ui/OptimizedImage'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { memo, useRef } from "react";
+import OptimizedImage from "../../ui/OptimizedImage";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaPlay } from "react-icons/fa6";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 function StructuredLearningSection() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
-  useGSAP(() => {
-    // 1. Top Section Intro
-    gsap.to('.structured-text', {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 75%'
-      }
-    })
-
-    gsap.to('.structured-btn', {
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 75%'
-      }
-    })
-
-    // 2. Horizontal Cards - batch optimization
-    gsap.to('.structured-card', {
-      x: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.12,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.structured-scroll-container',
-        start: 'top 85%'
-      }
-    })
-
-    // 3. Leadership Section
-    const leaderTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.leadership-container',
-        start: 'top 75%'
-      }
-    })
-
-    leaderTl.to('.leadership-text',
-      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }
-    )
-
-    leaderTl.to('.leadership-profile',
-      { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power3.out' },
-      "-=0.7"
-    )
-
-    // Parallax on leader images - optimized with fastScrollEnd
-    gsap.utils.toArray('.leadership-profile').forEach((profile) => {
-      const img = profile.querySelector('.leadership-img')
-      gsap.to(img, {
-        yPercent: 8,
-        ease: "none",
+  useGSAP(
+    () => {
+      // 1. Top Section Intro
+      gsap.to(".structured-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: profile,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          fastScrollEnd: true
-        }
-      })
-    })
+          trigger: containerRef.current,
+          start: "top 75%",
+        },
+      });
 
-    // 4. Bottom Text & Lists
-    const listTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.leadership-bottom-text',
-        start: 'top 85%'
-      }
-    })
+      gsap.to(".structured-btn", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        },
+      });
 
-    listTl.to('.leadership-bottom-heading',
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
-    )
+      // 2. Horizontal Cards - batch optimization
+      gsap.to(".structured-card", {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".structured-scroll-container",
+          start: "top 85%",
+        },
+      });
 
-    listTl.to('.leadership-list-item',
-      { x: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: 'power3.out' },
-      "-=0.5"
-    )
+      // 3. Leadership Section
+      const leaderTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".leadership-container",
+          start: "top 75%",
+        },
+      });
 
-    gsap.to('.structured-final',
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', 
-        scrollTrigger: { trigger: '.structured-final', start: 'top 85%' }
-      }
-    )
+      leaderTl.to(".leadership-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+      });
 
-  }, { scope: containerRef })
+      leaderTl.to(
+        ".leadership-profile",
+        { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" },
+        "-=0.7",
+      );
+
+      // Parallax on leader images - optimized with fastScrollEnd
+      gsap.utils.toArray(".leadership-profile").forEach((profile) => {
+        const img = profile.querySelector(".leadership-img");
+        gsap.to(img, {
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: profile,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            fastScrollEnd: true,
+          },
+        });
+      });
+
+      // 4. Bottom Text & Lists
+      const listTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".leadership-bottom-text",
+          start: "top 85%",
+        },
+      });
+
+      listTl.to(".leadership-bottom-heading", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      listTl.to(
+        ".leadership-list-item",
+        { x: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: "power3.out" },
+        "-=0.5",
+      );
+
+      gsap.to(".structured-final", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".structured-final", start: "top 85%" },
+      });
+    },
+    { scope: containerRef },
+  );
 
   return (
-    <section ref={containerRef} className="bg-[#b5122b] text-white px-4 py-20 overflow-hidden">
+    <section
+      ref={containerRef}
+      className="bg-[#b5122b] text-white px-4 py-20 overflow-hidden"
+    >
       <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
         {/* TOP GRID */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -125,10 +141,10 @@ function StructuredLearningSection() {
               framework supported by:
             </p>
 
-           <button className="structured-btn opacity-0 translate-y-5 mt-6 border border-white/60 px-5 py-2 rounded-lg text-sm flex items-center gap-2 hover:bg-white hover:text-[#b5122b] transition">
-  EXPLORE MORE
-  <FaPlay className="text-xs transition-colors" />
-</button>
+            <button className="structured-btn opacity-0 translate-y-5 mt-6 border border-white/60 px-5 py-2 rounded-lg text-sm flex items-center gap-2 hover:bg-white hover:text-[#b5122b] transition">
+              EXPLORE MORE
+              <FaPlay className="text-xs transition-colors" />
+            </button>
           </div>
 
           {/* RIGHT SCROLL CARDS */}
@@ -219,7 +235,7 @@ flex-shrink-0
                 <OptimizedImage
                   src="/images/teacher.webp"
                   alt="teacher"
-                 className="leadership-img w-full h-[115%] object-cover grayscale"
+                  className="leadership-img w-full h-[115%] object-cover grayscale"
                   sizes="(max-width: 768px) 100vw, 360px"
                   disableTransition
                 />
@@ -310,7 +326,7 @@ max-w-[260px]
                 </p>
               </div>
 
- <div
+              <div
                 className="
 structured-card
 relative
@@ -360,11 +376,11 @@ text-white
 max-w-[260px]
 "
                 >
-                 Holistic integration of academics, sports, and culture 
+                  Holistic integration of academics, sports, and culture
                 </p>
               </div>
 
- <div
+              <div
                 className="
 structured-card
 relative
@@ -414,10 +430,9 @@ text-white
 max-w-[260px]
 "
                 >
-                  Exposure-driven learning beyond textbooks 
+                  Exposure-driven learning beyond textbooks
                 </p>
               </div>
-
             </div>
           </div>
         </div>
@@ -504,7 +519,7 @@ max-w-[460px]
                 <OptimizedImage
                   src="/images/person1.webp"
                   alt="Dr. Siddeek Ahmed"
-                 className="w-full h-full object-cover grayscale block object-[72%_center]"
+                  className="w-full h-full object-cover grayscale block object-[72%_center]"
                   sizes="(max-width: 768px) 100vw, 460px"
                   disableTransition
                 />
@@ -581,7 +596,7 @@ max-w-[460px]
                 <OptimizedImage
                   src="/images/person2.webp"
                   alt="Mr. Abdussamod C K"
-                   className="w-full h-full object-cover grayscale block object-[15%_center]"
+                  className="w-full h-full object-cover grayscale block object-[15%_center]"
                   sizes="(max-width: 768px) 100vw, 460px"
                   disableTransition
                 />
@@ -672,18 +687,30 @@ ml-0
 md:ml-[40px]
 "
           >
-            <li className="leadership-list-item opacity-0 translate-x-5">• Continuous academic supervision</li>
-            <li className="leadership-list-item opacity-0 translate-x-5">• Institutional planning and performance monitoring</li>
-            <li className="leadership-list-item opacity-0 translate-x-5">• Direct engagement with Principals & HODs</li>
-            <li className="leadership-list-item opacity-0 translate-x-5">• Policy alignment across institutions</li>
-            <li className="leadership-list-item opacity-0 translate-x-5">• Transparent operational practices</li>
-            <li className="leadership-list-item opacity-0 translate-x-5">• Long-term strategic planning</li>
+            <li className="leadership-list-item opacity-0 translate-x-5">
+              • Continuous academic supervision
+            </li>
+            <li className="leadership-list-item opacity-0 translate-x-5">
+              • Institutional planning and performance monitoring
+            </li>
+            <li className="leadership-list-item opacity-0 translate-x-5">
+              • Direct engagement with Principals & HODs
+            </li>
+            <li className="leadership-list-item opacity-0 translate-x-5">
+              • Policy alignment across institutions
+            </li>
+            <li className="leadership-list-item opacity-0 translate-x-5">
+              • Transparent operational practices
+            </li>
+            <li className="leadership-list-item opacity-0 translate-x-5">
+              • Long-term strategic planning
+            </li>
           </ul>
         </div>
 
         {/* FINAL LINE */}
         <h3
-    className="
+          className="
       structured-final
       opacity-0 translate-y-8
       mt-20
@@ -700,14 +727,14 @@ md:ml-[40px]
       max-w-[980px]
       ml-0 md:ml-22
     "
-  >
-    The result is a unified educational system
-    <br />
-    supported by accountability and clarity.
-  </h3>
+        >
+          The result is a unified educational system
+          <br />
+          supported by accountability and clarity.
+        </h3>
       </div>
     </section>
-  )
+  );
 }
 
-export default memo(StructuredLearningSection)
+export default memo(StructuredLearningSection);

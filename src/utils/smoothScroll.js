@@ -1,54 +1,35 @@
-import { getLenis } from "../providers/SmoothScrollProvider"
+import { getLenis } from "../providers/SmoothScrollProvider";
 
 export const scrollToElementById = (id, offset = 80) => {
+  const el = document.getElementById(id);
 
-  const el = document.getElementById(id)
+  if (!el) return;
 
-  if (!el) return
-
-  const lenis = getLenis()
+  const lenis = getLenis();
 
   if (lenis) {
-
     lenis.scrollTo(el, {
-
-      offset: -offset
-
-    })
-
+      offset: -offset,
+    });
   } else {
-
     window.scrollTo({
-
       top: el.offsetTop - offset,
 
-      behavior: "smooth"
-
-    })
-
+      behavior: "smooth",
+    });
   }
-
-}
-
+};
 
 export const scrollToTop = () => {
-
-  const lenis = getLenis()
+  const lenis = getLenis();
 
   if (lenis) {
-
-    lenis.scrollTo(0)
-
+    lenis.scrollTo(0);
   } else {
-
     window.scrollTo({
-
       top: 0,
 
-      behavior: "smooth"
-
-    })
-
+      behavior: "smooth",
+    });
   }
-
-}
+};

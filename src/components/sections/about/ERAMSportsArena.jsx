@@ -1,74 +1,94 @@
-import { memo, useRef } from 'react'
-import OptimizedImage from '../../ui/OptimizedImage'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { memo, useRef } from "react";
+import OptimizedImage from "../../ui/OptimizedImage";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 function ERAMSportsArena() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
-  useGSAP(() => {
-    // Header
-    gsap.to('.arena-text', {
-      y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out',
-      scrollTrigger: { 
-        trigger: containerRef.current, 
-        start: 'top 75%'
-      }
-    })
+  useGSAP(
+    () => {
+      // Header
+      gsap.to(".arena-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        },
+      });
 
-    // Image card parallax
-    gsap.to('.arena-img-wrap', {
-      scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { 
-        trigger: '.arena-img-wrap', 
-        start: 'top 85%'
-      }
-    })
-    
-    // Parallax image with fastScrollEnd
-    gsap.to('.arena-img', {
-      yPercent: 10,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.arena-img-wrap',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-        fastScrollEnd: true
-      }
-    })
+      // Image card parallax
+      gsap.to(".arena-img-wrap", {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".arena-img-wrap",
+          start: "top 85%",
+        },
+      });
 
-    gsap.to('.arena-img-text', {
-      y: 0, opacity: 1, duration: 1, ease: 'power3.out',
-      scrollTrigger: { 
-        trigger: '.arena-img-wrap', 
-        start: 'top 60%'
-      }
-    })
+      // Parallax image with fastScrollEnd
+      gsap.to(".arena-img", {
+        yPercent: 10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".arena-img-wrap",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          fastScrollEnd: true,
+        },
+      });
 
-    // Final CTA Scale and Staggers - optimized
-    const ctaTl = gsap.timeline({
-      scrollTrigger: { 
-        trigger: '.arena-cta', 
-        start: 'top 80%'
-      }
-    })
+      gsap.to(".arena-img-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".arena-img-wrap",
+          start: "top 60%",
+        },
+      });
 
-    ctaTl.to('.arena-cta',
-      { scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out' }
-    )
+      // Final CTA Scale and Staggers - optimized
+      const ctaTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".arena-cta",
+          start: "top 80%",
+        },
+      });
 
-    ctaTl.to('.arena-cta-text',
-      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' },
-      "-=0.8"
-    )
-  }, { scope: containerRef })
+      ctaTl.to(".arena-cta", {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+      });
+
+      ctaTl.to(
+        ".arena-cta-text",
+        { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" },
+        "-=0.8",
+      );
+    },
+    { scope: containerRef },
+  );
 
   return (
-    <section ref={containerRef} className="bg-[#F5EFE8] px-5 sm:px-6 py-16 md:py-24">
+    <section
+      ref={containerRef}
+      className="bg-[#F5EFE8] px-5 sm:px-6 py-16 md:py-24"
+    >
       <div className="max-w-[1200px] mx-auto">
         {/* TOP HEADER */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
@@ -300,7 +320,7 @@ transition
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default memo(ERAMSportsArena)
+export default memo(ERAMSportsArena);

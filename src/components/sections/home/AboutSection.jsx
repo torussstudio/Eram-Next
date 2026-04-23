@@ -161,8 +161,8 @@ export default function AboutSection() {
 
         <div className="about-grid mt-[80px]">
           <div className="grid grid-cols-3 gap-[24px]">
-           <div className="about-card flex items-end min-h-[260px] pb-[115px] pl-[40px] max-[1280px]:pl-[60px]">
-  <p className="font-display text-[32px] leading-[1.25] text-[#f5efe8]">
+            <div className="about-card flex items-end min-h-[260px] pb-[115px] pl-[40px] max-[1280px]:pl-[60px]">
+              <p className="font-display text-[32px] leading-[1.25] text-[#f5efe8]">
                 Committed
                 <br />
                 to Access.
@@ -188,10 +188,10 @@ export default function AboutSection() {
       <div className="min-[1100px]:hidden">
         <div className="px-[28px] max-[480px]:px-[20px]">
           {/* Label */}
-        <div className="mob-label mb-[36px]">
-  <span className="text-[11px] tracking-[0.28em] uppercase text-[#f5efe8] font-medium">
-    ABOUT US
-  </span>
+          <div className="mob-label mb-[36px]">
+            <span className="text-[11px] tracking-[0.28em] uppercase text-[#f5efe8] font-medium">
+              ABOUT US
+            </span>
             <div className="mt-[6px] h-[1.5px] w-full bg-[#f5efe8]/40 rounded-full" />
           </div>
 
@@ -235,7 +235,6 @@ export default function AboutSection() {
                         grid grid-cols-2 gap-[14px]
                         max-[560px]:grid-cols-1"
         >
-
           <div
             className="mob-card rounded-[22px] bg-[#d8d8d8]
                           min-h-[200px] max-[560px]:min-h-[180px]"

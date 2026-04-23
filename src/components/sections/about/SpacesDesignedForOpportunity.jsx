@@ -1,52 +1,66 @@
-import { memo, useRef } from 'react'
-import OptimizedImage from '../../ui/OptimizedImage'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { memo, useRef } from "react";
+import OptimizedImage from "../../ui/OptimizedImage";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 function SpacesDesignedForOpportunity() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
-  useGSAP(() => {
-    // Header
-    gsap.to('.spaces-text', {
-      y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out',
-      scrollTrigger: { 
-        trigger: containerRef.current, 
-        start: 'top 75%'
-      }
-    })
+  useGSAP(
+    () => {
+      // Header
+      gsap.to(".spaces-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        },
+      });
 
-    // Layout cards fade up stagger - optimized
-    gsap.to('.spaces-card', {
-      y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out',
-      scrollTrigger: { 
-        trigger: '.spaces-grid', 
-        start: 'top 75%'
-      }
-    })
+      // Layout cards fade up stagger - optimized
+      gsap.to(".spaces-card", {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".spaces-grid",
+          start: "top 75%",
+        },
+      });
 
-    // Inner images scale with batching
-    ScrollTrigger.batch('.spaces-card', {
-      interval: 0.1,
-      batchMax: 3,
-      onEnter: (batch) => {
-        batch.forEach((element) => {
-          const img = element.querySelector('.spaces-img')
-          gsap.to(img, { 
-            scale: 1, 
-            duration: 1.5, 
-            ease: 'power3.out'
-          })
-        })
-      }
-    })
-  }, { scope: containerRef })
+      // Inner images scale with batching
+      ScrollTrigger.batch(".spaces-card", {
+        interval: 0.1,
+        batchMax: 3,
+        onEnter: (batch) => {
+          batch.forEach((element) => {
+            const img = element.querySelector(".spaces-img");
+            gsap.to(img, {
+              scale: 1,
+              duration: 1.5,
+              ease: "power3.out",
+            });
+          });
+        },
+      });
+    },
+    { scope: containerRef },
+  );
 
   return (
-    <section ref={containerRef} className="bg-[#F5EFE8] py-16 md:py-24 px-5 sm:px-6">
+    <section
+      ref={containerRef}
+      className="bg-[#F5EFE8] py-16 md:py-24 px-5 sm:px-6"
+    >
       <div className="max-w-[1200px] mx-auto">
         {/* heading */}
         <div className="max-w-[720px]">
@@ -370,7 +384,7 @@ lg:max-w-[190px]
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default memo(SpacesDesignedForOpportunity)
+export default memo(SpacesDesignedForOpportunity);
