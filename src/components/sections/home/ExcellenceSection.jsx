@@ -1,189 +1,447 @@
-import { useState } from "react";
+// import { useState } from "react";
+// import { excellenceDomains } from "../../../constants/homeData";
+
+// export default function ExcellenceSection() {
+//   const categories = ["ACADEMIC", "SPORTS", "CULTURAL", "PROFESSIONAL"];
+
+//   const [active, setActive] = useState("ACADEMIC");
+
+//   return (
+//     <section className="bg-white py-[120px] max-[900px]:py-[90px] max-[560px]:py-[72px]" id="gallery">
+//       <div
+//         className="
+//           max-w-[1180px]
+
+//           mx-auto
+
+//           px-[24px]
+//           max-[560px]:px-[16px]
+
+//           grid
+
+//           grid-cols-[260px_1fr]
+
+//           gap-[60px]
+
+//           max-[900px]:grid-cols-1
+//           max-[900px]:gap-[32px]
+//         "
+//       >
+//         {/* left menu */}
+//         <div
+//           className="
+//             pt-[20px]
+//  sticky top-[120px] self-start z-30
+//             flex
+//             flex-col
+
+//             gap-[22px]
+//             max-[900px]:flex-row
+//             max-[900px]:gap-[12px]
+//             max-[900px]:overflow-x-auto
+//             max-[900px]:pb-[6px]
+//             max-[900px]:scrollbar-hide
+//           "
+//         >
+//           {categories.map((item) => {
+//             const isActive = active === item;
+
+//             return (
+//               <button
+//                 key={item}
+//                 onClick={() => setActive(item)}
+//                 className={`
+
+//                   text-left
+
+//                   text-[22px]
+
+//                   tracking-[0.16em]
+
+//                   font-[400]
+
+//                   transition-all
+
+//                   duration-200
+//                   max-[900px]:shrink-0
+//                   max-[900px]:rounded-full
+//                   max-[900px]:border
+//                   max-[900px]:px-[14px]
+//                   max-[900px]:py-[8px]
+//                   max-[900px]:text-[13px]
+//                   max-[900px]:tracking-[0.08em]
+
+//                   ${
+//                     isActive
+//                       ? "text-[#111] max-[900px]:border-[#111] max-[900px]:bg-[#111] max-[900px]:text-white"
+//                       : "text-[#a3a3a3] hover:text-[#666] max-[900px]:border-[#d5d5d5] max-[900px]:bg-white max-[900px]:text-[#777]"
+//                   }
+
+//                 `}
+//               >
+//                 {isActive && <span className="max-[900px]:hidden">//</span>}
+
+//                 {item}
+//               </button>
+//             );
+//           })}
+//         </div>
+
+//         {/* right content */}
+//         <div className="max-w-[680px] ml-[80px] max-[900px]:ml-0">
+//           {/* heading */}
+//           <h2
+//             className="
+//             font-display
+//               text-[48px]
+
+//               font-[600]
+
+//               tracking-[-0.02em]
+
+//               text-[#111]
+
+//               mb-[56px]
+//               max-[900px]:text-[36px]
+//               max-[560px]:mb-[36px]
+//               max-[560px]:text-[30px]
+//             "
+//           >
+//             Excellence Across Every Domain
+//           </h2>
+
+//           {/* grid */}
+//           <div className="grid grid-cols-2 gap-[32px] max-[900px]:gap-[20px] max-[560px]:grid-cols-1">
+//             {excellenceDomains.map((item, i) => (
+//               <div
+//                 key={i}
+//                 className="
+//                   h-[320px]
+
+//                   rounded-[28px]
+
+//                   border
+
+//                   border-[#cfcfcf]
+
+//                   bg-[#f5efe8]
+
+//                   flex
+
+//                   items-center
+
+//                   justify-center
+//                   max-[900px]:h-[260px]
+//                   max-[560px]:h-[250px]
+//                 "
+//               >
+//                 {/* placeholder icon */}
+//                 <svg width="42" height="42" opacity="0.45">
+//                   <rect width="42" height="42" fill="#9a9a9a" />
+//                 </svg>
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* button */}
+//           <div
+//             className="mt-[56px] flex justify-center max-[560px]:mt-[36px]"
+//           >
+//             <button
+//             className="
+//                 px-[28px]
+
+//                 py-[12px]
+
+//                 text-[13px]
+
+//                 tracking-[0.16em]
+
+//                 uppercase
+
+//                 text-[#222]
+
+//                 border
+
+//                 border-[#bfbfbf]
+
+//                 rounded-[10px]
+//                 mr-[450px]
+//                 max-[1200px]:mr-0
+
+//                 transition-all
+
+//                 duration-200
+
+//                 hover:bg-[#111]
+
+//                 hover:text-white
+//                 max-[560px]:w-full
+//                 max-[560px]:py-[14px]
+//               "
+//             >
+//               Explore Excellence
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { excellenceDomains } from "../../../constants/homeData";
 
-export default function ExcellenceSection() {
-  const categories = ["ACADEMIC", "SPORTS", "CULTURAL", "PROFESSIONAL"];
+gsap.registerPlugin(ScrollTrigger);
 
-  const [active, setActive] = useState("ACADEMIC");
+const CATEGORIES = ["ACADEMIC", "SPORTS", "CULTURAL", "PROFESSIONAL"];
+
+export default function ExcellenceSection() {
+  const [active, setActive] = useState(0);
+  const sectionRef = useRef(null);
+
+  /* ── directional card transition ─────────────────────────────── */
+  const goTo = (nextIdx) => {
+    if (nextIdx === active || nextIdx < 0 || nextIdx >= CATEGORIES.length) return;
+    if (window.innerWidth >= 900) { setActive(nextIdx); return; }
+
+    const dir = nextIdx > active ? 1 : -1;
+    gsap.to(".mob-exc-card", {
+      x: dir * -40, opacity: 0, duration: 0.22, stagger: 0.03, ease: "power2.in",
+      onComplete: () => setActive(nextIdx),
+    });
+  };
+
+  /* ── enter new category ───────────────────────────────────────── */
+  useEffect(() => {
+    if (window.innerWidth >= 900) return;
+    gsap.fromTo(".mob-exc-card",
+      { x: 40, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.45, stagger: 0.07, ease: "power3.out" }
+    );
+  }, [active]);
+
+  /* ── desktop category switch ──────────────────────────────────── */
+  useEffect(() => {
+    if (window.innerWidth < 900) return;
+    gsap.fromTo(".exc-card",
+      { opacity: 0, y: 20, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08, ease: "power3.out" }
+    );
+  }, [active]);
+
+  /* ── scroll entrance ─────────────────────────────────────────── */
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 900px)", () => {
+      gsap.fromTo(".exc-heading",
+        { clipPath: "inset(0 100% 0 0)" },
+        { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power3.inOut",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" } }
+      );
+      gsap.fromTo(".exc-menu-item",
+        { x: -40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" } }
+      );
+      gsap.fromTo(".exc-card",
+        { scale: 0.9, opacity: 0, y: 30 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: ".exc-grid", start: "top 85%" } }
+      );
+      gsap.fromTo(".exc-btn",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: "power2.out",
+          scrollTrigger: { trigger: ".exc-grid", start: "top 75%" } }
+      );
+    });
+
+    mm.add("(max-width: 899px)", () => {
+      gsap.fromTo(".mob-exc-word",
+        { y: "105%", opacity: 0 },
+        { y: "0%", opacity: 1, duration: 0.7, stagger: 0.06, ease: "power4.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 82%" } }
+      );
+      gsap.fromTo(".mob-nav-row",
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, delay: 0.3, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
+      );
+      gsap.fromTo(".mob-exc-card",
+        { y: 48, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.65, stagger: 0.09, ease: "power3.out",
+          scrollTrigger: { trigger: ".mob-exc-grid", start: "top 88%" } }
+      );
+      gsap.fromTo(".mob-exc-btn",
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, delay: 0.2, ease: "power2.out",
+          scrollTrigger: { trigger: ".mob-exc-btn", start: "top 95%" } }
+      );
+    });
+
+    return () => mm.revert();
+  }, { scope: sectionRef });
 
   return (
-    <section className="bg-white py-[120px] max-[900px]:py-[90px] max-[560px]:py-[72px]" id="gallery">
-      <div
-        className="
-          max-w-[1180px]
+    <section
+      ref={sectionRef}
+      className="bg-white py-[120px] max-[900px]:py-[64px]"
+      id="gallery"
+    >
 
-          mx-auto
+      {/* ════════════════════════════════════════════════════════════
+          DESKTOP ≥ 900px — original, untouched
+      ════════════════════════════════════════════════════════════ */}
+      <div className="hidden min-[900px]:grid max-w-[1180px] mx-auto px-[24px] grid-cols-[260px_1fr] gap-[60px]">
 
-          px-[24px]
-          max-[560px]:px-[16px]
-
-          grid
-
-          grid-cols-[260px_1fr]
-
-          gap-[60px]
-
-          max-[900px]:grid-cols-1
-          max-[900px]:gap-[32px]
-        "
-      >
-        {/* left menu */}
-        <div
-          className="
-            pt-[20px]
- sticky top-[120px] self-start z-30
-            flex
-            flex-col
-
-            gap-[22px]
-            max-[900px]:flex-row
-            max-[900px]:gap-[12px]
-            max-[900px]:overflow-x-auto
-            max-[900px]:pb-[6px]
-            max-[900px]:scrollbar-hide
-          "
-        >
-          {categories.map((item) => {
-            const isActive = active === item;
-
+        <div className="pt-[20px] sticky top-[120px] self-start z-30 flex flex-col gap-[22px]">
+          {CATEGORIES.map((item, i) => {
+            const isActive = active === i;
             return (
               <button
                 key={item}
-                onClick={() => setActive(item)}
-                className={`
-
-                  text-left
-
-                  text-[22px]
-
-                  tracking-[0.16em]
-
-                  font-[400]
-
-                  transition-all
-
-                  duration-200
-                  max-[900px]:shrink-0
-                  max-[900px]:rounded-full
-                  max-[900px]:border
-                  max-[900px]:px-[14px]
-                  max-[900px]:py-[8px]
-                  max-[900px]:text-[13px]
-                  max-[900px]:tracking-[0.08em]
-
-                  ${
-                    isActive
-                      ? "text-[#111] max-[900px]:border-[#111] max-[900px]:bg-[#111] max-[900px]:text-white"
-                      : "text-[#a3a3a3] hover:text-[#666] max-[900px]:border-[#d5d5d5] max-[900px]:bg-white max-[900px]:text-[#777]"
-                  }
-
-                `}
+                onClick={() => setActive(i)}
+                className={`exc-menu-item text-left text-[22px] tracking-[0.16em] font-[400] transition-all duration-200 ${isActive ? "text-[#111]" : "text-[#a3a3a3] hover:text-[#666]"}`}
               >
-                {isActive && <span className="max-[900px]:hidden">//</span>}
-
+                {isActive && <span>//</span>}
                 {item}
               </button>
             );
           })}
         </div>
 
-        {/* right content */}
-        <div className="max-w-[680px] ml-[80px] max-[900px]:ml-0">
-          {/* heading */}
-          <h2
-            className="
-            font-display
-              text-[48px]
-
-              font-[600]
-
-              tracking-[-0.02em]
-
-              text-[#111]
-
-              mb-[56px]
-              max-[900px]:text-[36px]
-              max-[560px]:mb-[36px]
-              max-[560px]:text-[30px]
-            "
-          >
+        <div className="max-w-[680px] ml-[80px]">
+          <h2 className="exc-heading font-display text-[48px] font-[600] tracking-[-0.02em] text-[#111] mb-[56px]">
             Excellence Across Every Domain
           </h2>
-
-          {/* grid */}
-          <div className="grid grid-cols-2 gap-[32px] max-[900px]:gap-[20px] max-[560px]:grid-cols-1">
+          <div className="exc-grid grid grid-cols-2 gap-[32px]">
             {excellenceDomains.map((item, i) => (
-              <div
-                key={i}
-                className="
-                  h-[320px]
-
-                  rounded-[28px]
-
-                  border
-
-                  border-[#cfcfcf]
-
-                  bg-[#f5efe8]
-
-                  flex
-
-                  items-center
-
-                  justify-center
-                  max-[900px]:h-[260px]
-                  max-[560px]:h-[250px]
-                "
-              >
-                {/* placeholder icon */}
-                <svg width="42" height="42" opacity="0.45">
-                  <rect width="42" height="42" fill="#9a9a9a" />
-                </svg>
+              <div key={i} className="exc-card h-[320px] rounded-[28px] border border-[#cfcfcf] bg-[#f5efe8] flex items-center justify-center">
+                <svg width="42" height="42" opacity="0.45"><rect width="42" height="42" fill="#9a9a9a" /></svg>
               </div>
             ))}
           </div>
-
-          {/* button */}
-          <div
-            className="mt-[56px] flex justify-center max-[560px]:mt-[36px]"
-          >
-            <button
-            className="
-                px-[28px]
-
-                py-[12px]
-
-                text-[13px]
-
-                tracking-[0.16em]
-
-                uppercase
-
-                text-[#222]
-
-                border
-
-                border-[#bfbfbf]
-
-                rounded-[10px]
-                mr-[450px]
-                max-[1200px]:mr-0
-
-                transition-all
-
-                duration-200
-
-                hover:bg-[#111]
-
-                hover:text-white
-                max-[560px]:w-full
-                max-[560px]:py-[14px]
-              "
-            >
+          <div className="mt-[56px] flex justify-center">
+            <button className="exc-btn px-[28px] py-[12px] text-[13px] tracking-[0.16em] uppercase text-[#222] border border-[#bfbfbf] rounded-[10px] mr-[450px] max-[1200px]:mr-0 transition-all duration-200 hover:bg-[#111] hover:text-white">
               Explore Excellence
             </button>
           </div>
         </div>
+      </div>
+
+
+      {/* ════════════════════════════════════════════════════════════
+          MOBILE < 900px — neat, clean, refined
+      ════════════════════════════════════════════════════════════ */}
+      <div className="min-[900px]:hidden px-[20px]">
+
+        {/* ── Heading ────────────────────────────────────────────── */}
+        <div className="mb-[36px]">
+          <p className="text-[10px] tracking-[0.28em] uppercase text-[#b0b0b0] font-semibold mb-[14px]">
+            Our Domains
+          </p>
+          <h2 className="font-display text-[32px] font-[600] tracking-[-0.02em] text-[#111] leading-[1.2]">
+            {"Excellence Across Every Domain".split(" ").map((w, i) => (
+              <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.22em]">
+                <span className="mob-exc-word inline-block">{w}</span>
+              </span>
+            ))}
+          </h2>
+        </div>
+
+        {/* ── Navigation row ─────────────────────────────────────── */}
+        <div className="mob-nav-row mb-[24px]">
+
+          {/* prev / label / next */}
+          <div className="flex items-center justify-between mb-[10px]">
+
+            <button
+              onClick={() => goTo(active - 1)}
+              disabled={active === 0}
+              className="w-[36px] h-[36px] rounded-full border border-[#e4e4e4] flex items-center justify-center transition-colors duration-200 disabled:opacity-20"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M7.5 2L3.5 6l4 4" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <div className="flex flex-col items-center gap-[3px]">
+              <span className="text-[9px] font-semibold tracking-[0.22em] text-[#c0c0c0] uppercase">
+                0{active + 1} / 0{CATEGORIES.length}
+              </span>
+              <span className="font-display text-[17px] font-semibold tracking-[0.05em] text-[#111] leading-none">
+                {CATEGORIES[active]}
+              </span>
+            </div>
+
+            <button
+              onClick={() => goTo(active + 1)}
+              disabled={active === CATEGORIES.length - 1}
+              className="w-[36px] h-[36px] rounded-full border border-[#e4e4e4] flex items-center justify-center transition-colors duration-200 disabled:opacity-20"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M4.5 2l4 4-4 4" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          {/* progress track */}
+          <div className="h-[2px] bg-[#f0f0f0] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[#111] rounded-full transition-all duration-350 ease-out"
+              style={{ width: `${((active + 1) / CATEGORIES.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        {/* ── Cards — clean uniform 2-col grid ───────────────────── */}
+        <div className="mob-exc-grid grid grid-cols-2 gap-[10px] mb-[24px]">
+          {excellenceDomains.map((item, i) => (
+            <div
+              key={`${active}-${i}`}
+              className="mob-exc-card rounded-[20px] border border-[#ebebeb] bg-[#f5efe8] flex items-center justify-center"
+             className="
+mob-exc-card
+aspect-square
+rounded-[20px]
+border border-[#ebebeb]
+bg-[#f5efe8]
+flex items-center justify-center
+"
+            >
+              <svg width="34" height="34" opacity="0.35">
+                <rect width="34" height="34" fill="#9a9a9a" />
+              </svg>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Dot row ────────────────────────────────────────────── */}
+        <div className="flex justify-center gap-[6px] mb-[28px]">
+          {CATEGORIES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width:      active === i ? "20px" : "6px",
+                height:     "6px",
+                background: active === i ? "#111" : "#ddd",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* ── Button ─────────────────────────────────────────────── */}
+        <button className="mob-exc-btn w-full rounded-[12px] border border-[#d8d8d8] py-[15px] text-[11px] font-[600] tracking-[0.18em] uppercase text-[#222] transition-all duration-200 active:bg-[#111] active:text-white active:border-[#111]">
+          Explore Excellence
+        </button>
+
       </div>
     </section>
   );

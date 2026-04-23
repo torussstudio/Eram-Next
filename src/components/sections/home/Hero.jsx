@@ -16,27 +16,46 @@
 //   useGSAP(() => {
 //     const tl = gsap.timeline();
 
-//     tl.to('.hero-line', {
-//       y: '0%',
+//     tl.to(".hero-line", {
+//       y: "0%",
 //       skewY: 0,
 //       duration: 1.2,
 //       stagger: 0.15,
-//       ease: 'power4.out',
-//       delay: 0.1
+//       ease: "power4.out",
+//       delay: 0.1,
 //     })
-//     .to(descRef.current, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.8')
-//     .to(buttonsRef.current, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.8');
 
-//     // Parallax scroll effect
+//       .to(
+//         descRef.current,
+//         {
+//           opacity: 1,
+//           y: 0,
+//           duration: 1,
+//           ease: "power3.out",
+//         },
+//         "-=0.8",
+//       )
+
+//       .to(
+//         buttonsRef.current,
+//         {
+//           opacity: 1,
+//           y: 0,
+//           duration: 1,
+//           ease: "power3.out",
+//         },
+//         "-=0.8",
+//       );
+
 //     gsap.to(containerRef.current, {
 //       yPercent: 15,
-//       ease: 'none',
+//       ease: "none",
 //       scrollTrigger: {
 //         trigger: sectionRef.current,
-//         start: 'top top',
-//         end: 'bottom top',
-//         scrub: true
-//       }
+//         start: "top top",
+//         end: "bottom top",
+//         scrub: true,
+//       },
 //     });
 //   });
 
@@ -45,103 +64,115 @@
 //       ref={sectionRef}
 //       className={`${shell}
 
-//       isolate
-//       before:content-[''] before:absolute before:-top-[200px] before:bottom-0 before:w-[100vw] before:left-1/2 before:-translate-x-1/2 before:bg-[#ae1431] before:-z-10
-//       relative
-//       block
+// isolate
 
-//       pb-[66px]
-//       pt-[37px]
+// before:content-['']
+// before:absolute
+// before:-top-[200px]
+// before:bottom-0
+// before:w-[100vw]
+// before:left-1/2
+// before:-translate-x-1/2
+// before:bg-[#ae1431]
+// before:-z-10
 
-//       max-[920px]:pb-[56px]
-//       max-[640px]:pt-[24px]
-//       `}
+// relative
+// block
+
+// pb-[66px]
+// pt-[37px]
+
+// max-[920px]:pb-[56px]
+// max-[640px]:pt-[24px]
+// `}
 //       id="hero"
 //     >
 //       <div
 //         ref={containerRef}
 //         className="
-//         relative
 
-//         min-h-[650px]
+// relative
 
-//         rounded-[24px]
-//         rounded-tl-none
+// min-h-[650px]
 
-//         bg-[#F5EFE8]
+// rounded-[24px]
+// rounded-tl-none
 
-//         px-[92px]
+// bg-[#F5EFE8]
 
-//         pb-[92px]
+// px-[60px]
+// xl:px-[80px]
+// 2xl:px-[110px]
 
-//         pt-[220px]
+// pb-[92px]
+// pt-[220px]
 
-//         max-[920px]:min-h-[620px]
+// max-[920px]:px-[36px]
+// max-[920px]:pt-[240px]
 
-//         max-[920px]:px-[44px]
+// max-[640px]:px-6
+// max-[640px]:pt-[210px]
 
-//         max-[920px]:pb-[54px]
+// max-[420px]:px-4
+// max-[420px]:pt-[190px]
 
-//         max-[920px]:pt-[250px]
-
-//         max-[640px]:min-h-[520px]
-
-//         max-[640px]:px-6
-
-//         max-[640px]:pb-[34px]
-
-//         max-[640px]:pt-[220px]
-//         max-[420px]:px-4
-//         max-[420px]:pt-[200px]
-//         "
+// "
 //       >
-
 //         {/* text container */}
-//         <div className="max-w-[1200px] pb-[100px] max-[640px]:pb-[70px]">
 
+//         <div className="max-w-[1500px] pb-[100px] ml-[120px] max-[920px]:ml-[40px] max-[640px]:ml-0">
 //           {/* heading */}
+
 //           <h1
 //             className="
-//             font-display
 
-//             m-0
+// font-display
 
-//             text-[clamp(4.2rem,5vw,5.4rem)]
+// text-[clamp(4rem,5vw,5.6rem)]
 
-//             leading-[0.95]
+// leading-[0.95]
 
-//             tracking-[-0.02em]
+// tracking-[-0.02em]
 
-//             text-[#111]
-//             max-[640px]:text-[clamp(2.4rem,13vw,3.5rem)]
-//             "
+// text-[#111]
+
+// max-[640px]:text-[clamp(2.3rem,12vw,3.4rem)]
+
+// "
 //           >
-//             <div className="overflow-hidden pb-1"><span className="hero-line block translate-y-[110%] skew-y-2">An Institutional</span></div>
-//             <div className="overflow-hidden pb-1"><span className="hero-line block translate-y-[110%] skew-y-2">Movement of Purpose</span></div>
+//             <div className="overflow-hidden pb-1">
+//               <span className="hero-line block translate-y-[110%] skew-y-2">
+//                 An Institutional
+//               </span>
+//             </div>
+
+//             <div className="overflow-hidden pb-1">
+//               <span className="hero-line block translate-y-[110%] skew-y-2">
+//                 Movement of Purpose
+//               </span>
+//             </div>
 //           </h1>
 
-//           {/* paragraph */}
 //           <p
 //             ref={descRef}
 //             className="
-//             opacity-0
-//             translate-y-4
 
-//             mt-[34px]
+// opacity-0
+// translate-y-4
 
-//             max-w-[600px]
+// mt-[34px]
 
-//             text-[0.95rem]
+// max-w-[680px]
 
-//             leading-[1.6]
+// text-[1rem]
 
-//             tracking-[-0.005em]
+// leading-[1.65]
 
-//             text-[#616161]
+// text-[#616161]
 
-//             max-[640px]:max-w-full
-//             max-[640px]:text-[0.92rem]
-//             "
+// max-[640px]:max-w-full
+
+// "
 //           >
 //             ERAM Education was established to build disciplined, value-based
 //             institutions that expand access to quality learning and reach
@@ -150,36 +181,34 @@
 //             while serving communities with integrity.
 //           </p>
 
-//           {/* buttons */}
 //           <div
 //             ref={buttonsRef}
 //             className="
-//             opacity-0
-//             translate-y-4
 
-//             mt-11
+// opacity-0
+// translate-y-4
 
-//             flex
-//             flex-wrap
+// mt-11
 
-//             gap-[14px]
-//             "
+// flex
+// flex-wrap
+
+// gap-[14px]
+
+// "
 //           >
-//             <ActionButton>
-//               Explore Our Institutions
-//             </ActionButton>
+//             <ActionButton>Explore Our Institutions</ActionButton>
 
 //             <ActionButton variant="secondary">
 //               Admissions Open 2026-27
 //             </ActionButton>
 //           </div>
-
 //         </div>
-
 //       </div>
 //     </section>
 //   );
 // }
+
 
 import { useRef } from "react";
 import gsap from "gsap";
@@ -201,7 +230,7 @@ export default function Hero() {
 
     tl.to(".hero-line", {
       y: "0%",
-      skewY: 0,
+      // ❌ removed skewY for clean straight animation
       duration: 1.2,
       stagger: 0.15,
       ease: "power4.out",
@@ -216,7 +245,7 @@ export default function Hero() {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.8",
+        "-=0.8"
       )
 
       .to(
@@ -227,7 +256,7 @@ export default function Hero() {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.8",
+        "-=0.8"
       );
 
     gsap.to(containerRef.current, {
@@ -303,7 +332,7 @@ max-[420px]:pt-[190px]
       >
         {/* text container */}
 
-        <div className="max-w-[1500px] pb-[100px]">
+        <div className="max-w-[1500px] pb-[100px] ml-[120px] max-[920px]:ml-[40px] max-[640px]:ml-0">
           {/* heading */}
 
           <h1
@@ -324,13 +353,13 @@ max-[640px]:text-[clamp(2.3rem,12vw,3.4rem)]
 "
           >
             <div className="overflow-hidden pb-1">
-              <span className="hero-line block translate-y-[110%] skew-y-2">
+              <span className="hero-line block translate-y-[110%]">
                 An Institutional
               </span>
             </div>
 
             <div className="overflow-hidden pb-1">
-              <span className="hero-line block translate-y-[110%] skew-y-2">
+              <span className="hero-line block translate-y-[110%]">
                 Movement of Purpose
               </span>
             </div>

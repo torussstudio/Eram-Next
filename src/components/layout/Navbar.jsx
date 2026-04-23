@@ -5,7 +5,6 @@ import { navItems } from "../../constants/homeData";
 import { shell } from "../../constants/homeStyles";
 
 export default function Navbar() {
-
   const [open, setOpen] = useState(false);
 
   const location = useLocation();
@@ -27,15 +26,14 @@ export default function Navbar() {
   `;
 
   return (
-
-<header
-className={`
+    <header
+      className={`
 
 ${shell}
 
-sticky top-0 z-[60]
+sticky top-0 max-[920px]:top-[6px] z-[60]
 
-mt-6
+mt-0
 mb-[-34px]
 
 grid
@@ -62,17 +60,12 @@ max-[920px]:min-h-[64px]
 max-[920px]:rounded-[18px]
 
 `}
->
+    >
+      {/* LOGO */}
 
-{/* LOGO */}
-
-<Link
-to="/"
-className="inline-flex h-full items-stretch self-stretch"
->
-
-<span
-className="
+      <Link to="/" className="inline-flex h-full items-stretch self-stretch">
+        <span
+          className="
 
 flex
 
@@ -103,23 +96,19 @@ max-[920px]:rounded-[14px]
 max-[920px]:px-[18px]
 
 "
->
+        >
+          <img
+            src="/education-1.svg"
+            alt="ERAM Education"
+            className="w-[135px] pl-[20px] lg:w-[140px] object-contain"
+          />
+        </span>
+      </Link>
 
-<img
-src="/education-1.svg"
-alt="ERAM Education"
-className="w-[135px] lg:w-[140px] object-contain"
-/>
+      {/* DESKTOP MENU */}
 
-</span>
-
-</Link>
-
-
-{/* DESKTOP MENU */}
-
-<nav
-className="
+      <nav
+        className="
 
 flex
 
@@ -132,42 +121,32 @@ xl:gap-[110px]
 max-[920px]:hidden
 
 "
->
-
-{navItems.map((item) => (
-
-<NavLink
-
-key={item.path}
-
-to={item.path}
-
-className={({ isActive }) => `
+      >
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) => `
 
 ${navLinkClassName}
 
 ${
-isActive
-? "text-[#ae1431] underline underline-offset-4 decoration-[1.5px] decoration-[#ae1431]"
-: ""
+  isActive
+    ? "text-[#ae1431] underline underline-offset-4 decoration-[1.5px] decoration-[#ae1431]"
+    : ""
 }
 
 `}
->
+          >
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
 
-{item.label}
+      {/* BUTTONS */}
 
-</NavLink>
-
-))}
-
-</nav>
-
-
-{/* BUTTONS */}
-
-<div
-className="
+      <div
+        className="
 
 flex
 
@@ -177,11 +156,10 @@ lg:gap-[50px]
 max-[920px]:hidden
 
 "
->
-
-<ActionButton
-variant="ghost"
-className={`
+      >
+        <ActionButton
+          variant="ghost"
+          className={`
 
 ${textColor}
 
@@ -196,15 +174,12 @@ tracking-[0.03em]
 !rounded-[10px]
 
 `}
->
+        >
+          Parent Portal
+        </ActionButton>
 
-Parent Portal
-
-</ActionButton>
-
-
-<ActionButton
-className="
+        <ActionButton
+          className="
 
 bg-[#ae1431]
 
@@ -221,22 +196,16 @@ tracking-[0.03em]
 !rounded-[10px]
 
 "
->
+        >
+          News & Updates
+        </ActionButton>
+      </div>
 
-News & Updates
+      {/* MOBILE TOGGLE */}
 
-</ActionButton>
-
-</div>
-
-
-{/* MOBILE TOGGLE */}
-
-<button
-
-onClick={() => setOpen(true)}
-
-className={`
+      <button
+        onClick={() => setOpen(true)}
+        className={`
 
 hidden
 
@@ -251,37 +220,32 @@ justify-center
 rounded-[14px]
 
 ${
-isHome
-? "bg-white/10 border border-white/20"
-: "bg-black/5 border border-black/10"
+  isHome
+    ? "bg-white/10 border border-white/20"
+    : "bg-black/5 border border-black/10"
 }
 
 `}
->
+      >
+        <div className="space-y-[5px]">
+          <span
+            className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
+          />
 
-<div className="space-y-[5px]">
+          <span
+            className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
+          />
 
-<span
-className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
-/>
+          <span
+            className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
+          />
+        </div>
+      </button>
 
-<span
-className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
-/>
+      {/* OVERLAY */}
 
-<span
-className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
-/>
-
-</div>
-
-</button>
-
-
-{/* OVERLAY */}
-
-<div
-className={`
+      <div
+        className={`
 
 fixed inset-0 z-[100]
 
@@ -294,14 +258,13 @@ ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
 min-[921px]:hidden
 
 `}
-onClick={() => setOpen(false)}
-/>
+        onClick={() => setOpen(false)}
+      />
 
+      {/* MOBILE MENU */}
 
-{/* MOBILE MENU */}
-
-<div
-className={`
+      <div
+        className={`
 
 fixed top-0 right-0
 
@@ -324,39 +287,27 @@ ${open ? "translate-x-0" : "translate-x-full"}
 min-[921px]:hidden
 
 `}
->
+      >
+        <div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
+          <span className="font-display font-bold text-xl text-[#ae1431]">
+            ERAM.
+          </span>
 
-<div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
+          <button
+            onClick={() => setOpen(false)}
+            className="h-9 w-9 flex items-center justify-center rounded-full bg-black/5"
+          >
+            ✕
+          </button>
+        </div>
 
-<span className="font-display font-bold text-xl text-[#ae1431]">
-ERAM.
-</span>
-
-<button
-onClick={() => setOpen(false)}
-className="h-9 w-9 flex items-center justify-center rounded-full bg-black/5"
->
-
-✕
-
-</button>
-
-</div>
-
-
-<nav className="flex flex-col gap-7 px-7 py-10">
-
-{navItems.map((item) => (
-
-<NavLink
-
-key={item.path}
-
-to={item.path}
-
-onClick={() => setOpen(false)}
-
-className={({ isActive }) => `
+        <nav className="flex flex-col gap-7 px-7 py-10">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) => `
 
 text-[1.15rem]
 
@@ -369,37 +320,24 @@ tracking-[0.05em]
 ${isActive ? "text-[#ae1431]" : "text-black"}
 
 `}
->
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
 
-{item.label}
+        <div className="px-7 pb-10 mt-auto flex flex-col gap-3 border-t border-black/10 pt-6">
+          <ActionButton className="w-full justify-center bg-[#ae1431] text-white">
+            Parent Portal
+          </ActionButton>
 
-</NavLink>
-
-))}
-
-</nav>
-
-
-<div className="px-7 pb-10 mt-auto flex flex-col gap-3 border-t border-black/10 pt-6">
-
-<ActionButton className="w-full justify-center bg-[#ae1431] text-white">
-
-Parent Portal
-
-</ActionButton>
-
-
-<ActionButton variant="ghost" className="w-full justify-center">
-
-News & Updates
-
-</ActionButton>
-
-</div>
-
-</div>
-
-</header>
-
+          <ActionButton variant="ghost" className="w-full justify-center">
+            News & Updates
+          </ActionButton>
+        </div>
+      </div>
+    </header>
   );
 }
+
+

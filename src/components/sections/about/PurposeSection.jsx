@@ -2,7 +2,8 @@ import { memo, useRef } from 'react'
 import OptimizedImage from '../../ui/OptimizedImage'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FaPlay } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -194,38 +195,38 @@ function PurposeSection() {
               ))}
             </div>
 
-            <button
-              className="
-          purpose-btn
-          opacity-0 translate-y-4
-          mt-7 md:mt-8
+          <button
+  className="
+    purpose-btn
+    opacity-0 translate-y-4
+    mt-7 md:mt-8
 
-          border
-          border-black/40
+    border
+    border-black/40
 
-          px-5
-          py-2
+    px-5
+    py-2
 
-          rounded-[10px]
+    rounded-[10px]
 
-          text-[13px]
-          md:text-sm
+    text-[13px]
+    md:text-sm
 
-          font-medium
+    font-medium
 
-          flex
-          items-center
-          gap-2
+    flex
+    items-center
+    gap-2
 
-          hover:bg-black
-          hover:text-white
+    hover:bg-black
+    hover:text-white
 
-          transition
-          "
-            >
-              EXPLORE MORE
-              <span>▶</span>
-            </button>
+    transition
+  "
+>
+  EXPLORE MORE
+  <FaPlay className="text-xs transition-all duration-300 group-hover:translate-x-1" />
+</button>
           </div>
         </div>
       </div>

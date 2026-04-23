@@ -698,7 +698,7 @@ md:ml-[40px]
 
       text-white
       max-w-[980px]
-      ml-22
+      ml-0 md:ml-22
     "
   >
     The result is a unified educational system
