@@ -57,7 +57,7 @@ export default function InstitutionsSection() {
   return (
     <section
       ref={sectionRef}
-      id="courses"
+      id="c"
       className="bg-[#f5efe8] pt-[40px] pb-[120px]"
     >
       <div className="mx-auto max-w-[1180px] px-[24px] max-[640px]:px-[16px]">
