@@ -86,7 +86,7 @@ export default function ModelSection() {
     <section
       ref={sectionRef}
       className="
-        bg-[#ae1431]
+        bg-black
         py-[140px]
 
         relative
@@ -292,18 +292,21 @@ max-[900px]:mt-[70px]
           </h3>
 
           <div
-            className="
-    mt-[70px]
+         className="
+  mt-[70px]
 
-    grid
-    grid-cols-4
+  grid
+  grid-cols-4
 
-    gap-[60px]
+  gap-[60px]
 
-    max-[900px]:gap-[34px]
-    max-[900px]:grid-cols-2
-    max-[560px]:grid-cols-1
-  "
+  w-full
+  px-[16px] md:px-[24px] lg:px-[32px]
+
+  max-[900px]:gap-[34px]
+  max-[900px]:grid-cols-2
+  max-[560px]:grid-cols-1
+"
           >
             {facultySystems.map((item, i) => (
               <div

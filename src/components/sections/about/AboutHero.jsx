@@ -129,8 +129,8 @@ function AboutHero() {
 
               {/* ── DESKTOP (md+) ── original left-aligned layout */}
               <div
-                className="hidden md:block w-full text-white
-                              pl-[120px] pr-8 lg:pl-[160px]"
+               className="hidden md:block w-full text-white
+           ml-[115px] lg:ml-[180px] pr-8"
               >
                 <div className="max-w-[640px]">
                   <h1

@@ -89,7 +89,7 @@ export default function ArenaSection() {
     <section
       ref={sectionRef}
       id="arena"
-      className={`${section} ${sectionBand} bg-[#ae1431] -mb-[1px]`}
+      className={`${section} ${sectionBand} bg-[#F5EFE8] -mb-[1px]`}
       style={{ transform: "translateZ(0)", height: "100vh" }}
     >
       {/*

@@ -31,7 +31,7 @@ export default function CTASection() {
   return (
     <section
       id="contact"
-      className={`${section} pt-[130px] pb-[110px] bg-[#ae1431]`}
+      className={`${section} pt-[130px] pb-[110px] bg-[#F5EFE8]`}
     >
       <div
         ref={ctaRef}
@@ -45,7 +45,7 @@ export default function CTASection() {
 
           text-center
 
-          bg-[#f5efe8]
+          bg-white
 
           rounded-[32px]
           max-[640px]:rounded-[22px]

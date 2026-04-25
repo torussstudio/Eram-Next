@@ -29,7 +29,6 @@ export default function Navbar() {
   return (
     <header
       className={`
-
 ${shell}
 
 sticky top-0 max-[920px]:top-[6px] z-[60]
@@ -48,8 +47,8 @@ lg:min-h-[72px]
 
 gap-6 lg:gap-8
 
-rounded-[20px]
-lg:rounded-[24px]
+rounded-b-[20px] lg:rounded-b-[24px]   /* 👈 only bottom rounded */
+rounded-t-none                         /* 👈 remove top curve */
 
 ${bgColor}
 
@@ -58,8 +57,8 @@ pr-[14px]
 max-[920px]:grid-cols-[1fr_auto]
 max-[920px]:p-[8px]
 max-[920px]:min-h-[64px]
-max-[920px]:rounded-[18px]
-
+max-[920px]:rounded-b-[18px]
+max-[920px]:rounded-t-none
 `}
     >
       {/* LOGO */}

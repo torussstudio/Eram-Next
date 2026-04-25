@@ -89,7 +89,7 @@ function ERAMSportsArena() {
       ref={containerRef}
       className="bg-[#F5EFE8] px-5 sm:px-6 py-16 md:py-24"
     >
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1100px] mx-auto">
         {/* TOP HEADER */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
           <h2

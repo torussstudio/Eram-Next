@@ -61,7 +61,7 @@ function SpacesDesignedForOpportunity() {
       ref={containerRef}
       className="bg-[#F5EFE8] py-16 md:py-24 px-5 sm:px-6"
     >
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1100px] mx-auto">
         {/* heading */}
         <div className="max-w-[720px]">
           <h2

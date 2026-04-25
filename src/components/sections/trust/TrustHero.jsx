@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 function TrustHero() {
@@ -17,7 +16,7 @@ function TrustHero() {
       tl.fromTo(
         ".hero-img",
         { scale: 1.15 },
-        { scale: 1.08, duration: 1.2, ease: "power3.out" }
+        { scale: 1.08, duration: 1.2, ease: "power3.out" },
       );
 
       tl.to(
@@ -28,7 +27,7 @@ function TrustHero() {
           stagger: 0.12,
           ease: "power3.out",
         },
-        "-=1"
+        "-=1",
       );
 
       tl.to(
@@ -39,7 +38,7 @@ function TrustHero() {
           duration: 0.8,
           stagger: 0.1,
         },
-        "-=0.8"
+        "-=0.8",
       );
 
       gsap.to(".hero-img", {
@@ -53,7 +52,7 @@ function TrustHero() {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
@@ -64,7 +63,6 @@ function TrustHero() {
       <div className="max-w-[1500px] mx-auto px-[12px]">
         <div className="rounded-[28px] overflow-hidden shadow-sm">
           <div className="relative h-[480px] sm:h-[560px] md:h-[660px] lg:h-[760px] w-full">
-
             {/* IMAGE */}
             <div className="absolute inset-0">
               <div className="hero-img absolute inset-0 scale-110">
@@ -82,10 +80,8 @@ function TrustHero() {
 
             {/* CONTENT */}
             <div className="absolute inset-0 flex items-end md:items-center">
-
               {/* MOBILE */}
               <div className="w-full flex flex-col items-center text-center text-white px-6 pb-10 md:hidden">
-
                 {/* TOP LABEL */}
                 <span className="hero-content-fade text-[10px] tracking-[0.25em] uppercase text-white/70 mb-4 opacity-0 translate-y-6">
                   ERAM EDUCATIONAL & WELFARE TRUST
@@ -124,19 +120,17 @@ function TrustHero() {
               </div>
 
               {/* DESKTOP */}
-              <div className="hidden md:block w-full text-white pl-[120px] pr-8 lg:pl-[160px]">
+              <div className="hidden md:block w-full text-white pl-[130px] pr-8 lg:pl-[180px]">
                 <div className="max-w-[640px]">
-<div className="hero-content-fade flex items-center gap-4 mb-6 opacity-0 translate-y-6">
-  
-  {/* MAROON LINE */}
-  <span className="w-[32px] h-[2px] bg-[#8B1E1E]"></span>
+                  <div className="hero-content-fade flex items-center gap-4 mb-6 opacity-0 translate-y-6">
+                    {/* MAROON LINE */}
+                    <span className="w-[32px] h-[2px] bg-[#8B1E1E]"></span>
 
-  {/* TEXT */}
-  <span className="text-[11px] tracking-[0.32em] uppercase text-white/80">
-    ERAM EDUCATIONAL & WELFARE TRUST
-  </span>
-
-</div>
+                    {/* TEXT */}
+                    <span className="text-[11px] tracking-[0.32em] uppercase text-white/80">
+                      ERAM EDUCATIONAL & WELFARE TRUST
+                    </span>
+                  </div>
 
                   {/* HEADING */}
                   <h1 className="font-serif leading-[1.05] text-[clamp(2.5rem,4vw,3.8rem)] font-light">
@@ -164,24 +158,21 @@ function TrustHero() {
                     Across communities, ERAM Educational & Welfare Trust
                     implements long-term initiatives designed to strengthen
                     access, equity, and opportunity — guided by the principle
-                    that sustainable impact must be deliberate, measurable,
-                    and accountable.
+                    that sustainable impact must be deliberate, measurable, and
+                    accountable.
                   </p>
 
                   {/* BUTTON */}
                   <button className="hero-content-fade mt-8 bg-[#B3201D] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide font-medium opacity-0 translate-y-8 hover:bg-[#8f1a18] transition">
                     VIEW OUR COMMUNITY INTERVENTIONS →
                   </button>
-
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </section>
-    
   );
 }
 

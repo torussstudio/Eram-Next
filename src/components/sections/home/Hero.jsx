@@ -120,7 +120,7 @@ max-[420px]:pt-[190px]
       >
         {/* text container */}
 
-        <div className="max-w-[1500px] pb-[100px] ml-[120px] max-[920px]:ml-[40px] max-[640px]:ml-0">
+        <div className="max-w-[1500px] pb-[100px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
           {/* heading */}
 
           <h1
