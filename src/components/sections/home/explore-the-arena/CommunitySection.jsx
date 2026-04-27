@@ -15,8 +15,8 @@ export default function CommunitySection() {
 
             {/* LABEL */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="w-6 h-[1px] bg-[#9f2a1f]"></span>
-              <p className="text-[11px] tracking-[0.25em] text-[#9f2a1f] uppercase">
+              <span className="w-6 h-[1px] bg-[#ae1431]"></span>
+              <p className="text-[12px] tracking-[0.25em] text-[#ae1431] uppercase">
                 A venue for the wider community
               </p>
             </div>
@@ -58,19 +58,25 @@ export default function CommunitySection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 border border-[#cfc6bb]">
 
               {cards.map((card, i) => (
-                <div
-                  key={i}
-                  className={`
-                    p-[22px] md:p-[26px]
-                    bg-[#f5f2ed]
-                    min-h-[140px]
-                    flex flex-col justify-center
+               <div
+  key={i}
+  className={`
+    p-[22px] md:p-[26px]
+    bg-[#f5f2ed]
+    min-h-[140px]
+    flex flex-col justify-center
 
-                    ${i % 2 === 0 ? "sm:border-r" : ""}
-                    ${i < 2 ? "sm:border-b" : ""}
-                    border-[#cfc6bb]
-                  `}
-                >
+    transition-all duration-300 ease-out
+    cursor-pointer
+
+    hover:bg-[#ae1431]
+    hover:text-white
+
+    ${i % 2 === 0 ? "sm:border-r" : ""}
+    ${i < 2 ? "sm:border-b" : ""}
+    border-[#cfc6bb]
+  `}
+>
                   <div className="text-[20px] mb-[10px]">
                     {card.icon}
                   </div>

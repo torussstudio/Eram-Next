@@ -10,7 +10,6 @@ export default function Navbar() {
   const location = useLocation();
 
   const isHome = location.pathname === "/";
-  
 
   const bgColor = isHome ? "bg-[#ae1431]" : "bg-[#F5EFE8]";
   const textColor = isHome ? "text-[#F5EFE8]" : "text-black";
@@ -342,5 +341,3 @@ ${isActive ? "text-[#ae1431]" : "text-black"}
     </header>
   );
 }
-
-

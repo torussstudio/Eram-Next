@@ -1,7 +1,3 @@
-
-
-
-
 import { Calendar } from "lucide-react";
 
 export default function HeroSection() {
@@ -21,17 +17,18 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-black/70" />
 
           {/* CONTENT */}
-          <div className="relative z-10 flex flex-col">
+          <div className="relative z-10 flex flex-col justify-center min-h-[80vh]">
 
             {/* TOP SECTION */}
-            <div className="w-full max-w-[1100px] mx-auto px-4 md:px-6 py-16 md:py-24 lg:py-32 flex flex-col lg:flex-row gap-12">
+            <div className="w-full max-w-[1100px] mx-auto px-4 md:px-6 
+  py-20 md:py-28 lg:py-36 flex flex-col lg:flex-row gap-12">
 
               {/* LEFT */}
               <div className="flex-1 max-w-[720px]">
 
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="w-6 h-[1px] bg-red-500"></span>
-                  <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-red-500 uppercase">
+                  <span className="w-6 h-[1px] bg-[#ae1431]"></span>
+                  <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                     The Eram Sports Arena
                   </p>
                 </div>
@@ -49,12 +46,12 @@ export default function HeroSection() {
                 </p>
 
                 <div className="flex flex-wrap gap-3 mt-7">
-                  <button className="bg-red-600 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase">
-                    Explore →
+                  <button className="bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase">
+                    EXPLORE THE ARENA→
                   </button>
 
                   <button className="border border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2">
-                    Host Event
+                    HOST AN EVENT
                     <Calendar className="w-4 h-4 opacity-70" />
                   </button>
                 </div>
@@ -72,8 +69,8 @@ export default function HeroSection() {
                 lg:self-start
               ">
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="w-5 h-[1px] bg-red-500"></span>
-                  <p className="text-[10px] tracking-[0.28em] text-red-500 uppercase">
+                  <span className="w-5 h-[1px] bg-[#ae1431]"></span>
+                  <p className="text-[10px] tracking-[0.28em] text-[#ae1431] uppercase">
                     At a Glance
                   </p>
                 </div>
@@ -82,7 +79,7 @@ export default function HeroSection() {
                   ["1,000", "Seating Capacity"],
                   ["10,000", "sq. ft. Built-Up Area"],
                   ["Open-Air", "Amphitheatre Design"],
-                  ["38", "Floodlights"],
+                  ["38", "High-Intensity LED Floodlights"],
                 ].map(([title, desc], i) => (
                   <div
                     key={i}
@@ -99,14 +96,14 @@ export default function HeroSection() {
             </div>
 
             {/* STATS */}
-         <div className="border-t border-white/10">
+<div className="border-t border-white/10">
   <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
-    <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[60px] md:py-[80px]">
+    <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[56px]">
 
       {/* LABEL */}
       <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">
-        <span className="w-[26px] h-[1px] bg-[#a32020]" />
-        <p className="text-[10px] md:text-[15px] tracking-[0.28em] text-[#a32020] uppercase">
+        <span className="w-[26px] h-[1px] bg-[#ae1431]" />
+        <p className="text-[15px] md:text-[18px] tracking-[0.28em] text-[#ae1431] uppercase">
           Infrastructure at a glance
         </p>
       </div>

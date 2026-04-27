@@ -42,7 +42,7 @@ export default function ClosingSection() {
             </div>
 
             {/* RIGHT */}
-            <div className="flex flex-col items-start md:items-end gap-[14px] md:mt-[10px]">
+            <div className="flex flex-col items-start md:items-end gap-[14px] md:mt-[120px]">
 
               <button className="
                 bg-[#111111]
@@ -52,6 +52,7 @@ export default function ClosingSection() {
                 text-[12px]
                 tracking-[0.18em]
                 uppercase
+               
                 flex items-center gap-3
               ">
                 Explore the ERAM Ecosystem →

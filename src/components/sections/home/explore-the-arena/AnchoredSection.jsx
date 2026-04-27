@@ -22,8 +22,8 @@ export default function AnchoredSection() {
 
             {/* LABEL */}
             <div className="flex items-center gap-3 mb-[20px] md:mb-[28px]">
-              <span className="w-[24px] md:w-[28px] h-[1px] bg-[#a32020]" />
-              <p className="text-[10px] md:text-[11px] tracking-[0.28em] text-[#a32020] uppercase">
+              <span className="w-[24px] md:w-[28px] h-[1px] bg-[#ae1431]" />
+              <p className="text-[10px] md:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                 Integrated with the ERAM Ecosystem
               </p>
             </div>
@@ -48,10 +48,7 @@ export default function AnchoredSection() {
               text-[#b8b2a8]
               mb-[22px] md:mb-[28px]
             ">
-              The Arena operates in alignment with the ERAM institutional ecosystem,
-              reinforcing the Trust's long-standing commitment to youth development.
-              It is not a standalone facility — it is the physical expression of a
-              broader educational philosophy.
+              The Arena operates in alignment with the ERAM institutional ecosystem, reinforcing the Trust's long-standing commitment to youth development. It is not a standalone facility — it is the physical expression of a broader educational philosophy.
             </p>
 
             {/* QUOTE */}
@@ -60,7 +57,7 @@ export default function AnchoredSection() {
               text-[14px] md:text-[15px]
               text-[#9f988e]
               mb-[24px] md:mb-[30px]
-              border-l border-[#a32020]
+              border-l border-[#ae1431]
               pl-[14px] md:pl-[16px]
             ">
               “The Arena transforms training into performance, and performance into opportunity.”
@@ -70,7 +67,7 @@ export default function AnchoredSection() {
             <ul className="space-y-[12px] md:space-y-[14px] text-[13px] md:text-[14px] text-[#c9c3ba]">
               {points.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="w-[5px] h-[5px] md:w-[6px] md:h-[6px] mt-[6px] md:mt-[7px] bg-[#a32020] rounded-full" />
+                  <span className="w-[5px] h-[5px] md:w-[6px] md:h-[6px] mt-[6px] md:mt-[7px] bg-[#ae1431] rounded-full" />
                   {item}
                 </li>
               ))}
@@ -94,7 +91,7 @@ export default function AnchoredSection() {
                   ${i < 2 ? "border-b" : ""}
                   border-[#2a2a2a]
 
-                  ${card.variant === "red" ? "bg-[#8c1d18]" : "bg-[#1a1a1a]"}
+                  ${card.variant === "red" ? "bg-[#ae1431]" : "bg-[#1a1a1a]"}
                 `}
               >
                 <h3 className="
