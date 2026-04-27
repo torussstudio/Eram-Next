@@ -6,6 +6,7 @@ import Navbar from "../components/layout/Navbar";
 import ScrollToTop from "../components/layout/ScrollToTop";
 import SmoothScrollProvider from "../providers/SmoothScrollProvider";
 
+
 // ✅ Lazy load pages (BEST PRACTICE)
 const Home = lazy(() => import("../pages/home/Home"));
 const About = lazy(() => import("../pages/about-us/About"));
@@ -13,6 +14,9 @@ const TheTrust = lazy(() => import("../pages/the-trust/TheTrust"));
 const Facilities = lazy(() => import("../pages/facilities/Facilities"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
 const Gallery = lazy(() => import("../pages/gallery/Gallery"));
+const ExploreArena = lazy(() =>
+  import("../pages/explore-arena/ExploreArena")
+);
 
 // ✅ Preload helpers (instant navigation feel)
 const preloadAbout = () => import("../pages/about-us/About");
@@ -20,6 +24,7 @@ const preloadTheTrust = () => import("../pages/the-trust/TheTrust");
 const preloadFacilities = () => import("../pages/facilities/Facilities");
 const preloadContact = () => import("../pages/contact/Contact");
 const preloadGallery = () => import("../pages/gallery/Gallery");
+
 
 // ✅ Loader
 function PageLoader() {
@@ -54,6 +59,7 @@ export default function App() {
               <Route path="/facilities" element={<Facilities />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/explore-arena" element={<ExploreArena />} />
             </Routes>
           </Suspense>
 

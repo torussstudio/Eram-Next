@@ -77,8 +77,11 @@ lg:w-[210px]
 
 items-center
 
-rounded-t-[20px]
-lg:rounded-t-[24px]
+rounded-tr-[20px]
+lg:rounded-tr-[24px]
+
+
+
 
 bg-[#F5EFE8]
 

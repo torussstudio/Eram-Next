@@ -1,3 +1,396 @@
+// import { memo, useRef } from "react";
+// import OptimizedImage from "../../ui/OptimizedImage";
+// import gsap from "gsap";
+// import { useGSAP } from "@gsap/react";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// function SpacesDesignedForOpportunity() {
+//   const containerRef = useRef(null);
+
+//   useGSAP(
+//     () => {
+//       // Header
+//       gsap.to(".spaces-text", {
+//         y: 0,
+//         opacity: 1,
+//         duration: 1,
+//         stagger: 0.1,
+//         ease: "power3.out",
+//         scrollTrigger: {
+//           trigger: containerRef.current,
+//           start: "top 75%",
+//         },
+//       });
+
+//       // Layout cards fade up stagger - optimized
+//       gsap.to(".spaces-card", {
+//         y: 0,
+//         opacity: 1,
+//         duration: 1.2,
+//         stagger: 0.1,
+//         ease: "power3.out",
+//         scrollTrigger: {
+//           trigger: ".spaces-grid",
+//           start: "top 75%",
+//         },
+//       });
+
+//       // Inner images scale with batching
+//       ScrollTrigger.batch(".spaces-card", {
+//         interval: 0.1,
+//         batchMax: 3,
+//         onEnter: (batch) => {
+//           batch.forEach((element) => {
+//             const img = element.querySelector(".spaces-img");
+//             gsap.to(img, {
+//               scale: 1,
+//               duration: 1.5,
+//               ease: "power3.out",
+//             });
+//           });
+//         },
+//       });
+//     },
+//     { scope: containerRef },
+//   );
+
+//   return (
+//     <section
+//       ref={containerRef}
+//       className="bg-[#F5EFE8] py-16 md:py-24 px-5 sm:px-6"
+//     >
+//       <div className="max-w-[1100px] mx-auto">
+//         {/* heading */}
+//         <div className="max-w-[720px]">
+//           <h2
+//             className="
+// spaces-text
+// opacity-0 translate-y-8
+// font-display
+
+// text-[32px]
+// sm:text-[40px]
+// md:text-[48px]
+
+// font-semibold
+
+// leading-[1.15]
+
+// tracking-[-0.02em]
+
+// text-black
+// "
+//           >
+//             Spaces Designed for Opportunity
+//           </h2>
+
+//           <p
+//             className="
+// spaces-text
+// opacity-0 translate-y-8
+// mt-4
+
+// text-[14px]
+// md:text-[15px]
+
+// text-black/65
+
+// leading-[1.65]
+
+// max-w-[640px]
+// "
+//           >
+//             ERAM institutions are supported by purpose-built infrastructure that
+//             strengthens both academic and extracurricular engagement. Facilities
+//             across campuses include:
+//           </p>
+//         </div>
+
+//         {/* layout */}
+//         <div className="spaces-grid mt-12 md:mt-16 flex flex-col lg:flex-row gap-5 md:gap-6">
+//           {/* LEFT CARD */}
+//           <div
+//             className="
+// spaces-card
+// opacity-0 translate-y-16
+// relative
+
+// w-full
+// lg:w-[360px]
+
+// h-[420px]
+// sm:h-[480px]
+// lg:h-[520px]
+
+// rounded-[24px]
+// md:rounded-[28px]
+
+// overflow-hidden
+// transform-gpu
+
+// shrink-0
+// "
+//           >
+//             <div className="spaces-img w-full h-full">
+//               <OptimizedImage
+//                 src="/images/classroom.webp"
+//                 alt="modern classrooms"
+//                 className="w-full h-full object-cover block"
+//                 sizes="(max-width: 1024px) 100vw, 360px"
+//                 disableTransition
+//               />
+//             </div>
+
+//             <div className="absolute inset-0 bg-black/35" />
+
+//             <p
+//               className="
+// absolute
+
+// bottom-6
+// sm:bottom-8
+// lg:bottom-10
+
+// left-6
+// sm:left-8
+
+// text-white
+
+// text-[22px]
+// sm:text-[24px]
+// lg:text-[26px]
+
+// leading-[1.25]
+
+// font-medium
+
+// max-w-[200px]
+// sm:max-w-[220px]
+// lg:max-w-[230px]
+// "
+//             >
+//               Modern classrooms
+//               <br />
+//               & well-equipped
+//               <br />
+//               laboratories
+//             </p>
+//           </div>
+
+//           {/* RIGHT SIDE */}
+//           <div className="flex flex-col gap-5 md:gap-6 flex-1">
+//             {/* TOP WIDE */}
+//             <div
+//               className="
+// spaces-card
+// opacity-0 translate-y-16
+// relative
+
+// h-[200px]
+// sm:h-[220px]
+// md:h-[240px]
+
+// rounded-[24px]
+// md:rounded-[28px]
+
+// overflow-hidden
+// transform-gpu
+// "
+//             >
+//               <div className="spaces-img w-full h-full">
+//                 <OptimizedImage
+//                   src="/images/sports.webp"
+//                   alt="sports grounds"
+//                   className="w-full h-full object-cover block"
+//                   sizes="(max-width: 1024px) 100vw, 50vw"
+//                   disableTransition
+//                 />
+//               </div>
+
+//               <div className="absolute inset-0 bg-black/35" />
+
+//               <p
+//                 className="
+// absolute
+
+// bottom-6
+// sm:bottom-8
+// lg:bottom-10
+
+// left-6
+// sm:left-8
+// lg:left-10
+
+// text-white
+
+// text-[20px]
+// sm:text-[22px]
+// lg:text-[26px]
+
+// leading-[1.25]
+
+// font-medium
+
+// max-w-[260px]
+// sm:max-w-[340px]
+// lg:max-w-[420px]
+// "
+//               >
+//                 Dedicated sports grounds &
+//                 <br />
+//                 athletics facilities
+//               </p>
+//             </div>
+
+//             {/* BOTTOM GRID */}
+//             <div className="flex flex-col sm:flex-row gap-5 md:gap-6">
+//               {/* amphitheatre */}
+//               <div
+//                 className="
+// spaces-card
+// opacity-0 translate-y-16
+// relative
+
+// flex-1
+
+// h-[200px]
+// sm:h-[220px]
+// md:h-[240px]
+
+// rounded-[24px]
+// md:rounded-[28px]
+
+// overflow-hidden
+// transform-gpu
+// "
+//               >
+//                 <div className="spaces-img w-full h-full scale-[1.15]">
+//                   <OptimizedImage
+//                     src="/images/auditorium.webp"
+//                     alt="amphitheatre"
+//                     className="w-full h-full object-cover block"
+//                     sizes="(max-width: 1024px) 50vw, 33vw"
+//                     disableTransition
+//                   />
+//                 </div>
+
+//                 <div className="absolute inset-0 bg-black/35" />
+
+//                 <p
+//                   className="
+// absolute
+
+// bottom-6
+// sm:bottom-7
+// lg:bottom-8
+
+// left-6
+// sm:left-7
+// lg:left-8
+
+// text-white
+
+// text-[18px]
+// sm:text-[20px]
+// lg:text-[22px]
+
+// leading-[1.25]
+
+// font-medium
+
+// max-w-[170px]
+// sm:max-w-[190px]
+// lg:max-w-[210px]
+// "
+//                 >
+//                   Amphitheatre &
+//                   <br />
+//                   cultural
+//                   <br />
+//                   performance spaces
+//                 </p>
+//               </div>
+
+//               {/* transport */}
+//               <div
+//                 className="
+// spaces-card
+// opacity-0 translate-y-16
+// relative
+
+// flex-1
+
+// h-[200px]
+// sm:h-[220px]
+// md:h-[240px]
+
+// rounded-[24px]
+// md:rounded-[28px]
+
+// overflow-hidden
+// transform-gpu
+// "
+//               >
+//                 <div className="spaces-img w-full h-full scale-[1.15]">
+//                   <OptimizedImage
+//                     src="/images/bus.webp"
+//                     alt="transport system"
+//                     className="w-full h-full object-cover block"
+//                     sizes="(max-width: 1024px) 50vw, 33vw"
+//                     disableTransition
+//                   />
+//                 </div>
+
+//                 <div className="absolute inset-0 bg-black/35" />
+
+//                 <p
+//                   className="
+// absolute
+
+// bottom-6
+// sm:bottom-7
+// lg:bottom-8
+
+// left-6
+// sm:left-7
+// lg:left-8
+
+// text-white
+
+// text-[18px]
+// sm:text-[20px]
+// lg:text-[22px]
+
+// leading-[1.25]
+
+// font-medium
+
+// max-w-[150px]
+// sm:max-w-[170px]
+// lg:max-w-[190px]
+// "
+//                 >
+//                   Structured
+//                   <br />
+//                   transport &
+//                   <br />
+//                   safety systems
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default memo(SpacesDesignedForOpportunity);
+
+
+
 import { memo, useRef } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
@@ -11,7 +404,6 @@ function SpacesDesignedForOpportunity() {
 
   useGSAP(
     () => {
-      // Header
       gsap.to(".spaces-text", {
         y: 0,
         opacity: 1,
@@ -24,7 +416,6 @@ function SpacesDesignedForOpportunity() {
         },
       });
 
-      // Layout cards fade up stagger - optimized
       gsap.to(".spaces-card", {
         y: 0,
         opacity: 1,
@@ -37,7 +428,6 @@ function SpacesDesignedForOpportunity() {
         },
       });
 
-      // Inner images scale with batching
       ScrollTrigger.batch(".spaces-card", {
         interval: 0.1,
         batchMax: 3,
@@ -59,48 +449,39 @@ function SpacesDesignedForOpportunity() {
   return (
     <section
       ref={containerRef}
-      className="bg-[#F5EFE8] py-16 md:py-24 px-5 sm:px-6"
+      className="bg-[#F5EFE8] py-12 md:py-24 px-4 sm:px-6"
     >
       <div className="max-w-[1100px] mx-auto">
         {/* heading */}
         <div className="max-w-[720px]">
           <h2
             className="
-spaces-text
-opacity-0 translate-y-8
-font-display
-
-text-[32px]
-sm:text-[40px]
-md:text-[48px]
-
-font-semibold
-
-leading-[1.15]
-
-tracking-[-0.02em]
-
-text-black
-"
+              spaces-text
+              opacity-0 translate-y-8
+              font-display
+              text-[26px]
+              sm:text-[40px]
+              md:text-[48px]
+              font-semibold
+              leading-[1.15]
+              tracking-[-0.02em]
+              text-black
+            "
           >
             Spaces Designed for Opportunity
           </h2>
 
           <p
             className="
-spaces-text
-opacity-0 translate-y-8
-mt-4
-
-text-[14px]
-md:text-[15px]
-
-text-black/65
-
-leading-[1.65]
-
-max-w-[640px]
-"
+              spaces-text
+              opacity-0 translate-y-8
+              mt-3
+              text-[13px]
+              md:text-[15px]
+              text-black/65
+              leading-[1.65]
+              max-w-[640px]
+            "
           >
             ERAM institutions are supported by purpose-built infrastructure that
             strengthens both academic and extracurricular engagement. Facilities
@@ -108,37 +489,34 @@ max-w-[640px]
           </p>
         </div>
 
-        {/* layout */}
-        <div className="spaces-grid mt-12 md:mt-16 flex flex-col lg:flex-row gap-5 md:gap-6">
+        {/* layout — always flex-row */}
+        <div className="spaces-grid mt-8 md:mt-16 flex flex-row gap-3 md:gap-6">
+
           {/* LEFT CARD */}
           <div
             className="
-spaces-card
-opacity-0 translate-y-16
-relative
-
-w-full
-lg:w-[360px]
-
-h-[420px]
-sm:h-[480px]
-lg:h-[520px]
-
-rounded-[24px]
-md:rounded-[28px]
-
-overflow-hidden
-transform-gpu
-
-shrink-0
-"
+              spaces-card
+              opacity-0 translate-y-16
+              relative
+              w-[140px]
+              sm:w-[220px]
+              lg:w-[360px]
+              h-[320px]
+              sm:h-[400px]
+              lg:h-[520px]
+              rounded-[16px]
+              md:rounded-[28px]
+              overflow-hidden
+              transform-gpu
+              shrink-0
+            "
           >
             <div className="spaces-img w-full h-full">
               <OptimizedImage
                 src="/images/classroom.webp"
                 alt="modern classrooms"
                 className="w-full h-full object-cover block"
-                sizes="(max-width: 1024px) 100vw, 360px"
+                sizes="(max-width: 1024px) 140px, 360px"
                 disableTransition
               />
             </div>
@@ -147,29 +525,22 @@ shrink-0
 
             <p
               className="
-absolute
-
-bottom-6
-sm:bottom-8
-lg:bottom-10
-
-left-6
-sm:left-8
-
-text-white
-
-text-[22px]
-sm:text-[24px]
-lg:text-[26px]
-
-leading-[1.25]
-
-font-medium
-
-max-w-[200px]
-sm:max-w-[220px]
-lg:max-w-[230px]
-"
+                absolute
+                bottom-4
+                sm:bottom-8
+                lg:bottom-10
+                left-4
+                sm:left-8
+                text-white
+                text-[11px]
+                sm:text-[18px]
+                lg:text-[26px]
+                leading-[1.25]
+                font-medium
+                max-w-[100px]
+                sm:max-w-[180px]
+                lg:max-w-[230px]
+              "
             >
               Modern classrooms
               <br />
@@ -180,24 +551,22 @@ lg:max-w-[230px]
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="flex flex-col gap-5 md:gap-6 flex-1">
+          <div className="flex flex-col gap-3 md:gap-6 flex-1">
+
             {/* TOP WIDE */}
             <div
               className="
-spaces-card
-opacity-0 translate-y-16
-relative
-
-h-[200px]
-sm:h-[220px]
-md:h-[240px]
-
-rounded-[24px]
-md:rounded-[28px]
-
-overflow-hidden
-transform-gpu
-"
+                spaces-card
+                opacity-0 translate-y-16
+                relative
+                h-[150px]
+                sm:h-[180px]
+                md:h-[240px]
+                rounded-[16px]
+                md:rounded-[28px]
+                overflow-hidden
+                transform-gpu
+              "
             >
               <div className="spaces-img w-full h-full">
                 <OptimizedImage
@@ -213,30 +582,23 @@ transform-gpu
 
               <p
                 className="
-absolute
-
-bottom-6
-sm:bottom-8
-lg:bottom-10
-
-left-6
-sm:left-8
-lg:left-10
-
-text-white
-
-text-[20px]
-sm:text-[22px]
-lg:text-[26px]
-
-leading-[1.25]
-
-font-medium
-
-max-w-[260px]
-sm:max-w-[340px]
-lg:max-w-[420px]
-"
+                  absolute
+                  bottom-4
+                  sm:bottom-8
+                  lg:bottom-10
+                  left-4
+                  sm:left-8
+                  lg:left-10
+                  text-white
+                  text-[11px]
+                  sm:text-[18px]
+                  lg:text-[26px]
+                  leading-[1.25]
+                  font-medium
+                  max-w-[140px]
+                  sm:max-w-[260px]
+                  lg:max-w-[420px]
+                "
               >
                 Dedicated sports grounds &
                 <br />
@@ -244,27 +606,24 @@ lg:max-w-[420px]
               </p>
             </div>
 
-            {/* BOTTOM GRID */}
-            <div className="flex flex-col sm:flex-row gap-5 md:gap-6">
+            {/* BOTTOM GRID — always flex-row */}
+            <div className="flex flex-row gap-3 md:gap-6">
+
               {/* amphitheatre */}
               <div
                 className="
-spaces-card
-opacity-0 translate-y-16
-relative
-
-flex-1
-
-h-[200px]
-sm:h-[220px]
-md:h-[240px]
-
-rounded-[24px]
-md:rounded-[28px]
-
-overflow-hidden
-transform-gpu
-"
+                  spaces-card
+                  opacity-0 translate-y-16
+                  relative
+                  flex-1
+                  h-[150px]
+                  sm:h-[180px]
+                  md:h-[240px]
+                  rounded-[16px]
+                  md:rounded-[28px]
+                  overflow-hidden
+                  transform-gpu
+                "
               >
                 <div className="spaces-img w-full h-full scale-[1.15]">
                   <OptimizedImage
@@ -280,30 +639,23 @@ transform-gpu
 
                 <p
                   className="
-absolute
-
-bottom-6
-sm:bottom-7
-lg:bottom-8
-
-left-6
-sm:left-7
-lg:left-8
-
-text-white
-
-text-[18px]
-sm:text-[20px]
-lg:text-[22px]
-
-leading-[1.25]
-
-font-medium
-
-max-w-[170px]
-sm:max-w-[190px]
-lg:max-w-[210px]
-"
+                    absolute
+                    bottom-3
+                    sm:bottom-7
+                    lg:bottom-8
+                    left-3
+                    sm:left-7
+                    lg:left-8
+                    text-white
+                    text-[10px]
+                    sm:text-[16px]
+                    lg:text-[22px]
+                    leading-[1.25]
+                    font-medium
+                    max-w-[80px]
+                    sm:max-w-[150px]
+                    lg:max-w-[210px]
+                  "
                 >
                   Amphitheatre &
                   <br />
@@ -316,22 +668,18 @@ lg:max-w-[210px]
               {/* transport */}
               <div
                 className="
-spaces-card
-opacity-0 translate-y-16
-relative
-
-flex-1
-
-h-[200px]
-sm:h-[220px]
-md:h-[240px]
-
-rounded-[24px]
-md:rounded-[28px]
-
-overflow-hidden
-transform-gpu
-"
+                  spaces-card
+                  opacity-0 translate-y-16
+                  relative
+                  flex-1
+                  h-[150px]
+                  sm:h-[180px]
+                  md:h-[240px]
+                  rounded-[16px]
+                  md:rounded-[28px]
+                  overflow-hidden
+                  transform-gpu
+                "
               >
                 <div className="spaces-img w-full h-full scale-[1.15]">
                   <OptimizedImage
@@ -347,30 +695,23 @@ transform-gpu
 
                 <p
                   className="
-absolute
-
-bottom-6
-sm:bottom-7
-lg:bottom-8
-
-left-6
-sm:left-7
-lg:left-8
-
-text-white
-
-text-[18px]
-sm:text-[20px]
-lg:text-[22px]
-
-leading-[1.25]
-
-font-medium
-
-max-w-[150px]
-sm:max-w-[170px]
-lg:max-w-[190px]
-"
+                    absolute
+                    bottom-3
+                    sm:bottom-7
+                    lg:bottom-8
+                    left-3
+                    sm:left-7
+                    lg:left-8
+                    text-white
+                    text-[10px]
+                    sm:text-[16px]
+                    lg:text-[22px]
+                    leading-[1.25]
+                    font-medium
+                    max-w-[80px]
+                    sm:max-w-[140px]
+                    lg:max-w-[190px]
+                  "
                 >
                   Structured
                   <br />

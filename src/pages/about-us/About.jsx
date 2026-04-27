@@ -7,7 +7,7 @@ if (typeof window !== "undefined") {
   ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
-// ✅ Import all sections normally (NO lazy)
+
 import AboutHero from "../../components/sections/about/AboutHero";
 import PurposeSection from "../../components/sections/about/PurposeSection";
 import StructuredLearningSection from "../../components/sections/about/StructuredLearningSection";

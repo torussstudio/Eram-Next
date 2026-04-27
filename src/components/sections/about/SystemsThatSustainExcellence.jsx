@@ -181,13 +181,17 @@ function SystemsThatSustainExcellence() {
         const ROT_STEP   = 1.5;
         const SCALE_STEP = 0.018;
 
+        // Set ALL bg words to opacity 0 first — GSAP controls them exclusively.
+        // (Avoids conflict with the inline style that set index-0 to 0.065)
+        gsap.set(".stack-bg-word", { opacity: 0 });
+
         cards.forEach((card, domIndex) => {
           const depth = total - 1 - domIndex;
           gsap.set(card, {
             y: depth * Y_STEP,
             rotation: depth * ROT_STEP,
             scale: 1 - depth * SCALE_STEP,
-            zIndex: domIndex + 1,         // static — never animated
+            zIndex: domIndex + 1,
             transformOrigin: "center bottom",
             opacity: 1,
           });
@@ -211,7 +215,7 @@ function SystemsThatSustainExcellence() {
           const frontDOM = total - 1 - step;
           const segStart = step * segDur;
 
-          // Front card flies up — explicit fromTo for perfect reverse
+          // Front card flies up
           tl.fromTo(
             cards[frontDOM],
             { y: 0, rotation: 0, scale: 1, opacity: 1 },
@@ -255,7 +259,7 @@ function SystemsThatSustainExcellence() {
           }
         }
 
-        // Last bg word fades out within the final segment — no extra time added
+        // Last bg word fades out in final segment
         tl.fromTo(
           `.stack-bg-word[data-index="${total - 1}"]`,
           { opacity: 0.065 },
@@ -264,10 +268,12 @@ function SystemsThatSustainExcellence() {
         );
       };
 
-      // Desktop
+      // Desktop — generous scroll for smooth reveal
       mm.add("(min-width: 768px)", () => { buildStackTimeline(7 * 320); });
-      // Mobile — shorter distance, no dead-scroll gap
-      mm.add("(max-width: 767px)", () => { buildStackTimeline(7 * 180); });
+
+      // FIX: Mobile — reduced from 7*180 (1260px) to 7*100 (700px)
+      // This eliminates the huge black dead-zone gap between sections on mobile.
+      mm.add("(max-width: 767px)", () => { buildStackTimeline(7 * 100); });
 
       return () => mm.revert();
     },
@@ -280,7 +286,7 @@ function SystemsThatSustainExcellence() {
       {/* ══════════════════════════════════════════
           SECTION 1 — Heading
       ══════════════════════════════════════════ */}
-      <section className="bg-black overflow-hidden pt-20 pb-14 px-5 md:pt-28 md:pb-20 md:px-6">
+      <section className="bg-black overflow-hidden pt-8 pb-6 px-5 md:pt-8 md:pb-6 md:px-6">
         <div className="w-full md:max-w-[1100px] md:mx-auto">
           <div className="text-center max-w-[720px] mx-auto">
 
@@ -318,17 +324,13 @@ function SystemsThatSustainExcellence() {
 
       {/* ══════════════════════════════════════════
           SECTION 2 — Stacked Cards (pinned)
-          Between heading and image so layout order
-          is: Heading → Cards → Image.
-          Kept outside section 1 so GSAP's pin
-          spacer never creates a gap inside it.
       ══════════════════════════════════════════ */}
       <section
         ref={stackSectionRef}
         className="relative bg-black"
         style={{ minHeight: "100vh" }}
       >
-        {/* Background giant words */}
+        {/* Background giant words — all start at opacity 0; GSAP drives them */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none"
           aria-hidden="true"
@@ -341,7 +343,7 @@ function SystemsThatSustainExcellence() {
               style={{
                 fontSize: "clamp(70px, 15vw, 185px)",
                 letterSpacing: "-0.04em",
-                opacity: i === 0 ? 0.065 : 0,
+                opacity: 0, // ← FIX: always 0; GSAP animates exclusively (no SSR flash)
               }}
             >
               {word}
@@ -424,7 +426,6 @@ function SystemsThatSustainExcellence() {
 
       {/* ══════════════════════════════════════════
           SECTION 3 — Image block
-          Comes after cards, same bg as section 1
       ══════════════════════════════════════════ */}
       <section className="bg-[#F5EFE8] overflow-hidden py-14 px-5 md:py-20 md:px-6">
         <div className="w-full md:max-w-[1100px] md:mx-auto">

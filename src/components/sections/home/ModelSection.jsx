@@ -173,7 +173,7 @@ max-[640px]:text-[32px]
               text-[16px]
               leading-[1.7]
 
-              text-black
+              text-[#f5efe8]
 
               max-w-[520px]
               max-[900px]:text-[15px]
