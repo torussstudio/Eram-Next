@@ -1,4 +1,4 @@
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -9,6 +9,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 function StructuredLearningSection() {
   const containerRef = useRef(null);
+
+  useEffect(() => {
+  const handleLoad = () => ScrollTrigger.refresh();
+  window.addEventListener("load", handleLoad);
+  return () => window.removeEventListener("load", handleLoad);
+}, []);
 
   useGSAP(
     () => {
@@ -27,6 +33,7 @@ function StructuredLearningSection() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
+            invalidateOnRefresh: true,
             start: "top 75%",
           },
         });
@@ -38,6 +45,7 @@ function StructuredLearningSection() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
+            invalidateOnRefresh: true,
             start: "top 75%",
           },
         });
@@ -50,6 +58,7 @@ function StructuredLearningSection() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".structured-scroll-container",
+            invalidateOnRefresh: true,
             start: "top 85%",
           },
         });
@@ -57,6 +66,7 @@ function StructuredLearningSection() {
         const leaderTl = gsap.timeline({
           scrollTrigger: {
             trigger: ".leadership-container",
+            invalidateOnRefresh: true,
             start: "top 75%",
           },
         });
@@ -81,24 +91,25 @@ function StructuredLearningSection() {
           "-=0.7"
         );
 
-        gsap.utils.toArray(".leadership-profile").forEach((profile) => {
-          const img = profile.querySelector(".leadership-img");
-          gsap.to(img, {
-            yPercent: 8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: profile,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-              fastScrollEnd: true,
-            },
-          });
-        });
+      gsap.utils.toArray(".leadership-profile").forEach((profile) => {
+  const img = profile.querySelector(".leadership-img");
+
+  gsap.to(img, {
+    yPercent: 5, // reduced from 8
+    ease: "none",
+    scrollTrigger: {
+      trigger: profile,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.8, // smoother + less heavy
+    },
+  });
+});
 
         const listTl = gsap.timeline({
           scrollTrigger: {
             trigger: ".leadership-bottom-text",
+            invalidateOnRefresh: true,
             start: "top 85%",
           },
         });
@@ -129,6 +140,7 @@ function StructuredLearningSection() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".structured-final",
+            invalidateOnRefresh: true,
             start: "top 85%",
           },
         });
@@ -147,6 +159,7 @@ function StructuredLearningSection() {
             ease: "expo.out",
             scrollTrigger: {
               trigger: containerRef.current,
+              invalidateOnRefresh: true,
               start: "top 80%",
             },
           }
@@ -162,6 +175,7 @@ function StructuredLearningSection() {
             ease: "back.out(1.6)",
             scrollTrigger: {
               trigger: containerRef.current,
+              invalidateOnRefresh: true,
               start: "top 80%",
             },
           }
@@ -169,7 +183,7 @@ function StructuredLearningSection() {
 
         gsap.fromTo(
           ".structured-card",
-          { rotateX: 25, y: 60, opacity: 0, transformPerspective: 600 },
+          {  y: 60, opacity: 0, transformPerspective: 600 },
           {
             rotateX: 0,
             y: 0,
@@ -179,6 +193,7 @@ function StructuredLearningSection() {
             ease: "power4.out",
             scrollTrigger: {
               trigger: ".structured-scroll-container",
+              invalidateOnRefresh: true,
               start: "top 88%",
             },
           }
@@ -196,6 +211,7 @@ function StructuredLearningSection() {
             ease: "power3.out",
             scrollTrigger: {
               trigger: ".leadership-container",
+              invalidateOnRefresh: true,
               start: "top 82%",
             },
           }
@@ -213,6 +229,7 @@ function StructuredLearningSection() {
               ease: "expo.out",
               scrollTrigger: {
                 trigger: el,
+                invalidateOnRefresh: true,
                 start: "top 88%",
               },
             }
@@ -226,6 +243,7 @@ function StructuredLearningSection() {
             ease: "none",
             scrollTrigger: {
               trigger: profile,
+              invalidateOnRefresh: true,
               start: "top bottom",
               end: "bottom top",
               scrub: 1.5,
@@ -243,6 +261,7 @@ function StructuredLearningSection() {
             ease: "power3.out",
             scrollTrigger: {
               trigger: ".leadership-bottom-text",
+              invalidateOnRefresh: true,
               start: "top 88%",
             },
           }
@@ -260,6 +279,7 @@ function StructuredLearningSection() {
             delay: 0.2,
             scrollTrigger: {
               trigger: ".leadership-bottom-text",
+              invalidateOnRefresh: true,
               start: "top 88%",
             },
           }
@@ -276,6 +296,7 @@ function StructuredLearningSection() {
             ease: "expo.out",
             scrollTrigger: {
               trigger: ".structured-final",
+              invalidateOnRefresh: true,
               start: "top 88%",
             },
           }
@@ -428,15 +449,17 @@ function StructuredLearningSection() {
                   className="
                     structured-card
                     relative flex-shrink-0
-                    min-w-[260px] h-[200px]
-                    md:min-w-[360px] md:h-[260px]
+           min-w-[240px] h-[260px]
+sm:min-w-[260px] sm:h-[280px]
+md:min-w-[260px] md:h-[220px]
+lg:min-w-[280px] lg:h-[240px]
                     rounded-[20px] overflow-hidden transform-gpu
                   "
                 >
                   <OptimizedImage
                     src={card.img}
                     alt={card.alt}
-                    className="leadership-img w-full h-[115%] object-cover grayscale"
+                    className="leadership-img w-full h-full object-cover grayscale"
                     sizes="(max-width: 768px) 260px, 360px"
                     disableTransition
                   />
@@ -533,7 +556,7 @@ function StructuredLearningSection() {
             >
               {/* Image */}
               <div className="w-full h-[440px] md:h-[520px] overflow-hidden relative">
-                <div className="leadership-img w-full h-[115%] absolute -top-[7.5%]">
+                <div className="leadership-img w-full h-full absolute inset-0">
                   <OptimizedImage
                     src={person.src}
                     alt={person.alt}

@@ -86,7 +86,7 @@ export default function ModelSection() {
     <section
       ref={sectionRef}
       className="
-        bg-black
+        bg-[#0f0f0f]
         py-[140px]
 
         relative

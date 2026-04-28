@@ -11,9 +11,9 @@ export default function Navbar() {
 
   const isHome = location.pathname === "/";
 
-  const bgColor = isHome ? "bg-[#ae1431]" : "bg-[#F5EFE8]";
-  const textColor = isHome ? "text-[#F5EFE8]" : "text-black";
-  const borderColor = isHome ? "border-[#F5EFE8]/60" : "border-black/30";
+  const bgColor = "bg-[#F5EFE8]";
+  const textColor = "text-black";
+  const borderColor =  "border-black/30";
 
   const navLinkClassName = `
   text-[0.88rem]
@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <header
       className={`
-${shell}
+w-full
 
 sticky top-0 max-[920px]:top-[6px] z-[60]
 
@@ -46,8 +46,7 @@ lg:min-h-[72px]
 
 gap-6 lg:gap-8
 
-rounded-b-[20px] lg:rounded-b-[24px]   /* 👈 only bottom rounded */
-rounded-t-none                         /* 👈 remove top curve */
+
 
 ${bgColor}
 
@@ -56,8 +55,9 @@ pr-[14px]
 max-[920px]:grid-cols-[1fr_auto]
 max-[920px]:p-[8px]
 max-[920px]:min-h-[64px]
-max-[920px]:rounded-b-[18px]
-max-[920px]:rounded-t-none
+max-[920px]:rounded-[18px] 
+max-[920px]:mx-[10px]
+max-[920px]:w-auto
 `}
     >
       {/* LOGO */}
@@ -75,12 +75,6 @@ w-[180px]
 lg:w-[210px]
 
 items-center
-
-rounded-tr-[20px]
-lg:rounded-tr-[24px]
-
-
-
 
 bg-[#F5EFE8]
 
@@ -205,12 +199,11 @@ tracking-[0.03em]
 
       {/* MOBILE TOGGLE */}
 
-      <button
-        onClick={() => setOpen(true)}
-        className={`
+    <button
+  onClick={() => setOpen(true)}
+  className="
 
 hidden
-
 max-[920px]:flex
 
 h-[44px]
@@ -219,27 +212,23 @@ w-[44px]
 items-center
 justify-center
 
-rounded-[14px]
+bg-white
+border border-black
+rounded-full
 
-${
-  isHome
-    ? "bg-white/10 border border-white/20"
-    : "bg-black/5 border border-black/10"
-}
-
-`}
-      >
+"
+>
         <div className="space-y-[5px]">
           <span
-            className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
+            className="block h-[2px] w-[20px] bg-black"
           />
 
           <span
-            className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
+            className="block h-[2px] w-[20px] bg-black"
           />
 
           <span
-            className={`block h-[2px] w-[20px] ${isHome ? "bg-white" : "bg-black"}`}
+            className="block h-[2px] w-[20px] bg-black"
           />
         </div>
       </button>

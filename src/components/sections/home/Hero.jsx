@@ -62,22 +62,23 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className={`${shell}
+     className={`${shell}
 
 isolate
+relative
+block
+
+mt-[-37px]   
 
 before:content-['']
 before:absolute
-before:-top-[200px]
+before:-top-[160px]
 before:bottom-0
 before:w-[100vw]
 before:left-1/2
 before:-translate-x-1/2
 before:bg-[#ae1431]
 before:-z-10
-
-relative
-block
 
 pb-[66px]
 pt-[37px]
@@ -95,8 +96,8 @@ relative
 
 min-h-[650px]
 
-rounded-[24px]
-rounded-tl-none
+rounded-[20px]
+
 
 bg-[#F5EFE8]
 

@@ -4,11 +4,20 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaPlay } from "react-icons/fa6";
+import { useEffect } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function AboutHero() {
   const containerRef = useRef(null);
+  useEffect(() => {
+  const handleLoad = () => {
+    ScrollTrigger.refresh();
+  };
+
+  window.addEventListener("load", handleLoad);
+  return () => window.removeEventListener("load", handleLoad);
+}, []);
 
   useGSAP(
     () => {
@@ -43,6 +52,7 @@ function AboutHero() {
       );
 
       gsap.to(".hero-img", {
+        invalidateOnRefresh: true,
         y: 60,
         ease: "none",
         force3D: true,
@@ -65,12 +75,13 @@ function AboutHero() {
       <div className="max-w-[1500px] mx-auto px-[12px]">
         <div className="rounded-[28px] overflow-hidden shadow-sm transform-gpu [contain:paint]">
           {/* HERO */}
-          <div className="relative h-[480px] sm:h-[560px] md:h-[660px] lg:h-[760px] w-full">
+         <div className="relative min-h-[480px] sm:min-h-[560px] md:min-h-[660px] lg:min-h-[760px] w-full">
             {/* IMAGE */}
             <div className="absolute inset-0 overflow-hidden">
-              <div className="hero-img absolute inset-0 scale-110 will-change-transform">
+              <div className="hero-img absolute inset-0 scale-110 will-change-transform transform-gpu">
                 <OptimizedImage
                   src="/images/about-hero.webp"
+                   onLoad={() => ScrollTrigger.refresh()}
                   alt="students"
                   className="w-full h-full object-cover block"
                   loading="eager"

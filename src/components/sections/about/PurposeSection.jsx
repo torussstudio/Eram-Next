@@ -1,4 +1,4 @@
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -9,6 +9,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 function PurposeSection() {
   const containerRef = useRef(null);
+
+  useEffect(() => {
+  const handleLoad = () => {
+    ScrollTrigger.refresh();
+  };
+
+  window.addEventListener("load", handleLoad);
+  return () => window.removeEventListener("load", handleLoad);
+}, []);
 
   const items = [
     {
@@ -61,12 +70,13 @@ function PurposeSection() {
       });
 
       // Grid reveal (image + list)
-      const gridTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".purpose-grid",
-          start: "top 75%",
-        },
-      });
+     const gridTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".purpose-grid",
+    start: "top 75%",
+    invalidateOnRefresh: true,
+  },
+});
 
       gridTl.to(".purpose-image", {
         scale: 1,
@@ -150,15 +160,17 @@ function PurposeSection() {
       "
         >
           {/* image */}
-          <div className="purpose-image opacity-0 translate-y-8 scale-95 rounded-[22px] overflow-hidden">
-            <OptimizedImage
-              src="/images/campus.webp"
-              alt="campus"
-              className="w-full h-[420px] sm:h-[360px] md:h-[400px] lg:h-[460px] object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              disableTransition
-            />
-          </div>
+          <div className="purpose-image opacity-0 translate-y-8 scale-95 rounded-[22px] overflow-hidden transform-gpu">
+  <div className="aspect-[4/3] w-full">
+    <OptimizedImage
+      src="/images/campus.webp"
+      alt="campus"
+      className="w-full h-full object-cover"
+      sizes="(max-width: 768px) 100vw, 50vw"
+      disableTransition
+    />
+  </div>
+</div>
 
           {/* right content */}
           <div className="purpose-items">
