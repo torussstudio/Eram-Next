@@ -1,5 +1,5 @@
 export const shell =
-  "mx-auto mt-[-3px] w-[calc(100vw-80px)] max-[920px]:w-[calc(100vw-44px)]";
+"mx-auto mt-[-3px] w-[calc(100vw-40px)] max-[920px]:w-[calc(100vw-24px)]"
 
 export const section = "py-[28px] pb-[104px] max-[640px]:pb-20";
 

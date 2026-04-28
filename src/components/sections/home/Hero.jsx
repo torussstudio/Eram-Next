@@ -59,7 +59,7 @@ isolate
 relative
 block
 
-mt-[-37px]
+mt-[-20px]
 
 before:content-['']
 before:absolute
@@ -72,7 +72,7 @@ before:bg-[#ae1431]
 before:-z-10
 
 pb-[66px]
-pt-[37px]
+pt-[43px]
 
 max-[920px]:pb-[56px]
 max-[640px]:pt-[24px]
@@ -89,7 +89,7 @@ min-h-[650px]
 
 rounded-[20px]
 
-bg-[#F5EFE8]
+bg-[url('/images/sports.webp')] bg-cover bg-center
 
 px-[60px]
 xl:px-[80px]
@@ -124,7 +124,7 @@ leading-[0.95]
 
 tracking-[-0.02em]
 
-text-[#111]
+text-white
 
 max-[640px]:text-[clamp(2.3rem,12vw,3.4rem)]
 
@@ -158,7 +158,7 @@ text-[1rem]
 
 leading-[1.65]
 
-text-[#616161]
+text-white
 
 max-[640px]:max-w-full
 
@@ -185,13 +185,17 @@ flex-wrap
 
 gap-[14px]
 
+
+
 "
           >
-            <ActionButton>Explore Our Institutions</ActionButton>
+            <ActionButton className="!bg-[#8B1E1E] hover:!bg-black cursor-pointer">
+  Explore Our Institutions
+</ActionButton>
 
-            <ActionButton variant="secondary">
-              Admissions Open 2026-27
-            </ActionButton>
+           <ActionButton className="!bg-black !text-white hover:!bg-[#8B1E1E] cursor-pointer">
+  Admissions Open 2026-27
+</ActionButton>
           </div>
 
         </div>

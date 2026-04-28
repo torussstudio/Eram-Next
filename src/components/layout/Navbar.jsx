@@ -424,7 +424,7 @@ max-[920px]:px-[18px]
         <nav
           className="
 flex
-justify-start
+justify-center
 gap-[40px]
 lg:gap-[80px]
 xl:gap-[110px]
@@ -454,8 +454,8 @@ ${
         <div
           className="
 flex
-gap-[28px]
-lg:gap-[50px]
+gap-[20px]
+lg:gap-[40px]
 max-[920px]:hidden
 "
         >
@@ -468,6 +468,7 @@ px-[16px]
 text-[0.8rem]
 tracking-[0.03em]
 !rounded-[10px]
+cursor-pointer
 `}
           >
             Parent Portal
@@ -482,6 +483,7 @@ px-[16px]
 text-[0.8rem]
 tracking-[0.03em]
 !rounded-[10px]
+cursor-pointer
 "
           >
             News & Updates

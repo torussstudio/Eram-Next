@@ -75,7 +75,7 @@ export default function LegacySection() {
 
   return (
     <section ref={sectionRef} className="bg-[#F5EFE8] py-[clamp(60px,10vw,120px)] overflow-hidden relative">
-      <div className="max-w-[1100px] mx-auto px-[clamp(16px,5vw,40px)] relative z-10">
+     <div className="max-w-[1250px] mx-auto px-[clamp(16px,5vw,40px)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[clamp(32px,5vw,60px)] items-start">
 
           {/* ── LEFT ── */}
@@ -121,15 +121,15 @@ export default function LegacySection() {
           </div>
 
           {/* ── RIGHT ── */}
-         <div className="flex flex-col gap-4 md:items-end md:mt-[140px] mt-[10px]">
+         <div className="flex flex-col gap-4 md:items-end md:mt-[90px] mt-[10px]">
 
             {/* Primary button */}
             <button
               ref={btn1Ref}
-              className="group relative bg-[#111] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden w-full sm:w-auto"
+              className="group relative bg-[#8B1E1E] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden w-full sm:w-auto cursor-pointer"
             >
               {/* wipe reveal */}
-              <span className="absolute inset-0 bg-[#8B1E1E] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
+              <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
               <span className="relative z-10">Partner in Responsible Impact</span>
               <span className="relative z-10 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-[5px]">→</span>
             </button>
