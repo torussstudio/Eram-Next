@@ -1,12 +1,11 @@
 import { Calendar } from "lucide-react";
+import { shell } from "../../../../constants/homeStyles";
 
 export default function HeroSection() {
   return (
-   <section className="bg-[#F5EFE8] py-10 sm:py-12 md:py-10 px-4 md:px-6">
-      <div className="max-w-[1400px] mx-auto">
-
+  <section className={`${shell} bg-[#F5EFE8] py-9`}>
         {/* HERO CARD */}
-        <div className="relative rounded-[20px] md:rounded-[28px] overflow-hidden text-white">
+        <div className="relative rounded-[28px] overflow-hidden text-white">
 
           {/* BACKGROUND */}
           <img
@@ -17,11 +16,12 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-black/70" />
 
           {/* CONTENT */}
-          <div className="relative z-10 flex flex-col justify-center min-h-[80vh]">
+         <div className="relative z-10 flex flex-col justify-center
+min-h-[480px] sm:min-h-[560px] md:min-h-[660px] lg:min-h-[760px]">
 
             {/* TOP SECTION */}
-            <div className="w-full max-w-[1100px] mx-auto px-4 md:px-6 
-  py-20 md:py-28 lg:py-36 flex flex-col lg:flex-row gap-12">
+          <div className="w-full max-w-[1100px] mx-auto px-4 md:px-6 
+py-12 md:py-16 flex flex-col lg:flex-row gap-12">
 
               {/* LEFT */}
               <div className="flex-1 max-w-[720px]">
@@ -196,7 +196,6 @@ export default function HeroSection() {
 
           </div>
         </div>
-      </div>
     </section>
   );
 }

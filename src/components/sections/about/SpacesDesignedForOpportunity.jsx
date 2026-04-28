@@ -109,8 +109,8 @@ function SpacesDesignedForOpportunity() {
               sm:w-[220px]
               lg:w-[360px]
               h-[320px]
-              sm:h-[400px]
-              lg:h-[460px]
+              sm:h-[490px]
+              lg:h-[500px]
               rounded-[16px]
               md:rounded-[28px]
               overflow-hidden
