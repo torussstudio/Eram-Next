@@ -16,7 +16,7 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-black/70" />
 
           {/* CONTENT */}
-         <div className="relative z-10 flex flex-col justify-center
+         <div className="relative z-10 flex flex-col justify-start pt-[60px] md:pt-[80px]
 min-h-[480px] sm:min-h-[560px] md:min-h-[660px] lg:min-h-[760px]">
 
             {/* TOP SECTION */}
@@ -96,9 +96,9 @@ py-12 md:py-16 flex flex-col lg:flex-row gap-12">
             </div>
 
             {/* STATS */}
-<div className="border-t border-white/10">
+<div className="border-t border-white/10 mt-[80px] md:mt-[100px]">
   <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
-    <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[56px]">
+    <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[60px] md:py-[80px]">
 
       {/* LABEL */}
       <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">

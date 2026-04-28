@@ -144,12 +144,12 @@ export default function PhilosophySection() {
         </div>
 
         {/* CARDS */}
-        <div className="mt-16 grid md:grid-cols-4 gap-[1px] bg-white/10">
+        <div className="mt-16 grid md:grid-cols-4 rounded-3xl gap-0.5 overflow-hidden border border-white/10">
           {cards.map((item, i) => (
             <div
               key={i}
               ref={(el) => (cardRefs.current[i] = el)}
-              className="bg-[#f5efe8] p-[30px] min-h-[180px] flex flex-col justify-between"
+             className="bg-[#f5efe8] p-[30px] min-h-[180px] flex flex-col justify-between border border-white/10 -ml-px -mt-px"
               style={{ opacity: 0, transform: "translateY(40px)" }}
             >
               <span className="text-[12px] text-black tracking-[0.1em]">
