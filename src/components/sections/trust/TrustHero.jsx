@@ -3,6 +3,7 @@ import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { shell } from "../../../constants/homeStyles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,9 +59,10 @@ function TrustHero() {
   return (
     <section
       ref={containerRef}
-      className="bg-[#F5EFE8] py-9 px-[20px] md:px-[28px]"
+     className={`${shell}
+       bg-[#F5EFE8] py-9`}
     >
-      <div className="max-w-[1500px] mx-auto px-[12px]">
+      
         <div className="rounded-[28px] overflow-hidden shadow-sm">
           <div className="relative h-[480px] sm:h-[560px] md:h-[660px] lg:h-[760px] w-full">
             {/* IMAGE */}
@@ -171,7 +173,6 @@ function TrustHero() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }

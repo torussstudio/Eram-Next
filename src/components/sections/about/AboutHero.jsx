@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaPlay } from "react-icons/fa6";
 import { useEffect } from "react";
+import { shell } from "../../../constants/homeStyles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,9 +71,10 @@ function AboutHero() {
   return (
     <section
       ref={containerRef}
-      className="bg-[#F5EFE8] py-9 px-[20px] md:px-[28px]"
+      className={`${shell}
+         bg-[#F5EFE8] py-9`}
     >
-      <div className="max-w-[1500px] mx-auto px-[12px]">
+      
         <div className="rounded-[28px] overflow-hidden shadow-sm transform-gpu [contain:paint]">
           {/* HERO */}
          <div className="relative min-h-[480px] sm:min-h-[560px] md:min-h-[660px] lg:min-h-[760px] w-full">
@@ -194,7 +196,6 @@ function AboutHero() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
