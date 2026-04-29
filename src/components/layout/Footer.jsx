@@ -17,7 +17,7 @@ export default function Footer() {
           {/* LOGO + TEXT */}
 
           <div>
-            <img src="/education-white.svg" alt="ERAM" className="h-12 mb-6" />
+            <img src="/eramwhite.webp" alt="ERAM" className="h-12 mb-6" />
 
             <p
               className="

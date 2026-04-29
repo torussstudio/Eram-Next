@@ -77,10 +77,10 @@ max-[920px]:px-[18px]
 `}
 >
             <img
-              src="/education-1.svg"
-              alt="ERAM Education"
-              className="w-[130px] lg:w-[140px] pl-[5px] object-contain"
-            />
+  src={isHome ? "/eramwhite.webp" : "/education-1.svg"}
+  alt="ERAM Education"
+  className="w-[130px] lg:w-[140px] pl-[5px] object-contain"
+/>
           </span>
         </Link>
 
