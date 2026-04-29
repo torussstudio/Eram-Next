@@ -145,7 +145,7 @@ export default function ArenaSection() {
       className="absolute inset-0 w-full h-full object-cover object-center"
       style={{ willChange: "transform" }}
     >
-      <source src="/videos/arena.mp4" type="video/mp4" />
+      <source src="/videos/Arena.mp4" type="video/mp4" />
     </video>
     <div className="absolute inset-0 bg-black/35" />
   </div>
@@ -267,7 +267,7 @@ export default function ArenaSection() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/videos/arena.mp4" type="video/mp4" />
+        <source src="/videos/Arena.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/25" />
 
