@@ -295,16 +295,17 @@ export default function Hero() {
           max-[420px]:px-4 max-[420px]:pt-[190px]
         "
       >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="none"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/mainhero.mp4" type="video/mp4" />
-        </video>
+       <video
+  className="absolute inset-0 w-full h-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  poster="/videos/hero-thumb.jpg"
+>
+  <source src="/videos/mainhero.mp4" type="video/mp4" />
+</video>
 
         <div className="absolute inset-0 bg-black/40" />
 

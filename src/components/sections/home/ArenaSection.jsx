@@ -24,7 +24,7 @@ export default function ArenaSection() {
   useGSAP(
     () => {
       /* ── initial states ── */
-      gsap.set(heroVideoRef.current, {
+      gsap.set(heroRef.current, {
         scale: 1.22,
         transformOrigin: "center center",
         force3D: true,
@@ -59,7 +59,7 @@ export default function ArenaSection() {
       });
 
       // 0.00 – 0.55 : hero video zooms out
-      tl.to(heroVideoRef.current, { scale: 1, duration: 0.55 }, 0);
+      tl.to(heroRef.current, { scale: 1, duration: 0.55 }, 0);
 
       // 0.30 – 0.65 : hero fades out
       tl.to(heroRef.current, { opacity: 0, duration: 0.35 }, 0.3);
@@ -137,16 +137,17 @@ export default function ArenaSection() {
     style={{ willChange: "opacity" }}
   >
     <video
-      ref={heroVideoRef}
-      autoPlay
-      muted
-      loop
-      playsInline
-      className="absolute inset-0 w-full h-full object-cover object-center"
-      style={{ willChange: "transform" }}
-    >
-      <source src="/videos/Arena.mp4" type="video/mp4" />
-    </video>
+  ref={heroVideoRef}
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  poster="/videos/arena-thumb.jpg"
+  className="absolute inset-0 w-full h-full object-cover object-center"
+>
+  <source src="/videos/Arena.mp4" type="video/mp4" />
+</video>
     <div className="absolute inset-0 bg-black/35" />
   </div>
 
@@ -260,15 +261,13 @@ export default function ArenaSection() {
       "
       style={{ willChange: "transform" }}
     >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/Arena.mp4" type="video/mp4" />
-      </video>
+      <div className="absolute inset-0">
+  <img
+    src="/images/sports-ground.webp"
+    className="w-full h-full object-cover"
+    alt="Arena"
+  />
+</div>
       <div className="absolute inset-0 bg-black/25" />
 
       {/* THE ERAM */}
