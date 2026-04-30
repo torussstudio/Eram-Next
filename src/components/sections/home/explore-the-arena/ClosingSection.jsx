@@ -44,33 +44,85 @@ export default function ClosingSection() {
             {/* RIGHT */}
             <div className="flex flex-col items-start md:items-end gap-[14px] md:mt-[120px]">
 
-              <button className="
-                bg-[#111111]
-                text-white
-                px-[22px] md:px-[26px]
-                py-[14px] md:py-[15px]
-                text-[12px]
-                tracking-[0.18em]
-                uppercase
-               
-                flex items-center gap-3
-              ">
-                Explore the ERAM Ecosystem →
-              </button>
+     <button
+  className="
+    group relative overflow-hidden
 
-              <button className="
-                border border-[#1a1a1a]
-                px-[22px] md:px-[26px]
-                py-[14px] md:py-[15px]
-                text-[12px]
-                tracking-[0.18em]
-                uppercase
-                flex items-center gap-3
-              ">
-                Host an Event
-                <Calendar className="w-4 h-4 opacity-70" />
-              </button>
+    bg-[#ae1431]
+    text-white
 
+    px-[22px] md:px-[26px]
+    py-[14px] md:py-[15px]
+
+    text-[12px]
+    tracking-[0.18em]
+    uppercase
+
+    flex items-center gap-3
+  "
+>
+  {/* hover overlay */}
+  <span className="
+    absolute inset-0 bg-black
+    scale-x-0 origin-left
+    group-hover:scale-x-100
+    transition-transform duration-[400ms]
+    ease-[cubic-bezier(0.22,1,0.36,1)]
+  " />
+
+  {/* text */}
+  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+    Explore the ERAM Ecosystem
+  </span>
+
+  {/* arrow */}
+  <span className="
+    relative z-10
+    transition-all duration-300
+    group-hover:text-white
+    group-hover:translate-x-[5px]
+  ">
+    →
+  </span>
+</button>
+
+            <button
+  className="
+    group relative overflow-hidden
+
+    border border-[#1a1a1a]
+    text-[#111]
+
+    px-[22px] md:px-[26px]
+    py-[14px] md:py-[15px]
+
+    text-[12px]
+    tracking-[0.18em]
+    uppercase
+
+    flex items-center gap-3
+  "
+>
+  {/* hover overlay */}
+  <span className="
+    absolute inset-0 bg-[#111]
+    scale-x-0 origin-left
+    group-hover:scale-x-100
+    transition-transform duration-[400ms]
+    ease-[cubic-bezier(0.22,1,0.36,1)]
+  " />
+
+  {/* text */}
+  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+    Host an Event
+  </span>
+
+  <Calendar className="
+    relative z-10 w-4 h-4 opacity-70
+    transition-colors duration-300
+    group-hover:text-white
+  " />
+</button>
             </div>
 
           </div>

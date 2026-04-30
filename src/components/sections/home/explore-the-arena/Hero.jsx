@@ -17,11 +17,11 @@ export default function HeroSection() {
 
           {/* CONTENT */}
          <div className="relative z-10 flex flex-col justify-start pt-[60px] md:pt-[80px]
-min-h-[480px] sm:min-h-[560px] md:min-h-[660px] lg:min-h-[760px]">
+min-h-[420px] sm:min-h-[500px] md:min-h-[720px] lg:min-h-[820px]">
 
             {/* TOP SECTION */}
           <div className="w-full max-w-[1100px] mx-auto px-4 md:px-6 
-py-12 md:py-16 flex flex-col lg:flex-row gap-12">
+py-4 md:py-16 flex flex-col lg:flex-row gap-4">
 
               {/* LEFT */}
               <div className="flex-1 max-w-[720px]">
@@ -59,7 +59,7 @@ py-12 md:py-16 flex flex-col lg:flex-row gap-12">
 
               {/* RIGHT PANEL */}
               <div className="
-               mt-16 md:mt-0 
+               mt-4 md:mt-0 
                 w-full sm:w-[300px] lg:w-[280px]
                 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
                 backdrop-blur-md

@@ -243,7 +243,7 @@ function PurposeSection() {
     items-center
     gap-2
 
-    hover:bg-black
+    hover:bg-[#ae1431]
     hover:text-white
 
     transition

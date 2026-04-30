@@ -9,11 +9,11 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#ae1431] text-white px-6 py-20">
+    <footer className="bg-[#ae1431] text-white px-6 py-12">
       <div className="max-w-[1200px] mx-auto">
         {/* GRID */}
 
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid md:grid-cols-4 gap-8">
           {/* LOGO + TEXT */}
 
           <div>
@@ -37,7 +37,7 @@ max-w-[280px]
 
             {/* SOCIAL */}
 
-            <h4 className="mt-8 font-semibold tracking-wide">STAY CONNECTED</h4>
+            <h4 className="mt-5 font-semibold tracking-wide">STAY CONNECTED</h4>
 
             <div className="flex gap-5 mt-4 text-xl">
               <FaInstagram />
@@ -78,7 +78,7 @@ bg-white
               />
             </h4>
 
-            <ul className="space-y-2 text-sm text-white/90">
+            <ul className="space-y-1.5 text-sm text-white/90">
               <li>About Us</li>
               <li>Admissions</li>
               <li>Academics</li>
@@ -201,7 +201,7 @@ bg-white
 
         <div
           className="
-mt-14
+mt-8
 
 border-t
 

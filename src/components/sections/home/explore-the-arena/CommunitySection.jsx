@@ -1,6 +1,6 @@
 export default function CommunitySection() {
   return (
-   <section className="bg-[#e9e3d8] py-[80px] md:py-[100px] px-[16px] sm:px-[20px] md:px-[28px]">
+   <section className="bg-[#F5EFE8] py-[80px] md:py-[100px] px-[16px] sm:px-[20px] md:px-[28px]">
 
       <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
         <div className="

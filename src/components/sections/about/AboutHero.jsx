@@ -77,7 +77,7 @@ function AboutHero() {
       
         <div className="rounded-[28px] overflow-hidden shadow-sm transform-gpu [contain:paint]">
           {/* HERO */}
-         <div className="relative min-h-[480px] sm:min-h-[560px] md:min-h-[660px] lg:min-h-[760px] w-full">
+         <div className="relative min-h-[560px] sm:min-h-[620px] md:min-h-[660px] lg:min-h-[760px] w-full">
             {/* IMAGE */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="hero-img absolute inset-0 scale-110 will-change-transform transform-gpu">
@@ -98,7 +98,7 @@ function AboutHero() {
 
             {/* CONTENT */}
             {/* Mobile: bottom + centered | md+: middle + left (original) */}
-            <div className="absolute inset-0 flex items-end md:items-center">
+            <div className="absolute inset-0 flex items-center md:items-center">
               {/* ── MOBILE / TABLET (< md) ── centered column */}
               <div
                 className="w-full flex flex-col items-center text-center text-white

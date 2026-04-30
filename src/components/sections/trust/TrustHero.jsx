@@ -64,7 +64,7 @@ function TrustHero() {
     >
       
         <div className="rounded-[28px] overflow-hidden shadow-sm">
-          <div className="relative h-[480px] sm:h-[560px] md:h-[660px] lg:h-[760px] w-full">
+          <div className="relative h-[560px] sm:h-[620px] md:h-[660px] lg:h-[760px] w-full">
             {/* IMAGE */}
             <div className="absolute inset-0">
               <div className="hero-img absolute inset-0 scale-110">
@@ -81,7 +81,7 @@ function TrustHero() {
             <div className="absolute inset-0 bg-black/45 md:bg-black/35" />
 
             {/* CONTENT */}
-            <div className="absolute inset-0 flex items-end md:items-center">
+            <div className="absolute inset-0 flex items-center md:items-center">
               {/* MOBILE */}
               <div className="w-full flex flex-col items-center text-center text-white px-6 pb-10 md:hidden">
                 {/* TOP LABEL */}
