@@ -884,9 +884,8 @@
 // }
 
 
-import { useState } from "react";
 
-export default function TrustPage({ active, setActive }) {
+export default function EducationSection({ active, setActive }) {
 
   return (
     <section className="bg-[#F5EFE8] pt-[80px] pb-[80px]">

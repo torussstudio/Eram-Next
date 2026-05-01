@@ -241,7 +241,7 @@ export default function ArenaSection() {
        <ActionButton to="/explore-arena">
   Explore The Arena
 </ActionButton>
-        <ActionButton variant="secondary">
+        <ActionButton className="cursor-pointer" variant="secondary">
           Discover Our Infrastructure
         </ActionButton>
       </div>

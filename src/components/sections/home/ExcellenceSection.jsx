@@ -186,7 +186,7 @@ export default function ExcellenceSection() {
               <button
                 key={item}
                 onClick={() => setActive(i)}
-                className={`exc-menu-item text-left text-[22px] tracking-[0.16em] font-[400] transition-all duration-200 ${isActive ? "text-[#111]" : "text-[#a3a3a3] hover:text-[#666]"}`}
+                className={`exc-menu-item text-left text-[22px] tracking-[0.16em] font-[400] transition-all duration-200 ${isActive ? "text-[#111]" : "text-[#a3a3a3] hover:text-[#666] cursor-pointer"}`}
               >
                 {isActive && <span>//</span>}
                 {item}

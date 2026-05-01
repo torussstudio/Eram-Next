@@ -113,7 +113,7 @@ export default function BeyondSection() {
         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
           <ActionButton
             variant="secondary"
-            className="text-[#f5efe8] max-[640px]:!w-auto"
+            className="text-[#f5efe8] max-[640px]:!w-auto cursor-pointer"
           >
             Explore Student Pathways
           </ActionButton>

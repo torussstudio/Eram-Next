@@ -245,7 +245,7 @@ export default function ImpactSection() {
             className="
               btn-anim h-[44px] px-[22px] text-[13px] rounded-[10px]
               border border-[#f5efe8] bg-[#f5efe8]
-              text-[#ae1431] transition
+              text-[#ae1431] transition cursor-pointer
             "
           >
             EXPLORE STUDENT PATHWAYS
@@ -328,7 +328,7 @@ export default function ImpactSection() {
             overflow-x-auto scroll-smooth
             snap-x snap-mandatory
             [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-            pb-[20px]
+            pb-[20px] cursor-pointer
           "
         >
           <div className="flex gap-[20px] px-[32px]">

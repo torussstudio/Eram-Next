@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { FiArrowUp } from "react-icons/fi";
-import { useSmoothScrollToTop } from "../../hooks/useSmoothScroll";
+import { scrollToTop } from "../utils/smoothScroll";
 
 export const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const scrollToTop = useSmoothScrollToTop();
 
   useEffect(() => {
     const toggleVisibility = () => {

@@ -110,7 +110,7 @@ export default function InstitutionsSection() {
               </h3>
 
               {/* link */}
-              <button className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black">
+              <button className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black cursor-pointer">
                 View More
               </button>
             </div>

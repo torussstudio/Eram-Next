@@ -1,10 +1,9 @@
-import { memo, useRef } from "react";
+import { memo, useRef, useEffect } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaPlay } from "react-icons/fa6";
-import { useEffect } from "react";
 import { shell } from "../../../constants/homeStyles";
 
 gsap.registerPlugin(ScrollTrigger);

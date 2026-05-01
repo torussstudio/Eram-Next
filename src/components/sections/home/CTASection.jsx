@@ -132,6 +132,7 @@ export default function CTASection() {
 
               transition
               max-[640px]:w-full
+              cursor-pointer
             "
           >
             APPLY NOW
@@ -161,6 +162,7 @@ export default function CTASection() {
 
               transition
               max-[640px]:w-full
+              cursor-pointer
             "
           >
             BOOK A CAMPUS VISIT
