@@ -15,7 +15,7 @@ export default function CommunitySection() {
 
             {/* LABEL */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="w-6 h-[1px] bg-[#ae1431]"></span>
+              {/* <span className="w-6 h-[1px] bg-[#ae1431]"></span> */}
               <p className="text-[12px] tracking-[0.25em] text-[#ae1431] uppercase">
                 A venue for the wider community
               </p>
@@ -40,7 +40,7 @@ export default function CommunitySection() {
             </p>
 
             {/* BUTTON */}
-            <button className="bg-[#111] text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3">
+            <button className="bg-[#111] text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3 hover:bg-[#ae1431] hover:text-black cursor-pointer">
               Enquire About Hosting
               <span>→</span>
             </button>

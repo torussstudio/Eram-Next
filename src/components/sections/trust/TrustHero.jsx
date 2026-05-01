@@ -126,7 +126,7 @@ function TrustHero() {
                 <div className="max-w-[640px]">
                   <div className="hero-content-fade flex items-center gap-4 mb-6 opacity-0 translate-y-6">
                     {/* MAROON LINE */}
-                    <span className="w-[32px] h-[2px] bg-[#8B1E1E]"></span>
+                    {/* <span className="w-[32px] h-[2px] bg-[#8B1E1E]"></span> */}
 
                     {/* TEXT */}
                     <span className="text-[11px] tracking-[0.32em] uppercase text-white/80">
@@ -165,7 +165,7 @@ function TrustHero() {
                   </p>
 
                   {/* BUTTON */}
-                  <button className="hero-content-fade mt-8 bg-[#B3201D] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide font-medium opacity-0 translate-y-8 hover:bg-[#8f1a18] transition">
+                  <button className="hero-content-fade mt-8 bg-[#B3201D] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide font-medium opacity-0 translate-y-8 hover:bg-[#F5EFE8] hover:text-black transition cursor-pointer">
                     VIEW OUR COMMUNITY INTERVENTIONS →
                   </button>
                 </div>

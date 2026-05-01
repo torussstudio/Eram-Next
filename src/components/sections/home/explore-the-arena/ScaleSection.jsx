@@ -12,7 +12,7 @@ export default function ScaleSection() {
             {/* LEFT */}
             <div>
               <div className="flex items-center gap-3 mb-[20px]">
-                <span className="w-[24px] h-[1px] bg-[#ae1431]" />
+                {/* <span className="w-[24px] h-[1px] bg-[#ae1431]" /> */}
                 <p className="text-[10px] md:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                   The scale at a glance
                 </p>

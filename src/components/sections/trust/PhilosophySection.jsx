@@ -101,8 +101,8 @@ export default function PhilosophySection() {
           style={{ opacity: 0, transform: "translateY(20px)" }}
         >
           <div
-            ref={labelLineRef}
-            className="w-[40px] h-[1px] bg-white/40"
+            // ref={labelLineRef}
+            // className="w-[40px] h-[1px] bg-white/40"
             style={{ transformOrigin: "left", transform: "scaleX(0)" }}
           />
           <span className="text-[11px] tracking-[0.28em] uppercase text-white/60">

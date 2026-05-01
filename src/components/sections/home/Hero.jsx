@@ -143,7 +143,7 @@ export default function Hero() {
             <ActionButton className="!bg-[#8B1E1E] hover:!bg-black cursor-pointer">
               Explore Our Institutions
             </ActionButton>
-            <ActionButton className="!bg-black !text-white hover:!bg-[#8B1E1E] cursor-pointer">
+            <ActionButton className="!bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8]  cursor-pointer">
               Admissions Open 2026-27
             </ActionButton>
           </div>

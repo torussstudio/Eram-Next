@@ -247,6 +247,7 @@ function PurposeSection() {
     hover:text-white
 
     transition
+    cursor-pointer
   "
             >
               EXPLORE MORE

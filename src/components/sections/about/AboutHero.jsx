@@ -184,11 +184,11 @@ function AboutHero() {
                   <button
                     className="hero-content-fade mt-8 bg-white text-black
                                      px-6 py-3 rounded-[12px] text-sm font-medium
-                                     flex items-center gap-2 hover:bg-gray-200 transition
-                                     opacity-0 translate-y-8"
+                                     flex items-center gap-2 hover:bg-black hover:text-white transition
+                                     opacity-0 translate-y-8 cursor-pointer"
                   >
                     EXPLORE OUR INSTITUTIONS
-                    <FaPlay className="text-black text-xs" />
+                    <FaPlay className="text-xs transition-all duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
               </div>

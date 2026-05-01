@@ -59,6 +59,8 @@ export default function ClosingSection() {
     uppercase
 
     flex items-center gap-3
+    cursor-pointer
+
   "
 >
   {/* hover overlay */}
@@ -101,6 +103,7 @@ export default function ClosingSection() {
     uppercase
 
     flex items-center gap-3
+    cursor-pointer
   "
 >
   {/* hover overlay */}

@@ -263,7 +263,7 @@ export default function ArenaSection() {
     >
       <div className="absolute inset-0">
   <img
-    src="/images/sports-ground.webp"
+    src="/images/thumbnail.png"
     className="w-full h-full object-cover"
     alt="Arena"
   />

@@ -82,10 +82,10 @@ export default function LegacySection() {
           <div>
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-[clamp(18px,3vw,26px)]">
-              <span
+              {/* <span
                 ref={eyeLineRef}
                 className="w-[36px] h-[1px] bg-[#8B1E1E] shrink-0 block"
-              />
+              /> */}
               <span
                 ref={eyeTextRef}
                 className="text-[10px] tracking-[0.3em] uppercase text-[#8B1E1E] font-sans"

@@ -237,6 +237,7 @@ function ERAMSportsArena() {
                     hover:opacity-90
                     transition
                     whitespace-nowrap
+                    cursor-pointer
                   "
                 >
                   ADMISSIONS OPEN
@@ -259,6 +260,7 @@ function ERAMSportsArena() {
                     hover:text-black
                     transition
                     whitespace-nowrap
+                    cursor-pointer
                   "
                 >
                   EXPLORE OUR INSTITUTIONS

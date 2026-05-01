@@ -27,7 +27,7 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4">
               <div className="flex-1 max-w-[720px]">
 
                 <div className="flex items-center gap-3 mb-5">
-                  <span className="w-6 h-[1px] bg-[#ae1431]"></span>
+                  {/* <span className="w-6 h-[1px] bg-[#ae1431]"></span> */}
                   <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                     The Eram Sports Arena
                   </p>
@@ -46,11 +46,11 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4">
                 </p>
 
                 <div className="flex flex-wrap gap-3 mt-7">
-                  <button className="bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase">
+                  <button className="bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer">
                     EXPLORE THE ARENA→
                   </button>
 
-                  <button className="border border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2">
+                  <button className="border border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
                     HOST AN EVENT
                     <Calendar className="w-4 h-4 opacity-70" />
                   </button>
@@ -102,7 +102,7 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4">
 
       {/* LABEL */}
       <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">
-        <span className="w-[26px] h-[1px] bg-[#ae1431]" />
+        {/* <span className="w-[26px] h-[1px] bg-[#ae1431]" /> */}
         <p className="text-[15px] md:text-[18px] tracking-[0.28em] text-[#ae1431] uppercase">
           Infrastructure at a glance
         </p>

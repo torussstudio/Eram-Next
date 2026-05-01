@@ -424,6 +424,7 @@ function StructuredLearningSection() {
                 px-5 py-2 rounded-lg text-sm
                 flex items-center gap-2
                 hover:bg-white hover:text-[#b5122b] transition
+                cursor-pointer
               "
             >
               EXPLORE MORE

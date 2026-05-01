@@ -114,7 +114,7 @@ export default function StructuredFramework({ setActive }) {
           className="flex flex-col gap-[clamp(14px,2.5vw,24px)] mb-[clamp(48px,8vw,96px)]"
         >
           <div className="flex items-center gap-3">
-            <span className="inline-block w-7 h-px bg-white/30" />
+            {/* <span className="inline-block w-7 h-px bg-white/30" /> */}
             <span className="text-[10px] tracking-[0.32em] uppercase text-white/45 font-sans">
               THE TRUST FRAMEWORK
             </span>
