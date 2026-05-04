@@ -14,9 +14,8 @@ const TheTrust = lazy(() => import("../pages/the-trust/TheTrust"));
 const Facilities = lazy(() => import("../pages/facilities/Facilities"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
 const Gallery = lazy(() => import("../pages/gallery/Gallery"));
-const ExploreArena = lazy(() =>
-  import("../pages/explore-arena/ExploreArena")
-);
+const ExploreArena = lazy(() => import("../pages/explore-arena/ExploreArena"));
+const MmHss = lazy(()=> import("../pages/mmhss/MmHss"))
 
 // ✅ Preload helpers (instant navigation feel)
 const preloadAbout = () => import("../pages/about-us/About");
@@ -60,6 +59,7 @@ export default function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/explore-arena" element={<ExploreArena />} />
+              <Route path="/mmhss" element={<MmHss />} />
             </Routes>
           </Suspense>
 

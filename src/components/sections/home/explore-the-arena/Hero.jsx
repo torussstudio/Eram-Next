@@ -67,6 +67,7 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4">
                 rounded-md
                 p-5
                 lg:self-start
+                lg:ml-auto
               ">
                 <div className="flex items-center gap-3 mb-5">
                   <span className="w-5 h-[1px] bg-[#ae1431]"></span>

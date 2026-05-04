@@ -15,10 +15,8 @@ export default function TheTrust() {
       <TrustHero />
       <CommitmentSection />
 
-      
       <StructuredFramework setActive={setActive} />
 
-      
       <EducationSection active={active} setActive={setActive} />
 
       <PhilosophySection />

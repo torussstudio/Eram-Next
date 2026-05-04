@@ -3,16 +3,19 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MarqueeText from "../../ui/Marquee";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function InstitutionsSection() {
+  const navigate = useNavigate()
+
   const sectionRef = useRef(null);
 
   const institutions = [
     { title: "EASE (CBSE)" },
     { title: "MMPS (HS)" },
-    { title: "MMHSS (Hr. Sec)" },
+    { title: "MMHSS (Hr. Sec)", path: "/mmhss" },
     { title: "AMLP (LP)" },
     { title: "MMITE (TTI)" },
   ];
@@ -99,9 +102,9 @@ export default function InstitutionsSection() {
             >
               {/* image */}
               <div className="flex h-[260px] items-center justify-center rounded-[18px] bg-[#f5efe8] max-[640px]:h-[200px] max-[640px]:rounded-[14px]">
-                <svg width="36" height="36" opacity="0.35">
+                {/* <svg width="36" height="36" opacity="0.35">
                   <rect width="36" height="36" fill="#999" />
-                </svg>
+                </svg> */}
               </div>
 
               {/* title */}
@@ -110,9 +113,12 @@ export default function InstitutionsSection() {
               </h3>
 
               {/* link */}
-              <button className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black cursor-pointer">
-                View More
-              </button>
+              <button
+  onClick={() => navigate(item.path)}
+  className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black cursor-pointer"
+>
+  View More
+</button>
             </div>
           ))}
         </div>
