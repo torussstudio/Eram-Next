@@ -49,8 +49,8 @@ export default function Home() {
 
       <Suspense fallback={null}>
         <AboutSection />
-        <InstitutionsSection />
         <SystemsSection />
+        <InstitutionsSection />
         <ModelSection />
         <ExcellenceSection />
         <BeyondSection />

@@ -12,13 +12,13 @@ export default function InstitutionsSection() {
 
   const sectionRef = useRef(null);
 
-  const institutions = [
-    { title: "EASE (CBSE)" },
-    { title: "MMPS (HS)" },
-    { title: "MMHSS (Hr. Sec)", path: "/mmhss" },
-    { title: "AMLP (LP)" },
-    { title: "MMITE (TTI)" },
-  ];
+const institutions = [
+  { title: "EASE (CBSE)", image: "/images/ease.webp",path:"https://ease.edu.in/" },
+  { title: "MMPS (HS)", image: "/images/mmps.webp" },
+  { title: "MMHSS (Hr. Sec)", image: "/images/mmhss.webp", path: "/mmhss" },
+  { title: "AMLP (LP)", image: "/images/amlp.webp" },
+  { title: "MMITE (TTI)", image: "/images/mmite.webp" },
+];
 
   useGSAP(() => {
     // Fade in headlines
@@ -58,6 +58,7 @@ export default function InstitutionsSection() {
   });
 
   return (
+    
     <section
       ref={sectionRef}
       id="c"
@@ -101,11 +102,15 @@ export default function InstitutionsSection() {
               "
             >
               {/* image */}
-              <div className="flex h-[260px] items-center justify-center rounded-[18px] bg-[#f5efe8] max-[640px]:h-[200px] max-[640px]:rounded-[14px]">
-                {/* <svg width="36" height="36" opacity="0.35">
-                  <rect width="36" height="36" fill="#999" />
-                </svg> */}
-              </div>
+<div className="flex h-[260px] items-center justify-center rounded-[18px] bg-[#f5efe8] max-[640px]:h-[200px] max-[640px]:rounded-[14px] overflow-hidden">
+  <img
+    src={item.image}
+    alt={item.title}
+    className="h-full w-full object-cover rounded-[18px] max-[640px]:rounded-[14px]"
+  />
+</div>
+
+
 
               {/* title */}
               <h3 className="mt-[22px] text-[20px] font-[500] tracking-[0.02em] text-[#111] max-[640px]:mt-[16px] max-[640px]:text-[18px]">
@@ -114,7 +119,15 @@ export default function InstitutionsSection() {
 
               {/* link */}
               <button
-  onClick={() => navigate(item.path)}
+ onClick={() => {
+  if (!item.path) return;
+
+  if (item.path.startsWith("http")) {
+    window.open(item.path, "_blank"); // external
+  } else {
+    navigate(item.path); // internal
+  }
+}}
   className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black cursor-pointer"
 >
   View More

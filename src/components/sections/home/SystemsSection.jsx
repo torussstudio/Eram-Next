@@ -265,12 +265,7 @@ export default function SystemsSection() {
                       className="flex justify-end text-[26px] font-medium leading-[1.2]"
                       style={{ color: isActive ? "white" : "#111" }}
                     >
-                      {card.t.split(" ").map((w, idx) => (
-                        <span key={idx}>
-                          {w}
-                          <br />
-                        </span>
-                      ))}
+                      {card.t}
                     </span>
                   </div>
                 );

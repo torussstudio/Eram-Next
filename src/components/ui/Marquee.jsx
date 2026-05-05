@@ -26,9 +26,9 @@ relative
 left-1/2
 right-1/2
 
-mt-[30px]
 
-mb-[70px]
+
+mb-[80px]
 
 w-screen
 

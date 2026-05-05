@@ -12,7 +12,7 @@ export default function ActionButton({
 
   const variantClassName =
     variant === "primary"
-      ? "border-[#111111] bg-[#111111] text-white"
+      ? " bg-[#111111] text-white"
       : "bg-transparent hover:bg-[rgba(17,17,17,0.05)]";
 
   const classes = `${baseClassName} ${variantClassName} ${className}`;
