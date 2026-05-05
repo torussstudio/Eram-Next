@@ -103,7 +103,7 @@ export default function Hero() {
 
         {/* Content */}
         <div className="relative z-10 max-w-[1500px] pb-[100px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
-         <h1 className={headingCls}>
+         <h1 className={`${headingCls} -mt-16`}>
   {["Building Foundations.", "Shaping Futures."].map((line) => (
     <div key={line} className="overflow-hidden pb-1">
       <span className="hero-line block">{line}</span>
@@ -122,7 +122,7 @@ export default function Hero() {
         
 
           <div ref={buttonsRef} className="mt-11 flex flex-wrap gap-[14px]">
-            <ActionButton className="!bg-[#8B1E1E] hover:!bg-black cursor-pointer">
+            <ActionButton className="!bg-[#ae1431] hover:!bg-black cursor-pointer">
               Explore Our Institutions
             </ActionButton>
             <ActionButton className="!bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer">
