@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FiArrowUp } from "react-icons/fi";
+import { FiArrowUp } from "lucide-react";
 import { scrollToTop } from "../utils/smoothScroll";
 
 export const ScrollToTopButton = () => {

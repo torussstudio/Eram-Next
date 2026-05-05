@@ -3,7 +3,7 @@ import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaPlay } from "react-icons/fa6";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -426,7 +426,7 @@ function StructuredLearningSection() {
               "
             >
               EXPLORE MORE
-              <FaPlay className="text-xs transition-colors" />
+              <Play className="text-xs transition-colors" />
             </button>
           </div>
 

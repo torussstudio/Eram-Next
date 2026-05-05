@@ -3,7 +3,7 @@ import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaPlay } from "react-icons/fa6";
+import { Play } from "lucide-react";
 import { shell } from "../../../constants/homeStyles";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -135,7 +135,7 @@ function AboutHero() {
                                    opacity-0 translate-y-8"
                 >
                   EXPLORE OUR INSTITUTIONS
-                  <FaPlay className="text-black text-xs" />
+                  <Play  className="text-black text-xs" />
                 </button>
               </div>
 
@@ -188,7 +188,7 @@ function AboutHero() {
                                      opacity-0 translate-y-8 cursor-pointer"
                   >
                     EXPLORE OUR INSTITUTIONS
-                    <FaPlay className="text-xs transition-all duration-300 group-hover:translate-x-1" />
+                    <Play className="text-xs transition-all duration-300 group-hover:translate-x-1" />
                   </button>
                 </div>
               </div>

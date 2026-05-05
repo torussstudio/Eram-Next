@@ -3,7 +3,7 @@ import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaPlay } from "react-icons/fa6";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -251,7 +251,7 @@ function PurposeSection() {
   "
             >
               EXPLORE MORE
-              <FaPlay className="text-xs transition-all duration-300 group-hover:translate-x-1" />
+              <Play className="text-xs transition-all duration-300 group-hover:translate-x-1" />
             </button>
           </div>
         </div>
