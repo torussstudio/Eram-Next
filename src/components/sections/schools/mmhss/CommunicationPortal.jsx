@@ -40,8 +40,6 @@ export default function CommunicationPortal() {
         { opacity: 0, y: 20 }
       );
 
-      // ── Left column — staggered top-down reveal ───────────────────────
-      // Each element type gets its own beat so the column reads sequentially.
       const leftTl = gsap.timeline({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
@@ -62,9 +60,6 @@ export default function CommunicationPortal() {
           }, "-=0.2")
         .to(".anim-btn",     { opacity: 1, y: 0, duration: 0.45 }, "-=0.1");
 
-      // ── Right column — feed slides in from right edge ─────────────────
-      // x-offset reinforces the "incoming message" metaphor without
-      // the bounciness of back.out, which felt informal for this context.
       gsap.set([".anim-feed-header", ".anim-feed-item"], { x: 16 });
 
       const feedTl = gsap.timeline({
