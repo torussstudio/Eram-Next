@@ -248,7 +248,7 @@ function PerformanceSection() {
               ))}
             </h2>
 
-            <p className="perf-subtext mt-5 text-[13px] md:text-[15px] text-black leading-relaxed max-w-[540px] mx-auto">
+            <p className="perf-subtext mt-5 text-[14.5px] md:text-[15.5px] text-black leading-relaxed max-w-[540px] mx-auto">
               Built as a flagship infrastructure milestone within the ERAM ecosystem, the Arena
               represents the Trust's expanding vision — where structured development meets
               public-scale possibility.
@@ -362,7 +362,7 @@ function PerformanceSection() {
                     <p
                       className="leading-relaxed flex-shrink-0"
                       style={{
-                        fontSize: "clamp(11px, 1.35vw, 13px)",
+                        fontSize: "clamp(14px, 1.35vw, 13px)",
                         color:    text,
                         opacity:  0.55,
                         maxWidth: "90%",

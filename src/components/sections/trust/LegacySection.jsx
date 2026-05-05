@@ -110,7 +110,7 @@ export default function LegacySection() {
             {/* Description */}
             <p
               ref={descRef}
-              className="mt-[clamp(20px,3.5vw,36px)] text-[clamp(13px,1.5vw,15px)] leading-[1.9] text-black/60 max-w-[560px] font-sans"
+              className="mt-[clamp(20px,3.5vw,36px)] text-[15px] leading-[1.9] text-black/60 max-w-[560px] font-sans"
             >
               ERAM Educational &amp; Welfare Trust continues to expand its impact
               through system-driven interventions — strengthening institutions,

@@ -376,9 +376,7 @@ function StructuredLearningSection() {
         px-5 md:px-4
       "
     >
-      {/* ── INNER WRAPPER
-          Mobile : full width, no extra horizontal padding
-          Desktop: original max-width + centered          ── */}
+
       <div className="w-full md:max-w-[1200px] md:mx-auto md:px-8 lg:px-12">
 
         {/* ══════════════════════════════
@@ -393,7 +391,7 @@ function StructuredLearningSection() {
                 structured-text
                 md:opacity-0 md:translate-y-8
                 font-display
-                text-[28px] md:text-[38px]
+                text-[1.08rem] md:text-[38px]
                 font-semibold leading-tight
               "
             >
@@ -407,7 +405,7 @@ function StructuredLearningSection() {
                 structured-text
                 md:opacity-0 md:translate-y-8
                 mt-4 md:mt-5
-                text-[14px] text-white/80 leading-relaxed
+                text-[14.5px] text-white/80 leading-relaxed
               "
             >
               The Trust believes that excellence emerges from systems, not
@@ -507,7 +505,7 @@ lg:min-w-[280px] lg:h-[240px]
               leadership-text
               md:opacity-0 md:translate-y-8
               font-display
-              text-[24px] sm:text-[26px] md:text-[32px]
+              text-[1.08rem] sm:text-[26px] md:text-[32px]
               font-semibold leading-snug
               ml-0 md:ml-[160px]
             "
@@ -521,7 +519,7 @@ lg:min-w-[280px] lg:h-[240px]
             className="
               leadership-text
               md:opacity-0 md:translate-y-8
-              text-[14px] text-white/80 leading-relaxed
+              text-[14.5px] text-white/80 leading-relaxed
               w-full md:max-w-[420px]
               ml-0 md:ml-[20px]
             "
@@ -612,7 +610,7 @@ lg:min-w-[280px] lg:h-[240px]
             className="
               leadership-bottom-heading
               md:opacity-0 md:translate-y-5
-              text-[15px] md:text-[18px]
+              text-[1.08rem] md:text-[18px]
               font-medium text-white
               ml-0 md:ml-22
             "
@@ -622,7 +620,7 @@ lg:min-w-[280px] lg:h-[240px]
             enables:
           </p>
 
-          <ul className="space-y-[10px] md:space-y-2 text-[13px] text-white/80 ml-0 md:ml-[40px]">
+          <ul className="space-y-[10px] md:space-y-2 text-[14.5px] text-white/80 ml-0 md:ml-[40px]">
             {LIST_ITEMS.map((item, i) => (
               <li
                 key={i}

@@ -96,14 +96,6 @@ export default function ArenaSection() {
   className={`${section} ${sectionBand} bg-[#F5EFE8] -mb-[1px] max-[640px]:!pt-[110px]`}
   style={{ transform: "translateZ(0)", height: "100vh" }}
 >
-      {/*
-        ─────────────────────────────────────────────────────
-        WHITE CARD
-        overflow-hidden is here → clips SPORTS ARENA text,
-        so no empty space leaks below the card.
-        SPORTS ARENA is absolute inside this div.
-        ─────────────────────────────────────────────────────
-      */}
      {/* WHITE CARD */}
 <div
   className={`

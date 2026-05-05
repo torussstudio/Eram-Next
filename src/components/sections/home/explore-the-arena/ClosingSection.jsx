@@ -15,19 +15,18 @@ export default function ClosingSection() {
             {/* LEFT */}
             <div className="max-w-[620px]">
 
-              <h2 className="
-                font-serif
-                text-[34px] sm:text-[42px] md:text-[54px]
-                leading-[1.15]
-                tracking-[-0.02em]
-                mb-[20px] md:mb-[26px]
-              ">
-                Where Sport, Ceremony,<br />
-                and Gathering Unfold.
-              </h2>
+             <h2 className="
+  font-serif
+  text-[36px] sm:text-[40px] md:text-[46px]
+  leading-[1.15]
+  tracking-[-0.02em]
+  mb-[20px] md:mb-[26px]
+">
+  Where Sport, Ceremony, and Gathering Unfold.
+</h2>
 
               <p className="
-                text-[14px] md:text-[15px]
+                text-[14.5px] md:text-[15px]
                 leading-[1.9]
                 text-[#4a433c]
               ">
@@ -136,7 +135,7 @@ export default function ClosingSection() {
           {/* QUOTE */}
           <p className="
             italic
-            text-[13px] md:text-[14px]
+            text-[15px] md:text-[16px]
             text-[#7a7268]
           ">
             "Built not for scale alone — but for sustained opportunity: athletic, cultural, and communal."

@@ -27,13 +27,13 @@ export default function CommunitySection() {
             </h2>
 
             {/* TEXT */}
-            <p className="text-[15px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-6">
+            <p className="text-[14.5px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-6">
               The ERAM Sports Arena extends beyond institutional use. It is open
               for external bookings, welcoming a wide range of large-scale events
               and community gatherings.
             </p>
 
-            <p className="text-[15px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-8">
+            <p className="text-[14.5px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-8">
               By positioning the campus as an accessible venue for sport, culture,
               and community, the Arena strengthens ERAM's presence within the wider
               region — as an institution that serves beyond its walls.
@@ -50,7 +50,7 @@ export default function CommunitySection() {
           <div>
 
             {/* TITLE */}
-            <p className="text-[11px] tracking-[0.25em] text-[#7d746c] uppercase mb-6 text-center md:text-left">
+            <p className="text-[12px] tracking-[0.25em] text-[#7d746c] uppercase mb-6 text-center md:text-left">
               Events We Welcome
             </p>
 
@@ -85,7 +85,7 @@ export default function CommunitySection() {
                     {card.title}
                   </h3>
 
-                  <p className="text-[13px] text-[#7d746c]">
+                  <p className="text-[14px] text-[#7d746c]">
                     {card.desc}
                   </p>
                 </div>

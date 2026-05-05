@@ -201,7 +201,7 @@ export default function Hero() {
               </h1>
               <p
                 ref={subtextRef}
-                className="mt-4 sm:mt-5 text-[13px] sm:text-[14px] md:text-[15px]
+                className="mt-4 sm:mt-5 text-[1.05rem] sm:text-[14px] md:text-[15px]
                   leading-[1.8] text-white/70 max-w-[560px]"
               >
                 <span className="text-white font-medium">
@@ -217,7 +217,7 @@ export default function Hero() {
                 <button
                   className="bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer
-                    rounded-sm active:scale-[0.98] transition-transform"
+                    rounded-sm active:scale-[0.98] transition-transform rounded-[15px]"
                 >
                   Admissions Open — Book Now →
                 </button>
@@ -225,7 +225,7 @@ export default function Hero() {
                   className="border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
                     flex items-center gap-2 cursor-pointer rounded-sm
-                    active:scale-[0.98] transition-transform"
+                    active:scale-[0.98] transition-transform rounded-[15px]"
                 >
                   Enquire Now
                 </button>
@@ -306,7 +306,7 @@ export default function Hero() {
                     >
                       {item.value}
                     </h3>
-                    <p className="mt-3 sm:mt-[14px] text-[11px] sm:text-[12px] md:text-[13px] text-[#8f877d] leading-[1.6]">
+                    <p className="mt-3 sm:mt-[14px] text-[12px] sm:text-[12px] md:text-[13px] text-[#8f877d] leading-[1.6]">
                       {item.desc.map((line, idx) => (
                         <span key={idx} className="block">
                           {line}

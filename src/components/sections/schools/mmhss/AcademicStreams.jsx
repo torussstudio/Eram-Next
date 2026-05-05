@@ -303,7 +303,6 @@ export default function AcademicStreams() {
 
             {/* Badge */}
             <div ref={badgeRef} className="flex items-center gap-3 mb-8">
-              <div ref={badgeLineRef} className="w-6 h-[1px] bg-[#ae1431] flex-shrink-0" />
               <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
                 Academic Structure
               </p>
@@ -335,7 +334,7 @@ export default function AcademicStreams() {
             <div ref={dividerRef} className="w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             {/* Body */}
-            <p ref={bodyRef} className="text-[14px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
+            <p ref={bodyRef} className="text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
               MMHSS offers Higher Secondary education under the State syllabus
               across three focused streams. Our strength lies not just in what
               we teach, but in how we execute it — guiding, supervising, and
@@ -343,7 +342,7 @@ export default function AcademicStreams() {
             </p>
 <br></br>
             {/* Streams list */}
-            <div ref={streamsRef} className="relative rounded-sm overflow-hidden">
+            <div ref={streamsRef} className="relative border border-white/10 rounded-[20px] overflow-hidden">
               {/* Clockwise-drawn border */}
               <div className="sb-top    absolute top-0    left-0  right-0  h-[1px] bg-white/10" />
               <div className="sb-right  absolute top-0    right-0 bottom-0 w-[1px] bg-white/10" />
@@ -362,7 +361,7 @@ export default function AcademicStreams() {
                     <h3 className="stream-title text-white font-serif text-[16px] sm:text-[17px] leading-tight">
                       {item.title}
                     </h3>
-                    <p className="stream-sub text-[12px] text-white/40 mt-0.5">{item.sub}</p>
+                    <p className="stream-sub text-[13px] text-white/40 mt-0.5">{item.sub}</p>
                   </div>
                 </div>
               ))}
@@ -374,18 +373,18 @@ export default function AcademicStreams() {
 
             <p
               ref={subLabelRef}
-              className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
+              className="text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
             >
               Academic Support Systems
             </p>
 
-            <div ref={gridRef} className="flex flex-col gap-1">
+            <div ref={gridRef} className="flex flex-col gap-1 rounded-2xl overflow-hidden ">
               {supportItems.map(([left, right], i) => (
                 <div key={i} className="grid grid-cols-2 gap-1">
                   {[left, right].map((text, j) => (
                     <div key={j} className="support-card relative bg-[#252525] px-5 py-5 overflow-hidden">
                       {/* Accent bar — animated via GSAP */}
-                      <div className="card-accent absolute left-0 top-0 bottom-0 w-[2px] bg-[#ae1431]" />
+                     <div className="card-accent absolute left-0 top-0 bottom-0 w-[4px] bg-[#ae1431] rounded-l-[20px]" />
                       {/* One-shot shimmer sweep */}
                       <div
                         className="card-shimmer absolute inset-0 pointer-events-none"

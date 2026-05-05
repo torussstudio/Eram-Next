@@ -18,14 +18,13 @@ export default function ScaleSection() {
                 </p>
               </div>
 
-              <h2 className="font-serif text-[34px] sm:text-[42px] md:text-[56px] leading-[1.1] tracking-[-0.02em] text-[#eae6df]">
-                A Landmark Addition <br />
-                to the ERAM Campus.
-              </h2>
+             <h2 className="font-serif text-[34px] sm:text-[42px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-[#eae6df]">
+  A Landmark Addition <br></br>to the ERAM Campus.
+</h2>
             </div>
 
             {/* RIGHT */}
-            <p className="text-[14px] mt-[20px] md:mt-[165px] md:text-[15px] leading-[1.8] md:leading-[1.9] text-[#b8b2a8] max-w-[520px]">
+            <p className="text-[14.5px] mt-[25px] md:text-[15.5px] leading-[1.8] md:leading-[1.9] text-[#b8b2a8] max-w-[520px]">
               Every dimension of the ERAM Sports Arena is intentional — built for competitive performance,
               extended events, and long-term community use. These are not provisional specifications.
               They are a permanent statement of scale.
@@ -61,11 +60,11 @@ export default function ScaleSection() {
                   {card.label}
                 </p>
 
-                <h3 className="font-serif text-[20px] sm:text-[24px] md:text-[30px] text-[#f1eee8] mb-[6px]">
+                <h3 className="font-serif text-[22px] sm:text-[26px] md:text-[30px] text-[#f1eee8] mb-[6px]">
                   {card.value}
                 </h3>
 
-                <p className="text-[12px] md:text-[13px] text-[#c5beb5] leading-[1.5] max-w-[240px]">
+                <p className="text-[13px] md:text-[14px] text-[#c5beb5] leading-[1.5] max-w-[240px]">
                   {card.desc}
                 </p>
 

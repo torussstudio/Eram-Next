@@ -236,7 +236,7 @@ export default function Journey() {
 
             <div ref={dividerRef} className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
-            <div ref={parasRef} className="space-y-5 text-[14px] md:text-[15px] leading-[1.85] text-[#3d3128]">
+            <div ref={parasRef} className="space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
               <p>
                 When MMHSS began in 2005, it entered a competitive academic
                 environment with modest score brackets. Over time, through
@@ -257,7 +257,7 @@ export default function Journey() {
               </p>
             </blockquote>
 
-            <p ref={lastParaRef} className="text-[14px] md:text-[15px] leading-[1.85] text-[#3d3128]">
+            <p ref={lastParaRef} className="text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
               We always ensure academic attention, extended study systems, and
               continuous parent communication — across every batch, every year.
             </p>
@@ -267,7 +267,7 @@ export default function Journey() {
           <div className="flex flex-col">
             <p
               ref={subLabelRef}
-              className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-10 hidden lg:block"
+              className="text-[11px] sm:text-[11px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-10 hidden lg:block"
             >
               From Modest Beginnings to Measured Excellence
             </p>
@@ -275,11 +275,6 @@ export default function Journey() {
             {/* Timeline — relative container so the spine can be absolutely positioned */}
             <div ref={timelineRef} className="flex flex-col relative">
 
-              {/* ─ Single absolute spine behind all dots ─ */}
-              {/*
-                Left offset: year width (72px) + dot column left margin (mr-7 = 28px) + dot half-width (3.5px) ≈ 103.5px
-                Adjust if your spacing differs.
-              */}
               <div
                 ref={spineRef}
                 className="absolute w-[1px] bg-[#ae1431]"
@@ -319,7 +314,7 @@ export default function Journey() {
                     <h3 className="font-serif text-[#1a1209] text-[17px] sm:text-[18px] md:text-[19px] leading-snug mb-2 tracking-[-0.01em]">
                       {item.title}
                     </h3>
-                    <p className="text-[13px] sm:text-[14px] text-[#5a4e43] leading-[1.75]">
+                    <p className="text-[14px] sm:text-[14px] text-[#5a4e43] leading-[1.75]">
                       {item.desc}
                     </p>
                   </div>

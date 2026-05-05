@@ -83,7 +83,7 @@ function SpacesDesignedForOpportunity() {
               spaces-text
               opacity-0 translate-y-8
               mt-3
-              text-[13px]
+              text-[14.5px]
               md:text-[15px]
               text-black/65
               leading-[1.65]

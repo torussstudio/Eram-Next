@@ -29,21 +29,20 @@ export default function AnchoredSection() {
             </div>
 
             {/* TITLE */}
-            <h2 className="
-              font-serif
-              text-[34px] sm:text-[42px] md:text-[56px]
-              leading-[1.15] md:leading-[1.1]
-              tracking-[-0.02em]
-              mb-[18px] md:mb-[26px]
-              text-[#eae6df]
-            ">
-              Anchored In Structured <br />
-              Athletic Development
-            </h2>
+           <h2 className="
+  font-serif
+  text-[36px] sm:text-[40px] md:text-[45px]
+  leading-[1.15] md:leading-[1.1]
+  tracking-[-0.02em]
+  mb-[18px] md:mb-[26px]
+  text-[#eae6df]
+">
+  Anchored In Structured Athletic Development
+</h2>
 
             {/* DESC */}
             <p className="
-              text-[14px] md:text-[15px]
+              text-[14.5px] md:text-[15.5px]
               leading-[1.8] md:leading-[1.9]
               text-[#b8b2a8]
               mb-[22px] md:mb-[28px]
@@ -54,7 +53,7 @@ export default function AnchoredSection() {
             {/* QUOTE */}
             <p className="
               italic
-              text-[14px] md:text-[15px]
+              text-[16px] md:text-[17px]
               text-[#9f988e]
               mb-[24px] md:mb-[30px]
               border-l border-[#ae1431]
@@ -64,7 +63,7 @@ export default function AnchoredSection() {
             </p>
 
             {/* LIST */}
-            <ul className="space-y-[12px] md:space-y-[14px] text-[13px] md:text-[14px] text-[#c9c3ba]">
+            <ul className="space-y-[12px] md:space-y-[14px] text-[14px] md:text-[15px] text-[#c9c3ba]">
               {points.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="w-[5px] h-[5px] md:w-[6px] md:h-[6px] mt-[6px] md:mt-[7px] bg-[#ae1431] rounded-full" />
@@ -104,7 +103,7 @@ export default function AnchoredSection() {
                 </h3>
 
                 <p className="
-                  text-[12px] md:text-[13px]
+                  text-[13px] md:text-[14px]
                   leading-[1.5] md:leading-[1.6]
                   text-[#c5beb5]
                   max-w-[200px] md:max-w-[220px]

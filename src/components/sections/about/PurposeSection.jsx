@@ -11,13 +11,13 @@ function PurposeSection() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-  const handleLoad = () => {
-    ScrollTrigger.refresh();
-  };
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
 
-  window.addEventListener("load", handleLoad);
-  return () => window.removeEventListener("load", handleLoad);
-}, []);
+    window.addEventListener("load", handleLoad);
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
 
   const items = [
     {
@@ -70,13 +70,13 @@ function PurposeSection() {
       });
 
       // Grid reveal (image + list)
-     const gridTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".purpose-grid",
-    start: "top 75%",
-    invalidateOnRefresh: true,
-  },
-});
+      const gridTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".purpose-grid",
+          start: "top 75%",
+          invalidateOnRefresh: true,
+        },
+      });
 
       gridTl.to(".purpose-image", {
         scale: 1,
@@ -128,7 +128,7 @@ function PurposeSection() {
             Community Grounded.
           </h2>
 
-          <p className="purpose-text opacity-0 translate-y-10 mt-5 md:mt-6 text-[14px] md:text-[15px] leading-relaxed text-black/70">
+          <p className="purpose-text opacity-0 translate-y-10 mt-5 md:mt-6 text-[14.5px] md:text-[15px] leading-relaxed text-black/70">
             ERAM Educational & Welfare Trust was formed as the educational and
             social responsibility arm of the Eram Group. Its founding vision was
             clear: to create structured academic institutions that provide
@@ -136,7 +136,7 @@ function PurposeSection() {
             backward communities.
           </p>
 
-          <p className="purpose-text opacity-0 translate-y-10 mt-3 md:mt-4 text-[14px] md:text-[15px] leading-relaxed text-black/70">
+          <p className="purpose-text opacity-0 translate-y-10 mt-3 md:mt-4 text-[14.5px] md:text-[15px] leading-relaxed text-black/70">
             The Trust operates with the belief that excellence is sustained
             through systems. From foundational schooling to higher secondary
             education and professional teacher training, ERAM has built an
@@ -161,16 +161,16 @@ function PurposeSection() {
         >
           {/* image */}
           <div className="purpose-image opacity-0 translate-y-8 scale-95 rounded-[22px] overflow-hidden transform-gpu">
-  <div className="aspect-[4/3] w-full">
-    <OptimizedImage
-      src="/images/campus.webp"
-      alt="campus"
-      className="w-full h-full object-cover"
-      sizes="(max-width: 768px) 100vw, 50vw"
-      disableTransition
-    />
-  </div>
-</div>
+            <div className="aspect-[4/3] w-full">
+              <OptimizedImage
+                src="/images/campus.webp"
+                alt="campus"
+                className="w-full h-full object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                disableTransition
+              />
+            </div>
+          </div>
 
           {/* right content */}
           <div className="purpose-items">

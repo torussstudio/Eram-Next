@@ -118,7 +118,7 @@ function AboutHero() {
                 </h1>
 
                 <p
-                  className="hero-content-fade mt-4 text-[0.82rem] sm:text-[0.9rem]
+                  className="hero-content-fade mt-4 text-[.08rem] sm:text-[0.9rem]
                                text-white/85 leading-[1.7] max-w-[300px] sm:max-w-[420px]
                                opacity-0 translate-y-8"
                 >

@@ -124,7 +124,7 @@ export default function StructuredFramework({ setActive }) {
            <h2 className="font-serif text-[clamp(1.9rem,4.2vw,3.4rem)] font-light leading-[1.12] max-w-[620px] m-0 tracking-[-0.01em]">
   A Structured Approach to Social Responsibility
 </h2>
-            <p className="text-[clamp(13px,1.4vw,14px)] leading-[1.85] text-white/60 max-w-[360px] m-0 font-sans">
+            <p className="text-[14.5px] leading-[1.85] text-white/60 max-w-[360px] m-0 font-sans">
               The Trust operates through clearly defined focus areas, ensuring every initiative is part of a governed and accountable system.
             </p>
           </div>
@@ -186,7 +186,7 @@ export default function StructuredFramework({ setActive }) {
         {/* ── NOTE ── */}
         <p
           ref={noteRef}
-          className="text-center text-[11px] text-white/[0.38] mt-[clamp(28px,4vw,52px)] tracking-[0.06em] font-sans"
+          className="text-center text-[14.5px] text-white/[0.38] mt-[clamp(28px,4vw,52px)] tracking-[0.06em] font-sans"
         >
           Each initiative is planned with long-term sustainability, institutional oversight, and measurable outcomes.
         </p>

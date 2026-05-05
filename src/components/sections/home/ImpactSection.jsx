@@ -231,7 +231,7 @@ export default function ImpactSection() {
             text="In Service Of Society"
             className="text-[42px] leading-[1.12] font-[600] text-[#f5efe8] mb-[18px]"
           />
-          <p className="para-anim text-[15px] leading-[1.75] text-[#f5efe8] mb-[14px]">
+          <p className="para-anim text-[14.5px] leading-[1.75] text-[#f5efe8] mb-[14px]">
             ERAM Educational &amp; Welfare Trust advances social equity through
             structured CSR initiatives focused on educational access, healthcare
             outreach, and community resilience.
@@ -246,6 +246,8 @@ export default function ImpactSection() {
               btn-anim h-[44px] px-[22px] text-[13px] rounded-[10px]
               border border-[#f5efe8] bg-[#f5efe8]
               text-[#ae1431] transition cursor-pointer
+               hover:bg-black
+          hover:text-white hover:border-[#ae1431]
             "
           >
             EXPLORE STUDENT PATHWAYS

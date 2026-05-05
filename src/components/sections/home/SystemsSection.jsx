@@ -230,7 +230,7 @@ export default function SystemsSection() {
               <br />
               Sustain Excellence
             </h2>
-            <p className="text-[13.5px] leading-[1.8] text-black">
+            <p className="text-[14.5px] leading-[1.8] text-black">
               An integrated framework of management oversight, faculty
               excellence, and purpose-built infrastructure sustaining quality
               across every institution, ensuring continuous assessment, teacher
