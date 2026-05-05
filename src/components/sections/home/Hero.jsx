@@ -178,7 +178,7 @@ export default function Hero() {
 
   useEffect(() => {
     // ❌ Skip animations on mobile
-    if (window.innerWidth < 768) return;
+    if (window.innerWidth < 1024) return;
 
     let ctx;
 
@@ -257,7 +257,7 @@ export default function Hero() {
 
         {/* Content */}
         <div className="relative z-10 max-w-[1500px] pb-[100px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
-          <h1 className={headingCls}>
+         <h1 className={headingCls} style={{ contentVisibility: "auto" }}>
             {["An Institutional", "Movement of Purpose"].map((line) => (
               <div key={line} className="overflow-hidden pb-1">
                 <span className="hero-line block">{line}</span>

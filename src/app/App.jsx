@@ -77,9 +77,7 @@ import ScrollToTop from "../components/layout/ScrollToTop";
 // Lazy layout
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 const Footer = lazy(() => import("../components/layout/Footer"));
-const SmoothScrollProvider = lazy(() =>
-  import("../providers/SmoothScrollProvider")
-);
+
 
 // Pages
 const Home = lazy(() => import("../pages/home/Home"));
@@ -129,7 +127,6 @@ export default function App() {
 
         {/* ✅ SmoothScrollProvider isolated */}
         <Suspense fallback={null}>
-          <SmoothScrollProvider>
             
             {/* ✅ Only routes block UI */}
             <Suspense fallback={<PageLoader />}>
@@ -145,7 +142,6 @@ export default function App() {
               </Routes>
             </Suspense>
 
-          </SmoothScrollProvider>
         </Suspense>
 
         {/* ✅ Footer loads independently */}
