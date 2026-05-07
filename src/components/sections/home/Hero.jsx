@@ -330,17 +330,13 @@
 // }
 
 
-
 import { useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
-
 import ActionButton from "../../ui/ActionButton";
 import { shell } from "../../../constants/homeStyles";
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   STYLES
-───────────────────────────────────────────────────────────────────────────── */
+/* ─── Styles ──────────────────────────────────────────────────────────────── */
 const sectionCls = [
   shell,
   "isolate relative block mt-[-20px]",
@@ -360,221 +356,155 @@ const cardCls = [
   "max-[420px]:px-4 max-[420px]:pt-[130px]",
 ].join(" ");
 
-const headingCls = [
-  "font-display leading-[0.95] tracking-[-0.02em] text-white",
-  "text-[clamp(4rem,5vw,5.6rem)]",
-  "max-[640px]:text-[clamp(2.3rem,12vw,3.4rem)]",
-].join(" ");
+const headingCls =
+  "font-agency font-light tracking-[-0.03em] leading-[0.95] " +
+  "text-[clamp(1.75rem,7vw,5.8rem)] text-white -mt-16";
 
-const descCls = [
-  "mt-[34px] max-w-[680px]",
-  "text-[1.05rem] leading-[1.65] text-white",
-  "max-[640px]:max-w-full",
-].join(" ");
+const descCls =
+  "mt-[34px] max-w-[680px] text-[1.05rem] leading-[1.65] text-white " +
+  "max-[640px]:max-w-full font-rethink";
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   ANIMATION CONSTANTS
-───────────────────────────────────────────────────────────────────────────── */
+/* ─── Animation config ────────────────────────────────────────────────────── */
 const EASE = {
-  snappy : "power2.out",
-  smooth : "power3.out",
-  light  : "power1.out",
+  snappy: "power2.out",
+  smooth: "power3.out",
+  light:  "power1.out",
 };
 
-const DUR = {
-  // Desktop — cinematic entrance
-  dLine  : 1.00,
-  dDesc  : 0.75,
-  dBtns  : 0.75,
-  // Tablet — moderate
-  tLine  : 0.75,
-  tDesc  : 0.60,
-  tBtns  : 0.60,
-  // Mobile — fast, compositor-only
-  mFade  : 0.40,
-  mBtns  : 0.38,
-};
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   COMPONENT
-───────────────────────────────────────────────────────────────────────────── */
+/* ─── Component ───────────────────────────────────────────────────────────── */
 export default function Hero() {
   const sectionRef   = useRef(null);
   const containerRef = useRef(null);
-  const line0Ref     = useRef(null);   // "Building Foundations."
-  const line1Ref     = useRef(null);   // "Shaping Futures."
-  const sublineRef   = useRef(null);   // tagline below h1
+  const line0Ref     = useRef(null);
+  const line1Ref     = useRef(null);
+  const sublineRef   = useRef(null);
   const descRef      = useRef(null);
   const buttonsRef   = useRef(null);
 
-  useGSAP(
-    () => {
-      /* ── prefers-reduced-motion — bail, CSS handles visibility ─────────── */
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      const mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
+    const lines = () => [line0Ref.current, line1Ref.current];
 
-      /* ═══════════════════════════════════════════════════════════════════════
-         DESKTOP ≥ 1024px
-         Philosophy: RICH · CINEMATIC · LAYERED
-         ─ Lines:    clip-reveal (y: "110%" → "0%") — theatrical curtain lift
-         ─ Subline:  fast fade after lines land
-         ─ Desc:     opacity + small y — weighted follow
-         ─ Buttons:  opacity + small y — final punctuation
-         ─ Parallax: scrub on card container — depth on scroll
-      ═══════════════════════════════════════════════════════════════════════ */
-      mm.add("(min-width: 1024px)", () => {
-        const lines = [line0Ref.current, line1Ref.current];
+    /* ── Desktop ≥ 1024px — cinematic clip-reveal + parallax ─────────────── */
+    mm.add("(min-width: 1024px)", () => {
+      const tl = gsap.timeline({ delay: 0.1 });
 
-        // fromTo keeps initial + final state self-contained
-        // no separate gsap.set needed — safe under StrictMode double-invoke
-        const tl = gsap.timeline({ delay: 0.1 });
+      tl.fromTo(lines(),
+          { y: "110%" },
+          { y: "0%", duration: 1.0, stagger: 0.12, ease: EASE.smooth }
+        )
+        .fromTo(sublineRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: EASE.light },
+          "-=0.5"
+        )
+        .fromTo(descRef.current,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.75, ease: EASE.snappy },
+          "-=0.55"
+        )
+        .fromTo(buttonsRef.current,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.75, ease: EASE.snappy },
+          "-=0.55"
+        );
 
-        tl
-          // Lines: clip-reveal — overflow:hidden parent clips the travel
-          .fromTo(lines,
-            { y: "110%" },
-            { y: "0%", duration: DUR.dLine, stagger: 0.12, ease: EASE.smooth }
-          )
-          // Subline: pure fade, fast
-          .fromTo(sublineRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.5, ease: EASE.light },
-            "-=0.5"
-          )
-          // Desc: fade + small y
-          .fromTo(descRef.current,
-            { opacity: 0, y: 16 },
-            { opacity: 1, y: 0, duration: DUR.dDesc, ease: EASE.snappy },
-            "-=0.55"
-          )
-          // Buttons: fade + small y — final beat
-          .fromTo(buttonsRef.current,
-            { opacity: 0, y: 16 },
-            { opacity: 1, y: 0, duration: DUR.dBtns, ease: EASE.snappy },
-            "-=0.55"
-          );
-
-        // Parallax — scrub on card container
-        // GSAP uses transform:translateY internally — no layout shift
-        gsap.to(containerRef.current, {
-          yPercent : 8,
-          ease     : "none",
-          scrollTrigger: {
-            trigger            : sectionRef.current,
-            start              : "top top",
-            end                : "bottom top",
-            scrub              : 0.5,
-            invalidateOnRefresh: true,   // recalculates on resize/orientation
-          },
-        });
-
-        return () => tl.kill();
+      // Subtle parallax on scroll
+      gsap.to(containerRef.current, {
+        yPercent: 8,
+        ease: "none",
+        scrollTrigger: {
+          trigger:             sectionRef.current,
+          start:               "top top",
+          end:                 "bottom top",
+          scrub:               0.5,
+          invalidateOnRefresh: true,
+        },
       });
 
-      /* ═══════════════════════════════════════════════════════════════════════
-         TABLET  768px – 1023px
-         Philosophy: moderate — lines still reveal, lighter durations
-         No parallax (mid-range GPU cost not worth it)
-      ═══════════════════════════════════════════════════════════════════════ */
-      mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-        const lines = [line0Ref.current, line1Ref.current];
+      return () => tl.kill();
+    });
 
-        const tl = gsap.timeline({ delay: 0.08 });
+    /* ── Tablet 768–1023px — moderate reveals, no parallax ──────────────── */
+    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+      const tl = gsap.timeline({ delay: 0.08 });
 
-        tl
-          .fromTo(lines,
-            { y: "110%" },
-            { y: "0%", duration: DUR.tLine, stagger: 0.10, ease: EASE.smooth }
-          )
-          .fromTo(sublineRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.42, ease: EASE.light },
-            "-=0.38"
-          )
-          .fromTo(descRef.current,
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: DUR.tDesc, ease: EASE.snappy },
-            "-=0.42"
-          )
-          .fromTo(buttonsRef.current,
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: DUR.tBtns, ease: EASE.snappy },
-            "-=0.42"
-          );
+      tl.fromTo(lines(),
+          { y: "110%" },
+          { y: "0%", duration: 0.75, stagger: 0.10, ease: EASE.smooth }
+        )
+        .fromTo(sublineRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.42, ease: EASE.light },
+          "-=0.38"
+        )
+        .fromTo(descRef.current,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.60, ease: EASE.snappy },
+          "-=0.42"
+        )
+        .fromTo(buttonsRef.current,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.60, ease: EASE.snappy },
+          "-=0.42"
+        );
 
-        return () => tl.kill();
-      });
+      return () => tl.kill();
+    });
 
-      /* ═══════════════════════════════════════════════════════════════════════
-         MOBILE < 768px
-         Philosophy: SUBTLE · FAST · SMOOTH · LIGHTWEIGHT
-         ─ Lines:    opacity-only — no y travel, zero layout cost
-         ─ Subline:  pure fade
-         ─ Desc:     pure fade
-         ─ Buttons:  pure fade — fastest possible
-         ─ No parallax — no scrub overhead on low-end devices
-         Hard rules:
-           duration ≤ 0.45s | no y on lines | single timeline | no parallax
-      ═══════════════════════════════════════════════════════════════════════ */
-      mm.add("(max-width: 767px)", () => {
-        const lines = [line0Ref.current, line1Ref.current];
+    /* ── Mobile < 768px — fade-only, no y travel, no parallax ───────────── */
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({ delay: 0.05 });
 
-        const tl = gsap.timeline({ delay: 0.05 });
+      tl.fromTo(lines(),
+          { opacity: 0 },
+          { opacity: 1, duration: 0.40, stagger: 0.08, ease: EASE.light }
+        )
+        .fromTo(sublineRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.32, ease: EASE.light },
+          "-=0.18"
+        )
+        .fromTo(descRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.40, ease: EASE.light },
+          "-=0.20"
+        )
+        .fromTo(buttonsRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.38, ease: EASE.light },
+          "-=0.18"
+        );
 
-        tl
-          // Lines: pure fade — no clip-reveal cost on mobile
-          .fromTo(lines,
-            { opacity: 0 },
-            { opacity: 1, duration: DUR.mFade, stagger: 0.08, ease: EASE.light }
-          )
-          .fromTo(sublineRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.32, ease: EASE.light },
-            "-=0.18"
-          )
-          .fromTo(descRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: DUR.mFade, ease: EASE.light },
-            "-=0.20"
-          )
-          .fromTo(buttonsRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: DUR.mBtns, ease: EASE.light },
-            "-=0.18"
-          );
+      return () => tl.kill();
+    });
 
-        return () => tl.kill();
-      });
-
-      return () => mm.revert();
-    },
-    { scope: sectionRef }
-  );
+    return () => mm.revert();
+  }, { scope: sectionRef });
 
   return (
     <section ref={sectionRef} className={sectionCls} id="hero">
       <div ref={containerRef} className={cardCls}>
 
-        {/* ── Media: LCP image first, video overlays it ─────────────────── */}
+        {/* ── Media: LCP image first, video overlays ──────────────────────── */}
         <div className="absolute inset-0">
-          {/* LCP IMAGE — fetchPriority high, loads immediately */}
           <img
             src="/videos/hero-thumb.jpg"
             alt="ERAM Education"
             className="w-full h-full object-cover"
             fetchPriority="high"
+            loading="eager"
             decoding="sync"
           />
-
-          {/* Video overlays image once loaded */}
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
             muted
             loop
             playsInline
-            preload="none"   // do not block page load
+            preload="none"
           >
             <source src="/videos/mainhero.mp4" type="video/mp4" />
           </video>
@@ -586,48 +516,37 @@ export default function Hero() {
         {/* Content */}
         <div className="relative z-10 max-w-[1500px] pb-[100px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
 
-          {/* H1 — LCP element: no contentVisibility:auto (would delay paint) */}
-<h1 className="font-agency font-light tracking-[-0.03em] leading-[0.95] text-[clamp(1.75rem,7vw,5.8rem)] text-white -mt-16">
-  <span className="block  pb-1">
-    <span ref={line0Ref} className="hero-heading-line block">
-      Building Foundations.
-    </span>
-  </span>
+          {/* H1 */}
+          <h1 className={headingCls}>
+            <span className=" pb-1 ">
+              <span ref={line0Ref} className="block">Building Foundations.</span>
+            </span>
+            <span className=" pb-1 ">
+              <span ref={line1Ref} className="block">Shaping Futures.</span>
+            </span>
+          </h1>
 
-  <span className="block  pb-1">
-    <span ref={line1Ref} className="hero-heading-line block">
-      Shaping Futures.
-    </span>
-  </span>
-</h1>
+          {/* Tagline */}
+          <p ref={sublineRef} className="font-rethink text-[22px] text-white mt-6">
+            Holistic, disciplined, and inclusive education for every child.
+          </p>
 
-          <br />
+          {/* Description */}
+          <p ref={descRef} className={descCls}>
+            A disciplined educational ecosystem nurturing academic excellence,
+            character, and opportunity.
+          </p>
 
-         <p
-  ref={sublineRef}
-  className="font-rethink text-[22px] text-white"
->
-  Holistic, disciplined, and inclusive education for every child.
-</p>
-
-<p
-  ref={descRef}
-  className={`${descCls} font-rethink`}
->
-  A disciplined educational ecosystem nurturing academic excellence,
-  character, and opportunity.
-</p>
-          <br />
-
-          <div ref={buttonsRef} className=" mt-11 flex flex-wrap gap-[14px]">
-            <ActionButton className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer">
+          {/* Buttons */}
+          <div ref={buttonsRef} className="mt-11 flex flex-wrap gap-[14px]">
+            <ActionButton className="font-rethink !bg-[#ae1431] hover:!bg-black">
               Explore Our Institutions
             </ActionButton>
-
-            <ActionButton className= "font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer">
+            <ActionButton className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8]">
               Admissions Open 2026-27
             </ActionButton>
           </div>
+
         </div>
       </div>
     </section>

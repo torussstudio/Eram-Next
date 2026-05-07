@@ -340,284 +340,194 @@
 //   );
 // }
 
+
+
 import { useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   ANIMATION CONSTANTS — single source of truth
-───────────────────────────────────────────────────────────────────────────── */
+/* ─── Animation config ────────────────────────────────────────────────────── */
 const EASE = {
-  snappy : "power2.out",
-  smooth : "power3.out",
-  heavy  : "power4.out",
-  light  : "power1.out",
+  snappy: "power2.out",
+  smooth: "power3.out",
+  heavy:  "power4.out",
+  light:  "power1.out",
 };
 
-const DUR = {
-  // Mobile — compositor-only, never sluggish
-  mFade    : 0.35,
-  mHeading : 0.42,
-  mCard    : 0.40,
-  // Tablet — balanced middle
-  tBase    : 0.55,
-  tHeading : 0.62,
-  // Desktop — rich, cinematic
-  dLabel   : 0.60,
-  dText    : 0.85,
-  dQuote   : 1.00,
-  dCard    : 0.90,
-};
+/* ─── Shared image class ──────────────────────────────────────────────────── */
+const imgCls = "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105";
 
+/* ─── Component ───────────────────────────────────────────────────────────── */
 export default function AboutSection() {
-  /* ── Element refs — zero string-selector fragility ─────────────────────── */
-  const sectionRef   = useRef(null);
+  const sectionRef = useRef(null);
 
-  // Desktop
-  const dLabelRef    = useRef(null);
-  const dHeadingRef  = useRef(null);
-  const dParaRef     = useRef(null);
-  const dGridRef     = useRef(null);
-  const dQuoteRef    = useRef(null);
-  const dCardsRef    = useRef([]); // array ref for multiple elements
+  // Desktop refs
+  const dLabelRef   = useRef(null);
+  const dHeadingRef = useRef(null);
+  const dParaRef    = useRef(null);
+  const dGridRef    = useRef(null);
+  const dQuoteRef   = useRef(null);
+  const dCardsRef   = useRef([]);
 
-  // Mobile / Tablet (shared layout)
-  const mLabelRef    = useRef(null);
-  const mHeadingRef  = useRef(null);
-  const mParaRef     = useRef(null);
-  const mQuoteRef    = useRef(null);
-  const mCardsWrap   = useRef(null);
-  const mCardsRef    = useRef([]); // array ref for multiple elements
+  // Mobile / Tablet refs
+  const mLabelRef   = useRef(null);
+  const mHeadingRef = useRef(null);
+  const mParaRef    = useRef(null);
+  const mQuoteRef   = useRef(null);
+  const mCardsWrap  = useRef(null);
+  const mCardsRef   = useRef([]);
 
-  useGSAP(
-    () => {
-      const section = sectionRef.current;
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      /* ── prefers-reduced-motion — bail early, show everything ────────────── */
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const section = sectionRef.current;
+    const mm = gsap.matchMedia();
 
-      /* ── matchMedia context ──────────────────────────────────────────────── */
-      const mm = gsap.matchMedia();
+    /* ── Desktop ≥ 1100px — cinematic, layered ──────────────────────────── */
+    mm.add("(min-width: 1100px)", () => {
+      gsap.set(
+        [dLabelRef.current, dHeadingRef.current, dParaRef.current,
+         dQuoteRef.current, ...dCardsRef.current],
+        { opacity: 0 }
+      );
 
-      /* ═══════════════════════════════════════════════════════════════════════
-         DESKTOP ≥ 1100px
-         Philosophy: RICH · CINEMATIC · LAYERED
-         Pattern: 2 timelines → 2 ScrollTriggers (not 4 separate observers)
-           tl1: label + heading + para  →  trigger: section top
-           tl2: quote + cards           →  trigger: grid top
-      ═══════════════════════════════════════════════════════════════════════ */
-      mm.add("(min-width: 1100px)", () => {
-        // Set initial state inside mm context so revert() cleans it up
-        gsap.set(
-          [dLabelRef.current, dHeadingRef.current, dParaRef.current,
-           dQuoteRef.current, ...dCardsRef.current],
-          { opacity: 0 }
-        );
-
-        /* — Timeline 1: text block — 1 ScrollTrigger ─ */
-        const tl1 = gsap.timeline({
-          scrollTrigger: {
-            trigger        : section,
-            start          : "top 78%",
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl1
-          // Label slides in from left — directional leader
-          .fromTo(dLabelRef.current,
-            { opacity: 0, x: -20 },
-            { opacity: 1, x: 0, duration: DUR.dLabel, ease: EASE.snappy }
-          )
-          // Heading rises — weighted, power3
-          .fromTo(dHeadingRef.current,
-            { opacity: 0, y: 36 },
-            { opacity: 1, y: 0, duration: DUR.dText, ease: EASE.smooth },
-            "-=0.35"   // overlaps label by 350ms — layered feel
-          )
-          // Para follows heading — tight stagger
-          .fromTo(dParaRef.current,
-            { opacity: 0, y: 36 },
-            { opacity: 1, y: 0, duration: DUR.dText, ease: EASE.smooth },
-            "-=0.68"   // runs mostly in parallel with heading
-          );
-
-        /* — Timeline 2: grid — 1 ScrollTrigger ─ */
-        const tl2 = gsap.timeline({
-          scrollTrigger: {
-            trigger        : dGridRef.current,
-            start          : "top 82%",
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl2
-          // Quote: heaviest, slowest, anchors the grid
-          .fromTo(dQuoteRef.current,
-            { opacity: 0, y: 50 },
-            { opacity: 1, y: 0, duration: DUR.dQuote, ease: EASE.heavy }
-          )
-          // Cards: scale + y — cinematic depth pop, staggered
-          .fromTo(dCardsRef.current,
-            { opacity: 0, y: 44, scale: 0.97 },
-            {
-              opacity  : 1,
-              y        : 0,
-              scale    : 1,
-              duration : DUR.dCard,
-              stagger  : 0.10,
-              ease     : EASE.snappy,
-            },
-            "-=0.75"   // cards begin while quote is still rising
-          );
-
-        return () => { tl1.kill(); tl2.kill(); };
+      // Text block
+      const tl1 = gsap.timeline({
+        scrollTrigger: { trigger: section, start: "top 78%", invalidateOnRefresh: true },
       });
 
-      /* ═══════════════════════════════════════════════════════════════════════
-         TABLET  768px – 1099px
-         Pattern: 2 timelines → 2 ScrollTriggers (was 5 separate observers)
-           tl1: label + heading + para + quote  →  section trigger
-           tl2: cards                           →  cards-wrap trigger
-      ═══════════════════════════════════════════════════════════════════════ */
-      mm.add("(min-width: 768px) and (max-width: 1099px)", () => {
-        gsap.set(
-          [mLabelRef.current, mHeadingRef.current, mParaRef.current,
-           mQuoteRef.current, ...mCardsRef.current],
-          { opacity: 0 }
+      tl1
+        .fromTo(dLabelRef.current,
+          { opacity: 0, x: -20 },
+          { opacity: 1, x: 0, duration: 0.60, ease: EASE.snappy }
+        )
+        .fromTo(dHeadingRef.current,
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 0.85, ease: EASE.smooth },
+          "-=0.35"
+        )
+        .fromTo(dParaRef.current,
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 0.85, ease: EASE.smooth },
+          "-=0.68"
         );
 
-        /* — Timeline 1: text block — */
-        const tl1 = gsap.timeline({
-          scrollTrigger: {
-            trigger        : section,
-            start          : "top 82%",
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl1
-          .fromTo(mLabelRef.current,
-            { opacity: 0, y: 14 },
-            { opacity: 1, y: 0, duration: DUR.tBase, ease: EASE.snappy }
-          )
-          .fromTo(mHeadingRef.current,
-            { opacity: 0, y: 22 },
-            { opacity: 1, y: 0, duration: DUR.tHeading, ease: EASE.snappy },
-            "-=0.30"
-          )
-          .fromTo(mParaRef.current,
-            { opacity: 0, y: 18 },
-            { opacity: 1, y: 0, duration: DUR.tBase, ease: EASE.snappy },
-            "-=0.42"
-          )
-          .fromTo(mQuoteRef.current,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: DUR.tBase, ease: EASE.snappy },
-            "-=0.38"
-          );
-
-        /* — Timeline 2: cards — */
-        const tl2 = gsap.timeline({
-          scrollTrigger: {
-            trigger        : mCardsWrap.current,
-            start          : "top 86%",
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl2.fromTo(mCardsRef.current,
-          { opacity: 0, y: 28 },
-          { opacity: 1, y: 0, duration: DUR.tHeading, stagger: 0.08, ease: EASE.snappy }
-        );
-
-        return () => { tl1.kill(); tl2.kill(); };
+      // Grid (quote + cards)
+      const tl2 = gsap.timeline({
+        scrollTrigger: { trigger: dGridRef.current, start: "top 82%", invalidateOnRefresh: true },
       });
 
-      /* ═══════════════════════════════════════════════════════════════════════
-         MOBILE < 768px
-         Philosophy: SUBTLE · FAST · SMOOTH · LIGHTWEIGHT
-         Pattern: 2 timelines → 2 ScrollTriggers
-         Hard rules:
-           1. opacity-only by default   →  compositor thread, zero layout cost
-           2. y only on heading         →  12px max, earns its place
-           3. duration ≤ 0.45s          →  never sluggish
-           4. stagger 0.06s             →  snappy, not dragged out
-           5. timeline positions used   →  not `.delay()` on individual tweens
-      ═══════════════════════════════════════════════════════════════════════ */
-      mm.add("(max-width: 767px)", () => {
-        gsap.set(
-          [mLabelRef.current, mHeadingRef.current, mParaRef.current,
-           mQuoteRef.current, ...mCardsRef.current],
-          { opacity: 0 }
+      tl2
+        .fromTo(dQuoteRef.current,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 1.00, ease: EASE.heavy }
+        )
+        .fromTo(dCardsRef.current,
+          { opacity: 0, y: 44, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.90, stagger: 0.10, ease: EASE.snappy },
+          "-=0.75"
         );
 
-        /* — Timeline 1: text block — 1 ScrollTrigger — */
-        const tl1 = gsap.timeline({
-          scrollTrigger: {
-            trigger        : section,
-            start          : "top 88%",
-            invalidateOnRefresh: true,
-          },
-        });
+      return () => { tl1.kill(); tl2.kill(); };
+    });
 
-        tl1
-          // Pure fade — cheapest possible
-          .fromTo(mLabelRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: DUR.mFade, ease: EASE.light }
-          )
-          // Heading: only element that earns y on mobile (12px)
-          .fromTo(mHeadingRef.current,
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: DUR.mHeading, ease: EASE.snappy },
-            "-=0.18"
-          )
-          // Para: pure fade
-          .fromTo(mParaRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: DUR.mFade, ease: EASE.light },
-            "-=0.20"
-          )
-          // Quote: pure fade
-          .fromTo(mQuoteRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: DUR.mFade, ease: EASE.light },
-            "-=0.18"
-          );
+    /* ── Tablet 768–1099px — balanced ───────────────────────────────────── */
+    mm.add("(min-width: 768px) and (max-width: 1099px)", () => {
+      gsap.set(
+        [mLabelRef.current, mHeadingRef.current, mParaRef.current,
+         mQuoteRef.current, ...mCardsRef.current],
+        { opacity: 0 }
+      );
 
-        /* — Timeline 2: cards — 1 ScrollTrigger — */
-        const tl2 = gsap.timeline({
-          scrollTrigger: {
-            trigger        : mCardsWrap.current,
-            start          : "top 90%",
-            invalidateOnRefresh: true,
-          },
-        });
+      const tl1 = gsap.timeline({
+        scrollTrigger: { trigger: section, start: "top 82%", invalidateOnRefresh: true },
+      });
 
-        // Cards: pure opacity stagger — zero layout cost
-        tl2.fromTo(mCardsRef.current,
+      tl1
+        .fromTo(mLabelRef.current,
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.55, ease: EASE.snappy }
+        )
+        .fromTo(mHeadingRef.current,
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.62, ease: EASE.snappy },
+          "-=0.30"
+        )
+        .fromTo(mParaRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.55, ease: EASE.snappy },
+          "-=0.42"
+        )
+        .fromTo(mQuoteRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.55, ease: EASE.snappy },
+          "-=0.38"
+        );
+
+      const tl2 = gsap.timeline({
+        scrollTrigger: { trigger: mCardsWrap.current, start: "top 86%", invalidateOnRefresh: true },
+      });
+
+      tl2.fromTo(mCardsRef.current,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.62, stagger: 0.08, ease: EASE.snappy }
+      );
+
+      return () => { tl1.kill(); tl2.kill(); };
+    });
+
+    /* ── Mobile < 768px — fade-only, fast, zero layout cost ─────────────── */
+    mm.add("(max-width: 767px)", () => {
+      gsap.set(
+        [mLabelRef.current, mHeadingRef.current, mParaRef.current,
+         mQuoteRef.current, ...mCardsRef.current],
+        { opacity: 0 }
+      );
+
+      const tl1 = gsap.timeline({
+        scrollTrigger: { trigger: section, start: "top 88%", invalidateOnRefresh: true },
+      });
+
+      tl1
+        .fromTo(mLabelRef.current,
           { opacity: 0 },
-          { opacity: 1, duration: DUR.mCard, stagger: 0.06, ease: EASE.light }
+          { opacity: 1, duration: 0.35, ease: EASE.light }
+        )
+        .fromTo(mHeadingRef.current,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.42, ease: EASE.snappy },
+          "-=0.18"
+        )
+        .fromTo(mParaRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.35, ease: EASE.light },
+          "-=0.20"
+        )
+        .fromTo(mQuoteRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.35, ease: EASE.light },
+          "-=0.18"
         );
 
-        return () => { tl1.kill(); tl2.kill(); };
+      const tl2 = gsap.timeline({
+        scrollTrigger: { trigger: mCardsWrap.current, start: "top 90%", invalidateOnRefresh: true },
       });
 
-      return () => mm.revert();
-    },
-    { scope: sectionRef }
-  );
+      tl2.fromTo(mCardsRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.40, stagger: 0.06, ease: EASE.light }
+      );
+
+      return () => { tl1.kill(); tl2.kill(); };
+    });
+
+    return () => mm.revert();
+  }, { scope: sectionRef });
 
   return (
-    <section
-      ref={sectionRef}
-      id="about-us"
-      className="bg-[#ae1431] py-[100px]"
-    >
-      {/* ═══════════════════════════════════════════════════════════════════
-          DESKTOP ≥ 1100px
-      ═══════════════════════════════════════════════════════════════════ */}
+    <section ref={sectionRef} id="about-us" className="bg-[#ae1431] py-[100px]">
+
+      {/* ── Desktop ≥ 1100px ──────────────────────────────────────────────── */}
       <div className="hidden min-[1100px]:block mx-auto w-[min(1100px,calc(100vw-120px))]">
 
         <div className="grid grid-cols-[300px_1fr] gap-x-[100px]">
@@ -639,7 +549,7 @@ export default function AboutSection() {
 
             <p
               ref={dParaRef}
-              className="font-rethink mt-[24px] text-[14.5px] leading-[1.75] text-[#f5efe8] max-w-[520px]"
+              className="font-rethink mt-6 text-[14.5px] leading-[1.75] text-[#f5efe8] max-w-[520px]"
             >
               ERAM Education was established to build disciplined, value-based
               institutions that expand access to quality learning and reach
@@ -650,114 +560,44 @@ export default function AboutSection() {
           </div>
         </div>
 
-      <div ref={dGridRef} className="mt-[80px]">
+        {/* Grid */}
+        <div ref={dGridRef} className="mt-[80px]">
 
-  {/* ROW 1 */}
-  <div className="grid grid-cols-3 gap-[24px]">
+          {/* Row 1 */}
+          <div className="grid grid-cols-3 gap-[24px]">
+            <div
+              ref={dQuoteRef}
+              className="flex items-end h-[300px] pb-[115px] pl-[40px] max-[1280px]:pl-[60px]"
+            >
+              <p className="font-display text-[38px] leading-[1.25] text-[#f5efe8]">
+                Committed<br />to Access.<br />Dedicated to<br />Excellence
+              </p>
+            </div>
 
-    {/* TEXT BLOCK */}
-    <div
-      ref={dQuoteRef}
-      className="flex items-end h-[300px] pb-[115px] pl-[40px] max-[1280px]:pl-[60px]"
-    >
-      <p className="font-display text-[32px] leading-[1.25] text-[#f5efe8]">
-        Committed
-        <br />
-        to Access.
-        <br />
-        Dedicated to
-        <br />
-        Excellence
-      </p>
-    </div>
+            <div ref={(el) => { dCardsRef.current[0] = el; }} className="group rounded-[20px] h-[300px] overflow-hidden">
+              <img src="/images/about1.webp" alt="Campus" className={imgCls} />
+            </div>
 
-    {/* IMAGE 1 */}
-    <div
-      ref={(el) => { dCardsRef.current[0] = el; }}
-      className="group rounded-[20px] h-[300px] overflow-hidden"
-    >
-      <img
-        src="/images/about1.webp"
-        alt="Campus"
-        className="
-          w-full
-          h-full
-          object-cover
-           transition-transform
-          duration-700
-          group-hover:scale-105
-        "
-      />
-    </div>
+            <div ref={(el) => { dCardsRef.current[1] = el; }} className="group rounded-[20px] h-[300px] overflow-hidden">
+              <img src="/images/about2.webp" alt="Students" className={imgCls} />
+            </div>
+          </div>
 
-    {/* IMAGE 2 */}
-    <div
-      ref={(el) => { dCardsRef.current[1] = el; }}
-      className="group rounded-[20px] h-[300px] overflow-hidden"
-    >
-      <img
-        src="/images/about2.webp"
-        alt="Students"
-        className="
-          w-full
-          h-full
-          object-cover
-          transition-transform
-          duration-700
-          group-hover:scale-105
-        "
-      />
-    </div>
-  </div>
+          {/* Row 2 */}
+          <div className="grid grid-cols-3 gap-[24px] mt-[24px]">
+            <div ref={(el) => { dCardsRef.current[2] = el; }} className="group rounded-[24px] h-[320px] overflow-hidden">
+              <img src="/images/about3.webp" alt="Education" className={imgCls} />
+            </div>
 
-  {/* ROW 2 */}
-  <div className="grid grid-cols-3 gap-[24px] mt-[24px]">
+            <div ref={(el) => { dCardsRef.current[3] = el; }} className="group rounded-[24px] h-[320px] overflow-hidden">
+              <img src="/images/about4.webp" alt="Institution" className={imgCls} />
+            </div>
+          </div>
 
-    {/* IMAGE 3 */}
-    <div
-      ref={(el) => { dCardsRef.current[2] = el; }}
-      className="group rounded-[24px] h-[320px] overflow-hidden"
-    >
-      <img
-        src="/images/about3.webp"
-        alt="Education"
-        className="
-          w-full
-          h-full
-          object-cover
-           transition-transform
-          duration-700
-          group-hover:scale-105
-        "
-      />
-    </div>
-
-    {/* IMAGE 4 */}
-    <div
-      ref={(el) => { dCardsRef.current[3] = el; }}
-      className="group rounded-[24px] h-[320px] overflow-hidden"
-    >
-      <img
-        src="/images/about4.webp"
-        alt="Institution"
-        className="
-          w-full
-          h-full
-          object-cover
-          transition-transform
-          duration-700
-          group-hover:scale-105
-        "
-      />
-    </div>
-
-  </div>
-</div>
+        </div>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          MOBILE + TABLET  < 1100px
-      ═══════════════════════════════════════════════════════════════════ */}
+      {/* ── Mobile + Tablet < 1100px ──────────────────────────────────────── */}
       <div className="min-[1100px]:hidden">
         <div className="px-[28px] max-[480px]:px-[20px]">
 
@@ -770,19 +610,14 @@ export default function AboutSection() {
 
           <h2
             ref={mHeadingRef}
-            className="
-              font-display text-[42px] leading-[1.18] text-[#f5efe8] mb-[28px]
-              max-[480px]:text-[34px] max-[360px]:text-[28px]
-            "
+            className="font-display text-[42px] leading-[1.18] text-[#f5efe8] mb-[28px] max-[480px]:text-[34px] max-[360px]:text-[28px]"
           >
-            An Institutional
-            <br />
-            Movement of Purpose
+            An Institutional<br />Movement of Purpose
           </h2>
 
           <p
             ref={mParaRef}
-            className="text-[14px] leading-[1.85] text-[#f5efe8]/75 max-w-[500px] mb-[44px]"
+            className="font-rethink text-[14px] leading-[1.85] text-[#f5efe8]/75 max-w-[500px] mb-[44px]"
           >
             ERAM Education was established to build disciplined, value-based
             institutions that expand access to quality learning and reach
@@ -796,43 +631,71 @@ export default function AboutSection() {
             className="mb-[52px] border-l-[3px] border-[#f5efe8]/50 pl-[22px]"
           >
             <p className="font-display text-[26px] leading-[1.3] text-[#f5efe8] max-[480px]:text-[22px]">
-              Committed
-              <br />
-              to Access.
-              <br />
-              Dedicated to
-              <br />
-              Excellence
+              Committed<br />to Access.<br />Dedicated to<br />Excellence
             </p>
           </div>
+
         </div>
 
-        <div
-          ref={mCardsWrap}
-          className="
-            px-[28px] max-[480px]:px-[20px]
-            grid grid-cols-2 gap-[14px]
-            max-[560px]:grid-cols-1
-          "
-        >
-          <div
-            ref={(el) => { mCardsRef.current[0] = el; }}
-            className="rounded-[22px] bg-[#d8d8d8] min-h-[200px] max-[560px]:min-h-[180px]"
-          />
-          <div
-            ref={(el) => { mCardsRef.current[1] = el; }}
-            className="rounded-[22px] bg-[#d8d8d8] min-h-[240px] max-[560px]:min-h-[180px] mt-0 min-[561px]:mt-[-40px]"
-          />
-          <div
-            ref={(el) => { mCardsRef.current[2] = el; }}
-            className="rounded-[22px] bg-[#d8d8d8] min-h-[200px] max-[560px]:min-h-[180px] mt-0 min-[561px]:mt-[40px]"
-          />
-          <div
-            ref={(el) => { mCardsRef.current[3] = el; }}
-            className="rounded-[22px] bg-[#d8d8d8] min-h-[200px] max-[560px]:min-h-[180px]"
-          />
-        </div>
+       <div
+  ref={mCardsWrap}
+  className="px-[28px] max-[480px]:px-[20px] grid grid-cols-2 gap-[14px] max-[560px]:grid-cols-1"
+>
+  {[
+    {
+      src: "/images/about1.webp",
+      alt: "Campus",
+      h: "min-h-[200px] max-[560px]:min-h-[180px]",
+    },
+    {
+      src: "/images/about2.webp",
+      alt: "Students",
+      h: "min-h-[240px] max-[560px]:min-h-[180px] min-[561px]:mt-[-40px]",
+    },
+    {
+      src: "/images/about3.webp",
+      alt: "Education",
+      h: "min-h-[200px] max-[560px]:min-h-[180px] min-[561px]:mt-[40px]",
+    },
+    {
+      src: "/images/about4.webp",
+      alt: "Institution",
+      h: "min-h-[200px] max-[560px]:min-h-[180px]",
+    },
+  ].map((card, i) => (
+    <div
+      key={i}
+      ref={(el) => {
+        mCardsRef.current[i] = el;
+      }}
+      className={`
+        group
+        relative
+        overflow-hidden
+        rounded-[22px]
+        bg-[#d8d8d8]
+        ${card.h}
+      `}
+    >
+      <img
+        src={card.src}
+        alt={card.alt}
+        loading="lazy"
+        decoding="async"
+        className="
+          absolute inset-0
+          h-full w-full
+          object-cover
+          transition-transform
+          duration-700
+          group-hover:scale-105
+        "
+      />
+    </div>
+  ))}
+</div>
       </div>
+
     </section>
   );
 }

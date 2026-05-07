@@ -5,62 +5,135 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ─── Static data ─────────────────────────────────────────────────────────── */
+const TABS = [
+  "LEADERSHIP AND\nMANAGEMENT STRUCTURE",
+  "INFRASTRUCTURE AND\nOPERATIONAL EXCELLENCE",
+  "INSTITUTIONAL\nSYSTEMS & LEADERSHIP",
+];
+
+const TABS_SHORT = ["Leadership", "Infrastructure", "Institutional"];
+
+const CARDS_DATA = [
+  [
+    { n: "01", t: "Strategic Leadership",           img: "/images/card1.webp" },
+    { n: "02", t: "Structured Academics",            img: "/images/card2.webp" },
+    { n: "03", t: "Operational Discipline",          img: "/images/card3.webp" },
+    { n: "04", t: "Community-Rooted Vision",         img: "/images/card4.webp" },
+    { n: "05", t: "Faculty-Centric Approach",        img: "/images/card5.webp" },
+    { n: "06", t: "Infrastructure Excellence",       img: "/images/card6.webp" },
+    { n: "07", t: "Sports & Exposure Integration",   img: "/images/card7.webp" },
+    { n: "08", t: "Value-Anchored Education",        img: "/images/card8.webp" },
+  ],
+  [
+    { n: "01", t: "Academic Planning Support",                  img: "/images/cardinfra1.webp" },
+    { n: "02", t: "Active involvement of Trust leadership",     img: "/images/cardinfra2.webp" },
+    { n: "03", t: "Direct relationship with Principals & HODs", img: "/images/cardinfra3.webp" },
+    { n: "04", t: "Regular review meetings",                    img: "/images/cardinfra4.webp" },
+  ],
+  [
+    { n: "01", t: "Amphitheatre & cultural spaces",        img: "/images/cardinstit1.png" },
+    { n: "02", t: "Modern classrooms & labs",              img: "/images/institute.png"   },
+    { n: "03", t: "Sports grounds & athletics facilities", img: "/images/cardinstit3.png" },
+    { n: "04", t: "Community-Rooted Vision",               img: "/images/cardinstit4.png" },
+  ],
+];
+
+const CARD_WIDTH = 320;
+const CARD_GAP   = 18;
+const SCROLL_BY  = 2;
+
+/* ─── Arrow icon ──────────────────────────────────────────────────────────── */
+const ArrowIcon = ({ active }) => (
+  <svg
+    width="12" height="12" viewBox="0 0 12 12" fill="none"
+    style={{ transform: active ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}
+  >
+    <path
+      d="M2 6h8M6 2l4 4-4 4"
+      stroke={active ? "white" : "#888"}
+      strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+    />
+  </svg>
+);
+
+/* ─── Desktop carousel arrow button ──────────────────────────────────────── */
+function CarouselArrow({ direction, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
+      className="
+        group
+        flex-none
+        flex items-center justify-center
+
+        w-[42px] h-[42px]
+        rounded-full
+        border-[2px] border-[#cfcfcf]
+
+        bg-transparent
+        transition-all duration-300 ease-out
+
+        hover:bg-[#ae1431]
+        hover:border-[#ae1431]
+        hover:scale-110
+        hover:shadow-[0_0_18px_rgba(174,20,49,0.28)]
+
+        active:scale-95
+
+        cursor-pointer
+      "
+    >
+      <svg
+        width="16" height="16" viewBox="0 0 16 16" fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="transition-colors duration-300 stroke-[#555] group-hover:stroke-white"
+      >
+        {direction === "left" ? (
+          <path d="M10 13L5 8L10 3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        ) : (
+          <path d="M6 3L11 8L6 13" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        )}
+      </svg>
+    </button>
+  );
+}
+
+/* ─── Component ───────────────────────────────────────────────────────────── */
 export default function SystemsSection() {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab,  setActiveTab]  = useState(0);
   const [activeCard, setActiveCard] = useState(0);
-  const sectionRef = useRef(null);
-  const tabBarRef = useRef(null);
-  const indicatorRef = useRef(null);
-  const tabRefs = useRef([]);
-  const mobTabRefs = useRef([]);
-  const desktopCardRefs = useRef([]);
-  const mobCardRefs = useRef([]);
 
-  const tabs = [
-    "LEADERSHIP AND\nMANAGEMENT STRUCTURE",
-    "INFRASTRUCTURE AND\nOPERATIONAL EXCELLENCE",
-    "INSTITUTIONAL\nSYSTEMS & LEADERSHIP",
-  ];
+  const sectionRef       = useRef(null);
+  const tabBarRef        = useRef(null);
+  const indicatorRef     = useRef(null);
+  const tabRefs          = useRef([]);
+  const mobTabRefs       = useRef([]);
+  const desktopCardRefs  = useRef([]);
+  const mobCardRefs      = useRef([]);
+  const desktopScrollRef = useRef(null); // ← new: ref for desktop scroll container
 
-  const tabShort = ["Leadership", "Infrastructure", "Institutional"];
+  const cards = CARDS_DATA[activeTab];
 
-  const cardsData = [
-    [
-      { n: "01", t: "Strategic Leadership",img: "/images/card1.webp",},
-      { n: "02", t: "Structured Academics" ,img: "/images/card2.webp",},
-      { n: "03", t: "Operational Discipline",img: "/images/card3.webp", },
-      { n: "04", t: "Community-Rooted Vision" ,img: "/images/card4.webp",},
-      { n: "05", t: "Faculty-Centric Approach",img: "/images/card5.webp", },
-      { n: "06", t: "Infrastructure Excellence",img: "/images/card6.webp", },
-      { n: "07", t: "Sports & Exposure Integration" ,img: "/images/card7.webp",},
-      { n: "08", t: "Value-Anchored Education",img: "/images/card8.webp", },
-    ],
-    [
-      { n: "01", t: "Academic Planning Support",img: "/images/cardinfra1.webp", },
-      { n: "02", t: "Active involvement of Trust leadership",img: "/images/cardinfra2.webp", },
-      { n: "03", t: "Direct relationship with Principals & HODs",img: "/images/cardinfra3.webp", },
-      { n: "04", t: "Regular review meetings",img: "/images/cardinfra4.webp", },
-    ],
-    [
-      { n: "01", t: "Amphitheatre & cultural spaces",img: "/images/cardinstit1.png",},
-      { n: "02", t: "Modern classrooms & labs" ,img: "/images/institute.png",},
-      { n: "03", t: "Sports grounds & athletics facilities",img: "/images/cardinstit3.png", },
-      { n: "04", t: "Community-Rooted Vision" ,img: "/images/cardinstit4.png",},
-    ],
-  ];
+  /* ── Desktop carousel scroll ──────────────────────────────────────────── */
+  const scrollCarousel = (direction) => {
+    const el = desktopScrollRef.current;
+    if (!el) return;
+    const step = (CARD_WIDTH + CARD_GAP) * SCROLL_BY;
+    el.scrollBy({ left: direction === "right" ? step : -step, behavior: "smooth" });
+  };
 
-  const cards = cardsData[activeTab];
-
-  /* ── Desktop: slide indicator ─────────────────────────────────── */
+  /* ── Slide indicator ──────────────────────────────────────────────────── */
   const slideIndicator = (index) => {
     const btn = tabRefs.current[index];
     const bar = tabBarRef.current;
     if (!btn || !bar || !indicatorRef.current) return;
     const barLeft = bar.getBoundingClientRect().left;
-    const btnRect = btn.getBoundingClientRect();
+    const { left, width } = btn.getBoundingClientRect();
     gsap.to(indicatorRef.current, {
-      left: btnRect.left - barLeft,
-      width: btnRect.width,
+      left: left - barLeft,
+      width,
       duration: 0.4,
       ease: "power3.inOut",
     });
@@ -71,21 +144,15 @@ export default function SystemsSection() {
     return () => cancelAnimationFrame(id);
   }, []);
 
-  useEffect(() => {
-    slideIndicator(activeTab);
-  }, [activeTab]);
+  useEffect(() => { slideIndicator(activeTab); }, [activeTab]);
 
-  /* ── Tab switch: cards animate in ────────────────────────────── */
+  /* ── Tab switch — animate cards in ───────────────────────────────────── */
   useEffect(() => {
-    // Desktop
     const dCards = desktopCardRefs.current.filter(Boolean);
     if (dCards.length) {
       gsap.set(dCards, { y: 40, opacity: 0, scale: 0.93, rotateX: 6 });
       gsap.to(dCards, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        rotateX: 0,
+        y: 0, opacity: 1, scale: 1, rotateX: 0,
         duration: 0.55,
         stagger: { each: 0.1, ease: "power2.in" },
         ease: "expo.out",
@@ -93,47 +160,33 @@ export default function SystemsSection() {
       });
     }
 
-    // Mobile
     if (window.innerWidth >= 900) return;
     const mCards = mobCardRefs.current.filter(Boolean);
     if (mCards.length) {
       gsap.set(mCards, { x: 50, opacity: 0, scale: 0.95 });
       gsap.to(mCards, {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.5,
-        stagger: 0.09,
+        x: 0, opacity: 1, scale: 1,
+        duration: 0.5, stagger: 0.09,
         ease: "expo.out",
         clearProps: "transform",
       });
     }
   }, [activeTab]);
 
-  /* ── Desktop card click pulse ─────────────────────────────────── */
-  const pulseCard = (index) => {
-    const el = desktopCardRefs.current[index];
+  /* ── Card pulse helpers ───────────────────────────────────────────────── */
+  const pulseEl = (refs, index, scaleDown, dur) => {
+    const el = refs.current[index];
     if (!el) return;
     gsap.timeline()
-      .to(el, { scale: 0.92, duration: 0.12, ease: "power2.in" })
-      .to(el, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)" });
+      .to(el, { scale: scaleDown, duration: dur,       ease: "power2.in" })
+      .to(el, { scale: 1,         duration: dur * 4.2, ease: "elastic.out(1, 0.42)" });
   };
 
-  /* ── Mobile card click pulse ──────────────────────────────────── */
-  const pulseMobCard = (index) => {
-    const el = mobCardRefs.current[index];
-    if (!el) return;
-    gsap.timeline()
-      .to(el, { scale: 0.94, duration: 0.1, ease: "power2.in" })
-      .to(el, { scale: 1, duration: 0.45, ease: "elastic.out(1, 0.45)" });
-  };
-
-  /* ── Mobile tab pill spring ───────────────────────────────────── */
+  /* ── Mobile tab spring ────────────────────────────────────────────────── */
   const animateMobTab = (index) => {
     const el = mobTabRefs.current[index];
     if (!el) return;
-    gsap.fromTo(
-      el,
+    gsap.fromTo(el,
       { scale: 0.88, opacity: 0.6 },
       { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.8)" }
     );
@@ -144,50 +197,35 @@ export default function SystemsSection() {
     setActiveCard(0);
   };
 
-  /* ── Scroll entrance animations ───────────────────────────────── */
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+  /* ── Scroll entrance (mobile only) ───────────────────────────────────── */
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
 
-      mm.add("(max-width: 899px)", () => {
-        gsap.fromTo(
-          ".mob-sys-heading",
-          { y: 36, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 0.85, ease: "power3.out",
-            scrollTrigger: { trigger: sectionRef.current, start: "top 82%" },
-          }
-        );
-        gsap.fromTo(
-          ".mob-sys-para",
-          { y: 24, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 0.8, delay: 0.18, ease: "power2.out",
-            scrollTrigger: { trigger: sectionRef.current, start: "top 82%" },
-          }
-        );
-        gsap.fromTo(
-          ".mob-tab-bar",
-          { y: -20, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 0.7, ease: "expo.out",
-            scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
-          }
-        );
-        gsap.fromTo(
-          ".mob-sys-card",
-          { x: 60, opacity: 0 },
-          {
-            x: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: "power3.out",
-            scrollTrigger: { trigger: ".mob-sys-cards", start: "top 88%" },
-          }
-        );
+    mm.add("(max-width: 899px)", () => {
+      const st = (trigger, start = "top 82%") => ({
+        scrollTrigger: { trigger, start },
       });
 
-      return () => mm.revert();
-    },
-    { scope: sectionRef }
-  );
+      gsap.fromTo(".mob-sys-heading",
+        { y: 36, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.85, ease: "power3.out", ...st(sectionRef.current) }
+      );
+      gsap.fromTo(".mob-sys-para",
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.80, delay: 0.18, ease: "power2.out", ...st(sectionRef.current) }
+      );
+      gsap.fromTo(".mob-tab-bar",
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.70, ease: "expo.out", ...st(sectionRef.current, "top 78%") }
+      );
+      gsap.fromTo(".mob-sys-card",
+        { x: 60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.70, stagger: 0.1, ease: "power3.out", ...st(".mob-sys-cards", "top 88%") }
+      );
+    });
+
+    return () => mm.revert();
+  }, { scope: sectionRef });
 
   return (
     <section
@@ -195,17 +233,14 @@ export default function SystemsSection() {
       id="facilities"
       className="bg-[#f5efe8] py-[90px] max-[899px]:pt-[24px] max-[899px]:pb-[48px] overflow-hidden"
     >
-      {/* ════════════════════════════════════════════════════════════
-          DESKTOP ≥ 900px
-      ════════════════════════════════════════════════════════════ */}
+
+      {/* ── Desktop ≥ 900px ──────────────────────────────────────────────── */}
       <div className="hidden min-[900px]:block">
-        {/* tabs */}
+
+        {/* Tab bar */}
         <div className="flex justify-center mb-[70px] px-[20px]">
-          <div
-            ref={tabBarRef}
-            className="relative flex gap-[160px] border-b-[4px] border-[#e5e5e5]"
-          >
-            {tabs.map((item, i) => (
+          <div ref={tabBarRef} className="relative flex gap-[160px] border-b-[4px] border-[#e5e5e5]">
+            {TABS.map((item, i) => (
               <button
                 key={i}
                 ref={(el) => (tabRefs.current[i] = el)}
@@ -218,8 +253,6 @@ export default function SystemsSection() {
                 ))}
               </button>
             ))}
-
-            {/* Single animated underline indicator */}
             <span
               ref={indicatorRef}
               className="absolute -bottom-[4px] h-[6px] rounded-t-full bg-[#ae1431] pointer-events-none"
@@ -228,14 +261,13 @@ export default function SystemsSection() {
           </div>
         </div>
 
-        {/* content */}
+        {/* Content */}
         <div className="mx-auto w-[min(1200px,calc(100vw-120px))] flex items-start gap-[80px]">
-          {/* text */}
+
+          {/* Text */}
           <div className="max-w-[420px] ml-[40px]">
-            <h2 className="font-display mb-[24px] text-[42px] font-black leading-[1.1] text-[#111]">
-              Systems That
-              <br />
-              Sustain Excellence
+            <h2 className="font-display mb-[32px] text-[42px] leading-[1.1] text-[#111]">
+              Systems That<br />Sustain Excellence
             </h2>
             <p className="font-rethink text-[14.5px] leading-[1.8] text-black">
               An integrated framework of management oversight, faculty
@@ -245,95 +277,47 @@ export default function SystemsSection() {
             </p>
           </div>
 
-          {/* desktop cards */}
-         <div className="w-[620px] overflow-hidden">
-  <div className="flex snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-smooth pb-[20px] scrollbar-hide">
-    {cards.map((card, i) => {
-      const isActive = activeCard === i;
+          {/* Cards + Arrows */}
+          <div className="flex items-center gap-[14px] flex-1 min-w-0">
 
-      return (
-        <div
-          key={`${activeTab}-${i}`}
-          ref={(el) => (desktopCardRefs.current[i] = el)}
-          onClick={() => {
-            setActiveCard(i);
-            pulseCard(i);
-          }}
-          className="
-            group
-            relative
-            cursor-pointer
-            flex
-            h-[220px]
-            w-[320px]
-            flex-shrink-0
-            snap-start
-            overflow-hidden
-            rounded-[22px]
-            p-[34px]
-          "
-        >
+            {/* ← Left */}
+            <CarouselArrow direction="left" onClick={() => scrollCarousel("left")} />
 
-          {/* BACKGROUND IMAGE */}
-          <img
-            src={card.img}
-            alt={card.t}
-            className="
-              absolute
-              inset-0
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-105
-            "
-          />
-
-          {/* DARK OVERLAY */}
-          {/* <div
-            className="absolute inset-0 transition-all duration-300"
-            style={{
-              background: isActive
-                ? "rgba(174,20,49,0.72)"
-                : "rgba(0,0,0,0.38)",
-            }}
-          /> */}
-
-          {/* CONTENT */}
-          <div className="relative z-10 flex h-full w-full flex-col justify-between">
-            <span
-              style={{
-                color: isActive ? "#f1d7dd" : "rgba(255,255,255,0.7)",
-              }}
+            {/* Scrollable strip */}
+            <div
+              ref={desktopScrollRef}
+              className="flex snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-smooth pb-[20px] scrollbar-hide flex-1 min-w-0"
             >
-              /{card.n}
-            </span>
+              {cards.map((card, i) => (
+                <div
+                  key={`${activeTab}-${i}`}
+                  ref={(el) => (desktopCardRefs.current[i] = el)}
+                  onClick={() => { setActiveCard(i); pulseEl(desktopCardRefs, i, 0.92, 0.12); }}
+                  className="group relative cursor-pointer flex h-[220px] w-[320px] flex-shrink-0 snap-start overflow-hidden rounded-[22px] p-[34px]"
+                >
+                  <img
+                    src={card.img} alt={card.t}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="relative z-10 flex h-full w-full flex-col justify-between">
+                    <span style={{ color: activeCard === i ? "#f1d7dd" : "rgba(255,255,255,0.7)" }}>
+                      /{card.n}
+                    </span>
+                    <span className="font-rethink flex justify-end text-[26px] font-medium leading-[1.2] text-white">
+                      {card.t}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-            <span
-              className="
-                font-rethink
-                flex
-                justify-end
-                text-[26px]
-                font-medium
-                leading-[1.2]
-              "
-              style={{
-                color: "white",
-              }}
-            >
-              {card.t}
-            </span>
+            {/* → Right */}
+            <CarouselArrow direction="right" onClick={() => scrollCarousel("right")} />
           </div>
-        </div>
-      );
-    })}
-  </div>
-</div>
+
         </div>
 
-        {/* button */}
+        {/* CTA */}
         <div className="mt-[70px] flex justify-center px-[20px]">
           <button className="font-rethink rounded-[8px] border border-[#cfcfcf] px-[36px] py-[14px] text-[12px] font-[500] uppercase tracking-[0.16em] text-[#111] transition-all duration-300 hover:border-black hover:bg-black hover:text-white cursor-pointer">
             EXPLORE OUR SYSTEMS & STANDARDS
@@ -341,16 +325,13 @@ export default function SystemsSection() {
         </div>
       </div>
 
-      {/* ════════════════════════════════════════════════════════════
-          MOBILE < 900px
-      ════════════════════════════════════════════════════════════ */}
+      {/* ── Mobile < 900px ───────────────────────────────────────────────── */}
       <div className="min-[900px]:hidden px-[22px]">
-        {/* header */}
+
+        {/* Header */}
         <div className="mb-[20px]">
           <h2 className="mob-sys-heading font-display text-[32px] font-black leading-[1.12] text-[#111] mb-[10px]">
-            Systems That
-            <br />
-            Sustain Excellence
+            Systems That<br />Sustain Excellence
           </h2>
           <p className="mob-sys-para text-[13.5px] leading-[1.8] text-[#444] max-w-[420px]">
             An integrated framework of management oversight, faculty excellence,
@@ -360,27 +341,22 @@ export default function SystemsSection() {
           </p>
         </div>
 
-        {/* mobile tab bar */}
+        {/* Mobile tab bar */}
         <div className="mob-tab-bar flex gap-[8px] mb-[20px]">
-          {tabShort.map((label, i) => (
+          {TABS_SHORT.map((label, i) => (
             <button
               key={i}
               ref={(el) => (mobTabRefs.current[i] = el)}
-              onClick={() => {
-                handleTabClick(i);
-                animateMobTab(i);
-              }}
+              onClick={() => { handleTabClick(i); animateMobTab(i); }}
               className="flex-1 flex flex-col items-start gap-[6px] rounded-[14px] px-[14px] py-[12px] transition-colors duration-300 border"
               style={{
-                background: activeTab === i ? "#ae1431" : "transparent",
-                borderColor: activeTab === i ? "#ae1431" : "#ddd",
+                background:   activeTab === i ? "#ae1431" : "transparent",
+                borderColor:  activeTab === i ? "#ae1431" : "#ddd",
               }}
             >
               <span
                 className="text-[10px] font-semibold tracking-[0.18em]"
-                style={{
-                  color: activeTab === i ? "rgba(255,255,255,0.55)" : "#aaa",
-                }}
+                style={{ color: activeTab === i ? "rgba(255,255,255,0.55)" : "#aaa" }}
               >
                 0{i + 1}
               </span>
@@ -394,7 +370,7 @@ export default function SystemsSection() {
           ))}
         </div>
 
-        {/* mobile cards */}
+        {/* Mobile cards */}
         <div className="mob-sys-cards flex flex-col gap-[10px] mb-[24px]">
           {cards.map((card, i) => {
             const isActive = activeCard === i;
@@ -402,26 +378,19 @@ export default function SystemsSection() {
               <div
                 key={`${activeTab}-${i}`}
                 ref={(el) => (mobCardRefs.current[i] = el)}
-                onClick={() => {
-                  setActiveCard(i);
-                  pulseMobCard(i);
-                }}
+                onClick={() => { setActiveCard(i); pulseEl(mobCardRefs, i, 0.94, 0.10); }}
                 className="mob-sys-card flex items-center justify-between rounded-[18px] px-[22px] py-[20px] cursor-pointer border"
                 style={{
-                  background: isActive ? "#ae1431" : "white",
+                  background:  isActive ? "#ae1431" : "white",
                   borderColor: isActive ? "#ae1431" : "#e8e8e8",
-                  boxShadow: isActive
-                    ? "0 8px 32px rgba(174,20,49,0.22)"
-                    : "0 2px 8px rgba(0,0,0,0.04)",
-                  transition: "background 0.3s, border-color 0.3s, box-shadow 0.3s",
+                  boxShadow:   isActive ? "0 8px 32px rgba(174,20,49,0.22)" : "0 2px 8px rgba(0,0,0,0.04)",
+                  transition:  "background 0.3s, border-color 0.3s, box-shadow 0.3s",
                 }}
               >
                 <div className="flex items-center gap-[18px]">
                   <span
                     className="text-[11px] font-semibold tracking-[0.16em] tabular-nums w-[26px]"
-                    style={{
-                      color: isActive ? "rgba(255,255,255,0.45)" : "#bbb",
-                    }}
+                    style={{ color: isActive ? "rgba(255,255,255,0.45)" : "#bbb" }}
                   >
                     /{card.n}
                   </span>
@@ -440,34 +409,18 @@ export default function SystemsSection() {
                     transition: "background 0.3s",
                   }}
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    style={{
-                      transform: isActive ? "rotate(90deg)" : "rotate(0deg)",
-                      transition: "transform 0.3s ease",
-                    }}
-                  >
-                    <path
-                      d="M2 6h8M6 2l4 4-4 4"
-                      stroke={isActive ? "white" : "#888"}
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <ArrowIcon active={isActive} />
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* mobile button */}
+        {/* Mobile CTA */}
         <button className="w-full rounded-[14px] border border-[#cfcfcf] py-[16px] text-[11px] font-[600] uppercase tracking-[0.18em] text-[#111] transition-all duration-300 active:bg-black active:text-white active:border-black">
           EXPLORE OUR SYSTEMS & STANDARDS
         </button>
+
       </div>
     </section>
   );
