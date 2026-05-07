@@ -2,11 +2,88 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { excellenceDomains } from "../../../constants/homeData";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 const CATEGORIES = ["ACADEMIC", "SPORTS", "CULTURAL", "PROFESSIONAL"];
+export const excellenceDomains = {
+  ACADEMIC: [
+    {
+      title: "Academic Excellence",
+      image: "/images/academic1.jpeg",
+    },
+    {
+      title: "Smart Classrooms",
+      image: "/images/academic2.jpeg",
+    },
+    {
+      title: "Research Spaces",
+      image: "/images/academic3.jpeg",
+    },
+    {
+      title: "Faculty Development",
+      image: "/images/academic4.jpeg",
+    },
+  ],
+
+  SPORTS: [
+    {
+      title: "Football Ground",
+      image: "/images/sports1.png",
+    },
+    {
+      title: "Athletics",
+      image: "/images/sports2.png",
+    },
+    {
+      title: "Indoor Facilities",
+      image: "/images/sports3.png",
+    },
+    {
+      title: "Training Programs",
+      image: "/images/sports4.jpeg",
+    },
+  ],
+
+  CULTURAL: [
+    {
+      title: "Auditorium",
+      image: "/images/cultural1.webp",
+    },
+    {
+      title: "Art Programs",
+      image: "/images/cultural2.webp",
+    },
+    {
+      title: "Events",
+      image: "/images/cultural3.webp",
+    },
+    {
+      title: "Student Activities",
+      image: "/images/cultural4.webp",
+    },
+  ],
+
+  PROFESSIONAL: [
+    {
+      title: "Industry Exposure",
+      image: "/images/pro1.webp",
+    },
+    {
+      title: "Internships",
+      image: "/images/pro2.webp",
+    },
+    {
+      title: "Leadership Training",
+      image: "/images/pro3.webp",
+    },
+    {
+      title: "Career Guidance",
+      image: "/images/pro4.webp",
+    },
+  ],
+};
 
 const isDesktop = () => window.innerWidth >= 900;
 
@@ -15,6 +92,8 @@ export default function ExcellenceSection() {
   const sectionRef = useRef(null);
   const isAnimating = useRef(false);
   const isMounted = useRef(false);
+  const currentCategory = CATEGORIES[active];
+const currentCards = excellenceDomains[currentCategory];
 
   /* ── mobile card transition ───────────────────────────────────── */
   const goTo = useCallback(
@@ -146,11 +225,51 @@ export default function ExcellenceSection() {
             Excellence Across Every Domain
           </h2>
           <div className="exc-grid grid grid-cols-2 gap-[32px]">
-            {excellenceDomains.map((_, i) => (
+            {currentCards.map((item, i) => (
               <div
-                key={i}
-                className="exc-card h-[320px] rounded-[28px] border border-[#cfcfcf] bg-[#f5efe8] flex items-center justify-center"
-              />
+  key={i}
+  className="
+    exc-card
+    group
+    relative
+    h-[320px]
+    overflow-hidden
+    rounded-[28px]
+  "
+>
+  {/* IMAGE */}
+  <img
+    src={item.image}
+    alt={item.title}
+    className="
+      absolute
+      inset-0
+      h-full
+      w-full
+      object-cover
+      transition-transform
+      duration-700
+      group-hover:scale-105
+    "
+  />
+
+  {/* OVERLAY */}
+  <div className="absolute inset-0 bg-black/25" />
+
+  {/* CONTENT */}
+  <div className="relative z-10 flex h-full items-end p-[24px]">
+    <h3
+      className="
+        font-display
+        text-[28px]
+        leading-[1.1]
+        text-white
+      "
+    >
+      {item.title}
+    </h3>
+  </div>
+</div>
             ))}
           </div>
           <div className="mt-[56px] flex justify-center">
@@ -208,15 +327,44 @@ export default function ExcellenceSection() {
 
         {/* Cards */}
         <div className="mob-exc-grid grid grid-cols-2 gap-[10px] mb-[24px]">
-          {excellenceDomains.map((_, i) => (
-            <div
-              key={i}
-              className="mob-exc-card aspect-square rounded-[20px] border border-[#ebebeb] bg-[#f5efe8] flex items-center justify-center"
-            >
-              <svg width="34" height="34" opacity="0.35">
-                <rect width="34" height="34" fill="#9a9a9a" />
-              </svg>
-            </div>
+         {currentCards.map((item, i) => (
+          <div
+  key={i}
+  className="
+    mob-exc-card
+    group
+    relative
+    aspect-square
+    overflow-hidden
+    rounded-[20px]
+  "
+>
+  {/* IMAGE */}
+  <img
+    src={item.image}
+    alt={item.title}
+    className="
+      absolute
+      inset-0
+      h-full
+      w-full
+      object-cover
+      transition-transform
+      duration-700
+      group-active:scale-105
+    "
+  />
+
+  {/* OVERLAY */}
+  <div className="absolute inset-0 bg-black/25" />
+
+  {/* TEXT */}
+  <div className="relative z-10 flex h-full items-end p-[14px]">
+    <h3 className="text-[14px] font-semibold leading-[1.2] text-white">
+      {item.title}
+    </h3>
+  </div>
+</div>
           ))}
         </div>
 

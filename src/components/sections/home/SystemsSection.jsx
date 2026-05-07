@@ -26,19 +26,26 @@ export default function SystemsSection() {
 
   const cardsData = [
     [
-      { n: "01", t: "Strategic Leadership" },
-      { n: "02", t: "Governance Model" },
-      { n: "03", t: "Organizational Clarity" },
+      { n: "01", t: "Strategic Leadership",img: "/images/card1.webp",},
+      { n: "02", t: "Structured Academics" ,img: "/images/card2.webp",},
+      { n: "03", t: "Operational Discipline",img: "/images/card3.webp", },
+      { n: "04", t: "Community-Rooted Vision" ,img: "/images/card4.webp",},
+      { n: "05", t: "Faculty-Centric Approach",img: "/images/card5.webp", },
+      { n: "06", t: "Infrastructure Excellence",img: "/images/card6.webp", },
+      { n: "07", t: "Sports & Exposure Integration" ,img: "/images/card7.webp",},
+      { n: "08", t: "Value-Anchored Education",img: "/images/card8.webp", },
     ],
     [
-      { n: "01", t: "Campus Facilities" },
-      { n: "02", t: "Digital Systems" },
-      { n: "03", t: "Operational Flow" },
+      { n: "01", t: "Academic Planning Support",img: "/images/cardinfra1.webp", },
+      { n: "02", t: "Active involvement of Trust leadership",img: "/images/cardinfra2.webp", },
+      { n: "03", t: "Direct relationship with Principals & HODs",img: "/images/cardinfra3.webp", },
+      { n: "04", t: "Regular review meetings",img: "/images/cardinfra4.webp", },
     ],
     [
-      { n: "01", t: "Strategic Leadership" },
-      { n: "02", t: "Structured Academics" },
-      { n: "03", t: "Operational Excellence" },
+      { n: "01", t: "Amphitheatre & cultural spaces",img: "/images/cardinstit1.png",},
+      { n: "02", t: "Modern classrooms & labs" ,img: "/images/institute.png",},
+      { n: "03", t: "Sports grounds & athletics facilities",img: "/images/cardinstit3.png", },
+      { n: "04", t: "Community-Rooted Vision" ,img: "/images/cardinstit4.png",},
     ],
   ];
 
@@ -239,39 +246,91 @@ export default function SystemsSection() {
           </div>
 
           {/* desktop cards */}
-          <div className="w-[620px] overflow-hidden">
-            <div className="flex snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-smooth pb-[20px] scrollbar-hide">
-              {cards.map((card, i) => {
-                const isActive = activeCard === i;
-                return (
-                  <div
-                    key={`${activeTab}-${i}`}
-                    ref={(el) => (desktopCardRefs.current[i] = el)}
-                    onClick={() => {
-                      setActiveCard(i);
-                      pulseCard(i);
-                    }}
-                    className="cursor-pointer flex h-[220px] w-[320px] flex-shrink-0 snap-start flex-col justify-between rounded-[22px] p-[34px]"
-                    style={{
-                      background: isActive ? "#ae1431" : "white",
-                      border: isActive ? "none" : "1px solid #e2e2e2",
-                      transition: "background 0.3s, border 0.3s",
-                    }}
-                  >
-                    <span style={{ color: isActive ? "#bfbfbf" : "#999" }}>
-                      /{card.n}
-                    </span>
-                    <span
-                      className="font-rethink flex justify-end text-[26px] font-medium leading-[1.2]"
-                      style={{ color: isActive ? "white" : "#111" }}
-                    >
-                      {card.t}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+         <div className="w-[620px] overflow-hidden">
+  <div className="flex snap-x snap-mandatory gap-[18px] overflow-x-auto scroll-smooth pb-[20px] scrollbar-hide">
+    {cards.map((card, i) => {
+      const isActive = activeCard === i;
+
+      return (
+        <div
+          key={`${activeTab}-${i}`}
+          ref={(el) => (desktopCardRefs.current[i] = el)}
+          onClick={() => {
+            setActiveCard(i);
+            pulseCard(i);
+          }}
+          className="
+            group
+            relative
+            cursor-pointer
+            flex
+            h-[220px]
+            w-[320px]
+            flex-shrink-0
+            snap-start
+            overflow-hidden
+            rounded-[22px]
+            p-[34px]
+          "
+        >
+
+          {/* BACKGROUND IMAGE */}
+          <img
+            src={card.img}
+            alt={card.t}
+            className="
+              absolute
+              inset-0
+              h-full
+              w-full
+              object-cover
+              transition-transform
+              duration-700
+              group-hover:scale-105
+            "
+          />
+
+          {/* DARK OVERLAY */}
+          {/* <div
+            className="absolute inset-0 transition-all duration-300"
+            style={{
+              background: isActive
+                ? "rgba(174,20,49,0.72)"
+                : "rgba(0,0,0,0.38)",
+            }}
+          /> */}
+
+          {/* CONTENT */}
+          <div className="relative z-10 flex h-full w-full flex-col justify-between">
+            <span
+              style={{
+                color: isActive ? "#f1d7dd" : "rgba(255,255,255,0.7)",
+              }}
+            >
+              /{card.n}
+            </span>
+
+            <span
+              className="
+                font-rethink
+                flex
+                justify-end
+                text-[26px]
+                font-medium
+                leading-[1.2]
+              "
+              style={{
+                color: "white",
+              }}
+            >
+              {card.t}
+            </span>
           </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
         </div>
 
         {/* button */}

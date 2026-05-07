@@ -650,44 +650,109 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div ref={dGridRef} className="mt-[80px]">
-          <div className="grid grid-cols-3 gap-[24px]">
-            <div
-              ref={dQuoteRef}
-              className="flex items-end min-h-[260px] pb-[115px] pl-[40px] max-[1280px]:pl-[60px]"
-            >
-              <p className="font-display text-[32px] leading-[1.25] text-[#f5efe8]">
-                Committed
-                <br />
-                to Access.
-                <br />
-                Dedicated to
-                <br />
-                Excellence
-              </p>
-            </div>
+      <div ref={dGridRef} className="mt-[80px]">
 
-            <div
-              ref={(el) => { dCardsRef.current[0] = el; }}
-              className="rounded-[20px] bg-[#d8d8d8] min-h-[300px]"
-            />
-            <div
-              ref={(el) => { dCardsRef.current[1] = el; }}
-              className="rounded-[20px] bg-[#d8d8d8] min-h-[300px]"
-            />
-          </div>
+  {/* ROW 1 */}
+  <div className="grid grid-cols-3 gap-[24px]">
 
-          <div className="grid grid-cols-3 gap-[24px] mt-[24px]">
-            <div
-              ref={(el) => { dCardsRef.current[2] = el; }}
-              className="rounded-[24px] bg-[#d8d8d8] min-h-[320px]"
-            />
-            <div
-              ref={(el) => { dCardsRef.current[3] = el; }}
-              className="rounded-[24px] bg-[#d8d8d8] min-h-[320px]"
-            />
-          </div>
-        </div>
+    {/* TEXT BLOCK */}
+    <div
+      ref={dQuoteRef}
+      className="flex items-end h-[300px] pb-[115px] pl-[40px] max-[1280px]:pl-[60px]"
+    >
+      <p className="font-display text-[32px] leading-[1.25] text-[#f5efe8]">
+        Committed
+        <br />
+        to Access.
+        <br />
+        Dedicated to
+        <br />
+        Excellence
+      </p>
+    </div>
+
+    {/* IMAGE 1 */}
+    <div
+      ref={(el) => { dCardsRef.current[0] = el; }}
+      className="group rounded-[20px] h-[300px] overflow-hidden"
+    >
+      <img
+        src="/images/about1.webp"
+        alt="Campus"
+        className="
+          w-full
+          h-full
+          object-cover
+           transition-transform
+          duration-700
+          group-hover:scale-105
+        "
+      />
+    </div>
+
+    {/* IMAGE 2 */}
+    <div
+      ref={(el) => { dCardsRef.current[1] = el; }}
+      className="group rounded-[20px] h-[300px] overflow-hidden"
+    >
+      <img
+        src="/images/about2.webp"
+        alt="Students"
+        className="
+          w-full
+          h-full
+          object-cover
+          transition-transform
+          duration-700
+          group-hover:scale-105
+        "
+      />
+    </div>
+  </div>
+
+  {/* ROW 2 */}
+  <div className="grid grid-cols-3 gap-[24px] mt-[24px]">
+
+    {/* IMAGE 3 */}
+    <div
+      ref={(el) => { dCardsRef.current[2] = el; }}
+      className="group rounded-[24px] h-[320px] overflow-hidden"
+    >
+      <img
+        src="/images/about3.webp"
+        alt="Education"
+        className="
+          w-full
+          h-full
+          object-cover
+           transition-transform
+          duration-700
+          group-hover:scale-105
+        "
+      />
+    </div>
+
+    {/* IMAGE 4 */}
+    <div
+      ref={(el) => { dCardsRef.current[3] = el; }}
+      className="group rounded-[24px] h-[320px] overflow-hidden"
+    >
+      <img
+        src="/images/about4.webp"
+        alt="Institution"
+        className="
+          w-full
+          h-full
+          object-cover
+          transition-transform
+          duration-700
+          group-hover:scale-105
+        "
+      />
+    </div>
+
+  </div>
+</div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════

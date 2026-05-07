@@ -594,7 +594,7 @@ export default function Hero() {
     </span>
   </span>
 
-  <span className="block overflow-hidden pb-1">
+  <span className="block  pb-1">
     <span ref={line1Ref} className="hero-heading-line block">
       Shaping Futures.
     </span>

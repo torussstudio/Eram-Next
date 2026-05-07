@@ -75,15 +75,6 @@ export const facultySystems = [
   "SQAAF /<br/>quality<br/>frameworks",
 ];
 
-export const excellenceDomains = [
-  { title: "Academic" },
-
-  { title: "Sports" },
-
-  { title: "Cultural" },
-
-  { title: "Professional" },
-];
 export const beyondCards = [
   {
     code: "/01",
