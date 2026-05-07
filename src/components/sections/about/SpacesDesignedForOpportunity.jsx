@@ -69,7 +69,6 @@ function SpacesDesignedForOpportunity() {
               text-[26px]
               sm:text-[40px]
               md:text-[48px]
-              font-semibold
               leading-[1.15]
               tracking-[-0.02em]
               text-black

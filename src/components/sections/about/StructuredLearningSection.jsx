@@ -392,7 +392,7 @@ function StructuredLearningSection() {
                 md:opacity-0 md:translate-y-8
                 font-display
                 text-[1.08rem] md:text-[38px]
-                font-semibold leading-tight
+                leading-tight
               "
             >
               Structured Learning.
@@ -432,9 +432,7 @@ function StructuredLearningSection() {
             </button>
           </div>
 
-          {/* RIGHT — scroll cards
-              Mobile: -mx-5 so the strip bleeds to screen edges,
-              then px-5 inside restores the card-start indent.        */}
+         
           <div className="structured-scroll-container -mx-5 md:mx-0 overflow-hidden">
             <div
               className="
@@ -509,7 +507,7 @@ lg:min-w-[280px] lg:h-[240px]
               md:opacity-0 md:translate-y-8
               font-display
               text-[1.08rem] sm:text-[26px] md:text-[32px]
-              font-semibold leading-snug
+               leading-snug
               ml-0 md:ml-[160px]
             "
           >

@@ -301,7 +301,7 @@ function SystemsThatSustainExcellence() {
               />
             </div>
 
-            <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px] font-semibold leading-tight text-[#F5EFE8] overflow-hidden">
+            <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px]  leading-tight text-[#F5EFE8] overflow-hidden">
               {["Systems", "That", "Sustain", "Excellence"].map((word, i) => (
                 <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
                   <span className="systems-heading-word inline-block">{word}</span>

@@ -198,16 +198,16 @@ function AboutHero() {
                     text-[clamp(2.2rem,4vw,3.5rem)]
                   "
                 >
-                  <span className="block">
-                    <span className="hero-heading-line block">
+                 
+                    <span className="hero-heading-line ">
                       A Legacy of Structure.
                     </span>
-                  </span>
+                 
 
-                  <span className="block">
-                    <span className="hero-heading-line block">
+                 
+                    <span className="hero-heading-line">
                       A Future of Opportunity.
-                    </span>
+                    
                   </span>
                 </h1>
 

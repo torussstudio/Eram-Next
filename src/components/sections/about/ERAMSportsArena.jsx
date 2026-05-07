@@ -84,7 +84,7 @@ function ERAMSportsArena() {
               text-[30px]
               sm:text-[34px]
               md:text-[44px]
-              font-semibold
+              
               leading-[1.2]
               text-black
             "
