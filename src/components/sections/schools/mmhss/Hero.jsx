@@ -185,23 +185,23 @@ export default function Hero() {
                 ref={badgeRef}
                 className="flex items-center gap-3 mb-4 sm:mb-5"
               >
-                <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
+                <p className="font-rethink text-[13px] sm:text-[14px] tracking-[0.28em] text-[#ae1431] uppercase">
                   Higher Secondary · Est. 2005
                 </p>
               </div>
 
               <h1
                 ref={headingRef}
-                className="font-serif leading-[1.05] tracking-[-0.02em]
+                className="font-display leading-[1.05] tracking-[-0.02em]
   text-[36px] xs:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[72px]"
               >
                 Mariyumma Memorial <br />
                 Higher Secondary <br />
-                <span className="italic text-white/60">School</span>
+                <span className="font-display italic text-white/60">School</span>
               </h1>
               <p
                 ref={subtextRef}
-                className="mt-4 sm:mt-5 text-[1.05rem] sm:text-[14px] md:text-[15px]
+                className="font-rethink mt-4 sm:mt-5 text-[1.05rem] sm:text-[14px] md:text-[15px]
                   leading-[1.8] text-white/70 max-w-[560px]"
               >
                 <span className="text-white font-medium">
@@ -215,14 +215,14 @@ export default function Hero() {
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
                 <button
-                  className="bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3
+                  className="font-rethink bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer
                     rounded-sm active:scale-[0.98] transition-transform rounded-[15px]"
                 >
                   Admissions Open — Book Now →
                 </button>
                 <button
-                  className="border border-white/30 px-5 md:px-7 py-2.5 md:py-3
+                  className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
                     flex items-center gap-2 cursor-pointer rounded-sm
                     active:scale-[0.98] transition-transform rounded-[15px]"
@@ -235,7 +235,7 @@ export default function Hero() {
             {/* RIGHT PANEL */}
             <div
               ref={panelRef}
-              className="w-full sm:w-[300px] lg:w-[280px]
+              className="font-rethink w-full sm:w-[300px] lg:w-[280px]
                 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
                 backdrop-blur-md border border-white/10 rounded-md p-5
                 lg:ml-auto lg:mr-8 mt-2 lg:mt-0 will-change-transform"
@@ -291,7 +291,7 @@ export default function Hero() {
                   <div
                     key={i}
                     className={[
-                      "stat-item flex flex-col items-center justify-center text-center",
+                      "stat-item flex flex-col items-center font-rethink justify-center text-center",
                       "py-10 sm:py-14 md:py-[60px] lg:py-[80px] px-4 sm:px-5",
                       i % 2 === 0 ? "border-r border-white/10" : "",
                       i < 2 ? "border-b border-white/10 md:border-b-0" : "",

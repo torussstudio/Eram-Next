@@ -13,18 +13,18 @@ export default function ScaleSection() {
             <div>
               <div className="flex items-center gap-3 mb-[20px]">
                 {/* <span className="w-[24px] h-[1px] bg-[#ae1431]" /> */}
-                <p className="text-[10px] md:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
+                <p className="font-rethink text-[10px] md:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                   The scale at a glance
                 </p>
               </div>
 
-             <h2 className="font-serif text-[34px] sm:text-[42px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-[#eae6df]">
+             <h2 className="font-display text-[34px] sm:text-[42px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-[#eae6df]">
   A Landmark Addition <br></br>to the ERAM Campus.
 </h2>
             </div>
 
             {/* RIGHT */}
-            <p className="text-[14.5px] mt-[25px] md:text-[15.5px] leading-[1.8] md:leading-[1.9] text-[#b8b2a8] max-w-[520px]">
+            <p className="font-rethink text-[14.5px] mt-[25px] md:text-[15.5px] leading-[1.8] md:leading-[1.9] text-[#b8b2a8] max-w-[520px]">
               Every dimension of the ERAM Sports Arena is intentional — built for competitive performance,
               extended events, and long-term community use. These are not provisional specifications.
               They are a permanent statement of scale.
@@ -35,7 +35,7 @@ export default function ScaleSection() {
           <div className="border-t border-[#1f1f1f] mb-[40px] md:mb-[50px]" />
 
           {/* GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border border-[#2a2a2a] divide-y sm:divide-y-0">
+          <div className="font-rethink grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border border-[#2a2a2a] divide-y sm:divide-y-0">
 
             {cards.map((card, i) => (
               <div

@@ -230,7 +230,7 @@ function PerformanceSection() {
                 className="perf-eyebrow-line h-px bg-[#ae1431]/60 w-10"
                 style={{ transformOrigin: "left center" }}
               />
-              <span className="text-[10px] uppercase tracking-[0.22em] text-[#ae1431] font-semibold">
+              <span className="font-rethink text-[10px] uppercase tracking-[0.22em] text-[#ae1431] font-semibold">
                 Key Features
               </span>
               <div
@@ -240,7 +240,7 @@ function PerformanceSection() {
             </div>
 
             {/* Heading */}
-            <h2 className="font-serif text-[30px] sm:text-[38px] md:text-[48px] font-semibold leading-tight text-black">
+            <h2 className="font-display text-[30px] sm:text-[38px] md:text-[48px] font-semibold leading-tight text-black">
               {["Designed", "for", "Performance", "&", "Gathering"].map((word, i) => (
                 <span key={i} className="inline-block overflow-hidden mr-[0.28em] last:mr-0">
                   <span className="perf-heading-word inline-block">{word}</span>
@@ -248,7 +248,7 @@ function PerformanceSection() {
               ))}
             </h2>
 
-            <p className="perf-subtext mt-5 text-[14.5px] md:text-[15.5px] text-black leading-relaxed max-w-[540px] mx-auto">
+            <p className="font-rethink perf-subtext mt-5 text-[14.5px] md:text-[15.5px] text-black leading-relaxed max-w-[540px] mx-auto">
               Built as a flagship infrastructure milestone within the ERAM ecosystem, the Arena
               represents the Trust's expanding vision — where structured development meets
               public-scale possibility.
@@ -360,7 +360,7 @@ function PerformanceSection() {
 
                     {/* ── Row 3: Description ── */}
                     <p
-                      className="leading-relaxed flex-shrink-0"
+                      className="font-rethink leading-relaxed flex-shrink-0"
                       style={{
                         fontSize: "clamp(14px, 1.35vw, 13px)",
                         color:    text,

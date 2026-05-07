@@ -92,22 +92,22 @@ export default function CommunicationPortal() {
         {/* ── LEFT ── */}
         <div>
           <div className="anim-tag flex items-center gap-3 mb-6">
-            <span className="text-xs tracking-widest uppercase text-white/70">
+            <span className="font-rethink text-xs tracking-widest uppercase text-white/70">
               Communication Portal
             </span>
           </div>
 
-          <h1 className="anim-heading text-4xl md:text-5xl font-serif leading-tight mb-6">
+          <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
             Centralised Access. Structured Communication.
           </h1>
 
-          <p className="anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
+          <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
             Academic monitoring and parent communications extend beyond the
             classroom through a unified digital interface — designed as a single
             point of coordination across all ERAM institutions.
           </p>
 
-        <p className="anim-body text-white/80 max-w-xl mb-4 text-[14.5px] md:text-[15.5px]">
+        <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[14.5px] md:text-[15.5px]">
             The portal ensures clarity, accountability, and timely communication
             for every student, teacher, and parent.
           </p>
@@ -121,12 +121,12 @@ export default function CommunicationPortal() {
               >
                 <span className="text-xs text-white/50">{f.num}</span>
                 <h3 className="mt-3 font-serif font-bold text-white">{f.title}</h3>
-                <p className="text-sm text-white/70 mt-2">{f.desc}</p>
+                <p className="font-rethink text-sm text-white/70 mt-2">{f.desc}</p>
               </div>
             ))}
           </div>
 
-          <button className="anim-btn bg-white text-[#ae1431] px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:gap-3 transition-all duration-200 cursor-pointer rounded-[10px]">
+          <button className="font-rethink anim-btn bg-white text-[#ae1431] px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:gap-3 transition-all duration-200 cursor-pointer rounded-[10px]">
             Access the Parent Portal
             <ArrowRight size={16} />
           </button>
@@ -148,8 +148,8 @@ export default function CommunicationPortal() {
               >
                 <span className={`w-2 h-2 mt-[6px] rounded-full shrink-0 ${item.color}`} />
                 <div>
-                  <p className="text-sm">{item.text}</p>
-                  <span className="text-xs text-white/50 block mt-1">{item.meta}</span>
+                  <p className="font-rethink text-sm">{item.text}</p>
+                  <span className=" font-rethink text-xs text-white/50 block mt-1">{item.meta}</span>
                 </div>
               </div>
             ))}

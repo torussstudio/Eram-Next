@@ -16,31 +16,31 @@ export default function CommunitySection() {
             {/* LABEL */}
             <div className="flex items-center gap-3 mb-6">
               {/* <span className="w-6 h-[1px] bg-[#ae1431]"></span> */}
-              <p className="text-[12px] tracking-[0.25em] text-[#ae1431] uppercase">
+              <p className="font-rethink text-[12px] tracking-[0.25em] text-[#ae1431] uppercase">
                 A venue for the wider community
               </p>
             </div>
 
             {/* HEADING */}
-            <h2 className="font-serif text-[34px] sm:text-[42px] md:text-[54px] leading-[1.15] text-[#1a1a1a] mb-6">
+            <h2 className="font-display text-[34px] sm:text-[42px] md:text-[54px] leading-[1.15] text-[#1a1a1a] mb-6">
               Open Beyond <br /> the Campus.
             </h2>
 
             {/* TEXT */}
-            <p className="text-[14.5px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-6">
+            <p className="font-rethink text-[14.5px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-6">
               The ERAM Sports Arena extends beyond institutional use. It is open
               for external bookings, welcoming a wide range of large-scale events
               and community gatherings.
             </p>
 
-            <p className="text-[14.5px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-8">
+            <p className="font-rethink text-[14.5px] text-[#4a433c] leading-[1.8] max-w-[520px] mb-8">
               By positioning the campus as an accessible venue for sport, culture,
               and community, the Arena strengthens ERAM's presence within the wider
               region — as an institution that serves beyond its walls.
             </p>
 
             {/* BUTTON */}
-            <button className="bg-[#111] text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3 hover:bg-[#ae1431] hover:text-black cursor-pointer">
+            <button className="bg-[#111] font-rethink text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3 hover:bg-[#ae1431] hover:text-black cursor-pointer">
               Enquire About Hosting
               <span>→</span>
             </button>
@@ -61,6 +61,7 @@ export default function CommunitySection() {
                <div
   key={i}
   className={`
+    font-rethink
     p-[22px] md:p-[26px]
     bg-[#f5f2ed]
     min-h-[140px]

@@ -103,6 +103,7 @@ function ERAMSportsArena() {
               text-black/70
               leading-[1.65]
               max-w-[600px]
+              font-rethink
             "
           >
             The ERAM Sports Arena further reflects the Trust's long-term
@@ -162,6 +163,7 @@ function ERAMSportsArena() {
                 max-w-[260px]
                 sm:max-w-[360px]
                 md:max-w-[520px]
+                font-rethink
               "
             >
               Infrastructure at ERAM is planned not for scale alone, but for
@@ -213,6 +215,7 @@ function ERAMSportsArena() {
                   sm:max-w-[460px]
                   md:max-w-[560px]
                   mx-auto
+                  font-rethink
                 "
               >
                 ERAM Educational & Welfare Trust continues to build an
@@ -238,6 +241,7 @@ function ERAMSportsArena() {
                     transition
                     whitespace-nowrap
                     cursor-pointer
+                    font-rethink
                   "
                 >
                   ADMISSIONS OPEN
@@ -261,6 +265,7 @@ function ERAMSportsArena() {
                     transition
                     whitespace-nowrap
                     cursor-pointer
+                    font-rethink
                   "
                 >
                   EXPLORE OUR INSTITUTIONS

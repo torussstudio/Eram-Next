@@ -60,6 +60,7 @@ max-[920px]:min-h-[64px]
         <Link to="/" className="inline-flex h-full items-stretch self-stretch">
 <span
   className={`
+    
 flex
 h-[68px]
 lg:h-[72px]
@@ -88,6 +89,7 @@ max-[920px]:px-[18px]
 
         <nav
           className="
+          font-rethink
 flex
 justify-center
 gap-[40px]
@@ -118,6 +120,7 @@ ${
 
         <div
           className="
+          
 flex
 gap-[20px]
 lg:gap-[40px]
@@ -129,6 +132,7 @@ max-[920px]:hidden
             className={`
 ${textColor}
 ${borderColor}
+font-rethink
 px-[16px]
 text-[0.8rem]
 tracking-[0.03em]
@@ -147,6 +151,7 @@ text-[0.8rem]
 tracking-[0.03em]
 !rounded-[10px]
 cursor-pointer
+font-rethink
 `}
 >
   News & Updates

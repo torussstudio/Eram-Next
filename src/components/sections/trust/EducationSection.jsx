@@ -7,7 +7,7 @@ export default function EducationSection({ active, setActive }) {
         <div id="pillar-1" className="mb-[20px]">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+              <span className=" font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
                 PILLAR ONE
               </span>
 
@@ -15,11 +15,11 @@ export default function EducationSection({ active, setActive }) {
                 <span className="font-serif text-[48px] text-black/10">01</span>
 
                 <div>
-                  <h2 className="font-serif text-[32px] font-light">
+                  <h2 className="font-display text-[32px] font-light">
                     Education
                   </h2>
 
-                  <p className="text-[14.5px] text-black/60 mt-1">
+                  <p className="font-rethink text-[14.5px] text-black/60 mt-1">
                     Expanding Access Through Structured Institutions
                   </p>
                 </div>
@@ -38,16 +38,16 @@ export default function EducationSection({ active, setActive }) {
         </div>
 
         {active === 0 && (
-          <div className="pb-[30px]">
+          <div className=" pb-[30px]">
             {/* TOP WHITE CARD */}
-            <div className="rounded-2xl border border-black/10 bg-white/40 p-[28px] mb-[20px] grid md:grid-cols-2 gap-[40px]">
+            <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[28px] mb-[20px] grid md:grid-cols-2 gap-[40px]">
               {/* LEFT */}
               <div>
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   PALAKKAD DISTRICT
                 </span>
 
-                <h3 className="mt-3 font-serif text-[18px]">
+                <h3 className=" mt-3 font-serif text-[18px]">
                   Structured Educational Institutions
                 </h3>
 
@@ -96,7 +96,7 @@ export default function EducationSection({ active, setActive }) {
             {/* BOTTOM GRID */}
             <div className="grid md:grid-cols-2 gap-[20px]">
               {/* RED CARD */}
-              <div className="rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/70">
                   KOZHIKODE DISTRICT
                 </span>
@@ -130,7 +130,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* DARK CARD */}
-              <div className="rounded-2xl bg-[#111111] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#111111] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/60">
                   PALAKKAD DISTRICT
                 </span>
@@ -161,7 +161,7 @@ export default function EducationSection({ active, setActive }) {
         <div id="pillar-2" className="mt-[20px] mb-[20px]">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+              <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
                 PILLAR TWO
               </span>
 
@@ -169,11 +169,11 @@ export default function EducationSection({ active, setActive }) {
                 <span className="font-serif text-[48px] text-black/10">02</span>
 
                 <div>
-                  <h2 className="font-serif text-[32px] font-light">
+                  <h2 className="font-display text-[32px] font-light">
                     Health & Sanitation
                   </h2>
 
-                  <p className="text-[14.5px] text-black/60 mt-1">
+                  <p className=" font-rethink text-[14.5px] text-black/60 mt-1">
                     Preventive Care and Sustainable Public Health Solutions
                   </p>
                 </div>
@@ -196,7 +196,7 @@ export default function EducationSection({ active, setActive }) {
             {/* TOP GRID */}
             <div className="grid md:grid-cols-3 gap-[20px] mb-[20px]">
               {/* RED CARD */}
-              <div className="rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/70">
                   4 YEARS · 30 PANCHAYATS
                 </span>
@@ -226,7 +226,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD 1 */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   2015 · MANKARA
                 </span>
@@ -254,7 +254,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD 2 */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   CRITICAL CARE ACCESS
                 </span>
@@ -277,7 +277,7 @@ export default function EducationSection({ active, setActive }) {
             {/* BOTTOM GRID */}
             <div className="grid md:grid-cols-2 gap-[20px]">
               {/* DARK CARD */}
-              <div className="rounded-2xl bg-[#111111] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#111111] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/60">
                   PUBLIC SANITATION INNOVATION
                 </span>
@@ -302,7 +302,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   5 PANCHAYATS · PALAKKAD
                 </span>
@@ -342,19 +342,19 @@ export default function EducationSection({ active, setActive }) {
         <div id="pillar-3" className="mt-[20px] mb-[20px]">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+              <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
                 PILLAR THREE
               </span>
 
               <div className="flex items-center gap-6 mt-2">
-                <span className="font-serif text-[48px] text-black/10">03</span>
+                <span className="font-display text-[48px] text-black/10">03</span>
 
                 <div>
-                  <h2 className="font-serif text-[32px] font-light leading-[1.2]">
+                  <h2 className="font-display text-[32px] font-light leading-[1.2]">
                     Humanitarian & Rehabilitation
                   </h2>
 
-                  <p className="text-[14.5px] text-black/60 mt-1">
+                  <p className="font-rethink text-[14.5px] text-black/60 mt-1">
                     Direct & Structured Intervention During Social Crisis
                   </p>
                 </div>
@@ -377,7 +377,7 @@ export default function EducationSection({ active, setActive }) {
             {/* TOP ROW */}
             <div className="grid md:grid-cols-2 gap-[20px] mb-[20px]">
               {/* RED CARD */}
-              <div className="rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/70">
                   PERMANENT SHELTER
                 </span>
@@ -407,7 +407,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   2013 · REPATRIATION
                 </span>
@@ -438,7 +438,7 @@ export default function EducationSection({ active, setActive }) {
             {/* BOTTOM ROW */}
             <div className="grid md:grid-cols-2 gap-[20px]">
               {/* DARK CARD */}
-              <div className="rounded-2xl bg-[#111111] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#111111] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/60">
                   NORKA COLLABORATION
                 </span>
@@ -463,7 +463,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   REHABILITATION SUPPORT
                 </span>
@@ -496,19 +496,19 @@ export default function EducationSection({ active, setActive }) {
         <div id="pillar-4" className="mt-[20px] mb-[20px]">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+              <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
                 PILLAR FOUR
               </span>
 
               <div className="flex items-center gap-6 mt-2">
-                <span className="font-serif text-[48px] text-black/10">04</span>
+                <span className="font-diplay text-[48px] text-black/10">04</span>
 
                 <div>
-                  <h2 className="font-serif text-[32px] font-light">
+                  <h2 className="font-display text-[32px] font-light">
                     Youth & Sports
                   </h2>
 
-                  <p className="text-[14.5px] text-black/60 mt-1">
+                  <p className="font-rethink text-[14.5px] text-black/60 mt-1">
                     Structured Support for Competitive Potential
                   </p>
                 </div>
@@ -530,7 +530,7 @@ export default function EducationSection({ active, setActive }) {
           <div className="pb-[30px]">
             <div className="grid md:grid-cols-3 gap-[20px]">
               {/* RED CARD */}
-              <div className="rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/70">
                   NATIONAL SCHOOLS GAMES
                 </span>
@@ -563,7 +563,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   PROFESSIONAL SPORTS
                 </span>
@@ -581,7 +581,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* DARK CARD */}
-              <div className="rounded-2xl bg-[#111111] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#111111] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/60">
                   2015 · 2026 MILESTONE
                 </span>
@@ -612,19 +612,19 @@ export default function EducationSection({ active, setActive }) {
         <div id="pillar-5" className="mt-[20px] mb-[20px]">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+              <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
                 PILLAR FIVE
               </span>
 
               <div className="flex items-center gap-6 mt-2">
-                <span className="font-serif text-[48px] text-black/10">05</span>
+                <span className="font-display text-[48px] text-black/10">05</span>
 
                 <div>
-                  <h2 className="font-serif text-[32px] font-light">
+                  <h2 className="font-display text-[32px] font-light">
                     Environment
                   </h2>
 
-                  <p className="text-[14.5px] text-black/60 mt-1">
+                  <p className="font-rethink text-[14.5px] text-black/60 mt-1">
                     Water Conservation & Ecological Responsibility
                   </p>
                 </div>
@@ -645,7 +645,7 @@ export default function EducationSection({ active, setActive }) {
         {active === 4 && (
           <div className="pb-[30px]">
             {/* TOP FULL CARD */}
-            <div className="rounded-2xl border border-black/10 bg-white/40 p-[28px] mb-[20px] grid md:grid-cols-2 gap-[40px]">
+            <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[28px] mb-[20px] grid md:grid-cols-2 gap-[40px]">
               {/* LEFT */}
               <div>
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
@@ -695,7 +695,7 @@ export default function EducationSection({ active, setActive }) {
             {/* BOTTOM GRID */}
             <div className="grid md:grid-cols-2 gap-[20px]">
               {/* RED CARD */}
-              <div className="rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/70">
                   PALAKKAD REGION
                 </span>
@@ -726,7 +726,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* WHITE CARD */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   PALAKKAD REGION
                 </span>
@@ -761,19 +761,19 @@ export default function EducationSection({ active, setActive }) {
         <div id="pillar-6" className="mt-[20px] mb-[20px]">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+              <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
                 PILLAR SIX
               </span>
 
               <div className="flex items-center gap-6 mt-2">
-                <span className="font-serif text-[48px] text-black/10">06</span>
+                <span className="font-display text-[48px] text-black/10">06</span>
 
                 <div>
-                  <h2 className="font-serif text-[32px] font-light leading-[1.2]">
+                  <h2 className="font-display text-[32px] font-light leading-[1.2]">
                     Community Infrastructure & Welfare
                   </h2>
 
-                  <p className="text-[14.5px] text-black/60 mt-1">
+                  <p className="font-rethink text-[14.5px] text-black/60 mt-1">
                     System-Based Community Support — Strengthening Civic Systems
                   </p>
                 </div>
@@ -795,7 +795,7 @@ export default function EducationSection({ active, setActive }) {
           <div className="pb-[30px]">
             <div className="grid md:grid-cols-3 gap-[20px]">
               {/* WHITE CARD */}
-              <div className="rounded-2xl border border-black/10 bg-white/40 p-[26px]">
+              <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[26px]">
                 <span className="text-[11px] uppercase text-[#8B1E1E]">
                   PALAKKAD DISTRICT
                 </span>
@@ -819,7 +819,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* RED CARD */}
-              <div className="rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#8B1E1E] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/70">
                   KERALA ODF INITIATIVE
                 </span>
@@ -849,7 +849,7 @@ export default function EducationSection({ active, setActive }) {
               </div>
 
               {/* DARK CARD */}
-              <div className="rounded-2xl bg-[#111111] text-white p-[26px]">
+              <div className="font-rethink rounded-2xl bg-[#111111] text-white p-[26px]">
                 <span className="text-[11px] uppercase text-white/60">
                   SOCIAL COHESION
                 </span>

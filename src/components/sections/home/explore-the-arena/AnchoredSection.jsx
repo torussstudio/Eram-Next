@@ -23,14 +23,14 @@ export default function AnchoredSection() {
             {/* LABEL */}
             <div className="flex items-center gap-3 mb-[20px] md:mb-[28px]">
               {/* <span className="w-[24px] md:w-[28px] h-[1px] bg-[#ae1431]" /> */}
-              <p className="text-[10px] md:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
+              <p className="font-rethink text-[10px] md:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                 Integrated with the ERAM Ecosystem
               </p>
             </div>
 
             {/* TITLE */}
            <h2 className="
-  font-serif
+  font-display
   text-[36px] sm:text-[40px] md:text-[45px]
   leading-[1.15] md:leading-[1.1]
   tracking-[-0.02em]
@@ -46,12 +46,14 @@ export default function AnchoredSection() {
               leading-[1.8] md:leading-[1.9]
               text-[#b8b2a8]
               mb-[22px] md:mb-[28px]
+              font-rethink
             ">
               The Arena operates in alignment with the ERAM institutional ecosystem, reinforcing the Trust's long-standing commitment to youth development. It is not a standalone facility — it is the physical expression of a broader educational philosophy.
             </p>
 
             {/* QUOTE */}
             <p className="
+            font-display
               italic
               text-[16px] md:text-[17px]
               text-[#9f988e]
@@ -65,7 +67,7 @@ export default function AnchoredSection() {
             {/* LIST */}
             <ul className="space-y-[12px] md:space-y-[14px] text-[14px] md:text-[15px] text-[#c9c3ba]">
               {points.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
+                <li key={i} className="font-rethink flex items-start gap-3">
                   <span className="w-[5px] h-[5px] md:w-[6px] md:h-[6px] mt-[6px] md:mt-[7px] bg-[#ae1431] rounded-full" />
                   {item}
                 </li>
@@ -94,7 +96,7 @@ export default function AnchoredSection() {
                 `}
               >
                 <h3 className="
-                  font-serif
+                  font-rethink
                   text-[24px] sm:text-[28px] md:text-[34px]
                   mb-[4px] md:mb-[6px]
                   text-[#f1eee8]
@@ -103,6 +105,7 @@ export default function AnchoredSection() {
                 </h3>
 
                 <p className="
+                font-rethink
                   text-[13px] md:text-[14px]
                   leading-[1.5] md:leading-[1.6]
                   text-[#c5beb5]

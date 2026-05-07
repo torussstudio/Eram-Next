@@ -16,7 +16,7 @@ export default function ClosingSection() {
             <div className="max-w-[620px]">
 
              <h2 className="
-  font-serif
+  font-display
   text-[36px] sm:text-[40px] md:text-[46px]
   leading-[1.15]
   tracking-[-0.02em]
@@ -29,6 +29,7 @@ export default function ClosingSection() {
                 text-[14.5px] md:text-[15px]
                 leading-[1.9]
                 text-[#4a433c]
+                font-rethink
               ">
                 The ERAM Sports Arena extends the campus into a space of scale.
                 Its open-air amphitheatre and floodlit multi-court design reflect
@@ -41,7 +42,7 @@ export default function ClosingSection() {
             </div>
 
             {/* RIGHT */}
-            <div className="flex flex-col items-start md:items-end gap-[14px] md:mt-[120px]">
+            <div className="font-rethink flex flex-col items-start md:items-end gap-[14px] md:mt-[120px]">
 
      <button
   className="
@@ -134,6 +135,7 @@ export default function ClosingSection() {
 
           {/* QUOTE */}
           <p className="
+          font-display
             italic
             text-[15px] md:text-[16px]
             text-[#7a7268]

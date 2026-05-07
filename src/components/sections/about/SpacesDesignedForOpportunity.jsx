@@ -88,6 +88,7 @@ function SpacesDesignedForOpportunity() {
               text-black/65
               leading-[1.65]
               max-w-[640px]
+              font-rethink
             "
           >
             ERAM institutions are supported by purpose-built infrastructure that
@@ -147,6 +148,7 @@ function SpacesDesignedForOpportunity() {
                 max-w-[100px]
                 sm:max-w-[180px]
                 lg:max-w-[230px]
+                font-rethink
               "
             >
               Modern classrooms
@@ -205,6 +207,7 @@ function SpacesDesignedForOpportunity() {
                   max-w-[140px]
                   sm:max-w-[260px]
                   lg:max-w-[420px]
+                  font-rethink
                 "
               >
                 Dedicated sports grounds &
@@ -262,6 +265,7 @@ function SpacesDesignedForOpportunity() {
                     max-w-[80px]
                     sm:max-w-[150px]
                     lg:max-w-[210px]
+                    font-rethink
                   "
                 >
                   Amphitheatre &
@@ -318,6 +322,7 @@ function SpacesDesignedForOpportunity() {
                     max-w-[80px]
                     sm:max-w-[140px]
                     lg:max-w-[190px]
+                    font-rethink
                   "
                 >
                   Structured

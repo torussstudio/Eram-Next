@@ -303,7 +303,7 @@ export default function AcademicStreams() {
 
             {/* Badge */}
             <div ref={badgeRef} className="flex items-center gap-3 mb-8">
-              <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
+              <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
                 Academic Structure
               </p>
             </div>
@@ -311,7 +311,7 @@ export default function AcademicStreams() {
             {/* Heading — word split */}
             <h2
               ref={headingRef}
-              className="font-serif text-white leading-[1.05] tracking-[-0.02em]
+              className="font-display text-white leading-[1.05] tracking-[-0.02em]
                 text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]"
               style={{ perspective: "900px" }}
             >
@@ -334,7 +334,7 @@ export default function AcademicStreams() {
             <div ref={dividerRef} className="w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             {/* Body */}
-            <p ref={bodyRef} className="text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
+            <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
               MMHSS offers Higher Secondary education under the State syllabus
               across three focused streams. Our strength lies not just in what
               we teach, but in how we execute it — guiding, supervising, and
@@ -373,7 +373,7 @@ export default function AcademicStreams() {
 
             <p
               ref={subLabelRef}
-              className="text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
+              className="font-rethink text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
             >
               Academic Support Systems
             </p>

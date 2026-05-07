@@ -113,19 +113,19 @@ export default function ParentPartnership() {
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col">
             <div className="anim-subtitle flex items-center gap-3 mb-8">
-              <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
+              <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
                 Parent Partnership
               </p>
             </div>
 
-            <h2 className="anim-title font-serif text-[#1a1209] leading-[1.05] tracking-[-0.02em]
+            <h2 className="font-display anim-title text-[#1a1209] leading-[1.05] tracking-[-0.02em]
               text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px]">
               Discipline &amp; Communication as Accountability
             </h2>
 
             <div className="anim-divider w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
-            <p className="anim-desc text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#3d3128] max-w-[560px]">
+            <p className="anim-desc font-rethink  text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#3d3128] max-w-[560px]">
               The institution maintains a mandatory WhatsApp-based communication
               system to ensure parents are continuously informed — making parent
               engagement institutional, not incidental.
@@ -135,7 +135,7 @@ export default function ParentPartnership() {
               {bullets.map((item, i) => (
                 <li
                   key={i}
-                  className="anim-bullet flex items-center gap-3 text-[14px] md:text-[15px] text-[#3d3128]"
+                  className="font-rethink anim-bullet flex items-center gap-3 text-[14px] md:text-[15px] text-[#3d3128]"
                 >
                   <span className="w-[6px] h-[6px] rounded-full bg-[#ae1431] flex-shrink-0" />
                   {item}
@@ -143,12 +143,12 @@ export default function ParentPartnership() {
               ))}
             </ul>
 
-            <p className="anim-quote mt-7 font-serif italic text-[14px] sm:text-[15px] text-[#9a8f84]">
+            <p className="font-display anim-quote mt-7 font-serif italic text-[14px] sm:text-[15px] text-[#9a8f84]">
               No student goes unnoticed. No parent remains uninformed.
             </p>
 
             <div className="mt-8 anim-btn">
-              <button className="bg-[#1a1209] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
+              <button className="font-rethink bg-[#1a1209] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
                 px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-[#2e2318] transition-colors duration-200 rounded-[10px]">
                 Access Parent Portal
                 <span className="text-[15px]">→</span>
@@ -157,7 +157,7 @@ export default function ParentPartnership() {
           </div>
 
           {/* ── RIGHT COLUMN — WhatsApp mockup ── */}
-          <div className="anim-mockup w-full rounded-[14px] bg-[#181818] p-4 shadow-2xl">
+          <div className="anim-mockup font-rethink w-full rounded-[14px] bg-[#181818] p-4 shadow-2xl">
             <div className="anim-mockup-header bg-[#ae1431] rounded-[6px] px-5 py-4 mb-3">
               <p className="text-white font-semibold text-[13px] sm:text-[14px] tracking-[0.01em]">
                 MMHSS Parent Communication Channel

@@ -221,6 +221,7 @@ export default function ArenaSection() {
           mb-[34px]
           max-[640px]:text-[14px]
           max-[640px]:mb-[26px]
+          font-rethink
         "
       >
         The ERAM Sports Arena reflects the Trust's long-term commitment to
@@ -229,11 +230,12 @@ export default function ArenaSection() {
         sports integration.
       </p>
 
-      <div className="flex gap-[14px] flex-wrap max-[640px]:gap-[10px]">
-       <ActionButton to="/explore-arena">
+      <div className="flex  gap-[14px] flex-wrap max-[640px]:gap-[10px]">
+       <ActionButton className="font-rethink" to="/explore-arena">
   Explore The Arena
 </ActionButton>
-        <ActionButton className="cursor-pointer" variant="secondary">
+<br></br>
+        <ActionButton className="font-rethink cursor-pointer" variant="secondary">
           Discover Our Infrastructure
         </ActionButton>
       </div>
@@ -266,6 +268,7 @@ export default function ArenaSection() {
       <div
         ref={eramTextRef}
         className="
+        font-rethink
           absolute
           right-[20px]
           bottom-[10px]

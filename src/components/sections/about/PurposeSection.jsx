@@ -128,7 +128,7 @@ function PurposeSection() {
             Community Grounded.
           </h2>
 
-          <p className="purpose-text opacity-0 translate-y-10 mt-5 md:mt-6 text-[14.5px] md:text-[15px] leading-relaxed text-black/70">
+          <p className="font-rethink purpose-text opacity-0 translate-y-10 mt-5 md:mt-6 text-[14.5px] md:text-[15px] leading-relaxed text-black/70">
             ERAM Educational & Welfare Trust was formed as the educational and
             social responsibility arm of the Eram Group. Its founding vision was
             clear: to create structured academic institutions that provide
@@ -136,7 +136,7 @@ function PurposeSection() {
             backward communities.
           </p>
 
-          <p className="purpose-text opacity-0 translate-y-10 mt-3 md:mt-4 text-[14.5px] md:text-[15px] leading-relaxed text-black/70">
+          <p className="font-rethink purpose-text opacity-0 translate-y-10 mt-3 md:mt-4 text-[14.5px] md:text-[15px] leading-relaxed text-black/70">
             The Trust operates with the belief that excellence is sustained
             through systems. From foundational schooling to higher secondary
             education and professional teacher training, ERAM has built an
@@ -174,7 +174,7 @@ function PurposeSection() {
 
           {/* right content */}
           <div className="purpose-items">
-            <h3 className="text-[18px] md:text-[20px] font-medium text-black mb-6 md:mb-8 opacity-0 translate-y-5">
+            <h3 className="font-rethink text-[18px] md:text-[20px] font-medium text-black mb-6 md:mb-8 opacity-0 translate-y-5">
               Across its institutions, the
               <br />
               Trust remains committed to:
@@ -248,6 +248,7 @@ function PurposeSection() {
 
     transition
     cursor-pointer
+    font-rethink
   "
             >
               EXPLORE MORE

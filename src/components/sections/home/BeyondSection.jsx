@@ -66,7 +66,7 @@ export default function BeyondSection() {
         </h2>
 
         {/* Description */}
-        <p className="beyond-heading mx-auto mb-[26px] max-w-[560px] text-[14.5px] leading-[1.7] text-[#f5efe8] max-[640px]:text-[13px]">
+        <p className="beyond-heading font-rethink mx-auto mb-[26px] max-w-[560px] text-[14.5px] leading-[1.7] text-[#f5efe8] max-[640px]:text-[13px]">
           Clubs, leadership forums, residential programs, state-level
           participation, curated experiences, learning that extends beyond
           textbooks.
@@ -76,7 +76,7 @@ export default function BeyondSection() {
         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
           <ActionButton
             variant="secondary"
-            className="text-[#f5efe8] max-[640px]:!w-auto cursor-pointer hover:bg-black hover:text-white"
+            className="font-rethink text-[#f5efe8] max-[640px]:!w-auto cursor-pointer hover:bg-black hover:text-white"
           >
             Explore Student Pathways
           </ActionButton>
@@ -103,7 +103,7 @@ export default function BeyondSection() {
                   </div>
 
                   <div
-                    className="flex justify-end text-center text-[23px] font-[500] tracking-[0.01em] max-[640px]:text-[18px]"
+                    className=" font-rethink flex justify-end text-center text-[23px] font-[500] tracking-[0.01em] max-[640px]:text-[18px]"
                     style={{ color }}
                   >
                     {card.title}

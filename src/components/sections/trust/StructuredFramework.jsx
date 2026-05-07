@@ -115,16 +115,16 @@ export default function StructuredFramework({ setActive }) {
         >
           <div className="flex items-center gap-3">
             {/* <span className="inline-block w-7 h-px bg-white/30" /> */}
-            <span className="text-[10px] tracking-[0.32em] uppercase text-white/45 font-sans">
+            <span className="font-rethink text-[10px] tracking-[0.32em] uppercase text-white/45 font-sans">
               THE TRUST FRAMEWORK
             </span>
           </div>
 
           <div className="flex flex-wrap items-end gap-[clamp(16px,4vw,56px)] justify-between">
-           <h2 className="font-serif text-[clamp(1.9rem,4.2vw,3.4rem)] font-light leading-[1.12] max-w-[620px] m-0 tracking-[-0.01em]">
+           <h2 className="font-display text-[clamp(1.9rem,4.2vw,3.4rem)] font-light leading-[1.12] max-w-[620px] m-0 tracking-[-0.01em]">
   A Structured Approach to Social Responsibility
 </h2>
-            <p className="text-[14.5px] leading-[1.85] text-white/60 max-w-[360px] m-0 font-sans">
+            <p className="font-rethink text-[14.5px] leading-[1.85] text-white/60 max-w-[360px] m-0 font-sans">
               The Trust operates through clearly defined focus areas, ensuring every initiative is part of a governed and accountable system.
             </p>
           </div>
@@ -145,6 +145,7 @@ export default function StructuredFramework({ setActive }) {
             >
               <div
                 className="
+                
                   relative p-[clamp(24px,3.5vw,40px)] min-h-[clamp(190px,22vw,240px)]
                   flex flex-col justify-between cursor-pointer overflow-hidden
                   transition-colors duration-[350ms] bg-transparent
@@ -165,7 +166,7 @@ export default function StructuredFramework({ setActive }) {
                 onClick={() => handleCardClick(item.id, i)}
               >
                 <div className="relative z-[2]">
-                  <span className="block text-[10px] tracking-[0.22em] text-[#B3201D] font-sans mb-[14px] transition-[letter-spacing,color] duration-[400ms] ease-[ease]">
+                  <span className=" font-rethink block text-[10px] tracking-[0.22em] text-[#B3201D] font-sans mb-[14px] transition-[letter-spacing,color] duration-[400ms] ease-[ease]">
                     {item.label}
                   </span>
                   <h3 className="font-serif text-[clamp(15px,1.8vw,18px)] font-normal m-0 mb-[10px] leading-[1.3] text-white transition-colors duration-300">
@@ -186,7 +187,7 @@ export default function StructuredFramework({ setActive }) {
         {/* ── NOTE ── */}
         <p
           ref={noteRef}
-          className="text-center text-[14.5px] text-white/[0.38] mt-[clamp(28px,4vw,52px)] tracking-[0.06em] font-sans"
+          className=" font-display text-center text-[14.5px] text-white/[0.38] mt-[clamp(28px,4vw,52px)] tracking-[0.06em]"
         >
           Each initiative is planned with long-term sustainability, institutional oversight, and measurable outcomes.
         </p>

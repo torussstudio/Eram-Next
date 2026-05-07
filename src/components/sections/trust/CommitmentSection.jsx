@@ -34,7 +34,7 @@ function injectStyles() {
 function InkHeading({ text, active }) {
   const words = text.split(" ");
   return (
-    <h2 className="font-serif text-[clamp(2.4rem,3.5vw,3.6rem)] leading-[1.15] text-[#1a1a1a] font-light m-0">
+    <h2 className="font-display text-[clamp(2.4rem,3.5vw,3.6rem)] leading-[1.15] text-[#1a1a1a] font-light m-0">
       {words.map((word, i) => (
         <span
           key={i}
@@ -242,7 +242,7 @@ export default function CommitmentSection() {
                 }}
               />
               <span
-                className="text-[11px] tracking-[0.32em] uppercase text-black/70"
+                className=" font-rethink text-[11px] tracking-[0.32em] uppercase text-black/70"
                 style={{
                   opacity: topVisible ? 1 : 0,
                   transform: topVisible ? "translateX(0)" : "translateX(12px)",
@@ -254,7 +254,7 @@ export default function CommitmentSection() {
             </div>
 
             {/* HEADING */}
-            <InkHeading
+            <InkHeading 
               text="Our Commitment To Structured Responsibility"
               active={topVisible}
             />
@@ -267,7 +267,7 @@ export default function CommitmentSection() {
           </div>
 
           {/* RIGHT */}
-          <div className="text-[15px] leading-[1.9] text-black/80 space-y-6">
+          <div className=" font-rethink text-[15px] leading-[1.9] text-black/80 space-y-6">
             {[
               "ERAM Educational & Welfare Trust advances its mission through structured interventions across education, healthcare, rehabilitation, environmental resilience, youth development, and community infrastructure.",
               "Each initiative begins with a clearly identified need and evolves into a designed response — planned, executed, and monitored with institutional discipline. Whether restoring water systems, strengthening public health access, enabling dignified rehabilitation, or expanding structured education, the Trust approaches community development as a long-term responsibility.",
@@ -296,9 +296,9 @@ export default function CommitmentSection() {
       </div>
 
       {/* DARK STATS STRIP */}
-      <div ref={stripRef} className="bg-[#0E0E0E] py-[70px] relative overflow-hidden">
+      <div ref={stripRef} className="bg-[#0E0E0E] py-[90px] relative overflow-hidden">
         <Scanlines />
-        <div className="max-w-[1100px] mx-auto px-3 grid grid-cols-2 md:grid-cols-4 text-center relative z-[1]">
+        <div className="font-rethink max-w-[1100px] mx-auto px-3 grid grid-cols-2 md:grid-cols-4 text-center relative z-[1]">
           {stats.map((stat, i) => (
             <StatCard key={i} stat={stat} index={i} active={statsVisible} />
           ))}

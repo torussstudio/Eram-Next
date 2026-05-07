@@ -231,18 +231,18 @@ export default function ImpactSection() {
             text="In Service Of Society"
             className="text-[42px] leading-[1.12] font-[600] text-[#f5efe8] mb-[18px]"
           />
-          <p className="para-anim text-[14.5px] leading-[1.75] text-[#f5efe8] mb-[14px]">
+          <p className="para-anim font-rethink text-[14.5px] leading-[1.75] text-[#f5efe8] mb-[14px]">
             ERAM Educational &amp; Welfare Trust advances social equity through
             structured CSR initiatives focused on educational access, healthcare
             outreach, and community resilience.
           </p>
-          <p className="para-anim text-[15px] leading-[1.75] text-[#f5efe8] mb-[28px]">
+          <p className="para-anim font-rethink text-[15px] leading-[1.75] text-[#f5efe8] mb-[28px]">
             While education remains its core mission, the Trust extends its
             responsibility through targeted social initiatives supporting
             underprivileged communities.
           </p>
           <button
-            className="
+            className="font-rethink
               btn-anim h-[44px] px-[22px] text-[13px] rounded-[10px]
               border border-[#f5efe8] bg-[#f5efe8]
               text-[#ae1431] transition cursor-pointer
@@ -337,7 +337,7 @@ export default function ImpactSection() {
             {impactItems.map((item) => (
               <div
                 key={item.code}
-                className="
+                className="font-rethink
                   relative w-[350px] flex-none snap-start
                   pl-[26px] pr-[26px] min-h-[120px]
                   flex flex-col justify-end

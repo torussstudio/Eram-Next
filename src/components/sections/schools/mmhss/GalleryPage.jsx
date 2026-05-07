@@ -61,7 +61,7 @@ export default function GalleryPage() {
           {/* HEADER */}
           <div className="mb-12">
             <div className="anim-tag flex items-center gap-3 mb-4">
-              <span className="text-xs tracking-widest text-gray-400 uppercase">
+              <span className="font-rethink text-xs tracking-widest text-gray-400 uppercase">
                 Gallery
               </span>
             </div>

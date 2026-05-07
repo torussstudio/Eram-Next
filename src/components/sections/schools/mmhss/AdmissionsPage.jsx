@@ -97,16 +97,16 @@ export default function AdmissionsPage() {
           {/* LEFT */}
           <div className="max-w-xl">
             <div className="anim-hero-tag flex items-center gap-3 mb-6">
-              <span className="text-[11px] tracking-widest uppercase text-[#8B1A14] font-medium">
+              <span className="font-rethink text-[11px] tracking-widest uppercase text-[#8B1A14] font-medium">
                 Admissions 2026–27
               </span>
             </div>
 
-            <h1 className="anim-hero-title font-serif text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.02em] mb-8">
+            <h1 className="font-display anim-hero-title  text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.02em] mb-8">
               Begin the Journey at MMHSS.
             </h1>
 
-            <p className="anim-hero-desc text-[#3a3228] text-[14.5px] md:text-[15.5px] leading-relaxed max-w-sm">
+            <p className="font-rethink anim-hero-desc text-[#3a3228] text-[14.5px] md:text-[15.5px] leading-relaxed max-w-sm">
               Admissions are now open for Higher Secondary streams — Biology
               Science, Computer Science, and Commerce. Join an institution with
               a proven record of academic excellence, structured discipline, and
@@ -116,11 +116,11 @@ export default function AdmissionsPage() {
 
           {/* RIGHT — BUTTONS */}
           <div className="flex flex-col gap-3 pt-22 lg:min-w-[280px]">
-            <button className="anim-hero-btn bg-[#8B1A14] text-white px-10 py-4 text-[13px] tracking-widest uppercase flex items-center justify-between gap-4 hover:bg-[#7a1410] transition-colors duration-200 cursor-pointer rounded-[10px]">
+            <button className="font-rethink anim-hero-btn bg-[#8B1A14] text-white px-10 py-4 text-[13px] tracking-widest uppercase flex items-center justify-between gap-4 hover:bg-[#7a1410] transition-colors duration-200 cursor-pointer rounded-[10px]">
               Apply Now — 2026–27
               <ArrowRight size={15} />
             </button>
-            <button className="anim-hero-btn border border-[#1a1209] text-[#1a1209] px-6 py-4 text-[13px] tracking-widest uppercase hover:bg-[#1a1209] hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px] ">
+            <button className="font-rethink anim-hero-btn border border-[#1a1209] text-[#1a1209] px-6 py-4 text-[13px] tracking-widest uppercase hover:bg-[#1a1209] hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px] ">
               Book a Campus Visit
             </button>
           </div>
@@ -142,7 +142,7 @@ export default function AdmissionsPage() {
                   <p className="text-[10px] tracking-widest uppercase text-white/50 mb-3">
                     {inst.type}
                   </p>
-                  <p className="font-serif text-white text-xl font-bold mb-1">
+                  <p className="font-display text-white text-xl font-bold mb-1">
                     {inst.name}
                   </p>
                   <p className="text-sm text-white/65">{inst.desc}</p>

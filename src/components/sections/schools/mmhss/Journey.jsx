@@ -219,14 +219,14 @@ export default function Journey() {
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col">
             <div ref={badgeRef} className="flex items-center gap-3 mb-8 md:mb-10">
-              <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
+              <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
                 Our Journey
               </p>
             </div>
 
             <h2
               ref={headingRef}
-              className="font-serif text-[#1a1209] leading-[1.0] tracking-[-0.02em]
+              className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
                 text-[38px] sm:text-[46px] md:text-[54px] lg:text-[58px] xl:text-[64px]"
             >
               A Transformation
@@ -236,7 +236,7 @@ export default function Journey() {
 
             <div ref={dividerRef} className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
-            <div ref={parasRef} className="space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
+            <div ref={parasRef} className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
               <p>
                 When MMHSS began in 2005, it entered a competitive academic
                 environment with modest score brackets. Over time, through
@@ -251,13 +251,13 @@ export default function Journey() {
             </div>
 
             <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
-              <p className="font-serif italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
+              <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
                 "For 14 consecutive years, we have maintained a 100% Higher
                 Secondary result."
               </p>
             </blockquote>
 
-            <p ref={lastParaRef} className="text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
+            <p ref={lastParaRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
               We always ensure academic attention, extended study systems, and
               continuous parent communication — across every batch, every year.
             </p>
@@ -314,7 +314,7 @@ export default function Journey() {
                     <h3 className="font-serif text-[#1a1209] text-[17px] sm:text-[18px] md:text-[19px] leading-snug mb-2 tracking-[-0.01em]">
                       {item.title}
                     </h3>
-                    <p className="text-[14px] sm:text-[14px] text-[#5a4e43] leading-[1.75]">
+                    <p className="font-rethink text-[14px] sm:text-[14px] text-[#5a4e43] leading-[1.75]">
                       {item.desc}
                     </p>
                   </div>

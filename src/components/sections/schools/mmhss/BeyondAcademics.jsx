@@ -137,14 +137,14 @@ export default function BeyondAcademics() {
         {/* ── HEADER ── */}
         <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-14 lg:mb-16">
           <div className="anim-header">
-            <h2 className="font-serif text-[#1a1209] leading-[1.05] tracking-[-0.02em] text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] xl:text-[46px]">
+            <h2 className="font-display text-[#1a1209] leading-[1.05] tracking-[-0.02em] text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] xl:text-[46px]">
               Representation,
               <br />
               Recognition &amp; Exposure
             </h2>
           </div>
           <div className="anim-header flex items-end">
-            <p className="text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
+            <p className=" font-rethink text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
               Academic consistency is matched by active participation beyond the
               classroom — ensuring competitive exposure and character development
               remain central to the student experience.

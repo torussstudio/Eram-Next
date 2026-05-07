@@ -82,13 +82,9 @@ export default function LegacySection() {
           <div>
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-[clamp(18px,3vw,26px)]">
-              {/* <span
-                ref={eyeLineRef}
-                className="w-[36px] h-[1px] bg-[#8B1E1E] shrink-0 block"
-              /> */}
               <span
                 ref={eyeTextRef}
-                className="text-[10px] tracking-[0.3em] uppercase text-[#8B1E1E] font-sans"
+                className="font-rethink text-[10px] tracking-[0.3em] uppercase text-[#8B1E1E] font-sans"
               >
                 BEGIN HERE
               </span>
@@ -99,10 +95,10 @@ export default function LegacySection() {
               ref={headingRef}
               className="font-serif text-[clamp(2.2rem,4vw,4.2rem)] leading-[1.08] text-[#111] font-light m-0"
             >
-              <span className="block overflow-hidden">
+              <span className=" font-display block ">
                 {wrapWords("A Legacy of Responsibility.")}
               </span>
-              <span className="block overflow-hidden">
+              <span className="font-display block ">
                 {wrapWords("A Future of Impact.")}
               </span>
             </h2>
@@ -110,7 +106,7 @@ export default function LegacySection() {
             {/* Description */}
             <p
               ref={descRef}
-              className="mt-[clamp(20px,3.5vw,36px)] text-[15px] leading-[1.9] text-black/60 max-w-[560px] font-sans"
+              className="font-rethink mt-[clamp(20px,3.5vw,36px)] text-[15px] leading-[1.9] text-black/60 max-w-[560px]"
             >
               ERAM Educational &amp; Welfare Trust continues to expand its impact
               through system-driven interventions — strengthening institutions,
@@ -130,7 +126,7 @@ export default function LegacySection() {
             >
               {/* wipe reveal */}
               <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
-              <span className="relative z-10">Partner in Responsible Impact</span>
+              <span className="font-rethink relative z-10">Partner in Responsible Impact</span>
               <span className="relative z-10 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-[5px]">→</span>
             </button>
 
@@ -140,7 +136,7 @@ export default function LegacySection() {
               className="group relative border border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden w-full sm:w-auto"
             >
               <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300">Discover Our Academic Framework</span>
+              <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">Discover Our Academic Framework</span>
               <span className="relative z-10 group-hover:text-white transition-colors duration-300 transition-transform group-hover:translate-x-[5px] ease-[cubic-bezier(0.34,1.56,0.64,1)]">→</span>
             </button>
 

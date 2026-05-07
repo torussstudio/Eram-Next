@@ -166,12 +166,13 @@ max-[640px]:text-[32px]
 
           <p
             className="
+            font-rethink
               mt-[18px]
 
               text-[16px]
               leading-[1.7]
 
-              text-[#f5efe8]
+              text-white
 
               max-w-[520px]
               max-[900px]:text-[15px]
@@ -214,6 +215,7 @@ max-[640px]:text-[32px]
               className="
                 model-pillar
                 text-center
+                font-rethink
               "
             >
               <div
@@ -353,6 +355,7 @@ max-[900px]:mt-[70px]
                 {/* text */}
                 <p
                   className="
+                  font-rethink
     mt-[100px]
     text-[26px]
     leading-[1.15]

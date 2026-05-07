@@ -1,4 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Agency", sans-serif;
+  --font-rethink: "Rethink Sans", sans-serif;
+}
+
 @font-face {
   font-family: "Agency";
   src: url("/fonts/Agency.woff2") format("woff2");

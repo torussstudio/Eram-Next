@@ -28,20 +28,20 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
             <div className="flex-1 max-w-[720px]">
               <div className="flex items-center gap-3 mb-5">
                 {/* <span className="w-6 h-[1px] bg-[#ae1431]"></span> */}
-                <p className="text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
+                <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                   The Eram Sports Arena
                 </p>
               </div>
 
               <h1
-                className="font-serif leading-[1] tracking-[-0.02em]
+                className="font-display leading-[1] tracking-[-0.02em]
                   text-[42px] sm:text-[56px] md:text-[72px] lg:text-[88px]"
               >
                 A New Stage <br />
                 of <span className="italic text-white/60">Scale.</span>
               </h1>
 
-              <p className="mt-5 text-[1.05rem] md:text-[16px] leading-[1.8] text-white/70 max-w-[560px]">
+              <p className="font-rethink mt-5 text-[1.05rem] md:text-[16px] leading-[1.8] text-white/70 max-w-[560px]">
                 A 1,000-seat open-air amphitheatre and multi-court venue
                 designed to elevate athletic performance, cultural engagement,
                 and large-scale campus events<br></br> — a flagship
@@ -49,11 +49,11 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
               </p>
 
               <div className="flex flex-wrap gap-3 mt-7">
-                <button className="bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer">
+                <button className="font-rethink bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer">
                   EXPLORE THE ARENA→
                 </button>
 
-                <button className="border border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
+                <button className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
                   HOST AN EVENT
                   <Calendar className="w-4 h-4 opacity-70" />
                 </button>
@@ -72,6 +72,7 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
                 p-5
                 lg:self-start
                 lg:ml-auto
+                font-rethink
               "
             >
               <div className="flex items-center gap-3 mb-5">
@@ -105,7 +106,7 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
             <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
               <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[60px] md:py-[80px]">
                 {/* LABEL */}
-                <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">
+                <div className="font-rethink flex items-center gap-3 mb-[40px] md:mb-[50px]">
                   {/* <span className="w-[26px] h-[1px] bg-[#ae1431]" /> */}
                   <p className="text-[15px] md:text-[18px] tracking-[0.28em] text-[#ae1431] uppercase">
                     Infrastructure at a glance

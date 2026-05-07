@@ -73,8 +73,8 @@ const institutions = [
             The ERAM Learning Continuum
           </h2>
 
-          <p className="institutions-text mx-auto mt-[18px] max-w-[820px] text-[18px] leading-[1.65] text-black max-[640px]:text-[15px]">
-            <span className="text-[#111] font-medium">
+          <p className="institutions-text font-rethink mx-auto mt-[18px] max-w-[820px] text-[18px] leading-[1.65] text-black max-[640px]:text-[15px]">
+            <span className="  text-[#111] ">
               An ecosystem designed to guide students from foundation to
               formation.
             </span>
@@ -113,7 +113,7 @@ const institutions = [
 
 
               {/* title */}
-              <h3 className="mt-[22px] text-[20px] font-[500] tracking-[0.02em] text-[#111] max-[640px]:mt-[16px] max-[640px]:text-[18px]">
+              <h3 className="font-rethink mt-[22px] text-[20px] font-[500] tracking-[0.02em] text-[#111] max-[640px]:mt-[16px] max-[640px]:text-[18px]">
                 {item.title}
               </h3>
 
@@ -128,7 +128,7 @@ const institutions = [
     navigate(item.path); // internal
   }
 }}
-  className="mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black cursor-pointer"
+  className="font-rethink mt-[14px] inline-block border-b-[2px] border-[#6d6d6d] pb-[3px] text-[13px] uppercase tracking-[0.14em] text-[#6d6d6d] transition-all hover:border-black hover:text-black cursor-pointer"
 >
   View More
 </button>

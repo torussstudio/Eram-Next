@@ -288,13 +288,11 @@ function SystemsThatSustainExcellence() {
           <div className="text-center max-w-[720px] mx-auto">
 
             <div className="flex items-center justify-center gap-3 mb-5">
-              {/* FIX 2: Split into two distinct class names so each line gets
-                  its own correct transformOrigin in the GSAP animation above. */}
               <div
                 className="systems-eyebrow-line-left h-px bg-black/30 w-10"
                 style={{ transformOrigin: "left center" }}
               />
-              <span className="text-[11px] uppercase tracking-[0.2em] text-[#F5EFE8] font-medium">
+              <span className="font-rethink text-[11px] uppercase tracking-[0.2em] text-[#F5EFE8] font-medium">
                 Academic Systems
               </span>
               <div
@@ -311,7 +309,7 @@ function SystemsThatSustainExcellence() {
               ))}
             </h2>
 
-            <p className="systems-subtext mt-4 text-[14px] md:text-[15px] text-[#F5EFE8] leading-relaxed max-w-[560px] mx-auto">
+            <p className="font-rethink systems-subtext mt-4 text-[14px] md:text-[15px] text-[#F5EFE8] leading-relaxed max-w-[560px] mx-auto">
               Sustained academic performance requires consistent faculty
               development and institutional review mechanisms. ERAM integrates
               comprehensive academic systems, including:
@@ -401,7 +399,7 @@ function SystemsThatSustainExcellence() {
                         {CARD_TAGS[originalItemIndex].map((tag) => (
                           <span
                             key={tag}
-                            className="font-medium text-black/50 leading-snug"
+                            className="font-rethink font-medium text-black/50 leading-snug"
                             style={{ fontSize: "clamp(10px, 1.3vw, 13px)" }}
                           >
                             {tag}
@@ -448,7 +446,7 @@ function SystemsThatSustainExcellence() {
               }}
             />
             <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10">
-              <p className="system-desc text-center text-white text-[15px] sm:text-[17px] md:text-[22px] leading-relaxed max-w-[680px] font-light">
+              <p className="font-rethink system-desc text-center text-white text-[15px] sm:text-[17px] md:text-[22px] leading-relaxed max-w-[680px] font-light">
                 These systems ensure that faculty remain professionally
                 equipped, students receive guided mentorship, and institutional
                 standards are maintained across all campuses.

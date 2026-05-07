@@ -69,15 +69,15 @@
 //     </Router>
 //   );
 // }
+
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import ScrollToTop from "../components/layout/ScrollToTop";
 
-// Lazy layout
+// Layout
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 const Footer = lazy(() => import("../components/layout/Footer"));
-
 
 // Pages
 const Home = lazy(() => import("../pages/home/Home"));
@@ -113,8 +113,8 @@ export default function App() {
       <ScrollToTop />
 
       <div className="overflow-x-clip bg-[#F5EFE8] font-display text-[#111111] leading-[1.4]">
-        
-        {/* ✅ Navbar loads independently */}
+
+        {/* Navbar */}
         <Suspense fallback={null}>
           <Navbar
             onAboutHover={preloadAbout}
@@ -125,26 +125,21 @@ export default function App() {
           />
         </Suspense>
 
-        {/* ✅ SmoothScrollProvider isolated */}
-        <Suspense fallback={null}>
-            
-            {/* ✅ Only routes block UI */}
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about-us" element={<About />} />
-                <Route path="/the-trust" element={<TheTrust />} />
-                <Route path="/facilities" element={<Facilities />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/explore-arena" element={<ExploreArena />} />
-                <Route path="/mmhss" element={<MmHss />} />
-              </Routes>
-            </Suspense>
-
+        {/* Routes */}
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/the-trust" element={<TheTrust />} />
+            <Route path="/facilities" element={<Facilities />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/explore-arena" element={<ExploreArena />} />
+            <Route path="/mmhss" element={<MmHss />} />
+          </Routes>
         </Suspense>
 
-        {/* ✅ Footer loads independently */}
+        {/* Footer */}
         <Suspense fallback={null}>
           <Footer />
         </Suspense>

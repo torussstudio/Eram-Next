@@ -406,6 +406,7 @@ function StructuredLearningSection() {
                 md:opacity-0 md:translate-y-8
                 mt-4 md:mt-5
                 text-[14.5px] text-white/80 leading-relaxed
+                font-rethink
               "
             >
               The Trust believes that excellence emerges from systems, not
@@ -423,6 +424,7 @@ function StructuredLearningSection() {
                 flex items-center gap-2
                 hover:bg-white hover:text-[#b5122b] transition
                 cursor-pointer
+                font-rethink
               "
             >
               EXPLORE MORE
@@ -483,6 +485,7 @@ lg:min-w-[280px] lg:h-[240px]
                       md:bottom-6 md:left-12 md:right-10
                       text-[13px] md:text-[20px]
                       font-medium leading-[1.35] text-white
+                      font-rethink
                     "
                   >
                     {card.text}
@@ -522,6 +525,7 @@ lg:min-w-[280px] lg:h-[240px]
               text-[14.5px] text-white/80 leading-relaxed
               w-full md:max-w-[420px]
               ml-0 md:ml-[20px]
+              font-rethink
             "
           >
             Trust leadership maintains direct engagement with Principals and
@@ -551,6 +555,7 @@ lg:min-w-[280px] lg:h-[240px]
                 md:opacity-0 md:translate-y-12
                 relative rounded-[26px] overflow-hidden transform-gpu
                 w-full md:max-w-[460px]
+                
               "
             >
               {/* Image */}
@@ -593,7 +598,7 @@ lg:min-w-[280px] lg:h-[240px]
                 <p className="text-[20px] font-semibold text-white leading-tight tracking-[0.2px]">
                   {person.name}
                 </p>
-                <p className="mt-1 text-[13px] text-white/75 font-medium leading-snug">
+                <p className=" font-rethink mt-1 text-[13px] text-white/75 font-medium leading-snug">
                   – {person.role}
                 </p>
               </div>
@@ -624,7 +629,7 @@ lg:min-w-[280px] lg:h-[240px]
             {LIST_ITEMS.map((item, i) => (
               <li
                 key={i}
-                className="leadership-list-item md:opacity-0 md:translate-x-5 flex items-start gap-[10px]"
+                className="font-rethink leadership-list-item md:opacity-0 md:translate-x-5 flex items-start gap-[10px]"
               >
                 {/* Mobile dot — mt-[5px] aligns with first text line */}
                 <span className="mt-[5px] w-[5px] h-[5px] rounded-full bg-white/50 flex-shrink-0 md:hidden" />

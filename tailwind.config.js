@@ -33,6 +33,7 @@ export default {
       fontFamily: {
         sans: ['"Red Hat Display"', 'sans-serif'],
         display: ['Agency', 'sans-serif'],
+          rethink: ['"Rethink Sans"', 'sans-serif'],
       },
     },
   },

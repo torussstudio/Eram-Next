@@ -105,13 +105,13 @@ export default function PhilosophySection() {
             // className="w-[40px] h-[1px] bg-white/40"
             style={{ transformOrigin: "left", transform: "scaleX(0)" }}
           />
-          <span className="text-[11px] tracking-[0.28em] uppercase text-white/60">
+          <span className="font-rethink text-[11px] tracking-[0.28em] uppercase text-white/60">
             OUR PHILOSOPHY
           </span>
         </div>
 
         {/* HEADING */}
-        <h2 className="font-serif text-[clamp(2.8rem,4vw,4.5rem)] leading-[1.1] max-w-[600px]">
+        <h2 className="font-display text-[clamp(2.8rem,4vw,4.5rem)] leading-[1.1] max-w-[600px]">
           <span
             ref={headLine1Ref}
             className="block"
@@ -134,7 +134,7 @@ export default function PhilosophySection() {
           className="mt-10 max-w-[650px] border-l border-white/30 pl-6"
           style={{ opacity: 0, transform: "translateX(-20px)" }}
         >
-          <p className="text-[15px] leading-[1.8] text-white/85">
+          <p className="font-rethink text-[15px] leading-[1.8] text-white/85">
             The Trust approaches community development through infrastructure,
             capacity-building, and systems-based execution. Rather than
             short-term distribution models, initiatives are designed to
@@ -152,14 +152,14 @@ export default function PhilosophySection() {
              className="bg-[#f5efe8] p-[30px] min-h-[180px] flex flex-col justify-between border border-white/10 -ml-px -mt-px"
               style={{ opacity: 0, transform: "translateY(40px)" }}
             >
-              <span className="text-[12px] text-black tracking-[0.1em]">
+              <span className="font-display text-[12px] text-black tracking-[0.1em]">
                 {item.no}
               </span>
               <div>
-                <h3 className="mt-3 font-serif text-black text-[18px]">
+                <h3 className="font-display mt-3 text-black text-[18px]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[13px] text-black leading-[1.7]">
+                <p className="font-rethink mt-3 text-[13px] text-black leading-[1.7]">
                   {item.desc}
                 </p>
               </div>

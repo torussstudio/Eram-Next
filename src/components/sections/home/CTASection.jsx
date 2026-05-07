@@ -93,6 +93,7 @@ export default function CTASection() {
 
             mb-[28px]
             max-[640px]:text-[14px]
+            font-rethink
           "
         >
           Admissions are now open across our institutions.
@@ -133,6 +134,7 @@ export default function CTASection() {
               transition
               max-[640px]:w-full
               cursor-pointer
+              font-rethink
             "
           >
             APPLY NOW
@@ -163,6 +165,7 @@ export default function CTASection() {
               transition
               max-[640px]:w-full
               cursor-pointer
+              font-rethink
             "
           >
             BOOK A CAMPUS VISIT

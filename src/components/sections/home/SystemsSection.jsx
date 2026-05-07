@@ -230,7 +230,7 @@ export default function SystemsSection() {
               <br />
               Sustain Excellence
             </h2>
-            <p className="text-[14.5px] leading-[1.8] text-black">
+            <p className="font-rethink text-[14.5px] leading-[1.8] text-black">
               An integrated framework of management oversight, faculty
               excellence, and purpose-built infrastructure sustaining quality
               across every institution, ensuring continuous assessment, teacher
@@ -262,7 +262,7 @@ export default function SystemsSection() {
                       /{card.n}
                     </span>
                     <span
-                      className="flex justify-end text-[26px] font-medium leading-[1.2]"
+                      className="font-rethink flex justify-end text-[26px] font-medium leading-[1.2]"
                       style={{ color: isActive ? "white" : "#111" }}
                     >
                       {card.t}
@@ -276,7 +276,7 @@ export default function SystemsSection() {
 
         {/* button */}
         <div className="mt-[70px] flex justify-center px-[20px]">
-          <button className="rounded-[8px] border border-[#cfcfcf] px-[36px] py-[14px] text-[12px] font-[500] uppercase tracking-[0.16em] text-[#111] transition-all duration-300 hover:border-black hover:bg-black hover:text-white cursor-pointer">
+          <button className="font-rethink rounded-[8px] border border-[#cfcfcf] px-[36px] py-[14px] text-[12px] font-[500] uppercase tracking-[0.16em] text-[#111] transition-all duration-300 hover:border-black hover:bg-black hover:text-white cursor-pointer">
             EXPLORE OUR SYSTEMS & STANDARDS
           </button>
         </div>
