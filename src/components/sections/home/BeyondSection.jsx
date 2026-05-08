@@ -281,29 +281,26 @@ function BeyondCard({ card, isActive, onClick }) {
       <img
         src={card.image}
         alt={card.title}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:brightness-110"
       />
 
-      {/* Overlay */}
-      <div
-        className="absolute inset-0 transition-all duration-300"
-        style={{
-          background: isActive
-            ? "linear-gradient(to top, rgba(174,20,49,0.72), rgba(0,0,0,0.25))"
-            : "linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.20))",
-        }}
-      />
+    {/* Overlay */}
+<div className="absolute inset-0 bg-black/30 transition-all duration-500 group-hover:bg-black/10 z-[1]" />
 
-      {/* Content */}
-      <div className="relative z-10 flex h-full flex-col justify-between px-[clamp(18px,3vw,30px)]
-py-[clamp(18px,3vw,28px)] max-[640px]:px-[20px] max-[640px]:py-[18px]">
+<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent transition-all duration-500 group-hover:from-black/45 group-hover:via-black/5 z-[2]" />
+
+{/* Content */}
+<div className="relative z-[3] flex h-full flex-col justify-between px-[clamp(18px,3vw,30px)] py-[clamp(18px,3vw,28px)] max-[640px]:px-[20px] max-[640px]:py-[18px]">
         {/* Code */}
-        <div className="text-[clamp(1rem,2vw,1.55rem)] font-[700] tracking-[0.16em] flex justify-start text-white/75 max-[640px]:text-[19px]">
+       <div className="absolute inset-0 bg-black/35 transition-all duration-500 group-hover:bg-black/15" />
+
+<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-all duration-500 group-hover:from-black/40 group-hover:via-black/5" />
+        <div className="text-[clamp(1rem,2vw,1.55rem)] font-[700] tracking-[0.16em] flex justify-start text-white/85 max-[640px]:text-[19px]">
           {card.code}
         </div>
 
         {/* Title */}
-        <div className="font-rethink max-w-[220px]  text-[clamp(1rem,2vw,1.45rem)] font-[500] leading-[1.15] text-white max-[640px]:text-[18px]">
+        <div className="font-rethink max-w-[220px]  text-[clamp(1rem,2vw,1.45rem)] font-[500] leading-[1.15] text-white/85 max-[640px]:text-[18px]">
           {card.title}
         </div>
       </div>

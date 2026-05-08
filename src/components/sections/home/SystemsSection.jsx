@@ -44,9 +44,7 @@ const SCROLL_BY   = 2;
 const CARD_WIDTH  = 320;
 const CARD_GAP    = 18;
 
-/* ─── Config per tab ──────────────────────────────────────────────────────── */
-// showText  → show left text block
-// fullWidth → cards fill the row (calc width)
+
 const TAB_CONFIG = [
   { showText: false, fullWidth: true,  showArrows: true  },
   { showText: false, fullWidth: true,  showArrows: false },
