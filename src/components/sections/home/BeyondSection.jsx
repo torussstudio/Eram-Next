@@ -1,232 +1,3 @@
-// import { useState, useRef } from "react";
-// import gsap from "gsap";
-// import { useGSAP } from "@gsap/react";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import ActionButton from "../../ui/ActionButton";
-// import { section } from "../../../constants/homeStyles";
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// const BEYOND_CARDS = [
-//   {
-//     code: "/01",
-//     title: "JCI & ROTARY",
-//     image: "/images/beyond1.png",
-//   },
-//   {
-//     code: "/02",
-//     title: "STEM CLUBS",
-//     image: "/images/beyond2.png",
-//   },
-//   {
-//     code: "/03",
-//     title: "RESIDENTIAL CAMPS",
-//     image: "/images/beyond3.png",
-//   },
-//   {
-//     code: "/04",
-//     title: "TRAINING SESSIONS",
-//     image: "/images/beyond4.png",
-//   },
-//   {
-//     code: "/05",
-//     title: "STATE-LEVEL PROGRAMS",
-//     image: "/images/beyond5.jpg",
-//   },
-//   {
-//     code: "/06",
-//     title: "SOCIETY-CONNECT INITIATIVES",
-//     image: "/images/beyond6.png",
-//   },
-// ];
-
-
-// export default function BeyondSection() {
-//   const sectionRef = useRef(null);
-//   const [activeCard, setActiveCard] = useState(0);
-
-//   useGSAP(
-//     () => {
-//       const defaults = { ease: "power2.out" };
-
-//       gsap.fromTo(
-//         ".beyond-heading",
-//         { opacity: 0, y: 30 },
-//         {
-//           ...defaults,
-//           opacity: 1,
-//           y: 0,
-//           duration: 0.8,
-//           scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-//         },
-//       );
-
-//       gsap.fromTo(
-//         ".beyond-card",
-//         { opacity: 0, x: 50 },
-//         {
-//           opacity: 1,
-//           x: 0,
-//           duration: 0.8,
-//           stagger: 0.15,
-//           ease: "power3.out",
-//           scrollTrigger: { trigger: ".beyond-cards-container", start: "top 85%" },
-//         },
-//       );
-//     },
-//     { scope: sectionRef },
-//   );
-
-//   return (
-//     <section
-//       ref={sectionRef}
-//       id="beyond"
-//       className={`${section} pt-[90px] pb-[120px] bg-[#ae1431]`}
-//     >
-//       <div className="mx-auto w-[min(1200px,calc(100vw-140px))] text-center">
-//         {/* Heading */}
-//         <h2 className="beyond-heading font-display mb-[14px] text-[36px] font-[700] leading-[1.2] tracking-[-0.02em] text-[#f5efe8] max-[640px]:text-[28px]">
-//           BEYOND THE CLASSROOM
-//         </h2>
-
-//         {/* Description */}
-//         <p className="beyond-heading font-rethink mx-auto mb-[26px] max-w-[560px] text-[14.5px] leading-[1.7] text-[#f5efe8] max-[640px]:text-[13px]">
-//           Clubs, leadership forums, residential programs, state-level
-//           participation, curated experiences, learning that extends beyond
-//           textbooks.
-//         </p>
-
-//         {/* CTA */}
-//         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
-//           <ActionButton
-//             variant="secondary"
-//             className="font-rethink text-[#f5efe8] max-[640px]:!w-auto cursor-pointer hover:bg-black hover:text-white"
-//           >
-//             Explore Student Pathways
-//           </ActionButton>
-//         </div>
-
-//         {/* Cards */}
-//         <div className="beyond-cards-container mx-auto mt-[48px] w-[85%] overflow-hidden max-[1100px]:w-[88%] max-[640px]:mt-[34px] max-[640px]:w-full">
-//           <div className="flex snap-x snap-mandatory gap-[22px] overflow-x-auto pb-[16px] scrollbar-hide max-[640px]:gap-[12px]">
-//             {BEYOND_CARDS.map((card, index) => {
-//               const isActive = activeCard === index;
-//               const color = isActive ? "#ae1431" : "#f5efe8";
-
-//               return (
-//                 <div
-//   key={card.title}
-//   onClick={() => setActiveCard(index)}
-//   className="
-//     beyond-card
-//     group
-//     relative
-//     cursor-pointer
-//     flex
-//     h-[225px]
-//     w-[350px]
-//     flex-none
-//     snap-start
-//     overflow-hidden
-//     rounded-[22px]
-
-//     max-[640px]:h-[185px]
-//     max-[640px]:w-[260px]
-//     max-[640px]:rounded-[18px]
-//   "
-// >
-
-//   {/* IMAGE */}
-//   <img
-//     src={card.image}
-//     alt={card.title}
-//     className="
-//       absolute
-//       inset-0
-//       h-full
-//       w-full
-//       object-cover
-//       transition-transform
-//       duration-700
-//       group-hover:scale-105
-//     "
-//   />
-
-//   {/* OVERLAY */}
-//   <div
-//     className="absolute inset-0 transition-all duration-300"
-//     style={{
-//       background: isActive
-//         ? "linear-gradient(to top, rgba(174,20,49,0.72), rgba(0,0,0,0.25))"
-//         : "linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.20))",
-//     }}
-//   />
-
-//   {/* CONTENT */}
-//   <div
-//     className="
-//       relative
-//       z-10
-//       flex
-//       h-full
-//       flex-col
-//       justify-between
-
-//       px-[30px]
-//       py-[28px]
-
-//       max-[640px]:px-[20px]
-//       max-[640px]:py-[18px]
-//     "
-//   >
-
-//     {/* CODE */}
-//     <div
-//       className="
-//         text-[25px]
-//         font-[700]
-//         tracking-[0.16em]
-//         text-white/75
-
-//         max-[640px]:text-[19px]
-//       "
-//     >
-//       {card.code}
-//     </div>
-
-//     {/* TITLE */}
-//     <div
-//       className="
-//         font-rethink
-//         max-w-[220px]
-//         self-end
-//         text-right
-
-//         text-[23px]
-//         font-[500]
-//         leading-[1.15]
-//         text-white
-
-//         max-[640px]:text-[18px]
-//       "
-//     >
-//       {card.title}
-//     </div>
-//   </div>
-// </div>
-//               );
-//             })}
-//           </div>
-//         </div>
-
-//         {/* Divider */}
-//         <div className="mx-auto mt-[60px] w-[85%] border-t-[2px] border-[#f5efe8] max-[1100px]:w-[88%] max-[640px]:mt-[40px] max-[640px]:w-full" />
-//       </div>
-//     </section>
-//   );
-// }
-
-
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -310,7 +81,7 @@ export default function BeyondSection() {
       id="beyond"
       className={`${section} pt-[90px] pb-[120px] bg-[#ae1431]`}
     >
-      <div className="mx-auto w-[min(1200px,calc(100vw-140px))] text-center">
+      <div className="mx-auto w-full max-w-[1200px] px-[20px] md:px-[32px] lg:px-[40px] text-center">
 
         {/* Heading */}
         <h2 className="beyond-heading font-display mb-[14px] text-[36px] font-[700] leading-[1.2] tracking-[-0.02em] text-[#f5efe8] max-[640px]:text-[28px]">
@@ -335,18 +106,68 @@ export default function BeyondSection() {
         </div>
 
         {/* Cards + Arrow Buttons */}
-        <div className="beyond-cards-container mx-auto mt-[48px] w-[85%] max-[1100px]:w-[88%] max-[640px]:mt-[34px] max-[640px]:w-full">
+        <div
+  className="
+    beyond-cards-container
+    mx-auto
+    mt-[48px]
 
+    w-full
+
+    max-[640px]:
+    mt-[34px]
+  "
+>
           {/* Row: arrow-left | scrollable strip | arrow-right */}
-          <div className="flex items-center gap-[14px] max-[640px]:gap-[8px]">
+          <div
+  className="
+    flex
+    items-center
+
+    gap-[14px]
+
+    max-[768px]:
+    gap-[10px]
+
+    max-[640px]:
+    gap-[6px]
+  "
+>
 
             {/* ← Left Arrow */}
             <ArrowButton direction="left" onClick={() => scrollCarousel("left")} />
 
             {/* Scrollable cards */}
-            <div
-              ref={scrollRef}
-              className="flex flex-1 snap-x snap-mandatory gap-[22px] overflow-x-auto pb-[16px] scrollbar-hide max-[640px]:gap-[12px]"
+          <div
+  ref={scrollRef}
+  style={{
+    WebkitOverflowScrolling: "touch",
+  }}
+              className="
+  flex
+  flex-1
+
+  snap-x
+  snap-mandatory
+
+  gap-[22px]
+
+  overflow-x-auto
+
+  pb-[16px]
+
+  scrollbar-hide
+
+  scroll-smooth
+
+  px-[2px]
+
+  max-[900px]:
+  gap-[16px]
+
+  max-[640px]:
+  gap-[12px]
+"
             >
               {BEYOND_CARDS.map((card, index) => (
                 <BeyondCard
@@ -429,23 +250,31 @@ function BeyondCard({ card, isActive, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="
-        beyond-card
-        group
-        relative
-        cursor-pointer
-        flex
-        h-[225px]
-        w-[350px]
-        flex-none
-        snap-start
-        overflow-hidden
-        rounded-[22px]
+     className="
+  beyond-card
 
-        max-[640px]:h-[185px]
-        max-[640px]:w-[260px]
-        max-[640px]:rounded-[18px]
-      "
+  group
+  relative
+  cursor-pointer
+
+  flex-none
+  snap-start
+
+  overflow-hidden
+
+  rounded-[22px]
+
+  w-[clamp(240px,30vw,350px)]
+  h-[clamp(180px,22vw,225px)]
+
+  transition-transform
+  duration-500
+
+  hover:-translate-y-[4px]
+
+  max-[640px]:
+  rounded-[18px]
+"
     >
       {/* Image */}
       <img
@@ -465,14 +294,15 @@ function BeyondCard({ card, isActive, onClick }) {
       />
 
       {/* Content */}
-      <div className="relative z-10 flex h-full flex-col justify-between px-[30px] py-[28px] max-[640px]:px-[20px] max-[640px]:py-[18px]">
+      <div className="relative z-10 flex h-full flex-col justify-between px-[clamp(18px,3vw,30px)]
+py-[clamp(18px,3vw,28px)] max-[640px]:px-[20px] max-[640px]:py-[18px]">
         {/* Code */}
-        <div className="text-[25px] font-[700] tracking-[0.16em] flex justify-start text-white/75 max-[640px]:text-[19px]">
+        <div className="text-[clamp(1rem,2vw,1.55rem)] font-[700] tracking-[0.16em] flex justify-start text-white/75 max-[640px]:text-[19px]">
           {card.code}
         </div>
 
         {/* Title */}
-        <div className="font-rethink max-w-[220px]  text-[23px] font-[500] leading-[1.15] text-white max-[640px]:text-[18px]">
+        <div className="font-rethink max-w-[220px]  text-[clamp(1rem,2vw,1.45rem)] font-[500] leading-[1.15] text-white max-[640px]:text-[18px]">
           {card.title}
         </div>
       </div>

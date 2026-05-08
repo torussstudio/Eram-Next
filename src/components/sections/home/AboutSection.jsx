@@ -637,45 +637,27 @@ export default function AboutSection() {
 
         </div>
 
-       <div
+      <div
   ref={mCardsWrap}
-  className="px-[28px] max-[480px]:px-[20px] grid grid-cols-2 gap-[14px] max-[560px]:grid-cols-1"
+  className="px-[28px] max-[480px]:px-[20px] grid grid-cols-2 gap-[14px]"
 >
   {[
-    {
-      src: "/images/about1.webp",
-      alt: "Campus",
-      h: "min-h-[200px] max-[560px]:min-h-[180px]",
-    },
-    {
-      src: "/images/about2.webp",
-      alt: "Students",
-      h: "min-h-[240px] max-[560px]:min-h-[180px] min-[561px]:mt-[-40px]",
-    },
-    {
-      src: "/images/about3.webp",
-      alt: "Education",
-      h: "min-h-[200px] max-[560px]:min-h-[180px] min-[561px]:mt-[40px]",
-    },
-    {
-      src: "/images/about4.webp",
-      alt: "Institution",
-      h: "min-h-[200px] max-[560px]:min-h-[180px]",
-    },
+    { src: "/images/about1.webp", alt: "Campus" },
+    { src: "/images/about2.webp", alt: "Students" },
+    { src: "/images/about3.webp", alt: "Education" },
+    { src: "/images/about4.webp", alt: "Institution" },
   ].map((card, i) => (
     <div
       key={i}
-      ref={(el) => {
-        mCardsRef.current[i] = el;
-      }}
-      className={`
+      ref={(el) => { mCardsRef.current[i] = el; }}
+      className="
         group
         relative
         overflow-hidden
-        rounded-[22px]
+        rounded-[18px]
         bg-[#d8d8d8]
-        ${card.h}
-      `}
+        h-[180px]
+      "
     >
       <img
         src={card.src}

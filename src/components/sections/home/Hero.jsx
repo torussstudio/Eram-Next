@@ -539,10 +539,10 @@ export default function Hero() {
 
           {/* Buttons */}
           <div ref={buttonsRef} className="mt-11 flex flex-wrap gap-[14px]">
-            <ActionButton className="font-rethink !bg-[#ae1431] hover:!bg-black">
+            <ActionButton className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer">
               Explore Our Institutions
             </ActionButton>
-            <ActionButton className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8]">
+            <ActionButton className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer">
               Admissions Open 2026-27
             </ActionButton>
           </div>

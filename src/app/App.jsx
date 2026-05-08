@@ -90,6 +90,9 @@ const ExploreArena = lazy(() =>
   import("../pages/explore-arena/ExploreArena")
 );
 const MmHss = lazy(() => import("../pages/mmhss/MmHss"));
+const Mmps = lazy(() => import("../pages/mmps/Mmps"));
+const Amlp = lazy(() => import("../pages/amlp/Amlp"));
+const Mmite = lazy(() => import("../pages/mmite/Mmite"));
 
 // Preload helpers
 const preloadAbout = () => import("../pages/about-us/About");
@@ -136,6 +139,9 @@ export default function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/explore-arena" element={<ExploreArena />} />
             <Route path="/mmhss" element={<MmHss />} />
+            <Route path="/mmps" element={<Mmps />} />
+            <Route path="/amlp" element={<Amlp />} />
+             <Route path="/mmite" element={<Mmite />} />
           </Routes>
         </Suspense>
 
