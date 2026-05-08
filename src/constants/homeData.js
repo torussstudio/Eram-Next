@@ -72,7 +72,11 @@ export const facultySystems = [
 
   "Observation<br/>based<br/>evaluation",
 
+  "Observation-based evaluation",
+
   "SQAAF /<br/>quality<br/>frameworks",
+
+  "Curriculum alignment"
 ];
 
 export const beyondCards = [

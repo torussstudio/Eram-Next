@@ -9,16 +9,16 @@ gsap.registerPlugin(ScrollTrigger);
 /* ── Data ────────────────────────────────────────────────────────── */
 const impactItems = [
   { code: "/01", title: "Free & subsidised education" },
-  { code: "/02", title: "Healthcare Outreach"          },
-  { code: "/03", title: "Community Resilience"         },
-  { code: "/04", title: "Student Pathways"             },
-  { code: "/05", title: "Youth Development"            },
-  { code: "/06", title: "Skills Training"              },
+  { code: "/02", title: "Healthcare outreach and medical camps"          },
+  { code: "/03", title: "Water conservation projects and 180+ community wells"         },
+  { code: "/04", title: "Interreligious harmony initiatives"             },
+  { code: "/05", title: "Housing support for disaster-affected families"            },
+  { code: "/06", title: "WHO-certified teacher training programs"              },
 ];
 
 const CARD_WIDTH  = 350;
 const CARD_GAP    = 20;
-const SCROLL_BY   = 2;
+const SCROLL_BY   = 1;
 
 /* ── SplitHeading ────────────────────────────────────────────────── */
 function SplitHeading({ text, className }) {

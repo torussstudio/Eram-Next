@@ -86,7 +86,7 @@ export default function PhilosophySection() {
     },
     {
       no: "/04",
-      title: "Governance-Backed Continuity",
+      title: "Maintaining governance-backed continuity",
       desc: "Every long-term initiative is anchored in institutional oversight — ensuring accountability, measurability, and continuity across leadership transitions.",
     },
   ];

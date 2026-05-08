@@ -64,18 +64,32 @@ export default function InstitutionsSection() {
         <MarqueeText />
 
         {/* ── Heading ── */}
-        <div className="mx-auto mt-10 max-w-[720px] text-center">
+       <div className="mx-auto mt-10 w-full max-w-[980px] px-[20px] text-center">
           <h2 className="inst-heading font-display text-[44px]  tracking-[-0.02em] text-[#111] md:text-[32px] sm:text-[26px]">
             The ERAM Learning Continuum
           </h2>
-
-          <p className="inst-heading font-rethink mx-auto mt-4 text-[18px] leading-[1.7] text-[#444] sm:text-[15px]">
-            An ecosystem designed to guide students from foundation to formation.{" "}
-            <span className="text-[#111]">
-              From foundational schooling to teacher training, each institution
-              strengthens a different stage of the learner's journey.
-            </span>
-          </p>
+<p
+  className="
+    inst-heading font-rethink
+    mx-auto mt-4
+    w-full max-w-[900px]
+    px-[20px]
+    text-center
+    text-[22px] leading-[1.7]
+    text-[#111]
+    sm:max-w-full
+    sm:px-0
+    sm:text-[15px]
+  "
+>
+  An ecosystem designed to guide students from foundation to formation.
+  <br></br>
+  <span className="text-[#444]">
+    {" "}
+    From foundational schooling to teacher training, each institution
+    strengthens a different stage of the learner's journey.
+  </span>
+</p>
         </div>
 
         {/* ── Cards ── */}
@@ -121,6 +135,7 @@ export default function InstitutionsSection() {
                   transition-colors duration-200
                   hover:border-black hover:text-black
                   disabled:cursor-default disabled:opacity-40
+                  cursor-pointer
                 "
               >
                 View More

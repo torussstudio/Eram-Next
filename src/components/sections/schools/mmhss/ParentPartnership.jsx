@@ -119,9 +119,9 @@ export default function ParentPartnership() {
             </div>
 
             <h2 className="font-display anim-title text-[#1a1209] leading-[1.05] tracking-[-0.02em]
-              text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px]">
-              Discipline &amp; Communication as Accountability
-            </h2>
+  text-[26px] sm:text-[30px] md:text-[28px] lg:text-[32px] xl:text-[36px]">
+  Discipline &amp; Communication<br />as Accountability
+</h2>
 
             <div className="anim-divider w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 

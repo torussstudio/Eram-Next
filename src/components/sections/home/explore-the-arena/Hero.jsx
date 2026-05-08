@@ -27,7 +27,6 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
             {/* LEFT */}
             <div className="flex-1 max-w-[720px]">
               <div className="flex items-center gap-3 mb-5">
-                {/* <span className="w-6 h-[1px] bg-[#ae1431]"></span> */}
                 <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase">
                   The Eram Sports Arena
                 </p>
@@ -49,11 +48,11 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
               </p>
 
               <div className="flex flex-wrap gap-3 mt-7">
-                <button className="font-rethink bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer">
+                <button className="font-rethink bg-[#ae1431] rounded-[12px] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer">
                   EXPLORE THE ARENA→
                 </button>
 
-                <button className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
+                <button className="font-rethink border rounded-[12px] border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
                   HOST AN EVENT
                   <Calendar className="w-4 h-4 opacity-70" />
                 </button>

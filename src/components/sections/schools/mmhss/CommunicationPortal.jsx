@@ -97,9 +97,9 @@ export default function CommunicationPortal() {
             </span>
           </div>
 
-          <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
-            Centralised Access. Structured Communication.
-          </h1>
+         <h1 className="font-display anim-heading text-4xl md:text-[36px] lg:text-[42px] leading-tight mb-6">
+  Centralised Access.<br />Structured Communication.
+</h1>
 
           <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
             Academic monitoring and parent communications extend beyond the

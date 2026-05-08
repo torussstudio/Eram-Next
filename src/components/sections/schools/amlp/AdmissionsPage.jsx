@@ -1,5 +1,8 @@
+
+
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -7,19 +10,20 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const institutions = [
-  { type: "LP School",         name: "AMLP",  desc: "Aided Mappila LP School",                      isActive: false },
-  { type: "High School",       name: "MMPS",  desc: "Mariyumma Memorial Public School",              isActive: false },
-  { type: "Higher Secondary",  name: "MMHSS", desc: "Mariyumma Memorial Hr. Sec. School",            isActive: true  },
-  { type: "CBSE School",       name: "EASE",  desc: "ERAM Academy for Sports & Excellence",          isActive: false },
-  { type: "Teacher Training",  name: "MMITE", desc: "Mariyumma Memorial Institute of Teacher Ed.",   isActive: false },
+  { type: "LP School",        name: "AMLP",  desc: "Aided Mappila LP School",                     path: "/amlp"  },
+  { type: "High School",      name: "MMPS",  desc: "Mariyumma Memorial Public School",             path: "/mmps"  },
+  { type: "Higher Secondary", name: "MMHSS", desc: "Mariyumma Memorial Hr. Sec. School",           path: "/mmhss" },
+  { type: "CBSE School",      name: "EASE",  desc: "ERAM Academy for Sports & Excellence",         path: "https://ease.edu.in/"  },
+  { type: "Teacher Training", name: "MMITE", desc: "Mariyumma Memorial Institute of Teacher Ed.",  path: "/mmite" },
 ];
 
 export default function AdmissionsPage() {
   const containerRef = useRef(null);
+  const navigate     = useNavigate();
+  const location     = useLocation();
 
   useGSAP(
     () => {
-      // ─── Set initial states before any paint ───────────────────────────
       gsap.set(".anim-top-bar",    { scaleX: 0, transformOrigin: "left center" });
       gsap.set(".anim-hero-tag",   { opacity: 0, y: 12 });
       gsap.set(".anim-hero-title", { opacity: 0, y: 24 });
@@ -28,58 +32,25 @@ export default function AdmissionsPage() {
       gsap.set(".anim-inst-label", { opacity: 0 });
       gsap.set(".anim-inst-card",  { opacity: 0, y: 32 });
 
-      // ─── Hero sequence ─────────────────────────────────────────────────
       const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
-
       hero
-        // 1. Red bar draws in
-        .to(".anim-top-bar", {
-          scaleX: 1,
-          duration: 0.9,
-          ease: "expo.inOut",
-        })
-        // 2. Tagline fades up — slightly overlaps bar finish
-        .to(".anim-hero-tag", {
-          opacity: 1, y: 0,
-          duration: 0.55,
-        }, "-=0.25")
-        // 3. Title sweeps up — the headline deserves its own beat
-        .to(".anim-hero-title", {
-          opacity: 1, y: 0,
-          duration: 0.7,
-        }, "-=0.15")
-        // 4. Body copy follows, softer
-        .to(".anim-hero-desc", {
-          opacity: 1, y: 0,
-          duration: 0.6,
-        }, "-=0.4")
-        // 5. Buttons stagger in together
-        .to(".anim-hero-btn", {
-          opacity: 1, y: 0,
-          duration: 0.5,
-          stagger: 0.1,
-        }, "-=0.35");
+        .to(".anim-top-bar",    { scaleX: 1, duration: 0.9, ease: "expo.inOut" })
+        .to(".anim-hero-tag",   { opacity: 1, y: 0, duration: 0.55 }, "-=0.25")
+        .to(".anim-hero-title", { opacity: 1, y: 0, duration: 0.7  }, "-=0.15")
+        .to(".anim-hero-desc",  { opacity: 1, y: 0, duration: 0.6  }, "-=0.4")
+        .to(".anim-hero-btn",   { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.35");
 
-      // ─── Institutions — scroll-triggered ───────────────────────────────
       const inst = gsap.timeline({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: ".anim-inst-wrap",
           start: "top 80%",
-          once: true,           // fires exactly once; avoids replaying on scroll-up
+          once: true,
         },
       });
-
       inst
-        .to(".anim-inst-label", {
-          opacity: 1,
-          duration: 0.5,
-        })
-        .to(".anim-inst-card", {
-          opacity: 1, y: 0,
-          duration: 0.65,
-          stagger: { each: 0.08, ease: "power1.inOut" },
-        }, "-=0.2");
+        .to(".anim-inst-label", { opacity: 1, duration: 0.5 })
+        .to(".anim-inst-card",  { opacity: 1, y: 0, duration: 0.65, stagger: { each: 0.08, ease: "power1.inOut" } }, "-=0.2");
     },
     { scope: containerRef }
   );
@@ -102,7 +73,7 @@ export default function AdmissionsPage() {
               </span>
             </div>
 
-            <h1 className="font-display anim-hero-title  text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.02em] mb-8">
+            <h1 className="font-display anim-hero-title text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.02em] mb-8">
               Begin the Journey at MMHSS.
             </h1>
 
@@ -120,7 +91,7 @@ export default function AdmissionsPage() {
               Apply Now — 2026–27
               <ArrowRight size={15} />
             </button>
-            <button className="font-rethink anim-hero-btn border border-[#1a1209] text-[#1a1209] px-6 py-4 text-[13px] tracking-widest uppercase hover:bg-[#1a1209] hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px] ">
+            <button className="font-rethink anim-hero-btn border border-[#1a1209] text-[#1a1209] px-6 py-4 text-[13px] tracking-widest uppercase hover:bg-[#1a1209] hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px]">
               Book a Campus Visit
             </button>
           </div>
@@ -135,9 +106,10 @@ export default function AdmissionsPage() {
             Explore All ERAM Institutions
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-1  rounded-2xl overflow-hidden">
-            {institutions.map((inst, i) =>
-              inst.isActive ? (
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-1 rounded-2xl overflow-hidden">
+            {institutions.map((inst, i) => {
+              const isActive = location.pathname === inst.path;
+              return isActive ? (
                 <div key={i} className="anim-inst-card bg-[#8B1A14] p-6">
                   <p className="text-[10px] tracking-widest uppercase text-white/50 mb-3">
                     {inst.type}
@@ -150,6 +122,7 @@ export default function AdmissionsPage() {
               ) : (
                 <div
                   key={i}
+                  onClick={() => navigate(inst.path)}
                   className="anim-inst-card bg-white p-6 cursor-pointer group hover:bg-[#1a1209] transition-colors duration-200"
                 >
                   <p className="text-[10px] tracking-widest uppercase text-[#8a8278] group-hover:text-white/50 mb-3 transition-colors duration-200">
@@ -162,8 +135,8 @@ export default function AdmissionsPage() {
                     {inst.desc}
                   </p>
                 </div>
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </section>

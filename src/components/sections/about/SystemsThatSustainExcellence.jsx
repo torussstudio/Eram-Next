@@ -431,20 +431,20 @@ function SystemsThatSustainExcellence() {
               <OptimizedImage
                 src="/images/campus.webp"
                 alt="campus"
-                className="w-full h-full object-cover block"
+                className="w-full h-full object-cover"
                 sizes="100vw"
                 disableTransition
               />
             </div>
             <div className="absolute inset-0 bg-black/40" />
-            <div
+            {/* <div
               className="absolute inset-0 opacity-[0.04] pointer-events-none"
               style={{
                 backgroundImage:
                   "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
                 backgroundSize: "180px 180px",
               }}
-            />
+            /> */}
             <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10">
               <p className="font-rethink system-desc text-center text-white text-[15px] sm:text-[17px] md:text-[22px] leading-relaxed max-w-[680px] font-light">
                 These systems ensure that faculty remain professionally

@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ActionButton from "../../ui/ActionButton";
 import { section } from "../../../constants/homeStyles";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const BEYOND_CARDS = [
@@ -22,7 +23,7 @@ const GAP              = 22;
 const GAP_MOBILE       = 12;
 
 // How many cards to scroll per arrow click
-const SCROLL_BY = 2;
+const SCROLL_BY = 1;
 
 export default function BeyondSection() {
   const sectionRef   = useRef(null);

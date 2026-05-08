@@ -197,7 +197,7 @@ export default function Hero() {
               >
                 Mariyumma Memorial <br />
                 Higher Secondary <br />
-                <span className="font-display italic text-white/60">School</span>
+                <span className="font-display  text-white/60">School</span>
               </h1>
               <p
                 ref={subtextRef}

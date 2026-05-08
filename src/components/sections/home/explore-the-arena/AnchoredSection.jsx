@@ -29,15 +29,16 @@ export default function AnchoredSection() {
             </div>
 
             {/* TITLE */}
-           <h2 className="
+          <h2 className="
   font-display
-  text-[36px] sm:text-[40px] md:text-[45px]
+  text-[18px] sm:text-[28px] md:text-[36px] lg:text-[42px]
   leading-[1.15] md:leading-[1.1]
   tracking-[-0.02em]
   mb-[18px] md:mb-[26px]
   text-[#eae6df]
 ">
-  Anchored In Structured Athletic Development
+  Anchored In Structured<br />
+  Athletic Development
 </h2>
 
             {/* DESC */}

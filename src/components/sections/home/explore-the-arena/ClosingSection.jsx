@@ -17,7 +17,7 @@ export default function ClosingSection() {
 
              <h2 className="
   font-display
-  text-[36px] sm:text-[40px] md:text-[46px]
+  text-[36px] sm:text-[40px] md:text-[38px]
   leading-[1.15]
   tracking-[-0.02em]
   mb-[20px] md:mb-[26px]

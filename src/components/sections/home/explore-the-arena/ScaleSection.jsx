@@ -18,7 +18,7 @@ export default function ScaleSection() {
                 </p>
               </div>
 
-             <h2 className="font-display text-[34px] sm:text-[42px] md:text-[48px] leading-[1.1] tracking-[-0.02em] text-[#eae6df]">
+             <h2 className="font-display text-[34px] sm:text-[42px] md:text-[36px] leading-[1.1] tracking-[-0.02em] text-[#eae6df]">
   A Landmark Addition <br></br>to the ERAM Campus.
 </h2>
             </div>
