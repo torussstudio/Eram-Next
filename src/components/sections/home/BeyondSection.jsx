@@ -9,12 +9,12 @@ import { section } from "../../../constants/homeStyles";
 gsap.registerPlugin(ScrollTrigger);
 
 const BEYOND_CARDS = [
-  { code: "/01", title: "JCI & ROTARY",               image: "/images/beyond1.png" },
-  { code: "/02", title: "STEM CLUBS",                  image: "/images/beyond2.png" },
-  { code: "/03", title: "RESIDENTIAL CAMPS",           image: "/images/beyond3.png" },
-  { code: "/04", title: "TRAINING SESSIONS",           image: "/images/beyond4.png" },
-  { code: "/05", title: "STATE-LEVEL PROGRAMS",        image: "/images/beyond5.jpg" },
-  { code: "/06", title: "SOCIETY-CONNECT INITIATIVES", image: "/images/beyond6.png" },
+  { code: "/01", title: "JCI & ROTARY",               image: "/images/beyond1.webp" },
+  { code: "/02", title: "STEM CLUBS",                  image: "/images/beyond2.webp" },
+  { code: "/03", title: "RESIDENTIAL CAMPS",           image: "/images/beyond3.webp" },
+  { code: "/04", title: "TRAINING SESSIONS",           image: "/images/beyond4.webp" },
+  { code: "/05", title: "STATE-LEVEL PROGRAMS",        image: "/images/beyond5.webp" },
+  { code: "/06", title: "SOCIETY-CONNECT INITIATIVES", image: "/images/beyond6.webp" },
 ];
 
 const CARD_WIDTH       = 350; // px  (desktop)

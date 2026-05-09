@@ -236,7 +236,7 @@ function SpacesDesignedForOpportunity() {
               >
                 <div className="spaces-img w-full h-full scale-[1.05]">
                   <OptimizedImage
-                    src="/images/auditorium.webp"
+                    src="/images/auditorium (1).webp"
                     alt="amphitheatre"
                     className="w-full h-full object-cover block"
                     sizes="(max-width: 1024px) 50vw, 33vw"

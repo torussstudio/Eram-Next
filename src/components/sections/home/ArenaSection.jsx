@@ -176,7 +176,7 @@ export default function ArenaSection() {
           max-[640px]:rounded-[22px]
         "
         style={{
-          backgroundImage: "url('/images/sportsarena.png')",
+          backgroundImage: "url('/images/sportsarena.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center 40%",
           height: "calc(100vh - 56px)",

@@ -33,10 +33,10 @@ const CARDS_DATA = [
     { n: "04", t: "Regular review meetings",                      img: "/images/cardinfra4.webp" },
   ],
   [
-    { n: "01", t: "Amphitheatre & cultural spaces",       img: "/images/cardinstit1.png" },
-    { n: "02", t: "Modern classrooms & labs",             img: "/images/institute.png"   },
-    { n: "03", t: "Sports grounds & athletics facilities",img: "/images/cardinstit3.png" },
-    { n: "04", t: "Community-Rooted Vision",              img: "/images/cardinstit4.png" },
+    { n: "01", t: "Amphitheatre & cultural spaces",       img: "/images/cardinstit1.webp" },
+    { n: "02", t: "Modern classrooms & labs",             img: "/images/institute.webp"   },
+    { n: "03", t: "Sports grounds & athletics facilities",img: "/images/cardinstit3.webp" },
+    { n: "04", t: "Community-Rooted Vision",              img: "/images/cardinstit4.webp" },
   ],
 ];
 

@@ -26,7 +26,7 @@ function PurposeSection() {
           Expanding equitable <br /> access to education
         </>
       ),
-      icon: "/icons/access.png",
+      icon: "/icons/access.webp",
     },
     {
       title: (
@@ -34,7 +34,7 @@ function PurposeSection() {
           Upholding uncompromising <br /> academic rigor
         </>
       ),
-      icon: "/icons/rigor.png",
+      icon: "/icons/rigor.webp",
     },
     {
       title: (
@@ -42,7 +42,7 @@ function PurposeSection() {
           Supporting holistic <br /> student development
         </>
       ),
-      icon: "/icons/development.png",
+      icon: "/icons/development.webp",
     },
     {
       title: (
@@ -50,7 +50,7 @@ function PurposeSection() {
           Serving communities <br /> with institutional responsibility
         </>
       ),
-      icon: "/icons/community.png",
+      icon: "/icons/community.webp",
     },
   ];
 

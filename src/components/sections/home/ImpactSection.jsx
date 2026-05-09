@@ -206,8 +206,8 @@ export default function ImpactSection() {
       {/* ── Desktop top layout ──────────────────────────────────── */}
       <div className={`${shell} grid grid-cols-[1.05fr_0.95fr] max-[1100px]:grid-cols-1 max-[640px]:hidden`}>
         <div className="ml-[200px] grid grid-cols-[0.85fr_1.15fr] items-end gap-[26px] pt-[10px]">
-          <ImpactImage src="/images/impact1.png" alt="Community support" className="img-left  h-[200px] w-[300px]" />
-          <ImpactImage src="/images/impact2.png" alt="Social outreach"   className="img-right h-[300px] w-[300px]" />
+          <ImpactImage src="/images/impact1.webp" alt="Community support" className="img-left  h-[200px] w-[300px]" />
+          <ImpactImage src="/images/impact2.webp" alt="Social outreach"   className="img-right h-[300px] w-[300px]" />
         </div>
 
         <div className="max-w-[480px] pt-[25px] pl-[50px] max-[1100px]:pl-0 max-[1100px]:pt-9">
@@ -233,8 +233,8 @@ export default function ImpactSection() {
       {/* ── Mobile top layout ───────────────────────────────────── */}
       <div className="hidden max-[640px]:flex flex-col gap-8 px-5 pt-11">
         <div className="flex w-full items-end gap-3">
-          <ImpactImage src="/images/impact1.png" alt="Students" className="mob-img h-[160px] flex-1" />
-          <ImpactImage src="/images/impact2.png" alt="Campus"   className="mob-img h-[200px] flex-1" />
+          <ImpactImage src="/images/impact1.webp" alt="Students" className="mob-img h-[160px] flex-1" />
+          <ImpactImage src="/images/impact2.webp" alt="Campus"   className="mob-img h-[200px] flex-1" />
         </div>
 
         <div className="flex flex-col gap-3.5">

@@ -61,7 +61,7 @@ export default function CTASection() {
 
   {/* BACKGROUND IMAGE */}
   <img
-    src="/images/cta-bg.jpg"
+    src="/images/cta-bg.webp"
     alt="Campus"
     className="
       absolute
