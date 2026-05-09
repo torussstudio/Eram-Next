@@ -169,7 +169,7 @@ export default function StructuredFramework({ setActive }) {
                   <span className=" font-rethink block text-[10px] tracking-[0.22em] text-[#B3201D] font-sans mb-[14px] transition-[letter-spacing,color] duration-[400ms] ease-[ease]">
                     {item.label}
                   </span>
-                  <h3 className="font-serif text-[clamp(15px,1.8vw,18px)] font-normal m-0 mb-[10px] leading-[1.3] text-white transition-colors duration-300">
+                  <h3 className="font-rethink text-[clamp(15px,1.8vw,18px)] font-normal m-0 mb-[10px] leading-[1.3] text-white transition-colors duration-300">
                     {item.title}
                   </h3>
                   <p className="text-[clamp(12px,1.2vw,13px)] leading-[1.78] text-white/50 m-0 font-sans transition-colors duration-[350ms]">

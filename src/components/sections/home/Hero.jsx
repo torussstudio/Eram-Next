@@ -7,7 +7,7 @@ import { shell } from "../../../constants/homeStyles";
 /* ─── Styles ──────────────────────────────────────────────────────────────── */
 const sectionCls = [
   shell,
-  "isolate relative block mt-[-20px]",
+  "isolate relative block",
   "before:content-[''] before:absolute before:-top-[160px] before:bottom-0",
   "before:w-[100vw] before:left-1/2 before:-translate-x-1/2",
   "before:bg-[#ae1431] before:-z-10",
@@ -182,7 +182,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
 
         {/* Content */}
-        <div className="relative z-10 max-w-[1500px] pb-[100px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
+        <div className="relative z-10 max-w-[1500px] pb-[100px] max-[640px]:pb-[20px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
 
           {/* H1 */}
           <h1 className={headingCls}>

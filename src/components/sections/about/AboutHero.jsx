@@ -90,7 +90,7 @@ function AboutHero() {
   return (
     <section
       ref={containerRef}
-      className={`${shell} bg-[#F5EFE8] py-9`}
+      className={`${shell}  bg-[#F5EFE8] py-9`}
     >
       <div className="overflow-hidden rounded-[28px] shadow-sm transform-gpu [contain:paint]">
         {/* HERO */}

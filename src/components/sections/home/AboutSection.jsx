@@ -525,7 +525,11 @@ export default function AboutSection() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="about-us" className="bg-[#ae1431] py-[100px]">
+    <section
+  ref={sectionRef}
+  id="about-us"
+  className="bg-[#ae1431] py-[100px] -mt-[2px]"
+>
 
       {/* ── Desktop ≥ 1100px ──────────────────────────────────────────────── */}
       <div className="hidden min-[1100px]:block mx-auto w-[min(1100px,calc(100vw-120px))]">
@@ -601,12 +605,11 @@ export default function AboutSection() {
       <div className="min-[1100px]:hidden">
         <div className="px-[28px] max-[480px]:px-[20px]">
 
-          <div ref={mLabelRef} className="mb-[36px]">
-            <span className="text-[11px] tracking-[0.28em] uppercase text-[#f5efe8] font-medium">
-              ABOUT US
-            </span>
-            <div className="mt-[6px] h-[1.5px] w-full bg-[#f5efe8]/40 rounded-full" />
-          </div>
+         <div ref={mLabelRef} className="mb-[36px]">
+  <span className="text-[11px] tracking-[0.28em] uppercase text-[#f5efe8] font-medium">
+    ABOUT US
+  </span>
+</div>
 
           <h2
             ref={mHeadingRef}

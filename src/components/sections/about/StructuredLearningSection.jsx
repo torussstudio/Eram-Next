@@ -351,7 +351,7 @@ function StructuredLearningSection() {
     {
       src: "/images/person2.webp",
       alt: "Mr. Abdussamod C K",
-      objPos: "object-[15%_center]",
+      objPos: "object-[15%_20%]",
       name: "Mr. Abdussamod C K",
       role: "Secretary & Manager",
       num: "02",

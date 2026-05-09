@@ -68,7 +68,7 @@ function TrustHero() {
           <div className="absolute inset-0">
             <div className="hero-img absolute inset-0 scale-110">
               <OptimizedImage
-                src="/images/about-hero.webp"
+                src="/images/trust-hero.webp"
                 alt="students"
                 className="w-full h-full object-cover"
                 loading="eager"

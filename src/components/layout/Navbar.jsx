@@ -16,15 +16,18 @@ const bgColor = isHome ? "bg-[#ae1431]" : "bg-[#F5EFE8]";
 const textColor = isHome ? "text-[#F5EFE8]" : "text-black";
 const borderColor = isHome ? "border-[#F5EFE8]/30" : "border-black/30";
 
-  const navLinkClassName = `
-  text-[0.88rem]
+const navLinkClassName = `
+  text-[1rem]
+  lg:text-[1.05rem]
+  xl:text-[1.08rem]
   font-semibold
   uppercase
   tracking-[0.04em]
   transition-colors
   duration-200
+  whitespace-nowrap
   ${textColor}
-  `;
+`;
 
   return (
     <div className=" w-full sticky top-0 z-[999]">
@@ -90,11 +93,12 @@ max-[920px]:px-[18px]
         <nav
           className="
           font-rethink
+          
 flex
 justify-center
 gap-[40px]
-lg:gap-[80px]
-xl:gap-[110px]
+lg:gap-[55px]
+xl:gap-[85px]
 max-[920px]:hidden
 "
         >
@@ -122,8 +126,8 @@ ${
           className="
           
 flex
-gap-[20px]
-lg:gap-[40px]
+gap-[16px]
+lg:gap-[24px]
 max-[920px]:hidden
 "
         >
