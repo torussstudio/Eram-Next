@@ -25,7 +25,6 @@ const STATS = [
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Hero() {
   const sectionRef = useRef(null);
-  const bgImgRef = useRef(null);
   const overlayRef = useRef(null);
   const badgeRef = useRef(null);
   const headingRef = useRef(null);
@@ -107,18 +106,6 @@ export default function Hero() {
         );
       }
 
-      /* ── 2. Parallax on background image ── */
-      gsap.to(bgImgRef.current, {
-        yPercent: 18,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.4,
-        },
-      });
-
       /* ── 3. Stats reveal on scroll ── */
       const statItems = statsRef.current?.querySelectorAll(".stat-item");
       if (statItems?.length) {
@@ -160,13 +147,12 @@ export default function Hero() {
       {/* ── HERO CARD ── */}
       <div className="relative rounded-[28px] overflow-hidden text-white">
         {/* BACKGROUND */}
-        <img
-          ref={bgImgRef}
-          src="/hero-bg.jpg"
-          alt="Hero"
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
-          style={{ height: "110%" }}
-        />
+ <img
+
+  src="/images/mmhss.webp"
+  alt="Hero"
+  className="absolute inset-x-0 top-0 w-full h-[78%] object-cover object-[center_70%]"
+/>
         <div ref={overlayRef} className="absolute inset-0 bg-black/70" />
 
         {/* CONTENT */}
@@ -217,15 +203,15 @@ export default function Hero() {
                 <button
                   className="font-rethink bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer
-                    rounded-sm active:scale-[0.98] transition-transform rounded-[15px]"
+                   active:scale-[0.98] transition-transform rounded-[12px]"
                 >
                   Admissions Open — Book Now →
                 </button>
                 <button
                   className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
-                    flex items-center gap-2 cursor-pointer rounded-sm
-                    active:scale-[0.98] transition-transform rounded-[15px]"
+                    flex items-center gap-2 cursor-pointer 
+                    active:scale-[0.98] transition-transform rounded-[12px]"
                 >
                   Enquire Now
                 </button>

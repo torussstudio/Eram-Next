@@ -51,11 +51,11 @@ export default function ArenaSection() {
 
       if (words?.length) {
         gsap.set(words, {
-          y: "110%",
-          skewX: 6,
-          force3D: true,
-          willChange: "transform",
-        });
+  y: "100%",
+  skewX: 3,
+  force3D: true,
+  willChange: "transform",
+});
       }
 
       /* ── Scroll-pinned timeline ───────────────────────────────────── */
@@ -85,15 +85,26 @@ export default function ArenaSection() {
       tl.to(overlay, { opacity: 0.42, duration: 0.22 }, 0.16);
 
       /* Phase 4 — lines slice in (0.20 → 0.46) */
-      tl.to(
-        lineTopRef.current,
-        { scaleX: 1, ease: "expo.out", duration: 0.2 },
-        0.2,
-      ).to(
-        lineBottomRef.current,
-        { scaleX: 1, ease: "expo.out", duration: 0.2 },
-        0.26,
-      );
+     tl.to(
+  lineTopRef.current,
+  { scaleX: 1, ease: "expo.out", duration: 0.5 },
+  0.2,
+)
+.to(
+  lineBottomRef.current,
+  { scaleX: 1, ease: "expo.out", duration: 0.5 },
+  0.26,
+)
+.to(
+  [lineTopRef.current, lineBottomRef.current],
+  {
+    opacity: 0,
+    duration: 0.12,
+    ease: "power2.out",
+    pointerEvents: "none",
+  },
+  0.72,
+);
 
       /* Phase 5 — heading slams in (0.34 → 0.54) */
       tl.to(
@@ -133,19 +144,22 @@ export default function ArenaSection() {
       );
 
       /* Phase 8 — letters curtain reveal (0.56 → 1.0) */
-      if (words?.length) {
-        tl.to(
-          words,
-          {
-            y: "0%",
-            skewX: 0,
-            ease: "expo.out",
-            duration: 0.8,
-            stagger: { each: 0.03, from: "start" }, // 0.10 → 0.03
-          },
-          0.56,
-        );
-      }
+if (words?.length) {
+  tl.to(
+    words,
+    {
+      y: "0%",
+      skewX: 0,
+      ease: "power4.out",
+      duration: 2,
+      stagger: {
+        each: 0.2,
+        from: "start",
+      },
+    },
+    0.56,
+  );
+}
 
       /* Cleanup willChange after scroll settles */
       ScrollTrigger.addEventListener("scrollEnd", () => {
@@ -213,8 +227,8 @@ export default function ArenaSection() {
           ref={outlineRef}
           className="
             pointer-events-none select-none
-            absolute z-20 bottom-[-70px] left-[30px]
-            font-display font-bold leading-[0.88] text-transparent
+            absolute z-20 bottom-[-55px] left-[30px]
+            font-display  leading-[0.88] text-transparent
             text-[clamp(7.2rem,13.2vw,14rem)] tracking-[-0.045em]
             [-webkit-text-stroke:1.6px_white]
             whitespace-nowrap
