@@ -185,7 +185,7 @@ function StructuredLearningSection() {
             <div className="flex gap-4 md:gap-5 overflow-x-auto scroll-smooth scrollbar-hide px-5 md:px-0 pb-2">
               {CARDS.map((card, i) => (
                 <div key={i} className="structured-card relative flex-shrink-0 overflow-hidden min-w-[240px] h-[260px] sm:min-w-[260px] sm:h-[280px] md:min-w-[260px] md:h-[220px] lg:min-w-[280px] lg:h-[240px] rounded-[20px] transform-gpu">
-                  <OptimizedImage src={card.img} alt={card.alt} className="leadership-img w-full h-full object-cover grayscale" sizes="(max-width: 768px) 260px, 360px" disableTransition />
+                  <OptimizedImage src={card.img} alt={card.alt} className="leadership-img w-full h-full object-cover" sizes="(max-width: 768px) 260px, 360px" disableTransition />
                   <div className="absolute inset-0 bg-black/25" />
                   <span className="absolute top-5 left-5 md:top-10 md:left-12 text-[14px] md:text-[18px] text-white">{card.num}</span>
                   <p className="absolute bottom-5 left-5 right-5 md:bottom-6 md:left-12 md:right-10 text-[13px] md:text-[20px] font-medium leading-[1.35] text-white font-rethink">{card.text}</p>
