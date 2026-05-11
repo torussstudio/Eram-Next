@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import ActionButton from "../ui/ActionButton";
 import { navItems } from "../../constants/homeData";
 import { shell } from "../../constants/homeStyles";
@@ -10,6 +10,7 @@ export default function Navbar() {
   const location = useLocation();
 
   const isHome = location.pathname === "/";
+  const navigate = useNavigate();
 
 
 const bgColor = isHome ? "bg-[#ae1431]" : "bg-[#F5EFE8]";
@@ -103,20 +104,34 @@ max-[920px]:hidden
 "
         >
           {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) => `
-${navLinkClassName}
-${
-  isActive
-    ? "text-[#ae1431] underline underline-offset-4 decoration-[1.5px] decoration-[#ae1431]"
-    : ""
-}
-`}
-            >
-              {item.label}
-            </NavLink>
+           <button
+  key={item.path}
+  onClick={() => {
+    if (item.path.startsWith("#")) {
+      const section = document.querySelector(item.path);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+        });
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          const target = document.querySelector(item.path);
+
+          target?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }, 200);
+      }
+    } else {
+      navigate(item.path);
+    }
+  }}
+  className={navLinkClassName}
+>
+  {item.label}
+</button>
           ))}
         </nav>
 
@@ -229,20 +244,36 @@ min-[921px]:hidden
 
           <nav className="flex flex-col gap-7 px-7 py-10">
             {navItems.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) => `
-text-[1.15rem]
-font-medium
-uppercase
-tracking-[0.05em]
-${isActive ? "text-[#ae1431]" : "text-black"}
-`}
-              >
-                {item.label}
-              </NavLink>
+             <button
+  key={item.path}
+  onClick={() => {
+    setOpen(false);
+
+    if (item.path.startsWith("#")) {
+      const section = document.querySelector(item.path);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+        });
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          const target = document.querySelector(item.path);
+
+          target?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }, 200);
+      }
+    } else {
+      navigate(item.path);
+    }
+  }}
+  className="text-[1.15rem] font-medium uppercase tracking-[0.05em] text-left"
+>
+  {item.label}
+</button>
             ))}
           </nav>
 

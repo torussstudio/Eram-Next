@@ -1,7 +1,7 @@
 export const navItems = [
   { label: "About Us", path: "/about-us" },
   { label: "The Trust", path: "/the-trust" },
-  { label: "Institutions", path: "/facilities" },
+  { label: "Institutions", path: "#institutions" },
   { label: "Sports Arena", path: "/contact" },
   { label: "Contact", path: "/gallery" },
 ];
