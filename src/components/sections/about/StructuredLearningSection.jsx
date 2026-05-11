@@ -221,7 +221,7 @@ function StructuredLearningSection() {
                   <OptimizedImage
                     src={person.src}
                     alt={person.alt}
-                    className={`w-full h-full object-cover grayscale block ${person.objPos} transition-opacity duration-500 ease-in-out group-hover:opacity-45`}
+                    className={`w-full h-full object-cover block ${person.objPos} transition-opacity duration-500 ease-in-out group-hover:opacity-45`}
                     sizes="(max-width: 768px) 100vw, 460px"
                     disableTransition
                   />

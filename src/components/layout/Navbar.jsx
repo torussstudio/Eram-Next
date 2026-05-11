@@ -26,6 +26,7 @@ const navLinkClassName = `
   tracking-[0.04em]
   transition-colors
   duration-200
+  cursor-pointer
   whitespace-nowrap
   ${textColor}
 `;
