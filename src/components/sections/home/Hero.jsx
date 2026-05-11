@@ -178,7 +178,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
             poster="/images/institute.webp"
           >
             <source src="/videos/mainhero.mp4" type="video/mp4" />

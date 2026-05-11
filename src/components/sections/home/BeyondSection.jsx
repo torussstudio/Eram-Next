@@ -28,7 +28,6 @@ const SCROLL_BY = 1;
 export default function BeyondSection() {
   const sectionRef   = useRef(null);
   const scrollRef    = useRef(null);
-  const [activeCard, setActiveCard] = useState(0);
 
   /* ── Scroll helpers ─────────────────────────────────────── */
   const isMobile = () => window.innerWidth <= 640;
@@ -43,44 +42,63 @@ export default function BeyondSection() {
   };
 
   /* ── GSAP entrance animations ───────────────────────────── */
-  useGSAP(
-    () => {
-      const defaults = { ease: "power2.out" };
+ useGSAP(
+  () => {
+    const isMobile = window.innerWidth < 768;
 
-      gsap.fromTo(
-        ".beyond-heading",
-        { opacity: 0, y: 30 },
-        {
-          ...defaults,
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        },
-      );
+    if (isMobile) {
+      gsap.set(".beyond-heading, .beyond-card", {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        clearProps: "all",
+      });
 
-      gsap.fromTo(
-        ".beyond-card",
-        { opacity: 0, x: 50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".beyond-cards-container", start: "top 85%" },
+      return;
+    }
+
+    const defaults = { ease: "power2.out" };
+
+    gsap.fromTo(
+      ".beyond-heading",
+      { opacity: 0, y: 30 },
+      {
+        ...defaults,
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
         },
-      );
-    },
-    { scope: sectionRef },
-  );
+      },
+    );
+
+    gsap.fromTo(
+      ".beyond-card",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".beyond-cards-container",
+          start: "top 90%",
+        },
+      },
+    );
+  },
+  { scope: sectionRef },
+);
 
   /* ── Render ─────────────────────────────────────────────── */
   return (
     <section
       ref={sectionRef}
       id="beyond"
-      className={`${section} pt-[90px] pb-[120px] bg-[#ae1431]`}
+      className={`${section}  pt-[90px] pb-[120px] bg-[#ae1431]`}
     >
       <div className="mx-auto w-full max-w-[1200px] px-[20px] md:px-[32px] lg:px-[40px] text-center">
 
@@ -153,7 +171,7 @@ export default function BeyondSection() {
 
   gap-[22px]
 
-  overflow-x-auto
+overflow-x-auto overscroll-x-contain
 
   pb-[16px]
 
@@ -174,8 +192,6 @@ export default function BeyondSection() {
                 <BeyondCard
                   key={card.title}
                   card={card}
-                  isActive={activeCard === index}
-                  onClick={() => setActiveCard(index)}
                 />
               ))}
             </div>
@@ -281,13 +297,18 @@ function BeyondCard({ card, isActive, onClick }) {
       <img
         src={card.image}
         alt={card.title}
-        className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:brightness-110"
+        loading="lazy"
+  decoding="async"
+  fetchPriority="low"
+        className="
+absolute inset-0 h-full w-full object-cover
+transition-transform duration-500 ease-out
+will-change-transform
+transform-gpu
+group-hover:scale-[1.02]
+"
       />
 
-    {/* Overlay */}
-<div className="absolute inset-0 bg-black/30 transition-all duration-500 group-hover:bg-black/10 z-[1]" />
-
-<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent transition-all duration-500 group-hover:from-black/45 group-hover:via-black/5 z-[2]" />
 
 {/* Content */}
 <div className="relative z-[3] flex h-full flex-col justify-between px-[clamp(18px,3vw,30px)] py-[clamp(18px,3vw,28px)] max-[640px]:px-[20px] max-[640px]:py-[18px]">

@@ -10,19 +10,19 @@ const CATEGORIES = ["ACADEMIC", "SPORTS", "CULTURAL", "PROFESSIONAL"];
 
 export const excellenceDomains = {
   ACADEMIC: Array.from({ length: 4 }, (_, i) => ({
-    image: `/images/academic${i + 1}.webp`,
+    image: `/images/academic${i + 1}.avif`,
   })),
 
   SPORTS: Array.from({ length: 4 }, (_, i) => ({
-    image: `/images/sports${i + 1}.webp`,
+    image: `/images/sports${i + 1}.avif`,
   })),
 
   CULTURAL: Array.from({ length: 4 }, (_, i) => ({
-    image: `/images/cultural${i + 1}.webp`,
+    image: `/images/cultural${i + 1}.avif`,
   })),
 
   PROFESSIONAL: Array.from({ length: 4 }, (_, i) => ({
-    image: `/images/pro${i + 1}.webp`,
+    image: `/images/pro${i + 1}.avif`,
   })),
 };
 
@@ -148,12 +148,10 @@ export default function ExcellenceSection() {
     } else {
       gsap.fromTo(
         ".mob-exc-card",
-        { x: 36, opacity: 0 },
+        { opacity: 0 },
         {
-          x: 0,
-          opacity: 1,
-          duration: 0.42,
-          stagger: { amount: 0.25 },
+         opacity: 1,
+duration: 0.3,
           ease: "power3.out",
         },
       );
@@ -206,7 +204,11 @@ export default function ExcellenceSection() {
         });
       });
 
-      mm.add("(max-width: 899px)", () => {
+     mm.add("(max-width: 899px)", () => {
+  gsap.set(cards, {
+    opacity: 1,
+    clearProps: "all",
+  });
         gsap.set(".mob-exc-word", { y: "105%", opacity: 0 });
         gsap.set(".mob-nav-row", { y: 14, opacity: 0 });
         gsap.set(".mob-exc-card", { y: 40, opacity: 0 });
@@ -258,7 +260,7 @@ export default function ExcellenceSection() {
     <section
       ref={sectionRef}
       id="gallery"
-      className=" bg-white py-[120px] max-[900px]:py-16"
+      className=" content-visibility-auto bg-white py-[120px] max-[900px]:py-16"
     >
       {/* ── Desktop ≥ 900px ─────────────────────────────────────── */}
       <div className="mx-auto hidden max-w-[1180px] grid-cols-[240px_1fr] gap-16 px-6 min-[900px]:grid">

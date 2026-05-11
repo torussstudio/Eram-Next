@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const institutions = [
-  { title: "EASE (CBSE)",    image: "/images/ease.webp",  path: "https://ease.edu.in/" },
+  { title: "EASE (CBSE)",    image: "/images/ease.avif",  path: "https://ease.edu.in/" },
   { title: "MMPS (HS)",      image: "/images/mmps.webp",   path: "mmps"                             },
-  { title: "MMHSS (Hr. Sec)",image: "/images/mmhss.webp", path: "/mmhss"              },
-  { title: "AMLP (LP)",      image: "/images/amlp.webp" , path:"/amlp"                               },
+  { title: "MMHSS (Hr. Sec)",image: "/images/mmhss.avif", path: "/mmhss"              },
+  { title: "AMLP (LP)",      image: "/images/amlp.avif" , path:"/amlp"                               },
   { title: "MMITE (TTI)",    image: "/images/mmite.webp" , path:"/mmite"                              },
 ];
 
@@ -43,7 +43,7 @@ export default function InstitutionsSection() {
     // Cards stagger in with a subtle lift
     gsap.fromTo(
       ".inst-card",
-      { opacity: 0, y: 36, scale: 0.97 },
+      { opacity: 0, y: 36 },
       {
         opacity: 1, y: 0, scale: 1,
         duration: 0.75,
@@ -58,7 +58,7 @@ export default function InstitutionsSection() {
     <section
       ref={sectionRef}
       id="institutions"
-      className=" bg-[#f5efe8] pt-10 pb-28"
+      className=" content-visibility-auto  bg-[#f5efe8] pt-10 pb-28"
     >
       <div className="mx-auto max-w-[1180px] px-6 sm:px-4">
         <MarqueeText />
@@ -115,6 +115,8 @@ export default function InstitutionsSection() {
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
+                   decoding="async"
+  fetchPriority="low"
                   className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(.25,.46,.45,.94)] group-hover:scale-[1.04]"
                 />
               </div>

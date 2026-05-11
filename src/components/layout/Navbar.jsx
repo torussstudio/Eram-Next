@@ -50,7 +50,6 @@ lg:min-h-[72px]
 
 gap-6 lg:gap-8
 px-6 lg:px-12 xl:px-8
-
 ${bgColor}
 
 max-[920px]:grid-cols-[1fr_auto]
