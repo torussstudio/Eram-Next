@@ -52,10 +52,14 @@ function NavArrow({ direction, onClick, disabled }) {
 /* ── ImageCard ───────────────────────────────────────────────────── */
 function ImageCard({ src, className = "", cardClass = "" }) {
   return (
-    <div className={`group relative overflow-hidden rounded-[28px] ${cardClass}`}>
+    <div
+      className={`group relative overflow-hidden rounded-[28px] ${cardClass}`}
+    >
       <img
         src={src}
         loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] group-hover:scale-105 ${className}`}
       />
       <div className="absolute inset-0 bg-black/20" />
@@ -65,111 +69,193 @@ function ImageCard({ src, className = "", cardClass = "" }) {
 
 /* ── Main component ──────────────────────────────────────────────── */
 export default function ExcellenceSection() {
-  const [active, setActive]   = useState(0);
-  const sectionRef            = useRef(null);
-  const isAnimating           = useRef(false);
-  const isMounted             = useRef(false);
+  const [active, setActive] = useState(0);
+  const sectionRef = useRef(null);
+  const isAnimating = useRef(false);
+  const isMounted = useRef(false);
 
   const currentCards = excellenceDomains[CATEGORIES[active]];
 
   /* ── Category switch ───────────────────────────────────────────── */
-  const goTo = useCallback((nextIdx) => {
-    if (nextIdx === active || nextIdx < 0 || nextIdx >= CATEGORIES.length || isAnimating.current) return;
+  const goTo = useCallback(
+    (nextIdx) => {
+      if (
+        nextIdx === active ||
+        nextIdx < 0 ||
+        nextIdx >= CATEGORIES.length ||
+        isAnimating.current
+      )
+        return;
 
-    if (isDesktop()) {
+      if (isDesktop()) {
+        isAnimating.current = true;
+
+        // Animate current cards OUT first, then switch
+        gsap.to(".exc-card", {
+          opacity: 0,
+          y: -18,
+          scale: 0.97,
+          duration: 0.22,
+          stagger: { amount: 0.12 },
+          ease: "power2.in",
+          onComplete: () => {
+            setActive(nextIdx);
+            isAnimating.current = false;
+          },
+        });
+        return;
+      }
+
+      // Mobile path
       isAnimating.current = true;
+      const dir = nextIdx > active ? 1 : -1;
 
-      // Animate current cards OUT first, then switch
-      gsap.to(".exc-card", {
+      gsap.to(".mob-exc-card", {
+        x: dir * -36,
         opacity: 0,
-        y: -18,
-        scale: 0.97,
-        duration: 0.22,
-        stagger: { amount: 0.12 },
+        duration: 0.2,
+        stagger: 0.03,
         ease: "power2.in",
         onComplete: () => {
           setActive(nextIdx);
           isAnimating.current = false;
         },
       });
-      return;
-    }
-
-    // Mobile path
-    isAnimating.current = true;
-    const dir = nextIdx > active ? 1 : -1;
-
-    gsap.to(".mob-exc-card", {
-      x: dir * -36,
-      opacity: 0,
-      duration: 0.2,
-      stagger: 0.03,
-      ease: "power2.in",
-      onComplete: () => {
-        setActive(nextIdx);
-        isAnimating.current = false;
-      },
-    });
-  }, [active]);
+    },
+    [active],
+  );
 
   /* ── Animate cards IN after tab switch ────────────────────────── */
   useEffect(() => {
-    if (!isMounted.current) { isMounted.current = true; return; }
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
 
     if (isDesktop()) {
       gsap.fromTo(
         ".exc-card",
         { opacity: 0, y: 18, scale: 0.97 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: { amount: 0.3 }, ease: "power3.out" }
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          stagger: { amount: 0.3 },
+          ease: "power3.out",
+        },
       );
     } else {
       gsap.fromTo(
         ".mob-exc-card",
         { x: 36, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.42, stagger: { amount: 0.25 }, ease: "power3.out" }
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.42,
+          stagger: { amount: 0.25 },
+          ease: "power3.out",
+        },
       );
     }
   }, [active]);
 
   /* ── Scroll entrance ─────────────────────────────────────────── */
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 900px)", () => {
-      gsap.set(".exc-heading",   { clipPath: "inset(0 100% 0 0)" });
-      gsap.set(".exc-menu-item", { x: -32, opacity: 0 });
-      gsap.set(".exc-card",      { opacity: 0, y: 28, scale: 0.95 });
-      gsap.set(".exc-btn",       { opacity: 0, y: 16 });
+      mm.add("(min-width: 900px)", () => {
+        gsap.set(".exc-heading", { clipPath: "inset(0 100% 0 0)" });
+        gsap.set(".exc-menu-item", { x: -32, opacity: 0 });
+        gsap.set(".exc-card", { opacity: 0, y: 28, scale: 0.95 });
+        gsap.set(".exc-btn", { opacity: 0, y: 16 });
 
-      const t1 = { trigger: sectionRef.current, start: "top 78%" };
-      const t2 = { trigger: ".exc-grid",        start: "top 85%" };
+        const t1 = { trigger: sectionRef.current, start: "top 78%" };
+        const t2 = { trigger: ".exc-grid", start: "top 85%" };
 
-      gsap.to(".exc-heading",   { clipPath: "inset(0 0% 0 0)", duration: 1.0, ease: "power3.inOut", scrollTrigger: t1 });
-      gsap.to(".exc-menu-item", { x: 0, opacity: 1, duration: 0.65, stagger: 0.09, ease: "power3.out", scrollTrigger: t1 });
-      gsap.to(".exc-card",      { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: { amount: 0.35 }, ease: "power3.out", scrollTrigger: t2 });
-      gsap.to(".exc-btn",       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", scrollTrigger: t2 });
-    });
+        gsap.to(".exc-heading", {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 1.0,
+          ease: "power3.inOut",
+          scrollTrigger: t1,
+        });
+        gsap.to(".exc-menu-item", {
+          x: 0,
+          opacity: 1,
+          duration: 0.65,
+          stagger: 0.09,
+          ease: "power3.out",
+          scrollTrigger: t1,
+        });
+        gsap.to(".exc-card", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+          stagger: { amount: 0.35 },
+          ease: "power3.out",
+          scrollTrigger: t2,
+        });
+        gsap.to(".exc-btn", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: t2,
+        });
+      });
 
-    mm.add("(max-width: 899px)", () => {
-      gsap.set(".mob-exc-word", { y: "105%", opacity: 0 });
-      gsap.set(".mob-nav-row",  { y: 14, opacity: 0 });
-      gsap.set(".mob-exc-card", { y: 40, opacity: 0 });
-      gsap.set(".mob-exc-btn",  { y: 14, opacity: 0 });
+      mm.add("(max-width: 899px)", () => {
+        gsap.set(".mob-exc-word", { y: "105%", opacity: 0 });
+        gsap.set(".mob-nav-row", { y: 14, opacity: 0 });
+        gsap.set(".mob-exc-card", { y: 40, opacity: 0 });
+        gsap.set(".mob-exc-btn", { y: 14, opacity: 0 });
 
-      const t1 = { trigger: sectionRef.current, start: "top 82%" };
-      const t2 = { trigger: ".mob-exc-grid",   start: "top 88%" };
+        const t1 = { trigger: sectionRef.current, start: "top 82%" };
+        const t2 = { trigger: ".mob-exc-grid", start: "top 88%" };
 
-      gsap.to(".mob-exc-word", { y: "0%", opacity: 1, duration: 0.65, stagger: 0.055, ease: "power4.out", scrollTrigger: t1 });
-      gsap.to(".mob-nav-row",  { y: 0, opacity: 1, duration: 0.55, delay: 0.25, ease: "power3.out", scrollTrigger: t1 });
-      gsap.to(".mob-exc-card", { y: 0, opacity: 1, duration: 0.6, stagger: { amount: 0.3 }, ease: "power3.out", scrollTrigger: t2 });
-      gsap.to(".mob-exc-btn",  { y: 0, opacity: 1, duration: 0.5, delay: 0.15, ease: "power2.out", scrollTrigger: { trigger: ".mob-exc-btn", start: "top 95%" } });
-    });
+        gsap.to(".mob-exc-word", {
+          y: "0%",
+          opacity: 1,
+          duration: 0.65,
+          stagger: 0.055,
+          ease: "power4.out",
+          scrollTrigger: t1,
+        });
+        gsap.to(".mob-nav-row", {
+          y: 0,
+          opacity: 1,
+          duration: 0.55,
+          delay: 0.25,
+          ease: "power3.out",
+          scrollTrigger: t1,
+        });
+        gsap.to(".mob-exc-card", {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: { amount: 0.3 },
+          ease: "power3.out",
+          scrollTrigger: t2,
+        });
+        gsap.to(".mob-exc-btn", {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          delay: 0.15,
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".mob-exc-btn", start: "top 95%" },
+        });
+      });
 
-    return () => mm.revert();
-  }, { scope: sectionRef });
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       id="gallery"
       className=" bg-white py-[120px] max-[900px]:py-16"
@@ -183,7 +269,9 @@ export default function ExcellenceSection() {
               key={label}
               onClick={() => goTo(i)}
               className={`exc-menu-item text-left text-[22px] tracking-[0.16em] transition-colors duration-200 ${
-                active === i ? "text-[#111]" : "text-[#b0b0b0] hover:text-[#555] cursor-pointer"
+                active === i
+                  ? "text-[#111]"
+                  : "text-[#b0b0b0] hover:text-[#555] cursor-pointer"
               }`}
             >
               {active === i && <span className="mr-1">//</span>}
@@ -200,7 +288,11 @@ export default function ExcellenceSection() {
 
           <div className="exc-grid grid grid-cols-2 gap-8">
             {currentCards.map((item, i) => (
-              <ImageCard key={i} src={item.image} cardClass="exc-card h-[320px]" />
+              <ImageCard
+                key={i}
+                src={item.image}
+                cardClass="exc-card h-[320px]"
+              />
             ))}
           </div>
 
@@ -221,7 +313,10 @@ export default function ExcellenceSection() {
           </p>
           <h2 className="font-display text-[32px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#111]">
             {"Excellence Across Every Domain".split(" ").map((word, i) => (
-              <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-bottom">
+              <span
+                key={i}
+                className="mr-[0.22em] inline-block overflow-hidden align-bottom"
+              >
                 <span className="mob-exc-word inline-block">{word}</span>
               </span>
             ))}
@@ -231,7 +326,11 @@ export default function ExcellenceSection() {
         {/* Navigation row */}
         <div className="mob-nav-row mb-6">
           <div className="mb-2.5 flex items-center justify-between">
-            <NavArrow direction="left"  onClick={() => goTo(active - 1)} disabled={active === 0} />
+            <NavArrow
+              direction="left"
+              onClick={() => goTo(active - 1)}
+              disabled={active === 0}
+            />
             <div className="flex flex-col items-center gap-1">
               <span className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#c0c0c0]">
                 0{active + 1} / 0{CATEGORIES.length}
@@ -240,7 +339,11 @@ export default function ExcellenceSection() {
                 {CATEGORIES[active]}
               </span>
             </div>
-            <NavArrow direction="right" onClick={() => goTo(active + 1)} disabled={active === CATEGORIES.length - 1} />
+            <NavArrow
+              direction="right"
+              onClick={() => goTo(active + 1)}
+              disabled={active === CATEGORIES.length - 1}
+            />
           </div>
 
           {/* Progress bar */}
@@ -255,7 +358,11 @@ export default function ExcellenceSection() {
         {/* Cards grid */}
         <div className="mob-exc-grid mb-6 grid grid-cols-2 gap-2.5">
           {currentCards.map((item, i) => (
-            <ImageCard key={i} src={item.image} cardClass="mob-exc-card aspect-square rounded-[20px]" />
+            <ImageCard
+              key={i}
+              src={item.image}
+              cardClass="mob-exc-card aspect-square rounded-[20px]"
+            />
           ))}
         </div>
 
@@ -267,8 +374,8 @@ export default function ExcellenceSection() {
               onClick={() => goTo(i)}
               className="rounded-full transition-all duration-300"
               style={{
-                width:      active === i ? "20px" : "6px",
-                height:     "6px",
+                width: active === i ? "20px" : "6px",
+                height: "6px",
                 background: active === i ? "#111" : "#ddd",
               }}
             />

@@ -36,143 +36,150 @@ const descCls =
 const EASE = {
   snappy: "power2.out",
   smooth: "power3.out",
-  light:  "power1.out",
+  light: "power1.out",
 };
 
 /* ─── Component ───────────────────────────────────────────────────────────── */
 export default function Hero() {
-  const sectionRef   = useRef(null);
+  const sectionRef = useRef(null);
   const containerRef = useRef(null);
-  const line0Ref     = useRef(null);
-  const line1Ref     = useRef(null);
-  const sublineRef   = useRef(null);
-  const descRef      = useRef(null);
-  const buttonsRef   = useRef(null);
+  const line0Ref = useRef(null);
+  const line1Ref = useRef(null);
+  const sublineRef = useRef(null);
+  const descRef = useRef(null);
+  const buttonsRef = useRef(null);
 
-  useGSAP(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const mm = gsap.matchMedia();
-    const lines = () => [line0Ref.current, line1Ref.current];
+      const mm = gsap.matchMedia();
+      const lines = () => [line0Ref.current, line1Ref.current];
 
-    /* ── Desktop ≥ 1024px — cinematic clip-reveal + parallax ─────────────── */
-    mm.add("(min-width: 1024px)", () => {
-      const tl = gsap.timeline({ delay: 0.1 });
+      /* ── Desktop ≥ 1024px — cinematic clip-reveal + parallax ─────────────── */
+      mm.add("(min-width: 1024px)", () => {
+        const tl = gsap.timeline({ delay: 0.1 });
 
-      tl.fromTo(lines(),
+        tl.fromTo(
+          lines(),
           { y: "110%" },
-          { y: "0%", duration: 1.0, stagger: 0.12, ease: EASE.smooth }
+          { y: "0%", duration: 1.0, stagger: 0.12, ease: EASE.smooth },
         )
-        .fromTo(sublineRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.5, ease: EASE.light },
-          "-=0.5"
-        )
-        .fromTo(descRef.current,
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.75, ease: EASE.snappy },
-          "-=0.55"
-        )
-        .fromTo(buttonsRef.current,
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.75, ease: EASE.snappy },
-          "-=0.55"
-        );
+          .fromTo(
+            sublineRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.5, ease: EASE.light },
+            "-=0.5",
+          )
+          .fromTo(
+            descRef.current,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.75, ease: EASE.snappy },
+            "-=0.55",
+          )
+          .fromTo(
+            buttonsRef.current,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.75, ease: EASE.snappy },
+            "-=0.55",
+          );
 
-      // Subtle parallax on scroll
-      gsap.to(containerRef.current, {
-        yPercent: 8,
-        ease: "none",
-        scrollTrigger: {
-          trigger:             sectionRef.current,
-          start:               "top top",
-          end:                 "bottom top",
-          scrub:               0.5,
-          invalidateOnRefresh: true,
-        },
+        // Subtle parallax on scroll
+        gsap.to(containerRef.current, {
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        return () => tl.kill();
       });
 
-      return () => tl.kill();
-    });
+      /* ── Tablet 768–1023px — moderate reveals, no parallax ──────────────── */
+      mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+        const tl = gsap.timeline({ delay: 0.08 });
 
-    /* ── Tablet 768–1023px — moderate reveals, no parallax ──────────────── */
-    mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-      const tl = gsap.timeline({ delay: 0.08 });
-
-      tl.fromTo(lines(),
+        tl.fromTo(
+          lines(),
           { y: "110%" },
-          { y: "0%", duration: 0.75, stagger: 0.10, ease: EASE.smooth }
+          { y: "0%", duration: 0.75, stagger: 0.1, ease: EASE.smooth },
         )
-        .fromTo(sublineRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.42, ease: EASE.light },
-          "-=0.38"
-        )
-        .fromTo(descRef.current,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.60, ease: EASE.snappy },
-          "-=0.42"
-        )
-        .fromTo(buttonsRef.current,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.60, ease: EASE.snappy },
-          "-=0.42"
-        );
+          .fromTo(
+            sublineRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.42, ease: EASE.light },
+            "-=0.38",
+          )
+          .fromTo(
+            descRef.current,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.6, ease: EASE.snappy },
+            "-=0.42",
+          )
+          .fromTo(
+            buttonsRef.current,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.6, ease: EASE.snappy },
+            "-=0.42",
+          );
 
-      return () => tl.kill();
-    });
+        return () => tl.kill();
+      });
 
-    /* ── Mobile < 768px — fade-only, no y travel, no parallax ───────────── */
-    mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({ delay: 0.05 });
+      /* ── Mobile < 768px — fade-only, no y travel, no parallax ───────────── */
+      mm.add("(max-width: 767px)", () => {
+        const tl = gsap.timeline({ delay: 0.05 });
 
-      tl.fromTo(lines(),
+        tl.fromTo(
+          lines(),
           { opacity: 0 },
-          { opacity: 1, duration: 0.40, stagger: 0.08, ease: EASE.light }
+          { opacity: 1, duration: 0.4, stagger: 0.08, ease: EASE.light },
         )
-        .fromTo(sublineRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.32, ease: EASE.light },
-          "-=0.18"
-        )
-        .fromTo(descRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.40, ease: EASE.light },
-          "-=0.20"
-        )
-        .fromTo(buttonsRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.38, ease: EASE.light },
-          "-=0.18"
-        );
+          .fromTo(
+            sublineRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.32, ease: EASE.light },
+            "-=0.18",
+          )
+          .fromTo(
+            descRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.4, ease: EASE.light },
+            "-=0.20",
+          )
+          .fromTo(
+            buttonsRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.38, ease: EASE.light },
+            "-=0.18",
+          );
 
-      return () => tl.kill();
-    });
+        return () => tl.kill();
+      });
 
-    return () => mm.revert();
-  }, { scope: sectionRef });
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section ref={sectionRef} className={sectionCls} id="hero">
       <div ref={containerRef} className={cardCls}>
-
         {/* ── Media: LCP image first, video overlays ──────────────────────── */}
         <div className="absolute inset-0">
-          <img
-            src="/images/institute.webp"
-            alt="ERAM Education"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-          />
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
+            poster="/images/institute.webp"
           >
             <source src="/videos/mainhero.mp4" type="video/mp4" />
           </video>
@@ -183,19 +190,25 @@ export default function Hero() {
 
         {/* Content */}
         <div className="relative z-10 max-w-[1500px] pb-[100px] max-[640px]:pb-[20px] ml-[65px] max-[920px]:ml-[40px] max-[640px]:ml-0">
-
           {/* H1 */}
           <h1 className={headingCls}>
             <span className=" pb-1 ">
-              <span ref={line0Ref} className="block">Building Foundations.</span>
+              <span ref={line0Ref} className="block">
+                Building Foundations.
+              </span>
             </span>
             <span className=" pb-1 ">
-              <span ref={line1Ref} className="block">Shaping Futures.</span>
+              <span ref={line1Ref} className="block">
+                Shaping Futures.
+              </span>
             </span>
           </h1>
 
           {/* Tagline */}
-          <p ref={sublineRef} className="font-rethink text-[22px] text-white mt-6">
+          <p
+            ref={sublineRef}
+            className="font-rethink text-[22px] text-white mt-6"
+          >
             Holistic, disciplined, and inclusive education for every child.
           </p>
 
@@ -207,32 +220,31 @@ export default function Hero() {
 
           {/* Buttons */}
           <div ref={buttonsRef} className="mt-11 flex flex-wrap gap-[14px]">
-           <ActionButton
-  onClick={() => {
-    const section = document.getElementById("institutions");
+            <ActionButton
+              onClick={() => {
+                const section = document.getElementById("institutions");
 
-    if (section) {
-      const yOffset = -90; // navbar height
-      const y =
-        section.getBoundingClientRect().top +
-        window.pageYOffset +
-        yOffset;
+                if (section) {
+                  const yOffset = -90; // navbar height
+                  const y =
+                    section.getBoundingClientRect().top +
+                    window.pageYOffset +
+                    yOffset;
 
-      window.scrollTo({
-        top: y,
-        behavior: "smooth",
-      });
-    }
-  }}
-  className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer"
->
-  Explore Our Institutions
-</ActionButton>
+                  window.scrollTo({
+                    top: y,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer"
+            >
+              Explore Our Institutions
+            </ActionButton>
             <ActionButton className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer">
               Admissions Open 2026-27
             </ActionButton>
           </div>
-
         </div>
       </div>
     </section>

@@ -11,10 +11,10 @@ function StructuredLearningSection() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-  const handleLoad = () => ScrollTrigger.refresh();
-  window.addEventListener("load", handleLoad);
-  return () => window.removeEventListener("load", handleLoad);
-}, []);
+    const handleLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", handleLoad);
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
 
   useGSAP(
     () => {
@@ -88,23 +88,23 @@ function StructuredLearningSection() {
             stagger: 0.15,
             ease: "power3.out",
           },
-          "-=0.7"
+          "-=0.7",
         );
 
-      gsap.utils.toArray(".leadership-profile").forEach((profile) => {
-  const img = profile.querySelector(".leadership-img");
+        gsap.utils.toArray(".leadership-profile").forEach((profile) => {
+          const img = profile.querySelector(".leadership-img");
 
-  gsap.to(img, {
-    yPercent: 5, // reduced from 8
-    ease: "none",
-    scrollTrigger: {
-      trigger: profile,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 0.8, // smoother + less heavy
-    },
-  });
-});
+          gsap.to(img, {
+            yPercent: 5, // reduced from 8
+            ease: "none",
+            scrollTrigger: {
+              trigger: profile,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.8, // smoother + less heavy
+            },
+          });
+        });
 
         const listTl = gsap.timeline({
           scrollTrigger: {
@@ -130,7 +130,7 @@ function StructuredLearningSection() {
             stagger: 0.08,
             ease: "power3.out",
           },
-          "-=0.5"
+          "-=0.5",
         );
 
         gsap.to(".structured-final", {
@@ -162,7 +162,7 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 80%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -178,12 +178,12 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 80%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
           ".structured-card",
-          {  y: 60, opacity: 0, transformPerspective: 600 },
+          { y: 60, opacity: 0, transformPerspective: 600 },
           {
             rotateX: 0,
             y: 0,
@@ -196,7 +196,7 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -214,7 +214,7 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 82%",
             },
-          }
+          },
         );
 
         gsap.utils.toArray(".leadership-profile").forEach((el, i) => {
@@ -232,7 +232,7 @@ function StructuredLearningSection() {
                 invalidateOnRefresh: true,
                 start: "top 88%",
               },
-            }
+            },
           );
         });
 
@@ -264,7 +264,7 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -282,7 +282,7 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -299,11 +299,11 @@ function StructuredLearningSection() {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
       }
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const CARDS = [
@@ -345,7 +345,7 @@ function StructuredLearningSection() {
       alt: "Dr. Siddeek Ahmed",
       objPos: "object-[72%_center]",
       name: "Dr. Siddeek Ahmed",
-      role: "President & Managing Trustee",
+      role: "Chairman & MD - ERAM Holdings",
       num: "01",
     },
     {
@@ -353,7 +353,7 @@ function StructuredLearningSection() {
       alt: "Mr. Abdussamod C K",
       objPos: "object-[15%_20%]",
       name: "Mr. Abdussamod C K",
-      role: "Secretary & Manager",
+      role: "School Manager, Karuna Educational Welfare Trust (AMLP)",
       num: "02",
     },
   ];
@@ -376,14 +376,11 @@ function StructuredLearningSection() {
         px-5 md:px-4
       "
     >
-
       <div className="w-full md:max-w-[1200px] md:mx-auto md:px-8 lg:px-12">
-
         {/* ══════════════════════════════
             TOP GRID
         ══════════════════════════════ */}
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-
+        <div className="grid md:grid-cols-2 gap-8  md:gap-12 items-center">
           {/* LEFT — text */}
           <div className="w-full md:max-w-[420px]">
             <h2
@@ -393,6 +390,7 @@ function StructuredLearningSection() {
                 font-display
                 text-[1.08rem] md:text-[38px]
                 leading-tight
+                
               "
             >
               Structured Learning.
@@ -432,7 +430,6 @@ function StructuredLearningSection() {
             </button>
           </div>
 
-         
           <div className="structured-scroll-container -mx-5 md:mx-0 overflow-hidden">
             <div
               className="
@@ -445,15 +442,17 @@ function StructuredLearningSection() {
               {CARDS.map((card, i) => (
                 <div
                   key={i}
-                  className="
-                    structured-card
-                    relative flex-shrink-0
-           min-w-[240px] h-[260px]
-sm:min-w-[260px] sm:h-[280px]
-md:min-w-[260px] md:h-[220px]
-lg:min-w-[280px] lg:h-[240px]
-                    rounded-[20px] overflow-hidden transform-gpu
-                  "
+                 className="
+  structured-card
+  relative flex-shrink-0
+  overflow-hidden
+  min-w-[240px] h-[260px]
+  sm:min-w-[260px] sm:h-[280px]
+  md:min-w-[260px] md:h-[220px]
+  lg:min-w-[280px] lg:h-[240px]
+  rounded-[20px]
+  transform-gpu
+"
                 >
                   <OptimizedImage
                     src={card.img}
@@ -557,17 +556,17 @@ lg:min-w-[280px] lg:h-[240px]
               "
             >
               {/* Image */}
-              <div className="w-full h-[440px] md:h-[520px] overflow-hidden relative">
-                <div className="leadership-img w-full h-full absolute inset-0">
-                  <OptimizedImage
-                    src={person.src}
-                    alt={person.alt}
-                    className={`w-full h-full object-cover grayscale block ${person.objPos}`}
-                    sizes="(max-width: 768px) 100vw, 460px"
-                    disableTransition
-                  />
-                </div>
-              </div>
+            <div className="w-full h-[440px] md:h-[520px] overflow-hidden relative">
+  <div className="leadership-img w-full h-[108%] absolute inset-0 -top-[4%]">
+    <OptimizedImage
+      src={person.src}
+      alt={person.alt}
+      className={`w-full h-full object-cover grayscale block ${person.objPos}`}
+      sizes="(max-width: 768px) 100vw, 460px"
+      disableTransition
+    />
+  </div>
+</div>
 
               {/* ── MOBILE OVERLAY ──
                   Gradient fills the bottom 150px so text always reads cleanly.
@@ -608,7 +607,6 @@ lg:min-w-[280px] lg:h-[240px]
             BOTTOM TEXT + LIST
         ══════════════════════════════ */}
         <div className="leadership-bottom-text mt-12 md:mt-14 grid md:grid-cols-2 gap-6 md:gap-10 items-start">
-
           <p
             className="
               leadership-bottom-heading
@@ -631,7 +629,9 @@ lg:min-w-[280px] lg:h-[240px]
               >
                 {/* Mobile dot — mt-[5px] aligns with first text line */}
                 <span className="mt-[5px] w-[5px] h-[5px] rounded-full bg-white/50 flex-shrink-0 md:hidden" />
-                <span className="hidden md:inline leading-none mt-[2px]">•</span>
+                <span className="hidden md:inline leading-none mt-[2px]">
+                  •
+                </span>
                 <span className="flex-1">{item}</span>
               </li>
             ))}
@@ -654,10 +654,9 @@ lg:min-w-[280px] lg:h-[240px]
           "
         >
           The result is a unified educational system
-          <br className="hidden sm:block" />
-          {" "}supported by accountability and clarity.
+          <br className="hidden sm:block" /> supported by accountability and
+          clarity.
         </h3>
-
       </div>
     </section>
   );
