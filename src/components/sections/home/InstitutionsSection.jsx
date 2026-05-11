@@ -58,7 +58,7 @@ export default function InstitutionsSection() {
     <section
       ref={sectionRef}
       id="institutions"
-      className="bg-[#f5efe8] pt-10 pb-28"
+      className=" bg-[#f5efe8] pt-10 pb-28"
     >
       <div className="mx-auto max-w-[1180px] px-6 sm:px-4">
         <MarqueeText />

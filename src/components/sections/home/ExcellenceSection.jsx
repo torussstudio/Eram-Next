@@ -169,10 +169,10 @@ export default function ExcellenceSection() {
   }, { scope: sectionRef });
 
   return (
-    <section
+    <section 
       ref={sectionRef}
       id="gallery"
-      className="bg-white py-[120px] max-[900px]:py-16"
+      className=" bg-white py-[120px] max-[900px]:py-16"
     >
       {/* ── Desktop ≥ 900px ─────────────────────────────────────── */}
       <div className="mx-auto hidden max-w-[1180px] grid-cols-[240px_1fr] gap-16 px-6 min-[900px]:grid">

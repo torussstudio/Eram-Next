@@ -201,7 +201,7 @@ export default function ImpactSection() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className={`${section} bg-[#ae1431]`} id="impact">
+    <section ref={sectionRef}  className={`${section} bg-[#ae1431]`} id="impact">
 
       {/* ── Desktop top layout ──────────────────────────────────── */}
       <div className={`${shell} grid grid-cols-[1.05fr_0.95fr] max-[1100px]:grid-cols-1 max-[640px]:hidden`}>

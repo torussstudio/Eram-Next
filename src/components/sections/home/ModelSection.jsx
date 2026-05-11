@@ -425,7 +425,7 @@ export default function ModelSection() {
   return (
     <section
       ref={sectionRef}
-      className="
+      className=" 
         bg-[#0f0f0f]
         relative
         overflow-hidden

@@ -159,12 +159,12 @@ export default function Hero() {
         {/* ── Media: LCP image first, video overlays ──────────────────────── */}
         <div className="absolute inset-0">
           <img
-            src="/videos/hero-thumb.jpg"
+            src="/images/institute.webp"
             alt="ERAM Education"
             className="w-full h-full object-cover"
             fetchPriority="high"
             loading="eager"
-            decoding="sync"
+            decoding="async"
           />
           <video
             className="absolute inset-0 w-full h-full object-cover"
@@ -172,7 +172,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
           >
             <source src="/videos/mainhero.mp4" type="video/mp4" />
           </video>

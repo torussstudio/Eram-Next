@@ -370,7 +370,7 @@ function StructuredLearningSection() {
   return (
     <section
       ref={containerRef}
-      className="
+      className=" 
         bg-[#b5122b] text-white overflow-hidden
         py-16 md:py-20
         px-5 md:px-4
