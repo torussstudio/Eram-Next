@@ -94,21 +94,21 @@ export default function PhilosophySection() {
   return (
     <section ref={sectionRef} className="bg-[#ae1431] text-white py-[100px]">
       <div className="max-w-[1100px] mx-auto px-[40px]">
-        {/* TOP LABEL */}
-        <div
-          ref={labelRef}
-          className="flex items-center gap-3 mb-6"
-          style={{ opacity: 0, transform: "translateY(20px)" }}
-        >
-          <div
-            // ref={labelLineRef}
-            // className="w-[40px] h-[1px] bg-white/40"
-            style={{ transformOrigin: "left", transform: "scaleX(0)" }}
-          />
-          <span className="font-rethink text-[11px] tracking-[0.28em] uppercase text-white/60">
-            OUR PHILOSOPHY
-          </span>
-        </div>
+       {/* TOP LABEL */}
+<div className="flex items-center gap-3 mb-6">
+  <div
+    ref={labelLineRef}          
+    className="w-[40px] h-[1px] bg-white/40"
+    style={{ transformOrigin: "left", transform: "scaleX(0)" }}
+  />
+  <span
+    ref={labelRef}            
+    className="font-rethink text-[11px] tracking-[0.28em] uppercase text-white/60"
+    style={{ opacity: 0, transform: "translateY(20px)" }}
+  >
+    OUR PHILOSOPHY
+  </span>
+</div>
 
         {/* HEADING */}
         <h2 className="font-display text-[clamp(2.8rem,4vw,4.5rem)] leading-[1.1] max-w-[600px]">

@@ -40,7 +40,6 @@ function SystemsThatSustainExcellence() {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 0px)", () => {
-
         gsap.fromTo(
           ".systems-eyebrow-line-left",
           { scaleX: 0, transformOrigin: "left center" },
@@ -78,23 +77,6 @@ function SystemsThatSustainExcellence() {
       // ── DESKTOP (md+) ───────────────────────────────────────────────
       mm.add("(min-width: 768px)", () => {
         gsap.fromTo(
-          ".system-item",
-          { y: 50, opacity: 0, rotateX: 8, transformPerspective: 800 },
-          {
-            y: 0, opacity: 1, rotateX: 0, duration: 0.9,
-            stagger: { amount: 0.7, from: "start" }, ease: "power3.out",
-            scrollTrigger: { trigger: ".system-grid", start: "top 80%" },
-          },
-        );
-        gsap.fromTo(
-          ".system-item-line",
-          { scaleY: 0, transformOrigin: "top center" },
-          {
-            scaleY: 1, duration: 0.6, stagger: 0.1, ease: "power2.out",
-            scrollTrigger: { trigger: ".system-grid", start: "top 80%" },
-          },
-        );
-        gsap.fromTo(
           ".system-img-wrap",
           { scale: 0.93, opacity: 0, borderRadius: "40px" },
           {
@@ -117,34 +99,10 @@ function SystemsThatSustainExcellence() {
             scrollTrigger: { trigger: ".system-img-wrap", start: "top 58%" },
           },
         );
-        gsap.fromTo(
-          ".system-img-tag",
-          { x: 20, opacity: 0 },
-          {
-            x: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-            scrollTrigger: { trigger: ".system-img-wrap", start: "top 55%" },
-          },
-        );
       });
 
       // ── MOBILE (<768px) ─────────────────────────────────────────────
       mm.add("(max-width: 767px)", () => {
-        gsap.fromTo(
-          ".system-item",
-          { x: -40, opacity: 0 },
-          {
-            x: 0, opacity: 1, duration: 0.75, stagger: 0.08, ease: "expo.out",
-            scrollTrigger: { trigger: ".system-grid", start: "top 85%" },
-          },
-        );
-        gsap.fromTo(
-          ".system-item-line",
-          { scaleY: 0, transformOrigin: "top center" },
-          {
-            scaleY: 1, duration: 0.5, stagger: 0.08, ease: "power2.out",
-            scrollTrigger: { trigger: ".system-grid", start: "top 85%" },
-          },
-        );
         gsap.fromTo(
           ".system-img-wrap",
           { clipPath: "inset(100% 0% 0% 0% round 26px)", opacity: 1 },
@@ -167,14 +125,6 @@ function SystemsThatSustainExcellence() {
             scrollTrigger: { trigger: ".system-img-wrap", start: "top 62%" },
           },
         );
-        gsap.fromTo(
-          ".system-img-tag",
-          { y: 12, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 0.7, ease: "power3.out",
-            scrollTrigger: { trigger: ".system-img-wrap", start: "top 60%" },
-          },
-        );
       });
 
       // ── STACKED CARDS — shared builder ─────────────────────────────
@@ -189,7 +139,6 @@ function SystemsThatSustainExcellence() {
         const ROT_STEP   = 1.5;
         const SCALE_STEP = 0.018;
 
-        // Set ALL bg words to opacity 0 first — GSAP controls them exclusively.
         gsap.set(".stack-bg-word", { opacity: 0 });
 
         cards.forEach((card, domIndex) => {
@@ -222,7 +171,6 @@ function SystemsThatSustainExcellence() {
           const frontDOM = total - 1 - step;
           const segStart = step * segDur;
 
-          // Front card flies up
           tl.fromTo(
             cards[frontDOM],
             { y: 0, rotation: 0, scale: 1, opacity: 1 },
@@ -230,7 +178,6 @@ function SystemsThatSustainExcellence() {
             segStart,
           );
 
-          // Remaining cards shift one depth forward
           for (let d = 0; d < frontDOM; d++) {
             const depthBefore = frontDOM - d;
             const depthAfter  = frontDOM - 1 - d;
@@ -266,10 +213,7 @@ function SystemsThatSustainExcellence() {
         }
       };
 
-      // Desktop — generous scroll for smooth reveal
       mm.add("(min-width: 768px)", () => { buildStackTimeline(7 * 320); });
-
-      // Mobile — reduced scroll to eliminate dead-zone gap between sections
       mm.add("(max-width: 767px)", () => { buildStackTimeline(7 * 100); });
 
       return () => mm.revert();
@@ -301,7 +245,7 @@ function SystemsThatSustainExcellence() {
               />
             </div>
 
-            <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px]  leading-tight text-[#F5EFE8] overflow-hidden">
+            <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px] leading-tight text-[#F5EFE8] overflow-hidden">
               {["Systems", "That", "Sustain", "Excellence"].map((word, i) => (
                 <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
                   <span className="systems-heading-word inline-block">{word}</span>
@@ -327,7 +271,7 @@ function SystemsThatSustainExcellence() {
         className="relative bg-[#0f0f0f]"
         style={{ minHeight: "100vh" }}
       >
-        {/* Background giant words — all start at opacity 0; GSAP drives them */}
+        {/* Background giant words */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none"
           aria-hidden="true"
@@ -360,7 +304,6 @@ function SystemsThatSustainExcellence() {
               height: "clamp(360px, 50vw, 480px)",
             }}
           >
-            {/* DOM order: "07" first = back, "01" last = front */}
             {[...ITEMS].reverse().map((item, reversedDOMIndex) => {
               const originalItemIndex = ITEMS.length - 1 - reversedDOMIndex;
               return (
@@ -437,14 +380,6 @@ function SystemsThatSustainExcellence() {
               />
             </div>
             <div className="absolute inset-0 bg-black/40" />
-            {/* <div
-              className="absolute inset-0 opacity-[0.04] pointer-events-none"
-              style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-                backgroundSize: "180px 180px",
-              }}
-            /> */}
             <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10">
               <p className="font-rethink system-desc text-center text-white text-[15px] sm:text-[17px] md:text-[22px] leading-relaxed max-w-[680px] font-light">
                 These systems ensure that faculty remain professionally
