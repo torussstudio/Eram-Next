@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── Constants ──────────────────────────────────────────────────── */
-const CATEGORIES = ["ACADEMIC", "SPORTS", "CULTURAL", "PROFESSIONAL"];
+const CATEGORIES = ["ACADEMIC", "SPORTS", "CULTURAL", "SOCIAL"];
 
 export const excellenceDomains = {
   ACADEMIC: Array.from({ length: 4 }, (_, i) => ({

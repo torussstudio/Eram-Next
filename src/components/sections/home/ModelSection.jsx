@@ -116,6 +116,7 @@ export default function ModelSection() {
   className="
     model-heading
     max-w-[500px]
+    pb-[10px]
     ml-[560px]
     max-[1300px]:ml-[500px]
     max-[1200px]:ml-[460px]
@@ -131,23 +132,23 @@ export default function ModelSection() {
     max-[640px]:order-1
   "
 >
-          <h2
-            className="
-              font-display
-              text-[52px]
-              leading-[1.05]
-              tracking-[-0.02em]
-              text-[#f5efe8]
-              max-[900px]:text-[42px]
-              max-[640px]:text-[32px]
-              max-[480px]:text-[28px]
-            "
-          >
-            The ERAM
-            <br />
-            Educational Model
-          </h2>
-
+         <h2
+  className="
+    font-display
+    text-[52px]
+    leading-[1.05]
+    tracking-[-0.02em]
+    text-[#f5efe8]
+    -mt-[20px]
+    max-[900px]:text-[42px]
+    max-[640px]:text-[32px]
+    max-[480px]:text-[28px]
+  "
+>
+  The ERAM
+  <br />
+  Educational Model
+</h2>
           <p
             className="
               font-rethink

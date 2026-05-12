@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
+import ActionButton from "../../ui/ActionButton";
 
 /* ─── Animation config ────────────────────────────────────────────────────── */
 const EASE = {
@@ -197,7 +198,7 @@ export default function AboutSection() {
             </span>
           </div>
 
-          <div className="pl-[300px] max-[1280px]:pl-[160px]">
+          <div className="pl-[150px] max-[1280px]:pl-[160px]">
             <h2
               ref={dHeadingRef}
               className="font-display text-[48px] leading-[1.15] text-[#f5efe8] max-w-[600px]"
@@ -217,7 +218,17 @@ export default function AboutSection() {
               Eram Group of Companies, it upholds structured academic standards
               while serving communities with integrity.
             </p>
+
+             <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
+                    <ActionButton
+                      variant="secondary"
+                      className="font-rethink text-[#f5efe8] max-[640px]:!w-auto cursor-pointer hover:bg-black hover:text-white"
+                    >
+                      Explore Student Pathways
+                    </ActionButton>
+                  </div>
           </div>
+           
         </div>
 
         {/* Grid */}

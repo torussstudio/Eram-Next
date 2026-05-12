@@ -140,7 +140,7 @@ function StructuredLearningSection() {
     src: "/images/person2.avif",
     alt: "Mr. Abdhussamad C K",
     objPos: "object-[15%_20%]",
-    name: "Mr. Abdussamod C K",
+    name: "Mr. Abdhussamad C K",
     role:
       "School Manager,\nKaruna Educational Welfare Trust (AMLP)",
     num: "02",

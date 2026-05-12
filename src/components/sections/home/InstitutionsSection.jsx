@@ -9,8 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const institutions = [
   { title: "EASE (CBSE)",    image: "/images/ease.avif",  path: "https://ease.edu.in/" },
+   { title: "MMHSS (Hr. Sec)",image: "/images/mmhss.avif", path: "/mmhss"              },
   { title: "MMPS (HS)",      image: "/images/mmps.webp",   path: "mmps"                             },
-  { title: "MMHSS (Hr. Sec)",image: "/images/mmhss.avif", path: "/mmhss"              },
+ 
   { title: "AMLP (LP)",      image: "/images/amlp.avif" , path:"/amlp"                               },
   { title: "MMITE (TTI)",    image: "/images/mmite.webp" , path:"/mmite"                              },
 ];
