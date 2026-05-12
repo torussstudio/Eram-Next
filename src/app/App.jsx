@@ -70,6 +70,7 @@ export default function App() {
             <Route path="/mmps" element={<Mmps />} />
             <Route path="/amlp" element={<Amlp />} />
              <Route path="/mmite" element={<Mmite />} />
+             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Suspense>
 

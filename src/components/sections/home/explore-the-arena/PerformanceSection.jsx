@@ -12,7 +12,6 @@ const CARDS = [
     no: "01",
     title: "Open-Air\nAmphitheatre",
     desc: "With a seating capacity of 1,000, the Arena is designed as an open-air amphitheatre that accommodates large audiences while maintaining clear sightlines and gathering scale. Its architectural layout enables visibility, flow, and shared experience — for sporting events, convocations, or cultural programs.",
-    
     labels: ["Capacity", "Format", "Sightlines"],
     values: ["1,000 Spectators", "Open-Air Design", "Unobstructed, All Tiers"],
     Icon: Landmark,
@@ -21,7 +20,6 @@ const CARDS = [
     no: "02",
     title: "Multi-Court\nAthletic\nLayout",
     desc: "At its core, the Arena integrates a competitive multi-court system that supports structured training, competitive matches, and tournament-level play. Designed to transition seamlessly between practice, competition, and event configurations.",
-    
     labels: ["Primary Court", "Badminton Court", "Configuration"],
     values: ["47m × 22m", "13.40m × 6.10m", "Multi-Sport Ready"],
     Icon: LayoutGrid,
@@ -30,7 +28,6 @@ const CARDS = [
     no: "03",
     title: "Event-Ready\nIllumination",
     desc: "Equipped with a full floodlighting system, the Arena enables evening matches, large-scale programs, and extended event scheduling — transforming the venue into a fully functional day-to-night event space without interruption.",
-   
     labels: ["Floodlight Poles", "LED Lights", "Operation"],
     values: ["8 Poles (10m Height)", "38 High-Intensity Units", "Day to Night Capable"],
     Icon: Lightbulb,
@@ -39,7 +36,6 @@ const CARDS = [
     no: "04",
     title: "Secure &\nAccessible\nInfrastructure",
     desc: "The Arena integrates essential support systems ensuring smooth, safe, and efficient operation for every event — whether institutional or public. Safety, accessibility, and operational efficiency are embedded into its design from the ground up.",
-
     labels: ["Car Parking", "Security", "Access"],
     values: ["50+ Vehicles", "CCTV Surveillance", "Controlled Campus Entry"],
     Icon: Shield,
@@ -81,28 +77,6 @@ function PerformanceSection() {
           {
             y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.6,
             scrollTrigger: { trigger: containerRef.current, start: "top 85%" },
-          },
-        );
-      });
-
-      /* Grid section reveal */
-      mm.add("(min-width: 768px)", () => {
-        gsap.fromTo(
-          ".perf-grid-card",
-          { y: 50, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 0.9, stagger: 0.02, ease: "power3.out",
-            scrollTrigger: { trigger: ".perf-grid", start: "top 80%" },
-          },
-        );
-      });
-      mm.add("(max-width: 767px)", () => {
-        gsap.fromTo(
-          ".perf-grid-card",
-          { x: -30, opacity: 0 },
-          {
-            x: 0, opacity: 1, duration: 0.75, stagger: 0.18, ease: "expo.out",
-            scrollTrigger: { trigger: ".perf-grid", start: "top 85%" },
           },
         );
       });
@@ -206,8 +180,8 @@ function PerformanceSection() {
         );
       };
 
-      mm.add("(min-width: 768px)", () => { buildStack(4 * 420); });
-     mm.add("(max-width: 767px)", () => { buildStack(4 * 110); });
+      mm.add("(min-width: 768px)", () => { buildStack(4 * window.innerHeight); });
+      mm.add("(max-width: 767px)", () => { buildStack(4 * window.innerHeight); });
 
       return () => mm.revert();
     },
@@ -263,7 +237,7 @@ function PerformanceSection() {
       <section
         ref={stackSectionRef}
         className="relative bg-[#F5EFE8]"
-       style={{ minHeight: "100dvh" }}
+        style={{ minHeight: "100dvh" }}
       >
         {/* Giant background words */}
         <div
@@ -289,7 +263,7 @@ function PerformanceSection() {
         {/* Card stack */}
         <div
           className="relative z-10 flex items-center justify-center"
-         style={{ minHeight: "100dvh", padding: "10px 0" }}
+          style={{ minHeight: "100dvh", padding: "10px 0" }}
         >
           <div
             className="relative"
@@ -301,28 +275,24 @@ function PerformanceSection() {
             {[...CARDS].reverse().map((card, reversedDOMIndex) => {
               const originalIndex = CARDS.length - 1 - reversedDOMIndex;
               const { Icon } = card;
-              const isLight = originalIndex % 2 === 0;
-              const bg = "#ffffff";
               const text = "#1a100b";
               return (
                 <div
                   key={card.no}
                   className="perf-stack-card absolute inset-0 rounded-[24px] md:rounded-[30px] overflow-hidden"
                   style={{
-                    background: bg,
+                    background: "#ffffff",
                     boxShadow: "0 24px 70px rgba(0,0,0,0.22), 0 2px 12px rgba(0,0,0,0.08)",
                     willChange: "transform, opacity",
                   }}
                 >
-                  
-
                   <div className="relative w-full h-full flex flex-col p-6 sm:p-8 md:p-9">
 
                     {/* ── Row 1: number + icon ── */}
                     <div className="flex items-center justify-between mb-5">
                       <span
                         className="font-mono tracking-[0.18em]"
-                        style={{ fontSize: "clamp(10px, 1.1vw, 11px)", color: `${text}`, opacity: 0.35 }}
+                        style={{ fontSize: "clamp(10px, 1.1vw, 11px)", color: text, opacity: 0.35 }}
                       >
                         {card.no} / 04
                       </span>
@@ -355,7 +325,7 @@ function PerformanceSection() {
                     {/* ── Divider ── */}
                     <div
                       className="my-4 md:my-5 flex-shrink-0"
-                      style={{ height: "1px", background: `${text}`, opacity: 0.1 }}
+                      style={{ height: "1px", background: text, opacity: 0.1 }}
                     />
 
                     {/* ── Row 3: Description ── */}
@@ -376,7 +346,6 @@ function PerformanceSection() {
 
                     {/* ── Row 4: Specs ── */}
                     <div className="flex-shrink-0">
-                      {/* Spec rows */}
                       <div className="flex flex-col gap-[6px] md:gap-[7px]">
                         {card.labels.map((label, idx) => (
                           <div

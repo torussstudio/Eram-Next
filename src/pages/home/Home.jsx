@@ -113,7 +113,7 @@ function LazySection({
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden bg-white">
+    <main className="relative overflow-x-clip bg-white">
       {/* ========================================
           HERO
       ======================================== */}

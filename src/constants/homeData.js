@@ -3,7 +3,7 @@ export const navItems = [
   { label: "The Trust", path: "/the-trust" },
   { label: "Institutions", path: "#institutions" },
   { label: "Sports Arena", path: "/explore-arena" },
-  { label: "Contact", path: "/gallery" },
+  { label: "Contact", path: "/contact" },
 ];
 
 export const institutions = [

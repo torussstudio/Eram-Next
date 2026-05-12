@@ -370,7 +370,7 @@ function SystemsThatSustainExcellence() {
       <section className="bg-[#F5EFE8] overflow-hidden py-14 px-5 md:py-20 md:px-6">
         <div className="w-full md:max-w-[1100px] md:mx-auto">
           <div className="system-img-wrap relative rounded-[26px] overflow-hidden transform-gpu h-[260px] sm:h-[320px] md:h-[480px]">
-            <div className="system-img w-full h-[120%] absolute -top-[10%]">
+            <div className="system-img w-full h-[130%] absolute -top-[15%]">
               <OptimizedImage
                 src="/images/campus.webp"
                 alt="campus"

@@ -191,7 +191,7 @@ export default function AboutSection() {
       <div className="hidden min-[1100px]:block mx-auto w-[min(1100px,calc(100vw-120px))]">
 
         <div className="grid grid-cols-[300px_1fr] gap-x-[100px]">
-          <div ref={dLabelRef} className="pl-[65px]">
+          <div ref={dLabelRef} className="pl-[50px]">
             <span className="text-[18px] tracking-[0.15em] uppercase text-[#f5efe8] font-medium">
               ABOUT US
             </span>
