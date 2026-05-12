@@ -205,10 +205,10 @@ duration: 0.3,
       });
 
      mm.add("(max-width: 899px)", () => {
-  gsap.set(cards, {
-    opacity: 1,
-    clearProps: "all",
-  });
+ gsap.set(".mob-exc-card", {
+  opacity: 1,
+  clearProps: "all",
+});
         gsap.set(".mob-exc-word", { y: "105%", opacity: 0 });
         gsap.set(".mob-nav-row", { y: 14, opacity: 0 });
         gsap.set(".mob-exc-card", { y: 40, opacity: 0 });
