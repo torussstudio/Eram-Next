@@ -34,7 +34,7 @@ export default function ClosingSection() {
                 The ERAM Sports Arena extends the campus into a space of scale.
                 Its open-air amphitheatre and floodlit multi-court design reflect
                 a long-term vision: to create infrastructure that supports performance,
-                visibility, and shared experience. As both athletic ground and event
+                visibility, and shared experience. As both sports ground and event
                 venue, the Arena strengthens the campus as a space built for participation
                 and presence.
               </p>
@@ -140,7 +140,7 @@ export default function ClosingSection() {
             text-[15px] md:text-[16px]
             text-[#7a7268]
           ">
-            "Built not for scale alone — but for sustained opportunity: athletic, cultural, and communal."
+            "Built not for scale alone — but for sustained opportunity: sports, cultural, and communal."
           </p>
 
         </div>

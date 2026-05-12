@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ScrollToTop from "../components/layout/ScrollToTop";
 
 // Layout
-const Navbar = lazy(() => import("../components/layout/Navbar"));
-const Footer = lazy(() => import("../components/layout/Footer"));
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 // Pages
 const Home = lazy(() => import("../pages/home/Home"));
@@ -45,16 +45,13 @@ export default function App() {
 
       <div className="overflow-x-clip bg-[#F5EFE8] font-display text-[#111111] leading-[1.4]">
 
-        {/* Navbar */}
-        <Suspense fallback={null}>
-          <Navbar
-            onAboutHover={preloadAbout}
-            onTheTrustHover={preloadTheTrust}
-            onFacilitiesHover={preloadFacilities}
-            onContactHover={preloadContact}
-            onGalleryHover={preloadGallery}
-          />
-        </Suspense>
+        <Navbar
+  onAboutHover={preloadAbout}
+  onTheTrustHover={preloadTheTrust}
+  onFacilitiesHover={preloadFacilities}
+  onContactHover={preloadContact}
+  onGalleryHover={preloadGallery}
+/>
 
         {/* Routes */}
         <Suspense fallback={<PageLoader />}>
@@ -75,9 +72,7 @@ export default function App() {
         </Suspense>
 
         {/* Footer */}
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
+       <Footer />
 
       </div>
     </Router>

@@ -38,7 +38,7 @@ export default function AnchoredSection() {
   text-[#eae6df]
 ">
   Anchored In Structured<br />
-  Athletic Development
+  sports Development
 </h2>
 
             {/* DESC */}
@@ -129,7 +129,7 @@ const points = [
   "Structured sports training environments for all institutions",
   "Competitive exposure platforms at campus scale",
   "Professional-grade infrastructure accessible to every student",
-  "Seamless integration between academics and athletics",
+  "Seamless integration between academics and sports",
 ];
 
 const cards = [

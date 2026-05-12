@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { section, shell } from "../../../constants/homeStyles";
@@ -36,12 +36,12 @@ function SplitHeading({ text, className }) {
 /* ── ImpactImage ─────────────────────────────────────────────────── */
 function ImpactImage({ src, alt, className = "" }) {
   return (
-    <div className={`group relative overflow-hidden rounded-[28px] ${className}`}>
+    <div className={`group relative overflow-hidden rounded-[28px] will-change-transform ${className}`}>
       <img
         src={src}
         alt={alt}
         loading="lazy"
-        className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] group-hover:scale-105"
+        className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.25,.46,.45,.94)] group-hover:scale-[1.03]"
       />
       <div className="absolute inset-0 bg-black/10" />
     </div>
@@ -80,7 +80,7 @@ function CarouselArrow({ direction, onClick }) {
         hover:bg-[#f5efe8]
         hover:border-[#f5efe8]
         hover:scale-110
-        hover:shadow-[0_0_18px_rgba(245,239,232,0.35)]
+       
 
         active:scale-95
         cursor-pointer
@@ -129,14 +129,14 @@ export default function ImpactSection() {
 
     topTl.fromTo(
       root.querySelectorAll(".split-word"),
-      { y: "105%", rotate: 3 },
-      { y: "0%", rotate: 0, duration: 0.75, stagger: 0.07, ease: ease3 }
+      { y: "105%" },
+      { y: "0%", duration: 0.68, stagger: 0.07, ease: ease3 }
     );
 
     if (!isMobile) {
       topTl
-        .fromTo(".img-left",  { x: -44, opacity: 0, scale: 0.93 }, { x: 0, opacity: 1, scale: 1, duration: 0.75, ease: ease2 }, "-=0.55")
-        .fromTo(".img-right", { x:  44, opacity: 0, scale: 0.93 }, { x: 0, opacity: 1, scale: 1, duration: 0.75, ease: ease2 }, "-=0.72");
+        .fromTo(".img-left",  { x: -44, opacity: 0, scale: 0.93 }, { x: 0, opacity: 1, scale: 1, duration: 0.6, ease: ease2 }, "-=0.55")
+        .fromTo(".img-right", { x:  44, opacity: 0, scale: 0.93 }, { x: 0, opacity: 1, scale: 1, duration: 0.6, ease: ease2 }, "-=0.72");
     } else {
       topTl.fromTo(
         root.querySelectorAll(".mob-img"),
@@ -169,10 +169,10 @@ export default function ImpactSection() {
       root.querySelector(".key-areas-heading"),
       isMobile
         ? { opacity: 0, y: 18, scale: 0.94 }
-        : { letterSpacing: "0.44em", opacity: 0, y: 16 },
+        :  { opacity: 0, y: 16 },
       isMobile
         ? { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }
-        : { letterSpacing: "0.18em", opacity: 1, y: 0, duration: 0.85, ease: ease2 }
+        :  { opacity: 1, y: 0, duration: 0.7, ease: ease2 }
     );
 
     const cardEase = isMobile ? "back.out(1.8)" : ease2;
@@ -198,7 +198,9 @@ export default function ImpactSection() {
         { opacity: 1, scale: 1, y: 0, duration: 0.42, stagger: 0.07, ease: cardEase },
         "-=0.38"
       );
-  }, { scope: sectionRef });
+return () => gsap.killTweensOf("*");
+
+}, { scope: sectionRef });
 
   return (
     <section ref={sectionRef}  className={`${section} bg-[#ae1431]`} id="impact">

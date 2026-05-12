@@ -117,16 +117,16 @@ function StructuredLearningSection() {
   );
 
   const CARDS = [
-    { num: "/01", img: "/images/student.webp", alt: "student", text: "Rigorous curriculum alignment (State & CBSE)" },
-    { num: "/02", img: "/images/teacher.webp", alt: "teacher", text: "Teacher-guided mentorship models" },
-    { num: "/03", img: "/images/student.webp", alt: "class", text: "Continuous evaluation & improvement cycles" },
-    { num: "/04", img: "/images/student.webp", alt: "student", text: "Holistic integration of academics, sports, and culture" },
-    { num: "/05", img: "/images/teacher.webp", alt: "teacher", text: "Exposure-driven learning beyond textbooks" },
+    { num: "/01", img: "/images/student.avif", alt: "student", text: "Rigorous curriculum alignment (State & CBSE)" },
+    { num: "/02", img: "/images/teacher.avif", alt: "teacher", text: "Teacher-guided mentorship models" },
+    { num: "/03", img: "/images/student.avif", alt: "class", text: "Continuous evaluation & improvement cycles" },
+    { num: "/04", img: "/images/student.avif", alt: "student", text: "Holistic integration of academics, sports, and culture" },
+    { num: "/05", img: "/images/teacher.avif", alt: "teacher", text: "Exposure-driven learning beyond textbooks" },
   ];
 
   const PROFILES = [
   {
-    src: "/images/person1.webp",
+    src: "/images/person1.avif",
     alt: "Dr. Siddeek Ahmed",
     objPos: "object-[72%_center]",
     name: "Dr. Siddeek Ahmed",
@@ -137,8 +137,8 @@ function StructuredLearningSection() {
       "Education is a powerful force that shapes intellect, character, and values. At ERAM, we are committed to providing value-based quality education to every student, irrespective of background. Through structured learning and strong moral principles, we aim to nurture disciplined, responsible individuals who strive for excellence and contribute meaningfully to society. May God Almighty bless us all!",
   },
   {
-    src: "/images/person2.webp",
-    alt: "Mr. Abdussamod C K",
+    src: "/images/person2.avif",
+    alt: "Mr. Abdhussamad C K",
     objPos: "object-[15%_20%]",
     name: "Mr. Abdussamod C K",
     role:

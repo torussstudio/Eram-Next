@@ -25,7 +25,6 @@ const STATS = [
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Hero() {
   const sectionRef = useRef(null);
-  const bgImgRef = useRef(null);
   const overlayRef = useRef(null);
   const badgeRef = useRef(null);
   const headingRef = useRef(null);
@@ -37,6 +36,7 @@ export default function Hero() {
   const lineRef = useRef(null);
 
   useEffect(() => {
+     requestAnimationFrame(() => {
     const ctx = gsap.context(() => {
       /* ── 1. Hero entrance timeline ── */
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -51,8 +51,8 @@ export default function Hero() {
       // Heading clip-path reveal (cinematic curtain up)
       tl.fromTo(
         headingRef.current,
-        { clipPath: "inset(0 0 100% 0)", opacity: 0, y: 40 },
-        { clipPath: "inset(0 0 0% 0)", opacity: 1, y: 0, duration: 1.1 },
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.9 },
         "-=0.4",
       );
 
@@ -83,7 +83,7 @@ export default function Hero() {
       // Right panel slides in from right with slight scale
       tl.fromTo(
         panelRef.current,
-        { opacity: 0, x: 60, scale: 0.96 },
+        { opacity: 0, x: 36, scale: 0.98 },
         { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: "power2.out" },
         "-=0.7",
       );
@@ -107,53 +107,34 @@ export default function Hero() {
         );
       }
 
-      /* ── 2. Parallax on background image ── */
-      gsap.to(bgImgRef.current, {
-        yPercent: 18,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.4,
-        },
-      });
-
       /* ── 3. Stats reveal on scroll ── */
       const statItems = statsRef.current?.querySelectorAll(".stat-item");
       if (statItems?.length) {
-        gsap.fromTo(
-          statItems,
-          { opacity: 0, y: 36, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.14,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: "top 88%",
-              toggleActions: "play none none none",
-            },
-          },
-        );
+       gsap.fromTo(
+  statItems,
+  { y: 24, scale: 0.98 },
+  {
+    y: 0,
+    scale: 1,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: statsRef.current,
+      start: "top 92%",
+      once: true,
+    },
+  }
+);
       }
-
-      /* ── 4. Idle floating on panel ── */
-      gsap.to(panelRef.current, {
-        y: -6,
-        duration: 3.2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.6,
-      });
     }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+  ScrollTrigger.getAll().forEach((t) => t.kill());
+  ctx.revert();
+};
+  });
+}, []);
 
   return (
     <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
@@ -161,11 +142,11 @@ export default function Hero() {
       <div className="relative rounded-[28px] overflow-hidden text-white">
         {/* BACKGROUND */}
         <img
-          ref={bgImgRef}
-          src="/hero-bg.jpg"
+          src="/images/mmhss.webp"
           alt="Hero"
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
-          style={{ height: "110%" }}
+          decoding="async"
+          fetchPriority="high"
+          className="absolute inset-x-0 top-0 w-full h-[78%] object-cover object-[center_70%]"
         />
         <div ref={overlayRef} className="absolute inset-0 bg-black/70" />
 
@@ -197,7 +178,7 @@ export default function Hero() {
               >
                 Mariyumma Memorial <br />
                 Higher Secondary <br />
-                <span className="font-display italic text-white/60">School</span>
+                <span className="font-display  text-white/60">School</span>
               </h1>
               <p
                 ref={subtextRef}
@@ -217,15 +198,15 @@ export default function Hero() {
                 <button
                   className="font-rethink bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer
-                    rounded-sm active:scale-[0.98] transition-transform rounded-[15px]"
+                   active:scale-[0.98] transition-transform rounded-[12px]"
                 >
                   Admissions Open — Book Now →
                 </button>
                 <button
                   className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
-                    flex items-center gap-2 cursor-pointer rounded-sm
-                    active:scale-[0.98] transition-transform rounded-[15px]"
+                    flex items-center gap-2 cursor-pointer 
+                    active:scale-[0.98] transition-transform rounded-[12px]"
                 >
                   Enquire Now
                 </button>
@@ -237,7 +218,7 @@ export default function Hero() {
               ref={panelRef}
               className="font-rethink w-full sm:w-[300px] lg:w-[280px]
                 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
-                backdrop-blur-md border border-white/10 rounded-md p-5
+               border border-white/10 rounded-md p-5
                 lg:ml-auto lg:mr-8 mt-2 lg:mt-0 will-change-transform"
             >
               <div className="flex items-center gap-3 mb-5">

@@ -100,11 +100,17 @@ export default function Journey() {
         { opacity: 1, x: 0, duration: 0.7, ease, scrollTrigger: st(badgeRef.current) }
       );
 
-      gsap.fromTo(headingRef.current,
-        { opacity: 0, y: 50, clipPath: "inset(0 0 100% 0)" },
-        { opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)", duration: 1.05, ease,
-          scrollTrigger: st(headingRef.current, "top 85%") }
-      );
+    gsap.fromTo(
+  headingRef.current,
+  { opacity: 0, y: 40 },
+  {
+    opacity: 1,
+    y: 0,
+    duration: 0.9,
+    ease,
+    scrollTrigger: st(headingRef.current, "top 85%"),
+  }
+);
 
       gsap.fromTo(dividerRef.current,
         { scaleX: 0, transformOrigin: "left center" },
@@ -146,29 +152,55 @@ export default function Journey() {
       const rows = timelineRef.current?.querySelectorAll(".milestone-row");
 
       if (rows?.length) {
-        rows.forEach((row) => {
-          const year    = row.querySelector(".ms-year");
-          const content = row.querySelector(".ms-content");
-          const dot     = row.querySelector(".ms-dot");
+      rows.forEach((row) => {
+  const year = row.querySelector(".ms-year");
+  const content = row.querySelector(".ms-content");
+  const dot = row.querySelector(".ms-dot");
 
-          gsap.fromTo(year,
-            { opacity: 0, x: -14 },
-            { opacity: 1, x: 0, duration: 0.55, ease,
-              scrollTrigger: { trigger: row, start: "top 84%", toggleActions: "play none none none" } }
-          );
-
-          gsap.fromTo(dot,
-            { opacity: 0, scale: 0, transformOrigin: "center center" },
-            { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.7)", delay: 0.08,
-              scrollTrigger: { trigger: row, start: "top 84%", toggleActions: "play none none none" } }
-          );
-
-          gsap.fromTo(content,
-            { opacity: 0, x: 24 },
-            { opacity: 1, x: 0, duration: 0.65, ease, delay: 0.12,
-              scrollTrigger: { trigger: row, start: "top 84%", toggleActions: "play none none none" } }
-          );
-        });
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: row,
+      start: "top 84%",
+      toggleActions: "play none none none",
+    },
+  })
+  .fromTo(
+    year,
+    { opacity: 0, x: -14 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 0.45,
+      ease,
+    }
+  )
+  .fromTo(
+    dot,
+    {
+      opacity: 0,
+      scale: 0,
+      transformOrigin: "center center",
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.35,
+      ease: "back.out(1.4)",
+    },
+    "-=0.2"
+  )
+  .fromTo(
+    content,
+    { opacity: 0, x: 18 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 0.5,
+      ease,
+    },
+    "-=0.2"
+  );
+});
       }
 
       /* ── 4. SPINE — first dot center → last dot center, pixel-perfect on all screen sizes ── */
@@ -189,26 +221,33 @@ export default function Journey() {
         const spineFullH     = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
 
         gsap.set(spine, { left: spineLeft, top: spineTopOffset, height: 0, xPercent: -50 });
+        gsap.set(spine, {
+  left: spineLeft,
+  top: spineTopOffset,
+  height: spineFullH,
+  scaleY: 0,
+  transformOrigin: "top center",
+  xPercent: -50,
+});
 
-        const proxy = { h: 0 };
-        gsap.to(proxy, {
-          h: spineFullH,
-          ease: "none",
-          onUpdate() {
-            spine.style.height = `${proxy.h}px`;
-          },
-          scrollTrigger: {
-            trigger: timeline,
-            start: "top 75%",
-            end:   "bottom 70%",
-            scrub: 1,
-          },
-        });
+gsap.to(spine, {
+  scaleY: 1,
+  ease: "none",
+  scrollTrigger: {
+    trigger: timeline,
+    start: "top 75%",
+    end: "bottom 70%",
+    scrub: 0.6,
+  },
+});
       }
 
     }, sectionRef);
 
-    return () => ctx.revert();
+   return () => {
+  ScrollTrigger.getAll().forEach((t) => t.kill());
+  ctx.revert();
+};
   }, []);
 
   return (

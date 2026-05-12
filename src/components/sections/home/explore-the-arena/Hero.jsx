@@ -41,16 +41,35 @@ py-4 md:py-16 flex flex-col lg:flex-row gap-4"
               </h1>
 
               <p className="font-rethink mt-5 text-[1.05rem] md:text-[16px] leading-[1.8] text-white/70 max-w-[560px]">
-                A 1,000-seat open-air amphitheatre and multi-court venue
-                designed to elevate athletic performance, cultural engagement,
-                and large-scale campus events<br></br> — a flagship
-                infrastructure milestone within the ERAM ecosystem.
+             A 1,000-seat open-air amphitheatre and multi-court venue designed to elevate competitive sport, cultural engagement, and large-scale campus events.
+A flagship infrastructure milestone within the ERAM ecosystem.
               </p>
 
-              <div className="flex flex-wrap gap-3 mt-7">
-                <button className="font-rethink bg-[#ae1431] rounded-[12px] px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer">
-                  EXPLORE THE ARENA→
-                </button>
+              <div className="flex flex-wrap gap-6 mt-7">
+               <button className="
+  group
+  font-rethink 
+  bg-[#ae1431] 
+  rounded-[12px] 
+  px-5 md:px-7 
+  py-2.5 md:py-3 
+  text-[11px] md:text-[12px] 
+  tracking-[0.12em] 
+  uppercase 
+  cursor-pointer
+  text-white
+  flex items-center gap-2
+">
+  EXPLORE THE ARENA
+  <span className="
+    relative z-10
+    inline-block
+    transition-all duration-300
+    group-hover:translate-x-[5px]
+  ">
+    →
+  </span>
+</button>
 
                 <button className="font-rethink border rounded-[12px] border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
                   HOST AN EVENT

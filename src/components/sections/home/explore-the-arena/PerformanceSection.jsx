@@ -1,6 +1,6 @@
 import { memo, useRef } from "react";
 import { Landmark, LayoutGrid, Lightbulb, Shield } from "lucide-react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -18,7 +18,7 @@ const CARDS = [
   },
   {
     no: "02",
-    title: "Multi-Court\nAthletic\nLayout",
+    title: "Multi-Court\nSports\nLayout",
     desc: "At its core, the Arena integrates a competitive multi-court system that supports structured training, competitive matches, and tournament-level play. Designed to transition seamlessly between practice, competition, and event configurations.",
     labels: ["Primary Court", "Badminton Court", "Configuration"],
     values: ["47m × 22m", "13.40m × 6.10m", "Multi-Sport Ready"],
@@ -116,7 +116,7 @@ function PerformanceSection() {
             end:           `+=${scrollEndPx}`,
             pin:           true,
             pinSpacing:    true,
-            scrub:         2.8,
+            scrub:         1.2,
             anticipatePin: 1,
           },
         });
@@ -128,7 +128,7 @@ function PerformanceSection() {
           tl.fromTo(
             cards[frontDOM],
             { y: 0, rotation: 0, scale: 1, opacity: 1 },
-            { y: -700, rotation: -14, scale: 0.90, opacity: 0, ease: "power2.inOut", duration: segDur },
+            { y: -520, rotation: -14, scale: 0.90, opacity: 0, ease: "power2.inOut", duration: segDur },
             segStart,
           );
 
@@ -159,13 +159,13 @@ function PerformanceSection() {
           tl.fromTo(
             `.perf-bg-word[data-index="${step}"]`,
             { opacity: 0 },
-            { opacity: 0.07, ease: "none", duration: segDur },
+            { opacity:0.04 , ease: "none", duration: segDur },
             segStart,
           );
           if (step > 0) {
             tl.fromTo(
               `.perf-bg-word[data-index="${step - 1}"]`,
-              { opacity: 0.07 },
+              { opacity: 0.04 },
               { opacity: 0, ease: "none", duration: segDur },
               segStart,
             );
@@ -174,14 +174,19 @@ function PerformanceSection() {
 
         tl.fromTo(
           `.perf-bg-word[data-index="${total - 1}"]`,
-          { opacity: 0.07 },
+          { opacity: 0.04},
           { opacity: 0, ease: "none", duration: segDur },
           (total - 1) * segDur,
         );
       };
 
-      mm.add("(min-width: 768px)", () => { buildStack(4 * window.innerHeight); });
-      mm.add("(max-width: 767px)", () => { buildStack(4 * window.innerHeight); });
+      mm.add("(min-width: 768px)", () => { buildStack(3 * window.innerHeight); });
+      mm.add("(max-width: 767px)", () => { buildStack(3 * window.innerHeight); });
+
+      return () => {
+  ScrollTrigger.getAll().forEach((t) => t.kill());
+  mm.revert();
+};
 
       return () => mm.revert();
     },
@@ -279,10 +284,10 @@ function PerformanceSection() {
               return (
                 <div
                   key={card.no}
-                  className="perf-stack-card absolute inset-0 rounded-[24px] md:rounded-[30px] overflow-hidden"
+                  className="will-change-transform perf-stack-card absolute inset-0 rounded-[24px] md:rounded-[30px] overflow-hidden"
                   style={{
                     background: "#ffffff",
-                    boxShadow: "0 24px 70px rgba(0,0,0,0.22), 0 2px 12px rgba(0,0,0,0.08)",
+                    boxShadow: "0 12px 32px rgba(0,0,0,0.14)",
                     willChange: "transform, opacity",
                   }}
                 >

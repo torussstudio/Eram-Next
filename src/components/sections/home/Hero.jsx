@@ -1,8 +1,11 @@
 import { useRef } from "react";
-import { gsap } from "../../../lib/gsap";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ActionButton from "../../ui/ActionButton";
 import { shell } from "../../../constants/homeStyles";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Styles ──────────────────────────────────────────────────────────────── */
 const sectionCls = [
@@ -56,8 +59,8 @@ export default function Hero() {
       const mm = gsap.matchMedia();
       const lines = () => [line0Ref.current, line1Ref.current];
 
-      /* ── Desktop ≥ 1024px — cinematic clip-reveal + parallax ─────────────── */
-      mm.add("(min-width: 1024px)", () => {
+      /* ── Desktop ≥ 1280px — cinematic clip-reveal + parallax ─────────────── */
+      mm.add("(min-width: 1280px)", () => {
         const tl = gsap.timeline({ delay: 0.1 });
 
         tl.fromTo(
@@ -86,18 +89,21 @@ export default function Hero() {
 
         // Subtle parallax on scroll
         gsap.to(containerRef.current, {
-          yPercent: 8,
+          yPercent: 4,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
             end: "bottom top",
-            scrub: 0.5,
+            scrub: 0.2,
             invalidateOnRefresh: true,
           },
         });
 
-        return () => tl.kill();
+        return () => {
+  tl.kill();
+  ScrollTrigger.getAll().forEach((t) => t.kill());
+};
       });
 
       /* ── Tablet 768–1023px — moderate reveals, no parallax ──────────────── */
@@ -169,18 +175,23 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className={sectionCls} id="hero">
-      <div ref={containerRef} className={cardCls}>
+      <div
+  ref={containerRef}
+  className={`${cardCls} will-change-transform`}
+>
         {/* ── Media: LCP image first, video overlays ──────────────────────── */}
         <div className="absolute inset-0">
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/images/institute.webp"
-          >
+        <video
+ className="absolute inset-0 w-full h-full object-cover will-change-transform"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  disablePictureInPicture
+  disableRemotePlayback
+  poster="/images/institute.webp"
+>
             <source src="/videos/mainhero.mp4" type="video/mp4" />
           </video>
         </div>

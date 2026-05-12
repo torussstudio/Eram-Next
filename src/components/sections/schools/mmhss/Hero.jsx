@@ -36,6 +36,7 @@ export default function Hero() {
   const lineRef = useRef(null);
 
   useEffect(() => {
+     requestAnimationFrame(() => {
     const ctx = gsap.context(() => {
       /* ── 1. Hero entrance timeline ── */
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -50,8 +51,8 @@ export default function Hero() {
       // Heading clip-path reveal (cinematic curtain up)
       tl.fromTo(
         headingRef.current,
-        { clipPath: "inset(0 0 100% 0)", opacity: 0, y: 40 },
-        { clipPath: "inset(0 0 0% 0)", opacity: 1, y: 0, duration: 1.1 },
+        { opacity: 0, y: 32 },
+        { opacity: 1, y: 0, duration: 0.9 },
         "-=0.4",
       );
 
@@ -82,7 +83,7 @@ export default function Hero() {
       // Right panel slides in from right with slight scale
       tl.fromTo(
         panelRef.current,
-        { opacity: 0, x: 60, scale: 0.96 },
+        { opacity: 0, x: 36, scale: 0.98 },
         { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: "power2.out" },
         "-=0.7",
       );
@@ -109,50 +110,44 @@ export default function Hero() {
       /* ── 3. Stats reveal on scroll ── */
       const statItems = statsRef.current?.querySelectorAll(".stat-item");
       if (statItems?.length) {
-        gsap.fromTo(
-          statItems,
-          { opacity: 0, y: 36, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.14,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: "top 88%",
-              toggleActions: "play none none none",
-            },
-          },
-        );
+       gsap.fromTo(
+  statItems,
+  { y: 24, scale: 0.98 },
+  {
+    y: 0,
+    scale: 1,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: statsRef.current,
+      start: "top 92%",
+      once: true,
+    },
+  }
+);
       }
-
-      /* ── 4. Idle floating on panel ── */
-      gsap.to(panelRef.current, {
-        y: -6,
-        duration: 3.2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.6,
-      });
     }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+  ScrollTrigger.getAll().forEach((t) => t.kill());
+  ctx.revert();
+};
+  });
+}, []);
 
   return (
     <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
       {/* ── HERO CARD ── */}
       <div className="relative rounded-[28px] overflow-hidden text-white">
         {/* BACKGROUND */}
- <img
-
-  src="/images/mmhss.webp"
-  alt="Hero"
-  className="absolute inset-x-0 top-0 w-full h-[78%] object-cover object-[center_70%]"
-/>
+        <img
+          src="/images/mmhss.webp"
+          alt="Hero"
+          decoding="async"
+          fetchPriority="high"
+          className="absolute inset-x-0 top-0 w-full h-[78%] object-cover object-[center_70%]"
+        />
         <div ref={overlayRef} className="absolute inset-0 bg-black/70" />
 
         {/* CONTENT */}
@@ -223,7 +218,7 @@ export default function Hero() {
               ref={panelRef}
               className="font-rethink w-full sm:w-[300px] lg:w-[280px]
                 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
-                backdrop-blur-md border border-white/10 rounded-md p-5
+               border border-white/10 rounded-md p-5
                 lg:ml-auto lg:mr-8 mt-2 lg:mt-0 will-change-transform"
             >
               <div className="flex items-center gap-3 mb-5">
