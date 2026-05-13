@@ -98,7 +98,7 @@ export default function BeyondSection() {
     <section
       ref={sectionRef}
       id="beyond"
-      className={`${section}  pt-[90px] pb-[120px] bg-[#ae1431]`}
+      className={`${section}  pt-[90px]  bg-[#ae1431]`}
     >
       <div className="mx-auto w-full max-w-[1200px] px-[20px] md:px-[32px] lg:px-[40px] text-center">
 

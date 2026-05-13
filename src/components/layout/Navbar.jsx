@@ -12,7 +12,7 @@ const institutions = [
   { title: "MMPS (HS)", image: "/images/mmps.webp", path: "/mmps" },
   
   { title: "AMLP (LP)", image: "/images/amlp.avif", path: "/amlp" },
-  { title: "MMITE (TTI)", image: "/images/mmite.webp", path: "/mmite" },
+  { title: "MMITE (D. El. Edc)", image: "/images/mmite.webp", path: "/mmite" },
 ];
 
 /* ── Institutions Dropdown ──────────────────────────────────────── */
@@ -133,6 +133,7 @@ export default function Navbar() {
   const [mobileInstitutionsOpen, setMobileInstitutionsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [navHidden, setNavHidden] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -226,6 +227,40 @@ export default function Navbar() {
     });
     return () => observers.forEach((o) => o.disconnect());
   }, [isHome, location.pathname]);
+
+
+ useEffect(() => {
+  let target = 0;
+  let current = 0;
+  let rafId = null;
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  const tick = () => {
+    current = lerp(current, target, 0.09);
+    setScrollProgress(current);
+    if (Math.abs(target - current) > 0.0002) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      setScrollProgress(target);
+      rafId = null;
+    }
+  };
+
+
+  const handleScroll = () => {
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    target = docHeight > 0 ? window.scrollY / docHeight : 0;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    if (rafId) cancelAnimationFrame(rafId);
+  };
+}, []);
 
   /* ── Nav click helper ─────────────────────────────────────────── */
   const handleNavClick = (path, closeMobile = false) => {
@@ -373,17 +408,47 @@ WebkitFontSmoothing: "antialiased",
           </button>
         </div>
 
-        {/* ── MOBILE HAMBURGER ── */}
-        <button
-          onClick={() => setOpen(true)}
-          className="ml-auto min-[920px]:hidden h-[42px] w-[42px] flex items-center justify-center bg-white border border-black rounded-full shrink-0"
-        >
-          <div className="space-y-[5px]">
-            <span className="block h-[2px] w-[19px] bg-black" />
-            <span className="block h-[2px] w-[19px] bg-black" />
-            <span className="block h-[2px] w-[19px] bg-black" />
-          </div>
-        </button>
+      {/* ── MOBILE HAMBURGER ── */}
+<div className="ml-auto min-[920px]:hidden relative h-[42px] w-[42px] shrink-0">
+  {/* Scroll progress ring */}
+  <svg
+    className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
+    viewBox="0 0 42 42"
+  >
+    {/* Track */}
+    <circle
+      cx="21"
+      cy="21"
+      r="19"
+      fill="none"
+      stroke="rgba(0,0,0,0.08)"
+      strokeWidth="2.5"
+    />
+    {/* Progress */}
+   <circle
+  cx="21"
+  cy="21"
+  r="19"
+  fill="none"
+  stroke="#ae1431"
+  strokeWidth="2.5"
+  strokeLinecap="round"
+  strokeDasharray={`${2 * Math.PI * 19}`}
+  strokeDashoffset={`${2 * Math.PI * 19 * (1 - scrollProgress)}`}
+/>
+  </svg>
+  {/* Button itself */}
+  <button
+    onClick={() => setOpen(true)}
+    className="h-full w-full flex items-center justify-center bg-white border border-black/15 rounded-full"
+  >
+    <div className="space-y-[5px]">
+      <span className="block h-[2px] w-[19px] bg-black" />
+      <span className="block h-[2px] w-[19px] bg-black" />
+      <span className="block h-[2px] w-[19px] bg-black" />
+    </div>
+  </button>
+</div>
 
         {/* ── OVERLAY ── */}
         <div

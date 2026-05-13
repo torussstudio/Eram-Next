@@ -92,7 +92,7 @@ function AboutHero() {
       ref={containerRef}
       className={`${shell}  bg-[#F5EFE8] py-9`}
     >
-      <div className="overflow-hidden rounded-[28px] shadow-sm transform-gpu [contain:paint]">
+      <div className="overflow-hidden rounded-[28px] shadow-sm transform-gpu [contain:paint] max-[767px]:outline max-[767px]:outline-[4px] max-[767px]:outline-[#F5EFE8]">
         {/* HERO */}
         <div className="relative min-h-[560px] sm:min-h-[620px] md:min-h-[660px] lg:min-h-[760px] w-full">
 

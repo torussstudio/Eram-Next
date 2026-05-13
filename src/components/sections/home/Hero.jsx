@@ -26,7 +26,7 @@ const cardCls = [
   "max-[920px]:px-[36px] max-[920px]:pt-[180px]",
   "max-[640px]:px-6 max-[640px]:pt-[150px]",
   "max-[420px]:px-4 max-[420px]:pt-[130px]",
-  "max-[767px]:mt-[10px]",   
+  "max-[767px]:mt-[10px]",
 ].join(" ");
 
 const headingCls =

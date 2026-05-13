@@ -8,12 +8,11 @@ import { useNavigate } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const institutions = [
-  { title: "EASE (CBSE)",    image: "/images/ease.avif",  path: "https://ease.edu.in/" },
-   { title: "MMHSS (Hr. Sec)",image: "/images/mmhss.avif", path: "/mmhss"              },
-  { title: "MMPS (HS)",      image: "/images/mmps.webp",   path: "mmps"                             },
- 
-  { title: "AMLP (LP)",      image: "/images/amlp.avif" , path:"/amlp"                               },
-  { title: "MMITE (TTI)",    image: "/images/mmite.webp" , path:"/mmite"                              },
+  { title: "EASE (CBSE)",     image: "/images/ease.avif",  path: "https://ease.edu.in/" },
+  { title: "MMHSS (Hr. Sec)", image: "/images/mmhss.avif", path: "/mmhss"              },
+  { title: "MMPS (HS)",       image: "/images/mmps.webp",  path: "mmps"                },
+  { title: "AMLP (LP)",       image: "/images/amlp.avif",  path: "/amlp"               },
+  { title: "MMITE (D. El. Ed)",     image: "/images/mmite.webp", path: "/mmite"              },
 ];
 
 export default function InstitutionsSection() {
@@ -26,73 +25,78 @@ export default function InstitutionsSection() {
   };
 
   useGSAP(() => {
-    const defaults = { ease: "power3.out" };
+    const mm = gsap.matchMedia();
 
-    // Heading block fades up
-    gsap.fromTo(
-      ".inst-heading",
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1, y: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ...defaults,
-        scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
-      }
-    );
+    // ── Desktop only (768px+) ──────────────────────────────────────
+    mm.add("(min-width: 768px)", () => {
+      const defaults = { ease: "power3.out" };
 
-    // Cards stagger in with a subtle lift
-    gsap.fromTo(
-      ".inst-card",
-      { opacity: 0, y: 36 },
-      {
-        opacity: 1, y: 0, scale: 1,
-        duration: 0.75,
-        stagger: { amount: 0.45 },
-        ...defaults,
-        scrollTrigger: { trigger: ".inst-grid", start: "top 85%" },
-      }
-    );
+      gsap.fromTo(
+        ".inst-heading",
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.9,
+          stagger: 0.12,
+          ...defaults,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" },
+        },
+      );
+
+      gsap.fromTo(
+        ".inst-card",
+        { opacity: 0, y: 36 },
+        {
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.75,
+          stagger: { amount: 0.45 },
+          ...defaults,
+          scrollTrigger: { trigger: ".inst-grid", start: "top 85%" },
+        },
+      );
+    });
+
+    // ── Mobile — no animations, elements fully visible ─────────────
+    mm.add("(max-width: 767px)", () => {
+      gsap.set(".inst-heading", { opacity: 1, y: 0 });
+      gsap.set(".inst-card",    { opacity: 1, y: 0 });
+    });
+
+    return () => mm.revert();
   }, { scope: sectionRef });
 
   return (
     <section
       ref={sectionRef}
       id="institutions"
-      className=" content-visibility-auto  bg-[#f5efe8] pt-10 pb-28"
+      className="content-visibility-auto bg-[#f5efe8] pt-10 pb-28"
     >
       <div className="mx-auto max-w-[1180px] px-6 sm:px-4">
         <MarqueeText />
 
         {/* ── Heading ── */}
        <div className="mx-auto mt-10 w-full max-w-[980px] px-[20px] text-center">
-          <h2 className="inst-heading font-display text-[44px]  tracking-[-0.02em] text-[#111] md:text-[32px] sm:text-[26px]">
-            The ERAM Learning Continuum
-          </h2>
-<p
-  className="
-    inst-heading font-rethink
+  <h2 className="inst-heading font-display text-[44px] tracking-[-0.02em] text-[#111] 
+    md:text-[32px] max-[640px]:text-[20px]">
+    The ERAM Learning Continuum
+  </h2>
+  <p className="inst-heading font-rethink
     mx-auto mt-4
     w-full max-w-[900px]
     px-[20px]
     text-center
     text-[22px] leading-[1.7]
     text-[#111]
-    sm:max-w-full
-    sm:px-0
-    sm:text-[15px]
-  "
->
-  An ecosystem designed to guide students from foundation to formation.
-  <br></br>
-  <span className="text-[#444]">
-    {" "}
-    From foundational schooling to teacher training, each institution
-    strengthens a different stage of the learner's journey.
-  </span>
-</p>
-        </div>
-
+    max-[640px]:max-w-full max-[640px]:px-0 max-[640px]:text-[13px] 
+    max-[640px]:leading-[1.55] max-[640px]:mt-2 max-[640px]:text-left
+  ">
+    An ecosystem designed to guide students from foundation to formation.{" "}
+    <span className="text-[#444]">
+      From foundational schooling to teacher training, each institution
+      strengthens a different stage of the learner's journey.
+    </span>
+  </p>
+</div>
         {/* ── Cards ── */}
         <div className="inst-grid mt-[70px] grid grid-cols-6 gap-9 sm:mt-12 sm:gap-5 max-[1100px]:grid-cols-4 max-[900px]:grid-cols-2 max-[500px]:grid-cols-1">
           {institutions.map((item, i) => (
@@ -116,8 +120,8 @@ export default function InstitutionsSection() {
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                   decoding="async"
-  fetchPriority="low"
+                  decoding="async"
+                  fetchPriority="low"
                   className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(.25,.46,.45,.94)] group-hover:scale-[1.04]"
                 />
               </div>
