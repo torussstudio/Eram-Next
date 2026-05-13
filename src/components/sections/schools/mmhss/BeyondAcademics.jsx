@@ -174,9 +174,9 @@ export default function BeyondAcademics() {
                 <p className="text-[13px] text-[#6b5f54] leading-[1.7] max-w-[480px]">
                   {card.desc}
                 </p>
-                <span className="absolute bottom-4 right-5 font-serif text-[60px] text-[#e8dfd4] leading-none select-none pointer-events-none font-medium tracking-[-0.03em] opacity-70">
+                {/* <span className="absolute bottom-4 right-5 font-serif text-[60px] text-[#e8dfd4] leading-none select-none pointer-events-none font-medium tracking-[-0.03em] opacity-70">
                   14
-                </span>
+                </span> */}
               </div>
             ))}
           </div>

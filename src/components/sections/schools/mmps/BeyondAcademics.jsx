@@ -10,33 +10,45 @@ const benchmarks = [
   {
     tag: "Academic Record",
     title: "14 Consecutive Years — 100% Higher Secondary Results",
-    desc: "A sustained record of complete pass results across all streams, maintained through disciplined academic systems and structured student monitoring.",
+    desc: "The milestones we are proud of reflect the consistency and flexibility of our institution. ",
   },
   {
     tag: "District Ranking",
-    title: "14th Rank Among 150 Schools in Palakkad District",
-    desc: "Recognised among the top institutions in Palakkad for consistent academic output and institutional discipline across Higher Secondary streams.",
+    title: "Academic strength & Athletic development",
+    desc: "Strengthening academics and athletics hand in hand. ",
   },
 ];
 
 const excellence = [
   {
     tag: "National Level · Sports",
-    title: "Diya Maryam",
-    sub: "Grade 11",
-    desc: "🥇 1st Place — National Level Wushu Championship, Hyderabad",
+    title: "Mohammed Sinan",
+    sub: "Grade 10",
+    desc: "Selected to FIFA Talent Academy Odisha",
   },
   {
-    tag: "State Level · Cultural",
-    title: "Farha Shirin",
-    sub: "Grade 11",
-    desc: "🥇 A Grade — State Level Kalotsavam 2026 (English Story Writing)",
+    tag: "State Level · Sports",
+    title: "Mohammed Razan",
+    sub: "Grade 9",
+    desc: "Selected to the Sub Junior Kerala State Football Team",
   },
   {
-    tag: "Scouts & Guides",
-    title: "Rajyapuraskar",
-    sub: "Governor's Award — Scouts & Guides",
-    desc: "100% success rate in Rajyapuraskar qualification — the highest Governor's Award for Scouts & Guides.",
+    tag: "State Level · Sports",
+    title: "Mohammed Amar",
+    sub: "grade 10",
+    desc: "Selected for Punjab FC",
+  },
+   {
+    tag: "Athletics & Competitive Sports",
+    title: "Ajmal Rahman",
+    sub: "grade 9",
+    desc: "Bronze Medal – State Level Neeraj Chopra Javelin Throw Competition",
+  },
+  {
+    tag: "Athletics & Competitive Sports",
+    title: "Fathima Mehrin",
+    sub: "grade 7",
+    desc: "Gold Medal – 4th Kerala State Sambo Championship 2026",
   },
 ];
 
@@ -138,16 +150,15 @@ export default function BeyondAcademics() {
        <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-6 lg:mb-8">
           <div className="anim-header">
             <h2 className="font-display text-[#1a1209] leading-[1.05] tracking-[-0.02em] text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] xl:text-[46px]">
-              Representation,
+              Early Pathways
               <br />
-              Recognition &amp; Exposure
+              to Higher Performance
             </h2>
           </div>
           <div className="anim-header flex items-end">
             <p className=" font-rethink text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
-              Academic consistency is matched by active participation beyond the
-              classroom — ensuring competitive exposure and character development
-              remain central to the student experience.
+              Academic consistency at MMPS is matched by active participation in competitive platforms, particularly
+               in football and athletics. Our students actively represent the school across competitive platforms.
             </p>
           </div>
         </div>
@@ -174,9 +185,9 @@ export default function BeyondAcademics() {
                 <p className="text-[13px] text-[#6b5f54] leading-[1.7] max-w-[480px]">
                   {card.desc}
                 </p>
-                <span className="absolute bottom-4 right-5 font-serif text-[60px] text-[#e8dfd4] leading-none select-none pointer-events-none font-medium tracking-[-0.03em] opacity-70">
+                {/* <span className="absolute bottom-4 right-5 font-serif text-[60px] text-[#e8dfd4] leading-none select-none pointer-events-none font-medium tracking-[-0.03em] opacity-70">
                   14
-                </span>
+                </span> */}
               </div>
             ))}
           </div>
