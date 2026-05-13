@@ -78,48 +78,58 @@ export default function AnchoredSection() {
           </div>
 
           {/* RIGHT GRID */}
-          <div className="grid grid-cols-2 border border-[#2a2a2a]">
+          <div className="overflow-hidden border border-[#2a2a2a] rounded-[28px]">
+  <div className="grid grid-cols-2">
 
-            {cards.map((card, i) => (
-              <div
-                key={i}
-                className={`
-                  p-[22px] sm:p-[26px] md:p-[32px]
-                  min-h-[140px] sm:min-h-[160px] md:min-h-[180px]
+    {cards.map((card, i) => (
+      <div
+        key={i}
+        className={`
+          p-[22px] sm:p-[26px] md:p-[32px]
+          min-h-[140px] sm:min-h-[160px] md:min-h-[180px]
 
-                  flex flex-col justify-center
+          flex flex-col justify-center
 
-                  ${i % 2 === 0 ? "border-r" : ""}
-                  ${i < 2 ? "border-b" : ""}
-                  border-[#2a2a2a]
+          ${i % 2 === 0 ? "border-r" : ""}
+          ${i < 2 ? "border-b" : ""}
+          border-[#2a2a2a]
 
-                  ${card.variant === "red" ? "bg-[#ae1431]" : "bg-[#1a1a1a]"}
-                `}
-              >
-                <h3 className="
-                  font-rethink
-                  text-[24px] sm:text-[28px] md:text-[34px]
-                  mb-[4px] md:mb-[6px]
-                  text-[#f1eee8]
-                ">
-                  {card.title}
-                </h3>
+          ${card.variant === "red" ? "bg-[#ae1431]" : "bg-[#1a1a1a]"}
 
-                <p className="
-                font-rethink
-                  text-[13px] md:text-[14px]
-                  leading-[1.5] md:leading-[1.6]
-                  text-[#c5beb5]
-                  max-w-[200px] md:max-w-[220px]
-                ">
-                  {card.desc}
-                </p>
-              </div>
-            ))}
+          ${i === 0 ? "rounded-tl-[28px]" : ""}
+          ${i === 1 ? "rounded-tr-[28px]" : ""}
+          ${i === 2 ? "rounded-bl-[28px]" : ""}
+          ${i === 3 ? "rounded-br-[28px]" : ""}
+        `}
+      >
+        <h3
+          className="
+            font-rethink
+            text-[24px] sm:text-[28px] md:text-[34px]
+            mb-[4px] md:mb-[6px]
+            text-[#f1eee8]
+          "
+        >
+          {card.title}
+        </h3>
 
-          </div>
+        <p
+          className="
+            font-rethink
+            text-[13px] md:text-[14px]
+            leading-[1.5] md:leading-[1.6]
+            text-[#c5beb5]
+            max-w-[200px] md:max-w-[220px]
+          "
+        >
+          {card.desc}
+        </p>
+      </div>
+    ))}
 
-        </div>
+  </div>
+</div>
+</div>
       </div>
     </section>
   );

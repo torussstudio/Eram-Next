@@ -51,10 +51,36 @@ function ImpactImage({ src, alt, className = "" }) {
 /* ── ImpactCard ──────────────────────────────────────────────────── */
 function ImpactCard({ code, title, cardClass = "" }) {
   return (
-    <div className={`relative flex flex-col justify-end ${cardClass}`}>
-      <div className="card-line absolute left-0 top-0 w-[2px] bg-[#f5efe8]" />
-      <span className="card-code tracking-[0.16em] text-[#f5efe8]">{code}</span>
-      <p className="card-title leading-[1.3] text-[#f5efe8]">{title}</p>
+    <div className={`relative ${cardClass}`}>
+      
+      {/* Divider */}
+     <div className="card-line absolute left-0 top-0 h-full w-[2px] bg-[#f5efe8]" />
+
+      {/* Content */}
+      <div className="flex h-[225px] flex-col  py-[6px]">
+
+        {/* Code */}
+        <span className="card-code tracking-[0.16em] text-[#f5efe8]">
+          {code}
+        </span>
+
+        {/* Title */}
+    <p
+  className="
+    card-title
+    translate-y-[-20px]
+
+    leading-[1.08]
+    text-[#f5efe8]
+
+    min-h-[84px]
+    flex
+    items-end
+  "
+>
+  {title}
+</p>
+      </div>
     </div>
   );
 }

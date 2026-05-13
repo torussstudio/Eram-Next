@@ -3,11 +3,13 @@ import OptimizedImage from "../../ui/OptimizedImage";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function ERAMSportsArena() {
   const containerRef = useRef(null);
+  const navigate = useNavigate();
 
   useGSAP(
     () => {
@@ -247,29 +249,51 @@ function ERAMSportsArena() {
                   ADMISSIONS OPEN
                 </button>
 
-                <button
-                  className="
-                    arena-cta-text
-                    opacity-0 translate-y-5
-                    border border-white/60
-                    text-white
-                    px-4
-                    sm:px-5
-                    py-2.5
-                    rounded-lg
-                    text-[11px]
-                    sm:text-sm
-                    font-medium
-                    hover:bg-white
-                    hover:text-black
-                    transition
-                    whitespace-nowrap
-                    cursor-pointer
-                    font-rethink
-                  "
-                >
-                  EXPLORE OUR INSTITUTIONS
-                </button>
+              <button
+  type="button"
+ onClick={() => {
+  navigate("/");
+
+  setTimeout(() => {
+    const section = document.getElementById("institutions");
+
+    if (section) {
+      const yOffset = -90;
+
+      const y =
+        section.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+
+      window.scrollTo({
+        top: y,
+        behavior: "smooth",
+      });
+    }
+  }, 700);
+}}
+  className="
+    arena-cta-text
+    opacity-0 translate-y-5
+    border border-white/60
+    text-white
+    px-4
+    sm:px-5
+    py-2.5
+    rounded-lg
+    text-[11px]
+    sm:text-sm
+    font-medium
+    hover:bg-white
+    hover:text-black
+    transition
+    whitespace-nowrap
+    cursor-pointer
+    font-rethink
+  "
+>
+  EXPLORE OUR INSTITUTIONS
+</button>
               </div>
             </div>
           </div>

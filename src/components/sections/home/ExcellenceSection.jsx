@@ -18,7 +18,7 @@ export const excellenceDomains = {
   CULTURAL: Array.from({ length: 4 }, (_, i) => ({
     image: `/images/cultural${i + 1}.avif`,
   })),
-  PROFESSIONAL: Array.from({ length: 4 }, (_, i) => ({
+  SOCIAL: Array.from({ length: 4 }, (_, i) => ({
     image: `/images/pro${i + 1}.avif`,
   })),
 };

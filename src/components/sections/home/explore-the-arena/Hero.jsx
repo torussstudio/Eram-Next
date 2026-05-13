@@ -50,7 +50,7 @@ A flagship infrastructure milestone within the ERAM ecosystem.
   group
   font-rethink 
   bg-[#ae1431] 
-  rounded-[12px] 
+  rounded-[10px] 
   px-5 md:px-7 
   py-2.5 md:py-3 
   text-[11px] md:text-[12px] 
@@ -71,7 +71,7 @@ A flagship infrastructure milestone within the ERAM ecosystem.
   </span>
 </button>
 
-                <button className="font-rethink border rounded-[12px] border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
+                <button className="font-rethink border rounded-[10px] border-white/30 px-5 md:px-7 py-2.5 md:py-3 text-[11px] md:text-[12px] tracking-[0.12em] uppercase flex items-center gap-2 cursor-pointer">
                   HOST AN EVENT
                   <Calendar className="w-4 h-4 opacity-70" />
                 </button>

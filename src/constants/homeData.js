@@ -46,7 +46,7 @@ export const institutions = [
 export const modelPillars = [
   {
     icon: "/icons/structured.png",
-    title: "Structured Academics and mentoring",
+    title: "Structured Academics",
   },
 
   {

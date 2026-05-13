@@ -32,48 +32,51 @@ export default function ScaleSection() {
           </div>
 
           {/* DIVIDER */}
-          <div className="border-t border-[#1f1f1f] mb-[40px] md:mb-[50px]" />
+         <div className="overflow-hidden rounded-[28px] border border-[#2a2a2a]">
 
-          {/* GRID */}
-          <div className="font-rethink grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border border-[#2a2a2a] divide-y sm:divide-y-0">
+  <div className="font-rethink grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-y sm:divide-y-0">
 
-            {cards.map((card, i) => (
-              <div
-                key={i}
-                className={`
-                  p-[18px] sm:p-[22px] md:p-[30px]
-                  min-h-[160px] md:min-h-[180px]
+    {cards.map((card, i) => (
+      <div
+        key={i}
+        className={`
+          p-[18px] sm:p-[22px] md:p-[30px]
+          min-h-[160px] md:min-h-[180px]
 
-                  flex flex-col justify-center
-                  break-words
+          flex flex-col justify-center
+          break-words
 
-                  border-[#2a2a2a]
+          border-[#2a2a2a]
 
-                  ${i % 3 !== 2 ? "md:border-r" : ""}
-                  ${i < 3 ? "md:border-b" : ""}
+          ${i % 3 !== 2 ? "md:border-r" : ""}
+          ${i < 3 ? "md:border-b" : ""}
 
-                  bg-[#141414] hover:bg-[#8c1d18] transition-colors duration-300
-                `}
-              >
+          bg-[#141414]
+          hover:bg-[#8c1d18]
+          transition-colors duration-300
+          cursor-pointer
+        `}
+      >
 
-                <p className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#8f877d] uppercase mb-[10px]">
-                  {card.label}
-                </p>
+        <p className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#8f877d] uppercase mb-[10px]">
+          {card.label}
+        </p>
 
-                <h3 className="font-serif text-[22px] sm:text-[26px] md:text-[30px] text-[#f1eee8] mb-[6px]">
-                  {card.value}
-                </h3>
+        <h3 className="font-serif text-[22px] sm:text-[26px] md:text-[30px] text-[#f1eee8] mb-[6px]">
+          {card.value}
+        </h3>
 
-                <p className="text-[13px] md:text-[14px] text-[#c5beb5] leading-[1.5] max-w-[240px]">
-                  {card.desc}
-                </p>
+        <p className="text-[13px] md:text-[14px] text-[#c5beb5] leading-[1.5] max-w-[240px]">
+          {card.desc}
+        </p>
 
-              </div>
-            ))}
+      </div>
+    ))}
 
-          </div>
+  </div>
 
-        </div>
+</div>
+</div>
       </div>
     </section>
   );

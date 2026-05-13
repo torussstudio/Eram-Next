@@ -12,9 +12,7 @@ import SystemsSection from "../../components/sections/home/SystemsSection";
 // BELOW THE FOLD (LAZY LOAD)
 // ========================================
 
-const InstitutionsSection = lazy(() =>
-  import("../../components/sections/home/InstitutionsSection")
-);
+import InstitutionsSection from "../../components/sections/home/InstitutionsSection";
 
 const ModelSection = lazy(() =>
   import("../../components/sections/home/ModelSection")
@@ -130,9 +128,7 @@ export default function Home() {
           BELOW THE FOLD
       ======================================== */}
 
-      <LazySection height="min-h-[85vh]">
-        <InstitutionsSection />
-      </LazySection>
+     <InstitutionsSection />
 
       <LazySection height="min-h-[90vh]">
         <ModelSection />

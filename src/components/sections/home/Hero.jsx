@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ActionButton from "../../ui/ActionButton";
 import { shell } from "../../../constants/homeStyles";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,6 +53,7 @@ export default function Hero() {
   const sublineRef = useRef(null);
   const descRef = useRef(null);
   const buttonsRef = useRef(null);
+  const navigate = useNavigate();
 
   useGSAP(
     () => {
@@ -253,9 +255,12 @@ export default function Hero() {
             >
               Explore Our Institutions
             </ActionButton>
-            <ActionButton className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer">
-              Admissions Open 2026-27
-            </ActionButton>
+           <ActionButton
+  onClick={() => navigate("/contact")}
+  className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer"
+>
+  Admissions Open 2026-27
+</ActionButton>
           </div>
         </div>
       </div>

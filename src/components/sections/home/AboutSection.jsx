@@ -220,12 +220,27 @@ export default function AboutSection() {
             </p>
 
              <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
-                    <ActionButton
-                      variant="secondary"
-                      className="font-rethink text-[#f5efe8] max-[640px]:!w-auto cursor-pointer hover:bg-black hover:text-white"
-                    >
-                      Explore Student Pathways
-                    </ActionButton>
+                     <ActionButton
+              onClick={() => {
+                const section = document.getElementById("institutions");
+
+                if (section) {
+                  const yOffset = -90; // navbar height
+                  const y =
+                    section.getBoundingClientRect().top +
+                    window.pageYOffset +
+                    yOffset;
+
+                  window.scrollTo({
+                    top: y,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer"
+            >
+              Explore Our Institutions
+            </ActionButton>
                   </div>
           </div>
            

@@ -40,9 +40,16 @@ export default function CommunitySection() {
             </p>
 
             {/* BUTTON */}
-            <button className="bg-[#111] font-rethink text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3 hover:bg-[#ae1431] hover:text-black cursor-pointer">
+            <button className="bg-[#111] rounded-[12px] font-rethink text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3 hover:bg-[#ae1431] hover:text-black cursor-pointer">
               Enquire About Hosting
-              <span>→</span>
+                <span className="
+    relative z-10
+    inline-block
+    transition-all duration-300
+    group-hover:translate-x-[5px]
+  ">
+    →
+  </span>
             </button>
           </div>
 
@@ -55,45 +62,47 @@ export default function CommunitySection() {
             </p>
 
             {/* GRID */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 border border-[#cfc6bb]">
+<div className="overflow-hidden rounded-[24px] border border-[#cfc6bb]">
+  <div className="grid grid-cols-1 sm:grid-cols-2">
 
-              {cards.map((card, i) => (
-               <div
-  key={i}
-  className={`
-    font-rethink
-    p-[22px] md:p-[26px]
-    bg-[#f5f2ed]
-    min-h-[140px]
-    flex flex-col justify-center
+    {cards.map((card, i) => (
+      <div
+        key={i}
+        className={`
+          font-rethink
+          p-[22px] md:p-[26px]
+          bg-[#f5f2ed]
+          min-h-[140px]
+          flex flex-col justify-center
 
-    transition-all duration-300 ease-out
-    cursor-pointer
+          transition-all duration-300 ease-out
+          cursor-pointer
 
-    hover:bg-[#ae1431]
-    hover:text-white
+          hover:bg-[#ae1431]
+          hover:text-white
 
-    ${i % 2 === 0 ? "sm:border-r" : ""}
-    ${i < 2 ? "sm:border-b" : ""}
-    border-[#cfc6bb]
-  `}
->
-                  <div className="text-[20px] mb-[10px]">
-                    {card.icon}
-                  </div>
+          ${i % 2 === 0 ? "sm:border-r" : ""}
+          ${i < 2 ? "sm:border-b" : ""}
+          border-[#cfc6bb]
+        `}
+      >
+        <div className="text-[20px] mb-[10px]">
+          {card.icon}
+        </div>
 
-                  <h3 className="text-[16px] font-medium text-[#1a1a1a] mb-[4px]">
-                    {card.title}
-                  </h3>
+        <h3 className="text-[16px] font-medium text-[#1a1a1a] mb-[4px]">
+          {card.title}
+        </h3>
 
-                  <p className="text-[14px] text-[#7d746c]">
-                    {card.desc}
-                  </p>
-                </div>
-              ))}
+        <p className="text-[14px] text-[#7d746c]">
+          {card.desc}
+        </p>
+      </div>
+    ))}
 
-            </div>
-          </div>
+  </div>
+</div>
+</div>
 
         </div>
 

@@ -60,6 +60,7 @@ export default function ClosingSection() {
 
     flex items-center gap-3
     cursor-pointer
+    rounded-[10px]
 
   "
 >
@@ -104,6 +105,7 @@ export default function ClosingSection() {
 
     flex items-center gap-3
     cursor-pointer
+    rounded-[10px]
   "
 >
   {/* hover overlay */}
