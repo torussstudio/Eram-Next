@@ -529,7 +529,7 @@ export default function SystemsSection() {
             <br />
             Sustain Excellence
           </h2>
-          <p className="mob-para text-[13.5px] leading-[1.8] text-[#444] max-w-[420px]">
+          <p className="mob-para font-rethink text-[13.5px] leading-[1.8] text-[#444] max-w-[420px]">
             An integrated framework of management oversight, faculty excellence,
             and purpose-built infrastructure sustaining quality across every
             institution, ensuring continuous assessment, teacher development,
@@ -554,7 +554,7 @@ export default function SystemsSection() {
               }}
             >
               <span
-                className="text-[10px] font-semibold tracking-[0.18em]"
+                className="text-[10px] font-rethink tracking-[0.18em]"
                 style={{
                   color: activeTab === i ? "rgba(255,255,255,0.55)" : "#aaa",
                 }}
@@ -562,7 +562,7 @@ export default function SystemsSection() {
                 0{i + 1}
               </span>
               <span
-                className="text-[11px] font-medium leading-[1.3] tracking-[0.04em] text-left"
+                className="text-[11px] font-rethink leading-[1.3] tracking-[0.04em] text-left"
                 style={{ color: activeTab === i ? "white" : "#555" }}
               >
                 {label}
@@ -596,14 +596,14 @@ export default function SystemsSection() {
               >
                 <div className="flex items-center gap-[18px]">
                   <span
-                    className="text-[11px] font-semibold tracking-[0.16em] tabular-nums w-[26px]"
+                    className="text-[11px] font-rethink tracking-[0.16em] tabular-nums w-[26px]"
                     style={{
                       color: isActive ? "rgba(255,255,255,0.45)" : "#bbb",
                     }}
                   >
                     /{card.n}
                   </span>
-                  <span className="text-[17px] font-semibold leading-[1.25] text-white">
+                  <span className="text-[17px] font-rethink leading-[1.25] text-white">
                     {card.t}
                   </span>
                 </div>
