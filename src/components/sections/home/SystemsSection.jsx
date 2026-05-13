@@ -623,7 +623,7 @@ export default function SystemsSection() {
 
         <button
           onClick={() => navigate("/about-us")}
-          className="w-full rounded-[14px] border border-[#cfcfcf] py-[16px] text-[11px] font-[600] uppercase tracking-[0.18em] text-[#111] transition-all duration-300 active:bg-black active:text-white active:border-black"
+          className="w-full font-rethink rounded-[14px] border border-[#cfcfcf] py-[16px] text-[11px] font-[600] uppercase tracking-[0.18em] text-[#111] transition-all duration-300 active:bg-black active:text-white active:border-black"
         >
           EXPLORE OUR SYSTEMS & STANDARDS
         </button>
