@@ -78,21 +78,26 @@ export default function AdmissionsPage() {
             </h1>
 
             <p className="font-rethink anim-hero-desc text-[#3a3228] text-[14.5px] md:text-[15.5px] leading-relaxed max-w-sm">
-              Admissions are now open for Higher Secondary streams — Biology
-              Science, Computer Science, and Commerce. Join an institution with
-              a proven record of academic excellence, structured discipline, and
-              consistent results.
+              Academic coordination and administrative communication extend 
+              through the unified ERAM Student & Parent Portal. Through this interface,
+               students and parents can access fee systems, academic resources, and
+                campus-wide updates in a centralised manner.
             </p>
+
+            <br></br>
+            <br></br>
+<div>
+
+                      <p className="font-rethink anim-hero-desc text-[#3a3228] text-[14.5px] md:text-[15.5px] leading-relaxed max-w-sm">Mariyumma Memorial Public School serves as the disciplined academic foundation within the ERAM ecosystem, preparing students steadily for higher academic stages and competitive pathways.</p>
+</div>
           </div>
 
+
           {/* RIGHT — BUTTONS */}
-          <div className="flex flex-col gap-3 pt-22 lg:min-w-[280px]">
+         <div className="relative -left-[180px] flex flex-col gap-3 pt-[400px] lg:min-w-[280px]">
             <button className="font-rethink anim-hero-btn bg-[#8B1A14] text-white px-10 py-4 text-[13px] tracking-widest uppercase flex items-center justify-between gap-4 hover:bg-[#7a1410] transition-colors duration-200 cursor-pointer rounded-[10px]">
-              Apply Now — 2026–27
+              Student - Parent Portal
               <ArrowRight size={15} />
-            </button>
-            <button className="font-rethink anim-hero-btn border border-[#1a1209] text-[#1a1209] px-6 py-4 text-[13px] tracking-widest uppercase hover:bg-[#1a1209] hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px]">
-              Book a Campus Visit
             </button>
           </div>
 

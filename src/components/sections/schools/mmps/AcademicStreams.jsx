@@ -8,18 +8,13 @@ import { FlaskConical, Monitor, BarChart2 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Data ────────────────────────────────────────────────────────────────────
-const streams = [
-  { icon: <FlaskConical size={18} />, title: "Biology Science",  sub: "State Board · Science Stream"  },
-  { icon: <Monitor      size={18} />, title: "Computer Science", sub: "State Board · Science Stream"  },
-  { icon: <BarChart2    size={18} />, title: "Commerce",         sub: "State Board · Commerce Stream" },
-];
+// ─── Data ────
 
 const supportItems = [
-  ["Categorized student attention by performance bracket", "Morning study sessions before regular classes"],
-  ["Supervised special study classes after hours",         "Crash courses for critical syllabus portions"],
-  ["Special question practice modules",                   "Exam-oriented revision cycles"],
-  ["Structured monitoring & internal assessment",         "Teacher-guided mentorship per student"],
+  ["Categorized student attention", "Morning study sessions before regular classes"],
+  [" Regular internal assessments",         "Crash courses for critical syllabus portions"],
+  ["Supervised academic monitoring",                   "Exam-oriented revision cycles"],
+  ["Targeted question practice modules",         "Teacher-guided mentorship per student"],
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -315,7 +310,7 @@ export default function AcademicStreams() {
                 text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]"
               style={{ perspective: "900px" }}
             >
-              {[["Multiple", "Streams."], ["One", "Discipline"], ["Framework."]].map((line, li) => (
+              {[["An Integrated", " Academic"], ["Athletic", "Ecosystem."]].map((line, li) => (
                 <span key={li} className="block">
                   {line.map((w, wi) => (
                     <span
@@ -335,74 +330,69 @@ export default function AcademicStreams() {
 
             {/* Body */}
             <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
-              MMHSS offers Higher Secondary education under the State syllabus
-              across three focused streams. Our strength lies not just in what
-              we teach, but in how we execute it — guiding, supervising, and
-              supporting every student at every stage.
+             MMPS prepares students for board examinations through structured academic planning, and its curriculum structure allows flexibility while maintaining consistent academic monitoring.
+
             </p>
 <br></br>
-            {/* Streams list */}
-            <div ref={streamsRef} className="relative border border-white/10 rounded-[20px] overflow-hidden">
-              {/* Clockwise-drawn border */}
-              <div className="sb-top    absolute top-0    left-0  right-0  h-[1px] bg-white/10" />
-              <div className="sb-right  absolute top-0    right-0 bottom-0 w-[1px] bg-white/10" />
-              <div className="sb-bottom absolute bottom-0 left-0  right-0  h-[1px] bg-white/10" />
-              <div className="sb-left   absolute top-0    left-0  bottom-0 w-[1px] bg-white/10" />
-
-              {streams.map((item, i) => (
-                <div key={i} className="stream-row relative px-5 py-5 flex items-center gap-4">
-                  {i !== 0 && (
-                    <div className="stream-sep absolute top-0 left-0 right-0 h-[1px] bg-white/10" />
-                  )}
-                  <div className="stream-icon w-9 h-9 bg-[#ae1431] rounded-sm flex items-center justify-center text-white flex-shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h3 className="stream-title text-white font-serif text-[16px] sm:text-[17px] leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="stream-sub text-[13px] text-white/40 mt-0.5">{item.sub}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* ══ RIGHT COLUMN ═════════════════════════════════════════════════ */}
-          <div className="flex flex-col">
+         <div className="flex flex-col">
 
-            <p
-              ref={subLabelRef}
-              className="font-rethink text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
-            >
-              Academic Support Systems
+  <p
+    ref={subLabelRef}
+    className="font-rethink text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
+  >
+    Academic Support Systems
+  </p>
+
+  <div
+    ref={gridRef}
+    className="flex flex-col gap-1 rounded-2xl overflow-hidden"
+  >
+    {supportItems.map(([left, right], i) => (
+      <div key={i} className="grid grid-cols-2 gap-1">
+        {[left, right].map((text, j) => (
+          <div
+            key={j}
+            className="support-card relative bg-[#252525] px-5 py-5 overflow-hidden"
+          >
+            <div className="card-accent absolute left-0 top-0 bottom-0 w-[4px] bg-[#ae1431] rounded-l-[20px]" />
+
+            <div
+              className="card-shimmer absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.05) 50%, transparent 62%)",
+                transform: "translateX(-115%)",
+              }}
+              aria-hidden="true"
+            />
+
+            <p className="relative z-10 text-[13px] sm:text-[14px] text-[#c4b9ae] leading-[1.65]">
+              {text}
             </p>
-
-            <div ref={gridRef} className="flex flex-col gap-1 rounded-2xl overflow-hidden ">
-              {supportItems.map(([left, right], i) => (
-                <div key={i} className="grid grid-cols-2 gap-1">
-                  {[left, right].map((text, j) => (
-                    <div key={j} className="support-card relative bg-[#252525] px-5 py-5 overflow-hidden">
-                      {/* Accent bar — animated via GSAP */}
-                     <div className="card-accent absolute left-0 top-0 bottom-0 w-[4px] bg-[#ae1431] rounded-l-[20px]" />
-                      {/* One-shot shimmer sweep */}
-                      <div
-                        className="card-shimmer absolute inset-0 pointer-events-none"
-                        style={{
-                          background: "linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.05) 50%, transparent 62%)",
-                          transform: "translateX(-115%)",
-                        }}
-                        aria-hidden="true"
-                      />
-                      <p className="relative z-10 text-[13px] sm:text-[14px] text-[#c4b9ae] leading-[1.65]">
-                        {text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
           </div>
+        ))}
+      </div>
+    ))}
+  </div>
+
+  {/* NEW TEXT */}
+  <p
+    className="
+      font-rethink
+      mt-6
+      text-[14px]
+      leading-[1.8]
+      text-[#7d746c]
+      max-w-[520px]
+    "
+  >
+    Students are guided progressively, from foundational years through board examination stages.
+  </p>
+
+</div>
 
         </div>
       </div>

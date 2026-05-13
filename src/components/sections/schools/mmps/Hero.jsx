@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const QUICK_FACTS = [
-  ["2005", "Year Established"],
+  ["2004", "Year Established"],
   ["State Board", "Curriculum · English Medium"],
   ["750+", "Student Strength"],
-  ["14 Yrs", "100% Pass Record"],
+  ["14 Yrs", "100% Pass Rate"],
 ];
 
 const STATS = [
@@ -167,7 +167,7 @@ export default function Hero() {
                 className="flex items-center gap-3 mb-4 sm:mb-5"
               >
                 <p className="font-rethink text-[13px] sm:text-[14px] tracking-[0.28em] text-[#ae1431] uppercase">
-                  Higher Secondary · Est. 2005
+                  Higher Secondary · Est. 2004
                 </p>
               </div>
 
@@ -177,7 +177,7 @@ export default function Hero() {
   text-[36px] xs:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[72px]"
               >
                 Mariyumma Memorial <br />
-                Higher Secondary <br />
+                Public <br />
                 <span className="font-display  text-white/60">School</span>
               </h1>
               <p
@@ -186,12 +186,10 @@ export default function Hero() {
                   leading-[1.8] text-white/70 max-w-[560px]"
               >
                 <span className="text-white font-medium">
-                  100% Results. Structured Academic Discipline.
+                  20+ years of operation. 100% pass rate.
                 </span>
                 <br />
-                Over 750 students, built on academic transformation, structured
-                monitoring, and strong coordination with parents — achieving
-                consistent excellence in higher secondary education.
+               Established in 2004, MMPS provides structured High School education under the State syllabus, preparing students with disciplined academic systems and early competitive exposure.
               </p>
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
