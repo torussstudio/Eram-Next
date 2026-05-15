@@ -7,18 +7,22 @@ import { shell } from "../../../../constants/homeStyles";
 gsap.registerPlugin(ScrollTrigger);
 
 const bullets = [
-  "Real-time attendance updates",
-  "Academic progress monitoring",
-  "Department-wise announcements",
-  "Real-time notice sharing",
+  "Continuous academic progress tracking",
+  "Structured daily attendance monitoring",
+  "Coordinated parent communication",
+  "Shreshtta classroom development initiative",
+  "STEM clubs & sports club engagement",
+  "JCI & Rotary Junior Wing leadership exposure",
+  "State-level program hosting & representation",
+  "Nalla Naalekkaayi youth development initiative",
 ];
 
 const messages = [
   {
     emoji: "📋",
-    tag: "Academic Update",
-    text: "Grade 11 Commerce — Unit Test 3 results uploaded. Average: 78%. 4 students flagged for additional support.",
-    meta: "Today · 8:42 AM · Academic Monitoring",
+    tag: " Sports Update",
+    text: "Mohammed Sinan (Gr. 10) has been officially selected to the FIFA Talent Academy, Odisha. Congratulations!",
+    meta: "Today · 9:15 AM · Sports Development",
     accent: true,
   },
   {
@@ -30,15 +34,15 @@ const messages = [
   },
   {
     emoji: "📣",
-    tag: "Notice",
-    text: "Crash course for Biology Practical begins Monday. Attendance mandatory for all Grade 12 students.",
-    meta: "Yesterday · 5:30 PM · Biology Dept.",
+    tag: " Shreshtta Initiative",
+    text: "Grade 8 classroom performance review completed. Results shared with respective parents.",
+    meta: "Yesterday · 4:30 PM · Academic Monitoring",
     accent: true,
   },
   {
     emoji: "🏆",
     tag: "Recognition",
-    text: "Diya Maryam (Gr. 11) — National Level Wushu Championship. 1st Place. Congratulations!",
+    text: "Fathima Mehrin (Gr. 7) — Gold Medal, 4th Kerala State Sambo Championship 2026!",
     meta: "2 days ago · School Management",
     accent: false,
   },
@@ -114,21 +118,22 @@ export default function ParentPartnership() {
           <div className="flex flex-col">
             <div className="anim-subtitle flex items-center gap-3 mb-8">
               <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
-                Parent Partnership
+                Institutional Strengths
               </p>
             </div>
 
             <h2 className="font-display anim-title text-[#1a1209] leading-[1.05] tracking-[-0.02em]
               text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px]">
-              Discipline &amp; Communication as Accountability
+              Academic Strength,
+Competitive Exposure,
+Monitoring &amp; Coordination
             </h2>
 
             <div className="anim-divider w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             <p className="anim-desc font-rethink  text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#3d3128] max-w-[560px]">
-              The institution maintains a mandatory WhatsApp-based communication
-              system to ensure parents are continuously informed — making parent
-              engagement institutional, not incidental.
+              MMPS functions on structured daily supervision and consistent communication systems — ensuring no student's progress
+               goes unmonitored and every parent stays informed in real time.
             </p>
 
             <ul className="mt-6 space-y-3">
@@ -160,7 +165,7 @@ export default function ParentPartnership() {
           <div className="anim-mockup font-rethink w-full rounded-[14px] bg-[#181818] p-4 shadow-2xl">
             <div className="anim-mockup-header bg-[#ae1431] rounded-[6px] px-5 py-4 mb-3">
               <p className="text-white font-semibold text-[13px] sm:text-[14px] tracking-[0.01em]">
-                MMHSS Parent Communication Channel
+                MMPS Parent Communication Channel
               </p>
             </div>
 

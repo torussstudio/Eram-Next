@@ -18,8 +18,8 @@ const QUICK_FACTS = [
 const STATS = [
   { value: "14", desc: ["Consecutive Years", "100% Pass Rate"] },
   { value: "750+", desc: ["Students Currently", "Enrolled"] },
-  { value: "#14", desc: ["Among 150 Schools", "in Palakkad District"] },
-  { value: "3", desc: ["Higher Secondary", "Academic Streams"] },
+  { value: "#20+", desc: ["Years of" ,"Continuous Operation"] },
+  { value: "5+", desc: ["National & State Level","Sports Selections"] },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -189,7 +189,7 @@ export default function Hero() {
                   20+ years of operation. 100% pass rate.
                 </span>
                 <br />
-               Established in 2004, MMPS provides structured High School education under the State syllabus, preparing students with disciplined academic systems and early competitive exposure.
+              Over 750 students, built on structured academic systems, early competitive sports exposure, and consistent communication — achieving 100% pass results for 14 consecutive years.
               </p>
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">

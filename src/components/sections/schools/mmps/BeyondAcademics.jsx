@@ -10,71 +10,77 @@ const benchmarks = [
   {
     tag: "Academic Record",
     title: "14 Consecutive Years — 100% Higher Secondary Results",
-    desc: "The milestones we are proud of reflect the consistency and flexibility of our institution. ",
+    desc: "A sustained record of complete pass results, maintained through disciplined academic systems, structured student monitoring, and exam-focused revision cycles ",
   },
   {
-    tag: "District Ranking",
-    title: "Academic strength & Athletic development",
-    desc: "Strengthening academics and athletics hand in hand. ",
+    tag: "Sports Development",
+    title: "Academic Strength & Athletic Development — Hand in Hand",
+    desc: "Students identified early, trained systematically, and supported to compete at state and national levels — from FIFA Talent Academy to Kerala State Football selections. ",
   },
 ];
 
 const excellence = [
   {
-    tag: "National Level · Sports",
+    tag: "Football · National",
     title: "Mohammed Sinan",
     sub: "Grade 10",
     desc: "Selected to FIFA Talent Academy Odisha",
   },
   {
-    tag: "State Level · Sports",
+    tag: "Football · State",
     title: "Mohammed Razan",
     sub: "Grade 9",
     desc: "Selected to the Sub Junior Kerala State Football Team",
   },
   {
-    tag: "State Level · Sports",
+    tag: "Football · Club",
     title: "Mohammed Amar",
     sub: "grade 10",
     desc: "Selected for Punjab FC",
   },
    {
-    tag: "Athletics & Competitive Sports",
+    tag: "Athletics · State",
     title: "Ajmal Rahman",
     sub: "grade 9",
     desc: "Bronze Medal – State Level Neeraj Chopra Javelin Throw Competition",
   },
   {
-    tag: "Athletics & Competitive Sports",
+    tag: "Combat Sports · State",
     title: "Fathima Mehrin",
     sub: "grade 7",
     desc: "Gold Medal – 4th Kerala State Sambo Championship 2026",
+  },
+    {
+    tag: "Scouts & Guides",
+    title: "Fathima Mehrin",
+    sub: "Governor's Award — Scouts & Guides",
+    desc: "25+ students qualified — highest Governor's Award for Scouts & Guides.",
   },
 ];
 
 const stats = [
   {
-    value: "100",
-    unit: "%",
-    label: "Success Rate in Rajyapuraskar Qualification\n(Highest Governor's Award)",
+    value: "25",
+    unit: "+",
+    label: "Students — Rajyapuraskar Qualification\n(Governor's Award, Scouts & Guides)",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
     descC: "text-[#5e554e]",
   },
   {
-    value: "50",
+    value: "150",
     unit: "+",
-    label: "Blood Donations Annually\nunder NSS Program",
+    label: "Active Scout & Guide \nStudent Engagement",
     bg: "bg-[#8b1020]",
     valC: "text-white",
     unitC: "text-white/60",
     descC: "text-white/55",
   },
   {
-    value: "100",
+    value: "5",
     unit: "+",
-    label: "Scout & Guide Activities\nConducted Annually",
+    label: "National & State Level\nSports Selections (2026)",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
@@ -194,35 +200,72 @@ export default function BeyondAcademics() {
         </div>
 
         {/* ── STUDENT EXCELLENCE ── */}
-        <div className="anim-excel-wrap mb-12">
-          <p className="anim-excel-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Student Excellence
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-1  rounded-2xl overflow-hidden">
-            {excellence.map((card, i) => {
-              const isRed  = i === 0;
-              const isDark = i === 1;
-              const bg     = isRed  ? "bg-[#8b1020]" : isDark ? "bg-[#1a1a1a]" : "bg-white border border-[#d4cbbf]";
-              const badge  = isRed  ? "bg-[#ae1431] text-white" : isDark ? "bg-[#2a2a2a] text-[#a09488]" : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
-              const titleC = isRed || isDark ? "text-white" : "text-[#1a1209]";
-              const subC   = isRed  ? "text-white/50"  : isDark ? "text-white/40"  : "text-[#8a7d6e]";
-              const descC  = isRed  ? "text-white/80"  : isDark ? "text-white/70"  : "text-[#4a3f35]";
+       <div className="anim-excel-wrap mb-12">
+  <p className="anim-excel-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
+    Student Excellence
+  </p>
 
-              return (
-                <div key={i} className={`anim-excel p-7 ${bg}`}>
-                  <span className={`inline-block text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6 font-medium ${badge}`}>
-                    {card.tag}
-                  </span>
-                  <h3 className={`font-serif text-[22px] sm:text-[24px] leading-tight mb-1 ${titleC}`}>
-                    {card.title}
-                  </h3>
-                  <p className={`text-[12px] mb-5 ${subC}`}>{card.sub}</p>
-                  <p className={`text-[13px] leading-[1.65] ${descC}`}>{card.desc}</p>
-                </div>
-              );
-            })}
-          </div>
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl overflow-hidden">
+    {excellence.map((card, i) => {
+      const isRed = i === 0 || i === 4;
+      const isDark = i === 1 || i === 5;
+      const isWhite = i === 2 || i === 3;
+
+      const bg = isRed
+        ? "bg-[#8b1020]"
+        : isDark
+        ? "bg-[#1a1a1a]"
+        : "bg-white border border-[#d4cbbf]";
+
+      const badge = isRed
+        ? "bg-[#ae1431] text-white"
+        : isDark
+        ? "bg-[#2a2a2a] text-[#a09488]"
+        : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
+
+      const titleC =
+        isRed || isDark
+          ? "text-white"
+          : "text-[#1a1209]";
+
+      const subC = isRed
+        ? "text-white/50"
+        : isDark
+        ? "text-white/40"
+        : "text-[#8a7d6e]";
+
+      const descC = isRed
+        ? "text-white/80"
+        : isDark
+        ? "text-white/70"
+        : "text-[#4a3f35]";
+
+      return (
+        <div key={i} className={`anim-excel p-7 ${bg}`}>
+          <span
+            className={`inline-block text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6 font-medium ${badge}`}
+          >
+            {card.tag}
+          </span>
+
+          <h3
+            className={`font-serif text-[22px] sm:text-[24px] leading-tight mb-1 ${titleC}`}
+          >
+            {card.title}
+          </h3>
+
+          <p className={`text-[12px] mb-5 ${subC}`}>
+            {card.sub}
+          </p>
+
+          <p className={`text-[13px] leading-[1.65] ${descC}`}>
+            {card.desc}
+          </p>
         </div>
+      );
+    })}
+  </div>
+</div>
 
         {/* ── CIVIC LEADERSHIP & NSS ── */}
         <div className="anim-stat-wrap">

@@ -10,29 +10,29 @@ gsap.registerPlugin(ScrollTrigger);
 // ─── Data ────────────────────────────────────────────────────────────────────
 const milestones = [
   {
-    year: "2005",
-    title: "MMHSS Established",
-    desc: "Higher Secondary School founded under the ERAM Educational & Welfare Trust, beginning with modest performance benchmarks.",
+    year: "2004",
+    title: "MMPS Established",
+    desc: "Mariyumma Memorial Public School founded under the ERAM Educational & Welfare Trust to provide structured High School education under the State syllabus.",
   },
   {
     year: "2008",
-    title: "Structured Academic Systems Introduced",
-    desc: "Categorized student attention, morning study sessions, and supervised revision cycles implemented across all streams.",
+    title: "Structured Academic Systems Embedded",
+    desc: "Categorized student attention, internal assessments, and targeted revision modules become core to daily academic delivery across all grades.",
   },
   {
-    year: "2011",
-    title: "First 100% Result Achieved",
-    desc: "Systematic monitoring and structured exam preparation leads to the institution's first complete pass result — a milestone that reset expectations.",
+    year: "2012",
+    title: "Sports Development Pathway Introduced",
+    desc: "Early sports identification and structured training programs introduced — creating a parallel development track alongside academics.",
   },
   {
-    year: "2015",
-    title: "Parent Communication System Formalised",
-    desc: "Mandatory WhatsApp-based communication system introduced — bringing attendance, performance, and departmental updates directly to parents in real time.",
+    year: "2018",
+    title: "Shreshtta Initiative & Leadership Programs",
+    desc: "The Shreshtta classroom development initiative launched. JCI & Rotary Junior Wing, STEM Clubs, and Scout & Guide programs formalised across the institution.",
   },
   {
     year: "2026",
-    title: "14 Consecutive Years — 100% Results",
-    desc: "A record sustained across every stream — Biology Science, Computer Science, and Commerce — reinforcing the school as one of Palakkad's top-ranked institutions.",
+    title: "National Sports Selections & 14-Year Record",
+    desc: "Students selected to FIFA Talent Academy, Kerala State Football Team, and Punjab FC. 14 consecutive years of 100% board results sustained.",
   },
 ];
 
@@ -263,42 +263,45 @@ gsap.to(spine, {
               </p>
             </div>
 
-            <h2
-              ref={headingRef}
-              className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
-                text-[38px] sm:text-[46px] md:text-[54px] lg:text-[58px] xl:text-[64px]"
-            >
-              A Transformation
-              <br />
-              in Performance
-            </h2>
+           <h2
+  ref={headingRef}
+  className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
+  text-[38px] sm:text-[46px] md:text-[54px] lg:text-[58px] xl:text-[64px]
+  max-w-[12ch]"
+>
+  A Journey of Consistent
+  <br />
+  Growth and Discipline
+</h2>
 
             <div ref={dividerRef} className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             <div ref={parasRef} className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
               <p>
-                When MMHSS began in 2005, it entered a competitive academic
-                environment with modest score brackets. Over time, through
-                structured intervention and systematic academic discipline, the
-                school witnessed a significant transformation.
+               Established in 2004, MMPS was built to provide structured High School education
+                under the State syllabus. Over time, it evolved into one of the largest
+                 and most disciplined High School institutions in the region,
+                  today serving 750+ students
               </p>
               <p>
-                Moving from single-digit high performers to consistent top
-                scorers, the institution redefined what was possible through
-                deliberate systems — not chance.
+                Over the years, the school has maintained 14 consecutive
+                 years of 100% result in the State Board examination,
+                  reflecting disciplined academic monitoring and
+                   structured execution.
               </p>
             </div>
 
             <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
               <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
-                "For 14 consecutive years, we have maintained a 100% Higher
-                Secondary result."
+                "The journey of MMPS has never been limited to board results alone."
               </p>
             </blockquote>
 
             <p ref={lastParaRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
-              We always ensure academic attention, extended study systems, and
-              continuous parent communication — across every batch, every year.
+              Parallel to academic consistency, the institution has steadily built a culture
+               of competitive exposure — especially in sports, where students are identified 
+               early, trained systematically, and encouraged to participate beyond
+               campus boundaries.
             </p>
           </div>
 
@@ -308,7 +311,7 @@ gsap.to(spine, {
               ref={subLabelRef}
               className="text-[11px] sm:text-[11px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-10 hidden lg:block"
             >
-              From Modest Beginnings to Measured Excellence
+              From Foundation to Measured Excellence
             </p>
 
             {/* Timeline — relative container so the spine can be absolutely positioned */}

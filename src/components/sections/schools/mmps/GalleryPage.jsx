@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const galleryItems = [
   { title: "INTER-SCHOOL SPORTS MEETS",     icon: Drama       },
-  { title: "CULTURAL COMPATETION",   icon: PartyPopper },
-  { title: "SCHOOL-LEVEL CELEBRATION",    icon: Droplet     },
-  { title: "ANNUAL ATHLETIC EVENTS", icon: HeartPulse },
+  { title: "ANNUAL ATHELETIC EVENTS",   icon: PartyPopper },
+  { title: "SCHOOL CELEBRATION",    icon: Droplet     },
+  { title: "SCOUT & GUIDE ACTIVITIES", icon: HeartPulse },
 ];
 
 export default function GalleryPage() {
@@ -66,10 +66,7 @@ export default function GalleryPage() {
               </span>
             </div>
             <p className="anim-desc text-gray-400 max-w-xl">
-              Inter-school sports meets
-, Cultural competitions
-, School-level celebrations
-, Annual athletic events
+             Sports competitions, cultural events, school celebrations, and Scout & Guide activities at MMPS.
             </p>
           </div>
 
