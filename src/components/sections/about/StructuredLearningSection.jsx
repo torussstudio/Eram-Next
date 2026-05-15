@@ -140,7 +140,7 @@ function StructuredLearningSection() {
       alt: "Dr. Siddeek Ahmed",
       objPos: "object-[72%_center]",
       name: "Dr. SIDDEEK AHMED",
-      role: "Chairman & MD -\nERAM Holdings",
+      role: "Chairman & MD \nERAM Holdings",
       num: "01",
       messageTitle: "Chairman's Message",
       message:
@@ -151,7 +151,7 @@ function StructuredLearningSection() {
       alt: "Mr. Abdhussamad C K",
       objPos: "object-[15%_20%]",
       name: "Mr. ABDUSSAMAD C K",
-      role: "Secretary,\nEram Educational And Welfare Trust",
+      role: "Secretary & Manager\nEram Educational And Welfare Trust",
       num: "02",
       messageTitle: "Manager's Message",
       message:
