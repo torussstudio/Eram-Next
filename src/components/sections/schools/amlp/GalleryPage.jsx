@@ -7,10 +7,10 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryItems = [
-  { title: "CULTURAL PROGRAMS",     icon: Drama       },
+  { title: "CLASSROMM ACTIVITIES",     icon: Drama       },
   { title: "SCHOOL CELEBRATIONS",   icon: PartyPopper },
-  { title: "NSS BLOOD DONATION",    icon: Droplet     },
-  { title: "COMMUNITY HEALTH DRIVES", icon: HeartPulse },
+  { title: "CULTURAL PROGRAMS",    icon: Droplet     },
+  { title: "COMMUNITY EVENTS", icon: HeartPulse },
 ];
 
 export default function GalleryPage() {
@@ -66,8 +66,7 @@ export default function GalleryPage() {
               </span>
             </div>
             <p className="anim-desc text-gray-400 max-w-xl">
-              Cultural programs, school celebrations, NSS activities, and campus
-              life at MMHSS.
+              Classroom activities, school events, cultural celebrations, and community programs at AMLP.
             </p>
           </div>
 
@@ -82,9 +81,9 @@ export default function GalleryPage() {
                     overflow-hidden group hover:scale-[1.02] transition-transform duration-300"
                 >
                   {/* ICON */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-50">
+                  {/* <div className="absolute inset-0 flex items-center justify-center opacity-50">
                     <Icon size={36} />
-                  </div>
+                  </div> */}
 
                   {/* GRADIENT */}
                   <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/80 to-transparent" />

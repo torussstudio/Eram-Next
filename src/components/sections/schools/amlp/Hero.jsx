@@ -9,17 +9,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const QUICK_FACTS = [
-  ["2005", "Year Established"],
-  ["State Board", "Curriculum · English Medium"],
-  ["750+", "Student Strength"],
-  ["14 Yrs", "100% Pass Record"],
+  ["1924", "Year Established"],
+  ["Govt. Aided", "State Board | Malayalam"],
+  ["500+", "Student Strength"],
+  ["~100Yrs", "Of Foundational Learning"],
 ];
 
 const STATS = [
-  { value: "14", desc: ["Consecutive Years", "100% Pass Rate"] },
-  { value: "750+", desc: ["Students Currently", "Enrolled"] },
-  { value: "#14", desc: ["Among 150 Schools", "in Palakkad District"] },
-  { value: "3", desc: ["Higher Secondary", "Academic Streams"] },
+  { value: "1924", desc: ["Year Founded —", "One of the Region's Oldest"] },
+  { value: "500+", desc: ["Students Currently", "Enrolled"] },
+  { value: "~100", desc: ["Years of Continuous", "Foundational Education"] },
+  {
+    value: "Govt.",
+    desc: ["Aided Institution —", "Community Trust & Stability"],
+  },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -36,105 +39,105 @@ export default function Hero() {
   const lineRef = useRef(null);
 
   useEffect(() => {
-     requestAnimationFrame(() => {
-    const ctx = gsap.context(() => {
-      /* ── 1. Hero entrance timeline ── */
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    requestAnimationFrame(() => {
+      const ctx = gsap.context(() => {
+        /* ── 1. Hero entrance timeline ── */
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // Background overlay fades in first
-      tl.fromTo(
-        overlayRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.9 },
-      );
-
-      // Heading clip-path reveal (cinematic curtain up)
-      tl.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 32 },
-        { opacity: 1, y: 0, duration: 0.9 },
-        "-=0.4",
-      );
-
-      // Badge slides in from left
-      tl.fromTo(
-        badgeRef.current,
-        { opacity: 0, x: -24 },
-        { opacity: 1, x: 0, duration: 0.7 },
-        "-=0.7",
-      );
-
-      // Subtext fades up
-      tl.fromTo(
-        subtextRef.current,
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        "-=0.4",
-      );
-
-      // Buttons rise up
-      tl.fromTo(
-        btnsRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        "-=0.35",
-      );
-
-      // Right panel slides in from right with slight scale
-      tl.fromTo(
-        panelRef.current,
-        { opacity: 0, x: 36, scale: 0.98 },
-        { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: "power2.out" },
-        "-=0.7",
-      );
-
-      // Accent line draws from left
-      tl.fromTo(
-        lineRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 0.5 },
-        "-=0.4",
-      );
-
-      // Quick-fact rows stagger in
-      const factItems = factsRef.current?.querySelectorAll(".fact-item");
-      if (factItems?.length) {
+        // Background overlay fades in first
         tl.fromTo(
-          factItems,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 },
+          overlayRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.9 },
+        );
+
+        // Heading clip-path reveal (cinematic curtain up)
+        tl.fromTo(
+          headingRef.current,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.9 },
+          "-=0.4",
+        );
+
+        // Badge slides in from left
+        tl.fromTo(
+          badgeRef.current,
+          { opacity: 0, x: -24 },
+          { opacity: 1, x: 0, duration: 0.7 },
+          "-=0.7",
+        );
+
+        // Subtext fades up
+        tl.fromTo(
+          subtextRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.4",
+        );
+
+        // Buttons rise up
+        tl.fromTo(
+          btnsRef.current,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6 },
           "-=0.35",
         );
-      }
 
-      /* ── 3. Stats reveal on scroll ── */
-      const statItems = statsRef.current?.querySelectorAll(".stat-item");
-      if (statItems?.length) {
-       gsap.fromTo(
-  statItems,
-  { y: 24, scale: 0.98 },
-  {
-    y: 0,
-    scale: 1,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: statsRef.current,
-      start: "top 92%",
-      once: true,
-    },
-  }
-);
-      }
-    }, sectionRef);
+        // Right panel slides in from right with slight scale
+        tl.fromTo(
+          panelRef.current,
+          { opacity: 0, x: 36, scale: 0.98 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: "power2.out" },
+          "-=0.7",
+        );
 
-    return () => {
-  ScrollTrigger.getAll().forEach((t) => t.kill());
-  ctx.revert();
-};
-  });
-}, []);
+        // Accent line draws from left
+        tl.fromTo(
+          lineRef.current,
+          { scaleX: 0, transformOrigin: "left center" },
+          { scaleX: 1, duration: 0.5 },
+          "-=0.4",
+        );
+
+        // Quick-fact rows stagger in
+        const factItems = factsRef.current?.querySelectorAll(".fact-item");
+        if (factItems?.length) {
+          tl.fromTo(
+            factItems,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 },
+            "-=0.35",
+          );
+        }
+
+        /* ── 3. Stats reveal on scroll ── */
+        const statItems = statsRef.current?.querySelectorAll(".stat-item");
+        if (statItems?.length) {
+          gsap.fromTo(
+            statItems,
+            { y: 24, scale: 0.98 },
+            {
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: statsRef.current,
+                start: "top 92%",
+                once: true,
+              },
+            },
+          );
+        }
+      }, sectionRef);
+
+      return () => {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+        ctx.revert();
+      };
+    });
+  }, []);
 
   return (
     <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
@@ -167,7 +170,7 @@ export default function Hero() {
                 className="flex items-center gap-3 mb-4 sm:mb-5"
               >
                 <p className="font-rethink text-[13px] sm:text-[14px] tracking-[0.28em] text-[#ae1431] uppercase">
-                  Higher Secondary · Est. 2005
+                  Lower Primary · Est. 1924
                 </p>
               </div>
 
@@ -176,8 +179,8 @@ export default function Hero() {
                 className="font-display leading-[1.05] tracking-[-0.02em]
   text-[36px] xs:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[72px]"
               >
-                Mariyumma Memorial <br />
-                Higher Secondary <br />
+                Aided Mappila <br />
+                Lower Primary <br />
                 <span className="font-display  text-white/60">School</span>
               </h1>
               <p
@@ -186,12 +189,12 @@ export default function Hero() {
                   leading-[1.8] text-white/70 max-w-[560px]"
               >
                 <span className="text-white font-medium">
-                  100% Results. Structured Academic Discipline.
+                  Established in 1924. Rooted in Community.
                 </span>
                 <br />
-                Over 750 students, built on academic transformation, structured
-                monitoring, and strong coordination with parents — achieving
-                consistent excellence in higher secondary education.
+                One of the oldest educational institutions in the region —
+                serving as a foundational learning space for generations of
+                students across nearly a century of uninterrupted presence.
               </p>
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">

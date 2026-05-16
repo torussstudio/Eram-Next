@@ -8,61 +8,59 @@ gsap.registerPlugin(ScrollTrigger);
 
 const benchmarks = [
   {
-    tag: "Academic Record",
-    title: "14 Consecutive Years — 100% Higher Secondary Results",
-    desc: "A sustained record of complete pass results across all streams, maintained through disciplined academic systems and structured student monitoring.",
+    tag: "Founded 1924",
+    title: "Nearly a Century of Uninterrupted Foundational Education",
+    desc: "One of the oldest active primary institutions in the region — a record of presence, trust, and educational continuity that spans nearly 100 years of community service.",
   },
   {
-    tag: "District Ranking",
-    title: "14th Rank Among 150 Schools in Palakkad District",
-    desc: "Recognised among the top institutions in Palakkad for consistent academic output and institutional discipline across Higher Secondary streams.",
+    tag: "Government Aided",
+    title: "Community Trust Built Across Generations of Families",
+    desc: "As a government-aided institution, AMLP represents stability and responsibility — a school that generations of families in the region have trusted as the foundation of their children's learning.",
   },
 ];
 
 const excellence = [
   {
-    tag: "National Level · Sports",
-    title: "Diya Maryam",
-    sub: "Grade 11",
-    desc: "🥇 1st Place — National Level Wushu Championship, Hyderabad",
+    tag: "Annual Celebration",
+    title: "School Celebrations",
+    sub: "All Grades · Whole Community",
+    desc: "Annual school events bringing students, teachers, and parents together for shared celebration and recognition.",
   },
   {
-    tag: "State Level · Cultural",
-    title: "Farha Shirin",
-    sub: "Grade 11",
-    desc: "🥇 A Grade — State Level Kalotsavam 2026 (English Story Writing)",
+    tag: "Cultural Participation",
+    title: "Cultural Activities",
+    sub: "Classroom & Inter-School",
+    desc: "Structured participation in cultural programs, art, music, and creative expression at the foundational level.",
   },
   {
-    tag: "Scouts & Guides",
-    title: "Rajyapuraskar",
-    sub: "Governor's Award — Scouts & Guides",
-    desc: "100% success rate in Rajyapuraskar qualification — the highest Governor's Award for Scouts & Guides.",
+    tag: "Community Engagement",
+    title: "Foundational Social Programs",
+    sub: "Community-Rooted Initiatives",
+    desc: "Social engagement programs designed to build civic awareness, shared responsibility, and community belonging from an early age.",
   },
 ];
 
 const stats = [
   {
-    value: "100",
-    unit: "%",
-    label: "Success Rate in Rajyapuraskar Qualification\n(Highest Governor's Award)",
+    value: "1924",
+    label: "Year of Establishment \n —Oldest in the ERAM Ecosystem",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
     descC: "text-[#5e554e]",
   },
   {
-    value: "50",
+    value: "500",
     unit: "+",
-    label: "Blood Donations Annually\nunder NSS Program",
+    label: "Students Currently Receiving \nFoundational Education",
     bg: "bg-[#8b1020]",
     valC: "text-white",
     unitC: "text-white/60",
     descC: "text-white/55",
   },
   {
-    value: "100",
-    unit: "+",
-    label: "Scout & Guide Activities\nConducted Annually",
+    value: "Govt. Aided",
+    label: "Status — Reflecting Community\n Trust & Institutional Stability",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
@@ -114,18 +112,36 @@ export default function BeyondAcademics() {
       revealSection(".anim-stat-wrap",  ".anim-stat-label",  ".anim-stat");
 
       // ── Number counters — triggered once with the stat section ────────
-      gsap.utils.toArray(".counter-num").forEach((el) => {
-        const target = parseInt(el.getAttribute("data-target"), 10);
+     gsap.utils.toArray(".counter-num").forEach((el) => {
+  const target = el.getAttribute("data-target");
 
-        gsap.to(el, {
-          scrollTrigger: { trigger: ".anim-stat-wrap", start: "top 82%", once: true },
-          textContent: target,
-          duration: 2,
-          ease: "power2.out",
-          snap: { textContent: 1 },
-          delay: 0.3,         // slight delay so cards land before numbers run
-        });
-      });
+  // check if target is numeric
+  if (!isNaN(target)) {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: ".anim-stat-wrap",
+        start: "top 82%",
+        once: true,
+      },
+      textContent: parseInt(target, 10),
+      duration: 2,
+      ease: "power2.out",
+      snap: { textContent: 1 },
+      delay: 0.3,
+    });
+  } else {
+    // directly show string values
+    gsap.set(el, {
+      scrollTrigger: {
+        trigger: ".anim-stat-wrap",
+        start: "top 82%",
+        once: true,
+      },
+      textContent: target,
+      delay: 0.3,
+    });
+  }
+});
     },
     { scope: containerRef }
   );
@@ -155,7 +171,7 @@ export default function BeyondAcademics() {
         {/* ── BENCHMARKS ── */}
         <div className="anim-bench-wrap mb-12">
           <p className="anim-bench-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Institutional Benchmarks
+            Institutional Legacy
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
             {benchmarks.map((card, i) => (
@@ -185,7 +201,7 @@ export default function BeyondAcademics() {
         {/* ── STUDENT EXCELLENCE ── */}
         <div className="anim-excel-wrap mb-12">
           <p className="anim-excel-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Student Excellence
+            Participation & Engagement
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-1  rounded-2xl overflow-hidden">
             {excellence.map((card, i) => {
@@ -213,10 +229,9 @@ export default function BeyondAcademics() {
           </div>
         </div>
 
-        {/* ── CIVIC LEADERSHIP & NSS ── */}
         <div className="anim-stat-wrap">
           <p className="anim-stat-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Civic Leadership &amp; NSS
+            Legacy at a Glance
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl overflow-hidden">
             {stats.map((stat, i) => (

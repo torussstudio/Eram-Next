@@ -267,3 +267,223 @@ export default function Hero() {
     </section>
   );
 }
+
+
+// import { useRef } from "react";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { useGSAP } from "@gsap/react";
+// import ActionButton from "../../ui/ActionButton";
+// import { shell } from "../../../constants/homeStyles";
+// import { useNavigate } from "react-router-dom";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// /* ─── Styles ──────────────────────────────────────────────────────────────── */
+// const sectionCls = [
+//   shell,
+//   "isolate relative block",
+//   "before:content-[''] before:absolute before:-top-[160px] before:bottom-0",
+//   "before:w-[100vw] before:left-1/2 before:-translate-x-1/2",
+//   "before:bg-[#ae1431] before:-z-10",
+//   "pb-[66px] pt-[43px]",
+//   "max-[920px]:pb-[56px] max-[640px]:pt-[24px]",
+// ].join(" ");
+
+// const cardCls = [
+//   "relative min-h-[650px] rounded-[20px] overflow-hidden",
+//   "px-[60px] xl:px-[80px] 2xl:px-[110px]",
+//   "pb-[92px] pt-[220px]",
+//   "max-[920px]:px-[36px] max-[920px]:pt-[180px]",
+//   "max-[640px]:px-6 max-[640px]:pt-[150px]",
+//   "max-[420px]:px-4 max-[420px]:pt-[130px]",
+//   "max-[767px]:mt-[10px]",
+// ].join(" ");
+
+// const headingCls =
+//   "font-agency font-light tracking-[-0.03em] leading-[0.95] " +
+//   "text-[clamp(1.75rem,7vw,5.8rem)] text-white -mt-16 " +
+//   "overflow-visible"; // ✅ add this
+
+// const descCls =
+//   "mt-[34px] max-w-[680px] text-[1.05rem] leading-[1.65] text-white " +
+//   "max-[640px]:max-w-full font-rethink";
+
+// /* ─── Animation config ────────────────────────────────────────────────────── */
+// const EASE = {
+//   snappy: "power2.out",
+//   smooth: "power3.out",
+//   light: "power1.out",
+// };
+
+// /* ─── Component ───────────────────────────────────────────────────────────── */
+// export default function Hero() {
+//   const sectionRef = useRef(null);
+//   const containerRef = useRef(null);
+//   const line0Ref = useRef(null);
+//   const line1Ref = useRef(null);
+//   const sublineRef = useRef(null);
+//   const descRef = useRef(null);
+//   const buttonsRef = useRef(null);
+
+//   const navigate = useNavigate();
+
+// useGSAP(
+//   () => {
+//     // ✅ Safety: always ensure visible as fallback
+//     gsap.set(
+//       [sublineRef.current, descRef.current, buttonsRef.current],
+//       { opacity: 0 }
+//     );
+//     gsap.set([line0Ref.current, line1Ref.current], { y: "110%" });
+
+//     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+//       gsap.set(
+//         [line0Ref.current, line1Ref.current, sublineRef.current, descRef.current, buttonsRef.current],
+//         { opacity: 1, y: 0 }
+//       );
+//       return;
+//     }
+
+//     const tl = gsap.timeline({ delay: 0.1 });
+
+//     tl.fromTo(
+//       [line0Ref.current, line1Ref.current],
+//       { y: "110%" },
+//       { y: "0%", duration: 1.0, stagger: 0.12, ease: "power3.out" }
+//     )
+//     .fromTo(sublineRef.current,
+//       { opacity: 0 },
+//       { opacity: 1, duration: 0.5, ease: "power1.out" }, "-=0.5"
+//     )
+//     .fromTo(descRef.current,
+//       { opacity: 0, y: 16 },
+//       { opacity: 1, y: 0, duration: 0.75, ease: "power2.out" }, "-=0.55"
+//     )
+//     .fromTo(buttonsRef.current,
+//       { opacity: 0, y: 16 },
+//       { opacity: 1, y: 0, duration: 0.75, ease: "power2.out" }, "-=0.55"
+//     );
+
+//     // Parallax
+//     gsap.to(containerRef.current, {
+//       yPercent: 4,
+//       ease: "none",
+//       scrollTrigger: {
+//         trigger: sectionRef.current,
+//         start: "top top",
+//         end: "bottom top",
+//         scrub: 0.2,
+//       },
+//     });
+//   },
+// );
+
+//   return (
+//     <section ref={sectionRef} className={sectionCls} id="hero">
+//       <div
+//         ref={containerRef}
+//         className={`${cardCls} will-change-transform`}
+//       >
+//         {/* Background Video */}
+//         <div className="absolute inset-0">
+//           <video
+//             className="absolute inset-0 w-full h-full object-cover will-change-transform"
+//             autoPlay
+//             muted
+//             loop
+//             playsInline
+//             preload="metadata"
+//             disablePictureInPicture
+//             disableRemotePlayback
+//             poster="/images/institute.webp"
+//           >
+//             <source src="/videos/mainhero.mp4" type="video/mp4" />
+//           </video>
+//         </div>
+
+//         {/* Overlay */}
+//         <div
+//           className="absolute inset-0 bg-black/40"
+//           aria-hidden="true"
+//         />
+
+//         {/* Content */}
+//         <div className="relative z-10 max-w-[1400px] pb-[100px] max-[640px]:pb-[20px]">
+          
+//           {/* Heading */}
+//           <h1 className={headingCls}>
+//             <span className="block overflow-hidden">
+//               <span
+//                 ref={line0Ref}
+//                 className="block whitespace-nowrap"
+//               >
+//                 Building Foundations.
+//               </span>
+//             </span>
+
+//             <span className="block overflow-hidden">
+//               <span
+//                 ref={line1Ref}
+//                 className="block whitespace-nowrap"
+//               >
+//                 Shaping Futures.
+//               </span>
+//             </span>
+//           </h1>
+
+//           {/* Tagline */}
+//           <p
+//             ref={sublineRef}
+//             className="font-rethink text-[22px] text-white mt-6"
+//           >
+//             Holistic, disciplined, and inclusive education for every child.
+//           </p>
+
+//           {/* Description */}
+//           <p ref={descRef} className={descCls}>
+//             A disciplined educational ecosystem nurturing academic
+//             excellence, character, and opportunity.
+//           </p>
+
+//           {/* Buttons */}
+//           <div
+//             ref={buttonsRef}
+//             className="mt-11 flex flex-wrap gap-[14px]"
+//           >
+//             <ActionButton
+//               onClick={() => {
+//                 const section =
+//                   document.getElementById("institutions");
+
+//                 if (section) {
+//                   const yOffset = -90;
+
+//                   const y =
+//                     section.getBoundingClientRect().top +
+//                     window.pageYOffset +
+//                     yOffset;
+
+//                   window.scrollTo({
+//                     top: y,
+//                     behavior: "smooth",
+//                   });
+//                 }
+//               }}
+//               className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer"
+//             >
+//               Explore Our Institutions
+//             </ActionButton>
+
+//             <ActionButton
+//               onClick={() => navigate("/contact")}
+//               className="font-rethink !bg-[#f5efe8] !text-black hover:!bg-black hover:!text-[#f5efe8] cursor-pointer"
+//             >
+//               Admissions Open 2026-27
+//             </ActionButton>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }

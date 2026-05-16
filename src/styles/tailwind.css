@@ -17,6 +17,7 @@ body {
   src: url("/fonts/Agency.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* hide scrollbar but keep scroll working */

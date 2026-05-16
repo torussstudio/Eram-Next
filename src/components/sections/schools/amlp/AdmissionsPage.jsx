@@ -74,14 +74,14 @@ export default function AdmissionsPage() {
             </div>
 
             <h1 className="font-display anim-hero-title text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.02em] mb-8">
-              Begin the Journey at MMHSS.
+              Begin the Journey at AMLP.
             </h1>
 
             <p className="font-rethink anim-hero-desc text-[#3a3228] text-[14.5px] md:text-[15.5px] leading-relaxed max-w-sm">
-              Admissions are now open for Higher Secondary streams — Biology
-              Science, Computer Science, and Commerce. Join an institution with
-              a proven record of academic excellence, structured discipline, and
-              consistent results.
+              Admissions are now open at Aided Mappila Lower Primary School. 
+              Enrol your child in one of the region's oldest and most trusted 
+              foundational learning institutions — where early discipline, 
+              structured supervision, and community values shape every learner
             </p>
           </div>
 

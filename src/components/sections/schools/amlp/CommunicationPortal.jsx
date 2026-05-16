@@ -7,18 +7,18 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
-  { num: "/01", title: "Academic Monitoring",  desc: "Real-time progress tracking across all subjects" },
+  { num: "/01", title: "Fee Management",  desc: "Structured fee payment access for parents" },
   { num: "/02", title: "Attendance Updates",   desc: "Daily attendance communicated directly to parents" },
-  { num: "/03", title: "Department Notices",   desc: "Stream-specific announcements and circulars" },
-  { num: "/04", title: "Extended Access",      desc: "Available across all 5 ERAM institutions" },
+  { num: "/03", title: "Academic Resources",   desc: "Learning materials and progress shared digitally" },
+  { num: "/04", title: "Campus Announcements",      desc: "All school notices in one unified interface" },
 ];
 
 const feedItems = [
-  { color: "bg-green-400",  text: "Grade 12 Biology — Crash Course Week 2 begins tomorrow.",              meta: "Academic · 2 minutes ago" },
-  { color: "bg-yellow-400", text: "3 students flagged for attendance review in Commerce stream.",          meta: "Attendance · 18 minutes ago" },
-  { color: "bg-blue-400",   text: "Internal Assessment scores updated for Grade 11 Comp. Science.",       meta: "Assessment · 1 hour ago" },
-  { color: "bg-yellow-400", text: "Parent-Teacher meeting scheduled for 12 May 2026, 10 AM.",             meta: "Notice · 3 hours ago" },
-  { color: "bg-green-400",  text: "Monsoon disease prevention awareness drive — results shared.",         meta: "NSS / Community · Yesterday" },
+  { color: "bg-green-400",  text: "Grade 3 formative assessment results ready. Reports shared with parents.",              meta: "Academic · 2 minutes ago" },
+  { color: "bg-yellow-400", text: "Attendance for today: Grade 1 – 100%, Grade 2 – 96%, Grade 3 – 98%.",          meta: "Attendance · 18 minutes ago" },
+  { color: "bg-blue-400",   text: "Annual Day preparation — rehearsal schedule shared for all grades.",       meta: "Notice · 1 hour ago" },
+  { color: "bg-yellow-400", text: "Fee payment reminder: Term 2 dues. Access portal for payment details.",             meta: "Admin· 3 hours ago" },
+  { color: "bg-green-400",  text: "Cultural activity photos from last week's programme uploaded to gallery.",         meta: "gALLERY· Yesterday" },
 ];
 
 export default function CommunicationPortal() {
@@ -98,18 +98,19 @@ export default function CommunicationPortal() {
           </div>
 
           <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
-            Centralised Access. Structured Communication.
+            Centralised Access <br/> for Parents.
           </h1>
 
           <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
-            Academic monitoring and parent communications extend beyond the
-            classroom through a unified digital interface — designed as a single
-            point of coordination across all ERAM institutions.
+           Administrative communication and coordination extend through the 
+           unified ERAM Student & Parent Portal. Parents can access fee 
+           payment systems, academic resources, and campus-wide 
+           announcements through a single, structured interface.
           </p>
 
         <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[14.5px] md:text-[15.5px]">
-            The portal ensures clarity, accountability, and timely communication
-            for every student, teacher, and parent.
+           The portal ensures structured communication across all ERAM 
+           institutions — keeping every parent informed and every student supported.
           </p>
 
           {/* FEATURE GRID */}
@@ -135,7 +136,7 @@ export default function CommunicationPortal() {
         {/* ── RIGHT — LIVE FEED ── */}
         <div className="anim-feed-wrap lg:mt-0 mt-8">
           <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
-            MMHSS — Live Communication Feed
+            AMLP — Live Communication Feed
           </div>
 
           <div className="flex flex-col gap-[2px]">

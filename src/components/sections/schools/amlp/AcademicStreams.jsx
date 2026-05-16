@@ -4,22 +4,22 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { shell } from "../../../../constants/homeStyles";
-import { FlaskConical, Monitor, BarChart2 } from "lucide-react";
+import { BarChart2, BookOpen, NotebookText } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const streams = [
-  { icon: <FlaskConical size={18} />, title: "Biology Science",  sub: "State Board · Science Stream"  },
-  { icon: <Monitor      size={18} />, title: "Computer Science", sub: "State Board · Science Stream"  },
-  { icon: <BarChart2    size={18} />, title: "Commerce",         sub: "State Board · Commerce Stream" },
+  { icon: <BookOpen size={18} />, title: "Structured Lesson Execution",  sub: "Kerala State Syllabus · Malayalam Medium"  },
+  { icon: <NotebookText      size={18} />, title: "Continuous Formative Assessment", sub: "Regular progressive evaluation"  },
+  { icon: <BarChart2    size={18} />, title: "Teacher-Led Engagement", sub: "Supervised learning at every stage" },
 ];
 
 const supportItems = [
-  ["Categorized student attention by performance bracket", "Morning study sessions before regular classes"],
-  ["Supervised special study classes after hours",         "Crash courses for critical syllabus portions"],
-  ["Special question practice modules",                   "Exam-oriented revision cycles"],
-  ["Structured monitoring & internal assessment",         "Teacher-guided mentorship per student"],
+  ["Structured lesson execution aligned to State syllabus", "Disciplined early-stage supervision daily"],
+  ["Continuous formative assessment practice","Regular progressive evaluation cycles"],
+  ["Continuous classroom monitoring","Structured attendance supervision"],
+  ["Parent communication coordination","Teacher-guided foundational activity sessions"],
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -315,7 +315,7 @@ export default function AcademicStreams() {
                 text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]"
               style={{ perspective: "900px" }}
             >
-              {[["Multiple", "Streams."], ["One", "Discipline"], ["Framework."]].map((line, li) => (
+              {[["Early Learning ", "with"], ["Structured", "Monitoring."],].map((line, li) => (
                 <span key={li} className="block">
                   {line.map((w, wi) => (
                     <span
@@ -335,10 +335,16 @@ export default function AcademicStreams() {
 
             {/* Body */}
             <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
-              MMHSS offers Higher Secondary education under the State syllabus
-              across three focused streams. Our strength lies not just in what
-              we teach, but in how we execute it — guiding, supervising, and
-              supporting every student at every stage.
+             At AMLP, foundational education is delivered through a monitored
+              and system-based approach aligned with the Kerala State syllabus
+              . Rather than informal early-stage instruction, the school operates 
+              through structured classroom routines, supervised learning blocks,
+               and continuous teacher-led engagement.
+            </p>
+            <br />
+              <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
+         The school ensures that students develop clarity in fundamentals
+          before progressing to higher academic stages within the ERAM ecosystem and beyond.
             </p>
 <br></br>
             {/* Streams list */}

@@ -10,44 +10,39 @@ gsap.registerPlugin(ScrollTrigger);
 // ─── Data ────────────────────────────────────────────────────────────────────
 const milestones = [
   {
-    year: "2005",
-    title: "MMHSS Established",
-    desc: "Higher Secondary School founded under the ERAM Educational & Welfare Trust, beginning with modest performance benchmarks.",
+    year: "1924",
+    title: "MMHSS Founded",
+    desc: "Aided Mappila Lower Primary School established as one of the region's earliest structured primary institutions — serving the foundational learning needs of the local community.",
   },
   {
-    year: "2008",
-    title: "Structured Academic Systems Introduced",
-    desc: "Categorized student attention, morning study sessions, and supervised revision cycles implemented across all streams.",
+    year: "Mid Century",
+    title: "Generations of Students Shaped",
+    desc: "Decades of uninterrupted education — building foundational literacy, numeracy, and discipline for successive generations in the Palakkad region.",
   },
   {
-    year: "2011",
-    title: "First 100% Result Achieved",
-    desc: "Systematic monitoring and structured exam preparation leads to the institution's first complete pass result — a milestone that reset expectations.",
+    year: "2004",
+    title: "Integrated into the ERAM Ecosystem",
+    desc: "As the ERAM Educational & Welfare Trust expanded with MMPS and MMITE, AMLP became the foundational entry point of a unified, multi-stage academic ecosystem.",
   },
   {
-    year: "2015",
-    title: "Parent Communication System Formalised",
-    desc: "Mandatory WhatsApp-based communication system introduced — bringing attendance, performance, and departmental updates directly to parents in real time.",
-  },
-  {
-    year: "2026",
-    title: "14 Consecutive Years — 100% Results",
-    desc: "A record sustained across every stream — Biology Science, Computer Science, and Commerce — reinforcing the school as one of Palakkad's top-ranked institutions.",
+    year: "present",
+    title: "Nearly 100 Years — Still Serving",
+    desc: "With 500+ students and structured academic systems, AMLP continues as a community-rooted yet institution-governed Lower Primary school — consistent, trusted, and present.",
   },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Journey() {
-  const sectionRef  = useRef(null);
-  const badgeRef    = useRef(null);
-  const headingRef  = useRef(null);
-  const dividerRef  = useRef(null);
-  const parasRef    = useRef(null);
-  const quoteRef    = useRef(null);
+  const sectionRef = useRef(null);
+  const badgeRef = useRef(null);
+  const headingRef = useRef(null);
+  const dividerRef = useRef(null);
+  const parasRef = useRef(null);
+  const quoteRef = useRef(null);
   const lastParaRef = useRef(null);
   const subLabelRef = useRef(null);
   const timelineRef = useRef(null);
-  const spineRef    = useRef(null); // ← single absolute spine
+  const spineRef = useRef(null); // ← single absolute spine
 
   useEffect(() => {
     let resizeTimer;
@@ -64,23 +59,23 @@ export default function Journey() {
       window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimer);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Extracted so both useEffects can call it
   const recalcSpine = () => {
-    const spine    = spineRef.current;
+    const spine = spineRef.current;
     const timeline = timelineRef.current;
     if (!spine || !timeline) return;
-    const allDots  = [...timeline.querySelectorAll(".ms-dot")];
+    const allDots = [...timeline.querySelectorAll(".ms-dot")];
     const firstDot = allDots[0];
-    const lastDot  = allDots[allDots.length - 1];
+    const lastDot = allDots[allDots.length - 1];
     if (!firstDot || !lastDot) return;
-    const tlRect    = timeline.getBoundingClientRect();
+    const tlRect = timeline.getBoundingClientRect();
     const firstRect = firstDot.getBoundingClientRect();
-    const lastRect  = lastDot.getBoundingClientRect();
-    const spineLeft      = firstRect.left  - tlRect.left  + firstRect.width  / 2;
-    const spineTopOffset = firstRect.top   - tlRect.top   + firstRect.height / 2;
+    const lastRect = lastDot.getBoundingClientRect();
+    const spineLeft = firstRect.left - tlRect.left + firstRect.width / 2;
+    const spineTopOffset = firstRect.top - tlRect.top + firstRect.height / 2;
     gsap.set(spine, { left: spineLeft, top: spineTopOffset, xPercent: -50 });
   };
 
@@ -95,56 +90,94 @@ export default function Journey() {
       });
 
       /* ── 1. LEFT COLUMN ── */
-      gsap.fromTo(badgeRef.current,
+      gsap.fromTo(
+        badgeRef.current,
         { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.7, ease, scrollTrigger: st(badgeRef.current) }
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.7,
+          ease,
+          scrollTrigger: st(badgeRef.current),
+        },
       );
 
-    gsap.fromTo(
-  headingRef.current,
-  { opacity: 0, y: 40 },
-  {
-    opacity: 1,
-    y: 0,
-    duration: 0.9,
-    ease,
-    scrollTrigger: st(headingRef.current, "top 85%"),
-  }
-);
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease,
+          scrollTrigger: st(headingRef.current, "top 85%"),
+        },
+      );
 
-      gsap.fromTo(dividerRef.current,
+      gsap.fromTo(
+        dividerRef.current,
         { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 0.6, ease: "power2.inOut",
-          scrollTrigger: st(dividerRef.current) }
+        {
+          scaleX: 1,
+          duration: 0.6,
+          ease: "power2.inOut",
+          scrollTrigger: st(dividerRef.current),
+        },
       );
 
       const paraItems = parasRef.current?.querySelectorAll("p");
       if (paraItems?.length) {
-        gsap.fromTo(paraItems,
+        gsap.fromTo(
+          paraItems,
           { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: 0.75, stagger: 0.18, ease,
-            scrollTrigger: st(parasRef.current) }
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.18,
+            ease,
+            scrollTrigger: st(parasRef.current),
+          },
         );
       }
 
-      gsap.fromTo(quoteRef.current,
+      gsap.fromTo(
+        quoteRef.current,
         { opacity: 0, x: -30, rotateZ: -0.6 },
-        { opacity: 1, x: 0, rotateZ: 0, duration: 0.9, ease,
-          scrollTrigger: st(quoteRef.current) }
+        {
+          opacity: 1,
+          x: 0,
+          rotateZ: 0,
+          duration: 0.9,
+          ease,
+          scrollTrigger: st(quoteRef.current),
+        },
       );
 
-      gsap.fromTo(lastParaRef.current,
+      gsap.fromTo(
+        lastParaRef.current,
         { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7, ease,
-          scrollTrigger: st(lastParaRef.current) }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease,
+          scrollTrigger: st(lastParaRef.current),
+        },
       );
 
       /* ── 2. RIGHT COLUMN sub-label ── */
       if (subLabelRef.current) {
-        gsap.fromTo(subLabelRef.current,
+        gsap.fromTo(
+          subLabelRef.current,
           { opacity: 0, y: -10 },
-          { opacity: 1, y: 0, duration: 0.6, ease,
-            scrollTrigger: st(subLabelRef.current) }
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease,
+            scrollTrigger: st(subLabelRef.current),
+          },
         );
       }
 
@@ -152,112 +185,123 @@ export default function Journey() {
       const rows = timelineRef.current?.querySelectorAll(".milestone-row");
 
       if (rows?.length) {
-      rows.forEach((row) => {
-  const year = row.querySelector(".ms-year");
-  const content = row.querySelector(".ms-content");
-  const dot = row.querySelector(".ms-dot");
+        rows.forEach((row) => {
+          const year = row.querySelector(".ms-year");
+          const content = row.querySelector(".ms-content");
+          const dot = row.querySelector(".ms-dot");
 
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: row,
-      start: "top 84%",
-      toggleActions: "play none none none",
-    },
-  })
-  .fromTo(
-    year,
-    { opacity: 0, x: -14 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 0.45,
-      ease,
-    }
-  )
-  .fromTo(
-    dot,
-    {
-      opacity: 0,
-      scale: 0,
-      transformOrigin: "center center",
-    },
-    {
-      opacity: 1,
-      scale: 1,
-      duration: 0.35,
-      ease: "back.out(1.4)",
-    },
-    "-=0.2"
-  )
-  .fromTo(
-    content,
-    { opacity: 0, x: 18 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 0.5,
-      ease,
-    },
-    "-=0.2"
-  );
-});
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: row,
+                start: "top 84%",
+                toggleActions: "play none none none",
+              },
+            })
+            .fromTo(
+              year,
+              { opacity: 0, x: -14 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.45,
+                ease,
+              },
+            )
+            .fromTo(
+              dot,
+              {
+                opacity: 0,
+                scale: 0,
+                transformOrigin: "center center",
+              },
+              {
+                opacity: 1,
+                scale: 1,
+                duration: 0.35,
+                ease: "back.out(1.4)",
+              },
+              "-=0.2",
+            )
+            .fromTo(
+              content,
+              { opacity: 0, x: 18 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.5,
+                ease,
+              },
+              "-=0.2",
+            );
+        });
       }
 
       /* ── 4. SPINE — first dot center → last dot center, pixel-perfect on all screen sizes ── */
-      const spine    = spineRef.current;
+      const spine = spineRef.current;
       const timeline = timelineRef.current;
-      const allDots  = [...timeline.querySelectorAll(".ms-dot")];
+      const allDots = [...timeline.querySelectorAll(".ms-dot")];
       const firstDot = allDots[0];
-      const lastDot  = allDots[allDots.length - 1];
+      const lastDot = allDots[allDots.length - 1];
 
       if (firstDot && lastDot) {
-        const tlRect    = timeline.getBoundingClientRect();
+        const tlRect = timeline.getBoundingClientRect();
         const firstRect = firstDot.getBoundingClientRect();
-        const lastRect  = lastDot.getBoundingClientRect();
+        const lastRect = lastDot.getBoundingClientRect();
 
         // Measure everything from actual DOM — works on any screen size
-        const spineLeft      = firstRect.left - tlRect.left + firstRect.width / 2;
-        const spineTopOffset = firstRect.top  - tlRect.top  + firstRect.height / 2;
-        const spineFullH     = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
+        const spineLeft = firstRect.left - tlRect.left + firstRect.width / 2;
+        const spineTopOffset =
+          firstRect.top - tlRect.top + firstRect.height / 2;
+        const spineFullH =
+          lastRect.top +
+          lastRect.height / 2 -
+          (firstRect.top + firstRect.height / 2);
 
-        gsap.set(spine, { left: spineLeft, top: spineTopOffset, height: 0, xPercent: -50 });
         gsap.set(spine, {
-  left: spineLeft,
-  top: spineTopOffset,
-  height: spineFullH,
-  scaleY: 0,
-  transformOrigin: "top center",
-  xPercent: -50,
-});
+          left: spineLeft,
+          top: spineTopOffset,
+          height: 0,
+          xPercent: -50,
+        });
+        gsap.set(spine, {
+          left: spineLeft,
+          top: spineTopOffset,
+          height: spineFullH,
+          scaleY: 0,
+          transformOrigin: "top center",
+          xPercent: -50,
+        });
 
-gsap.to(spine, {
-  scaleY: 1,
-  ease: "none",
-  scrollTrigger: {
-    trigger: timeline,
-    start: "top 75%",
-    end: "bottom 70%",
-    scrub: 0.6,
-  },
-});
+        gsap.to(spine, {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: timeline,
+            start: "top 75%",
+            end: "bottom 70%",
+            scrub: 0.6,
+          },
+        });
       }
-
     }, sectionRef);
 
-   return () => {
-  ScrollTrigger.getAll().forEach((t) => t.kill());
-  ctx.revert();
-};
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ctx.revert();
+    };
   }, []);
 
   return (
     <section ref={sectionRef} className={`${shell} bg-[#F5EFE8]`}>
       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 md:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 xl:gap-20">
-
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col">
-            <div ref={badgeRef} className="flex items-center gap-3 mb-8 md:mb-10">
+            <div
+              ref={badgeRef}
+              className="flex items-center gap-3 mb-8 md:mb-10"
+            >
               <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
                 Our Journey
               </p>
@@ -268,37 +312,53 @@ gsap.to(spine, {
               className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
                 text-[38px] sm:text-[46px] md:text-[54px] lg:text-[58px] xl:text-[64px]"
             >
-              A Transformation
+              A Legacy. Nearly
               <br />
-              in Performance
+              A Century of Foundational
+              <br/>
+              Learning
             </h2>
 
-            <div ref={dividerRef} className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8" />
+            <div
+              ref={dividerRef}
+              className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8"
+            />
 
-            <div ref={parasRef} className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
+            <div
+              ref={parasRef}
+              className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]"
+            >
               <p>
-                When MMHSS began in 2005, it entered a competitive academic
-                environment with modest score brackets. Over time, through
-                structured intervention and systematic academic discipline, the
-                school witnessed a significant transformation.
+                For nearly a century, AMLP has served as a foundational institution
+                 for early-stage education in the region. Established in 1924, the 
+                 school provided structured primary education, ensuring students
+                 develop disciplined learning habits before progressing to higher stages.
               </p>
               <p>
-                Moving from single-digit high performers to consistent top
-                scorers, the institution redefined what was possible through
-                deliberate systems — not chance.
+               As a government-aided school, AMLP represents continuity — not only
+                in existence, but in educational responsibility. Its longevity
+                 reflects trust, stability, and sustained community relevance.
               </p>
             </div>
 
-            <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
+            <blockquote
+              ref={quoteRef}
+              className="border-l-[3px] border-[#ae1431] pl-5 my-8"
+            >
               <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
-                "For 14 consecutive years, we have maintained a 100% Higher
-                Secondary result."
+                "Its journey reflects not rapid expansion,
+                 but steady presence — rooted in discipline,
+                  cultural familiarity, and early academic grounding."
               </p>
             </blockquote>
 
-            <p ref={lastParaRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
-              We always ensure academic attention, extended study systems, and
-              continuous parent communication — across every batch, every year.
+            <p
+              ref={lastParaRef}
+              className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]"
+            >
+              Today, AMLP stands as the foundational layer of the ERAM ecosystem,
+               shaping early discipline, literacy, and structured learning for the 
+               community it has served across generations.
             </p>
           </div>
 
@@ -308,12 +368,11 @@ gsap.to(spine, {
               ref={subLabelRef}
               className="text-[11px] sm:text-[11px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-10 hidden lg:block"
             >
-              From Modest Beginnings to Measured Excellence
+              Milestones Across Nearly a Century
             </p>
 
             {/* Timeline — relative container so the spine can be absolutely positioned */}
             <div ref={timelineRef} className="flex flex-col relative">
-
               <div
                 ref={spineRef}
                 className="absolute w-[1px] bg-[#ae1431]"
@@ -323,7 +382,6 @@ gsap.to(spine, {
 
               {milestones.map((item, i) => (
                 <div key={i} className="milestone-row flex min-h-0 relative">
-
                   {/* Year */}
                   <div className="ms-year w-[72px] flex-shrink-0 pt-[2px]">
                     <span className="text-[12px] sm:text-[13px] text-[#8a7d6e] tracking-[0.03em] tabular-nums">

@@ -7,39 +7,41 @@ import { shell } from "../../../../constants/homeStyles";
 gsap.registerPlugin(ScrollTrigger);
 
 const bullets = [
-  "Real-time attendance updates",
-  "Academic progress monitoring",
-  "Department-wise announcements",
-  "Real-time notice sharing",
+  "Continuous classroom monitoring",
+  "Structured attendance supervision",
+  "Parent communication coordination",
+  "Teacher-guided activity sessions",
+  "Foundational assessment practices",
+  "Community-rooted yet system-driven delivery",
 ];
 
 const messages = [
   {
     emoji: "📋",
     tag: "Academic Update",
-    text: "Grade 11 Commerce — Unit Test 3 results uploaded. Average: 78%. 4 students flagged for additional support.",
-    meta: "Today · 8:42 AM · Academic Monitoring",
+    text: "Grade 3 formative assessment completed. Progress reports will be shared by Friday.",
+    meta: "Today · 8:30 AM · Academic Monitoring",
     accent: true,
   },
   {
     emoji: "✅",
     tag: "Attendance",
-    text: "Your ward was present today. Morning study session attendance: 100%.",
-    meta: "Today · 7:05 AM · Attendance System",
+    text: "Your ward was present today. School hours: 9:00 AM – 3:30 PM.",
+    meta: "Today · 7:00 AM · Attendance System",
     accent: false,
   },
   {
     emoji: "📣",
     tag: "Notice",
-    text: "Crash course for Biology Practical begins Monday. Attendance mandatory for all Grade 12 students.",
-    meta: "Yesterday · 5:30 PM · Biology Dept.",
+    text: " School Annual Day celebrations scheduled for next Friday. All parents warmly invited.",
+    meta: "Yesterday · 5:30 PM · Schoo, Management.",
     accent: true,
   },
   {
     emoji: "🏆",
-    tag: "Recognition",
-    text: "Diya Maryam (Gr. 11) — National Level Wushu Championship. 1st Place. Congratulations!",
-    meta: "2 days ago · School Management",
+    tag: "Activity",
+    text: " Art & craft activity session completed for Grade 1 & 2 — photos shared in gallery.",
+    meta: "2 days ago · Class Teacher",
     accent: false,
   },
 ];
@@ -114,21 +116,23 @@ export default function ParentPartnership() {
           <div className="flex flex-col">
             <div className="anim-subtitle flex items-center gap-3 mb-8">
               <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
-                Parent Partnership
+                Institutional Strengths
               </p>
             </div>
 
             <h2 className="font-display anim-title text-[#1a1209] leading-[1.05] tracking-[-0.02em]
               text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px]">
-              Discipline &amp; Communication as Accountability
+              Enduring Legacy.<br/>Early Discipline.<br/>Structured Supervision.
             </h2>
 
             <div className="anim-divider w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             <p className="anim-desc font-rethink  text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#3d3128] max-w-[560px]">
-              The institution maintains a mandatory WhatsApp-based communication
-              system to ensure parents are continuously informed — making parent
-              engagement institutional, not incidental.
+              At the Lower Primary level, learning requires foundation, 
+              close supervision, and coordinated communication. 
+              AMLP maintains structured systems to support young learners
+               — ensuring early academic gaps are addressed promptly and
+                that learning habits are formed with discipline
             </p>
 
             <ul className="mt-6 space-y-3">
