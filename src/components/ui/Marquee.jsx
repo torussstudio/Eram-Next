@@ -7,7 +7,7 @@ export default function MarqueeText() {
   useEffect(() => {
     gsap.to(ref.current, {
       xPercent: -50,
-      duration: 22,
+      duration: 10,
       ease: "linear",
       repeat: -1,
     });

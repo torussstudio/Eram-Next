@@ -14,9 +14,7 @@ const TheTrust = lazy(() => import("../pages/the-trust/TheTrust"));
 const Facilities = lazy(() => import("../pages/facilities/Facilities"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
 const Gallery = lazy(() => import("../pages/gallery/Gallery"));
-const ExploreArena = lazy(() =>
-  import("../pages/explore-arena/ExploreArena")
-);
+const ExploreArena = lazy(() => import("../pages/explore-arena/ExploreArena"));
 const MmHss = lazy(() => import("../pages/mmhss/MmHss"));
 const Mmps = lazy(() => import("../pages/mmps/Mmps"));
 const Amlp = lazy(() => import("../pages/amlp/Amlp"));
@@ -44,14 +42,13 @@ export default function App() {
       <ScrollToTop />
 
       <div className="overflow-x-clip bg-[#F5EFE8] font-display text-[#111111] leading-[1.4]">
-
         <Navbar
-  onAboutHover={preloadAbout}
-  onTheTrustHover={preloadTheTrust}
-  onFacilitiesHover={preloadFacilities}
-  onContactHover={preloadContact}
-  onGalleryHover={preloadGallery}
-/>
+          onAboutHover={preloadAbout}
+          onTheTrustHover={preloadTheTrust}
+          onFacilitiesHover={preloadFacilities}
+          onContactHover={preloadContact}
+          onGalleryHover={preloadGallery}
+        />
 
         {/* Routes */}
         <Suspense fallback={<PageLoader />}>
@@ -60,20 +57,18 @@ export default function App() {
             <Route path="/about-us" element={<About />} />
             <Route path="/the-trust" element={<TheTrust />} />
             <Route path="/facilities" element={<Facilities />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/explore-arena" element={<ExploreArena />} />
             <Route path="/mmhss" element={<MmHss />} />
             <Route path="/mmps" element={<Mmps />} />
             <Route path="/amlp" element={<Amlp />} />
-             <Route path="/mmite" element={<Mmite />} />
-             <Route path="/contact" element={<Contact />} />
+            <Route path="/mmite" element={<Mmite />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </Suspense>
 
         {/* Footer */}
-       <Footer />
-
+        <Footer />
       </div>
     </Router>
   );

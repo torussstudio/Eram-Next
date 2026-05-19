@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import gsap from "gsap";
+import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
@@ -131,7 +131,7 @@ export default function BeyondAcademics() {
   );
 
   return (
-    <section ref={containerRef} className={`${shell} bg-[#F5EFE8]`}>
+    <section id="academics" ref={containerRef} className={`${shell} bg-[#F5EFE8]`}>
       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 md:py-20 lg:py-24">
 
         {/* ── HEADER ── */}

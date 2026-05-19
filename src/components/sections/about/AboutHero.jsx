@@ -1,6 +1,6 @@
 import { memo, useRef, useEffect } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
-import gsap from "gsap";
+import {gsap} from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Play } from "lucide-react";
@@ -90,15 +90,15 @@ function AboutHero() {
   return (
     <section
       ref={containerRef}
-      className={`${shell}  bg-[#F5EFE8] py-9`}
+      className="bg-[#F5EFE8] py-9 px-3 md:px-6"
     >
-      <div className="overflow-hidden rounded-[28px] shadow-sm transform-gpu [contain:paint] max-[767px]:outline max-[767px]:outline-[4px] max-[767px]:outline-[#F5EFE8]">
+     <div className="rounded-[28px] overflow-hidden shadow-sm">
         {/* HERO */}
         <div className="relative min-h-[560px] sm:min-h-[620px] md:min-h-[660px] lg:min-h-[760px] w-full">
 
           {/* IMAGE */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="hero-img absolute inset-0 scale-110 will-change-transform transform-gpu">
+          <div className="hero-img absolute inset-0 scale-110">
               <OptimizedImage
                 src="/images/about-hero.webp"
                 onLoad={() => ScrollTrigger.refresh()}

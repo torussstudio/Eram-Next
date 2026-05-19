@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navItems } from "../../constants/homeData";
+import { useSmoothScroll } from "../../hooks/useSmoothScroll";
 
 const institutions = [
   {
@@ -138,6 +139,7 @@ export default function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const navigate = useNavigate();
+ const smoothScrollTo = useSmoothScroll();
 
   const T = "500ms cubic-bezier(0.4,0,0.2,1)";
   const btnBg = isHome ? "#F5EFE8" : "#ae1431";
@@ -272,13 +274,13 @@ export default function Navbar() {
     if (path.startsWith("#")) {
       const section = document.querySelector(path);
       if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
+       smoothScrollTo(path.replace("#", ""));
         setActiveSection(path);
       } else {
         navigate("/");
         setTimeout(() => {
           const target = document.querySelector(path);
-          target?.scrollIntoView({ behavior: "smooth" });
+          smoothScrollTo(path.replace("#", ""));
           setActiveSection(path);
         }, 200);
       }

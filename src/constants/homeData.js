@@ -123,3 +123,43 @@ export const impactCards = [
       "Trust-led initiatives designed to strengthen social support systems around education.",
   },
 ];
+
+export const data = [
+  {
+    id: "pillar-1",
+    label: "/01",
+    title: "Education",
+    desc: "Structured institutions, special needs schools, and teacher training programs expanding access and excellence.",
+  },
+  {
+    id: "pillar-2",
+    label: "/02",
+    title: "Health & Sanitation",
+    desc: "Preventive medical camps, surgical access, dialysis support, and sustainable public sanitation solutions.",
+  },
+  {
+    id: "pillar-3",
+    label: "/03",
+    title: "Humanitarian & Rehabilitation",
+    desc: "Housing, repatriation support, rehabilitation aid, and targeted livelihood initiatives for vulnerable communities.",
+  },
+  {
+    id: "pillar-4",
+    label: "/04",
+    title: "Youth & Sports",
+    desc: "National athlete support, professional sports patronage, and the development of the ERAM Sports Arena.",
+  },
+  {
+    id: "pillar-5",
+    label: "/05",
+    title: "Environment",
+    desc: "Water conservation, river restoration, check dams, and over 180 wells serving rural Palakkad communities.",
+  },
+  {
+    id: "pillar-6",
+    label: "/06",
+    title: "Community Infrastructure & Welfare",
+    desc: "Ambulance sponsorship, sanitation infrastructure, and interreligious harmony programs.",
+  },
+];
+

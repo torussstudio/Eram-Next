@@ -1,28 +1,3 @@
-// import AcademicStreams from "../../components/sections/schools/mmhss/AcademicStreams";
-// import AdmissionsPage from "../../components/sections/schools/mmhss/AdmissionsPage";
-// import BeyondAcademics from "../../components/sections/schools/mmhss/BeyondAcademics";
-// import CommunicationPortal from "../../components/sections/schools/mmhss/CommunicationPortal";
-// import GalleryPage from "../../components/sections/schools/mmhss/GalleryPage";
-// import Hero from "../../components/sections/schools/mmhss/Hero";
-// import Journey from "../../components/sections/schools/mmhss/Journey";
-// import ParentPartnership from "../../components/sections/schools/mmhss/ParentPartnership";
-
-// export default function Mmhss(){
-//     return(
-//         <main>
-//             <Hero />
-//             <Journey />
-//             <AcademicStreams />
-//             <ParentPartnership />
-//             <BeyondAcademics/>
-//             <GalleryPage />
-//             <CommunicationPortal/>
-//             <AdmissionsPage />
-//         </main>
-//     )
-// }
-
-
 import { lazy, Suspense } from "react";
 
 // ✅ Keep Hero eager (critical paint)
@@ -35,6 +10,10 @@ const Journey = lazy(() =>
 
 const AcademicStreams = lazy(() =>
   import("../../components/sections/schools/mmhss/AcademicStreams")
+);
+
+const Streams = lazy(() =>
+  import("../../components/sections/schools/mmhss/Streams")
 );
 
 const ParentPartnership = lazy(() =>
@@ -66,6 +45,7 @@ export default function Mmhss() {
       {/* ✅ Deferred sections */}
       <Suspense fallback={null}>
         <Journey />
+        <Streams/>
         <AcademicStreams />
         <ParentPartnership />
         <BeyondAcademics />

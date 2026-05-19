@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const milestones = [
   {
     year: "1924",
-    title: "MMHSS Founded",
+    title: "AMLP Founded",
     desc: "Aided Mappila Lower Primary School established as one of the region's earliest structured primary institutions — serving the foundational learning needs of the local community.",
   },
   {

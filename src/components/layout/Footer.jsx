@@ -26,6 +26,7 @@ export default function Footer() {
             </h4>
 
             <div className="flex gap-5 mt-4 text-xl">
+              
             </div>
           </div>
 

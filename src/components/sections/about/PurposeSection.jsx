@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
-import gsap from "gsap";
+import {gsap} from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Play } from "lucide-react";

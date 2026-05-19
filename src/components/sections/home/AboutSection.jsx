@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import ActionButton from "../../ui/ActionButton";
+import { useSmoothScroll } from "../../../hooks/useSmoothScroll";
+
 
 /* ─── Animation config ────────────────────────────────────────────────────── */
 const EASE = {
@@ -10,6 +12,8 @@ const EASE = {
   heavy:  "power4.out",
   light:  "power1.out",
 };
+
+const smoothScrollTo = useSmoothScroll();
 
 /* ─── Shared image class ──────────────────────────────────────────────────── */
 const imgCls = "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105";
@@ -220,27 +224,12 @@ export default function AboutSection() {
             </p>
 
              <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
-                     <ActionButton
-              onClick={() => {
-                const section = document.getElementById("institutions");
-
-                if (section) {
-                  const yOffset = -90; // navbar height
-                  const y =
-                    section.getBoundingClientRect().top +
-                    window.pageYOffset +
-                    yOffset;
-
-                  window.scrollTo({
-                    top: y,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-              className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer"
-            >
-              Explore Our Institutions
-            </ActionButton>
+<ActionButton
+  onClick={() => smoothScrollTo("institutions")}
+  className="font-rethink !bg-[#ae1431] hover:!bg-black cursor-pointer"
+>
+  Explore Our Institutions
+</ActionButton>
                   </div>
           </div>
            

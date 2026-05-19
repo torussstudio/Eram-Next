@@ -1,43 +1,455 @@
+// "use client";
+
+// import { useEffect, useRef } from "react";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { shell } from "../../../../constants/homeStyles";
+// import { FlaskConical, Monitor, BarChart2 } from "lucide-react";
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// // ─── Data ────────────────────────────────────────────────────────────────────
+// const streams = [
+//   { icon: <FlaskConical size={18} />, title: "Biology Science",  sub: "State Board · Science Stream"  },
+//   { icon: <Monitor      size={18} />, title: "Computer Science", sub: "State Board · Science Stream"  },
+//   { icon: <BarChart2    size={18} />, title: "Commerce",         sub: "State Board · Commerce Stream" },
+// ];
+
+// const supportItems = [
+//   ["Categorized student attention by performance bracket", "Morning study sessions before regular classes"],
+//   ["Supervised special study classes after hours",         "Crash courses for critical syllabus portions"],
+//   ["Special question practice modules",                   "Exam-oriented revision cycles"],
+//   ["Structured monitoring & internal assessment",         "Teacher-guided mentorship per student"],
+// ];
+
+// // ─── Component ───────────────────────────────────────────────────────────────
+// export default function AcademicStreams() {
+//   const sectionRef   = useRef(null);
+//   const badgeRef     = useRef(null);
+//   const badgeLineRef = useRef(null);
+//   const headingRef   = useRef(null);
+//   const dividerRef   = useRef(null);
+//   const bodyRef      = useRef(null);
+//   const counterRef   = useRef(null);
+//   const streamsRef   = useRef(null);
+//   const subLabelRef  = useRef(null);
+//   const gridRef      = useRef(null);
+
+//   useEffect(() => {
+//     const ctx = gsap.context(() => {
+//       const ease    = "power3.out";
+//       const easeExp = "expo.out";
+
+//       const st = (trigger, start = "top 86%") => ({
+//         trigger,
+//         start,
+//         toggleActions: "play none none none",
+//       });
+
+//       // ── 0. Section bg lifts from deep black ───────────────────────────────
+//       gsap.fromTo(sectionRef.current,
+//         { backgroundColor: "#0e0e0e" },
+//         {
+//           backgroundColor: "#1a1a1a",
+//           duration: 1.6, ease: "power2.inOut",
+//           scrollTrigger: {
+//             trigger: sectionRef.current,
+//             start: "top 92%",
+//             toggleActions: "play none none none",
+//           },
+//         }
+//       );
+
+//       // ── 1. Badge line extends → text appears ──────────────────────────────
+//       gsap.fromTo(badgeLineRef.current,
+//         { scaleX: 0, transformOrigin: "left center" },
+//         {
+//           scaleX: 1, duration: 0.5, ease: "power2.inOut",
+//           scrollTrigger: st(badgeRef.current),
+//         }
+//       );
+//       gsap.fromTo(badgeRef.current.querySelector("p"),
+//         { opacity: 0, x: 12 },
+//         {
+//           opacity: 1, x: 0, duration: 0.55, ease, delay: 0.38,
+//           scrollTrigger: st(badgeRef.current),
+//         }
+//       );
+
+//       // ── 2. Heading — per-word 3D flip reveal ─────────────────────────────
+//       const words = headingRef.current?.querySelectorAll(".word");
+//       if (words?.length) {
+//         gsap.fromTo(words,
+//           { opacity: 0, y: 64, rotateX: -18, transformOrigin: "top center" },
+//           {
+//             opacity: 1, y: 0, rotateX: 0,
+//             duration: 1.0, ease: easeExp,
+//             stagger: 0.06,
+//             scrollTrigger: st(headingRef.current, "top 88%"),
+//           }
+//         );
+//       }
+
+//       // ── 3. Divider extends + red glow pulse ───────────────────────────────
+//       gsap.fromTo(dividerRef.current,
+//         { scaleX: 0, transformOrigin: "left center" },
+//         {
+//           scaleX: 1, duration: 0.65, ease: "power2.inOut",
+//           scrollTrigger: st(dividerRef.current),
+//           onComplete() {
+//             gsap.to(dividerRef.current, {
+//               boxShadow: "0 0 14px 3px rgba(174,20,49,0.6)",
+//               duration: 0.85, ease: "sine.inOut",
+//               yoyo: true, repeat: 3,
+//             });
+//           },
+//         }
+//       );
+
+//       // ── 4. Body — blur fade up ────────────────────────────────────────────
+//       gsap.fromTo(bodyRef.current,
+//         { opacity: 0, y: 24, filter: "blur(5px)" },
+//         {
+//           opacity: 1, y: 0, filter: "blur(0px)",
+//           duration: 0.9, ease,
+//           scrollTrigger: st(bodyRef.current),
+//         }
+//       );
+
+//       // ── 5. Counter badge rolls up ─────────────────────────────────────────
+//       if (counterRef.current) {
+//         gsap.fromTo(counterRef.current,
+//           { opacity: 0, scale: 0.75, y: 18 },
+//           {
+//             opacity: 1, scale: 1, y: 0,
+//             duration: 0.75, ease: "back.out(1.5)",
+//             scrollTrigger: st(counterRef.current),
+//           }
+//         );
+//         const obj = { val: 0 };
+//         gsap.to(obj, {
+//           val: 100, duration: 2.4, ease: "power2.out", delay: 0.3,
+//           scrollTrigger: st(counterRef.current),
+//           onUpdate() {
+//             const el = counterRef.current?.querySelector(".counter-val");
+//             if (el) el.textContent = Math.round(obj.val) + "%";
+//           },
+//         });
+//       }
+
+//       // ── 6. Stream box — border draws clockwise around container ──────────
+//       const bTop = streamsRef.current?.querySelector(".sb-top");
+//       const bRight = streamsRef.current?.querySelector(".sb-right");
+//       const bBottom = streamsRef.current?.querySelector(".sb-bottom");
+//       const bLeft = streamsRef.current?.querySelector(".sb-left");
+
+//       if (bTop) {
+//         gsap.timeline({ scrollTrigger: st(streamsRef.current) })
+//           .fromTo(bTop,    { scaleX: 0, transformOrigin: "left center" },   { scaleX: 1,  duration: 0.3, ease: "power2.inOut" })
+//           .fromTo(bRight,  { scaleY: 0, transformOrigin: "top center" },    { scaleY: 1,  duration: 0.3, ease: "power2.inOut" }, "-=0.05")
+//           .fromTo(bBottom, { scaleX: 0, transformOrigin: "right center" },  { scaleX: 1,  duration: 0.3, ease: "power2.inOut" }, "-=0.05")
+//           .fromTo(bLeft,   { scaleY: 0, transformOrigin: "bottom center" }, { scaleY: 1,  duration: 0.3, ease: "power2.inOut" }, "-=0.05");
+//       }
+
+//       // ── 7. Stream rows — 3D perspective tilt in ───────────────────────────
+//       const streamRows = streamsRef.current?.querySelectorAll(".stream-row");
+//       if (streamRows?.length) {
+//         streamRows.forEach((row, i) => {
+//           const icon  = row.querySelector(".stream-icon");
+//           const title = row.querySelector(".stream-title");
+//           const sub   = row.querySelector(".stream-sub");
+//           const sep   = row.querySelector(".stream-sep");
+
+//           gsap.fromTo(row,
+//             { opacity: 0, y: 36, rotateX: -10, transformPerspective: 900 },
+//             {
+//               opacity: 1, y: 0, rotateX: 0,
+//               duration: 0.8, ease: easeExp,
+//               delay: i * 0.15,
+//               scrollTrigger: st(streamsRef.current),
+//             }
+//           );
+//           gsap.fromTo(icon,
+//             { scale: 0, rotation: -20, opacity: 0 },
+//             {
+//               scale: 1, rotation: 0, opacity: 1,
+//               duration: 0.5, ease: "back.out(2.2)",
+//               delay: i * 0.15 + 0.22,
+//               scrollTrigger: st(streamsRef.current),
+//             }
+//           );
+//           gsap.fromTo(title,
+//             { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+//             {
+//               opacity: 1, clipPath: "inset(0 0% 0 0)",
+//               duration: 0.55, ease,
+//               delay: i * 0.15 + 0.3,
+//               scrollTrigger: st(streamsRef.current),
+//             }
+//           );
+//           gsap.fromTo(sub,
+//             { opacity: 0, y: 5 },
+//             {
+//               opacity: 1, y: 0, duration: 0.4, ease,
+//               delay: i * 0.15 + 0.44,
+//               scrollTrigger: st(streamsRef.current),
+//             }
+//           );
+//           if (sep) {
+//             gsap.fromTo(sep,
+//               { scaleX: 0, transformOrigin: "left center" },
+//               {
+//                 scaleX: 1, duration: 0.45, ease: "power2.inOut",
+//                 delay: i * 0.15 + 0.08,
+//                 scrollTrigger: st(streamsRef.current),
+//               }
+//             );
+//           }
+//         });
+//       }
+
+//       // ── 8. Sub-label — letter-spacing collapses in ───────────────────────
+//       if (subLabelRef.current) {
+//         gsap.fromTo(subLabelRef.current,
+//           { opacity: 0, letterSpacing: "0.55em" },
+//           {
+//             opacity: 1, letterSpacing: "0.28em",
+//             duration: 0.95, ease,
+//             scrollTrigger: st(subLabelRef.current),
+//           }
+//         );
+//       }
+
+//       // ── 9. Support cards — blur-slide + accent draw + shimmer ─────────────
+//       const cards = gridRef.current?.querySelectorAll(".support-card");
+//       if (cards?.length) {
+//         cards.forEach((card, i) => {
+//           const col    = i % 2;
+//           const rowIdx = Math.floor(i / 2);
+//           const xFrom  = col === 0 ? -38 : 38;
+//           const accent  = card.querySelector(".card-accent");
+//           const shimmer = card.querySelector(".card-shimmer");
+//           const text    = card.querySelector("p");
+//           const stCfg   = { trigger: gridRef.current, start: "top 85%", toggleActions: "play none none none" };
+
+//           gsap.fromTo(card,
+//             { opacity: 0, x: xFrom, filter: "blur(7px)" },
+//             {
+//               opacity: 1, x: 0, filter: "blur(0px)",
+//               duration: 0.72, ease: easeExp,
+//               delay: rowIdx * 0.1 + col * 0.07,
+//               scrollTrigger: stCfg,
+//             }
+//           );
+//           if (accent) {
+//             gsap.fromTo(accent,
+//               { scaleY: 0, transformOrigin: "top center" },
+//               {
+//                 scaleY: 1, duration: 0.6, ease: "power2.out",
+//                 delay: rowIdx * 0.1 + col * 0.07 + 0.22,
+//                 scrollTrigger: stCfg,
+//               }
+//             );
+//           }
+//           if (shimmer) {
+//             gsap.fromTo(shimmer,
+//               { x: "-115%" },
+//               {
+//                 x: "115%", duration: 0.75, ease: "power2.inOut",
+//                 delay: rowIdx * 0.1 + col * 0.07 + 0.38,
+//                 scrollTrigger: stCfg,
+//               }
+//             );
+//           }
+//           if (text) {
+//             gsap.fromTo(text,
+//               { opacity: 0, y: 10 },
+//               {
+//                 opacity: 1, y: 0, duration: 0.45, ease,
+//                 delay: rowIdx * 0.1 + col * 0.07 + 0.32,
+//                 scrollTrigger: stCfg,
+//               }
+//             );
+//           }
+//         });
+//       }
+
+//     }, sectionRef);
+
+//     return () => ctx.revert();
+//   }, []);
+
+//   return (
+//     <section ref={sectionRef} className={`${shell} bg-[#1a1a1a] relative overflow-hidden`}>
+
+//       {/* Ambient red glow — top left */}
+//       <div
+//         className="pointer-events-none absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full"
+//         style={{ background: "radial-gradient(circle, rgba(174,20,49,0.07) 0%, transparent 68%)" }}
+//         aria-hidden="true"
+//       />
+//       {/* Ambient glow — bottom right */}
+//       <div
+//         className="pointer-events-none absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full"
+//         style={{ background: "radial-gradient(circle, rgba(174,20,49,0.04) 0%, transparent 70%)" }}
+//         aria-hidden="true"
+//       />
+
+//       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 md:py-20 lg:py-24">
+//         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
+
+//           {/* ══ LEFT COLUMN ══════════════════════════════════════════════════ */}
+//           <div className="flex flex-col">
+
+//             {/* Badge */}
+//             <div ref={badgeRef} className="flex items-center gap-3 mb-8">
+//               <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
+//                 Academic Structure
+//               </p>
+//             </div>
+
+//             {/* Heading — word split */}
+//             <h2
+//               ref={headingRef}
+//               className="font-display text-white leading-[1.05] tracking-[-0.02em]
+//                 text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]"
+//               style={{ perspective: "900px" }}
+//             >
+//               {[["Multiple", "Streams."], ["One", "Discipline"], ["Framework."]].map((line, li) => (
+//                 <span key={li} className="block">
+//                   {line.map((w, wi) => (
+//                     <span
+//                       key={wi}
+//                       className="word"
+//                       style={{ display: "inline-block", marginRight: "0.22em" }}
+//                     >
+//                       {w}
+//                     </span>
+//                   ))}
+//                 </span>
+//               ))}
+//             </h2>
+
+//             {/* Divider */}
+//             <div ref={dividerRef} className="w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
+
+//             {/* Body */}
+//             <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
+//               MMHSS offers Higher Secondary education under the State syllabus
+//               across three focused streams. Our strength lies not just in what
+//               we teach, but in how we execute it — guiding, supervising, and
+//               supporting every student at every stage.
+//             </p>
+// <br></br>
+//             {/* Streams list */}
+//             <div ref={streamsRef} className="relative border border-white/10 rounded-[20px] overflow-hidden">
+//               {/* Clockwise-drawn border */}
+//               <div className="sb-top    absolute top-0    left-0  right-0  h-[1px] bg-white/10" />
+//               <div className="sb-right  absolute top-0    right-0 bottom-0 w-[1px] bg-white/10" />
+//               <div className="sb-bottom absolute bottom-0 left-0  right-0  h-[1px] bg-white/10" />
+//               <div className="sb-left   absolute top-0    left-0  bottom-0 w-[1px] bg-white/10" />
+
+//               {streams.map((item, i) => (
+//                 <div key={i} className="stream-row relative px-5 py-5 flex items-center gap-4">
+//                   {i !== 0 && (
+//                     <div className="stream-sep absolute top-0 left-0 right-0 h-[1px] bg-white/10" />
+//                   )}
+//                   <div className="stream-icon w-9 h-9 bg-[#ae1431] rounded-sm flex items-center justify-center text-white flex-shrink-0">
+//                     {item.icon}
+//                   </div>
+//                   <div>
+//                     <h3 className="stream-title text-white font-serif text-[16px] sm:text-[17px] leading-tight">
+//                       {item.title}
+//                     </h3>
+//                     <p className="stream-sub text-[13px] text-white/40 mt-0.5">{item.sub}</p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* ══ RIGHT COLUMN ═════════════════════════════════════════════════ */}
+//           <div className="flex flex-col">
+
+//             <p
+//               ref={subLabelRef}
+//               className="font-rethink text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
+//             >
+//               Academic Support Systems
+//             </p>
+
+//             <div ref={gridRef} className="flex flex-col gap-1 rounded-2xl overflow-hidden ">
+//               {supportItems.map(([left, right], i) => (
+//                 <div key={i} className="grid grid-cols-2 gap-1">
+//                   {[left, right].map((text, j) => (
+//                     <div key={j} className="support-card relative bg-[#252525] px-5 py-5 overflow-hidden">
+//                       {/* Accent bar — animated via GSAP */}
+//                      <div className="card-accent absolute left-0 top-0 bottom-0 w-[4px] bg-[#ae1431] rounded-l-[20px]" />
+//                       {/* One-shot shimmer sweep */}
+//                       <div
+//                         className="card-shimmer absolute inset-0 pointer-events-none"
+//                         style={{
+//                           background: "linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.05) 50%, transparent 62%)",
+//                           transform: "translateX(-115%)",
+//                         }}
+//                         aria-hidden="true"
+//                       />
+//                       <p className="relative z-10 text-[13px] sm:text-[14px] text-[#c4b9ae] leading-[1.65]">
+//                         {text}
+//                       </p>
+//                     </div>
+//                   ))}
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
 "use client";
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { shell } from "../../../../constants/homeStyles";
-import { FlaskConical, Monitor, BarChart2 } from "lucide-react";
+import { Play } from "lucide-react";
+import { useSmoothScroll } from "../../../../hooks/useSmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-const streams = [
-  { icon: <FlaskConical size={18} />, title: "Biology Science",  sub: "State Board · Science Stream"  },
-  { icon: <Monitor      size={18} />, title: "Computer Science", sub: "State Board · Science Stream"  },
-  { icon: <BarChart2    size={18} />, title: "Commerce",         sub: "State Board · Commerce Stream" },
-];
-
 const supportItems = [
-  ["Categorized student attention by performance bracket", "Morning study sessions before regular classes"],
-  ["Supervised special study classes after hours",         "Crash courses for critical syllabus portions"],
-  ["Special question practice modules",                   "Exam-oriented revision cycles"],
-  ["Structured monitoring & internal assessment",         "Teacher-guided mentorship per student"],
+  [
+    "Categorized student attention by performance bracket",
+    "Morning study sessions before regular classes",
+  ],
+  [
+    "Supervised special study classes after hours",
+    "Crash courses for critical syllabus portions",
+  ],
+  ["Special question practice modules", "Exam-oriented revision cycles"],
+  [
+    "Structured monitoring & internal assessment",
+    "Teacher-guided mentorship per student",
+  ],
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function AcademicStreams() {
-  const sectionRef   = useRef(null);
-  const badgeRef     = useRef(null);
-  const badgeLineRef = useRef(null);
-  const headingRef   = useRef(null);
-  const dividerRef   = useRef(null);
-  const bodyRef      = useRef(null);
-  const counterRef   = useRef(null);
-  const streamsRef   = useRef(null);
-  const subLabelRef  = useRef(null);
-  const gridRef      = useRef(null);
+  const sectionRef = useRef(null);
+  const subLabelRef = useRef(null);
+  const gridRef = useRef(null);
+  const principalRef = useRef(null);
+
+   const scrollTo = useSmoothScroll();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const ease    = "power3.out";
+      const ease = "power3.out";
       const easeExp = "expo.out";
 
       const st = (trigger, start = "top 86%") => ({
@@ -46,331 +458,146 @@ export default function AcademicStreams() {
         toggleActions: "play none none none",
       });
 
-      // ── 0. Section bg lifts from deep black ───────────────────────────────
-      gsap.fromTo(sectionRef.current,
-        { backgroundColor: "#0e0e0e" },
+      // ── Section bg ────────────────────────────────────────────────────────
+      // ── Section fade in ───────────────────────────────────────────────────
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0.85 },
         {
-          backgroundColor: "#1a1a1a",
-          duration: 1.6, ease: "power2.inOut",
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 92%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
-      // ── 1. Badge line extends → text appears ──────────────────────────────
-      gsap.fromTo(badgeLineRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        {
-          scaleX: 1, duration: 0.5, ease: "power2.inOut",
-          scrollTrigger: st(badgeRef.current),
-        }
-      );
-      gsap.fromTo(badgeRef.current.querySelector("p"),
-        { opacity: 0, x: 12 },
-        {
-          opacity: 1, x: 0, duration: 0.55, ease, delay: 0.38,
-          scrollTrigger: st(badgeRef.current),
-        }
-      );
-
-      // ── 2. Heading — per-word 3D flip reveal ─────────────────────────────
-      const words = headingRef.current?.querySelectorAll(".word");
-      if (words?.length) {
-        gsap.fromTo(words,
-          { opacity: 0, y: 64, rotateX: -18, transformOrigin: "top center" },
-          {
-            opacity: 1, y: 0, rotateX: 0,
-            duration: 1.0, ease: easeExp,
-            stagger: 0.06,
-            scrollTrigger: st(headingRef.current, "top 88%"),
-          }
-        );
-      }
-
-      // ── 3. Divider extends + red glow pulse ───────────────────────────────
-      gsap.fromTo(dividerRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        {
-          scaleX: 1, duration: 0.65, ease: "power2.inOut",
-          scrollTrigger: st(dividerRef.current),
-          onComplete() {
-            gsap.to(dividerRef.current, {
-              boxShadow: "0 0 14px 3px rgba(174,20,49,0.6)",
-              duration: 0.85, ease: "sine.inOut",
-              yoyo: true, repeat: 3,
-            });
-          },
-        }
-      );
-
-      // ── 4. Body — blur fade up ────────────────────────────────────────────
-      gsap.fromTo(bodyRef.current,
-        { opacity: 0, y: 24, filter: "blur(5px)" },
-        {
-          opacity: 1, y: 0, filter: "blur(0px)",
-          duration: 0.9, ease,
-          scrollTrigger: st(bodyRef.current),
-        }
-      );
-
-      // ── 5. Counter badge rolls up ─────────────────────────────────────────
-      if (counterRef.current) {
-        gsap.fromTo(counterRef.current,
-          { opacity: 0, scale: 0.75, y: 18 },
-          {
-            opacity: 1, scale: 1, y: 0,
-            duration: 0.75, ease: "back.out(1.5)",
-            scrollTrigger: st(counterRef.current),
-          }
-        );
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: 100, duration: 2.4, ease: "power2.out", delay: 0.3,
-          scrollTrigger: st(counterRef.current),
-          onUpdate() {
-            const el = counterRef.current?.querySelector(".counter-val");
-            if (el) el.textContent = Math.round(obj.val) + "%";
-          },
-        });
-      }
-
-      // ── 6. Stream box — border draws clockwise around container ──────────
-      const bTop = streamsRef.current?.querySelector(".sb-top");
-      const bRight = streamsRef.current?.querySelector(".sb-right");
-      const bBottom = streamsRef.current?.querySelector(".sb-bottom");
-      const bLeft = streamsRef.current?.querySelector(".sb-left");
-
-      if (bTop) {
-        gsap.timeline({ scrollTrigger: st(streamsRef.current) })
-          .fromTo(bTop,    { scaleX: 0, transformOrigin: "left center" },   { scaleX: 1,  duration: 0.3, ease: "power2.inOut" })
-          .fromTo(bRight,  { scaleY: 0, transformOrigin: "top center" },    { scaleY: 1,  duration: 0.3, ease: "power2.inOut" }, "-=0.05")
-          .fromTo(bBottom, { scaleX: 0, transformOrigin: "right center" },  { scaleX: 1,  duration: 0.3, ease: "power2.inOut" }, "-=0.05")
-          .fromTo(bLeft,   { scaleY: 0, transformOrigin: "bottom center" }, { scaleY: 1,  duration: 0.3, ease: "power2.inOut" }, "-=0.05");
-      }
-
-      // ── 7. Stream rows — 3D perspective tilt in ───────────────────────────
-      const streamRows = streamsRef.current?.querySelectorAll(".stream-row");
-      if (streamRows?.length) {
-        streamRows.forEach((row, i) => {
-          const icon  = row.querySelector(".stream-icon");
-          const title = row.querySelector(".stream-title");
-          const sub   = row.querySelector(".stream-sub");
-          const sep   = row.querySelector(".stream-sep");
-
-          gsap.fromTo(row,
-            { opacity: 0, y: 36, rotateX: -10, transformPerspective: 900 },
-            {
-              opacity: 1, y: 0, rotateX: 0,
-              duration: 0.8, ease: easeExp,
-              delay: i * 0.15,
-              scrollTrigger: st(streamsRef.current),
-            }
-          );
-          gsap.fromTo(icon,
-            { scale: 0, rotation: -20, opacity: 0 },
-            {
-              scale: 1, rotation: 0, opacity: 1,
-              duration: 0.5, ease: "back.out(2.2)",
-              delay: i * 0.15 + 0.22,
-              scrollTrigger: st(streamsRef.current),
-            }
-          );
-          gsap.fromTo(title,
-            { opacity: 0, clipPath: "inset(0 100% 0 0)" },
-            {
-              opacity: 1, clipPath: "inset(0 0% 0 0)",
-              duration: 0.55, ease,
-              delay: i * 0.15 + 0.3,
-              scrollTrigger: st(streamsRef.current),
-            }
-          );
-          gsap.fromTo(sub,
-            { opacity: 0, y: 5 },
-            {
-              opacity: 1, y: 0, duration: 0.4, ease,
-              delay: i * 0.15 + 0.44,
-              scrollTrigger: st(streamsRef.current),
-            }
-          );
-          if (sep) {
-            gsap.fromTo(sep,
-              { scaleX: 0, transformOrigin: "left center" },
-              {
-                scaleX: 1, duration: 0.45, ease: "power2.inOut",
-                delay: i * 0.15 + 0.08,
-                scrollTrigger: st(streamsRef.current),
-              }
-            );
-          }
-        });
-      }
-
-      // ── 8. Sub-label — letter-spacing collapses in ───────────────────────
+      // ── Label animation ───────────────────────────────────────────────────
       if (subLabelRef.current) {
-        gsap.fromTo(subLabelRef.current,
+        gsap.fromTo(
+          subLabelRef.current,
           { opacity: 0, letterSpacing: "0.55em" },
           {
-            opacity: 1, letterSpacing: "0.28em",
-            duration: 0.95, ease,
+            opacity: 1,
+            letterSpacing: "0.28em",
+            duration: 0.9,
+            ease,
             scrollTrigger: st(subLabelRef.current),
-          }
+          },
         );
       }
 
-      // ── 9. Support cards — blur-slide + accent draw + shimmer ─────────────
+      // ── Support cards animation ──────────────────────────────────────────
       const cards = gridRef.current?.querySelectorAll(".support-card");
+
       if (cards?.length) {
         cards.forEach((card, i) => {
-          const col    = i % 2;
+          const col = i % 2;
           const rowIdx = Math.floor(i / 2);
-          const xFrom  = col === 0 ? -38 : 38;
-          const accent  = card.querySelector(".card-accent");
-          const shimmer = card.querySelector(".card-shimmer");
-          const text    = card.querySelector("p");
-          const stCfg   = { trigger: gridRef.current, start: "top 85%", toggleActions: "play none none none" };
 
-          gsap.fromTo(card,
+          const xFrom = col === 0 ? -38 : 38;
+
+          const accent = card.querySelector(".card-accent");
+          const shimmer = card.querySelector(".card-shimmer");
+          const text = card.querySelector("p");
+
+          const stCfg = {
+            trigger: gridRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          };
+
+          gsap.fromTo(
+            card,
             { opacity: 0, x: xFrom, filter: "blur(7px)" },
             {
-              opacity: 1, x: 0, filter: "blur(0px)",
-              duration: 0.72, ease: easeExp,
+              opacity: 1,
+              x: 0,
+              filter: "blur(0px)",
+              duration: 0.72,
+              ease: easeExp,
               delay: rowIdx * 0.1 + col * 0.07,
               scrollTrigger: stCfg,
-            }
+            },
           );
+
           if (accent) {
-            gsap.fromTo(accent,
+            gsap.fromTo(
+              accent,
               { scaleY: 0, transformOrigin: "top center" },
               {
-                scaleY: 1, duration: 0.6, ease: "power2.out",
+                scaleY: 1,
+                duration: 0.6,
+                ease: "power2.out",
                 delay: rowIdx * 0.1 + col * 0.07 + 0.22,
                 scrollTrigger: stCfg,
-              }
+              },
             );
           }
+
           if (shimmer) {
-            gsap.fromTo(shimmer,
+            gsap.fromTo(
+              shimmer,
               { x: "-115%" },
               {
-                x: "115%", duration: 0.75, ease: "power2.inOut",
+                x: "115%",
+                duration: 0.75,
+                ease: "power2.inOut",
                 delay: rowIdx * 0.1 + col * 0.07 + 0.38,
                 scrollTrigger: stCfg,
-              }
+              },
             );
           }
+
           if (text) {
-            gsap.fromTo(text,
+            gsap.fromTo(
+              text,
               { opacity: 0, y: 10 },
               {
-                opacity: 1, y: 0, duration: 0.45, ease,
+                opacity: 1,
+                y: 0,
+                duration: 0.45,
+                ease,
                 delay: rowIdx * 0.1 + col * 0.07 + 0.32,
                 scrollTrigger: stCfg,
-              }
+              },
             );
           }
         });
       }
 
+      // ── Principal section animation ──────────────────────────────────────
+      if (principalRef.current) {
+        gsap.fromTo(
+          principalRef.current,
+          { opacity: 0, y: 50, scale: 0.96 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: easeExp,
+            scrollTrigger: st(principalRef.current),
+          },
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className={`${shell} bg-[#1a1a1a] relative overflow-hidden`}>
-
-      {/* Ambient red glow — top left */}
-      <div
-        className="pointer-events-none absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(174,20,49,0.07) 0%, transparent 68%)" }}
-        aria-hidden="true"
-      />
-      {/* Ambient glow — bottom right */}
-      <div
-        className="pointer-events-none absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(174,20,49,0.04) 0%, transparent 70%)" }}
-        aria-hidden="true"
-      />
-
+    <section
+      ref={sectionRef}
+      className={`${shell} bg-[#F5EFE8] relative overflow-hidden`}
+    >
       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 md:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
-
-          {/* ══ LEFT COLUMN ══════════════════════════════════════════════════ */}
+          {/* ══ LEFT COLUMN ═════════════════════════════════════ */}
           <div className="flex flex-col">
-
-            {/* Badge */}
-            <div ref={badgeRef} className="flex items-center gap-3 mb-8">
-              <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase font-medium">
-                Academic Structure
-              </p>
-            </div>
-
-            {/* Heading — word split */}
-            <h2
-              ref={headingRef}
-              className="font-display text-white leading-[1.05] tracking-[-0.02em]
-                text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]"
-              style={{ perspective: "900px" }}
-            >
-              {[["Multiple", "Streams."], ["One", "Discipline"], ["Framework."]].map((line, li) => (
-                <span key={li} className="block">
-                  {line.map((w, wi) => (
-                    <span
-                      key={wi}
-                      className="word"
-                      style={{ display: "inline-block", marginRight: "0.22em" }}
-                    >
-                      {w}
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </h2>
-
-            {/* Divider */}
-            <div ref={dividerRef} className="w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
-
-            {/* Body */}
-            <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
-              MMHSS offers Higher Secondary education under the State syllabus
-              across three focused streams. Our strength lies not just in what
-              we teach, but in how we execute it — guiding, supervising, and
-              supporting every student at every stage.
-            </p>
-<br></br>
-            {/* Streams list */}
-            <div ref={streamsRef} className="relative border border-white/10 rounded-[20px] overflow-hidden">
-              {/* Clockwise-drawn border */}
-              <div className="sb-top    absolute top-0    left-0  right-0  h-[1px] bg-white/10" />
-              <div className="sb-right  absolute top-0    right-0 bottom-0 w-[1px] bg-white/10" />
-              <div className="sb-bottom absolute bottom-0 left-0  right-0  h-[1px] bg-white/10" />
-              <div className="sb-left   absolute top-0    left-0  bottom-0 w-[1px] bg-white/10" />
-
-              {streams.map((item, i) => (
-                <div key={i} className="stream-row relative px-5 py-5 flex items-center gap-4">
-                  {i !== 0 && (
-                    <div className="stream-sep absolute top-0 left-0 right-0 h-[1px] bg-white/10" />
-                  )}
-                  <div className="stream-icon w-9 h-9 bg-[#ae1431] rounded-sm flex items-center justify-center text-white flex-shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h3 className="stream-title text-white font-serif text-[16px] sm:text-[17px] leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="stream-sub text-[13px] text-white/40 mt-0.5">{item.sub}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ══ RIGHT COLUMN ═════════════════════════════════════════════════ */}
-          <div className="flex flex-col">
-
             <p
               ref={subLabelRef}
               className="font-rethink text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
@@ -378,22 +605,30 @@ export default function AcademicStreams() {
               Academic Support Systems
             </p>
 
-            <div ref={gridRef} className="flex flex-col gap-1 rounded-2xl overflow-hidden ">
+            <div
+              ref={gridRef}
+              className="flex flex-col gap-1 rounded-2xl overflow-hidden"
+            >
               {supportItems.map(([left, right], i) => (
                 <div key={i} className="grid grid-cols-2 gap-1">
                   {[left, right].map((text, j) => (
-                    <div key={j} className="support-card relative bg-[#252525] px-5 py-5 overflow-hidden">
-                      {/* Accent bar — animated via GSAP */}
-                     <div className="card-accent absolute left-0 top-0 bottom-0 w-[4px] bg-[#ae1431] rounded-l-[20px]" />
-                      {/* One-shot shimmer sweep */}
+                    <div
+                      key={j}
+                      className="support-card relative bg-[#252525] px-5 py-5 overflow-hidden"
+                    >
+                      {/* Accent */}
+                      <div className="card-accent absolute left-0 top-0 bottom-0 w-[4px] bg-[#ae1431] rounded-l-[20px]" />
+
+                      {/* Shimmer */}
                       <div
                         className="card-shimmer absolute inset-0 pointer-events-none"
                         style={{
-                          background: "linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.05) 50%, transparent 62%)",
+                          background:
+                            "linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.05) 50%, transparent 62%)",
                           transform: "translateX(-115%)",
                         }}
-                        aria-hidden="true"
                       />
+
                       <p className="relative z-10 text-[13px] sm:text-[14px] text-[#c4b9ae] leading-[1.65]">
                         {text}
                       </p>
@@ -402,8 +637,60 @@ export default function AcademicStreams() {
                 </div>
               ))}
             </div>
+            <button
+              onClick={() => scrollTo("academics")}
+              className="structured-btn inline-flex w-fit self-center mt-5 md:mt-6 border border-[#252525]/20 px-4 py-2 rounded-lg text-sm items-center gap-2 hover:bg-[#252525] hover:text-white transition-all duration-300 cursor-pointer font-rethink"
+            >
+              Explore
+              <Play className="text-xs transition-colors" />
+            </button>
           </div>
 
+          {/* ══ RIGHT COLUMN ═══════════════════════════════════ */}
+          <div
+            ref={principalRef}
+            className="group relative overflow-hidden rounded-[28px] h-[420px] md:h-[520px] border border-white/10"
+          >
+            {/* Principal Image */}
+            <img
+              src="/images/mmhssprincipal.avif"
+              alt="Principal"
+              className="w-full h-full object-cover opacity-[0.80] transition-all duration-700 group-hover:scale-105 group-hover:opacity-[0.28]"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+
+            {/* Static Content */}
+            <div className="absolute top-0 left-0 w-full p-8 md:p-10 z-20">
+              <p className="font-rethink text-[11px] tracking-[0.28em] text-[#ae1431] uppercase mb-6">
+                Our Principal
+              </p>
+
+              <h2 className="font-display text-white text-[42px] md:text-[56px] leading-[0.95] tracking-[-0.03em]">
+                C.
+                <br />
+                UMMER
+              </h2>
+
+              <p className="text-[#cbbfb4] mt-4 text-[14px]">
+                Principal · MMHSS
+              </p>
+            </div>
+
+            {/* Hover Reveal */}
+            <div className="absolute inset-0 flex items-end p-8 md:p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30">
+              <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-500">
+                <div className="w-12 h-[2px] bg-[#ae1431] mb-6" />
+
+                <p className="text-[#e4dad2] text-[14px] leading-[1.9] max-w-[420px]">
+                  With decades of experience in academic leadership and student
+                  mentorship, he continues to shape MMHSS through discipline,
+                  innovation, and student-centered educational excellence.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
