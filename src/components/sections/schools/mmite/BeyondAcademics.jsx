@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import gsap from "gsap";
+import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
@@ -8,61 +8,58 @@ gsap.registerPlugin(ScrollTrigger);
 
 const benchmarks = [
   {
-    tag: "Academic Record",
-    title: "14 Consecutive Years — 100% Higher Secondary Results",
-    desc: "A sustained record of complete pass results across all streams, maintained through disciplined academic systems and structured student monitoring.",
+    tag: "KTET 2025",
+    title: "45 out of 53 Students Cleared the Kerala Teacher Eligibility Test",
+    desc: "A qualification outcome that reflects focused KTET preparation, structured academic execution, and disciplined mentorship across the two-year programme.",
   },
   {
-    tag: "District Ranking",
-    title: "14th Rank Among 150 Schools in Palakkad District",
-    desc: "Recognised among the top institutions in Palakkad for consistent academic output and institutional discipline across Higher Secondary streams.",
+    tag: "PSC Rankings",
+    title: "PSC Top Ranks Secured — 4th and 6th Positions by Alumni",
+    desc: "Alumni who passed through MMITE's structured formation have gone on to secure top PSC ranks and placement in reputed educational institutions across the region.",
   },
 ];
 
 const excellence = [
   {
-    tag: "National Level · Sports",
-    title: "Diya Maryam",
-    sub: "Grade 11",
-    desc: "🥇 1st Place — National Level Wushu Championship, Hyderabad",
+    tag: "Kerala First",
+    title: "Printed Magazine",
+    sub: "Academic & Literary Expression",
+    desc: "Kerala's first and only Teacher Training Institute with a printed institutional magazine — a platform for academic expression and professional identity.",
   },
   {
-    tag: "State Level · Cultural",
-    title: "Farha Shirin",
-    sub: "Grade 11",
-    desc: "🥇 A Grade — State Level Kalotsavam 2026 (English Story Writing)",
+    tag: "Academic Engagement",
+    title: "Seminars & Workshops",
+    sub: "Professional Development Platforms",
+    desc: "Structured seminar and workshop participation — strengthening confidence, pedagogical clarity, and professional communication in future educators.",
   },
   {
-    tag: "Scouts & Guides",
-    title: "Rajyapuraskar",
-    sub: "Governor's Award — Scouts & Guides",
-    desc: "100% success rate in Rajyapuraskar qualification — the highest Governor's Award for Scouts & Guides.",
+    tag: "Leadership Formation",
+    title: "15-Day Residential Camp",
+    sub: "Empathy · Adaptability · Leadership",
+    desc: "An immersive residential programme focused on building the personal and professional qualities that define effective, empathetic classroom leaders.",
   },
 ];
 
 const stats = [
   {
-    value: "100",
-    unit: "%",
-    label: "Success Rate in Rajyapuraskar Qualification\n(Highest Governor's Award)",
+    value: "45/53",
+    label: "Students Cleared KTETin \n2025 Batch",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
     descC: "text-[#5e554e]",
   },
   {
-    value: "50",
-    unit: "+",
-    label: "Blood Donations Annually\nunder NSS Program",
+    value: "4th",
+    label: "PSC Top Rank Securedby\n MMITE Alumni",
     bg: "bg-[#8b1020]",
     valC: "text-white",
     unitC: "text-white/60",
     descC: "text-white/55",
   },
   {
-    value: "100",
-    unit: "+",
-    label: "Scout & Guide Activities\nConducted Annually",
+    value: "50",
+    label: "Students per Batch — \nFocused Individual Mentorship",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
@@ -138,16 +135,16 @@ export default function BeyondAcademics() {
         <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-14 lg:mb-16">
           <div className="anim-header">
             <h2 className="font-display text-[#1a1209] leading-[1.05] tracking-[-0.02em] text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] xl:text-[46px]">
-              Representation,
+             Performance
               <br />
-              Recognition &amp; Exposure
+              That Speaks
             </h2>
           </div>
           <div className="anim-header flex items-end">
             <p className=" font-rethink text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
-              Academic consistency is matched by active participation beyond the
-              classroom — ensuring competitive exposure and character development
-              remain central to the student experience.
+              MMITE demonstrates strong qualification outcomes year after year
+              — a direct result of structured training, focused academic execution, 
+              and individualised mentorship across every batch.
             </p>
           </div>
         </div>
@@ -155,7 +152,7 @@ export default function BeyondAcademics() {
         {/* ── BENCHMARKS ── */}
         <div className="anim-bench-wrap mb-12">
           <p className="anim-bench-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Institutional Benchmarks
+            Qualification Benchmarks
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
             {benchmarks.map((card, i) => (
@@ -185,7 +182,7 @@ export default function BeyondAcademics() {
         {/* ── STUDENT EXCELLENCE ── */}
         <div className="anim-excel-wrap mb-12">
           <p className="anim-excel-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Student Excellence
+            Academic & Creative Engagement
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-1  rounded-2xl overflow-hidden">
             {excellence.map((card, i) => {
@@ -216,7 +213,7 @@ export default function BeyondAcademics() {
         {/* ── CIVIC LEADERSHIP & NSS ── */}
         <div className="anim-stat-wrap">
           <p className="anim-stat-label text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Civic Leadership &amp; NSS
+           Outcomes at a Glance
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl overflow-hidden">
             {stats.map((stat, i) => (

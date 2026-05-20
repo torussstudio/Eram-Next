@@ -10,16 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const streams = [
-  { icon: <FlaskConical size={18} />, title: "Biology Science",  sub: "State Board · Science Stream"  },
-  { icon: <Monitor      size={18} />, title: "Computer Science", sub: "State Board · Science Stream"  },
-  { icon: <BarChart2    size={18} />, title: "Commerce",         sub: "State Board · Commerce Stream" },
+  { icon: <FlaskConical size={18} />, title: "D.El.Ed — Theoretical Foundations",  sub: "Education theory, child psychology & development"  },
+  { icon: <Monitor      size={18} />, title: "Pedagogical Methodology", sub: "Classroom management & structured teaching"  },
+  { icon: <BarChart2    size={18} />, title: "Practical Teaching Assignments",         sub: "Structured internal assessment & internships" },
 ];
 
 const supportItems = [
-  ["Categorized student attention by performance bracket", "Morning study sessions before regular classes"],
-  ["Supervised special study classes after hours",         "Crash courses for critical syllabus portions"],
-  ["Special question practice modules",                   "Exam-oriented revision cycles"],
-  ["Structured monitoring & internal assessment",         "Teacher-guided mentorship per student"],
+  ["Theoretical Foundations of Education", "Pedagogical Methodology"],
+  ["Child Psychology & Development", "Classroom Management Training"],
+  ["Practical Teaching Assignments", "Structured Internal Assessment"],
+  ["Internship in International Schools", "15-Day Residential Leadership Camp"],
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -315,7 +315,7 @@ export default function AcademicStreams() {
                 text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]"
               style={{ perspective: "900px" }}
             >
-              {[["Multiple", "Streams."], ["One", "Discipline"], ["Framework."]].map((line, li) => (
+              {[["A", "Framework"], ["Built", "for"], ["Teaching."]].map((line, li) => (
                 <span key={li} className="block">
                   {line.map((w, wi) => (
                     <span
@@ -335,10 +335,11 @@ export default function AcademicStreams() {
 
             {/* Body */}
             <p ref={bodyRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#a09488] max-w-[560px]">
-              MMHSS offers Higher Secondary education under the State syllabus
-              across three focused streams. Our strength lies not just in what
-              we teach, but in how we execute it — guiding, supervising, and
-              supporting every student at every stage.
+              The D.El.Ed programme at MMITE follows a two-year, 
+              four-semester structure comprising 14 academic papers
+               aligned with NCERT / SCERT standards. The focus is not 
+               theoretical knowledge alone — but the formation of
+               disciplined educators capable of leading classrooms independently.
             </p>
 <br></br>
             {/* Streams list */}
@@ -375,7 +376,7 @@ export default function AcademicStreams() {
               ref={subLabelRef}
               className="font-rethink text-[11px] sm:text-[12px] tracking-[0.28em] text-[#6b5f54] uppercase mb-4 hidden lg:block"
             >
-              Academic Support Systems
+              Programme Curriculum — 14 Papers
             </p>
 
             <div ref={gridRef} className="flex flex-col gap-1 rounded-2xl overflow-hidden ">

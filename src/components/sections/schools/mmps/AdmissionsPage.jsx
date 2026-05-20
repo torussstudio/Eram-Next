@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
@@ -75,18 +75,16 @@ export default function AdmissionsPage() {
           once: true,
         },
       });
-      inst
-        .to(".anim-inst-label", { opacity: 1, duration: 0.5 })
-        .to(
-          ".anim-inst-card",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: { each: 0.08, ease: "power1.inOut" },
-          },
-          "-=0.2",
-        );
+      inst.to(".anim-inst-label", { opacity: 1, duration: 0.5 }).to(
+        ".anim-inst-card",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: { each: 0.08, ease: "power1.inOut" },
+        },
+        "-=0.2",
+      );
     },
     { scope: containerRef },
   );
@@ -117,8 +115,7 @@ export default function AdmissionsPage() {
               structured athletic development, and 14 consecutive years of 100%
               board results.
             </p>
-            <div>
-            </div>
+            <div></div>
           </div>
 
           {/* RIGHT — BUTTONS */}
@@ -128,8 +125,8 @@ export default function AdmissionsPage() {
               <ArrowRight size={15} />
             </button>
             <button className="font-rethink anim-hero-btn bg-[#F5EFE8] text-black border border-black px-10 py-4 text-[13px] tracking-widest uppercase flex items-center justify-between gap-4 hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px]">
-  Book A Campus Visit
-</button>
+              Book A Campus Visit
+            </button>
           </div>
         </div>
       </section>
@@ -157,7 +154,13 @@ export default function AdmissionsPage() {
               ) : (
                 <div
                   key={i}
-                  onClick={() => navigate(inst.path)}
+                  onClick={() => {
+                    if (inst.path.startsWith("http")) {
+                      window.open(inst.path, "_blank");
+                    } else {
+                      navigate(inst.path);
+                    }
+                  }}
                   className="anim-inst-card bg-white p-6 cursor-pointer group hover:bg-[#1a1209] transition-colors duration-200"
                 >
                   <p className="text-[10px] tracking-widest uppercase text-[#8a8278] group-hover:text-white/50 mb-3 transition-colors duration-200">

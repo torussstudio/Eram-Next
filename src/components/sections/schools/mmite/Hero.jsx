@@ -9,17 +9,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const QUICK_FACTS = [
-  ["2005", "Year Established"],
-  ["State Board", "Curriculum · English Medium"],
-  ["750+", "Student Strength"],
-  ["14 Yrs", "100% Pass Record"],
+  ["D.El.Ed", "Diploma in Elementary Education · 2 Years"],
+  ["50", "Students per Batch (Intake)"],
+  ["NCERT", "Affiliation · SCERT | Male & Female"],
+  ["20+ Yrs", "Of Teacher Preparation"],
 ];
 
 const STATS = [
-  { value: "14", desc: ["Consecutive Years", "100% Pass Rate"] },
-  { value: "750+", desc: ["Students Currently", "Enrolled"] },
-  { value: "#14", desc: ["Among 150 Schools", "in Palakkad District"] },
-  { value: "3", desc: ["Higher Secondary", "Academic Streams"] },
+  { value: "45/53", desc: ["Students Cleared", "KTET 2025"] },
+  { value: "4th", desc: ["PSC Top Rank", "Secured by Alumni"] },
+  { value: "20+", desc: ["Years of Structured", "Teacher Preparation"] },
+  { value: "50", desc: ["Students per Batch —", "Focused Mentorship"] },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -167,7 +167,7 @@ export default function Hero() {
                 className="flex items-center gap-3 mb-4 sm:mb-5"
               >
                 <p className="font-rethink text-[13px] sm:text-[14px] tracking-[0.28em] text-[#ae1431] uppercase">
-                  Higher Secondary · Est. 2005
+                  Teacher Training Institute · Est. 2004
                 </p>
               </div>
 
@@ -177,8 +177,8 @@ export default function Hero() {
   text-[36px] xs:text-[42px] sm:text-[52px] md:text-[62px] lg:text-[72px]"
               >
                 Mariyumma Memorial <br />
-                Higher Secondary <br />
-                <span className="font-display  text-white/60">School</span>
+                Institute of Teacher <br />
+                <span className="font-display  text-white/60">Education</span>
               </h1>
               <p
                 ref={subtextRef}
@@ -186,12 +186,13 @@ export default function Hero() {
                   leading-[1.8] text-white/70 max-w-[560px]"
               >
                 <span className="text-white font-medium">
-                  100% Results. Structured Academic Discipline.
+                  20+ Years of Preparing Qualified Educators.
                 </span>
                 <br />
-                Over 750 students, built on academic transformation, structured
-                monitoring, and strong coordination with parents — achieving
-                consistent excellence in higher secondary education.
+                Established in 2004, MMITE prepares aspiring teachers through
+                 structured academic formation, disciplined supervision, and 
+                 qualification-focused outcomes — shaping professionals who 
+                 step into classrooms with clarity and confidence.
               </p>
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">

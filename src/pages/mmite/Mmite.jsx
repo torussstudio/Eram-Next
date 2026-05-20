@@ -2,35 +2,35 @@
 import { lazy, Suspense } from "react";
 
 // ✅ Keep Hero eager (critical paint)
-import Hero from "../../components/sections/schools/mmhss/Hero";
+import Hero from "../../components/sections/schools/mmite/Hero";
 
 // ✅ Lazy load below-the-fold sections
 const Journey = lazy(() =>
-  import("../../components/sections/schools/mmhss/Journey")
+  import("../../components/sections/schools/mmite/Journey")
 );
 
 const AcademicStreams = lazy(() =>
-  import("../../components/sections/schools/mmhss/AcademicStreams")
+  import("../../components/sections/schools/mmite/AcademicStreams")
 );
 
 const ParentPartnership = lazy(() =>
-  import("../../components/sections/schools/mmhss/ParentPartnership")
+  import("../../components/sections/schools/mmite/ParentPartnership")
 );
 
 const BeyondAcademics = lazy(() =>
-  import("../../components/sections/schools/mmhss/BeyondAcademics")
+  import("../../components/sections/schools/mmite/BeyondAcademics")
 );
 
 const GalleryPage = lazy(() =>
-  import("../../components/sections/schools/mmhss/GalleryPage")
+  import("../../components/sections/schools/mmite/GalleryPage")
 );
 
 const CommunicationPortal = lazy(() =>
-  import("../../components/sections/schools/mmhss/CommunicationPortal")
+  import("../../components/sections/schools/mmite/CommunicationPortal")
 );
 
 const AdmissionsPage = lazy(() =>
-  import("../../components/sections/schools/mmhss/AdmissionsPage")
+  import("../../components/sections/schools/mmite/AdmissionsPage")
 );
 
 export default function Mmhss() {

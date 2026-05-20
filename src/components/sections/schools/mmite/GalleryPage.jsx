@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import { Drama, PartyPopper, Droplet, HeartPulse } from "lucide-react";
-import gsap from "gsap";
+import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryItems = [
-  { title: "CULTURAL PROGRAMS",     icon: Drama       },
-  { title: "SCHOOL CELEBRATIONS",   icon: PartyPopper },
-  { title: "NSS BLOOD DONATION",    icon: Droplet     },
-  { title: "COMMUNITY HEALTH DRIVES", icon: HeartPulse },
+  { title: "CLASSROOM SESSIONS",     icon: Drama       },
+  { title: "RESIDENTIAL LEADERSHIP CAMP",   icon: PartyPopper },
+  { title: "PRACTICE TEACHING",    icon: Droplet     },
+  { title: "INSTITUTE MAGAZINE", icon: HeartPulse },
 ];
 
 export default function GalleryPage() {
@@ -66,8 +66,7 @@ export default function GalleryPage() {
               </span>
             </div>
             <p className="anim-desc text-gray-400 max-w-xl">
-              Cultural programs, school celebrations, NSS activities, and campus
-              life at MMHSS.
+              Classroom sessions, practice teaching, residential camp, seminars, and campus life at MMITE.
             </p>
           </div>
 

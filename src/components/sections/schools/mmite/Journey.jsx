@@ -10,29 +10,29 @@ gsap.registerPlugin(ScrollTrigger);
 // ─── Data ────────────────────────────────────────────────────────────────────
 const milestones = [
   {
-    year: "2005",
-    title: "MMHSS Established",
-    desc: "Higher Secondary School founded under the ERAM Educational & Welfare Trust, beginning with modest performance benchmarks.",
+    year: "2004",
+    title: "MMITE Established",
+    desc: "Mariyumma Memorial Institute of Teacher Education founded as the professional training wing of the ERAM Educational & Welfare Trust — the same year as MMPS.",
   },
   {
-    year: "2008",
-    title: "Structured Academic Systems Introduced",
-    desc: "Categorized student attention, morning study sessions, and supervised revision cycles implemented across all streams.",
+    year: "Early Years",
+    title: "D.El.Ed Programme Structured",
+    desc: "The two-year, four-semester D.El.Ed curriculum embedded — 14 papers aligned with NCERT/SCERT standards, integrating theory, pedagogy, and practical teaching assignments.",
   },
   {
-    year: "2011",
-    title: "First 100% Result Achieved",
-    desc: "Systematic monitoring and structured exam preparation leads to the institution's first complete pass result — a milestone that reset expectations.",
+    year: "Milestone",
+    title: "Kerala's First TTI with a Printed Magazine",
+    desc: "MMITE became Kerala's first and only Teacher Training Institute to publish a printed magazine — a marker of academic expression and institutional identity.",
   },
   {
-    year: "2015",
-    title: "Parent Communication System Formalised",
-    desc: "Mandatory WhatsApp-based communication system introduced — bringing attendance, performance, and departmental updates directly to parents in real time.",
+    year: "2025",
+    title: "45 of 53 Students Clear KTET",
+    desc: "In 2025, 45 out of 53 students cleared the Kerala Teacher Eligibility Test — a result that reflects the strength of MMITE's focused qualification preparation system.",
   },
   {
-    year: "2026",
-    title: "14 Consecutive Years — 100% Results",
-    desc: "A record sustained across every stream — Biology Science, Computer Science, and Commerce — reinforcing the school as one of Palakkad's top-ranked institutions.",
+    year: "Present",
+    title: "PSC Top Ranks · Reputed Placements",
+    desc: "Alumni securing 4th and 6th PSC ranks and placed in reputed institutions — reinforcing MMITE's reputation as an outcome-driven teacher education institute.",
   },
 ];
 
@@ -268,37 +268,37 @@ gsap.to(spine, {
               className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
                 text-[38px] sm:text-[46px] md:text-[54px] lg:text-[58px] xl:text-[64px]"
             >
-              A Transformation
+              Two Decades of
               <br />
-              in Performance
+              Teacher Preparation
             </h2>
 
             <div ref={dividerRef} className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             <div ref={parasRef} className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
               <p>
-                When MMHSS began in 2005, it entered a competitive academic
-                environment with modest score brackets. Over time, through
-                structured intervention and systematic academic discipline, the
-                school witnessed a significant transformation.
+                Every teacher begins as a student. Since 2004, MMITE has functioned 
+                as the professional training wing within the ERAM ecosystem, preparing
+                 aspiring educators for structured classroom leadership.
               </p>
               <p>
-                Moving from single-digit high performers to consistent top
-                scorers, the institution redefined what was possible through
-                deliberate systems — not chance.
+               Over two decades, the institute has built a reputation
+                for disciplined academic execution, structured mentorship, 
+                qualification-focused preparation, and strong placement outcomes.
               </p>
             </div>
 
             <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
               <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
-                "For 14 consecutive years, we have maintained a 100% Higher
-                Secondary result."
+                "The journey of MMITE is not defined by scale, but by outcomes. 
+                Its graduates do not merely complete a course — they clear examinations, 
+                secure top ranks, and enter classrooms prepared."
               </p>
             </blockquote>
 
             <p ref={lastParaRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
-              We always ensure academic attention, extended study systems, and
-              continuous parent communication — across every batch, every year.
+              Today, MMITE stands as the professional training pillar of the ERAM ecosystem
+               — producing educators who carry institutional discipline into every classroom they lead.
             </p>
           </div>
 
@@ -308,7 +308,7 @@ gsap.to(spine, {
               ref={subLabelRef}
               className="text-[11px] sm:text-[11px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-10 hidden lg:block"
             >
-              From Modest Beginnings to Measured Excellence
+              Two Decades of Structured Formation
             </p>
 
             {/* Timeline — relative container so the spine can be absolutely positioned */}
