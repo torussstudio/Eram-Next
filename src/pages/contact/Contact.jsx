@@ -188,21 +188,6 @@ export default function ContactPage() {
               </span>
             ))}
           </div>
-
-          {/* Tagline — sm+: absolute bottom-right | xs: below word */}
-          <div
-            ref={taglineRef}
-            className="mt-3 sm:mt-0 sm:absolute sm:bottom-4 sm:right-0 sm:text-right"
-          >
-            <p className="text-[11px] font-rethink sm:text-[13px] tracking-[0.1em] uppercase text-[#ae1431] mb-1">
-              ERAM Sports Trust
-            </p>
-            <p className="text-[12px] font-rethink sm:text-[13px] text-black/45 leading-relaxed">
-              We'd love to hear from you.{" "}
-              <br className="hidden sm:block" />
-              Reach out anytime.
-            </p>
-          </div>
         </div>
 
         {/* ── Divider ── */}
