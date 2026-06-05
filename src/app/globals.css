@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+html,
+body {
+  overflow-x: clip;
+  background-color: #F5EFE8;
+}
+
+@theme {
+  --font-display: "Agency", sans-serif;
+  --font-rethink: "Rethink Sans", sans-serif;
+}
+
+@font-face {
+  font-family: "Agency";
+  src: url("/fonts/Agency.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* hide scrollbar but keep scroll working */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}

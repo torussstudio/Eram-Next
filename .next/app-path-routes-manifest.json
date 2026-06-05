@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/(marketing)/facilities/page": "/facilities",
+  "/(marketing)/about-us/page": "/about-us",
+  "/(marketing)/gallery/page": "/gallery",
+  "/(marketing)/contact/page": "/contact",
+  "/(marketing)/explore-arena/page": "/explore-arena",
+  "/(marketing)/the-trust/page": "/the-trust",
+  "/(marketing)/page": "/",
+  "/(marketing)/portal/page": "/portal",
+  "/(marketing)/amlp/page": "/amlp",
+  "/(marketing)/mmite/page": "/mmite",
+  "/(marketing)/mmps/page": "/mmps",
+  "/(marketing)/mmhss/page": "/mmhss"
+}

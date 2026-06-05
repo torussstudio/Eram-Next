@@ -1,0 +1,44 @@
+{
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 5139,
+    "files": [
+      "static/chunks/139.7a5a8e93a21948c1.js"
+    ]
+  },
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 1646,
+    "files": [
+      "static/chunks/646.f342b7cffc01feb0.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/CommitmentSection": {
+    "id": 7899,
+    "files": [
+      "static/chunks/899.efbafeafe3be85b7.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/EducationSection": {
+    "id": 8126,
+    "files": [
+      "static/chunks/126.8927283d567aa55d.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/LegacySection": {
+    "id": 6161,
+    "files": [
+      "static/chunks/161.fcec487f0bb2a40b.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/PhilosophySection": {
+    "id": 8093,
+    "files": [
+      "static/chunks/93.1fea6a16cc9d1d1d.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/StructuredFramework": {
+    "id": 9576,
+    "files": [
+      "static/chunks/576.9f5ba7786fb4c5ac.js"
+    ]
+  }
+}
