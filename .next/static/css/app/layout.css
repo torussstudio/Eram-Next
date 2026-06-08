@@ -812,9 +812,6 @@
   .ml-4 {
     margin-left: calc(var(--spacing) * 4);
   }
-  .ml-10 {
-    margin-left: calc(var(--spacing) * 10);
-  }
   .ml-20 {
     margin-left: calc(var(--spacing) * 20);
   }
@@ -2181,9 +2178,6 @@
   .border-\[\#c0c0c0\] {
     border-color: #c0c0c0;
   }
-  .border-\[\#c91c35\] {
-    border-color: #c91c35;
-  }
   .border-\[\#cfc6bb\] {
     border-color: #cfc6bb;
   }
@@ -2199,9 +2193,6 @@
   .border-\[\#d8d8d8\] {
     border-color: #d8d8d8;
   }
-  .border-\[\#d9d3cc\] {
-    border-color: #d9d3cc;
-  }
   .border-\[\#e4e4e4\] {
     border-color: #e4e4e4;
   }
@@ -2210,9 +2201,6 @@
   }
   .border-\[\#f5efe8\] {
     border-color: #f5efe8;
-  }
-  .border-\[\#f5efe8\]\/20 {
-    border-color: color-mix(in oklab, #f5efe8 20%, transparent);
   }
   .border-\[\#f5efe8\]\/40 {
     border-color: color-mix(in oklab, #f5efe8 40%, transparent);
@@ -2888,9 +2876,6 @@
   .p-\[28px\] {
     padding: 28px;
   }
-  .p-\[30px\] {
-    padding: 30px;
-  }
   .p-\[34px\] {
     padding: 34px;
   }
@@ -3362,9 +3347,6 @@
   }
   .text-\[1\.05rem\] {
     font-size: 1.05rem;
-  }
-  .text-\[1\.08rem\] {
-    font-size: 1.08rem;
   }
   .text-\[1\.8rem\] {
     font-size: 1.8rem;
@@ -5040,16 +5022,6 @@
       }
     }
   }
-  .hover\:scale-100 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-scale-x: 100%;
-        --tw-scale-y: 100%;
-        --tw-scale-z: 100%;
-        scale: var(--tw-scale-x) var(--tw-scale-y);
-      }
-    }
-  }
   .hover\:scale-110 {
     &:hover {
       @media (hover: hover) {
@@ -5071,14 +5043,6 @@
     &:hover {
       @media (hover: hover) {
         gap: calc(var(--spacing) * 3);
-      }
-    }
-  }
-  .hover\:border {
-    &:hover {
-      @media (hover: hover) {
-        border-style: var(--tw-border-style);
-        border-width: 1px;
       }
     }
   }
@@ -8548,22 +8512,6 @@
   .\[\&\:\:-webkit-scrollbar\]\:hidden {
     &::-webkit-scrollbar {
       display: none;
-    }
-  }
-  .sm\:\[\&\:nth-child\(2\)\]\:border-r-0 {
-    @media (width >= 40rem) {
-      &:nth-child(2) {
-        border-right-style: var(--tw-border-style);
-        border-right-width: 0px;
-      }
-    }
-  }
-  .md\:\[\&\:nth-child\(2\)\]\:border-r {
-    @media (width >= 48rem) {
-      &:nth-child(2) {
-        border-right-style: var(--tw-border-style);
-        border-right-width: 1px;
-      }
     }
   }
   .\[\&\:nth-child\(4\)\]\:col-start-2 {

@@ -79,30 +79,38 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        {/* Preconnect */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+     <head>
+  {/* Preconnect */}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossOrigin="anonymous"
+  />
 
-        {/* Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
+  {/* Fonts */}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
-        {/* Local Font */}
-        <link
-          rel="preload"
-          href="/fonts/Agency.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
+  {/* Local Font */}
+  <link
+    rel="preload"
+    href="/fonts/Agency.woff2"
+    as="font"
+    type="font/woff2"
+    crossOrigin="anonymous"
+  />
+
+  {/* SVG Logo */}
+  <link
+    rel="preload"
+    href="/education-1.svg"
+    as="image"
+    type="image/svg+xml"
+  />
+</head>
 
       <body className="antialiased">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>

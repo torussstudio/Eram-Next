@@ -26,11 +26,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(marketing)/layout.js"
     ],
-    "/(marketing)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(marketing)/page.js"
-    ],
     "/(marketing)/the-trust/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -46,15 +41,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(marketing)/about-us/page.js"
     ],
+    "/(marketing)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(marketing)/page.js"
+    ],
     "/(marketing)/explore-arena/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(marketing)/explore-arena/page.js"
     ],
-    "/(marketing)/mmps/page": [
+    "/(marketing)/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(marketing)/mmps/page.js"
+      "static/chunks/app/(marketing)/contact/page.js"
+    ],
+    "/(marketing)/portal/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(marketing)/portal/page.js"
+    ],
+    "/(marketing)/amlp/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(marketing)/amlp/page.js"
     ]
   }
 }

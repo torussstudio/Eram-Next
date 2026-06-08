@@ -1,163 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, RefObject, CSSProperties } from "react";
 
-const KEYFRAMES = `
-  @keyframes ink-drop {
-    0%   { opacity:0; filter:blur(16px) saturate(0) brightness(1.4);
-           transform:scale(1.12) translateY(10px) skewX(-2deg); letter-spacing:.22em; }
-    35%  { opacity:.7; filter:blur(4px) saturate(.3) brightness(1.1);
-           transform:scale(1.03) translateY(2px) skewX(-.5deg); letter-spacing:.06em; }
-    65%  { opacity:.95; filter:blur(1px) saturate(.8) brightness(1.02);
-           transform:scale(1.005) translateY(0) skewX(0); letter-spacing:.01em; }
-    100% { opacity:1; filter:blur(0) saturate(1) brightness(1);
-           transform:scale(1) translateY(0) skewX(0); letter-spacing:normal; }
-  }
-  @keyframes pulse-ring {
-    0%   { transform:scale(.8); opacity:.8; }
-    100% { transform:scale(2.4); opacity:0; }
-  }
-  @keyframes shimmer-pass {
-    0%   { left:-60%; }
-    100% { left:120%; }
-  }
-  @keyframes scanline-drift {
-    0%   { background-position:0 0; }
-    100% { background-position:0 40px; }
-  }
-  @keyframes dot-breathe {
-    0%,100% { transform:scale(1); opacity:.9; }
-    50%     { transform:scale(1.5); opacity:1; }
-  }
-  @keyframes cursor-blink {
-    0%,49%   { opacity:1; }
-    50%,100% { opacity:0; }
-  }
-
-  .animate-ink-drop    { animation: ink-drop var(--dur,.9s) cubic-bezier(.16,1,.3,1) var(--d,0s) both; }
-  .animate-pulse-ring  { animation: pulse-ring .9s ease-out var(--d,0s) forwards; }
-  .animate-shimmer     { animation: shimmer-pass .8s ease-out forwards; }
-  .animate-scanlines   { animation: scanline-drift 8s linear infinite; }
-  .animate-dot-breathe { animation: dot-breathe 2.5s ease-in-out var(--d,1.2s) infinite; }
-  .animate-cursor      { animation: cursor-blink .65s step-end infinite; }
-
-  .transition-spring    { transition-timing-function: cubic-bezier(.22,1,.36,1); }
-  .transition-overshoot { transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
-  .delay-var            { transition-delay: var(--d,0s); }
-`;
-
-function injectStyles() {
-  if (document.getElementById("eram-kf")) return;
-  const s = document.createElement("style");
-  s.id = "eram-kf";
-  s.textContent = KEYFRAMES;
-  document.head.appendChild(s);
-}
-
-/* ── useInView ── */
-function useInView(ref: React.RefObject<HTMLElement | null>, threshold = 0.15) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [ref, threshold]);
-  return visible;
-}
-
-/* ── useCounter — quintic ease-out ── */
-function useCounter(target: number, active: boolean, delayMs = 0) {
-  const [val, setVal] = useState(0);
-  const rafRef = useRef<number | null>(null);
-  useEffect(() => {
-    if (!active) return;
-    const t = setTimeout(() => {
-      let start: number | null = null;
-      const tick = (ts: number) => {
-        if (!start) start = ts;
-        const p = Math.min((ts - start) / 2000, 1);
-        setVal(Math.round((1 - Math.pow(1 - p, 5)) * target));
-        if (p < 1) rafRef.current = requestAnimationFrame(tick);
-      };
-      rafRef.current = requestAnimationFrame(tick);
-    }, delayMs);
-    return () => {
-      clearTimeout(t);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [active, target, delayMs]);
-  return val;
-}
-
-/* ─────────────────────────────────────────────
-   InkHeading — word-by-word blur/skew reveal
-───────────────────────────────────────────── */
-function InkHeading({ text, active }: { text: string; active: boolean }) {
-  return (
-    <h2 className="font-display text-[clamp(2.6rem,3.6vw,3.8rem)] leading-[1.18] text-[#1a1a1a] m-0 tracking-[-0.01em]">
-      {text.split(" ").map((word, i) => (
-        <span
-          key={i}
-          className={[
-            "inline-block mr-[0.22em] will-change-[transform,opacity,filter]",
-            active ? "animate-ink-drop" : "opacity-0",
-          ].join(" ")}
-          style={{ "--d": `${0.25 + i * 0.065}s` } as React.CSSProperties}
-        >
-          {word}
-        </span>
-      ))}
-    </h2>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   TypewriterQuote
-───────────────────────────────────────────── */
-function TypewriterQuote({ text, active }: { text: string; active: boolean }) {
-  const [displayed, setDisplayed] = useState("");
-  const [phase, setPhase] = useState("idle"); // idle | typing | done
-
-  useEffect(() => {
-    if (!active) return;
-    let i = 0;
-    setDisplayed("");
-    setPhase("typing");
-    const t = setTimeout(() => {
-      const iv = setInterval(() => {
-        i++;
-        setDisplayed(text.slice(0, i));
-        if (i >= text.length) { clearInterval(iv); setPhase("done"); }
-      }, 36);
-      return () => clearInterval(iv);
-    }, 900);
-    return () => clearTimeout(t);
-  }, [active, text]);
-
-  return (
-    <p
-      className={[
-        "mt-[1.4rem] font-rethink text-[14.5px] italic tracking-[0.02em] text-black/55",
-        "inline-flex items-center gap-px select-none",
-        "transition-opacity duration-[400ms] ease-in delay-[600ms]",
-        active ? "opacity-100" : "opacity-0",
-      ].join(" ")}
-    >
-      {displayed}
-      <span
-        className={[
-          "inline-block w-[1.5px] h-[1em] bg-[#8B1E1E] ml-px align-text-bottom transition-opacity",
-          phase === "typing" ? "animate-cursor opacity-100" : "",
-          phase === "done"   ? "opacity-0 duration-[400ms] delay-300" : "",
-          phase === "idle"   ? "opacity-100" : "",
-        ].join(" ")}
-      />
-    </p>
-  );
-}
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface StatItem {
   value: number;
@@ -165,250 +8,550 @@ interface StatItem {
   label: string;
 }
 
-/* ─────────────────────────────────────────────
-   StatCard
-───────────────────────────────────────────── */
-function StatCard({ stat, index, active }: { stat: StatItem; index: number; active: boolean }) {
-  const count = useCounter(stat.value, active, index * 140 + 300);
-  const [hovered, setHovered] = useState(false);
-  const [shimmer, setShimmer] = useState(false);
+type TypewriterPhase = "idle" | "typing" | "done";
+
+// ─── Keyframes & Global Styles ───────────────────────────────────────────────
+
+const STYLES = `
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  @keyframes ink-drop {
+    0%   { opacity: 0; filter: blur(14px) brightness(1.3); transform: scale(1.08) translateY(8px); }
+    40%  { opacity: 0.75; filter: blur(3px) brightness(1.05); transform: scale(1.02) translateY(2px); }
+    70%  { opacity: 0.95; filter: blur(0.5px); transform: scale(1.002) translateY(0); }
+    100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1) translateY(0); }
+  }
+  @keyframes fade-up {
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50%       { transform: scale(1.6); opacity: 1; }
+  }
+  @keyframes shimmer {
+    0%   { left: -80%; }
+    100% { left: 130%; }
+  }
+  @keyframes cursor-blink {
+    0%,  49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  @keyframes pulse-ring-cs {
+    0%   { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
+  @keyframes scanlines-drift {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 40px; }
+  }
+
+  .eram-section * { box-sizing: border-box; margin: 0; padding: 0; }
+  .eram-section { font-family: 'DM Sans', sans-serif; background: #F4EDE3; overflow: hidden; }
+`;
+
+function injectStyles(): void {
+  if (document.getElementById("eram-styles")) return;
+  const el = document.createElement("style");
+  el.id = "eram-styles";
+  el.textContent = STYLES;
+  document.head.appendChild(el);
+}
+
+// ─── Hooks ────────────────────────────────────────────────────────────────────
+
+function useInView(ref: RefObject<HTMLElement | null>, threshold = 0.15): boolean {
+  const [visible, setVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [ref, threshold]);
+
+  return visible;
+}
+
+function useCounter(target: number, active: boolean, delayMs = 0): number {
+  const [val, setVal] = useState<number>(0);
+  const raf = useRef<number | null>(null);
 
   useEffect(() => {
     if (!active) return;
-    const t = setTimeout(() => setShimmer(true), index * 140 + 300);
+
+    const DURATION = 1800;
+
+    const timer = setTimeout(() => {
+      let start: number | null = null;
+
+      const tick = (ts: number): void => {
+        if (start === null) start = ts;
+        const p = Math.min((ts - start) / DURATION, 1);
+        const eased = 1 - Math.pow(1 - p, 5); // quintic ease-out
+        setVal(Math.round(eased * target));
+        if (p < 1) {
+          raf.current = requestAnimationFrame(tick);
+        }
+      };
+
+      raf.current = requestAnimationFrame(tick);
+    }, delayMs);
+
+    return () => {
+      clearTimeout(timer);
+      if (raf.current !== null) cancelAnimationFrame(raf.current);
+    };
+  }, [active, target, delayMs]);
+
+  return val;
+}
+
+// ─── InkHeading ──────────────────────────────────────────────────────────────
+
+interface InkHeadingProps {
+  text: string;
+  active: boolean;
+}
+
+function InkHeading({ text, active }: InkHeadingProps) {
+  const words = text.split(" ");
+
+  const headingStyle: CSSProperties = {
+    fontFamily: "'Playfair Display', serif",
+    fontSize: "clamp(2.2rem, 3.4vw, 3.5rem)",
+    fontWeight: 700,
+    lineHeight: 1.18,
+    color: "#1a1208",
+    letterSpacing: "-0.01em",
+  };
+
+  return (
+    <h2 style={headingStyle}>
+      {words.map((word, i) => {
+        const wordStyle: CSSProperties = {
+          display: "inline-block",
+          marginRight: "0.2em",
+          willChange: "transform, opacity, filter",
+          animation: active
+            ? `ink-drop 0.85s cubic-bezier(.16,1,.3,1) ${0.22 + i * 0.06}s both`
+            : "none",
+          opacity: active ? undefined : 0,
+        };
+        return (
+          <span key={i} style={wordStyle}>
+            {word}
+          </span>
+        );
+      })}
+    </h2>
+  );
+}
+
+// ─── TypewriterQuote ─────────────────────────────────────────────────────────
+
+interface TypewriterQuoteProps {
+  text: string;
+  active: boolean;
+}
+
+function TypewriterQuote({ text, active }: TypewriterQuoteProps) {
+  const [displayed, setDisplayed] = useState<string>("");
+  const [phase, setPhase] = useState<TypewriterPhase>("idle");
+
+  useEffect(() => {
+    if (!active) return;
+    let i = 0;
+    setDisplayed("");
+    setPhase("typing");
+
+    const delay = setTimeout(() => {
+      const iv = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) {
+          clearInterval(iv);
+          setPhase("done");
+        }
+      }, 38);
+      return () => clearInterval(iv);
+    }, 850);
+
+    return () => clearTimeout(delay);
+  }, [active, text]);
+
+  const wrapStyle: CSSProperties = {
+    marginTop: "1.3rem",
+    fontFamily: "'Playfair Display', serif",
+    fontStyle: "italic",
+    fontSize: "15px",
+    color: "rgba(26,18,8,0.5)",
+    letterSpacing: "0.015em",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "2px",
+    opacity: active ? 1 : 0,
+    transition: "opacity 0.4s ease 0.55s",
+  };
+
+  const cursorStyle: CSSProperties = {
+    display: "inline-block",
+    width: "1.5px",
+    height: "1em",
+    background: "#8B1E1E",
+    marginLeft: "1px",
+    verticalAlign: "text-bottom",
+    animation: phase === "typing" ? "cursor-blink 0.65s step-end infinite" : "none",
+    opacity: phase === "done" ? 0 : 1,
+    transition: phase === "done" ? "opacity 0.3s ease 0.4s" : "none",
+  };
+
+  return (
+    <p style={wrapStyle}>
+      {displayed}
+      <span style={cursorStyle} />
+    </p>
+  );
+}
+
+// ─── SectionLabel ────────────────────────────────────────────────────────────
+
+interface SectionLabelProps {
+  active: boolean;
+}
+
+function SectionLabel({ active }: SectionLabelProps) {
+  const lineStyle: CSSProperties = {
+    display: "block",
+    width: "28px",
+    height: "1.5px",
+    background: "#8B1E1E",
+    transformOrigin: "left",
+    transform: active ? "scaleX(1)" : "scaleX(0)",
+    transition: "transform 0.5s cubic-bezier(.22,1,.36,1) 0.05s",
+  };
+
+  const textStyle: CSSProperties = {
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: "10px",
+    letterSpacing: "0.32em",
+    textTransform: "uppercase",
+    color: "rgba(26,18,8,0.6)",
+    fontWeight: 500,
+    opacity: active ? 1 : 0,
+    transform: active ? "translateX(0)" : "translateX(12px)",
+    transition: "opacity 0.5s ease 0.18s, transform 0.5s cubic-bezier(.22,1,.36,1) 0.18s",
+  };
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
+      <span style={lineStyle} />
+      <span style={textStyle}>Our Commitment</span>
+    </div>
+  );
+}
+
+// ─── RevealParagraph ─────────────────────────────────────────────────────────
+
+interface RevealParagraphProps {
+  text: string;
+  index: number;
+  active: boolean;
+}
+
+function RevealParagraph({ text, index, active }: RevealParagraphProps) {
+  const pStyle: CSSProperties = {
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: "15px",
+    lineHeight: 1.88,
+    color: "rgba(26,18,8,0.72)",
+    fontWeight: 300,
+    animation: active
+      ? `fade-up 0.72s cubic-bezier(.22,1,.36,1) ${0.28 + index * 0.18}s both`
+      : "none",
+    opacity: active ? undefined : 0,
+  };
+
+  return (
+    <div style={{ overflow: "hidden" }}>
+      <p style={pStyle}>{text}</p>
+    </div>
+  );
+}
+
+// ─── AnimatedDivider ─────────────────────────────────────────────────────────
+
+interface AnimatedDividerProps {
+  active: boolean;
+}
+
+function AnimatedDivider({ active }: AnimatedDividerProps) {
+  const armTransition = active
+    ? "stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1) 0.1s"
+    : "none";
+
+  const sideDotStyle = (offset: number): CSSProperties => ({
+    opacity: active ? 1 : 0,
+    transform: active ? "scale(1)" : "scale(0)",
+    transformOrigin: `${550 + offset}px 12px`,
+    transition: active
+      ? `opacity 0.4s ease ${0.12 + Math.abs(offset) / 100}s, transform 0.5s cubic-bezier(.34,1.56,.64,1) ${0.12 + Math.abs(offset) / 100}s`
+      : "none",
+  });
+
+  const centerDotStyle: CSSProperties = {
+    opacity: active ? 1 : 0,
+    transform: active ? "scale(1)" : "scale(0)",
+    transformOrigin: "550px 12px",
+    animation: active ? "dot-pulse 2.5s ease-in-out 1.2s infinite" : "none",
+    transition: active
+      ? "opacity 0.4s ease 0.06s, transform 0.5s cubic-bezier(.34,1.56,.64,1) 0.06s"
+      : "none",
+  };
+
+  return (
+    <svg width="100%" height="24" viewBox="0 0 1100 24" preserveAspectRatio="none" style={{ display: "block" }}>
+      <line
+        x1="550" y1="12" x2="0" y2="12"
+        stroke="rgba(139,30,30,0.2)" strokeWidth="0.8"
+        strokeDasharray="550" strokeDashoffset={active ? 0 : 550}
+        style={{ transition: armTransition }}
+      />
+      <line
+        x1="550" y1="12" x2="1100" y2="12"
+        stroke="rgba(139,30,30,0.2)" strokeWidth="0.8"
+        strokeDasharray="550" strokeDashoffset={active ? 0 : 550}
+        style={{ transition: armTransition }}
+      />
+      {([-20, 20] as number[]).map((offset) => (
+        <circle key={offset} cx={550 + offset} cy="12" r="1.5" fill="rgba(139,30,30,0.38)" style={sideDotStyle(offset)} />
+      ))}
+      <circle cx="550" cy="12" r="3.5" fill="#8B1E1E" style={centerDotStyle} />
+    </svg>
+  );
+}
+
+// ─── StatCard ─────────────────────────────────────────────────────────────────
+
+interface StatCardProps {
+  stat: StatItem;
+  index: number;
+  active: boolean;
+}
+
+function StatCard({ stat, index, active }: StatCardProps) {
+  const count = useCounter(stat.value, active, index * 150 + 280);
+  const [hovered, setHovered] = useState<boolean>(false);
+  const [shimmerKey, setShimmerKey] = useState<number>(0);
+  const [showShimmer, setShowShimmer] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!active) return;
+    const t = setTimeout(() => {
+      setShowShimmer(true);
+      setShimmerKey((k) => k + 1);
+    }, index * 150 + 280);
     return () => clearTimeout(t);
   }, [active, index]);
 
-  const staggerDelay = `${index * 0.13}s`;
-  const labelDelay   = `${index * 0.13 + 0.45}s`;
+  const cardStyle: CSSProperties = {
+    position: "relative",
+    textAlign: "center",
+    padding: "0 16px",
+    cursor: "default",
+    opacity: active ? 1 : 0,
+    transform: active ? "translateY(0)" : "translateY(40px)",
+    transition: `opacity 0.65s cubic-bezier(.22,1,.36,1) ${index * 0.13}s, transform 0.65s cubic-bezier(.34,1.56,.64,1) ${index * 0.13}s`,
+  };
+
+  const dividerStyle: CSSProperties = {
+    position: "absolute",
+    left: 0,
+    top: "50%",
+    transform: "translateY(-50%)",
+    height: "52px",
+    width: "1px",
+    background: "rgba(255,255,255,0.1)",
+    display: "block",
+  };
+
+  const numStyle: CSSProperties = {
+    fontFamily: "'Playfair Display', serif",
+    fontSize: "clamp(1.9rem, 2.5vw, 2.7rem)",
+    fontWeight: 700,
+    lineHeight: 1,
+    color: hovered ? "#c0392b" : "#fff",
+    textShadow: hovered ? "0 0 22px rgba(192,57,43,0.3)" : "none",
+    transition: "color 0.28s ease, text-shadow 0.28s ease",
+    letterSpacing: "-0.01em",
+  };
+
+  const labelStyle: CSSProperties = {
+    marginTop: "0.85rem",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: "10px",
+    fontWeight: 500,
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+    lineHeight: 1.65,
+    padding: "0 8px",
+    color: active ? "rgba(255,255,255,0.48)" : "transparent",
+    transition: `color 0.8s ease ${index * 0.13 + 0.45}s`,
+  };
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={[
-        "relative text-center cursor-default px-4 will-change-[transform,opacity]",
-        "transition-[opacity,transform] duration-700 transition-overshoot delay-var",
-        active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[50px]",
-      ].join(" ")}
-      style={{ "--d": staggerDelay } as React.CSSProperties}
+      style={cardStyle}
     >
-      {/* Divider — md+ only, non-first cards */}
-      {index !== 0 && (
-        <span className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-14 w-px bg-white/[0.09]" />
-      )}
+      {index !== 0 && <span style={dividerStyle} />}
 
-      {/* Pulse rings */}
-      {hovered && (
-        <>
-          <span className="absolute top-1/2 left-1/2 w-14 h-14 -ml-7 -mt-7 rounded-full border border-[rgba(192,57,43,0.5)] pointer-events-none animate-pulse-ring" />
+      {hovered &&
+        ([0, 1] as number[]).map((ri) => (
           <span
-            className="absolute top-1/2 left-1/2 w-14 h-14 -ml-7 -mt-7 rounded-full border border-[rgba(192,57,43,0.3)] pointer-events-none animate-pulse-ring"
-            style={{ "--d": "0.15s" } as React.CSSProperties}
+            key={ri}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              width: "52px",
+              height: "52px",
+              marginLeft: "-26px",
+              marginTop: "-26px",
+              borderRadius: "50%",
+              border: `1px solid rgba(192,57,43,${0.5 - ri * 0.2})`,
+              pointerEvents: "none",
+              animation: `pulse-ring-cs 0.85s ease-out ${ri * 0.14}s forwards`,
+            }}
           />
-        </>
-      )}
+        ))}
 
-      {/* Number + shimmer */}
-      <div className="relative inline-block overflow-hidden">
-        <h3
-          className={[
-            "font-rethink text-[clamp(2rem,2.6vw,2.9rem)] leading-none m-0  tracking-[-0.01em]",
-            "transition-[color,text-shadow] duration-300",
-            hovered
-              ? "text-[#c0392b] [text-shadow:0_0_24px_rgba(192,57,43,0.35)]"
-              : "text-white",
-          ].join(" ")}
-        >
+      <div style={{ position: "relative", display: "inline-block", overflow: "hidden" }}>
+        <h3 style={numStyle}>
           {count}{stat.suffix}
         </h3>
 
-        {shimmer && (
+        {showShimmer && (
           <span
-            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.12] to-transparent pointer-events-none animate-shimmer"
-            onAnimationEnd={() => setShimmer(false)}
+            key={shimmerKey}
+            onAnimationEnd={() => setShowShimmer(false)}
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              width: "50%",
+              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent)",
+              pointerEvents: "none",
+              animation: "shimmer 0.75s ease-out forwards",
+            }}
           />
         )}
       </div>
 
-      {/* Label */}
-      <p
-        className={[
-          "mt-[0.85rem] text-[11px] tracking-[0.22em] uppercase leading-[1.65] px-2 ",
-          "transition-colors duration-[900ms] delay-var",
-          active ? "text-white/[0.52]" : "text-transparent",
-        ].join(" ")}
-        style={{ "--d": labelDelay } as React.CSSProperties}
-      >
-        {stat.label}
-      </p>
+      <p style={labelStyle}>{stat.label}</p>
     </div>
   );
 }
 
-/* ─────────────────────────────────────────────
-   AnimatedDivider — outward draw from center
-   SVG transitions can't use Tailwind directly,
-   so we keep only the minimal JS-driven styles.
-───────────────────────────────────────────── */
-function AnimatedDivider({ active }: { active: boolean }) {
-  const armTransition = active
-    ? "stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1) 0.1s"
-    : "none";
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
-  return (
-    <svg width="100%" height="24" viewBox="0 0 1100 24" preserveAspectRatio="none" className="block">
-      <line x1="550" y1="12" x2="0"    y2="12" stroke="rgba(139,30,30,0.22)" strokeWidth="0.8" strokeDasharray="550" strokeDashoffset={active ? 0 : 550} style={{ transition: armTransition }} />
-      <line x1="550" y1="12" x2="1100" y2="12" stroke="rgba(139,30,30,0.22)" strokeWidth="0.8" strokeDasharray="550" strokeDashoffset={active ? 0 : 550} style={{ transition: armTransition }} />
-
-      <circle
-        cx="550" cy="12" r="3" fill="#8B1E1E"
-        className={active ? "animate-dot-breathe" : ""}
-        style={{
-          opacity: active ? 1 : 0,
-          transform: active ? "scale(1)" : "scale(0)",
-          transformOrigin: "550px 12px",
-          transition: active
-            ? "opacity .4s ease .05s, transform .5s cubic-bezier(.34,1.56,.64,1) .05s"
-            : "none",
-          "--d": "1.2s",
-        } as React.CSSProperties}
-      />
-
-      {[-18, 18].map((offset) => (
-        <circle
-          key={offset}
-          cx={550 + offset} cy="12" r="1.5" fill="rgba(139,30,30,0.4)"
-          style={{
-            opacity: active ? 1 : 0,
-            transform: active ? "scale(1)" : "scale(0)",
-            transformOrigin: `${550 + offset}px 12px`,
-            transition: active
-              ? `opacity .4s ease ${0.1 + Math.abs(offset) / 100}s, transform .5s cubic-bezier(.34,1.56,.64,1) ${0.1 + Math.abs(offset) / 100}s`
-              : "none",
-          } as React.CSSProperties}
-        />
-      ))}
-    </svg>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   RevealParagraph — overflow-clip slide-up
-───────────────────────────────────────────── */
-function RevealParagraph({ text, index, active }: { text: string; index: number; active: boolean }) {
-  return (
-    <div className="overflow-hidden">
-      <p
-        className={[
-          "m-0 will-change-[transform,opacity]",
-          "transition-[opacity,transform] duration-[750ms] transition-spring delay-var",
-          active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[110%]",
-        ].join(" ")}
-        style={{ "--d": `${0.3 + index * 0.2}s` } as React.CSSProperties}
-      >
-        {text}
-      </p>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   SectionLabel
-───────────────────────────────────────────── */
-function SectionLabel({ active }: { active: boolean }) {
-  return (
-    <div className="flex items-center gap-3 mb-6">
-      <span
-        className={[
-          "block w-[30px] h-[1.5px] bg-[#8B1E1E] origin-left",
-          "transition-transform duration-500 transition-spring",
-          active ? "scale-x-100 delay-[50ms]" : "scale-x-0",
-        ].join(" ")}
-      />
-      <span
-        className={[
-          "text-[10.5px] tracking-[0.34em] uppercase text-black/65 font-rethink",
-          "transition-[opacity,transform] duration-500 transition-spring",
-          active ? "opacity-100 translate-x-0 delay-[180ms]" : "opacity-0 translate-x-[14px]",
-        ].join(" ")}
-      >
-        Our Commitment
-      </span>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   Scanlines
-───────────────────────────────────────────── */
-function Scanlines() {
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0 animate-scanlines bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.013)_2px,rgba(255,255,255,0.013)_4px)]" />
-  );
-}
-
-/* ── Data ── */
-const stats = [
-  { value: 30,  suffix: "+",  label: "Medical Camps Conducted" },
-  { value: 4,   suffix: "k+", label: "Cataract Surgeries Completed" },
-  { value: 50,  suffix: "+",  label: "Homes Built for Homeless Families" },
-  { value: 242, suffix: "",   label: "BPL Families Supported" },
+const STATS: StatItem[] = [
+  { value: 30,   suffix: "+", label: "Medical Camps Conducted" },
+  { value: 4000, suffix: "+", label: "Cataract Surgeries Completed" },
+  { value: 50,   suffix: "+", label: "Homes Built for Families" },
+  { value: 242,  suffix: "",  label: "BPL Families Supported" },
 ];
 
-const paragraphs = [
+const PARAGRAPHS: string[] = [
   "ERAM Educational & Welfare Trust advances its mission through structured interventions across education, healthcare, rehabilitation, environmental resilience, youth development, and community infrastructure.",
-  "Each initiative begins with a clearly identified need and evolves into a designed response — planned, executed, and monitored with institutional discipline. Whether restoring water systems, strengthening public health access, enabling dignified rehabilitation, or expanding structured education, the Trust approaches community development as a long-term responsibility.",
-  "These efforts are not parallel acts of service. They form a cohesive model of engagement — one that addresses access gaps, strengthens local systems, and creates measurable outcomes.",
+  "Each initiative begins with a clearly identified need and evolves into a designed response — planned, executed, and monitored with institutional discipline. Whether restoring water systems, strengthening public health access, or expanding structured education, the Trust approaches community development as a long-term responsibility.",
+  "These efforts form a cohesive model of engagement — one that addresses access gaps, strengthens local systems, and creates measurable, lasting outcomes for the communities we serve.",
 ];
 
-/* ─────────────────────────────────────────────
-   Main Component
-───────────────────────────────────────────── */
+// ─── Main Component ───────────────────────────────────────────────────────────
+
 export default function CommitmentSection() {
   const topRef   = useRef<HTMLDivElement>(null);
-  const stripRef = useRef<HTMLDivElement>(null);
-  const lineRef  = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   const topVisible   = useInView(topRef,   0.12);
-  const statsVisible = useInView(stripRef, 0.12);
-  const lineVisible  = useInView(lineRef,  0.5);
+  const statsVisible = useInView(statsRef, 0.12);
 
-  useEffect(() => { injectStyles(); }, []);
+  useEffect(() => {
+    injectStyles();
+  }, []);
+
+  const statsStripStyle: CSSProperties = {
+    background: "linear-gradient(135deg, #1a0e0e 0%, #2c1010 50%, #1a1208 100%)",
+    position: "relative",
+    overflow: "hidden",
+  };
+
+  const scanlinesStyle: CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    zIndex: 0,
+    background:
+      "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)",
+    animation: "scanlines-drift 8s linear infinite",
+  };
+
+  const statsGridStyle: CSSProperties = {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: "1100px",
+    margin: "0 auto",
+    padding: "clamp(40px, 6vw, 64px) clamp(16px, 4vw, 40px)",
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 0,
+  };
 
   return (
-    <section className="bg-[#F5EFE8] overflow-hidden">
+    <section className="eram-section">
 
-      {/* ── TOP CONTENT ── */}
-     <div ref={topRef} className="max-w-[1100px] mx-auto px-4 pt-[55px] pb-[90px]"> 
-        <div className="grid md:grid-cols-2 gap-[clamp(2.5rem,6vw,5rem)]">
-
-          {/* LEFT */}
+      {/* ── Top Content ── */}
+      <div
+        ref={topRef}
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+          padding: "clamp(40px, 6vw, 72px) clamp(16px, 4vw, 40px) clamp(64px, 8vw, 96px)",
+        }}
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
+            gap: "clamp(2rem, 5vw, 5rem)",
+          }}
+        >
+          {/* Left column */}
           <div>
             <SectionLabel active={topVisible} />
-            <InkHeading
-              text="Our Commitment To Structured Responsibility"
-              active={topVisible}
-            />
-            <TypewriterQuote
-              text='"Commitment Beyond Institutions"'
-              active={topVisible}
-            />
+            <InkHeading text="Our Commitment To Structured Responsibility" active={topVisible} />
+            <TypewriterQuote text='"Commitment Beyond Institutions"' active={topVisible} />
           </div>
 
-          {/* RIGHT */}
-          <div className="font-rethink text-[15px] leading-[1.9] text-black/[0.78] flex flex-col gap-6">
-            {paragraphs.map((text, i) => (
+          {/* Right column */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            {PARAGRAPHS.map((text, i) => (
               <RevealParagraph key={i} text={text} index={i} active={topVisible} />
             ))}
           </div>
-
         </div>
       </div>
-
-
     </section>
   );
 }
-
-

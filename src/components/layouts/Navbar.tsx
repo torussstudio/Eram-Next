@@ -444,18 +444,18 @@ export default function Navbar() {
             }}
             className="flex items-center h-full py-[12px] pr-4 max-[920px]:h-[48px] max-[920px]:rounded-[14px] max-[920px]:px-3 max-[920px]:py-2"
           >
-            <div className="relative w-[128px] lg:w-[138px] h-[32px]">
-              <Image
-                src="/education-1.svg"
-                alt="ERAM Education"
-                fill
-                sizes="(max-width: 1024px) 128px, 138px"
-                style={{
-                  objectFit: "contain",
-                  objectPosition: "left",
-                }}
-              />
-            </div>
+           <div className="relative w-[128px] lg:w-[138px] h-[32px]">
+  <Image
+    src="/education-1.svg"
+    alt="ERAM Education"
+    fill
+    sizes="(max-width: 1024px) 128px, 138px"
+    style={{
+      objectFit: "contain",
+      objectPosition: "left",
+    }}
+  />
+</div>
           </span>
         </Link>
 
