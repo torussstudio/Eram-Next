@@ -34,24 +34,24 @@ export default function PhilosophySection() {
         .to(
           labelRef.current,
           { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
-          "-=0.25"
+          "-=0.25",
         )
         // 2. Heading lines — tighter stagger
         .to(
           headLine1Ref.current,
           { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
-          "-=0.15"
+          "-=0.15",
         )
         .to(
           headLine2Ref.current,
           { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
-          "-=0.35"
+          "-=0.35",
         )
         // 3. Description
         .to(
           descRef.current,
           { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" },
-          "-=0.25"
+          "-=0.25",
         )
         // 4. Cards — faster stagger, more overlap with desc
         .to(
@@ -63,7 +63,7 @@ export default function PhilosophySection() {
             ease: "power2.out",
             stagger: 0.07,
           },
-          "-=0.25"
+          "-=0.25",
         );
     }, sectionRef);
 
@@ -146,28 +146,60 @@ export default function PhilosophySection() {
         </div>
 
         {/* CARDS */}
-        <div className="mt-16 grid md:grid-cols-4 rounded-3xl gap-0.5 overflow-hidden border border-white/10">
-          {cards.map((item, i) => (
-            <div
-              key={i}
-              ref={(el) => { cardRefs.current[i] = el; }}
-              className="bg-[#f5efe8] p-[30px] min-h-[180px] flex flex-col justify-between border border-white/10 -ml-px -mt-px"
-              style={{ opacity: 0, transform: "translateY(40px)" }}
-            >
-              <span className="font-display text-[12px] text-black tracking-[0.1em]">
-                {item.no}
-              </span>
-              <div>
-                <h3 className="font-display mt-3 text-black text-[18px]">
-                  {item.title}
-                </h3>
-                <p className="font-rethink mt-3 text-[13px] text-black leading-[1.7]">
-                  {item.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="mt-16 grid md:grid-cols-4 rounded-[32px] overflow-hidden border border-[#ae1431]">
+  {cards.map((item, i) => (
+    <div
+      key={i}
+     ref={(el) => {
+  cardRefs.current[i] = el;
+}}
+      className="
+        bg-[#f5efe8]
+        px-8
+        pt-10
+        pb-9
+        min-h-[380px]
+        flex flex-col
+        border-r border-b border-[#ae1431]
+        last:border-r-0
+      "
+      style={{ opacity: 0, transform: "translateY(40px)" }}
+    >
+      <span className="font-display text-[12px] tracking-[0.16em] text-black">
+        {item.no}
+      </span>
+
+      <div className="mt-10 flex flex-col flex-1">
+        <h3
+          className="
+            font-display
+            text-[21px]
+            leading-[1.2]
+            tracking-[-0.02em]
+            text-black
+            min-h-[72px]
+            max-w-[220px]
+          "
+        >
+          {item.title}
+        </h3>
+
+        <p
+          className="
+            mt-6
+            font-rethink
+            text-[14px]
+            leading-[1.9]
+            text-black/80
+            max-w-[240px]
+          "
+        >
+          {item.desc}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
       </div>
     </section>
   );

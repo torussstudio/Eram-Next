@@ -119,7 +119,7 @@ function TrustHero() {
               </p>
 
               {/* BUTTON — ✅ no opacity-0/translate classes */}
-              <button className="font-rethink hero-content-fade mt-6 bg-[#B3201D] text-white px-5 py-2.5 rounded-[10px] text-xs tracking-wide font-medium">
+              <button className="font-rethink hero-content-fade mt-6 bg-[#ae1431] text-white px-5 py-2.5 rounded-[10px] text-xs tracking-wide font-medium">
                 VIEW COMMUNITY WORK →
               </button>
             </div>
@@ -168,7 +168,7 @@ function TrustHero() {
                 </p>
 
                 {/* BUTTON — ✅ no opacity-0/translate classes */}
-                <button className="font-rethink hero-content-fade mt-8 bg-[#B3201D] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide font-medium hover:bg-[#F5EFE8] hover:text-black transition cursor-pointer">
+                <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide font-medium hover:bg-[#F5EFE8] hover:text-black transition cursor-pointer">
                   VIEW OUR COMMUNITY INTERVENTIONS →
                 </button>
               </div>

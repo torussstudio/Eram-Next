@@ -1,3 +1,7 @@
 {
-  "/(marketing)/page": "app/(marketing)/page.js"
+  "/(marketing)/page": "app/(marketing)/page.js",
+  "/(marketing)/the-trust/page": "app/(marketing)/the-trust/page.js",
+  "/(marketing)/explore-arena/page": "app/(marketing)/explore-arena/page.js",
+  "/(marketing)/mmps/page": "app/(marketing)/mmps/page.js",
+  "/(marketing)/about-us/page": "app/(marketing)/about-us/page.js"
 }

@@ -536,24 +536,7 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
           </div>
         </div>
 
-        {/* BOTTOM */}
         <div>
-          {/* small label */}
-          <div className="mb-[10px] flex items-center gap-[8px]">
-            <span className="h-px w-[24px] bg-white/40" />
-
-            <span
-              className="
-                font-rethink
-                text-[10px]
-                uppercase
-                tracking-[0.22em]
-                text-white/55
-              "
-            >
-              Student Experience
-            </span>
-          </div>
 
           {/* title */}
           <div

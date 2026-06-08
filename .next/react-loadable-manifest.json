@@ -4,5 +4,35 @@
     "files": [
       "static/chunks/_app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js"
     ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/CommitmentSection": {
+    "id": "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/CommitmentSection",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_trust_CommitmentSection_tsx.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/EducationSection": {
+    "id": "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/EducationSection",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_trust_EducationSection_tsx.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/LegacySection": {
+    "id": "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/LegacySection",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_trust_LegacySection_tsx.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/PhilosophySection": {
+    "id": "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/PhilosophySection",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_trust_PhilosophySection_tsx.js"
+    ]
+  },
+  "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/StructuredFramework": {
+    "id": "app\\(marketing)\\the-trust\\page.tsx -> @/components/sections/trust/StructuredFramework",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_trust_StructuredFramework_tsx.js"
+    ]
   }
 }

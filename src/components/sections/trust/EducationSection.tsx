@@ -40,13 +40,13 @@ const Card = ({
   const base = "font-rethink rounded-2xl p-[26px]";
   const styles = {
     white: `${base} border border-black/10 bg-white/40`,
-    red: `${base} bg-[#8B1E1E] text-white`,
+    red: `${base} bg-[#ae1431] text-white`,
     dark: `${base} bg-[#111111] text-white`,
   };
   const textColor = variant === "white" ? "text-black/70" : "text-white/80";
   const metaColor = variant === "white" ? "text-black/60" : "text-white/70";
   const markerColor =
-    variant === "red" ? "marker:text-white" : "marker:text-[#8B1E1E]";
+    variant === "red" ? "marker:text-white" : "marker:text-[#ae1431]";
 
   return (
     <div className={styles[variant]}>
@@ -66,7 +66,7 @@ const Card = ({
           style={{
             color:
               variant === "white"
-                ? "#8B1E1E"
+                ? "[#ae1431]"
                 : variant === "dark"
                   ? "rgba(255,255,255,0.6)"
                   : "rgba(255,255,255,0.7)",
@@ -111,7 +111,7 @@ const Card = ({
       {badge && (
         <div
           className={`mt-6 px-4 py-3 inline-block rounded-lg ${
-            variant === "white" ? "bg-[#8B1E1E] text-white" : "bg-white/10"
+            variant === "white" ? "bg-[#ae1431] text-white" : "bg-white/10"
           }`}
         >
           <p className="text-[14px] font-semibold">{badge.value}</p>
@@ -150,7 +150,7 @@ const PillarHeader = ({
   <div className="mt-[20px] mb-[20px]" ref={headerRef}>
     <div className="flex items-start justify-between">
       <div>
-        <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#8B1E1E]">
+        <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#ae1431]">
           {label}
         </span>
         <div className="flex items-center gap-6 mt-2">
@@ -261,7 +261,7 @@ const panels = [
     <div className="pb-[30px]">
       <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[28px] mb-[20px] grid md:grid-cols-2 gap-[40px]">
         <div>
-          <span className="text-[11px] uppercase text-[#8B1E1E]">
+          <span className="text-[11px] uppercase text-[#ae1431]">
             PALAKKAD DISTRICT
           </span>
           <h3 className="mt-3 font-serif text-[18px]">
@@ -289,7 +289,7 @@ const panels = [
             where access and excellence coexist. Infrastructure compliant with
             Board regulations includes:
           </p>
-          <ul className="mt-4 space-y-2 text-[14px] list-disc pl-4 marker:text-[#8B1E1E] text-black/70">
+          <ul className="mt-4 space-y-2 text-[14px] list-disc pl-4 marker:text-[#ae1431] text-black/70">
             <li>Proper land and fully equipped academic buildings</li>
             <li>Laboratories and well-stocked libraries</li>
             <li>Dedicated sports infrastructure</li>
@@ -513,7 +513,7 @@ const panels = [
     <div className="pb-[30px]">
       <div className="font-rethink rounded-2xl border border-black/10 bg-white/40 p-[28px] mb-[20px] grid md:grid-cols-2 gap-[40px]">
         <div>
-          <span className="text-[11px] uppercase text-[#8B1E1E]">
+          <span className="text-[11px] uppercase text-[#ae1431]">
             MANKARA · KOTTAYI PANCHAYATS
           </span>
           <h3 className="mt-3 font-serif text-[18px]">
@@ -540,7 +540,7 @@ const panels = [
           <span className="text-[11px] uppercase text-black/50">
             ENVIRONMENTAL SCOPE
           </span>
-          <ul className="mt-3 space-y-2 text-[13px] list-disc pl-4 marker:text-[#8B1E1E] text-black/70">
+          <ul className="mt-3 space-y-2 text-[13px] list-disc pl-4 marker:text-[#ae1431] text-black/70">
             <li>Iron shutter replacement for structural integrity</li>
             <li>Coordination with local panchayat bodies</li>
             <li>Restored controlled water retention</li>

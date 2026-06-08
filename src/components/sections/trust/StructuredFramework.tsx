@@ -39,7 +39,7 @@ export default function StructuredFramework({
         }
       }
 
-      // ✅ Guard: scan-line null check
+    
       const scan = sectionRef.current?.querySelector(".scan-line");
       if (scan) {
         gsap.fromTo(
@@ -54,7 +54,6 @@ export default function StructuredFramework({
         );
       }
 
-      // ✅ Guard: filter out null refs before animating
       const validCells = cellRefs.current.filter(Boolean);
       if (validCells.length) {
         gsap.set(validCells, { opacity: 0, y: 52 });
@@ -66,13 +65,13 @@ export default function StructuredFramework({
           stagger: { amount: 0.5 },
           clearProps: "all",
           scrollTrigger: {
-            trigger: validCells[0], // ✅ safe — confirmed non-null
+            trigger: validCells[0], 
             start: "top 85%",
           },
         });
       }
 
-      // ✅ Guard: noteRef null check
+      
       if (noteRef.current) {
         gsap.fromTo(
           noteRef.current,
@@ -95,16 +94,30 @@ export default function StructuredFramework({
   }, []);
 
   const handleCardClick = (id: string, index: number) => {
-    if (setActive) setActive(index);
-    setTimeout(() => {
+  if (setActive) {
+    setActive(index);
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       const el = document.getElementById(id);
+
       if (!el) return;
+
+      const offset = 90;
+
+      const top =
+        el.getBoundingClientRect().top +
+        window.scrollY -
+        offset;
+
       window.scrollTo({
-        top: el.getBoundingClientRect().top + window.pageYOffset - 80,
+        top,
         behavior: "smooth",
       });
-    }, 300);
-  };
+    });
+  });
+};
 
   return (
     <section
@@ -157,7 +170,7 @@ export default function StructuredFramework({
                   hover:before:opacity-100
                   after:content-[''] after:absolute after:top-0 after:left-0
                   after:h-[2px] after:w-full
-                  after:bg-[linear-gradient(90deg,#B3201D_0%,transparent_75%)]
+                  after:bg-[linear-gradient(90deg,#ae1431_0%,transparent_75%)]
                   after:scale-x-0 after:origin-left
                   after:[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1)]
                   after:pointer-events-none after:z-[1]
@@ -166,7 +179,7 @@ export default function StructuredFramework({
                 onClick={() => handleCardClick(item.id, i)}
               >
                 <div className="relative z-[2]">
-                  <span className="font-rethink block text-[10px] tracking-[0.22em] text-[#B3201D]  mb-[14px] transition-[letter-spacing,color] duration-[400ms] ease-[ease]">
+                  <span className="font-rethink block text-[10px] tracking-[0.22em] text-[#ae1431]  mb-[14px] transition-[letter-spacing,color] duration-[400ms] ease-[ease]">
                     {item.label}
                   </span>
                   <h3 className="font-display text-[clamp(15px,1.8vw,18px)]  m-0 mb-[10px] leading-[1.3] text-white transition-colors duration-300">
