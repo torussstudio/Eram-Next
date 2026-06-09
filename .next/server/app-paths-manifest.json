@@ -1,8 +1,3 @@
 {
-  "/(marketing)/about-us/page": "app/(marketing)/about-us/page.js",
-  "/(marketing)/page": "app/(marketing)/page.js",
-  "/(marketing)/explore-arena/page": "app/(marketing)/explore-arena/page.js",
-  "/(marketing)/portal/page": "app/(marketing)/portal/page.js",
-  "/(marketing)/contact/page": "app/(marketing)/contact/page.js",
-  "/(marketing)/amlp/page": "app/(marketing)/amlp/page.js"
+  "/(marketing)/page": "app/(marketing)/page.js"
 }
