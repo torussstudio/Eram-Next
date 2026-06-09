@@ -9,13 +9,16 @@ import { useGSAP } from "@gsap/react";
 interface ContactItemProps {
   label: string;
   value: string;
+  href: string;
   icon: React.ReactNode;
 }
 
 const CONTACT_ITEMS: ContactItemProps[] = [
   {
     label: "Address",
-    value: "Eram Education, Eram Nagar, Prabhapuram, Mannengode (PO), Palakkad — 679307",
+    value:
+      "Eram Education, Eram Nagar, Prabhapuram, Mannengode (PO), Palakkad — 679307",
+    href: "https://maps.google.com/?q=Eram+Education+Palakkad",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path
@@ -25,9 +28,11 @@ const CONTACT_ITEMS: ContactItemProps[] = [
       </svg>
     ),
   },
+
   {
     label: "Phone",
     value: "+91 9048166313",
+    href: "tel:+919048166313",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path
@@ -37,12 +42,22 @@ const CONTACT_ITEMS: ContactItemProps[] = [
       </svg>
     ),
   },
+
   {
     label: "Email",
     value: "manager@eram.edu.in",
+    href: "mailto:manager@eram.edu.in",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.4" />
+        <rect
+          x="1"
+          y="3"
+          width="14"
+          height="10"
+          rx="2"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
         <path d="M1 5l7 5 7-5" stroke="currentColor" strokeWidth="1.4" />
       </svg>
     ),
@@ -58,8 +73,18 @@ interface FieldData {
 
 const TEXT_FIELDS: FieldData[] = [
   { name: "name", label: "Full Name", type: "text", placeholder: "John Doe" },
-  { name: "email", label: "Email Address", type: "email", placeholder: "john@example.com" },
-  { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98765 43210" },
+  {
+    name: "email",
+    label: "Email Address",
+    type: "email",
+    placeholder: "john@example.com",
+  },
+  {
+    name: "phone",
+    label: "Phone Number",
+    type: "tel",
+    placeholder: "+91 98765 43210",
+  },
 ];
 
 const SUBJECT_CHIPS = [
@@ -78,7 +103,13 @@ interface FormState {
   subject: string;
 }
 
-const INITIAL_FORM: FormState = { name: "", email: "", phone: "", message: "", subject: "" };
+const INITIAL_FORM: FormState = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+  subject: "",
+};
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
@@ -129,9 +160,14 @@ function Field({
   );
 }
 
-function ContactItem({ icon, label, value }: ContactItemProps) {
+function ContactItem({ icon, label, value, href }: ContactItemProps) {
   return (
-    <div className="flex gap-3.5 items-start">
+    <a
+      href={href}
+      target={label === "Address" ? "_blank" : undefined}
+      rel={label === "Address" ? "noopener noreferrer" : undefined}
+      className="flex gap-3.5 items-start group"
+    >
       <div className="w-9 h-9 min-w-[36px] rounded-[10px] bg-white/[0.07] flex items-center justify-center text-[#ae1431] shrink-0">
         {icon}
       </div>
@@ -143,7 +179,7 @@ function ContactItem({ icon, label, value }: ContactItemProps) {
           {value}
         </p>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -198,18 +234,31 @@ export default function ContactPage() {
       gsap.set(taglineRef.current, { opacity: 0, y: 18 });
       gsap.set(formCardRef.current, { opacity: 0, y: 40 });
       gsap.set(infoCardRef.current, { opacity: 0, y: 40 });
-      gsap.set(dividerRef.current, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(dividerRef.current, {
+        scaleX: 0,
+        transformOrigin: "left center",
+      });
 
-      tl.to(letters || [], { y: "0%", skewX: 0, duration: 0.9, stagger: { each: 0.045 } }, 0)
+      tl.to(
+        letters || [],
+        { y: "0%", skewX: 0, duration: 0.9, stagger: { each: 0.045 } },
+        0,
+      )
         .to(taglineRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.45)
-        .to(dividerRef.current, { scaleX: 1, duration: 0.7, ease: "expo.out" }, 0.55)
+        .to(
+          dividerRef.current,
+          { scaleX: 1, duration: 0.7, ease: "expo.out" },
+          0.55,
+        )
         .to(infoCardRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.62)
         .to(formCardRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.72);
     },
-    { scope: pageRef }
+    { scope: pageRef },
   );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
@@ -250,14 +299,17 @@ export default function ContactPage() {
           >
             {"CONTACT".split("").map((l, i) => (
               <span key={i} className=" align-bottom">
-                <span >{l}</span>
+                <span>{l}</span>
               </span>
             ))}
           </div>
         </div>
 
         {/* ── Divider ── */}
-        <div ref={dividerRef} className="h-px bg-black/[0.12] mt-4 sm:mt-2 mb-8 sm:mb-10 lg:mb-12" />
+        <div
+          ref={dividerRef}
+          className="h-px bg-black/[0.12] mt-4 sm:mt-2 mb-8 sm:mb-10 lg:mb-12"
+        />
 
         {/* ── Main grid: stacked on mobile/tablet, side-by-side on md+ ── */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.65fr] gap-5 items-start">
@@ -276,8 +328,9 @@ export default function ContactPage() {
                   Connect With <br /> Eram Education
                 </h2>
                 <p className="text-[13.5px] font-rethink leading-[1.75] text-white/55 max-w-xs">
-                  For admissions, institutional enquiries, partnerships, or sports Arena bookings,
-                  our team will guide you to the right department.
+                  For admissions, institutional enquiries, partnerships, or
+                  sports Arena bookings, our team will guide you to the right
+                  department.
                 </p>
               </div>
 
@@ -303,7 +356,8 @@ export default function ContactPage() {
                       Send us an Enquiry
                     </h3>
                     <p className="text-[13.5px] font-rethink text-black/45 leading-relaxed">
-                      Fill in the form and the relevant department will respond at the earliest.
+                      Fill in the form and the relevant department will respond
+                      at the earliest.
                     </p>
                   </div>
 
@@ -389,7 +443,12 @@ export default function ContactPage() {
                         transition-all duration-200 touch-manipulation "
                     >
                       Send Message
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
                         <path
                           d="M2 8h12M9 4l4 4-4 4"
                           stroke="white"

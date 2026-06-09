@@ -444,18 +444,18 @@ export default function Navbar() {
             }}
             className="flex items-center h-full py-[12px] pr-4 max-[920px]:h-[48px] max-[920px]:rounded-[14px] max-[920px]:px-3 max-[920px]:py-2"
           >
-           <div className="relative w-[128px] lg:w-[138px] h-[32px]">
-  <Image
-    src="/education-1.svg"
-    alt="ERAM Education"
-    fill
-    sizes="(max-width: 1024px) 128px, 138px"
-    style={{
-      objectFit: "contain",
-      objectPosition: "left",
-    }}
-  />
-</div>
+            <div className="relative w-[128px] lg:w-[138px] h-[32px]">
+              <Image
+                src="/education-1.svg"
+                alt="ERAM Education"
+                fill
+                sizes="(max-width: 1024px) 128px, 138px"
+                style={{
+                  objectFit: "contain",
+                  objectPosition: "left",
+                }}
+              />
+            </div>
           </span>
         </Link>
 
@@ -467,17 +467,17 @@ export default function Navbar() {
         {/* ── STUDENT-PARENT PORTAL BUTTON ── */}
         <div className="ml-auto shrink-0 hidden min-[920px]:flex font-rethink">
           <button
-  onClick={() => handleNavClick("/portal")}
-  style={{
-    backgroundColor: btnBg,
-    color: btnText,
-    borderColor: btnBorder,
-    transition: `background-color ${T}, color ${T}, border-color ${T}`,
-  }}
-  className="font-rethink font-semibold px-6 py-[11px] text-[0.95rem] tracking-[0.03em] rounded-[10px] border cursor-pointer whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
->
-  Student-Parent Portal
-</button>
+            onClick={() => handleNavClick("/portal")}
+            style={{
+              backgroundColor: btnBg,
+              color: btnText,
+              borderColor: btnBorder,
+              transition: `background-color ${T}, color ${T}, border-color ${T}`,
+            }}
+            className="font-rethink font-semibold px-6 py-[11px] text-[0.95rem] tracking-[0.03em] rounded-[10px] border cursor-pointer whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
+          >
+            Student-Parent Portal
+          </button>
         </div>
 
         {/* ── MOBILE HAMBURGER ── */}
@@ -648,11 +648,11 @@ export default function Navbar() {
 
           <div className="px-7 pb-10 mt-auto border-t border-black/10 pt-5">
             <button
-  onClick={() => handleNavClick("/portal", true)}
-  className="w-full bg-[#ae1431] text-white rounded-[10px] py-[14px] font-rethink text-[0.85rem] tracking-[0.04em] font-semibold"
->
-  Student-Parent Portal
-</button>
+              onClick={() => handleNavClick("/portal", true)}
+              className="w-full bg-[#ae1431] text-white rounded-[10px] py-[14px] font-rethink text-[0.85rem] tracking-[0.04em] font-semibold"
+            >
+              Student-Parent Portal
+            </button>
           </div>
         </div>
       </header>
