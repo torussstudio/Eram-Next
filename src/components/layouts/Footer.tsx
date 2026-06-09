@@ -1,6 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { Phone, MapPin, Mail } from "lucide-react";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import Link from "next/link";
+import { IoLogoYoutube } from "react-icons/io";
 
 export default function Footer() {
   return (
@@ -25,11 +28,38 @@ export default function Footer() {
               growth and development of our students.
             </p>
 
-            <h4 className="mt-5 font-semibold tracking-wide uppercase text-xs">
+            <h4 className="mt-5 text-xs font-semibold uppercase tracking-wide">
               STAY CONNECTED
             </h4>
 
-            <div className="flex gap-5 mt-4 text-xl"></div>
+            <div className="mt-4 flex items-center gap-5">
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform duration-300 hover:scale-110"
+              >
+                <FaInstagram className="text-[25px]" />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform duration-300 hover:scale-110"
+              >
+                <FaLinkedinIn className="text-[25px]" />
+              </a>
+
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform duration-300 hover:scale-110"
+              >
+                <IoLogoYoutube className="text-[30px]" />
+              </a>
+            </div>
           </div>
 
           {/* QUICK LINKS */}
@@ -40,16 +70,51 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-1.5 text-sm text-white/90">
-              <li className="cursor-pointer hover:underline">About Us</li>
-              <li className="cursor-pointer hover:underline">Admissions</li>
-              <li className="cursor-pointer hover:underline">Academics</li>
-              <li className="cursor-pointer hover:underline">Facilities</li>
-              <li className="cursor-pointer hover:underline">Faculty</li>
-              <li className="cursor-pointer hover:underline">Contact Us</li>
-              <li className="cursor-pointer hover:underline">Download Prospectus</li>
+              <li>
+                <Link href="/about-us" className="hover:underline">
+                  About Us
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/contact" className="hover:underline">
+                  Admissions
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/academics" className="hover:underline">
+                  Academics
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/facilities" className="hover:underline">
+                  Facilities
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/faculty" className="hover:underline">
+                  Faculty
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/contact" className="hover:underline">
+                  Contact Us
+                </Link>
+              </li>
+
+              <li>
+                <a href="/prospectus.pdf" download className="hover:underline">
+                  Download Prospectus
+                </a>
+              </li>
             </ul>
           </div>
 
+          {/* RESOURCES */}
           {/* RESOURCES */}
           <div>
             <h4 className="font-semibold tracking-wide relative inline-block mb-6 uppercase text-sm">
@@ -58,13 +123,47 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-2 text-sm text-white/90">
-              <li className="cursor-pointer hover:underline">FAQs</li>
-              <li className="cursor-pointer hover:underline">Gallery</li>
-              <li className="cursor-pointer hover:underline">News and Updates</li>
-              <li className="cursor-pointer hover:underline">Parent Portal</li>
-              <li className="cursor-pointer hover:underline">Privacy Policy</li>
-              <li className="cursor-pointer hover:underline">Terms & Conditions</li>
-              <li className="cursor-pointer hover:underline">Safety Guidelines</li>
+              <li>
+                <Link href="/faqs" className="hover:underline">
+                  FAQs
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/gallery" className="hover:underline">
+                  Gallery
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/news" className="hover:underline">
+                  News and Updates
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/parent-portal" className="hover:underline">
+                  Parent Portal
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/terms" className="hover:underline">
+                  Terms & Conditions
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/safety-guidelines" className="hover:underline">
+                  Safety Guidelines
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -75,23 +174,44 @@ export default function Footer() {
               <span className="absolute left-0 bottom-[-6px] w-10 h-[2px] bg-white" />
             </h4>
 
-            <ul className="space-y-3 text-sm text-white/90">
-              <li className="flex gap-3 items-start">
-                <Phone className="mt-1 w-4 h-4 shrink-0" />
-                <span>+91 90481 66313</span>
+            <ul className="space-y-4 text-sm text-white/90">
+              {/* PHONE */}
+              <li>
+                <a
+                  href="tel:+919048166313"
+                  className="flex items-start gap-3 hover:text-white transition"
+                >
+                  <Phone className="mt-1 h-4 w-4 shrink-0" />
+                  <span>+91 90481 66313</span>
+                </a>
               </li>
 
-              <li className="flex gap-3 items-start">
-                <Mail className="mt-1 w-4 h-4 shrink-0" />
-                <span className="break-all">manager@eram.edu.in</span>
+              {/* EMAIL */}
+              <li>
+                <a
+                  href="mailto:manager@eram.edu.in"
+                  className="flex items-start gap-3 hover:text-white transition"
+                >
+                  <Mail className="mt-1 h-4 w-4 shrink-0" />
+                  <span className="break-all">manager@eram.edu.in</span>
+                </a>
               </li>
 
-              <li className="flex gap-3 items-start">
-                <MapPin className="mt-1 w-4 h-4 shrink-0" />
-                <span>
-                  Eram Education, Eram nagar, Prabhapuram, Mannengode (PO),
-                  Palakkad-679307
-                </span>
+              {/* LOCATION */}
+              <li>
+                <a
+                  href="https://maps.google.com/?q=Eram+Education+Palakkad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 hover:text-white transition"
+                >
+                  <MapPin className="mt-1 h-4 w-4 shrink-0" />
+
+                  <span>
+                    Eram Education, Eram nagar, Prabhapuram, Mannengode (PO),
+                    Palakkad-679307
+                  </span>
+                </a>
               </li>
             </ul>
           </div>

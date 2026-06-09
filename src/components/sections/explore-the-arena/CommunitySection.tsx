@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function CommunitySection() {
   return (
    <section className="bg-[#F5EFE8] py-[80px] md:py-[100px] px-[16px] sm:px-[20px] md:px-[28px]">
@@ -42,17 +44,41 @@ export default function CommunitySection() {
             </p>
 
             {/* BUTTON */}
-            <button className="bg-[#111] rounded-[12px] font-rethink text-white px-[22px] py-[14px] text-[12px] tracking-[0.18em] uppercase flex items-center gap-3 hover:bg-[#ae1431] hover:text-black cursor-pointer">
-              Enquire About Hosting
-                <span className="
-    relative z-10
-    inline-block
+            <Link
+  href="/contact"
+  className="
+    group
+    bg-[#111]
+    rounded-[12px]
+    font-rethink
+    text-white
+    px-[22px]
+    py-[14px]
+    text-[12px]
+    tracking-[0.18em]
+    uppercase
+    inline-flex
+    items-center
+    gap-3
+    hover:bg-[#ae1431]
+    hover:text-black
     transition-all duration-300
-    group-hover:translate-x-[5px]
-  ">
+    cursor-pointer
+  "
+>
+  Enquire About Hosting
+
+  <span
+    className="
+      relative z-10
+      inline-block
+      transition-all duration-300
+      group-hover:translate-x-[5px]
+    "
+  >
     →
   </span>
-            </button>
+</Link>
           </div>
 
           {/* RIGHT SIDE */}

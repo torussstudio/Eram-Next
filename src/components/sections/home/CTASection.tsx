@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { gsap, ScrollTrigger } from "../../../lib/gsap";
+import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { section, shell } from "../../../constants/homeStyles";
+import Link from "next/link";
 
 
 export default function CTASection() {
@@ -139,24 +140,26 @@ export default function CTASection() {
     >
 
       {/* PRIMARY */}
-      <button
-        className="
-          h-[42px]
-          px-[22px]
-          text-[13px]
-          tracking-[0.04em]
-          rounded-[10px]
-          bg-[#ae1431]
-          text-white
-          hover:opacity-90
-          transition
-          max-[640px]:w-full
-          cursor-pointer
-          font-rethink
-        "
-      >
-        APPLY NOW
-      </button>
+      <Link href="/contact">
+  <button
+    className="
+      h-[42px]
+      px-[22px]
+      text-[13px]
+      tracking-[0.04em]
+      rounded-[10px]
+      bg-[#ae1431]
+      text-white
+      hover:opacity-90
+      transition
+      max-[640px]:w-full
+      cursor-pointer
+      font-rethink
+    "
+  >
+    APPLY NOW
+  </button>
+</Link>
 
       {/* SECONDARY */}
       <button
