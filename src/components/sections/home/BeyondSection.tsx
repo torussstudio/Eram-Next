@@ -492,7 +492,6 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
       >
         {/* TOP */}
         <div className="flex items-start justify-end">
-
           {/* arrow */}
           <div
             className="
@@ -537,7 +536,6 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
         </div>
 
         <div>
-
           {/* title */}
           <div
             className="

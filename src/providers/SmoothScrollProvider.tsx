@@ -17,10 +17,6 @@ interface SmoothScrollProviderProps {
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const pathname = usePathname();
 
-  // ── Kill ALL ScrollTriggers on every route change ──────────────────────────
-  // This runs in the useLayoutEffect *cleanup* phase, which React fires
-  // synchronously BEFORE new page components' layout effects (useGSAP).
-  // That prevents _refreshAll() from finding half-killed 'once:true' triggers.
   useLayoutEffect(() => {
     return () => {
       ScrollTrigger.killAll();
