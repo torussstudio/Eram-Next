@@ -145,7 +145,6 @@ function SpacesDesignedForOpportunity() {
                 sm:text-[18px]
                 lg:text-[26px]
                 leading-[1.25]
-                font-medium
                 max-w-[100px]
                 sm:max-w-[180px]
                 lg:max-w-[230px]
@@ -204,7 +203,7 @@ function SpacesDesignedForOpportunity() {
                   sm:text-[18px]
                   lg:text-[26px]
                   leading-[1.25]
-                  font-medium
+                  
                   max-w-[140px]
                   sm:max-w-[260px]
                   lg:max-w-[420px]
@@ -262,7 +261,7 @@ function SpacesDesignedForOpportunity() {
                     sm:text-[16px]
                     lg:text-[22px]
                     leading-[1.25]
-                    font-medium
+                    
                     max-w-[80px]
                     sm:max-w-[150px]
                     lg:max-w-[210px]
@@ -319,7 +318,7 @@ function SpacesDesignedForOpportunity() {
                     sm:text-[16px]
                     lg:text-[22px]
                     leading-[1.25]
-                    font-medium
+                   
                     max-w-[80px]
                     sm:max-w-[140px]
                     lg:max-w-[190px]

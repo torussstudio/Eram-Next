@@ -322,10 +322,10 @@ export default function ExcellenceSection() {
       <div className="w-full overflow-x-clip px-4 min-[900px]:hidden">
         {/* Heading */}
         <div className="mb-9">
-          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#b0b0b0]">
+          <p className="mb-3 text-[10px]  uppercase tracking-[0.28em] text-[#b0b0b0]">
             Our Domains
           </p>
-          <h2 className="font-display text-[26px] leading-[1.15] sm:text-[32px] font-semibold tracking-[-0.02em] text-[#111]">
+          <h2 className="font-display text-[26px] leading-[1.15] sm:text-[32px]  tracking-[-0.02em] text-[#111]">
             {"Excellence Across Every Domain".split(" ").map((word, i) => (
               <span
                 key={i}
@@ -346,10 +346,10 @@ export default function ExcellenceSection() {
               disabled={active === 0}
             />
             <div className="flex flex-col items-center gap-1">
-              <span className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#c0c0c0]">
+              <span className="text-[9px]  uppercase tracking-[0.22em] text-[#c0c0c0]">
                 0{active + 1} / 0{CATEGORIES.length}
               </span>
-              <span className="font-display text-[17px] font-semibold leading-none tracking-[0.05em] text-[#111]">
+              <span className="font-display text-[17px]  leading-none tracking-[0.05em] text-[#111]">
                 {CATEGORIES[active]}
               </span>
             </div>
@@ -398,7 +398,7 @@ export default function ExcellenceSection() {
         </div>
 
         {/* CTA */}
-        <button className="mob-exc-btn font-rethink w-full cursor-pointer rounded-[12px] border border-[#d8d8d8] py-[15px] text-[11px] font-semibold uppercase tracking-[0.18em] text-[#222] transition-all duration-200 active:border-[#111] active:bg-[#111] active:text-white">
+        <button className="mob-exc-btn font-rethink w-full cursor-pointer rounded-[12px] border border-[#d8d8d8] py-[15px] text-[11px] uppercase tracking-[0.18em] text-[#222] transition-all duration-200 active:border-[#111] active:bg-[#111] active:text-white">
           Explore Excellence
         </button>
       </div>

@@ -436,7 +436,7 @@ export default function SystemsSection() {
                 key={i}
                 ref={(el) => { tabRefs.current[i] = el; }}
                 onClick={() => handleTabClick(i)}
-                className="relative pb-[18px] text-[18px] font-medium tracking-[0.12em] uppercase whitespace-nowrap transition-colors duration-300 cursor-pointer"
+                className="relative pb-[18px] text-[18px] tracking-[0.12em] uppercase whitespace-nowrap transition-colors duration-300 cursor-pointer"
                 style={{ color: activeTab === i ? "#ffffff" : "rgba(255,255,255,0.65)" }}
               >
                 {label.split("\n").map((line, j) => (
@@ -524,7 +524,7 @@ export default function SystemsSection() {
                     >
                       /{card.n}
                     </span>
-                    <span className="font-rethink flex justify-end text-[26px] font-medium leading-[1.2] text-[#f8f8f8] drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+                    <span className="font-rethink flex justify-end text-[26px]  leading-[1.2] text-[#f8f8f8] drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
                       {card.t}
                     </span>
                   </div>
@@ -545,7 +545,7 @@ export default function SystemsSection() {
         <div className="desk-cta mt-[70px] flex justify-center px-[20px]">
           <button
             onClick={() => router.push("/about-us")}
-            className="font-rethink rounded-[8px] border border-white/70 px-[36px] py-[14px] text-[12px] font-[500] uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-[#a80c2d] cursor-pointer"
+            className="font-rethink rounded-[8px] border border-white/70 px-[36px] py-[14px] text-[12px]  uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-[#a80c2d] cursor-pointer"
           >
             EXPLORE OUR SYSTEMS & STANDARDS
           </button>
@@ -1073,7 +1073,7 @@ export default function SystemsSection() {
         className="
           block
           text-[12px]
-          font-[600]
+          
           uppercase
           tracking-[0.18em]
           leading-[1.5]

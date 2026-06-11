@@ -238,7 +238,7 @@ function SystemsThatSustainExcellence() {
                 className="systems-eyebrow-line-left h-px bg-black/30 w-10"
                 style={{ transformOrigin: "left center" }}
               />
-              <span className="font-rethink text-[14px] uppercase tracking-[0.2em] text-[#F5EFE8] font-medium">
+              <span className="font-rethink text-[14px] uppercase tracking-[0.2em] text-[#F5EFE8] ">
                 Academic Systems
               </span>
               <div
@@ -321,7 +321,7 @@ function SystemsThatSustainExcellence() {
                   <div className="w-full h-full flex flex-col justify-between p-6 sm:p-8 md:p-10">
                     <div>
                       <p
-                        className="font-mono text-black/35 tracking-[0.14em]"
+                        className="font-rethink text-black/35 tracking-[0.14em]"
                         style={{ fontSize: "clamp(10px, 1.3vw, 13px)" }}
                       >
                         {item.number}
@@ -344,7 +344,7 @@ function SystemsThatSustainExcellence() {
                         {CARD_TAGS[originalItemIndex].map((tag) => (
                           <span
                             key={tag}
-                            className="font-rethink font-medium text-black/50 leading-snug"
+                            className="font-rethink  text-black/50 leading-snug"
                             style={{ fontSize: "clamp(10px, 1.3vw, 13px)" }}
                           >
                             {tag}
@@ -383,7 +383,7 @@ function SystemsThatSustainExcellence() {
             </div>
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10">
-              <p className="font-rethink system-desc text-center text-white text-[15px] sm:text-[17px] md:text-[22px] leading-relaxed max-w-[680px] font-light">
+              <p className="font-rethink system-desc text-center text-white text-[15px] sm:text-[17px] md:text-[22px] leading-relaxed max-w-[680px]">
                 These systems ensure that faculty remain professionally
                 equipped, students receive guided mentorship, and institutional
                 standards are maintained across all campuses.

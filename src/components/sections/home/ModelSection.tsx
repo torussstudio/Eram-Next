@@ -180,7 +180,7 @@ export default function ModelSection() {
             max-[640px]:mt-[60px] max-[640px]:order-4
           "
         >
-          <h3 className="text-center text-[25px] tracking-[0.12em] font-[400] text-[#f5efe8] max-[900px]:text-[20px] max-[640px]:text-[16px] max-[640px]:tracking-[0.08em]">
+          <h3 className="text-center text-[25px] tracking-[0.12em]  text-[#f5efe8] max-[900px]:text-[20px] max-[640px]:text-[16px] max-[640px]:tracking-[0.08em]">
             ACADEMIC SYSTEMS & FACULTY DEVELOPMENT
           </h3>
 
@@ -191,7 +191,7 @@ export default function ModelSection() {
               onClick={() => scrollCarousel(-1)}
               className=" group
                 max-[560px]:hidden
-                absolute left-0  bottom-15 -translate-y-1/2 -translate-x-16 z-10
+                absolute left-0  bottom-13 -translate-y-1/2 -translate-x-16 z-10
                 w-[42px] h-[42px] rounded-full border-2 border-[#f5efe8]
                 bg-transparent flex items-center justify-center
                 transition-all duration-300 hover:border-transparent
@@ -235,7 +235,7 @@ export default function ModelSection() {
                   "
                 >
                   <span className="absolute left-0 top-[4px] w-[2px] bg-[#f5efe8] h-[180px] max-[900px]:h-[160px] max-[560px]:h-[120px]" />
-                  <div className="text-[25px] tracking-[0.16em] font-[500] text-[#f5efe8] max-[560px]:text-[16px]">
+                  <div className="text-[25px] tracking-[0.16em]  text-[#f5efe8] max-[560px]:text-[16px]">
                     /0{i + 1}
                   </div>
                   <p
@@ -255,7 +255,7 @@ export default function ModelSection() {
               onClick={() => scrollCarousel(1)}
               className=" group
                 max-[560px]:hidden
-                absolute right-0 bottom-15 -translate-y-1/2 translate-x-12 z-10
+                absolute right-0 bottom-13 -translate-y-1/2 translate-x-12 z-10
                 w-[42px] h-[42px] rounded-full border-2 border-[#f5efe8]
                 bg-transparent flex items-center justify-center
                transition-all duration-300 hover:border-transparent

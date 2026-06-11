@@ -78,7 +78,7 @@ export default function HeroSection() {
                   className="
                     font-rethink
 
-                    text-[10px]
+                    text-[11px]
 
                     sm:text-[11px]
 
@@ -197,7 +197,6 @@ export default function HeroSection() {
                   "
                 >
                   EXPLORE THE ARENA
-
                   <span
                     className="
                       relative
@@ -254,7 +253,6 @@ export default function HeroSection() {
                   "
                 >
                   HOST AN EVENT
-
                   <Calendar className="w-4 h-4 opacity-70" />
                 </button>
               </div>
@@ -322,18 +320,12 @@ export default function HeroSection() {
                 <div
                   key={i}
                   className={`py-3 ${
-                    i !== 3
-                      ? "border-b border-white/10"
-                      : ""
+                    i !== 3 ? "border-b border-white/10" : ""
                   }`}
                 >
-                  <h3 className="text-[20px] md:text-[22px] font-semibold">
-                    {title}
-                  </h3>
+                  <h3 className="text-[20px] font-rethink  md:text-[22px] ">{title}</h3>
 
-                  <p className="text-[12px] text-white/60 mt-1">
-                    {desc}
-                  </p>
+                  <p className="text-[12px] font-display text-white/60 mt-1">{desc}</p>
                 </div>
               ))}
             </div>
@@ -346,9 +338,11 @@ export default function HeroSection() {
             <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
               <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[55px]">
                 {/* LABEL */}
-                <div className="font-rethink flex items-center gap-3 mb-[40px] md:mb-[50px]">
+                <div className=" flex items-center gap-3 mb-[40px] md:mb-[50px]">
                   <p
                     className="
+                    font-rethink
+
                       text-[13px]
 
                       sm:text-[15px]
@@ -420,11 +414,7 @@ export default function HeroSection() {
 
                         md:px-[28px]
 
-                        ${
-                          i !== 3
-                            ? "md:border-r"
-                            : ""
-                        }
+                        ${i !== 3 ? "md:border-r" : ""}
 
                         border-white/10
                       `}
@@ -436,7 +426,7 @@ export default function HeroSection() {
                       <div className="flex items-baseline gap-[10px]">
                         <h3
                           className="
-                            font-serif
+                            font-rethink
 
                             text-[30px]
 
@@ -444,7 +434,7 @@ export default function HeroSection() {
 
                             text-[#eae6df]
 
-                            font-medium
+                            
 
                             tracking-[-0.01em]
                           "
@@ -458,9 +448,9 @@ export default function HeroSection() {
 
                             md:text-[17px]
 
-                            text-[#8f877d]
+                            text-white
 
-                            font-normal
+                            font-display
 
                             relative
 
@@ -480,7 +470,7 @@ export default function HeroSection() {
 
                           md:text-[14px]
 
-                          text-[#9f988e]
+                          text-white
 
                           leading-[1.7]
                         "

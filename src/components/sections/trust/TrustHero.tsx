@@ -111,7 +111,7 @@ function TrustHero() {
                 </span>
               </h1>
 
-              {/* PARAGRAPH — ✅ no opacity-0/translate classes */}
+              
               <p className="font-rethink hero-content-fade mt-4 text-[0.85rem] text-white/80 leading-[1.7] max-w-[320px]">
                 Across communities, ERAM implements long-term initiatives
                 designed to strengthen access, equity, and opportunity — guided
@@ -119,7 +119,7 @@ function TrustHero() {
               </p>
 
               {/* BUTTON — ✅ no opacity-0/translate classes */}
-              <button className="font-rethink hero-content-fade mt-6 bg-[#ae1431] text-white px-5 py-2.5 rounded-[10px] text-xs tracking-wide font-medium">
+              <button className="font-rethink hero-content-fade mt-6 bg-[#ae1431] text-white px-5 py-2.5 rounded-[10px] text-xs tracking-wide ">
                 VIEW COMMUNITY WORK →
               </button>
             </div>
@@ -128,33 +128,33 @@ function TrustHero() {
             <div className="hidden md:block w-full text-white pl-[130px] pr-8 lg:pl-[180px]">
               <div className="max-w-[640px]">
 
-                {/* TOP LABEL — ✅ no opacity-0/translate classes */}
+               
                 <div className="hero-content-fade flex items-center gap-4 mb-6">
                   <span className="font-rethink text-[11px] tracking-[0.32em] uppercase text-white/80">
                     ERAM EDUCATIONAL & WELFARE TRUST
                   </span>
                 </div>
 
-                {/* HEADING — ✅ overflow-hidden wrappers for masked reveal */}
-                <h1 className="font-display leading-[1.05] text-[clamp(2.5rem,4vw,3.8rem)] font-light">
-                  <span className="block overflow-hidden">
+               
+                <h1 className="font-display leading-[1.05] text-[clamp(2.5rem,4vw,3.8rem)] ">
+                  <span className="block ">
                     <span className="hero-heading-line block">
                       Purpose in Action.
                     </span>
                   </span>
-                  <span className="block overflow-hidden italic text-white/90">
+                  <span className="block  text-white/90">
                     <span className="hero-heading-line block">
                       Responsibility
                     </span>
                   </span>
-                  <span className="block overflow-hidden">
+                  <span className="block ">
                     <span className="hero-heading-line block">
                       in Structure.
                     </span>
                   </span>
                 </h1>
 
-                {/* PARAGRAPH — ✅ no opacity-0/translate classes */}
+                
                 <p className="font-rethink hero-content-fade mt-6 text-[1.05rem] text-white/85 leading-relaxed">
                   Across communities, ERAM Educational & Welfare Trust implements
                   long-term initiatives designed to strengthen access, equity, and
@@ -167,8 +167,8 @@ function TrustHero() {
                   and accountable.
                 </p>
 
-                {/* BUTTON — ✅ no opacity-0/translate classes */}
-                <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide font-medium hover:bg-[#F5EFE8] hover:text-black transition cursor-pointer">
+                
+                <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide  hover:bg-[#F5EFE8] hover:text-black transition cursor-pointer">
                   VIEW OUR COMMUNITY INTERVENTIONS →
                 </button>
               </div>

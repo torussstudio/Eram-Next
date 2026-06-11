@@ -147,13 +147,13 @@ export default function PhilosophySection() {
 
         {/* CARDS */}
         <div className="mt-16 grid md:grid-cols-4 rounded-[32px] overflow-hidden border border-[#ae1431]">
-  {cards.map((item, i) => (
-    <div
-      key={i}
-     ref={(el) => {
-  cardRefs.current[i] = el;
-}}
-      className="
+          {cards.map((item, i) => (
+            <div
+              key={i}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className="
         bg-[#f5efe8]
         px-8
         pt-10
@@ -163,15 +163,15 @@ export default function PhilosophySection() {
         border-r border-b border-[#ae1431]
         last:border-r-0
       "
-      style={{ opacity: 0, transform: "translateY(40px)" }}
-    >
-      <span className="font-display text-[12px] tracking-[0.16em] text-black">
-        {item.no}
-      </span>
+              style={{ opacity: 0, transform: "translateY(40px)" }}
+            >
+              <span className="font-rethink text-[12px] tracking-[0.16em] text-black">
+                {item.no}
+              </span>
 
-      <div className="mt-10 flex flex-col flex-1">
-        <h3
-          className="
+              <div className="mt-10 flex flex-col flex-1">
+                <h3
+                  className="
             font-display
             text-[21px]
             leading-[1.2]
@@ -180,12 +180,12 @@ export default function PhilosophySection() {
             min-h-[72px]
             max-w-[220px]
           "
-        >
-          {item.title}
-        </h3>
+                >
+                  {item.title}
+                </h3>
 
-        <p
-          className="
+                <p
+                  className="
             mt-6
             font-rethink
             text-[14px]
@@ -193,13 +193,13 @@ export default function PhilosophySection() {
             text-black/80
             max-w-[240px]
           "
-        >
-          {item.desc}
-        </p>
-      </div>
-    </div>
-  ))}
-</div>
+                >
+                  {item.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

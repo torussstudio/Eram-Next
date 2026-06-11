@@ -707,7 +707,7 @@ function StructuredLearningSection() {
                       text-[13px]
                       md:text-[20px]
 
-                      font-medium
+                      
 
                       leading-[1.35]
 
@@ -957,7 +957,7 @@ function StructuredLearningSection() {
                         className="
                           text-[20px]
 
-                          font-semibold
+                          
 
                           text-white
 
@@ -979,7 +979,7 @@ function StructuredLearningSection() {
 
                           text-white/65
 
-                          font-medium
+                          
 
                           uppercase
 
@@ -1026,7 +1026,7 @@ function StructuredLearningSection() {
                   className="
                     text-[20px]
 
-                    font-semibold
+                    
 
                     text-white
 
@@ -1048,7 +1048,7 @@ function StructuredLearningSection() {
 
                     text-white/75
 
-                    font-medium
+                    
 
                     leading-snug
 
@@ -1092,7 +1092,7 @@ function StructuredLearningSection() {
 
               md:text-[18px]
 
-              font-medium
+             
 
               text-white
 
@@ -1172,7 +1172,7 @@ function StructuredLearningSection() {
 
             lg:text-[48px]
 
-            font-medium
+          
 
             leading-[1.2]
 

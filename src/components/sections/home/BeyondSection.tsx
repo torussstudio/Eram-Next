@@ -131,7 +131,7 @@ export default function BeyondSection() {
     >
       <div className="mx-auto w-full max-w-[1200px] px-[20px] md:px-[32px] lg:px-[40px] text-center">
         {/* Heading */}
-        <h2 className="beyond-heading font-display mb-[14px] text-[36px] font-[700] leading-[1.2] tracking-[-0.02em] text-[#f5efe8] max-[640px]:text-[28px]">
+        <h2 className="beyond-heading font-display mb-[14px] text-[36px]  leading-[1.2] tracking-[-0.02em] text-[#f5efe8] max-[640px]:text-[28px]">
           BEYOND THE CLASSROOM
         </h2>
 
@@ -544,7 +544,7 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
               max-w-[92%]
 
               text-[clamp(1rem,2vw,1.45rem)]
-              font-[500]
+              
 
               leading-[1.12]
 

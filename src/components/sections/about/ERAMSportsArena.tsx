@@ -169,7 +169,7 @@ function ERAMSportsArena() {
                 right-4 sm:right-8 md:right-10
                 text-white
                 text-[12px] xs:text-[13px] sm:text-[15px] md:text-[18px] lg:text-[22px]
-                font-semibold leading-[1.4]
+                leading-[1.4]
                 max-w-[220px] xs:max-w-[260px] sm:max-w-[340px] md:max-w-[440px] lg:max-w-[520px]
                 font-rethink
               "
@@ -224,7 +224,7 @@ function ERAMSportsArena() {
                   arena-cta-text
                   text-white/90
                   text-[11.5px] xs:text-[12.5px] sm:text-[14px] md:text-[15px] lg:text-[16px]
-                  font-medium leading-[1.72]
+                  leading-[1.72]
                   max-w-[280px] xs:max-w-[320px] sm:max-w-[460px] md:max-w-[520px] lg:max-w-[560px]
                   mx-auto font-rethink
                 "
@@ -254,7 +254,7 @@ function ERAMSportsArena() {
     py-2 xs:py-2.5 sm:py-3
     rounded-lg
     text-[10px] xs:text-[11px] sm:text-[12px] md:text-[13px]
-    font-medium font-rethink
+    font-rethink
     hover:opacity-90 active:scale-95 transition
     whitespace-nowrap cursor-pointer
     tracking-wide
@@ -284,7 +284,7 @@ function ERAMSportsArena() {
                     py-2 xs:py-2.5 sm:py-3
                     rounded-lg
                     text-[10px] xs:text-[11px] sm:text-[12px] md:text-[13px]
-                    font-medium font-rethink
+                   font-rethink
                     hover:bg-white hover:text-black
                     active:scale-95 transition
                     whitespace-nowrap cursor-pointer

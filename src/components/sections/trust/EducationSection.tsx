@@ -76,7 +76,7 @@ const Card = ({
         </span>
       )}
       {title && (
-        <h3 className="font-serif text-[18px] leading-[1.4]">{title}</h3>
+        <h3 className="font-display text-[18px] leading-[1.4]">{title}</h3>
       )}
       {meta.length > 0 && (
         <div className={`mt-2 text-[12px] space-y-1 ${metaColor}`}>
@@ -114,7 +114,7 @@ const Card = ({
             variant === "white" ? "bg-[#ae1431] text-white" : "bg-white/10"
           }`}
         >
-          <p className="text-[14px] font-semibold">{badge.value}</p>
+          <p className="text-[14px] ">{badge.value}</p>
           <p
             className={`text-[12px] ${variant === "white" ? "text-white/80" : "text-white/70"}`}
           >
@@ -156,7 +156,7 @@ const PillarHeader = ({
         <div className="flex items-center gap-6 mt-2">
           <span className="font-display text-[48px] text-black/10">{num}</span>
           <div>
-            <h2 className="font-display text-[32px] font-light leading-[1.2]">
+            <h2 className="font-display text-[32px]  leading-[1.2]">
               {title}
             </h2>
             <p className="font-rethink text-[14.5px] text-black/60 mt-1">
@@ -264,7 +264,7 @@ const panels = [
           <span className="text-[11px] uppercase text-[#ae1431]">
             PALAKKAD DISTRICT
           </span>
-          <h3 className="mt-3 font-serif text-[18px]">
+          <h3 className="mt-3  text-[18px]">
             Structured Educational Institutions
           </h3>
           <p className="mt-3 text-[14px] text-black/70 leading-[1.7]">
@@ -516,7 +516,7 @@ const panels = [
           <span className="text-[11px] uppercase text-[#ae1431]">
             MANKARA · KOTTAYI PANCHAYATS
           </span>
-          <h3 className="mt-3 font-serif text-[18px]">
+          <h3 className="mt-3  text-[18px]">
             Bharathapuzha Shutter Restoration
           </h3>
           <div className="mt-3 text-[13px] text-black/60 space-y-1">

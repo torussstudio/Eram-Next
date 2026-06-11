@@ -217,7 +217,7 @@ export default function ArenaSection() {
   className="
     pointer-events-none select-none
     absolute z-20 bottom-[-55px]
-    left-1/2 -translate-x-1/2          {/* ✅ ഇത് മാത്രം — എല്ലാ sizes-ലും center */}
+    left-1/2 -translate-x-1/2       
     font-display leading-[0.88] text-transparent
     text-[clamp(7.2rem,13.2vw,14rem)] tracking-[-0.045em]
     [-webkit-text-stroke:1.6px_white]
@@ -267,7 +267,7 @@ export default function ArenaSection() {
             <h2
               ref={headingRef}
               className="
-                font-display font-bold tracking-[-0.02em] leading-[1.22]
+                font-display  tracking-[-0.02em] leading-[1.22]
                 text-[34px] text-white mb-5
                 max-[640px]:text-[28px]
               "

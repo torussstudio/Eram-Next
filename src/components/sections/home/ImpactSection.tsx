@@ -94,7 +94,8 @@ function CarouselArrow({ direction, onClick }: CarouselArrowProps) {
       onClick={onClick}
       aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
        className="
-        group flex-none flex items-center justify-center
+       relative -top-7
+        group flex-none  flex items-center justify-center
         w-[42px] h-[42px]
         rounded-full
         border-[2px] border-[#f5efe8]/50
@@ -294,7 +295,7 @@ const mobileCarouselRef = useRef<HTMLDivElement>(null);
         <div className="flex flex-col gap-3">
           <SplitHeading
             text="In Service Of Society"
-            className="text-[26px] font-semibold leading-[1.15] text-[#f5efe8]"
+            className="text-[26px]  leading-[1.15] text-[#f5efe8]"
           />
           <p className="para-anim font-rethink text-[13.5px] leading-[1.8] text-[#f5efe8]/90">
             ERAM Educational &amp; Welfare Trust advances social equity through structured
@@ -305,7 +306,7 @@ const mobileCarouselRef = useRef<HTMLDivElement>(null);
             While education remains its core mission, the Trust extends its responsibility
             through targeted social initiatives supporting underprivileged communities.
           </p>
-          <button className="btn-anim mt-1 h-[44px] w-full cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#f5efe8] font-rethink text-[12px] font-medium tracking-[0.08em] text-[#ae1431] transition active:scale-[0.97]">
+          <button className="btn-anim mt-1 h-[44px] w-full cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#f5efe8] font-rethink text-[12px]  tracking-[0.08em] text-[#ae1431] transition active:scale-[0.97]">
             EXPLORE STUDENT PATHWAYS
           </button>
         </div>

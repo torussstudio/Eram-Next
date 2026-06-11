@@ -106,7 +106,7 @@ export default function CTASection() {
         text-[40px]
         leading-[1.15]
         tracking-[-0.02em]
-        font-[600]
+        
         text-white
         mb-[10px]
         max-[640px]:text-[31px]

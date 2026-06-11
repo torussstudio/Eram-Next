@@ -209,7 +209,7 @@ export default function InstitutionsSection() {
             mt-5
 
             text-[20px]
-            font-medium
+            
             tracking-[0.01em]
             text-[#111]
 

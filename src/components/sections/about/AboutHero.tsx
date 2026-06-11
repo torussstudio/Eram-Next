@@ -126,7 +126,7 @@ function AboutHero() {
                 md:hidden
               "
             >
-              <h1 className="font-agency text-white font-light tracking-[-0.03em] leading-[0.95] text-[clamp(1.75rem,7vw,5.8rem)] -mt-16">
+              <h1 className="font-display text-white  tracking-[-0.03em] leading-[0.95] text-[clamp(1.75rem,7vw,5.8rem)] -mt-16">
 
                 <span className="block overflow-hidden pb-1">
                   <span
@@ -169,7 +169,7 @@ function AboutHero() {
                   hero-content-fade mt-6
                   bg-white text-black
                   px-5 py-2.5 rounded-[12px]
-                  text-xs font-medium
+                  text-xs 
                   flex items-center gap-2
                   hover:bg-gray-200
                   transition
@@ -265,7 +265,7 @@ function AboutHero() {
     hero-content-fade mt-8
     bg-white text-black
     px-6 py-3 rounded-[12px]
-    text-sm font-medium
+    text-sm 
     flex items-center gap-2
     hover:bg-black hover:text-white
     transition

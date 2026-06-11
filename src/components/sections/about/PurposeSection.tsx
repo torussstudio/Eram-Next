@@ -176,7 +176,7 @@ function PurposeSection() {
 
           {/* right content */}
           <div className="purpose-items">
-            <h3 className="font-rethink text-[18px] md:text-[20px] font-medium text-black mb-6 md:mb-8 opacity-0 translate-y-5">
+            <h3 className="font-rethink text-[18px] md:text-[20px]  text-black mb-6 md:mb-8 opacity-0 translate-y-5">
               Across its institutions, the
               <br />
               Trust remains committed to:
@@ -243,8 +243,6 @@ function PurposeSection() {
     text-[13px]
     md:text-[14px]
 
-    font-medium
-
     text-black/85
 
     leading-[1.42]
@@ -275,8 +273,6 @@ function PurposeSection() {
 
     text-[13px]
     md:text-sm
-
-    font-medium
 
     flex
     items-center

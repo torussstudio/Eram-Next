@@ -137,7 +137,7 @@ export default function StructuredFramework({
           </div>
 
           <div className="flex flex-wrap items-end gap-[clamp(16px,4vw,56px)] justify-between">
-            <h2 className="font-display text-[clamp(1.9rem,4.2vw,3.4rem)] font-light leading-[1.12] max-w-[620px] m-0 tracking-[-0.01em]">
+            <h2 className="font-display text-[50px] leading-[1.12] max-w-[620px] m-0 tracking-[-0.01em]">
               A Structured Approach to Social Responsibility
             </h2>
             <p className="font-rethink text-[14.5px] leading-[1.85] text-white/60 max-w-[360px] m-0 ">
@@ -182,10 +182,10 @@ export default function StructuredFramework({
                   <span className="font-rethink block text-[10px] tracking-[0.22em] text-[#ae1431]  mb-[14px] transition-[letter-spacing,color] duration-[400ms] ease-[ease]">
                     {item.label}
                   </span>
-                  <h3 className="font-display text-[clamp(15px,1.8vw,18px)]  m-0 mb-[10px] leading-[1.3] text-white transition-colors duration-300">
+                  <h3 className="font-display text-[20px]  m-0 mb-[10px] leading-[1.3] text-white transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-[clamp(12px,1.2vw,13px)] leading-[1.78] text-white/50 m-0 font-rethink transition-colors duration-[350ms]">
+                  <p className="text-[14px] leading-[1.78] text-white/50 m-0 font-rethink transition-colors duration-[350ms]">
                     {item.desc}
                   </p>
                 </div>

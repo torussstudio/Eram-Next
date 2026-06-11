@@ -59,7 +59,7 @@ function InstitutionsDropdown({
           color: "#111111",
           transition: `color ${T}`,
         }}
-        className="relative pb-[5px] text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] font-semibold uppercase tracking-[0.04em] cursor-pointer whitespace-nowrap flex items-center gap-[5px]"
+        className="relative pb-[5px] text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem]  uppercase tracking-[0.04em] cursor-pointer whitespace-nowrap flex items-center gap-[5px]"
       >
         INSTITUTIONS
         <svg
@@ -139,7 +139,7 @@ function InstitutionsDropdown({
                 <span
                   className={`
     text-[0.85rem]
-    font-semibold
+    
     tracking-[0.02em]
     flex-1
     transition-colors duration-200
@@ -393,7 +393,7 @@ export default function Navbar() {
             willChange: "color",
             WebkitFontSmoothing: "antialiased",
           }}
-          className="relative pb-[5px] translate-z-0 backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] font-medium uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap"
+          className="relative pb-[5px] translate-z-0 backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem]  uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap"
         >
           {item.label}
           <span
@@ -460,9 +460,9 @@ export default function Navbar() {
         </Link>
 
         {/* ── DESKTOP NAV ── */}
-        <nav className="absolute left-1/2 -translate-x-1/2 hidden min-[920px]:flex items-center gap-12 lg:gap-12 xl:gap-16 font-rethink">
-          {renderNavItems()}
-        </nav>
+        <nav className="absolute top-6 left-1/2 -translate-x-1/2 hidden min-[920px]:flex items-center gap-12 lg:gap-12 xl:gap-16 font-rethink">
+  {renderNavItems()}
+</nav>
 
         {/* ── STUDENT-PARENT PORTAL BUTTON ── */}
         <div className="ml-auto shrink-0 hidden min-[920px]:flex font-rethink">
@@ -474,7 +474,7 @@ export default function Navbar() {
               borderColor: btnBorder,
               transition: `background-color ${T}, color ${T}, border-color ${T}`,
             }}
-            className="font-rethink font-semibold px-6 py-[11px] text-[0.95rem] tracking-[0.03em] rounded-[10px] border cursor-pointer whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
+            className="font-rethink  px-6 py-[11px] text-[0.95rem] tracking-[0.03em] rounded-[10px] border cursor-pointer whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
           >
             Student-Parent Portal
           </button>
@@ -539,7 +539,7 @@ export default function Navbar() {
           } min-[920px]:hidden`}
         >
           <div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
-            <span className="font-display font-bold text-xl text-[#ae1431]">
+            <span className="font-display  text-xl text-[#ae1431]">
               ERAM.
             </span>
             <button
@@ -557,7 +557,7 @@ export default function Navbar() {
                   <div key="mob-institutions">
                     <button
                       onClick={() => setMobileInstitutionsOpen((v) => !v)}
-                      className="w-full flex items-center justify-between py-4 border-b border-black/[0.08] text-[1.05rem] font-semibold uppercase tracking-[0.05em] text-[#111]"
+                      className="w-full flex items-center justify-between py-4 border-b border-black/[0.08] text-[1.05rem]  uppercase tracking-[0.05em] text-[#111]"
                     >
                       INSTITUTIONS
                       <svg
@@ -609,7 +609,7 @@ export default function Navbar() {
                                 style={{ objectFit: "cover" }}
                               />
                             </div>
-                            <span className="text-[0.9rem] font-medium text-[#111] flex-1 font-rethink">
+                            <span className="text-[0.9rem]  text-[#111] flex-1 font-rethink">
                               {inst.title}
                             </span>
                             <svg
@@ -638,7 +638,7 @@ export default function Navbar() {
                 <button
                   key={item.path}
                   onClick={() => handleNavClick(item.path, true)}
-                  className="py-4 border-b border-black/[0.08] text-[1.05rem] font-semibold uppercase tracking-[0.05em] text-left text-[#111] hover:text-[#ae1431] transition-colors duration-200"
+                  className="py-4 border-b border-black/[0.08] text-[1.05rem]  uppercase tracking-[0.05em] text-left text-[#111] hover:text-[#ae1431] transition-colors duration-200"
                 >
                   {item.label}
                 </button>
@@ -649,7 +649,7 @@ export default function Navbar() {
           <div className="px-7 pb-10 mt-auto border-t border-black/10 pt-5">
             <button
               onClick={() => handleNavClick("/portal", true)}
-              className="w-full bg-[#ae1431] text-white rounded-[10px] py-[14px] font-rethink text-[0.85rem] tracking-[0.04em] font-semibold"
+              className="w-full bg-[#ae1431] text-white rounded-[10px] py-[14px] font-rethink text-[0.85rem] tracking-[0.04em]"
             >
               Student-Parent Portal
             </button>
