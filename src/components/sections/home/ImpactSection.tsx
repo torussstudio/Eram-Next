@@ -334,7 +334,7 @@ const mobileCarouselRef = useRef<HTMLDivElement>(null);
                    impact-scroll-card
                     flex-none snap-start
                     w-[350px] min-h-[120px] pl-[26px] pr-[26px]
-                    [&_.card-line]:h-[180px]
+                    [&_.card-line]:h-[185px]
                     [&_.card-code]:text-[25px] [&_.card-code]:mb-[15px]
                     [&_.card-title]:text-[25px] [&_.card-title]:mt-[50px]
                   "
