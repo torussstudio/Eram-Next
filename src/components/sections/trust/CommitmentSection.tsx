@@ -17,10 +17,10 @@ function InkHeading({ text, headingRef }: InkHeadingProps) {
   return (
     <h2
       ref={headingRef}
-      className="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[1.18] text-[#1a1208] tracking-[-0.01em]"
+      className="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[1.1] text-[#1a1208] tracking-[-0.01em]"
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block mr-[0.2em] overflow-hidden">
+        <span key={i} className="inline-block mr-[0.2em]">
           <span className="ls-word inline-block">{word}</span>
         </span>
       ))}
@@ -221,9 +221,6 @@ export default function CommitmentSection() {
               <RevealParagraph key={i} text={text} paraRef={paraRefs[i]} />
             ))}
           </div>
-        </div>
-        <div className="mt-[clamp(40px,6vw,64px)]">
-          <AnimatedDivider dividerRef={dividerRef} />
         </div>
       </div>
     </section>

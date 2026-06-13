@@ -162,16 +162,14 @@ function PurposeSection() {
       "
         >
           {/* image */}
-          <div className="purpose-image opacity-0 translate-y-8 scale-95 rounded-[22px] overflow-hidden transform-gpu">
-            <div className="aspect-[4/3] w-full">
-              <OptimizedImage
-                src="/images/campus.webp"
-                alt="campus"
-                className="w-full h-full object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                disableTransition
-              />
-            </div>
+          <div className="w-full h-[500px] ">
+            <OptimizedImage
+              src="/images/campus.webp"
+              alt="campus"
+              className="w-full h-full object-cover rounded-2xl"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              disableTransition
+            />
           </div>
 
           {/* right content */}

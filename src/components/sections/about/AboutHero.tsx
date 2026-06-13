@@ -276,7 +276,7 @@ function AboutHero() {
 >
   EXPLORE OUR INSTITUTIONS
 
-  <Play className="text-xs transition-all duration-300 group-hover:translate-x-1" />
+   <Play className="w-4 h-4 transition-all duration-300" />
 </button>
               </div>
             </div>

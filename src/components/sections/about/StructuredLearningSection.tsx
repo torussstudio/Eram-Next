@@ -428,8 +428,8 @@ useEffect(() => {
     {
       src: "/images/person2.avif",
       alt: "Mr. Abdhussamad C K",
-      objPos: "object-[15%_20%]",
-      name: "Mr. ABDUSSAMAD C K",
+      objPos: "object-[60%_20%]",
+       name: "Mr. ABDUSSAMAD C K",
       role:
         "Secretary & Manager\nEram Educational And Welfare Trust",
       messageTitle: "Manager's Message",
@@ -487,7 +487,7 @@ useEffect(() => {
           "
         >
           {/* LEFT */}
-          <div className="w-full md:max-w-[420px]">
+          <div className="w-full md:max-w-[420px] -mb-12">
             <h2
               className="
                 structured-text
@@ -1096,6 +1096,8 @@ useEffect(() => {
             </div>
           ))}
         </div>
+
+        <div className="my-12 md:my-16 border-t border-white/40" />
 
         {/* BOTTOM TEXT */}
         <div

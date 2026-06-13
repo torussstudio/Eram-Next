@@ -74,6 +74,7 @@ export default function PhilosophySection() {
     {
       no: "/01",
       title: "Building Assets That Endure",
+      src:"/images/beyond3.avif",
       desc: "Every intervention creates infrastructure, systems, or capabilities with lifespans beyond the immediate need — not one-time distributions.",
     },
     {
@@ -170,33 +171,40 @@ export default function PhilosophySection() {
               </span>
 
               <div className="mt-10 flex flex-col flex-1">
-                <h3
-                  className="
-            font-display
-            text-[21px]
-            leading-[1.2]
-            tracking-[-0.02em]
-            text-black
-            min-h-[72px]
-            max-w-[220px]
-          "
-                >
-                  {item.title}
-                </h3>
+  <h3
+    className="
+      font-display
+      text-[21px]
+      leading-[1.2]
+      tracking-[-0.02em]
+      text-black
+      min-h-[72px]
+      max-w-[220px]
+    "
+  >
+    {item.title}
+  </h3>
 
-                <p
-                  className="
-            mt-6
-            font-rethink
-            text-[14px]
-            leading-[1.9]
-            text-black/80
-            max-w-[240px]
-          "
-                >
-                  {item.desc}
-                </p>
-              </div>
+  <div className="mt-2 h-[160px] overflow-hidden rounded-2xl">
+    <img
+      src={item.src}
+      alt={item.title}
+      className="w-full h-full object-cover"
+    />
+  </div>
+
+  <p
+    className="
+      mt-6
+      font-rethink
+      text-[14px]
+      leading-[1.9]
+      text-black/80
+    "
+  >
+    {item.desc}
+  </p>
+</div>
             </div>
           ))}
         </div>

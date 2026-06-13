@@ -165,20 +165,18 @@ const PillarHeader = ({
           </div>
         </div>
       </div>
-      <button
-        onClick={onClick}
-        className="mt-[18px] text-[28px] cursor-pointer select-none"
-      >
-        <span
-          style={{
-            display: "inline-block",
-            transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
-            transform: active ? "rotate(45deg)" : "rotate(0deg)",
-          }}
-        >
-          +
-        </span>
-      </button>
+     <button
+  onClick={onClick}
+  className="mt-[18px] text-[58px] cursor-pointer select-none"
+>
+  <span
+    className={`inline-block transition-all duration-300 ${
+      active ? "text-black rotate-45" : "text-black/10 rotate-0"
+    }`}
+  >
+    +
+  </span>
+</button>
     </div>
     <div className="mt-5 border-t border-black/10" />
   </div>

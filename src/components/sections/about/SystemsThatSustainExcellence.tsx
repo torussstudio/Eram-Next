@@ -29,8 +29,8 @@ const CARD_TAGS = [
 ];
 
 const BG_WORDS = [
-  "DEVELOP", "TRAINING", "CERTIFY",
-  "EVALUATE", "QUALITY", "IMPROVE", "REVIEWS",
+  "Mentorship", "workshops", "initiatives",
+  "EVALUATion", " assessment", "committees", " Curriculum",
 ];
 
 function SystemsThatSustainExcellence() {
@@ -281,7 +281,7 @@ function SystemsThatSustainExcellence() {
           {BG_WORDS.map((word, i) => (
             <span
               key={i}
-              className="stack-bg-word absolute font-black text-[#F5EFE8] leading-none whitespace-nowrap"
+              className="stack-bg-word uppercase absolute font-black text-[#F5EFE8] leading-none whitespace-nowrap"
               data-index={i}
               style={{
                 fontSize: "clamp(70px, 15vw, 185px)",

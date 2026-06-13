@@ -5,6 +5,7 @@ import OptimizedImage from "../../ui/OptimizedImage";
 import {gsap} from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
+import { Play } from "lucide-react";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -168,9 +169,10 @@ function TrustHero() {
                 </p>
 
                 
-                <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide  hover:bg-[#F5EFE8] hover:text-black transition cursor-pointer">
-                  VIEW OUR COMMUNITY INTERVENTIONS →
-                </button>
+                <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide hover:bg-black hover:text-white transition cursor-pointer inline-flex items-center gap-2 whitespace-nowrap">
+  VIEW OUR COMMUNITY INTERVENTIONS
+  <Play className="w-4 h-4 transition-all duration-300" />
+</button>
               </div>
             </div>
 
