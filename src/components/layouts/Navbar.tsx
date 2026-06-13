@@ -59,7 +59,9 @@ function InstitutionsDropdown({
           color: "#111111",
           transition: `color ${T}`,
         }}
-        className="relative pb-[5px] text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem]  uppercase tracking-[0.04em] cursor-pointer whitespace-nowrap flex items-center gap-[5px]"
+       className={`relative pb-[5px] text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.04em] cursor-pointer whitespace-nowrap flex items-center gap-[5px] transition-all duration-300 ${
+  isActive ? "font-bold" : "font-normal"
+}`}
       >
         INSTITUTIONS
         <svg
@@ -198,10 +200,7 @@ export default function Navbar() {
   const btnText = "#ffffff";
   const btnBorder = "#ae1431";
 
-  /* ── Hide navbar when ArenaSection enters viewport ──────────────
-     ArenaSection is lazy-loaded so #arena won't exist in the DOM
-     when Navbar first mounts. A delayed check registers the observer.
-  ────────────────────────────────────────────────────────────────── */
+
   useEffect(() => {
     if (!isHome) {
       setNavHidden(false);
@@ -393,7 +392,9 @@ export default function Navbar() {
             willChange: "color",
             WebkitFontSmoothing: "antialiased",
           }}
-          className="relative pb-[5px] translate-z-0 backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem]  uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap"
+          className={`relative pb-[5px] translate-z-0 backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap transition-all duration-300 ${
+  isActive ? "font-bold" : "font-normal"
+}`}
         >
           {item.label}
           <span

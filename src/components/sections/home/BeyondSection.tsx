@@ -34,6 +34,9 @@ export default function BeyondSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
   const [shouldInit, setShouldInit] = useState(false);
 
   useEffect(() => {
@@ -56,6 +59,28 @@ export default function BeyondSection() {
 
   /* ── Scroll helpers ─────────────────────────────────────── */
   const isMobile = () => window.innerWidth <= 640;
+
+  const updateScrollButtons = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    setCanScrollLeft(el.scrollLeft > 5);
+
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    updateScrollButtons();
+
+    el.addEventListener("scroll", updateScrollButtons);
+
+    return () => {
+      el.removeEventListener("scroll", updateScrollButtons);
+    };
+  }, []);
 
   const scrollCarousel = (direction: "left" | "right") => {
     const el = scrollRef.current;
@@ -146,7 +171,7 @@ export default function BeyondSection() {
         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
           <ActionButton
             variant="secondary"
-            className="font-rethink text-[#f5efe8] max-[640px]:!w-auto cursor-pointer hover:bg-black hover:text-white"
+            className="font-rethink text-white border-white max-[640px]:!w-auto cursor-pointer hover:bg-black hover:border-black hover:text-white"
           >
             Explore Student Pathways
           </ActionButton>
@@ -184,6 +209,7 @@ export default function BeyondSection() {
             <ArrowButton
               direction="left"
               onClick={() => scrollCarousel("left")}
+              disabled={!canScrollLeft}
             />
 
             {/* Scrollable cards */}
@@ -227,6 +253,7 @@ overflow-x-auto overscroll-x-contain
             <ArrowButton
               direction="right"
               onClick={() => scrollCarousel("right")}
+              disabled={!canScrollRight}
             />
           </div>
         </div>
@@ -238,41 +265,33 @@ overflow-x-auto overscroll-x-contain
 interface ArrowButtonProps {
   direction: "left" | "right";
   onClick: () => void;
+  disabled?: boolean;
 }
 
 /* ── Arrow Button ───────────────────────────────────────────── */
-function ArrowButton({ direction, onClick }: ArrowButtonProps) {
+function ArrowButton({
+  direction,
+  onClick,
+  disabled = false,
+}: ArrowButtonProps) {
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
-      className="
-        group
-        flex-none
-        flex
-        items-center
-        justify-center
-        cursor-pointer
+      className={`
+    group flex-none flex items-center justify-center
+    w-[44px] h-[44px] rounded-full border-[2px]
+    transition-all duration-300 ease-out
+    ${
+      disabled
+        ? "border-[#666] opacity-40 cursor-not-allowed"
+        : "border-[#f5efe8]/50 cursor-pointer hover:border-transparent hover:scale-110"
+    }
 
-        w-[44px] h-[44px]
-        rounded-full
-        border-[2px] border-[#f5efe8]/50
-
-        bg-transparent
-        transition-all
-        duration-300
-        ease-out
-
-        hover:bg-transparent
-hover:border-transparent
-hover:scale-110
-hover:shadow-none
-
-        active:scale-95
-
-        max-[640px]:w-[36px]
-        max-[640px]:h-[36px]
-      "
+    max-[640px]:w-[36px]
+    max-[640px]:h-[36px]
+  `}
     >
       <svg
         width="18"
@@ -473,67 +492,23 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
       {/* =========================
           CONTENT
       ========================= */}
-      <div
-        className="
-          relative
-          z-[3]
+    <div
+  className="
+    relative
+    z-[3]
 
-          flex
-          h-full
-          flex-col
-          justify-between
+    flex
+    h-full
+    flex-col
+    justify-end
 
-          px-[clamp(18px,3vw,30px)]
-          py-[clamp(18px,3vw,28px)]
+    px-[clamp(18px,3vw,30px)]
+    py-[clamp(18px,3vw,28px)]
 
-          max-[640px]:px-[20px]
-          max-[640px]:py-[18px]
-        "
-      >
-        {/* TOP */}
-        <div className="flex items-start justify-end">
-          {/* arrow */}
-          <div
-            className="
-              flex
-              h-[35px]
-              w-[35px]
-              items-center
-              justify-center
-
-              rounded-full
-
-              border
-              border-white/10
-
-              bg-white/10
-
-              backdrop-blur-[10px]
-
-              transition-all
-              duration-500
-
-              group-hover:rotate-45
-              group-hover:bg-[#ae1431]
-            "
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-white"
-            >
-              <path
-                d="M3 13L13 3M13 3H5M13 3V11"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
+    max-[640px]:px-[20px]
+    max-[640px]:py-[18px]
+  "
+>
 
         <div>
           {/* title */}

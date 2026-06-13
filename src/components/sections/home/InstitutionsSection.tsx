@@ -236,7 +236,7 @@ export default function InstitutionsSection() {
             items-center
             gap-[8px]
 
-            rounded-full
+            rounded-[8px]
 
             border
             border-black/[0.08]

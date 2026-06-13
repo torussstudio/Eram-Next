@@ -151,6 +151,7 @@ export default function CTASection() {
       bg-[#ae1431]
       text-white
       hover:opacity-90
+      hover:bg-black
       transition
       max-[640px]:w-full
       cursor-pointer
@@ -173,7 +174,7 @@ export default function CTASection() {
           border-white/40
           text-white
           hover:bg-white
-          hover:text-black
+          hover:text-[#ae1431]
           transition
           max-[640px]:w-full
           cursor-pointer

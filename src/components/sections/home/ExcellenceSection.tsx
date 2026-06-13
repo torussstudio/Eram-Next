@@ -311,7 +311,7 @@ export default function ExcellenceSection() {
           </div>
 
           <div className="mt-14">
-            <button className="exc-btn font-rethink cursor-pointer rounded-[10px] border border-[#c0c0c0] px-7 py-3 text-[13px] uppercase tracking-[0.16em] text-[#222] transition-all duration-200 hover:bg-[#111] hover:text-white hover:border-[#111]">
+            <button className="exc-btn font-rethink cursor-pointer rounded-[10px] border border-[#ae1431] px-7 bg-[#ae1431] py-3 text-[13px] uppercase tracking-[0.16em] text-white transition-all duration-200 hover:bg-[#111] hover:text-white hover:border-[#111]">
               Explore Excellence
             </button>
           </div>

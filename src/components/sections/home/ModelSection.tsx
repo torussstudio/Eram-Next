@@ -11,6 +11,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ModelSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+const [canScrollLeft, setCanScrollLeft] = useState(false);
+const [canScrollRight, setCanScrollRight] = useState(true);
+
   const [shouldInit, setShouldInit] = useState(false);
 
   useEffect(() => {
@@ -75,9 +80,36 @@ export default function ModelSection() {
     { scope: sectionRef, dependencies: [shouldInit] },
   );
 
-  const scrollCarousel = (dir: number) => {
-    document.getElementById("faculty-carousel")?.scrollBy({ left: dir * 300, behavior: "smooth" });
+  const updateScrollButtons = () => {
+  const el = carouselRef.current;
+  if (!el) return;
+
+  setCanScrollLeft(el.scrollLeft > 5);
+
+  setCanScrollRight(
+    el.scrollLeft < el.scrollWidth - el.clientWidth - 5
+  );
+};
+
+useEffect(() => {
+  const el = carouselRef.current;
+  if (!el) return;
+
+  updateScrollButtons();
+
+  el.addEventListener("scroll", updateScrollButtons);
+
+  return () => {
+    el.removeEventListener("scroll", updateScrollButtons);
   };
+}, []);
+
+  const scrollCarousel = (dir: number) => {
+  carouselRef.current?.scrollBy({
+    left: dir * 300,
+    behavior: "smooth",
+  });
+};
 
   return (
     <section
@@ -187,17 +219,21 @@ export default function ModelSection() {
           <div className="relative mt-[70px] max-[900px]:mt-[50px] max-[560px]:mt-[36px]">
 
             {/* Desktop Left Arrow */}
-            <button
-              onClick={() => scrollCarousel(-1)}
-              className=" group
-                max-[560px]:hidden
-                absolute left-0  bottom-13 -translate-y-1/2 -translate-x-16 z-10
-                w-[42px] h-[42px] rounded-full border-2 border-[#f5efe8]
-                bg-transparent flex items-center justify-center
-                transition-all duration-300 hover:border-transparent
-                cursor-pointer
-              "
-            >
+           <button
+  onClick={() => scrollCarousel(-1)}
+  disabled={!canScrollLeft}
+  className={`
+    group max-[560px]:hidden
+    absolute left-0 bottom-13 -translate-y-1/2 -translate-x-16 z-10
+    w-[42px] h-[42px] rounded-full border-2
+    flex items-center justify-center transition-all duration-300
+    ${
+      canScrollLeft
+        ? "border-[#f5efe8] cursor-pointer"
+        : "border-[#f5efe8]/30 opacity-20 cursor-not-allowed"
+    }
+  `}
+>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f5efe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M10 13L5 8L10 3" />
               </svg>
@@ -205,7 +241,8 @@ export default function ModelSection() {
 
             {/* Scrollable track */}
             <div
-              id="faculty-carousel"
+  ref={carouselRef}
+  id="faculty-carousel"
               className="
                 flex gap-[60px] overflow-x-auto scroll-smooth scrollbar-hide
                 px-[16px] max-[900px]:gap-[34px]
@@ -252,16 +289,20 @@ export default function ModelSection() {
 
             {/* Desktop Right Arrow */}
               <button
-              onClick={() => scrollCarousel(1)}
-              className=" group
-                max-[560px]:hidden
-                absolute right-0 bottom-13 -translate-y-1/2 translate-x-12 z-10
-                w-[42px] h-[42px] rounded-full border-2 border-[#f5efe8]
-                bg-transparent flex items-center justify-center
-               transition-all duration-300 hover:border-transparent
-                cursor-pointer
-              "
-            >
+  onClick={() => scrollCarousel(1)}
+  disabled={!canScrollRight}
+  className={`
+    group max-[560px]:hidden
+    absolute right-0 bottom-13 -translate-y-1/2 translate-x-12 z-10
+    w-[42px] h-[42px] rounded-full border-2
+    flex items-center justify-center transition-all duration-300
+    ${
+      canScrollRight
+        ? "border-[#f5efe8] cursor-pointer"
+        : "border-[#f5efe8]/30 opacity-40 cursor-not-allowed"
+    }
+  `}
+>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f5efe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 3L11 8L6 13" />
               </svg>

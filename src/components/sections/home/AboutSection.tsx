@@ -275,12 +275,12 @@ export default function AboutSection() {
       <div className="hidden min-[1100px]:block mx-auto w-[min(1100px,calc(100vw-120px))]">
         <div className="grid grid-cols-[300px_1fr] gap-x-[100px]">
           <div ref={dLabelRef} className="pl-[50px]">
-            <span className="text-[18px] tracking-[0.15em] uppercase text-[#111111] font-medium">
+            <span className="text-[18px] tracking-[0.15em] uppercase text-[#111111] font-rethink font-medium">
               ABOUT US
             </span>
           </div>
 
-          <div className="pl-[150px] max-[1280px]:pl-[160px]">
+         <div className="xl:-ml-[20px] pl-0 max-[1280px]:pl-[60px]">
             <h2
               ref={dHeadingRef}
               className="font-display text-[48px] leading-[1.15] text-[#111111] max-w-[600px]"
@@ -292,7 +292,7 @@ export default function AboutSection() {
 
             <p
               ref={dParaRef}
-              className="font-rethink mt-6 text-[14.5px] leading-[1.75] text-[#111111] max-w-[520px]"
+              className="font-rethink mt-6 text-[14.5px] leading-[1.75] text-[#111111] max-w-[720px]"
             >
               ERAM Education was established to build disciplined, value-based
               institutions that expand access to quality learning and reach
@@ -303,17 +303,24 @@ export default function AboutSection() {
 
             <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
               <ActionButton
-                onClick={() => smoothScrollTo("institutions")}
-                className="font-rethink !bg-black !text-[#f5efe8] hover:!bg-[#222] cursor-pointer"
-              >
-                Explore Our Institutions
-              </ActionButton>
+                             onClick={() =>
+                               smoothScrollTo("institutions")
+                             }
+                             className="
+                               font-rethink
+                               !bg-[#ae1431]
+                               hover:!bg-black
+                               cursor-pointer
+                             "
+                           >
+                             Explore Our Institutions
+                           </ActionButton>
             </div>
           </div>
         </div>
 
         {/* Grid */}
-        <div ref={dGridRef} className="mt-[80px]">
+        <div ref={dGridRef} className="mt-[60px]">
           {/* Row 1 */}
           <div className="grid grid-cols-3 gap-[24px]">
             <div

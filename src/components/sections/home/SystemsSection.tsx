@@ -56,7 +56,7 @@ const CARDS_DATA = [
   ],
 ];
 
-const SCROLL_BY = 2;
+const SCROLL_BY = 1;
 const CARD_WIDTH = 320;
 const CARD_GAP = 18;
 
@@ -77,10 +77,6 @@ const ArrowIcon = ({ active }: ArrowIconProps) => (
     height="12"
     viewBox="0 0 12 12"
     fill="none"
-    style={{
-      transform: active ? "rotate(90deg)" : "none",
-      transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)",
-    }}
   >
     <path
       d="M2 6h8M6 2l4 4-4 4"
@@ -95,22 +91,29 @@ const ArrowIcon = ({ active }: ArrowIconProps) => (
 interface CarouselArrowProps {
   direction: "left" | "right";
   onClick: () => void;
+  disabled?: boolean;
 }
 
-const CarouselArrow = ({ direction, onClick }: CarouselArrowProps) => (
-  <button
-    onClick={onClick}
-    aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
-    className="
-      group flex-none flex items-center justify-center
-      w-[42px] h-[42px] rounded-full
-      border-[2px] border-[#cfcfcf] bg-transparent
-      transition-all duration-300 ease-out cursor-pointer
-      hover:bg-[#ae1431] hover:border-[#ae1431]
-      hover:scale-110 hover:shadow-lg
-      active:scale-95
-    "
-  >
+const CarouselArrow = ({
+  direction,
+  onClick,
+  disabled = false,
+}: CarouselArrowProps) => (
+ <button
+  onClick={onClick}
+  disabled={disabled}
+  aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
+  className={`
+    group flex-none flex items-center justify-center
+    w-[42px] h-[42px] rounded-full border-[2px]
+    transition-all duration-300 ease-out
+    ${
+      disabled
+        ? "border-[#666] opacity-40 cursor-not-allowed"
+        : "border-[#cfcfcf] cursor-pointer hover:bg-[#ae1431] hover:border-[#ae1431]"
+    }
+  `}
+>
     <svg
       width="16"
       height="16"
@@ -173,6 +176,8 @@ export default function SystemsSection() {
   const desktopCardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const mobCardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const desktopScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+const [canScrollRight, setCanScrollRight] = useState(true);
   const textBlockRef = useRef<HTMLDivElement>(null);
 
   const cards = CARDS_DATA[activeTab];
@@ -200,6 +205,29 @@ export default function SystemsSection() {
   useEffect(() => {
     moveIndicator(activeTab);
   }, [activeTab]);
+
+ const updateScrollButtons = useCallback(() => {
+  const el = desktopScrollRef.current;
+  if (!el) return;
+
+  setCanScrollLeft(el.scrollLeft > 5);
+
+  setCanScrollRight(
+    el.scrollLeft < el.scrollWidth - el.clientWidth - 5
+  );
+}, []);
+useEffect(() => {
+  const el = desktopScrollRef.current;
+  if (!el) return;
+
+  updateScrollButtons();
+
+  el.addEventListener("scroll", updateScrollButtons);
+
+  return () => {
+    el.removeEventListener("scroll", updateScrollButtons);
+  };
+}, [activeTab, updateScrollButtons]);
 
   /* ── carousel scroll ── */
   const scrollCarousel = useCallback((dir: "left" | "right") => {
@@ -290,15 +318,22 @@ export default function SystemsSection() {
   }, [activeTab]);
 
   /* ── tab click ── */
-  const handleTabClick = useCallback(
-    (index: number) => {
-      if (busy.current || index === activeTab) return;
-      busy.current = true;
-      setActiveTab(index);
-      setActiveCard(0);
-    },
-    [activeTab],
-  );
+ const handleTabClick = useCallback(
+  (index: number) => {
+    if (busy.current || index === activeTab) return;
+
+    busy.current = true;
+
+    desktopScrollRef.current?.scrollTo({
+      left: 0,
+      behavior: "auto",
+    });
+
+    setActiveTab(index);
+    setActiveCard(0);
+  },
+  [activeTab],
+);
 
   /* ── mobile tab spring ── */
   const animateMobTab = useCallback((index: number) => {
@@ -484,10 +519,11 @@ export default function SystemsSection() {
             className={`flex items-center gap-[14px] min-w-0 ${config.showText ? "flex-1" : "w-full"}`}
           >
             {config.showArrows && (
-              <CarouselArrow
-                direction="left"
-                onClick={() => scrollCarousel("left")}
-              />
+             <CarouselArrow
+  direction="left"
+  onClick={() => scrollCarousel("left")}
+  disabled={!canScrollLeft}
+/>
             )}
 
             <div
@@ -534,9 +570,10 @@ export default function SystemsSection() {
 
             {config.showArrows && (
               <CarouselArrow
-                direction="right"
-                onClick={() => scrollCarousel("right")}
-              />
+  direction="right"
+  onClick={() => scrollCarousel("right")}
+  disabled={!canScrollRight}
+/>
             )}
           </div>
         </div>

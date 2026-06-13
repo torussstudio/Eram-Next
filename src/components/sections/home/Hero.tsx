@@ -386,7 +386,7 @@ export default function Hero() {
                 Explore Our Institutions
               </ActionButton>
 
-              <ActionButton
+              {/* <ActionButton
                 onClick={() =>
                   router.push("/contact")
                 }
@@ -400,7 +400,14 @@ export default function Hero() {
                 "
               >
                 Admissions Open 2026-27
-              </ActionButton>
+              </ActionButton> */}
+
+               <button
+            onClick={() => router.push("/contact")}
+            className="font-rethink rounded-[12px] border border-white/70 px-[36px] py-[14px] text-[14px] font-semibold  uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-[#a80c2d] cursor-pointer"
+          >
+            ADMISSIONS OPEN 2026-27
+          </button>
             </div>
           </div>
         </div>

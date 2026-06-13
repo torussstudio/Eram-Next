@@ -1,15 +1,18 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import ActionButton from "../../ui/ActionButton";
+
 import { gsap, ScrollTrigger } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { useRouter } from "next/navigation";
 
 
 const ARENA_WORDS = ["SPORTS", "ARENA"];
 
 export default function ArenaSection() {
   const sectionRef    = useRef<HTMLElement>(null);
+
+  const router = useRouter();
 
   const [shouldInit, setShouldInit] = useState(false);
 
@@ -231,13 +234,13 @@ export default function ArenaSection() {
           {ARENA_WORDS.map((word, wi) => (
             <span
               key={wi}
-              className="inline-block"
+               className="inline-block "
               style={{ verticalAlign: "bottom" }}
             >
               {word.split("").map((letter, li) => (
                 <span
                   key={li}
-                  className="inline-block overflow-hidden"
+                  className="inline-block "
                   style={{ verticalAlign: "bottom" }}
                 >
                   <span className="a-word inline-block">{letter}</span>
@@ -294,9 +297,21 @@ export default function ArenaSection() {
   ref={btnsRef}
   className="flex flex-wrap justify-start"
 >
-  <ActionButton className="font-rethink" to="/explore-arena">
-    Explore The Arena
-  </ActionButton>
+   <button
+  className="
+    font-rethink
+    cursor-pointer
+    text-white
+    border border-white
+    px-6 py-3
+    rounded-[12px]
+    transition-all duration-300
+    hover:bg-white hover:text-[#ae1431]
+  "
+  onClick={() => router.push("/explore-arena")}
+>
+  Explore The Arena
+</button>
 </div>
           </div>
         </div>

@@ -27,7 +27,7 @@ export default function MarqueeText() {
         relative
         left-1/2
         right-1/2
-        mb-[20px]
+      
         w-screen
         -translate-x-1/2
         overflow-hidden
