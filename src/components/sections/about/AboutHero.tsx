@@ -263,7 +263,7 @@ function AboutHero() {
   }}
   className="
     hero-content-fade mt-8
-    bg-white text-black
+    bg-[#ae1431] text-white
     px-6 py-3 rounded-[12px]
     text-sm 
     flex items-center gap-2

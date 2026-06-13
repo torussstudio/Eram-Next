@@ -200,8 +200,8 @@ function PurposeSection() {
   md:gap-4
 "
                 >
-                 <div
-  className="
+                  <div
+                    className="
     flex-shrink-0
 
     w-[46px]
@@ -220,11 +220,11 @@ function PurposeSection() {
     mt-[2px]
     md:mt-0
   "
->
-                  <OptimizedImage
-  src={item.icon}
-  alt=""
-  className="
+                  >
+                    <OptimizedImage
+                      src={item.icon}
+                      alt=""
+                      className="
     w-[22px]
     h-[22px]
 
@@ -233,13 +233,13 @@ function PurposeSection() {
 
     object-contain
   "
-  sizes="25px"
-  disableTransition
-/>
+                      sizes="25px"
+                      disableTransition
+                    />
                   </div>
 
-                 <p
-  className="
+                  <p
+                    className="
     text-[13px]
     md:text-[14px]
 
@@ -250,7 +250,7 @@ function PurposeSection() {
     pt-[2px]
     md:pt-0
   "
->
+                  >
                     {item.title}
                   </p>
                 </div>
@@ -264,7 +264,7 @@ function PurposeSection() {
     mt-7 md:mt-8
 
     border
-    border-black/40
+    border-[#ae1431]
 
     px-5
     py-2
@@ -277,9 +277,12 @@ function PurposeSection() {
     flex
     items-center
     gap-2
+    bg-[#ae1431]
+    text-white
 
-    hover:bg-[#ae1431]
+    hover:bg-black
     hover:text-white
+    hover:border-black
 
     transition
     cursor-pointer

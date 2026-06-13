@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useRef, useCallback } from "react";
+import { memo, useRef, useCallback, useState, useEffect } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,6 +12,37 @@ gsap.registerPlugin(ScrollTrigger);
 function StructuredLearningSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+const [canScrollRight, setCanScrollRight] = useState(true);
+
+const updateScrollButtons = useCallback(() => {
+  const el = scrollRef.current;
+  if (!el) return;
+
+  const isAtStart = el.scrollLeft <= 5;
+
+  const isAtEnd =
+    el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+
+  setCanScrollLeft(!isAtStart);
+  setCanScrollRight(!isAtEnd);
+}, []);
+
+useEffect(() => {
+  const el = scrollRef.current;
+  if (!el) return;
+
+  updateScrollButtons();
+
+  el.addEventListener("scroll", updateScrollButtons);
+  window.addEventListener("resize", updateScrollButtons);
+
+  return () => {
+    el.removeEventListener("scroll", updateScrollButtons);
+    window.removeEventListener("resize", updateScrollButtons);
+  };
+}, [updateScrollButtons]);
 
   const scrollByCard = useCallback((direction: number) => {
     const el = scrollRef.current;
@@ -420,7 +451,7 @@ function StructuredLearningSection() {
     <section
       ref={containerRef}
       className="
-        bg-[#b5122b]
+        bg-[#ae1431]
         text-white
         overflow-hidden
 
@@ -548,68 +579,72 @@ function StructuredLearningSection() {
           <div className="structured-scroll-container -mx-5 md:mx-0 overflow-hidden">
             {/* ARROWS */}
             <div className="flex justify-end gap-3 px-5 md:px-0 mb-3">
-              <button
-                onClick={() => scrollByCard(-1)}
+             <button
+  onClick={() => scrollByCard(-1)}
+  disabled={!canScrollLeft}
                 aria-label="Scroll left"
-                className="
-                  w-11
-                  h-11
+                className={`
+  w-11
+  h-11
 
-                  md:w-12
-                  md:h-12
+  md:w-12
+  md:h-12
 
-                  rounded-full
+  rounded-full
 
-                  border
-                  border-white/50
+  border
+  flex
+  items-center
+  justify-center
 
-                  flex
-                  items-center
-                  justify-center
+  transition-all
+  duration-300
 
-                  transition-all
-                  duration-300
-
-                  hover:scale-90
-                  hover:border-none
-                  
-
-                  cursor-pointer
-                "
+  ${
+    !canScrollLeft
+      ? "border-white/20 opacity-50 cursor-not-allowed"
+      : "border-white/50 cursor-pointer hover:scale-90 hover:border-transparent"
+  }
+`}
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft
+  size={18}
+  className={!canScrollLeft ? "text-white/30" : ""}
+/>
               </button>
 
               <button
-                onClick={() => scrollByCard(1)}
+  onClick={() => scrollByCard(1)}
+  disabled={!canScrollRight}
                 aria-label="Scroll right"
-                className="
-                  w-11
-                  h-11
+                className={`
+  w-11
+  h-11
 
-                  md:w-12
-                  md:h-12
+  md:w-12
+  md:h-12
 
-                  rounded-full
+  rounded-full
 
-                  border
-                  border-white/50
+  border
+  flex
+  items-center
+  justify-center
 
-                  flex
-                  items-center
-                  justify-center
+  transition-all
+  duration-300
 
-                  transition-all
-                  duration-300
-
-                  hover:scale-90
-                  hover:border-none
-
-
-                  cursor-pointer
-                "
+  ${
+    !canScrollRight
+      ? "border-white/20 opacity-50 cursor-not-allowed"
+      : "border-white/50 cursor-pointer hover:scale-90 hover:border-transparent"
+  }
+`}
               >
-                <ChevronRight size={18} />
+                <ChevronRight
+  size={18}
+  className={!canScrollRight ? "text-white/30" : ""}
+/>
               </button>
             </div>
 

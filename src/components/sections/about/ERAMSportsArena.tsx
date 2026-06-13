@@ -249,12 +249,13 @@ function ERAMSportsArena() {
     inline-flex
     items-center
     justify-center
-    bg-[#b5122b] text-white
+    bg-[#ae1431] text-white
     px-4 xs:px-5 sm:px-6
     py-2 xs:py-2.5 sm:py-3
     rounded-lg
     text-[10px] xs:text-[11px] sm:text-[12px] md:text-[13px]
     font-rethink
+    hover:bg-black
     hover:opacity-90 active:scale-95 transition
     whitespace-nowrap cursor-pointer
     tracking-wide
@@ -285,7 +286,7 @@ function ERAMSportsArena() {
                     rounded-lg
                     text-[10px] xs:text-[11px] sm:text-[12px] md:text-[13px]
                    font-rethink
-                    hover:bg-white hover:text-black
+                    hover:bg-white hover:text-[#ae1431]
                     active:scale-95 transition
                     whitespace-nowrap cursor-pointer
                     tracking-wide
