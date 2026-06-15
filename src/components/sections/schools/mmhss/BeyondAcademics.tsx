@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -27,32 +28,18 @@ const excellence = [
     title: "Diya Maryam",
     sub: "Grade 11",
     desc: "🥇 1st Place — National Level Wushu Championship, Hyderabad",
+    image: "/images/diyaa.avif",
   },
   {
     tag: "State Level · Cultural",
     title: "Farha Shirin",
     sub: "Grade 11",
     desc: "🥇 A Grade — State Level Kalotsavam 2026 (English Story Writing)",
-  },
-  {
-    tag: "Scouts & Guides",
-    title: "Rajyapuraskar",
-    sub: "Governor's Award — Scouts & Guides",
-    desc: "100% success rate in Rajyapuraskar qualification — the highest Governor's Award for Scouts & Guides.",
+    image: "/images/farha.avif",
   },
 ];
 
 const stats = [
-  {
-    value: "100",
-    unit: "%",
-    label:
-      "Success Rate in Rajyapuraskar Qualification\n(Highest Governor's Award)",
-    bg: "bg-[#1a1a1a]",
-    valC: "text-white",
-    unitC: "text-white/40",
-    descC: "text-[#5e554e]",
-  },
   {
     value: "50",
     unit: "+",
@@ -83,8 +70,10 @@ export default function BeyondAcademics() {
 
       // ── Initial states ────────────────────────────────────────────────
       gsap.set(
-        q(".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat"),
-        { opacity: 0, y: 28 }
+        q(
+          ".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat",
+        ),
+        { opacity: 0, y: 28 },
       );
 
       // ── Header animation ──────────────────────────────────────────────
@@ -111,7 +100,7 @@ export default function BeyondAcademics() {
       function revealScopedSection(
         triggerClass: string,
         labelClass: string,
-        cardsClass: string
+        cardsClass: string,
       ) {
         const triggerEl = q(triggerClass)[0];
         if (!triggerEl) return;
@@ -132,14 +121,26 @@ export default function BeyondAcademics() {
           tl.to(labelEls, { opacity: 1, y: 0, duration: 0.45 });
         }
         if (cardsEls.length > 0) {
-          tl.to(cardsEls, { opacity: 1, y: 0, duration: 0.65, stagger: 0.09 }, "-=0.15");
+          tl.to(
+            cardsEls,
+            { opacity: 1, y: 0, duration: 0.65, stagger: 0.09 },
+            "-=0.15",
+          );
         }
       }
 
       // ── Section reveals ───────────────────────────────────────────────
-      revealScopedSection(".anim-bench-wrap", ".anim-bench-label", ".anim-bench");
-      revealScopedSection(".anim-excel-wrap", ".anim-excel-label", ".anim-excel");
-      revealScopedSection(".anim-stat-wrap",  ".anim-stat-label",  ".anim-stat");
+      revealScopedSection(
+        ".anim-bench-wrap",
+        ".anim-bench-label",
+        ".anim-bench",
+      );
+      revealScopedSection(
+        ".anim-excel-wrap",
+        ".anim-excel-label",
+        ".anim-excel",
+      );
+      revealScopedSection(".anim-stat-wrap", ".anim-stat-label", ".anim-stat");
 
       // ── Counter animation ─────────────────────────────────────────────
       // One ScrollTrigger fires all counters — avoids stale-ref crashes
@@ -166,16 +167,16 @@ export default function BeyondAcademics() {
         });
       }
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
-  <section
-  id="academics"
-  ref={containerRef}
-  className={`${shell} mb-[40px] bg-[#F5EFE8]`}  
->
-  <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-14">
+    <section
+      id="academics"
+      ref={containerRef}
+      className={`${shell} mb-[40px] bg-[#F5EFE8]`}
+    >
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-14">
         {/* ── HEADER ───────────────────────────────────────────── */}
         <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 mb-6 lg:mb-8">
           <div className="anim-header">
@@ -231,7 +232,13 @@ export default function BeyondAcademics() {
             Student Excellence
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl overflow-hidden">
+          <div
+            className={`grid gap-1 rounded-2xl overflow-hidden ${
+              excellence.length === 2
+                ? "grid-cols-1 sm:grid-cols-2"
+                : "grid-cols-1 sm:grid-cols-3"
+            }`}
+          >
             {excellence.map((card, i) => {
               const isRed = i === 0;
               const isDark = i === 1;
@@ -248,8 +255,7 @@ export default function BeyondAcademics() {
                   ? "bg-[#2a2a2a] text-[#a09488]"
                   : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
 
-              const titleC =
-                isRed || isDark ? "text-white" : "text-[#1a1209]";
+              const titleC = isRed || isDark ? "text-white" : "text-[#1a1209]";
 
               const subC = isRed
                 ? "text-white/50"
@@ -264,26 +270,42 @@ export default function BeyondAcademics() {
                   : "text-[#4a3f35]";
 
               return (
-                <div key={i} className={`anim-excel p-7 ${bg}`}>
-                  <span
-                    className={`inline-block text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6  ${badge}`}
-                  >
-                    {card.tag}
-                  </span>
+                <div
+                  key={i}
+                  className={`anim-excel overflow-hidden flex flex-col ${bg}`}
+                >
+                  <div className="p-7">
+                    <span
+                      className={`inline-block text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6 ${badge}`}
+                    >
+                      {card.tag}
+                    </span>
 
-                  <h3
-                    className={` text-[22px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
-                  >
-                    {card.title}
-                  </h3>
+                    <div className="relative h-[460px] w-full rounded-2xl overflow-hidden">
+                      <Image
+                        src={card.image}
+                        alt={card.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <br></br>
+                    <h3
+                      className={`text-[22px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
+                    >
+                      {card.title}
+                    </h3>
 
-                  <p className={`text-[12px] font-rethink  mb-5 ${subC}`}>
-                    {card.sub}
-                  </p>
+                    <p className={`text-[12px] font-rethink mb-5 ${subC}`}>
+                      {card.sub}
+                    </p>
 
-                  <p className={`text-[13px]  font-rethink leading-[1.65] ${descC}`}>
-                    {card.desc}
-                  </p>
+                    <p
+                      className={`text-[13px] font-rethink leading-[1.65] ${descC}`}
+                    >
+                      {card.desc}
+                    </p>
+                  </div>
                 </div>
               );
             })}
@@ -298,10 +320,7 @@ export default function BeyondAcademics() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl overflow-hidden">
             {stats.map((stat, i) => (
-              <div
-                key={i}
-                className={`anim-stat px-8 py-10 ${stat.bg}`}
-              >
+              <div key={i} className={`anim-stat px-8 py-10 ${stat.bg}`}>
                 <div className="flex items-baseline gap-1 mb-4">
                   <span
                     data-target={stat.value}
@@ -310,9 +329,7 @@ export default function BeyondAcademics() {
                     0
                   </span>
 
-                  <span
-                    className={`text-[18px] font-display  ${stat.unitC}`}
-                  >
+                  <span className={`text-[18px] font-display  ${stat.unitC}`}>
                     {stat.unit}
                   </span>
                 </div>

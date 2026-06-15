@@ -168,7 +168,7 @@ export default function ParentPartnership() {
               ))}
             </ul>
 
-            <p className="font-display anim-quote mt-7 font-serif italic text-[14px] sm:text-[15px] text-[#9a8f84]">
+            <p className="font-rethink anim-quote mt-7 text-[14px] sm:text-[15px] text-[#9a8f84]">
               No student goes unnoticed. No parent remains uninformed.
             </p>
 
