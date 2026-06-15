@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,7 +130,7 @@ export default function ParentPartnership() {
       ref={containerRef}
       className={`${shell} bg-[#F5EFE8] overflow-hidden`}
     >
-      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-2 md:pt-4 lg:pt-4 pb-8 md:pb-10 lg:pb-12">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-0 pb-8 md:pb-10 lg:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col">
@@ -174,11 +175,11 @@ export default function ParentPartnership() {
 
             <div className="mt-8 anim-btn">
               <button
-                className="font-rethink bg-[#1a1209] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
-                px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-[#2e2318] transition-colors duration-200 rounded-[10px]"
+                className="font-rethink bg-[#ae1431] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
+                px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-black transition-colors duration-200 rounded-[10px]"
               >
                 Access Parent Portal
-                <span className="text-[15px]">→</span>
+                <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
               </button>
             </div>
           </div>
@@ -195,10 +196,9 @@ export default function ParentPartnership() {
               {messages.map((msg, i) => (
                 <div
                   key={i}
-                  className={`anim-msg bg-[#242424] rounded-[5px] px-4 py-4
-                    ${msg.accent ? "border-l-[3px] border-[#ae1431]" : "border-l-[3px] border-transparent"}`}
+                  className="anim-msg bg-[#242424] rounded-[5px] px-4 py-4 border-l-[3px] border-transparent hover:border-[#ae1431] hover:bg-[#2a2a2a] transition-all duration-300"
                 >
-                   <p className="inline-flex items-center px-3 py-1 text-[11px] bg-[#1f1f1f] border border-[#2d2d2d] rounded-full text-[#c8c0b8] tracking-[0.02em] mb-2">
+                  <p className="inline-flex items-center px-3 py-1 text-[11px] bg-[#1f1f1f] border border-[#2d2d2d] rounded-full text-[#c8c0b8] tracking-[0.02em] mb-2">
                     {msg.meta}
                   </p>
                   <p className="text-[13px] sm:text-[14px] text-[#c8c0b8] leading-[1.65]">
@@ -208,7 +208,6 @@ export default function ParentPartnership() {
                     </span>{" "}
                     {msg.text}
                   </p>
-                  
                 </div>
               ))}
             </div>

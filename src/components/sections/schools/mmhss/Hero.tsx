@@ -220,7 +220,7 @@ export default function Hero() {
     tracking-[0.12em] uppercase
     cursor-pointer active:scale-[0.98]
     transition-transform rounded-[12px]
-    flex items-center justify-center gap-2
+    flex items-center hover:bg-black justify-center gap-2
     whitespace-nowrap
   "
 >
@@ -232,7 +232,7 @@ export default function Hero() {
                   className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
                     flex items-center gap-2 cursor-pointer 
-                    active:scale-[0.98] transition-transform rounded-[12px]"
+                    active:scale-[0.98] transition-transform hover:bg-white hover:text-[#ae1431] rounded-[12px]"
                 >
                   Enquire Now
                 </button>

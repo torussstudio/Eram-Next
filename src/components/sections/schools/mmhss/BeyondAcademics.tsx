@@ -12,12 +12,12 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const benchmarks = [
   {
     tag: "Academic Record",
-    title: "14 Consecutive Years — 100% Higher Secondary Results",
+    title: "98% Pass Rate in Last Year’s Final Examination - 2026",
     desc: "A sustained record of complete pass results across all streams, maintained through disciplined academic systems and structured student monitoring.",
   },
   {
     tag: "District Ranking",
-    title: "14th Rank Among 150 Schools in Palakkad District",
+    title: "10th Rank Among 150 Schools in Palakkad District",
     desc: "Recognised among the top institutions in Palakkad for consistent academic output and institutional discipline across Higher Secondary streams.",
   },
 ];
@@ -48,15 +48,6 @@ const stats = [
     valC: "text-white",
     unitC: "text-white/60",
     descC: "text-white/55",
-  },
-  {
-    value: "100",
-    unit: "+",
-    label: "Scout & Guide Activities\nConducted Annually",
-    bg: "bg-[#1a1a1a]",
-    valC: "text-white",
-    unitC: "text-white/40",
-    descC: "text-[#5e554e]",
   },
 ];
 
@@ -276,7 +267,7 @@ export default function BeyondAcademics() {
                 >
                   <div className="p-7">
                     <span
-                      className={`inline-block text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6 ${badge}`}
+                      className={`inline-block text-[12px] tracking-[0.2em] uppercase px-3 py-1 mb-6 ${badge}`}
                     >
                       {card.tag}
                     </span>
@@ -291,17 +282,17 @@ export default function BeyondAcademics() {
                     </div>
                     <br></br>
                     <h3
-                      className={`text-[22px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
+                      className={`text-[28px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
                     >
                       {card.title}
                     </h3>
 
-                    <p className={`text-[12px] font-rethink mb-5 ${subC}`}>
+                    <p className={`text-[15px] font-rethink mb-5 ${subC}`}>
                       {card.sub}
                     </p>
 
                     <p
-                      className={`text-[13px] font-rethink leading-[1.65] ${descC}`}
+                      className={`text-[17px] font-rethink leading-[1.65] ${descC}`}
                     >
                       {card.desc}
                     </p>
@@ -318,29 +309,34 @@ export default function BeyondAcademics() {
             Civic Leadership &amp; NSS
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl overflow-hidden">
-            {stats.map((stat, i) => (
-              <div key={i} className={`anim-stat px-8 py-10 ${stat.bg}`}>
-                <div className="flex items-baseline gap-1 mb-4">
-                  <span
-                    data-target={stat.value}
-                    className={`counter-num  text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] ${stat.valC}`}
-                  >
-                    0
-                  </span>
-
-                  <span className={`text-[18px] font-display  ${stat.unitC}`}>
-                    {stat.unit}
-                  </span>
-                </div>
-
-                <p
-                  className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}
+          <div className="max-w-md mx-auto">
+            <div className="grid grid-cols-1 rounded-2xl overflow-hidden">
+              {stats.map((stat, i) => (
+                <div
+                  key={i}
+                  className={`anim-stat px-8 py-10 text-center ${stat.bg}`}
                 >
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+                  <div className="flex items-baseline justify-center gap-1 mb-4">
+                    <span
+                      data-target={stat.value}
+                      className={`counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] ${stat.valC}`}
+                    >
+                      0
+                    </span>
+
+                    <span className={`text-[18px] font-display ${stat.unitC}`}>
+                      {stat.unit}
+                    </span>
+                  </div>
+
+                  <p
+                    className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}
+                  >
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

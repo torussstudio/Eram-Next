@@ -221,7 +221,7 @@ export default function AcademicStreams() {
                         }}
                       />
 
-                      <p className="relative z-10 text-[13px] sm:text-[14px] text-[#c4b9ae] leading-[1.65]">
+                      <p className="relative font-rethink z-10 text-[13px] sm:text-[14px] text-[#c4b9ae] leading-[1.65]">
                         {text}
                       </p>
                     </div>
@@ -266,9 +266,7 @@ export default function AcademicStreams() {
               </p>
 
               <h2 className="font-display text-white text-[42px] md:text-[56px] leading-[0.95] tracking-[-0.03em]">
-                C.
-                
-                UMMER
+                C.UMMER
               </h2>
 
               <p className="text-[#cbbfb4] mt-4 text-[14px]">

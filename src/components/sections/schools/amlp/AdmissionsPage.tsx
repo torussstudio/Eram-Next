@@ -48,6 +48,8 @@ const institutions = [
 export default function AdmissionsPage() {
   const containerRef = useRef(null);
   const pathname = usePathname();
+  const btn1Ref = useRef<HTMLButtonElement>(null); 
+const btn2Ref = useRef<HTMLButtonElement>(null);
 
   useGSAP(
     () => {
@@ -128,15 +130,29 @@ export default function AdmissionsPage() {
           </div>
 
           {/* RIGHT — BUTTONS */}
-          <div className="flex flex-col gap-3 pt-22 lg:min-w-[280px]">
-            <button className="font-rethink anim-hero-btn bg-[#ae1431] text-white px-10 py-4 text-[13px] tracking-widest uppercase flex items-center justify-between gap-4 hover:bg-[#ae1431] transition-colors duration-200 cursor-pointer rounded-[10px]">
-              Apply Now — 2026–27
-              <ArrowRight size={15} />
-            </button>
-            <button className="font-rethink anim-hero-btn border border-[#1a1209] text-[#1a1209] px-6 py-4 text-[13px] tracking-widest uppercase hover:bg-[#1a1209] hover:text-white transition-colors duration-200 cursor-pointer rounded-[10px]">
-              Book a Campus Visit
-            </button>
-          </div>
+         <div className="flex flex-col pt-[60px] gap-3 lg:min-w-[320px]">
+  <button
+    ref={btn1Ref}
+    className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
+  >
+    <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
+
+    <span className="font-rethink relative z-10">
+       Apply Now — 2026–27
+    </span>
+  </button>
+
+  <button
+    ref={btn2Ref}
+    className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
+  >
+    <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
+
+    <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">
+      Book a Campus Visit
+    </span>
+  </button>
+</div>
         </div>
       </section>
 
