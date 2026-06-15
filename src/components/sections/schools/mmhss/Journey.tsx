@@ -297,11 +297,11 @@ export default function Journey() {
               </p>
             </div>
 
-            <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
-              <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
-                "Top 10 Among 150 Schools
-in Palakkad District"
-              </p>
+            <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-4 my-6">
+              <p className="font-rethink font-bold text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
+  "Top 10 Among 150 Schools
+  in Palakkad District"
+</p>
             </blockquote>
 
             <p ref={lastParaRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">

@@ -231,7 +231,7 @@ export default function AcademicStreams() {
             </div>
             <button
               onClick={() => scrollTo("academics")}
-              className="structured-btn inline-flex w-fit self-left mt-5 md:mt-6 border border-[#252525]/20 px-4 py-2 rounded-lg text-sm items-center gap-2 hover:bg-[#252525] hover:text-white transition-all duration-300 cursor-pointer font-rethink"
+              className="structured-btn inline-flex w-fit self-left mt-5 bg-[#ae1431] text-white md:mt-6 border border-[#ae1431] px-4 py-2 rounded-lg text-sm items-center gap-2 hover:bg-black hover:border-black hover:text-white transition-all duration-300 cursor-pointer font-rethink"
             >
               Explore
               <Play className="text-xs transition-colors" />
@@ -261,13 +261,13 @@ export default function AcademicStreams() {
     group-hover:bottom-40
   "
             >
-              <p className="font-rethink text-[11px] tracking-[0.28em] text-[#ae1431] uppercase mb-6">
+              <p className="font-rethink text-[11px] tracking-[0.28em] text-white uppercase mb-6">
                 Our Principal
               </p>
 
               <h2 className="font-display text-white text-[42px] md:text-[56px] leading-[0.95] tracking-[-0.03em]">
                 C.
-                <br />
+                
                 UMMER
               </h2>
 
