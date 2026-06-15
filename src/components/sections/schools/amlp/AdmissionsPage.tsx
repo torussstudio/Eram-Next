@@ -133,7 +133,7 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
          <div className="flex flex-col pt-[60px] gap-3 lg:min-w-[320px]">
   <button
     ref={btn1Ref}
-    className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
+    className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
   >
     <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
 
@@ -144,7 +144,7 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
 
   <button
     ref={btn2Ref}
-    className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
+    className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
   >
     <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
 

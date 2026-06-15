@@ -181,7 +181,7 @@ export default function CommunicationPortal() {
             </p>
 
            <br></br>
-            <button className="font-rethink anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
+            <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
               Access the Parent Portal
               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
             </button>
