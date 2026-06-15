@@ -11,13 +11,13 @@ const QUICK_FACTS = [
   ["2005", "Year Established"],
   ["State Board", "Curriculum · English Medium"],
   ["450+", "Student Strength"],
-  ["21 Yrs", "100% Pass Record"],
+  ["21 Yrs", "of Academic Excellence"],
 ];
 
 const STATS = [
   { value: "98%", desc: ["Pass Rate", "2026"] },
   { value: "450+", desc: ["Students Currently", "Enrolled"] },
-  { value: "14", desc: ["Among 150 Schools", "in Palakkad District"] },
+  { value: "10", desc: ["Among 150 Schools", "in Palakkad District"] },
   { value: "3", desc: ["Higher Secondary", "Academic Streams"] },
 ];
 

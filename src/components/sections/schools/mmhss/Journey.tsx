@@ -32,7 +32,7 @@ const milestones = [
   },
   {
     year: "2026",
-    title: "14 Consecutive Years — 100% Results",
+    title: "98% Pass Rate in Last Year’s Final Examination",
     desc: "A record sustained across every stream — Biology Science, Computer Science, and Commerce — reinforcing the school as one of Palakkad's top-ranked institutions.",
   },
 ];
@@ -299,8 +299,8 @@ export default function Journey() {
 
             <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
               <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
-                "For 14 consecutive years, we have maintained a 100% Higher
-                Secondary result."
+                "Top 10 Among 150 Schools
+in Palakkad District"
               </p>
             </blockquote>
 
