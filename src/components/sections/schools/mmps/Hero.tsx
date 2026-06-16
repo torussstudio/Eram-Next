@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
+import { Play } from "lucide-react";
 
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -202,17 +203,25 @@ export default function Hero() {
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
                 <button
-                  className="font-rethink bg-[#ae1431] px-5 md:px-7 py-2.5 md:py-3
-                    text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase cursor-pointer
-                   active:scale-[0.98] transition-transform rounded-[12px]"
-                >
-                  Admissions Open — Book Now →
-                </button>
+  className="
+    font-rethink bg-[#ae1431]
+    px-5 md:px-7 py-2.5 md:py-3
+    text-[10px] sm:text-[11px] md:text-[12px]
+    tracking-[0.12em] uppercase
+    cursor-pointer active:scale-[0.98]
+    transition-transform rounded-[12px]
+    flex items-center hover:bg-black justify-center gap-2
+    whitespace-nowrap
+  "
+>
+  <span>Admissions Open</span>
+  <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
+</button>
                 <button
                   className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
                     flex items-center gap-2 cursor-pointer 
-                    active:scale-[0.98] transition-transform rounded-[12px]"
+                    active:scale-[0.98] transition-transform rounded-[12px] hover:bg-white hover:text-[#ae1431]"
                 >
                   Enquire Now
                 </button>

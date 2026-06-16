@@ -157,7 +157,7 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
       </section>
 
       {/* INSTITUTIONS */}
-      <section className="anim-inst-wrap bg-[#F5EFE8] px-10 py-12">
+      <section className="anim-inst-wrap bg-[#F5EFE8] px-6 py-8">
         <div className="max-w-7xl mx-auto">
           <p className="anim-inst-label text-[12px] tracking-widest uppercase text-[#6b6256] mb-6">
             Explore All ERAM Institutions

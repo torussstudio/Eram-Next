@@ -5,6 +5,7 @@ import {gsap} from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,7 +106,7 @@ export default function ParentPartnership() {
         .to(".anim-msg", {
             opacity: 1, y: 0,
             duration: 0.45,
-            stagger: 0.09,        // messages trickle like a live feed
+            stagger: 0.09,       
           }, "-=0.15");
     },
     { scope: containerRef }
@@ -114,7 +115,7 @@ export default function ParentPartnership() {
   return (
  <section
   ref={containerRef}
-  className={`${shell} bg-[#F5EFE8] overflow-hidden -mt-[100px] md:-mt-[120px]`}
+  className={`${shell} bg-[#F5EFE8] overflow-hidden -mt-[80px] md:-mt-[100px]`}
 >
   <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 md:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
@@ -153,15 +154,17 @@ Monitoring &amp; Coordination
               ))}
             </ul>
 
-            <p className="font-display anim-quote mt-7 font-serif italic text-[14px] sm:text-[15px] text-[#9a8f84]">
+            <p className="font-rethink anim-quote mt-7  text-[14px] sm:text-[15px] text-[#9a8f84]">
               No student goes unnoticed. No parent remains uninformed.
             </p>
 
             <div className="mt-8 anim-btn">
-              <button className="font-rethink bg-[#1a1209] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
-                px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-[#2e2318] transition-colors duration-200 rounded-[10px]">
+              <button
+                className="font-rethink bg-[#ae1431] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
+                px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-black transition-colors duration-200 rounded-[10px]"
+              >
                 Access Parent Portal
-                <span className="text-[15px]">→</span>
+                <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
               </button>
             </div>
           </div>
@@ -176,10 +179,9 @@ Monitoring &amp; Coordination
 
             <div className="flex flex-col gap-[6px]">
               {messages.map((msg, i) => (
-                <div
+                 <div
                   key={i}
-                  className={`anim-msg bg-[#242424] rounded-[5px] px-4 py-4
-                    ${msg.accent ? "border-l-[3px] border-[#ae1431]" : "border-l-[3px] border-transparent"}`}
+                  className="anim-msg bg-[#242424] rounded-[5px] px-4 py-4 border-l-[3px] border-transparent hover:border-[#ae1431] hover:bg-[#2a2a2a] transition-all duration-300"
                 >
                   <p className="inline-flex items-center px-3 py-1 text-[11px] bg-[#1f1f1f] border border-[#2d2d2d] rounded-full text-[#c8c0b8] tracking-[0.02em] mb-2">
                     {msg.meta}

@@ -5,6 +5,7 @@ import {gsap} from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,15 +153,17 @@ export default function ParentPartnership() {
               ))}
             </ul>
 
-            <p className="font-display anim-quote mt-7 font-serif italic text-[14px] sm:text-[15px] text-[#9a8f84]">
+            <p className="font-rethink anim-quote mt-7  text-[14px] sm:text-[15px] text-[#9a8f84]">
               No student goes unnoticed. No parent remains uninformed.
             </p>
 
             <div className="mt-8 anim-btn">
-              <button className="font-rethink bg-[#1a1209] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
-                px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-[#2e2318] transition-colors duration-200 rounded-[10px]">
+              <button
+                className="font-rethink bg-[#ae1431] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
+                px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-black transition-colors duration-200 rounded-[10px]"
+              >
                 Access Parent Portal
-                <span className="text-[15px]">→</span>
+                <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
               </button>
             </div>
           </div>
@@ -177,8 +180,7 @@ export default function ParentPartnership() {
               {messages.map((msg, i) => (
                 <div
                   key={i}
-                  className={`anim-msg bg-[#242424] rounded-[5px] px-4 py-4
-                    ${msg.accent ? "border-l-[3px] border-[#ae1431]" : "border-l-[3px] border-transparent"}`}
+                  className="anim-msg bg-[#242424] rounded-[5px] px-4 py-4 border-l-[3px] border-transparent hover:border-[#ae1431] hover:bg-[#2a2a2a] transition-all duration-300"
                 >
                   <p className="inline-flex items-center px-3 py-1 text-[11px] bg-[#1f1f1f] border border-[#2d2d2d] rounded-full text-[#c8c0b8] tracking-[0.02em] mb-2">
                     {msg.meta}

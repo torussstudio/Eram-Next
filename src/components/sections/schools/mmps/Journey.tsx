@@ -297,8 +297,8 @@ export default function Journey() {
               </p>
             </div>
 
-            <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
-              <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
+            <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-4 my-6">
+              <p className="font-rethink font-bold text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
                 "The journey of MMPS has never been limited to board results alone."
               </p>
             </blockquote>

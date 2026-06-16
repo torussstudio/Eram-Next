@@ -163,9 +163,9 @@ export default function CommunicationPortal() {
               </span>
             </div>
 
-            <h1 className="font-display anim-heading text-4xl md:text-[36px] lg:text-[42px] leading-tight mb-6">
+            <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
               Centralised Access.
-              <br />
+              
               Structured Communication.
             </h1>
 
@@ -186,7 +186,6 @@ export default function CommunicationPortal() {
               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
             </button>
           </div>
-
           {/* ── RIGHT — LIVE FEED ── */}
           <div className="anim-feed-wrap lg:mt-0 mt-8">
             <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
@@ -215,7 +214,6 @@ export default function CommunicationPortal() {
             </div>
           </div>
         </div>{" "}
-        {/* END TOP GRID */}
         {/* FULL WIDTH FEATURE GRID */}
         <div className="anim-grid-wrap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] rounded-2xl overflow-hidden mt-12">
           {features.map((f, i) => (

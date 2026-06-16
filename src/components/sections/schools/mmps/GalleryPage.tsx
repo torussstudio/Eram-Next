@@ -70,7 +70,7 @@ export default function GalleryPage() {
                 Gallery
               </span>
             </div>
-            <p className="anim-desc text-gray-400 max-w-xl">
+            <p className="anim-desc font-rethink text-gray-400 max-w-xl">
              Sports competitions, cultural events, school celebrations, and Scout & Guide activities at MMPS.
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function GalleryPage() {
                   <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/80 to-transparent" />
 
                   {/* TITLE */}
-                  <div className="absolute bottom-4 left-4 text-sm tracking-wide text-gray-300">
+                  <div className="absolute font-rethink bottom-4 left-4 text-sm tracking-wide text-gray-300">
                     {item.title}
                   </div>
                 </div>

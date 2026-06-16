@@ -354,7 +354,7 @@ export default function Journey() {
               ref={quoteRef}
               className="border-l-[3px] border-[#ae1431] pl-5 my-8"
             >
-              <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
+              <p className="font-rethink font-bold  text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
                 "Its journey reflects not rapid expansion,
                  but steady presence — rooted in discipline,
                   cultural familiarity, and early academic grounding."

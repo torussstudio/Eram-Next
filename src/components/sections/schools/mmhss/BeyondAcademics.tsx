@@ -134,8 +134,6 @@ export default function BeyondAcademics() {
       revealScopedSection(".anim-stat-wrap", ".anim-stat-label", ".anim-stat");
 
       // ── Counter animation ─────────────────────────────────────────────
-      // One ScrollTrigger fires all counters — avoids stale-ref crashes
-      // caused by multiple 'once: true' triggers sharing the same element.
       const statWrap = q(".anim-stat-wrap")[0];
       if (statWrap) {
         ScrollTrigger.create({
@@ -165,7 +163,7 @@ export default function BeyondAcademics() {
     <section
       id="academics"
       ref={containerRef}
-      className={`${shell} mb-[40px] bg-[#F5EFE8]`}
+      className={`${shell}  bg-[#F5EFE8]`}
     >
       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-14">
         {/* ── HEADER ───────────────────────────────────────────── */}

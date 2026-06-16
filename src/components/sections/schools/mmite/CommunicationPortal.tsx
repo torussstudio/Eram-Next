@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
@@ -140,7 +140,8 @@ export default function CommunicationPortal() {
       ref={containerRef}
       className="min-h-screen bg-[#ae1431] text-white px-6 py-16 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+     <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         {/* ── LEFT ── */}
         <div>
           <div className="anim-tag flex items-center gap-3 mb-6">
@@ -164,32 +165,13 @@ export default function CommunicationPortal() {
            Prospective students and current enrollees access all 
            programme information, fee systems, and notices through 
            a single, unified interface.
-          </p>
-
-          {/* FEATURE GRID */}
-          <div className="anim-grid-wrap grid grid-cols-2 gap-[2px] mb-10 rounded-2xl overflow-hidden">
-            {features.map((f, i) => (
-              <div
-                key={i}
-                className="anim-grid-item bg-[#7a1410] p-8 hover:bg-[#8f1712] transition-colors duration-200"
-              >
-                <span className="text-xs text-white/50">{f.num}</span>
-                <h3 className="mt-3 font-display text-white">
-                  {f.title}
-                </h3>
-                <p className="font-rethink text-sm text-white/70 mt-2">
-                  {f.desc}
-                </p>
-              </div>
-            ))}
+          </p>         
+           <br></br>
+            <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
+              Access the Parent Portal
+              <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
+            </button>
           </div>
-
-          <button className="font-rethink anim-btn bg-white text-[#ae1431] px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:gap-3 transition-all duration-200 cursor-pointer rounded-[10px]">
-            Access Student Portal
-            <ArrowRight size={16} />
-          </button>
-        </div>
-
         {/* ── RIGHT — LIVE FEED ── */}
         <div className="anim-feed-wrap lg:mt-0 mt-8">
           <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
@@ -218,6 +200,23 @@ export default function CommunicationPortal() {
           </div>
         </div>
       </div>
+      <div className="anim-grid-wrap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] rounded-2xl overflow-hidden mt-12">
+          {features.map((f, i) => (
+            <div
+              key={i}
+              className="anim-grid-item bg-[#7a1410] p-8 min-h-[180px] hover:bg-[#8f1712] transition-colors duration-200"
+            >
+              <span className="text-xs text-white/50">{f.num}</span>
+
+              <h3 className="mt-3 text-white font-medium">{f.title}</h3>
+
+              <p className="font-rethink text-sm text-white/70 mt-2">
+                {f.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+        </div>
     </div>
   );
 }

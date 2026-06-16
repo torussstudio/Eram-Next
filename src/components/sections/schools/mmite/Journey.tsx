@@ -297,7 +297,7 @@ export default function Journey() {
             </div>
 
             <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-5 my-8">
-              <p className="font-display italic text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
+              <p className="font-rethink font-bold  text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
                 "The journey of MMITE is not defined by scale, but by outcomes. 
                 Its graduates do not merely complete a course — they clear examinations, 
                 secure top ranks, and enter classrooms prepared."
