@@ -169,9 +169,52 @@ function TrustHero() {
                 </p>
 
                 
-                <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide hover:bg-black hover:text-white transition cursor-pointer inline-flex items-center gap-2 whitespace-nowrap">
+                {/* <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide hover:bg-black hover:text-white transition cursor-pointer inline-flex items-center gap-2 whitespace-nowrap">
   VIEW OUR COMMUNITY INTERVENTIONS
   <Play className="w-4 h-4 transition-all duration-300" />
+</button> */}
+<button
+  className="
+    font-rethink
+    hero-content-fade
+    mt-6 md:mt-8
+
+    inline-flex items-center gap-2
+    w-fit
+
+    bg-[#ae1431]
+    text-white
+
+    px-5 py-3
+    sm:px-6 sm:py-3.5
+    md:px-8 md:py-4
+
+    rounded-xl
+
+    text-xs
+    sm:text-sm
+    md:text-base
+
+    font-semibold
+    uppercase
+    tracking-[0.12em]
+
+    shadow-lg
+    transition-all
+    duration-300
+
+    hover:bg-black
+    hover:shadow-xl
+    hover:-translate-y-1
+
+    cursor-pointer
+    whitespace-nowrap
+    group
+  "
+>
+  <span>View Our Community Interventions</span>
+
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
 </button>
               </div>
             </div>

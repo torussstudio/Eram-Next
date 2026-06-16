@@ -335,7 +335,7 @@ const StudentParentPortal = () => {
                 resources, and administrative information for students and
                 parents across the ERAM ecosystem.
               </p>
-              <button className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl hover:bg-red-800 active:scale-95 transition-all">
+              <button className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl  active:scale-95 transition-all">
                 Proceed to Full Portal <ChevronRight size={18} />
               </button>
             </div>
@@ -399,7 +399,7 @@ const StudentParentPortal = () => {
               ))}
             </div>
 
-            <button className=" cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl hover:bg-red-800 active:scale-95 transition-all ">
+            <button className=" cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl hover:bg-black active:scale-95 transition-all ">
               Proceed to Fees Portal <ChevronRight size={18} />
             </button>
           </div>
@@ -465,7 +465,7 @@ const StudentParentPortal = () => {
             ))}
           </div>
 
-          <button className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-red-700 text-red-700 text-sm font-rethink rounded-xl hover:bg-red-50 transition-colors cursor-pointer">
+          <button className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 border-2 bg-[#ae1431] text-white border-[#ae1431] text-[#ae1431] hover:border-black text-sm font-rethink rounded-xl hover:bg-black transition-colors cursor-pointer">
             View All Notices <ChevronRight size={16} />
           </button>
         </div>
@@ -524,7 +524,7 @@ const StudentParentPortal = () => {
                     </div>
                   </div>
 
-                  <button className="shrink-0 p-2.5 bg-[#ae1431] text-white rounded-lg hover:bg-red-800 active:scale-95 transition-all">
+                  <button className="shrink-0 p-2.5 bg-[#ae1431] text-white rounded-lg hover:bg-black active:scale-95 transition-all">
                     <Download size={18} />
                   </button>
                 </div>
@@ -561,7 +561,7 @@ const StudentParentPortal = () => {
             Access complete portal features for enhanced learning and
             communication.
           </p>
-          <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl  cursor-pointer">
+          <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl  cursor-pointer">
             Launch Full Portal <ChevronRight size={20} />
           </button>
         </div>

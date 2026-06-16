@@ -56,8 +56,8 @@ export default function AnchoredSection() {
 
             {/* QUOTE */}
             <p className="
-            font-display
-              italic
+            font-rethink
+            font-bold
               text-[16px] md:text-[17px]
               text-[#9f988e]
               mb-[24px] md:mb-[30px]

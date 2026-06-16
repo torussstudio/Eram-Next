@@ -207,7 +207,7 @@ function PerformanceSection() {
                 className="perf-eyebrow-line h-px bg-[#ae1431]/60 w-10"
                 style={{ transformOrigin: "left center" }}
               />
-              <span className="font-rethink text-[10px] uppercase tracking-[0.22em] text-[#ae1431] font-semibold">
+              <span className="font-rethink text-[12px] uppercase tracking-[0.22em] text-[#ae1431] font-semibold">
                 Key Features
               </span>
               <div

@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
-import ActionButton from "../../ui/ActionButton";
 import { useSmoothScroll } from "../../../hooks/useSmoothScroll";
 
 /* ─── Animation config ────────────────────────────────────────────────────── */
@@ -302,19 +301,35 @@ export default function AboutSection() {
             </p>
 
             <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
-              <ActionButton
-                             onClick={() =>
-                               smoothScrollTo("institutions")
-                             }
-                             className="
-                               font-rethink
-                               !bg-[#ae1431]
-                               hover:!bg-black
-                               cursor-pointer
-                             "
-                           >
-                             Explore Our Institutions
-                           </ActionButton>
+           <button
+  onClick={() => smoothScrollTo("institutions")}
+  className="
+    font-rethink
+    inline-flex
+    items-center
+    gap-2
+
+    bg-[#ae1431]
+    text-white
+
+    px-5
+    py-2.5
+
+    rounded-lg
+
+    text-[18px]
+    font-medium
+
+    transition-colors
+    duration-300
+
+    hover:bg-black
+
+    cursor-pointer
+  "
+>
+  Explore Our Institutions
+</button>
             </div>
           </div>
         </div>

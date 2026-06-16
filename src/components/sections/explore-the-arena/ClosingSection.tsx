@@ -144,8 +144,8 @@ export default function ClosingSection() {
           {/* QUOTE */}
           <p
             className="
-          font-display
-            italic
+          font-rethink
+          font-bold
             text-[17px] md:text-[18px]
             text-[#7a7268]
           "

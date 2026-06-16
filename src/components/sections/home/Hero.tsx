@@ -5,13 +5,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
-
-import ActionButton from "@/components/ui/ActionButton";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
-
-
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -32,10 +28,7 @@ export default function Hero() {
     () => {
       const mm = gsap.matchMedia();
 
-      const lines = [
-        titleLine1Ref.current,
-        titleLine2Ref.current,
-      ];
+      const lines = [titleLine1Ref.current, titleLine2Ref.current];
 
       /* ───────────────── Desktop ───────────────── */
       mm.add("(min-width: 1280px)", () => {
@@ -50,7 +43,7 @@ export default function Hero() {
             scale: 1.05,
             duration: 1.2,
             ease: "power3.out",
-          }
+          },
         )
           .fromTo(
             lines,
@@ -65,7 +58,7 @@ export default function Hero() {
               stagger: 0.12,
               ease: "power3.out",
             },
-            "-=0.9"
+            "-=0.9",
           )
           .fromTo(
             sublineRef.current,
@@ -77,7 +70,7 @@ export default function Hero() {
               duration: 0.45,
               ease: "power1.out",
             },
-            "-=0.5"
+            "-=0.5",
           )
           .fromTo(
             descRef.current,
@@ -91,7 +84,7 @@ export default function Hero() {
               duration: 0.7,
               ease: "power2.out",
             },
-            "-=0.4"
+            "-=0.4",
           )
           .fromTo(
             buttonsRef.current,
@@ -105,7 +98,7 @@ export default function Hero() {
               duration: 0.7,
               ease: "power2.out",
             },
-            "-=0.55"
+            "-=0.55",
           );
 
         gsap.to(videoRef.current, {
@@ -141,7 +134,7 @@ export default function Hero() {
             duration: 0.65,
             stagger: 0.1,
             ease: "power3.out",
-          }
+          },
         )
           .fromTo(
             sublineRef.current,
@@ -153,7 +146,7 @@ export default function Hero() {
               duration: 0.4,
               ease: "power1.out",
             },
-            "-=0.35"
+            "-=0.35",
           )
           .fromTo(
             descRef.current,
@@ -167,7 +160,7 @@ export default function Hero() {
               duration: 0.55,
               ease: "power2.out",
             },
-            "-=0.3"
+            "-=0.3",
           )
           .fromTo(
             buttonsRef.current,
@@ -181,7 +174,7 @@ export default function Hero() {
               duration: 0.55,
               ease: "power2.out",
             },
-            "-=0.4"
+            "-=0.4",
           );
 
         return () => {
@@ -203,7 +196,7 @@ export default function Hero() {
             duration: 0.4,
             stagger: 0.08,
             ease: "power1.out",
-          }
+          },
         )
           .fromTo(
             sublineRef.current,
@@ -215,7 +208,7 @@ export default function Hero() {
               duration: 0.3,
               ease: "power1.out",
             },
-            "-=0.15"
+            "-=0.15",
           )
           .fromTo(
             descRef.current,
@@ -227,7 +220,7 @@ export default function Hero() {
               duration: 0.35,
               ease: "power1.out",
             },
-            "-=0.12"
+            "-=0.12",
           )
           .fromTo(
             buttonsRef.current,
@@ -239,7 +232,7 @@ export default function Hero() {
               duration: 0.35,
               ease: "power1.out",
             },
-            "-=0.15"
+            "-=0.15",
           );
 
         return () => {
@@ -251,14 +244,14 @@ export default function Hero() {
         mm.revert();
       };
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-       className="bg-[#F5EFE8] py-9 px-3 md:px-6"
+      className="bg-[#F5EFE8] py-9 px-3 md:px-6"
     >
       <div
         className="
@@ -281,10 +274,7 @@ export default function Hero() {
             disablePictureInPicture
             disableRemotePlayback
           >
-            <source
-              src="/videos/mainhero.mp4"
-              type="video/mp4"
-            />
+            <source src="/videos/mainhero.mp4" type="video/mp4" />
           </video>
         </div>
 
@@ -292,8 +282,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/40" />
 
         {/* ───────────────── Content ───────────────── */}
-       <div
-  className="
+        <div
+          className="
     relative z-10 flex min-h-[inherit] items-center
     justify-center xl:justify-start
     text-center xl:text-left
@@ -304,7 +294,7 @@ export default function Hero() {
     lg:px-20
     xl:px-28
   "
->
+        >
           <div className="max-w-[720px] text-white mx-auto xl:mx-30">
             {/* Heading */}
             <h1
@@ -315,17 +305,11 @@ export default function Hero() {
                 text-[clamp(3.2rem,5vw,5.2rem)]
               "
             >
-              <span
-                ref={titleLine1Ref}
-                className="block"
-              >
+              <span ref={titleLine1Ref} className="block">
                 Building Foundations.
               </span>
 
-              <span
-                ref={titleLine2Ref}
-                className="block"
-              >
+              <span ref={titleLine2Ref} className="block">
                 Shaping Futures.
               </span>
             </h1>
@@ -342,8 +326,7 @@ export default function Hero() {
                 text-white/95
               "
             >
-              Holistic, disciplined, and inclusive education
-              for every child.
+              Holistic, disciplined, and inclusive education for every child.
             </p>
 
             {/* Description */}
@@ -360,8 +343,8 @@ export default function Hero() {
                 md:text-[1.05rem]
               "
             >
-              A disciplined educational ecosystem nurturing
-              academic excellence, character, and opportunity.
+              A disciplined educational ecosystem nurturing academic excellence,
+              character, and opportunity.
             </p>
 
             {/* Buttons */}
@@ -372,42 +355,56 @@ export default function Hero() {
                 flex flex-wrap gap-4
               "
             >
-              <ActionButton
-                onClick={() =>
-                  smoothScrollTo("institutions")
-                }
-                className="
-                  font-rethink
-                  !bg-[#ae1431]
-                  hover:!bg-black
-                  cursor-pointer
-                "
-              >
-                Explore Our Institutions
-              </ActionButton>
-
-              {/* <ActionButton
-                onClick={() =>
-                  router.push("/contact")
-                }
-                className="
-                  font-rethink
-                  !bg-[#F5EFE8]
-                  !text-black
-                  hover:!bg-black
-                  hover:!text-[#F5EFE8]
-                  cursor-pointer
-                "
-              >
-                Admissions Open 2026-27
-              </ActionButton> */}
-
-               <button
-            onClick={() => router.push("/contact")}
-            className="font-rethink rounded-[12px] border border-white/70 px-[36px] py-[14px] text-[14px] font-semibold  uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-[#a80c2d] cursor-pointer"
-          >
-            ADMISSIONS OPEN 2026-27
-          </button>
+             <button
+  onClick={() => smoothScrollTo("institutions")}
+  className="
+    font-rethink
+    bg-[#ae1431]
+    hover:bg-black
+    text-white
+    cursor-pointer
+    px-8
+    py-4
+    rounded-[12px]
+    text-lg
+    md:text-lg
+    transition-all
+    duration-300
+    shadow-lg
+    font-semibold
+    hover:shadow-xl
+    hover:-translate-y-1
+    uppercase
+  "
+>
+  Explore Our Institutions
+</button>
+              <button
+  onClick={() => router.push("/contact")}
+  className="
+    font-rethink
+    cursor-pointer
+    rounded-xl
+    border
+    border-white/70
+    px-8
+    py-4
+    text-sm
+    font-semibold
+    uppercase
+    tracking-[0.14em]
+    text-white
+    transition-all
+    duration-300
+    hover:border-white
+    hover:bg-white
+    hover:text-[#a80c2d]
+    hover:-translate-y-1
+    hover:shadow-xl
+  "
+>
+  Admissions Open 2026–27
+</button>
             </div>
           </div>
         </div>

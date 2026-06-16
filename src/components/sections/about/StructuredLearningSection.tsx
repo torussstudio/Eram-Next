@@ -426,7 +426,7 @@ useEffect(() => {
         "Education is a powerful force that shapes intellect, character, and values. At ERAM, we are committed to providing value-based quality education to every student, irrespective of background. Through structured learning and strong moral principles, we aim to nurture disciplined, responsible individuals who strive for excellence and contribute meaningfully to society. May God Almighty bless us all!",
     },
     {
-      src: "/images/person2.avif",
+      src: "/images/person2.png",
       alt: "Mr. Abdhussamad C K",
       objPos: "object-[60%_20%]",
        name: "Mr. ABDUSSAMAD C K",

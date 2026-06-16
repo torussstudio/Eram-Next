@@ -238,7 +238,7 @@ function AboutHero() {
                   individuals.
                 </p>
 
-               <button
+               {/* <button
   type="button"
   onClick={() => {
     router.push("/");
@@ -277,6 +277,74 @@ function AboutHero() {
   EXPLORE OUR INSTITUTIONS
 
    <Play className="w-4 h-4 transition-all duration-300" />
+</button> */}
+
+<button
+  type="button"
+  onClick={() => {
+    router.push("/");
+
+    setTimeout(() => {
+      const section = document.getElementById("institutions");
+
+      if (section) {
+        const yOffset = -90;
+
+        const y =
+          section.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
+
+        window.scrollTo({
+          top: y,
+          behavior: "smooth",
+        });
+      }
+    }, 700);
+  }}
+  className="
+    hero-content-fade
+    mt-6 md:mt-8
+
+    inline-flex items-center gap-2
+    w-fit
+
+    bg-[#ae1431]
+    text-white
+
+    px-5 py-3
+    sm:px-6 sm:py-3.5
+    md:px-8 md:py-4
+
+    rounded-xl
+
+    text-xs
+    sm:text-sm
+    md:text-base
+
+    font-semibold
+    font-rethink
+    uppercase
+    tracking-[0.12em]
+
+    shadow-lg
+    transition-all
+    duration-300
+
+    hover:bg-black
+    hover:shadow-xl
+    hover:-translate-y-1
+
+    opacity-0
+    translate-y-8
+
+    cursor-pointer
+    group
+  "
+>
+  <span>Explore Our Institutions</span>
+
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
 </button>
               </div>
             </div>

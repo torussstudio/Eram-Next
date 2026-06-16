@@ -314,34 +314,30 @@ export default function ContactPage() {
         {/* ── Main grid: stacked on mobile/tablet, side-by-side on md+ ── */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.65fr] gap-5 items-start">
           {/* ── Info card ── */}
-          <div ref={infoCardRef}>
-            <div className="bg-[#1a1209] rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
-              {/* Decorative circle */}
-              {/* <div className="absolute -top-14 -right-14 w-60 h-60 rounded-full bg-[#ae1431]/[0.18] pointer-events-none" /> */}
+          <div ref={infoCardRef} className="md:mt-0 lg:mt-22">
+  <div className="bg-black rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
+    {/* Top section — "Get in Touch" overlaid on dark card header */}
+    <div>
+      <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-white mb-4">
+        Get in
+        <br />
+        Touch
+      </p>
+      <p className="text-[13.5px] font-rethink leading-[1.75] text-white/55 max-w-xs">
+        For admissions, institutional enquiries, partnerships, or
+        sports Arena bookings, our team will guide you to the right
+        department.
+      </p>
+    </div>
 
-              {/* Top section */}
-              <div>
-                <span className="inline-block bg-[#ae1431] text-white text-[10px] tracking-[0.14em] uppercase px-3 py-[5px] rounded-full mb-6 sm:mb-7 font-rethink">
-                  Get in Touch
-                </span>
-                <h2 className="font-display leading-[1.2] tracking-[-0.02em] mb-3 text-[1.55rem] sm:text-[1.85rem]">
-                  Connect With <br /> Eram Education
-                </h2>
-                <p className="text-[13.5px] font-rethink leading-[1.75] text-white/55 max-w-xs">
-                  For admissions, institutional enquiries, partnerships, or
-                  sports Arena bookings, our team will guide you to the right
-                  department.
-                </p>
-              </div>
-
-              {/* Contact items */}
-              <div className="flex flex-col gap-4 sm:gap-5">
-                {CONTACT_ITEMS.map((item) => (
-                  <ContactItem key={item.label} {...item} />
-                ))}
-              </div>
-            </div>
-          </div>
+    {/* Contact items */}
+    <div className="flex flex-col gap-4 sm:gap-5">
+      {CONTACT_ITEMS.map((item) => (
+        <ContactItem key={item.label} {...item} />
+      ))}
+    </div>
+  </div>
+</div>
 
           {/* ── Form card ── */}
           <div ref={formCardRef}>

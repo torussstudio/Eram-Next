@@ -5,14 +5,14 @@ import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 
 /* ── Constants ──────────────────────────────────────────────────── */
-const CATEGORIES = ["ACADEMIC", "SPORTS", "CULTURAL", "SOCIAL"] as const;
+const CATEGORIES = [ "SPORTS", "CULTURAL", "SOCIAL","ACADEMIC"] as const;
 type Category = (typeof CATEGORIES)[number];
 
 export const excellenceDomains: Record<Category, { image: string }[]> = {
-  ACADEMIC: Array.from({ length: 4 }, (_, i) => ({ image: `/images/academic${i + 1}.avif` })),
   SPORTS:   Array.from({ length: 4 }, (_, i) => ({ image: `/images/sports${i + 1}.avif` })),
   CULTURAL: Array.from({ length: 4 }, (_, i) => ({ image: `/images/cultural${i + 1}.avif` })),
   SOCIAL:   Array.from({ length: 4 }, (_, i) => ({ image: `/images/pro${i + 1}.avif` })),
+  ACADEMIC: Array.from({ length: 4 }, (_, i) => ({ image: `/images/academic${i + 1}.avif` })),
 };
 
 /* ── NavArrow ────────────────────────────────────────────────────── */

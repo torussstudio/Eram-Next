@@ -47,7 +47,7 @@ export default function CommunitySection() {
                 href="/contact"
                 className="
     group
-    bg-[#111]
+    bg-[#ae1431]
     rounded-[12px]
     font-rethink
     text-white
@@ -59,23 +59,12 @@ export default function CommunitySection() {
     inline-flex
     items-center
     gap-3
-    hover:bg-[#ae1431]
-    hover:text-black
+    hover:bg-black
     transition-all duration-300
     cursor-pointer
   "
               >
                 Enquire About Hosting
-                <span
-                  className="
-      relative z-10
-      inline-block
-      transition-all duration-300
-      group-hover:translate-x-[5px]
-    "
-                >
-                  →
-                </span>
               </Link>
             </div>
 

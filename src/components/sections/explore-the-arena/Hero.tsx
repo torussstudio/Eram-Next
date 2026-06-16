@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar } from "lucide-react";
+import { Calendar, Play } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -78,9 +78,9 @@ export default function HeroSection() {
                   className="
                     font-rethink
 
-                    text-[11px]
+                    text-[13px]
 
-                    sm:text-[11px]
+                    sm:text-[13px]
 
                     tracking-[0.28em]
 
@@ -158,7 +158,7 @@ export default function HeroSection() {
                 "
               >
                 {/* PRIMARY BUTTON */}
-                <button
+                {/* <button
                   className="
                     group
                     font-rethink
@@ -212,10 +212,56 @@ export default function HeroSection() {
                   >
                     →
                   </span>
-                </button>
+                </button> */}
+
+                <button
+  className="
+    group
+    font-rethink
+
+    inline-flex
+    items-center
+    justify-center
+    gap-2
+
+    bg-[#ae1431]
+    text-white
+
+    px-6
+    sm:px-7
+    md:px-8
+
+    py-3
+    md:py-4
+
+    rounded-xl
+
+    text-xs
+    sm:text-sm
+
+    font-semibold
+    uppercase
+    tracking-[0.12em]
+
+    cursor-pointer
+
+    shadow-lg
+
+    transition-all
+    duration-300
+
+    hover:bg-black
+    hover:shadow-xl
+    hover:-translate-y-1
+  "
+>
+  <span>Explore the Arena</span>
+
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+</button>
 
                 {/* SECONDARY BUTTON */}
-                <button
+                {/* <button
                   className="
                     font-rethink
 
@@ -254,7 +300,62 @@ export default function HeroSection() {
                 >
                   HOST AN EVENT
                   <Calendar className="w-4 h-4 opacity-70" />
-                </button>
+                </button> */}
+
+                <button
+  className="
+    font-rethink
+
+    inline-flex
+    items-center
+    justify-center
+    gap-2
+
+    border
+    border-white/40
+
+    px-6
+    sm:px-7
+    md:px-8
+
+    py-3
+    md:py-4
+
+    rounded-xl
+
+    text-xs
+    sm:text-sm
+
+    font-semibold
+    uppercase
+    tracking-[0.12em]
+
+    text-white
+
+    cursor-pointer
+
+    transition-all
+    duration-300
+
+    hover:bg-white
+    hover:text-[#ae1431]
+    hover:border-white
+    hover:-translate-y-1
+  "
+>
+  <span>Host an Event</span>
+
+  <Calendar
+    className="
+      w-4 h-4
+      md:w-5 md:h-5
+      opacity-70
+      transition-all
+      duration-300
+      group-hover:opacity-100
+    "
+  />
+</button>
               </div>
             </div>
 
