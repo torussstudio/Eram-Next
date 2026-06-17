@@ -7,16 +7,19 @@ import { useGSAP } from "@gsap/react";
 export default function MarqueeText() {
   const ref = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (!ref.current) return;
-    
-    gsap.to(ref.current, {
-      xPercent: -50,
-      duration: 40,
-      ease: "linear",
-      repeat: -1,
-    });
-  }, { scope: ref });
+  useGSAP(
+    () => {
+      if (!ref.current) return;
+
+      gsap.to(ref.current, {
+        xPercent: -50,
+        duration: 40,
+        ease: "linear",
+        repeat: -1,
+      });
+    },
+    { scope: ref },
+  );
 
   const text = "FIVE INSTITUTIONS. ONE DISCIPLINED ECOSYSTEM OF LEARNING";
   const items = Array.from({ length: 8 });

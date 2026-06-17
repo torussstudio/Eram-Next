@@ -186,7 +186,7 @@ export default function AcademicStreams() {
       ref={sectionRef}
       className={`${shell} bg-[#F5EFE8] relative overflow-hidden`}
     >
-     <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
           {/* ══ LEFT COLUMN ═════════════════════════════════════ */}
           <div className="flex flex-col mt-5 lg:mt-11">

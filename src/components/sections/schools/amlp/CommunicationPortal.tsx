@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";

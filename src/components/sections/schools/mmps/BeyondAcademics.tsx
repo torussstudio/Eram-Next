@@ -64,7 +64,8 @@ const stats = [
   {
     value: "25",
     unit: "+",
-    label: "Students — Rajyapuraskar Qualification\n(Governor's Award, Scouts & Guides)",
+    label:
+      "Students — Rajyapuraskar Qualification\n(Governor's Award, Scouts & Guides)",
     bg: "bg-[#1a1a1a]",
     valC: "text-white",
     unitC: "text-white/40",
@@ -102,12 +103,12 @@ export default function BeyondAcademics() {
       // ── Initial states ────────────────────────────────────────────────
       gsap.set(
         q(
-          ".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat"
+          ".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat",
         ),
         {
           opacity: 0,
           y: 28,
-        }
+        },
       );
 
       // ── Header animation ──────────────────────────────────────────────
@@ -134,7 +135,7 @@ export default function BeyondAcademics() {
       function revealScopedSection(
         triggerClass: string,
         labelClass: string,
-        cardsClass: string
+        cardsClass: string,
       ) {
         const triggerEl = q(triggerClass)[0];
         if (!triggerEl) return;
@@ -167,7 +168,7 @@ export default function BeyondAcademics() {
               duration: 0.65,
               stagger: 0.09,
             },
-            "-=0.15"
+            "-=0.15",
           );
         }
       }
@@ -176,30 +177,28 @@ export default function BeyondAcademics() {
       revealScopedSection(
         ".anim-bench-wrap",
         ".anim-bench-label",
-        ".anim-bench"
+        ".anim-bench",
       );
 
       revealScopedSection(
         ".anim-excel-wrap",
         ".anim-excel-label",
-        ".anim-excel"
+        ".anim-excel",
       );
 
-      revealScopedSection(
-        ".anim-stat-wrap",
-        ".anim-stat-label",
-        ".anim-stat"
-      );
+      revealScopedSection(".anim-stat-wrap", ".anim-stat-label", ".anim-stat");
     },
     {
       scope: containerRef,
-    }
+    },
   );
 
   return (
-    <section ref={containerRef} className={`${shell} bg-[#F5EFE8] -mt-8 md:-mt-12 lg:-mt-14`}>
-  <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
-
+    <section
+      ref={containerRef}
+      className={`${shell} bg-[#F5EFE8] -mt-8 md:-mt-12 lg:-mt-14`}
+    >
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         {/* ── HEADER ── */}
         <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-6 lg:mb-8">
           <div className="anim-header">
@@ -211,8 +210,10 @@ export default function BeyondAcademics() {
           </div>
           <div className="anim-header flex items-end">
             <p className=" font-rethink text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
-              Academic consistency at MMPS is matched by active participation in competitive platforms, particularly
-              in football and athletics. Our students actively represent the school across competitive platforms.
+              Academic consistency at MMPS is matched by active participation in
+              competitive platforms, particularly in football and athletics. Our
+              students actively represent the school across competitive
+              platforms.
             </p>
           </div>
         </div>
@@ -271,10 +272,7 @@ export default function BeyondAcademics() {
                   ? "bg-[#2a2a2a] text-[#a09488]"
                   : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
 
-              const titleC =
-                isRed || isDark
-                  ? "text-white"
-                  : "text-[#1a1209]";
+              const titleC = isRed || isDark ? "text-white" : "text-[#1a1209]";
 
               const subC = isRed
                 ? "text-white/50"
@@ -306,7 +304,9 @@ export default function BeyondAcademics() {
                     {card.sub}
                   </p>
 
-                  <p className={`text-[13px] font-rethink leading-[1.65] ${descC}`}>
+                  <p
+                    className={`text-[13px] font-rethink leading-[1.65] ${descC}`}
+                  >
                     {card.desc}
                   </p>
                 </div>
@@ -334,14 +334,15 @@ export default function BeyondAcademics() {
                     {stat.unit}
                   </span>
                 </div>
-                <p className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}>
+                <p
+                  className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}
+                >
                   {stat.label}
                 </p>
               </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

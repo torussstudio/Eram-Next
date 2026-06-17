@@ -20,13 +20,15 @@ const supportItems = [
     "Supervised academic monitoring daily",
     "Targeted question practice modules",
   ],
-  ["Shreshtta classroom development initiative", "Exam-focused revision & support modules"],
+  [
+    "Shreshtta classroom development initiative",
+    "Exam-focused revision & support modules",
+  ],
   [
     "Timely academic announcements & notices",
     "Coordinated parent communication system",
   ],
 ];
-
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function AcademicStreams() {
@@ -187,7 +189,7 @@ export default function AcademicStreams() {
       ref={sectionRef}
       className={`${shell} bg-[#F5EFE8] relative overflow-hidden`}
     >
-     <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
           {/* ══ LEFT COLUMN ═════════════════════════════════════ */}
           <div className="flex flex-col mt-5 lg:mt-11">
@@ -240,7 +242,7 @@ export default function AcademicStreams() {
           </div>
 
           {/* ══ RIGHT COLUMN ═══════════════════════════════════ */}
-           <div
+          <div
             ref={principalRef}
             className="group relative overflow-hidden mt-6 lg:mt-12 rounded-[28px] h-[350px] md:h-[450px] border border-white/10"
           >
@@ -267,8 +269,7 @@ export default function AcademicStreams() {
               </p>
 
               <h2 className="font-display text-white text-[42px] md:text-[56px] leading-[0.95] tracking-[-0.03em]">
-                RAKESH
-                C
+                RAKESH C
               </h2>
 
               <p className="text-[#cbbfb4] mt-4 text-[14px]">
@@ -277,7 +278,7 @@ export default function AcademicStreams() {
             </div>
 
             {/* Hover Reveal */}
-  <div className="absolute inset-0 flex items-end p-8 md:p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 pointer-events-none">
+            <div className="absolute inset-0 flex items-end p-8 md:p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 pointer-events-none">
               <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-500">
                 <div className="w-12 h-[2px] bg-[#ae1431] mb-6" />
 

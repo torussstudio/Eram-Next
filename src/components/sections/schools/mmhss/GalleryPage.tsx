@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useRef } from "react";
@@ -38,19 +36,24 @@ export default function GalleryPage() {
         start: "top 82%",
         toggleActions: "play none none none",
         onEnter: () => {
-          gsap.timeline({ defaults: { ease: SMOOTH } })
+          gsap
+            .timeline({ defaults: { ease: SMOOTH } })
             .to(q(".anim-tag"), {
               opacity: 1,
               y: 0,
               filter: "blur(0px)",
               duration: 0.7,
             })
-            .to(q(".anim-desc"), {
-              opacity: 1,
-              y: 0,
-              filter: "blur(0px)",
-              duration: 0.7,
-            }, "-=0.45");
+            .to(
+              q(".anim-desc"),
+              {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 0.7,
+              },
+              "-=0.45",
+            );
         },
       });
 
@@ -74,14 +77,13 @@ export default function GalleryPage() {
         });
       }
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
     <div ref={containerRef} className="bg-[#1f1f1f] text-white overflow-hidden">
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-
           {/* HEADER */}
           <div className="mb-12">
             <div className="anim-tag flex items-center gap-3 mb-4">
@@ -121,7 +123,6 @@ export default function GalleryPage() {
               );
             })}
           </div>
-
         </div>
       </section>
     </div>

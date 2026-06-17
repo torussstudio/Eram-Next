@@ -70,7 +70,7 @@ export default function CommunicationPortal() {
       // ── Set all initial states before first paint ─────────────────────
       gsap.set(
         q(
-          ".anim-tag, .anim-heading, .anim-body, .anim-grid-item, .anim-btn, .anim-feed-header, .anim-feed-item"
+          ".anim-tag, .anim-heading, .anim-body, .anim-grid-item, .anim-btn, .anim-feed-header, .anim-feed-item",
         ),
         { opacity: 0, y: 20 },
       );
@@ -118,7 +118,12 @@ export default function CommunicationPortal() {
         });
 
         feedTl
-          .to(q(".anim-feed-header"), { opacity: 1, x: 0, y: 0, duration: 0.45 })
+          .to(q(".anim-feed-header"), {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.45,
+          })
           .to(
             q(".anim-feed-item"),
             {
@@ -140,67 +145,69 @@ export default function CommunicationPortal() {
       ref={containerRef}
       className="min-h-screen bg-[#ae1431] text-white px-6 py-16 overflow-hidden"
     >
-     <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        {/* ── LEFT ── */}
-        <div>
-          <div className="anim-tag flex items-center gap-3 mb-6">
-            <span className="font-rethink text-xs tracking-widest uppercase text-white/70">
-              Communication & Admission
-            </span>
-          </div>
+          {/* ── LEFT ── */}
+          <div>
+            <div className="anim-tag flex items-center gap-3 mb-6">
+              <span className="font-rethink text-xs tracking-widest uppercase text-white/70">
+                Communication & Admission
+              </span>
+            </div>
 
-          <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
-            Structured Access.<br/>Clear Coordination.
-          </h1>
+            <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
+              Structured Access.
+              <br />
+              Clear Coordination.
+            </h1>
 
-          <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
-            Administrative coordination and admission enquiries 
-            are streamlined through the ERAM Student & Parent Portal 
-            and institutional communication channels — ensuring clarity
-            in admissions, coursework, and academic updates at every stage.
-          </p>
+            <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
+              Administrative coordination and admission enquiries are
+              streamlined through the ERAM Student & Parent Portal and
+              institutional communication channels — ensuring clarity in
+              admissions, coursework, and academic updates at every stage.
+            </p>
 
-          <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[14.5px] md:text-[15.5px]">
-           Prospective students and current enrollees access all 
-           programme information, fee systems, and notices through 
-           a single, unified interface.
-          </p>         
-           <br></br>
+            <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[14.5px] md:text-[15.5px]">
+              Prospective students and current enrollees access all programme
+              information, fee systems, and notices through a single, unified
+              interface.
+            </p>
+            <br></br>
             <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
               Access the Parent Portal
               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
             </button>
           </div>
-        {/* ── RIGHT — LIVE FEED ── */}
-        <div className="anim-feed-wrap lg:mt-0 mt-8">
-          <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
-           MMITE — Live Communication Feed
-          </div>
+          {/* ── RIGHT — LIVE FEED ── */}
+          <div className="anim-feed-wrap lg:mt-0 mt-8">
+            <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
+              MMITE — Live Communication Feed
+            </div>
 
-          <div className="flex flex-col gap-[2px]">
-            {feedItems.map((item, i) => (
-              <div
-                key={i}
-                className="anim-feed-item bg-[#7a1410] py-4 px-3 flex gap-3
+            <div className="flex flex-col gap-[2px]">
+              {feedItems.map((item, i) => (
+                <div
+                  key={i}
+                  className="anim-feed-item bg-[#7a1410] py-4 px-3 flex gap-3
                   border-l-2 border-transparent hover:border-white/40
                   transition-colors duration-200 cursor-default rounded-[10px]"
-              >
-                <span
-                  className={`w-2 h-2 mt-[6px] rounded-full shrink-0 ${item.color}`}
-                />
-                <div>
-                  <p className="font-rethink text-sm">{item.text}</p>
-                  <span className=" font-rethink text-xs text-white/50 block mt-1">
-                    {item.meta}
-                  </span>
+                >
+                  <span
+                    className={`w-2 h-2 mt-[6px] rounded-full shrink-0 ${item.color}`}
+                  />
+                  <div>
+                    <p className="font-rethink text-sm">{item.text}</p>
+                    <span className=" font-rethink text-xs text-white/50 block mt-1">
+                      {item.meta}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="anim-grid-wrap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] rounded-2xl overflow-hidden mt-12">
+        <div className="anim-grid-wrap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] rounded-2xl overflow-hidden mt-12">
           {features.map((f, i) => (
             <div
               key={i}
@@ -216,7 +223,7 @@ export default function CommunicationPortal() {
             </div>
           ))}
         </div>
-        </div>
+      </div>
     </div>
   );
 }

@@ -14,44 +14,41 @@ function StructuredLearningSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
-const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-const updateScrollButtons = useCallback(() => {
-  const el = scrollRef.current;
-  if (!el) return;
+  const updateScrollButtons = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-  const isAtStart = el.scrollLeft <= 5;
+    const isAtStart = el.scrollLeft <= 5;
 
-  const isAtEnd =
-    el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+    const isAtEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
 
-  setCanScrollLeft(!isAtStart);
-  setCanScrollRight(!isAtEnd);
-}, []);
+    setCanScrollLeft(!isAtStart);
+    setCanScrollRight(!isAtEnd);
+  }, []);
 
-useEffect(() => {
-  const el = scrollRef.current;
-  if (!el) return;
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-  updateScrollButtons();
+    updateScrollButtons();
 
-  el.addEventListener("scroll", updateScrollButtons);
-  window.addEventListener("resize", updateScrollButtons);
+    el.addEventListener("scroll", updateScrollButtons);
+    window.addEventListener("resize", updateScrollButtons);
 
-  return () => {
-    el.removeEventListener("scroll", updateScrollButtons);
-    window.removeEventListener("resize", updateScrollButtons);
-  };
-}, [updateScrollButtons]);
+    return () => {
+      el.removeEventListener("scroll", updateScrollButtons);
+      window.removeEventListener("resize", updateScrollButtons);
+    };
+  }, [updateScrollButtons]);
 
   const scrollByCard = useCallback((direction: number) => {
     const el = scrollRef.current;
 
     if (!el) return;
 
-    const card = el.querySelector(
-      ".structured-card"
-    ) as HTMLElement | null;
+    const card = el.querySelector(".structured-card") as HTMLElement | null;
 
     const cardWidth = card ? card.offsetWidth + 16 : 260;
 
@@ -129,11 +126,10 @@ useEffect(() => {
             stagger: 0.15,
             ease: "power3.out",
           },
-          "-=0.7"
+          "-=0.7",
         );
 
-        gsap
-          .utils
+        gsap.utils
           .toArray<HTMLElement>(".leadership-profile")
           .forEach((profile) => {
             const img = profile.querySelector(".leadership-img");
@@ -174,7 +170,7 @@ useEffect(() => {
             stagger: 0.08,
             ease: "power3.out",
           },
-          "-=0.5"
+          "-=0.5",
         );
 
         gsap.to(".structured-final", {
@@ -205,7 +201,7 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 80%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -224,7 +220,7 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 80%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -246,7 +242,7 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -268,11 +264,10 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 82%",
             },
-          }
+          },
         );
 
-        gsap
-          .utils
+        gsap.utils
           .toArray<HTMLElement>(".leadership-profile")
           .forEach((el, i) => {
             gsap.fromTo(
@@ -293,12 +288,11 @@ useEffect(() => {
                   invalidateOnRefresh: true,
                   start: "top 88%",
                 },
-              }
+              },
             );
           });
 
-        gsap
-          .utils
+        gsap.utils
           .toArray<HTMLElement>(".leadership-profile")
           .forEach((profile) => {
             const img = profile.querySelector(".leadership-img");
@@ -332,7 +326,7 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -353,7 +347,7 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
 
         gsap.fromTo(
@@ -374,11 +368,11 @@ useEffect(() => {
               invalidateOnRefresh: true,
               start: "top 88%",
             },
-          }
+          },
         );
       }
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const CARDS = [
@@ -429,9 +423,8 @@ useEffect(() => {
       src: "/images/person2.png",
       alt: "Mr. Abdhussamad C K",
       objPos: "object-[60%_20%]",
-       name: "Mr. ABDUSSAMAD C K",
-      role:
-        "Secretary & Manager\nEram Educational And Welfare Trust",
+      name: "Mr. ABDUSSAMAD C K",
+      role: "Secretary & Manager\nEram Educational And Welfare Trust",
       messageTitle: "Manager's Message",
       message:
         "Education is a shared commitment between dedicated teachers, motivated students, and supportive parents. At ERAM, we focus on quality learning supported by technology-enabled pedagogy and holistic development. Through academic and co-curricular engagement, workshops, and structured guidance, we nurture talent, strengthen character, and instill moral values, preparing students to grow as responsible and capable citizens.",
@@ -570,7 +563,6 @@ useEffect(() => {
               "
             >
               EXPLORE MORE
-
               <Play className="text-xs transition-colors" />
             </button>
           </div>
@@ -579,9 +571,9 @@ useEffect(() => {
           <div className="structured-scroll-container -mx-5 md:mx-0 overflow-hidden">
             {/* ARROWS */}
             <div className="flex justify-end gap-3 px-5 md:px-0 mb-3">
-             <button
-  onClick={() => scrollByCard(-1)}
-  disabled={!canScrollLeft}
+              <button
+                onClick={() => scrollByCard(-1)}
+                disabled={!canScrollLeft}
                 aria-label="Scroll left"
                 className={`
   w-11
@@ -608,14 +600,14 @@ useEffect(() => {
 `}
               >
                 <ChevronLeft
-  size={18}
-  className={!canScrollLeft ? "text-white/30" : ""}
-/>
+                  size={18}
+                  className={!canScrollLeft ? "text-white/30" : ""}
+                />
               </button>
 
               <button
-  onClick={() => scrollByCard(1)}
-  disabled={!canScrollRight}
+                onClick={() => scrollByCard(1)}
+                disabled={!canScrollRight}
                 aria-label="Scroll right"
                 className={`
   w-11
@@ -642,9 +634,9 @@ useEffect(() => {
 `}
               >
                 <ChevronRight
-  size={18}
-  className={!canScrollRight ? "text-white/30" : ""}
-/>
+                  size={18}
+                  className={!canScrollRight ? "text-white/30" : ""}
+                />
               </button>
             </div>
 

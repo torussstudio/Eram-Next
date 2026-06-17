@@ -215,7 +215,7 @@ export default function HeroSection() {
                 </button> */}
 
                 <button
-  className="
+                  className="
     group
     font-rethink
 
@@ -254,11 +254,11 @@ export default function HeroSection() {
     hover:shadow-xl
     hover:-translate-y-1
   "
->
-  <span>Explore the Arena</span>
+                >
+                  <span>Explore the Arena</span>
 
-  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-</button>
+                  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
 
                 {/* SECONDARY BUTTON */}
                 {/* <button
@@ -303,7 +303,7 @@ export default function HeroSection() {
                 </button> */}
 
                 <button
-  className="
+                  className="
     font-rethink
 
     inline-flex
@@ -342,11 +342,11 @@ export default function HeroSection() {
     hover:border-white
     hover:-translate-y-1
   "
->
-  <span>Host an Event</span>
+                >
+                  <span>Host an Event</span>
 
-  <Calendar
-    className="
+                  <Calendar
+                    className="
       w-4 h-4
       md:w-5 md:h-5
       opacity-70
@@ -354,8 +354,8 @@ export default function HeroSection() {
       duration-300
       group-hover:opacity-100
     "
-  />
-</button>
+                  />
+                </button>
               </div>
             </div>
 
@@ -424,9 +424,13 @@ export default function HeroSection() {
                     i !== 3 ? "border-b border-white/10" : ""
                   }`}
                 >
-                  <h3 className="text-[20px] font-rethink  md:text-[22px] ">{title}</h3>
+                  <h3 className="text-[20px] font-rethink  md:text-[22px] ">
+                    {title}
+                  </h3>
 
-                  <p className="text-[12px] font-display text-white/60 mt-1">{desc}</p>
+                  <p className="text-[12px] font-display text-white/60 mt-1">
+                    {desc}
+                  </p>
                 </div>
               ))}
             </div>

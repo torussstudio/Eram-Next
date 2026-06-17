@@ -6,11 +6,10 @@ import { gsap, ScrollTrigger } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
 
-
 const ARENA_WORDS = ["SPORTS", "ARENA"];
 
 export default function ArenaSection() {
-  const sectionRef    = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const router = useRouter();
 
@@ -27,19 +26,19 @@ export default function ArenaSection() {
           observer.disconnect();
         }
       },
-      { rootMargin: "300px" } // trigger 300px before
+      { rootMargin: "300px" }, // trigger 300px before
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-  const cardRef       = useRef<HTMLDivElement>(null);
-  const overlayRef    = useRef<HTMLDivElement>(null);
-  const headingRef    = useRef<HTMLHeadingElement>(null);
-  const paraRef       = useRef<HTMLParagraphElement>(null);
-  const btnsRef       = useRef<HTMLDivElement>(null);
-  const outlineRef    = useRef<HTMLDivElement>(null);
-  const lineTopRef    = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const paraRef = useRef<HTMLParagraphElement>(null);
+  const btnsRef = useRef<HTMLDivElement>(null);
+  const outlineRef = useRef<HTMLDivElement>(null);
+  const lineTopRef = useRef<HTMLDivElement>(null);
   const lineBottomRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -48,29 +47,43 @@ export default function ArenaSection() {
       const isMobile = window.innerWidth < 768;
 
       if (isMobile) {
-         gsap.set(overlayRef.current, { opacity: 0.38 });
+        gsap.set(overlayRef.current, { opacity: 0.38 });
 
-        gsap.set(
-          [headingRef.current, paraRef.current, btnsRef.current],
-          { opacity: 1, y: 0, clearProps: "all" }
-        );
+        gsap.set([headingRef.current, paraRef.current, btnsRef.current], {
+          opacity: 1,
+          y: 0,
+          clearProps: "all",
+        });
         return;
       }
 
-      const card    = cardRef.current;
+      const card = cardRef.current;
       const overlay = overlayRef.current;
-      const words   = outlineRef.current?.querySelectorAll(".a-word");
+      const words = outlineRef.current?.querySelectorAll(".a-word");
 
       /* ── Initial states ── */
-      gsap.set(card,    { scale: 1.04, force3D: true });
+      gsap.set(card, { scale: 1.04, force3D: true });
       gsap.set(overlay, { opacity: 0.88 });
 
-      gsap.set(lineTopRef.current,    { scaleX: 0, transformOrigin: "left center",  force3D: true });
-      gsap.set(lineBottomRef.current, { scaleX: 0, transformOrigin: "right center", force3D: true });
+      gsap.set(lineTopRef.current, {
+        scaleX: 0,
+        transformOrigin: "left center",
+        force3D: true,
+      });
+      gsap.set(lineBottomRef.current, {
+        scaleX: 0,
+        transformOrigin: "right center",
+        force3D: true,
+      });
 
-      gsap.set(headingRef.current, { opacity: 0, y: 56, skewY: 1.8, force3D: true });
-      gsap.set(paraRef.current,    { opacity: 0, y: 32, force3D: true });
-      gsap.set(btnsRef.current,    { opacity: 0, y: 20, force3D: true });
+      gsap.set(headingRef.current, {
+        opacity: 0,
+        y: 56,
+        skewY: 1.8,
+        force3D: true,
+      });
+      gsap.set(paraRef.current, { opacity: 0, y: 32, force3D: true });
+      gsap.set(btnsRef.current, { opacity: 0, y: 20, force3D: true });
 
       if (words?.length) {
         gsap.set(words, { y: "100%", skewX: 3, force3D: true });
@@ -78,18 +91,18 @@ export default function ArenaSection() {
 
       /* ── Timeline ── */
       const tl = gsap.timeline({
-       scrollTrigger: {
-  trigger: sectionRef.current,
-  start: "top top",          // ✅ "top 50px" മാറ്റി — pin-ന് exact top match
-  end: "+=220%",
-  scrub: 1.5,                // ✅ 2 → 1.5, forward-ൽ snappier feel
-  pin: true,
-  anticipatePin: 1,          // ✅ 0 → 1, ഇതാണ് KEY FIX — pin jump ഒഴിവാക്കും
-  pinSpacing: true,
-  fastScrollEnd: true,       // ✅ false → true, scroll വേഗം കൂടിയാലും smooth
-  preventOverlaps: true,
-  invalidateOnRefresh: true,
-},
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top", // ✅ "top 50px" മാറ്റി — pin-ന് exact top match
+          end: "+=220%",
+          scrub: 1.5, // ✅ 2 → 1.5, forward-ൽ snappier feel
+          pin: true,
+          anticipatePin: 1, // ✅ 0 → 1, ഇതാണ് KEY FIX — pin jump ഒഴിവാക്കും
+          pinSpacing: true,
+          fastScrollEnd: true, // ✅ false → true, scroll വേഗം കൂടിയാലും smooth
+          preventOverlaps: true,
+          invalidateOnRefresh: true,
+        },
         defaults: { ease: "none" },
       });
 
@@ -100,36 +113,44 @@ export default function ArenaSection() {
       tl.to(card, { backgroundPositionY: "62%", duration: 1 }, 0);
 
       /* Phase 3 (0.10 → 0.28) — overlay lifts */
-      tl.to(overlay, { opacity: 0.42, duration: 0.18 }, 0.10);
+      tl.to(overlay, { opacity: 0.42, duration: 0.18 }, 0.1);
 
       /* Phase 4 (0.18 → 0.44) — lines slice in then fade */
-      tl.to(lineTopRef.current,    { scaleX: 1, ease: "expo.out", duration: 0.18 }, 0.18)
-        .to(lineBottomRef.current, { scaleX: 1, ease: "expo.out", duration: 0.18 }, 0.24)
+      tl.to(
+        lineTopRef.current,
+        { scaleX: 1, ease: "expo.out", duration: 0.18 },
+        0.18,
+      )
+        .to(
+          lineBottomRef.current,
+          { scaleX: 1, ease: "expo.out", duration: 0.18 },
+          0.24,
+        )
         .to(
           [lineTopRef.current, lineBottomRef.current],
-          { opacity: 0, duration: 0.10, ease: "power2.out" },
-          0.56
+          { opacity: 0, duration: 0.1, ease: "power2.out" },
+          0.56,
         );
 
       /* Phase 5 (0.36 → 0.52) — heading */
       tl.to(
         headingRef.current,
         { opacity: 1, y: 0, skewY: 0, ease: "expo.out", duration: 0.16 },
-        0.36
+        0.36,
       );
 
       /* Phase 6 (0.48 → 0.64) — para */
       tl.to(
         paraRef.current,
         { opacity: 1, y: 0, ease: "power3.out", duration: 0.16 },
-        0.48
+        0.48,
       );
 
       /* Phase 7 (0.58 → 0.72) — buttons */
       tl.to(
         btnsRef.current,
         { opacity: 1, y: 0, ease: "power2.out", duration: 0.14 },
-        0.58
+        0.58,
       );
 
       /* Phase 8 (0.64 → 1.0) — word curtain */
@@ -143,7 +164,7 @@ export default function ArenaSection() {
             duration: 0.36,
             stagger: { each: 0.025, from: "start" },
           },
-          0.64
+          0.64,
         );
       }
 
@@ -156,9 +177,8 @@ export default function ArenaSection() {
       return () => {
         ScrollTrigger.removeEventListener("scrollEnd", onScrollEnd);
       };
-
     },
-    { scope: sectionRef, dependencies: [shouldInit] }
+    { scope: sectionRef, dependencies: [shouldInit] },
   );
 
   return (
@@ -216,8 +236,8 @@ export default function ArenaSection() {
 
         {/* Word-by-word outline reveal */}
         <div
-  ref={outlineRef}
-  className="
+          ref={outlineRef}
+          className="
     pointer-events-none select-none
     absolute z-20 bottom-[-55px]
     left-1/2 -translate-x-1/2       
@@ -230,11 +250,11 @@ export default function ArenaSection() {
     max-[640px]:bottom-[-14px] max-[640px]:text-[clamp(2.2rem,14vw,3.6rem)]
     max-[640px]:[-webkit-text-stroke:1.1px_white]
   "
->
+        >
           {ARENA_WORDS.map((word, wi) => (
             <span
               key={wi}
-               className="inline-block "
+              className="inline-block "
               style={{ verticalAlign: "bottom" }}
             >
               {word.split("").map((letter, li) => (
@@ -293,12 +313,9 @@ export default function ArenaSection() {
               sports integration.
             </p>
 
-           <div
-  ref={btnsRef}
-  className="flex flex-wrap justify-start"
->
-   <button
-  className="
+            <div ref={btnsRef} className="flex flex-wrap justify-start">
+              <button
+                className="
     font-rethink
     cursor-pointer
     text-white
@@ -308,11 +325,11 @@ export default function ArenaSection() {
     transition-all duration-300
     hover:bg-white hover:text-[#ae1431]
   "
-  onClick={() => router.push("/explore-arena")}
->
-  Explore The Arena
-</button>
-</div>
+                onClick={() => router.push("/explore-arena")}
+              >
+                Explore The Arena
+              </button>
+            </div>
           </div>
         </div>
       </div>

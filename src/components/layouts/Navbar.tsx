@@ -59,9 +59,9 @@ function InstitutionsDropdown({
           color: "#111111",
           transition: `color ${T}`,
         }}
-       className={`relative pb-[5px] text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.04em] cursor-pointer whitespace-nowrap flex items-center gap-[5px] transition-all duration-300 ${
-  isActive ? "font-bold" : "font-normal"
-}`}
+        className={`relative pb-[5px] text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.04em] cursor-pointer whitespace-nowrap flex items-center gap-[5px] transition-all duration-300 ${
+          isActive ? "font-bold" : "font-normal"
+        }`}
       >
         INSTITUTIONS
         <svg
@@ -199,7 +199,6 @@ export default function Navbar() {
   const btnBg = "#ae1431";
   const btnText = "#ffffff";
   const btnBorder = "#ae1431";
-
 
   useEffect(() => {
     if (!isHome) {
@@ -393,8 +392,8 @@ export default function Navbar() {
             WebkitFontSmoothing: "antialiased",
           }}
           className={`relative pb-[5px] translate-z-0 backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap transition-all duration-300 ${
-  isActive ? "font-bold" : "font-normal"
-}`}
+            isActive ? "font-bold" : "font-normal"
+          }`}
         >
           {item.label}
           <span
@@ -462,8 +461,8 @@ export default function Navbar() {
 
         {/* ── DESKTOP NAV ── */}
         <nav className="absolute top-6 left-1/2 -translate-x-1/2 hidden min-[920px]:flex items-center gap-12 lg:gap-12 xl:gap-16 font-rethink">
-  {renderNavItems()}
-</nav>
+          {renderNavItems()}
+        </nav>
 
         {/* ── STUDENT-PARENT PORTAL BUTTON ── */}
         <div className="ml-auto shrink-0 hidden min-[920px]:flex font-rethink">
@@ -540,9 +539,7 @@ export default function Navbar() {
           } min-[920px]:hidden`}
         >
           <div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
-            <span className="font-display  text-xl text-[#ae1431]">
-              ERAM.
-            </span>
+            <span className="font-display  text-xl text-[#ae1431]">ERAM.</span>
             <button
               onClick={() => setOpen(false)}
               className="h-9 w-9 flex items-center justify-center rounded-full bg-black/5 text-[#111]"

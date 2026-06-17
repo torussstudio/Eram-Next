@@ -19,10 +19,10 @@ function ERAMSportsArena() {
       const isMobile = window.innerWidth < 768;
 
       if (!isMobile) {
-        gsap.set(".arena-text",     { opacity: 0, y: 32 });
+        gsap.set(".arena-text", { opacity: 0, y: 32 });
         gsap.set(".arena-img-wrap", { opacity: 0, scale: 0.95 });
         gsap.set(".arena-img-text", { opacity: 0, y: 20 });
-        gsap.set(".arena-cta",      { opacity: 0, scale: 0.98 });
+        gsap.set(".arena-cta", { opacity: 0, scale: 0.98 });
         gsap.set(".arena-cta-text", { opacity: 0, y: 20 });
       }
 
@@ -85,10 +85,10 @@ function ERAMSportsArena() {
           stagger: 0.1,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
@@ -101,13 +101,14 @@ function ERAMSportsArena() {
       "
     >
       <div className="max-w-[1100px] mx-auto">
-
         {/* ── TOP HEADER ── */}
-        <div className="
+        <div
+          className="
           grid grid-cols-1 md:grid-cols-2
           gap-6 sm:gap-8 md:gap-12
           items-start
-        ">
+        "
+        >
           <h2
             className="
               arena-text
@@ -182,7 +183,6 @@ function ERAMSportsArena() {
 
         {/* ── CTA BLOCK ── */}
         <div className="arena-cta mt-8 sm:mt-10 md:mt-12 lg:mt-14">
-
           {/*
             KEY FIX: The outer wrapper has an explicit height at every breakpoint.
             Previously only the <img> had height — if OptimizedImage renders
@@ -243,9 +243,9 @@ function ERAMSportsArena() {
                   justify-center
                 "
               >
-               <Link
-  href="/contact"
-  className="
+                <Link
+                  href="/contact"
+                  className="
     inline-flex
     items-center
     justify-center
@@ -260,9 +260,9 @@ function ERAMSportsArena() {
     whitespace-nowrap cursor-pointer
     tracking-wide
   "
->
-  ADMISSIONS OPEN
-</Link>
+                >
+                  ADMISSIONS OPEN
+                </Link>
 
                 <button
                   type="button"
@@ -298,7 +298,6 @@ function ERAMSportsArena() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

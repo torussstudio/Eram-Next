@@ -2,21 +2,20 @@
 
 import { memo, useRef, useEffect } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
 import { Play } from "lucide-react";
-import { useRouter } from "next/navigation";;
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 function AboutHero() {
   const containerRef = useRef(null);
 
   const line0Ref = useRef(null);
   const line1Ref = useRef(null);
-  const router = useRouter();;
+  const router = useRouter();
 
   useEffect(() => {
     const handleLoad = () => {
@@ -42,7 +41,7 @@ function AboutHero() {
           scale: 1.08,
           duration: 1.2,
           ease: "power3.out",
-        }
+        },
       );
 
       // HEADING REVEAL
@@ -55,7 +54,7 @@ function AboutHero() {
           stagger: 0.12,
           ease: "power3.out",
         },
-        "-=1"
+        "-=1",
       );
 
       // CONTENT FADE
@@ -68,7 +67,7 @@ function AboutHero() {
           stagger: 0.1,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       );
 
       // PARALLAX — invalidateOnRefresh moved inside scrollTrigger ✅
@@ -85,21 +84,17 @@ function AboutHero() {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
-    <section
-      ref={containerRef}
-      className="bg-[#F5EFE8] py-9 px-3 md:px-6"
-    >
-     <div className="rounded-[28px] overflow-hidden shadow-sm">
+    <section ref={containerRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
+      <div className="rounded-[28px] overflow-hidden shadow-sm">
         {/* HERO */}
         <div className="relative min-h-[560px] sm:min-h-[620px] md:min-h-[660px] lg:min-h-[760px] w-full">
-
           {/* IMAGE */}
           <div className="absolute inset-0 overflow-hidden">
-          <div className="hero-img absolute inset-0 scale-110">
+            <div className="hero-img absolute inset-0 scale-110">
               <OptimizedImage
                 src="/images/about-hero.webp"
                 onLoad={() => ScrollTrigger.refresh()}
@@ -117,7 +112,6 @@ function AboutHero() {
 
           {/* CONTENT */}
           <div className="absolute inset-0 flex items-center md:items-center">
-
             {/* MOBILE / TABLET */}
             <div
               className="
@@ -127,21 +121,14 @@ function AboutHero() {
               "
             >
               <h1 className="font-display text-white  tracking-[-0.03em] leading-[0.95] text-[clamp(1.75rem,7vw,5.8rem)] -mt-16">
-
                 <span className="block overflow-hidden pb-1">
-                  <span
-                    ref={line0Ref}
-                    className="hero-heading-line block"
-                  >
+                  <span ref={line0Ref} className="hero-heading-line block">
                     Building Foundations.
                   </span>
                 </span>
 
                 <span className="block overflow-hidden pb-1">
-                  <span
-                    ref={line1Ref}
-                    className="hero-heading-line block"
-                  >
+                  <span ref={line1Ref} className="hero-heading-line block">
                     Shaping Futures.
                   </span>
                 </span>
@@ -157,10 +144,9 @@ function AboutHero() {
                   opacity-0 translate-y-8
                 "
               >
-                Founded under the CSR vision of the Eram Group, ERAM
-                Educational &amp; Welfare Trust was established to expand
-                access to disciplined, value-based education across its
-                institutions.
+                Founded under the CSR vision of the Eram Group, ERAM Educational
+                &amp; Welfare Trust was established to expand access to
+                disciplined, value-based education across its institutions.
               </p>
 
               <button
@@ -190,7 +176,6 @@ function AboutHero() {
               "
             >
               <div className="max-w-[640px]">
-
                 <h1
                   className="
                     font-display
@@ -238,7 +223,7 @@ function AboutHero() {
                   individuals.
                 </p>
 
-               {/* <button
+                {/* <button
   type="button"
   onClick={() => {
     router.push("/");
@@ -279,30 +264,30 @@ function AboutHero() {
    <Play className="w-4 h-4 transition-all duration-300" />
 </button> */}
 
-<button
-  type="button"
-  onClick={() => {
-    router.push("/");
+                <button
+                  type="button"
+                  onClick={() => {
+                    router.push("/");
 
-    setTimeout(() => {
-      const section = document.getElementById("institutions");
+                    setTimeout(() => {
+                      const section = document.getElementById("institutions");
 
-      if (section) {
-        const yOffset = -90;
+                      if (section) {
+                        const yOffset = -90;
 
-        const y =
-          section.getBoundingClientRect().top +
-          window.pageYOffset +
-          yOffset;
+                        const y =
+                          section.getBoundingClientRect().top +
+                          window.pageYOffset +
+                          yOffset;
 
-        window.scrollTo({
-          top: y,
-          behavior: "smooth",
-        });
-      }
-    }, 700);
-  }}
-  className="
+                        window.scrollTo({
+                          top: y,
+                          behavior: "smooth",
+                        });
+                      }
+                    }, 700);
+                  }}
+                  className="
     hero-content-fade
     mt-6 md:mt-8
 
@@ -341,14 +326,13 @@ function AboutHero() {
     cursor-pointer
     group
   "
->
-  <span>Explore Our Institutions</span>
+                >
+                  <span>Explore Our Institutions</span>
 
-  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-</button>
+                  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>

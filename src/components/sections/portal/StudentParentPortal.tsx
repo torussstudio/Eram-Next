@@ -13,13 +13,7 @@ import {
   History,
 } from "lucide-react";
 
-
-type InstitutionKey =
-  | "AMLP"
-  | "MMPS"
-  | "MMHSS"
-  | "EASE"
-  | "MMITE";
+type InstitutionKey = "AMLP" | "MMPS" | "MMHSS" | "EASE" | "MMITE";
 
 type NoticeCategory =
   | "Academic"
@@ -30,14 +24,13 @@ type NoticeCategory =
   | "Training"
   | "Professional";
 
-
-  type ResourceType =
+type ResourceType =
   | "Question Paper"
   | "Study Material"
   | "Worksheet"
   | "Course Material";
 
-  type Resource = {
+type Resource = {
   id: number;
   title: string;
   type: ResourceType;
@@ -52,16 +45,16 @@ type Notice = {
 };
 
 const StudentParentPortal = () => {
- const [selectedInstitution, setSelectedInstitution] =
-  useState<keyof typeof resources>("MMPS");
+  const [selectedInstitution, setSelectedInstitution] =
+    useState<keyof typeof resources>("MMPS");
 
   const [searchQuery, setSearchQuery] = useState("");
 
   const institutions: {
-  id: InstitutionKey;
-  name: string;
-  full: string;
-}[] = [
+    id: InstitutionKey;
+    name: string;
+    full: string;
+  }[] = [
     { id: "AMLP", name: "AMLP", full: "AMLP (Lower Primary)" },
     { id: "MMPS", name: "MMPS", full: "MMPS (High School)" },
     { id: "MMHSS", name: "MMHSS", full: "MMHSS (Higher Secondary)" },
@@ -413,24 +406,25 @@ const StudentParentPortal = () => {
             Select Your Institution
           </p>
           {/* Tab strip */}
-        <div className="flex w-full border-b-[0.5px] border-gray-200 overflow-x-auto scrollbar-hide mb-[30px]">
-  {institutions.map((inst) => (
-    <button
-      key={inst.id}
-      onClick={() => setSelectedInstitution(inst.id)}
-      className={`relative flex-1 py-2.5 text-[20px] whitespace-nowrap text-center 
+          <div className="flex w-full border-b-[0.5px] border-gray-200 overflow-x-auto scrollbar-hide mb-[30px]">
+            {institutions.map((inst) => (
+              <button
+                key={inst.id}
+                onClick={() => setSelectedInstitution(inst.id)}
+                className={`relative flex-1 py-2.5 text-[20px] whitespace-nowrap text-center 
         cursor-pointer transition-colors bg-transparent border-none
         after:absolute after:bottom-[-0.9px] after:left-0 after:right-0 
         after:h-[3.5px] after:rounded-t-sm after:transition-colors
-        ${selectedInstitution === inst.id
-          ? "text-[#ae1431] font-medium after:bg-[#ae1431]"
-          : "text-gray-500 hover:text-gray-800 after:bg-transparent"
+        ${
+          selectedInstitution === inst.id
+            ? "text-[#ae1431] font-medium after:bg-[#ae1431]"
+            : "text-gray-500 hover:text-gray-800 after:bg-transparent"
         }`}
-    >
-      {inst.name}
-    </button>
-  ))}
-</div>
+              >
+                {inst.name}
+              </button>
+            ))}
+          </div>
           <br />
           {/* Notices */}
           <h3 className="text-xl sm:text-2xl font-display text-gray-900 mb-1">

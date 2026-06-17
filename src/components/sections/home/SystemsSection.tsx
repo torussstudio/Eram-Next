@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { gsap} from "../../../lib/gsap";
+import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
-
 
 /* ─── Constants ───────────────────────────────────────────────────────────── */
 const TABS = [
@@ -72,12 +71,7 @@ interface ArrowIconProps {
 
 /* ─── Sub-components ──────────────────────────────────────────────────────── */
 const ArrowIcon = ({ active }: ArrowIconProps) => (
-  <svg
-    width="12"
-    height="12"
-    viewBox="0 0 12 12"
-    fill="none"
-  >
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
     <path
       d="M2 6h8M6 2l4 4-4 4"
       stroke={active ? "white" : "#888"}
@@ -99,11 +93,11 @@ const CarouselArrow = ({
   onClick,
   disabled = false,
 }: CarouselArrowProps) => (
- <button
-  onClick={onClick}
-  disabled={disabled}
-  aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
-  className={`
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
+    className={`
     group flex-none flex items-center justify-center
     w-[42px] h-[42px] rounded-full border-[2px]
     transition-all duration-300 ease-out
@@ -113,7 +107,7 @@ const CarouselArrow = ({
         : "border-[#cfcfcf] cursor-pointer hover:bg-[#ae1431] hover:border-[#ae1431]"
     }
   `}
->
+  >
     <svg
       width="16"
       height="16"
@@ -142,7 +136,7 @@ const CarouselArrow = ({
 
 /* ─── Main component ──────────────────────────────────────────────────────── */
 export default function SystemsSection() {
-  const router = useRouter();;
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
   const [activeCard, setActiveCard] = useState(0);
   const busy = useRef(false); // animation lock
@@ -160,7 +154,7 @@ export default function SystemsSection() {
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
 
     observer.observe(el);
@@ -177,7 +171,7 @@ export default function SystemsSection() {
   const mobCardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const desktopScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
-const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const textBlockRef = useRef<HTMLDivElement>(null);
 
   const cards = CARDS_DATA[activeTab];
@@ -206,28 +200,26 @@ const [canScrollRight, setCanScrollRight] = useState(true);
     moveIndicator(activeTab);
   }, [activeTab]);
 
- const updateScrollButtons = useCallback(() => {
-  const el = desktopScrollRef.current;
-  if (!el) return;
+  const updateScrollButtons = useCallback(() => {
+    const el = desktopScrollRef.current;
+    if (!el) return;
 
-  setCanScrollLeft(el.scrollLeft > 5);
+    setCanScrollLeft(el.scrollLeft > 5);
 
-  setCanScrollRight(
-    el.scrollLeft < el.scrollWidth - el.clientWidth - 5
-  );
-}, []);
-useEffect(() => {
-  const el = desktopScrollRef.current;
-  if (!el) return;
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+  }, []);
+  useEffect(() => {
+    const el = desktopScrollRef.current;
+    if (!el) return;
 
-  updateScrollButtons();
+    updateScrollButtons();
 
-  el.addEventListener("scroll", updateScrollButtons);
+    el.addEventListener("scroll", updateScrollButtons);
 
-  return () => {
-    el.removeEventListener("scroll", updateScrollButtons);
-  };
-}, [activeTab, updateScrollButtons]);
+    return () => {
+      el.removeEventListener("scroll", updateScrollButtons);
+    };
+  }, [activeTab, updateScrollButtons]);
 
   /* ── carousel scroll ── */
   const scrollCarousel = useCallback((dir: "left" | "right") => {
@@ -240,14 +232,17 @@ useEffect(() => {
   }, []);
 
   /* ── card pulse ── */
-  const pulseEl = useCallback((refs: React.MutableRefObject<any[]>, i: number) => {
-    const el = refs.current[i];
-    if (!el) return;
-    gsap
-      .timeline()
-      .to(el, { scale: 0.94, duration: 0.1, ease: "power2.in" })
-      .to(el, { scale: 1, duration: 0.45, ease: "elastic.out(1,0.42)" });
-  }, []);
+  const pulseEl = useCallback(
+    (refs: React.MutableRefObject<any[]>, i: number) => {
+      const el = refs.current[i];
+      if (!el) return;
+      gsap
+        .timeline()
+        .to(el, { scale: 0.94, duration: 0.1, ease: "power2.in" })
+        .to(el, { scale: 1, duration: 0.45, ease: "elastic.out(1,0.42)" });
+    },
+    [],
+  );
 
   /* ── tab switch animation ── */
   useEffect(() => {
@@ -312,28 +307,28 @@ useEffect(() => {
       );
     }
     return () => {
-    gsap.killTweensOf(dCards);
-    gsap.killTweensOf(mobCardRefs.current);
-  };
+      gsap.killTweensOf(dCards);
+      gsap.killTweensOf(mobCardRefs.current);
+    };
   }, [activeTab]);
 
   /* ── tab click ── */
- const handleTabClick = useCallback(
-  (index: number) => {
-    if (busy.current || index === activeTab) return;
+  const handleTabClick = useCallback(
+    (index: number) => {
+      if (busy.current || index === activeTab) return;
 
-    busy.current = true;
+      busy.current = true;
 
-    desktopScrollRef.current?.scrollTo({
-      left: 0,
-      behavior: "auto",
-    });
+      desktopScrollRef.current?.scrollTo({
+        left: 0,
+        behavior: "auto",
+      });
 
-    setActiveTab(index);
-    setActiveCard(0);
-  },
-  [activeTab],
-);
+      setActiveTab(index);
+      setActiveCard(0);
+    },
+    [activeTab],
+  );
 
   /* ── mobile tab spring ── */
   const animateMobTab = useCallback((index: number) => {
@@ -469,10 +464,14 @@ useEffect(() => {
             {TABS.map((label, i) => (
               <button
                 key={i}
-                ref={(el) => { tabRefs.current[i] = el; }}
+                ref={(el) => {
+                  tabRefs.current[i] = el;
+                }}
                 onClick={() => handleTabClick(i)}
                 className="relative pb-[18px] text-[18px] tracking-[0.12em] uppercase whitespace-nowrap transition-colors duration-300 cursor-pointer"
-                style={{ color: activeTab === i ? "#ffffff" : "rgba(255,255,255,0.65)" }}
+                style={{
+                  color: activeTab === i ? "#ffffff" : "rgba(255,255,255,0.65)",
+                }}
               >
                 {label.split("\n").map((line, j) => (
                   <span key={j} className="block">
@@ -519,11 +518,11 @@ useEffect(() => {
             className={`flex items-center gap-[14px] min-w-0 ${config.showText ? "flex-1" : "w-full"}`}
           >
             {config.showArrows && (
-             <CarouselArrow
-  direction="left"
-  onClick={() => scrollCarousel("left")}
-  disabled={!canScrollLeft}
-/>
+              <CarouselArrow
+                direction="left"
+                onClick={() => scrollCarousel("left")}
+                disabled={!canScrollLeft}
+              />
             )}
 
             <div
@@ -533,7 +532,9 @@ useEffect(() => {
               {cards.map((card, i) => (
                 <div
                   key={`${activeTab}-${i}`}
-                  ref={(el) => { desktopCardRefs.current[i] = el; }}
+                  ref={(el) => {
+                    desktopCardRefs.current[i] = el;
+                  }}
                   className="will-change-transform group relative cursor-pointer flex flex-shrink-0 snap-start overflow-hidden rounded-[22px] p-[34px] bg-black"
                   style={{
                     width: config.fullWidth ? "calc(25% - 14px)" : "320px",
@@ -570,10 +571,10 @@ useEffect(() => {
 
             {config.showArrows && (
               <CarouselArrow
-  direction="right"
-  onClick={() => scrollCarousel("right")}
-  disabled={!canScrollRight}
-/>
+                direction="right"
+                onClick={() => scrollCarousel("right")}
+                disabled={!canScrollRight}
+              />
             )}
           </div>
         </div>
@@ -590,35 +591,35 @@ useEffect(() => {
       </div>
 
       {/* ══ Mobile < 900px ═══════════════════════════════════════════════ */}
-     <div className="min-[900px]:hidden px-[22px] pb-[10px]">
-  {/* =========================
+      <div className="min-[900px]:hidden px-[22px] pb-[10px]">
+        {/* =========================
       HEADER
   ========================= */}
-  <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111] px-[22px] pt-[26px] pb-[28px] mb-[18px]">
-    {/* glow */}
-    <div className="absolute top-[-120px] right-[-60px] w-[220px] h-[220px] rounded-full bg-[#ae1431]/20 blur-[90px]" />
+        <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111] px-[22px] pt-[26px] pb-[28px] mb-[18px]">
+          {/* glow */}
+          <div className="absolute top-[-120px] right-[-60px] w-[220px] h-[220px] rounded-full bg-[#ae1431]/20 blur-[90px]" />
 
-    {/* grid pattern */}
-    <div
-      className="absolute inset-0 opacity-[0.04]"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-        backgroundSize: "22px 22px",
-      }}
-    />
+          {/* grid pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+            }}
+          />
 
-    <div className="relative z-[2]">
-      <div className="flex items-center gap-[10px] mb-[18px]">
-        <span className="w-[32px] h-px bg-[#ae1431]" />
+          <div className="relative z-[2]">
+            <div className="flex items-center gap-[10px] mb-[18px]">
+              <span className="w-[32px] h-px bg-[#ae1431]" />
 
-        <span className="font-rethink text-[10px] tracking-[0.28em] uppercase text-white/45">
-          Institutional Framework
-        </span>
-      </div>
+              <span className="font-rethink text-[10px] tracking-[0.28em] uppercase text-white/45">
+                Institutional Framework
+              </span>
+            </div>
 
-      <h2
-        className="
+            <h2
+              className="
           mob-heading
           font-display
           text-[36px]
@@ -626,14 +627,14 @@ useEffect(() => {
           tracking-[-0.05em]
           text-white
         "
-      >
-        Systems That
-        <br />
-        Sustain Excellence
-      </h2>
+            >
+              Systems That
+              <br />
+              Sustain Excellence
+            </h2>
 
-      <p
-        className="
+            <p
+              className="
           mob-para
           mt-[18px]
           font-rethink
@@ -642,37 +643,37 @@ useEffect(() => {
           text-white/70
           max-w-[420px]
         "
-      >
-        An integrated framework of management oversight, faculty excellence,
-        and purpose-built infrastructure sustaining quality across every
-        institution, ensuring continuous assessment, teacher development,
-        institutional monitoring, and transparent processes.
-      </p>
-    </div>
-  </div>
+            >
+              An integrated framework of management oversight, faculty
+              excellence, and purpose-built infrastructure sustaining quality
+              across every institution, ensuring continuous assessment, teacher
+              development, institutional monitoring, and transparent processes.
+            </p>
+          </div>
+        </div>
 
-  {/* =========================
+        {/* =========================
       MOBILE TABS
   ========================= */}
-  <div className="mob-tabbar flex gap-[10px] mb-[18px] overflow-x-auto scrollbar-hide pb-[2px]">
-    {TABS_SHORT.map((label, i) => {
-      const isActive = activeTab === i;
+        <div className="mob-tabbar flex gap-[10px] mb-[18px] overflow-x-auto scrollbar-hide pb-[2px]">
+          {TABS_SHORT.map((label, i) => {
+            const isActive = activeTab === i;
 
-      return (
-        <button
-          key={i}
-          ref={(el) => {
-            mobTabRefs.current[i] = el;
-          }}
-          onClick={() => {
-            if (activeTab === i) return;
+            return (
+              <button
+                key={i}
+                ref={(el) => {
+                  mobTabRefs.current[i] = el;
+                }}
+                onClick={() => {
+                  if (activeTab === i) return;
 
-            requestAnimationFrame(() => {
-              setActiveCard(0);
-              handleTabClick(i);
-            });
-          }}
-          className={`
+                  requestAnimationFrame(() => {
+                    setActiveCard(0);
+                    handleTabClick(i);
+                  });
+                }}
+                className={`
             relative
             overflow-hidden
             min-w-[108px]
@@ -697,29 +698,29 @@ useEffect(() => {
 
             ${isActive ? "scale-[1]" : "scale-[0.985]"}
           `}
-          style={{
-            backgroundColor: isActive ? "#ae1431" : "#111",
-            borderColor: isActive ? "#ae1431" : "#262626",
-          }}
-        >
-          {/* pattern */}
-          <div
-            className="
+                style={{
+                  backgroundColor: isActive ? "#ae1431" : "#111",
+                  borderColor: isActive ? "#ae1431" : "#262626",
+                }}
+              >
+                {/* pattern */}
+                <div
+                  className="
               absolute
               inset-0
               opacity-[0.04]
               pointer-events-none
             "
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-              backgroundSize: "18px 18px",
-            }}
-          />
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
+                    backgroundSize: "18px 18px",
+                  }}
+                />
 
-          {/* active bg */}
-          <div
-            className={`
+                {/* active bg */}
+                <div
+                  className={`
               absolute
               inset-0
               bg-[#ae1431]
@@ -728,11 +729,11 @@ useEffect(() => {
               pointer-events-none
               ${isActive ? "opacity-100" : "opacity-0"}
             `}
-          />
+                />
 
-          {/* number */}
-          <span
-            className={`
+                {/* number */}
+                <span
+                  className={`
               relative
               z-[2]
               text-[10px]
@@ -740,19 +741,15 @@ useEffect(() => {
               tracking-[0.2em]
               transition-colors
               duration-300
-              ${
-                isActive
-                  ? "text-white/55"
-                  : "text-[#777]"
-              }
+              ${isActive ? "text-white/55" : "text-[#777]"}
             `}
-          >
-            0{i + 1}
-          </span>
+                >
+                  0{i + 1}
+                </span>
 
-          {/* label */}
-          <span
-            className={`
+                {/* label */}
+                <span
+                  className={`
               relative
               z-[2]
               text-[11px]
@@ -762,19 +759,15 @@ useEffect(() => {
               text-left
               transition-colors
               duration-300
-              ${
-                isActive
-                  ? "text-white"
-                  : "text-[#d1d1d1]"
-              }
+              ${isActive ? "text-white" : "text-[#d1d1d1]"}
             `}
-          >
-            {label}
-          </span>
+                >
+                  {label}
+                </span>
 
-          {/* active line */}
-          <span
-            className={`
+                {/* active line */}
+                <span
+                  className={`
               absolute
               left-[16px]
               bottom-0
@@ -786,39 +779,35 @@ useEffect(() => {
               duration-300
               ease-out
 
-              ${
-                isActive
-                  ? "w-[38px] opacity-100"
-                  : "w-0 opacity-0"
-              }
+              ${isActive ? "w-[38px] opacity-100" : "w-0 opacity-0"}
             `}
-          />
-        </button>
-      );
-    })}
-  </div>
+                />
+              </button>
+            );
+          })}
+        </div>
 
-  {/* =========================
+        {/* =========================
       MOBILE CARDS
   ========================= */}
-  <div className="mob-cards flex flex-col gap-[12px] mb-[24px]">
-    {cards.map((card, i) => {
-      const isActive = activeCard === i;
+        <div className="mob-cards flex flex-col gap-[12px] mb-[24px]">
+          {cards.map((card, i) => {
+            const isActive = activeCard === i;
 
-      return (
-        <div
-          key={`${activeTab}-${i}`}
-          ref={(el) => {
-            mobCardRefs.current[i] = el;
-          }}
-          onClick={() => {
-            if (activeCard === i) return;
+            return (
+              <div
+                key={`${activeTab}-${i}`}
+                ref={(el) => {
+                  mobCardRefs.current[i] = el;
+                }}
+                onClick={() => {
+                  if (activeCard === i) return;
 
-            requestAnimationFrame(() => {
-              setActiveCard(i);
-            });
-          }}
-          className={`
+                  requestAnimationFrame(() => {
+                    setActiveCard(i);
+                  });
+                }}
+                className={`
             will-change-transform
             transform-gpu
 
@@ -839,24 +828,24 @@ useEffect(() => {
 
             ${isActive ? "scale-[1]" : "scale-[0.992]"}
           `}
-          style={{
-            backgroundColor: isActive ? "#ae1431" : "#111",
-            borderColor: isActive ? "#ae1431" : "#202020",
-          }}
-        >
-          {/* grid pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-              backgroundSize: "22px 22px",
-            }}
-          />
+                style={{
+                  backgroundColor: isActive ? "#ae1431" : "#111",
+                  borderColor: isActive ? "#ae1431" : "#202020",
+                }}
+              >
+                {/* grid pattern */}
+                <div
+                  className="absolute inset-0 opacity-[0.04]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+                    backgroundSize: "22px 22px",
+                  }}
+                />
 
-          {/* active glow */}
-          <div
-            className={`
+                {/* active glow */}
+                <div
+                  className={`
               absolute
               top-[-40px]
               right-[-20px]
@@ -869,19 +858,15 @@ useEffect(() => {
               transition-opacity
               duration-300
 
-              ${
-                isActive
-                  ? "opacity-100"
-                  : "opacity-0"
-              }
+              ${isActive ? "opacity-100" : "opacity-0"}
             `}
-          />
+                />
 
-          <div className="relative z-[2] flex items-center justify-between">
-            {/* LEFT */}
-            <div className="flex items-center gap-[18px]">
-              <span
-                className={`
+                <div className="relative z-[2] flex items-center justify-between">
+                  {/* LEFT */}
+                  <div className="flex items-center gap-[18px]">
+                    <span
+                      className={`
                   text-[11px]
                   font-rethink
                   tracking-[0.16em]
@@ -891,19 +876,15 @@ useEffect(() => {
                   transition-colors
                   duration-300
 
-                  ${
-                    isActive
-                      ? "text-white/45"
-                      : "text-[#8e8e8e]"
-                  }
+                  ${isActive ? "text-white/45" : "text-[#8e8e8e]"}
                 `}
-              >
-                /{card.n}
-              </span>
+                    >
+                      /{card.n}
+                    </span>
 
-              <div>
-                <span
-                  className={`
+                    <div>
+                      <span
+                        className={`
                     block
                     text-[17px]
                     font-rethink
@@ -913,18 +894,14 @@ useEffect(() => {
                     transition-colors
                     duration-300
 
-                    ${
-                      isActive
-                        ? "text-white"
-                        : "text-[#f5f5f5]"
-                    }
+                    ${isActive ? "text-white" : "text-[#f5f5f5]"}
                   `}
-                >
-                  {card.t}
-                </span>
+                      >
+                        {card.t}
+                      </span>
 
-                <span
-                  className={`
+                      <span
+                        className={`
                     block
                     mt-[4px]
                     text-[10px]
@@ -934,21 +911,17 @@ useEffect(() => {
                     transition-colors
                     duration-300
 
-                    ${
-                      isActive
-                        ? "text-white/50"
-                        : "text-[#666]"
-                    }
+                    ${isActive ? "text-white/50" : "text-[#666]"}
                   `}
-                >
-                  Institutional Standard
-                </span>
-              </div>
-            </div>
+                      >
+                        Institutional Standard
+                      </span>
+                    </div>
+                  </div>
 
-            {/* RIGHT */}
-            <div
-              className={`
+                  {/* RIGHT */}
+                  <div
+                    className={`
                 flex-shrink-0
                 w-[38px]
                 h-[38px]
@@ -967,21 +940,21 @@ useEffect(() => {
                     : "bg-[#1b1b1b] border border-[#2a2a2a]"
                 }
               `}
-            >
-              <ArrowIcon active={isActive} />
-            </div>
-          </div>
+                  >
+                    <ArrowIcon active={isActive} />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
 
-  {/* =========================
+        {/* =========================
       CTA
   ========================= */}
- <button
-  onClick={() => router.push("/about-us")}
-  className="
+        <button
+          onClick={() => router.push("/about-us")}
+          className="
     group
     relative
     overflow-hidden
@@ -1007,55 +980,55 @@ useEffect(() => {
 
     active:scale-[0.985]
   "
->
-  {/* =========================
+        >
+          {/* =========================
       MAIN GRADIENT
   ========================= */}
-  <div
-    className="
+          <div
+            className="
       absolute
       inset-0
       opacity-100
       transition-opacity
       duration-500
     "
-  >
-    <div className="absolute inset-0 bg-[linear-gradient(135deg,#ae1431_0%,#8f0f29_45%,#5a0818_100%)]" />
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,#ae1431_0%,#8f0f29_45%,#5a0818_100%)]" />
 
-    {/* radial highlight */}
-    <div className="absolute top-[-120px] right-[-80px] w-[240px] h-[240px] rounded-full bg-white/10 blur-[80px]" />
+            {/* radial highlight */}
+            <div className="absolute top-[-120px] right-[-80px] w-[240px] h-[240px] rounded-full bg-white/10 blur-[80px]" />
 
-    {/* secondary glow */}
-    <div className="absolute bottom-[-100px] left-[-80px] w-[180px] h-[180px] rounded-full bg-[#ff6a85]/10 blur-[70px]" />
-  </div>
+            {/* secondary glow */}
+            <div className="absolute bottom-[-100px] left-[-80px] w-[180px] h-[180px] rounded-full bg-[#ff6a85]/10 blur-[70px]" />
+          </div>
 
-  {/* =========================
+          {/* =========================
       GRID PATTERN
   ========================= */}
-  <div
-    className="
+          <div
+            className="
       absolute
       inset-0
       opacity-[0.045]
       pointer-events-none
     "
-    style={{
-      backgroundImage:
-        "linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)",
-      backgroundSize: "22px 22px",
-    }}
-  />
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+            }}
+          />
 
-  {/* =========================
+          {/* =========================
       TOP BORDER GLOW
   ========================= */}
-  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
-  {/* =========================
+          {/* =========================
       HOVER SHINE
   ========================= */}
-  <div
-    className="
+          <div
+            className="
       absolute
       inset-0
       opacity-0
@@ -1063,9 +1036,9 @@ useEffect(() => {
       transition-opacity
       duration-700
     "
-  >
-    <div
-      className="
+          >
+            <div
+              className="
         absolute
         top-0
         left-[-120%]
@@ -1079,35 +1052,35 @@ useEffect(() => {
         duration-[1200ms]
         ease-out
       "
-    />
-  </div>
+            />
+          </div>
 
-  {/* =========================
+          {/* =========================
       CONTENT
   ========================= */}
-  <div className="relative z-[2] flex items-center justify-between">
-    {/* LEFT */}
-    <div className="text-left">
-      {/* small label */}
-      <div className="flex items-center gap-[8px] mb-[10px]">
-        <span className="w-[24px] h-px bg-white/40" />
+          <div className="relative z-[2] flex items-center justify-between">
+            {/* LEFT */}
+            <div className="text-left">
+              {/* small label */}
+              <div className="flex items-center gap-[8px] mb-[10px]">
+                <span className="w-[24px] h-px bg-white/40" />
 
-        <span
-          className="
+                <span
+                  className="
             text-[10px]
             tracking-[0.26em]
             uppercase
             text-white/50
             font-rethink
           "
-        >
-          Learn More
-        </span>
-      </div>
+                >
+                  Learn More
+                </span>
+              </div>
 
-      {/* title */}
-      <span
-        className="
+              {/* title */}
+              <span
+                className="
           block
           text-[12px]
           
@@ -1118,16 +1091,16 @@ useEffect(() => {
           font-rethink
           max-w-[220px]
         "
-      >
-        Explore Our
-        <br />
-        Systems & Standards
-      </span>
-    </div>
+              >
+                Explore Our
+                <br />
+                Systems & Standards
+              </span>
+            </div>
 
-    {/* RIGHT */}
-    <div
-      className="
+            {/* RIGHT */}
+            <div
+              className="
         relative
         w-[48px]
         h-[48px]
@@ -1149,13 +1122,13 @@ useEffect(() => {
         group-hover:scale-[1.08]
         group-hover:bg-white/[0.14]
       "
-    >
-      {/* glow */}
-      <div className="absolute inset-0 rounded-full bg-white/10 blur-[16px]" />
+            >
+              {/* glow */}
+              <div className="absolute inset-0 rounded-full bg-white/10 blur-[16px]" />
 
-      {/* rotating ring */}
-      <div
-        className="
+              {/* rotating ring */}
+              <div
+                className="
           absolute
           inset-[-2px]
           rounded-full
@@ -1167,19 +1140,19 @@ useEffect(() => {
           duration-[1200ms]
           ease-out
         "
-      />
+              />
 
-      <div className="relative z-[2]">
-        <ArrowIcon active />
-      </div>
-    </div>
-  </div>
+              <div className="relative z-[2]">
+                <ArrowIcon active />
+              </div>
+            </div>
+          </div>
 
-  {/* =========================
+          {/* =========================
       BOTTOM PROGRESS LINE
   ========================= */}
-  <div
-    className="
+          <div
+            className="
       absolute
       left-0
       bottom-0
@@ -1194,9 +1167,9 @@ useEffect(() => {
       duration-700
       ease-out
     "
-  />
-</button>
-</div>
+          />
+        </button>
+      </div>
     </section>
   );
 }

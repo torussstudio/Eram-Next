@@ -75,7 +75,7 @@ export function measureComponentPerformance(componentName: string) {
       if (renderTime > 16.67) {
         // > 60fps threshold
         console.warn(
-          `${componentName} render time: ${renderTime.toFixed(2)}ms (exceeds 60fps budget)`
+          `${componentName} render time: ${renderTime.toFixed(2)}ms (exceeds 60fps budget)`,
         );
       }
     },

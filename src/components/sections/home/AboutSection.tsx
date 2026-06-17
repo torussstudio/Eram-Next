@@ -279,7 +279,7 @@ export default function AboutSection() {
             </span>
           </div>
 
-         <div className="xl:-ml-[20px] pl-0 max-[1280px]:pl-[60px]">
+          <div className="xl:-ml-[20px] pl-0 max-[1280px]:pl-[60px]">
             <h2
               ref={dHeadingRef}
               className="font-display text-[48px] leading-[1.15] text-[#111111] max-w-[600px]"
@@ -301,9 +301,9 @@ export default function AboutSection() {
             </p>
 
             <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
-           <button
-  onClick={() => smoothScrollTo("institutions")}
-  className="
+              <button
+                onClick={() => smoothScrollTo("institutions")}
+                className="
     font-rethink
     inline-flex
     items-center
@@ -327,9 +327,9 @@ export default function AboutSection() {
 
     cursor-pointer
   "
->
-  Explore Our Institutions
-</button>
+              >
+                Explore Our Institutions
+              </button>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
@@ -15,7 +15,7 @@ const bullets = [
   "15-day residential camp — empathy, adaptability & leadership",
   "Secular and inclusive institutional culture",
   "Focused batch size of 50 for individual mentorship",
-  "KTET & PSC qualification-focused preparation"
+  "KTET & PSC qualification-focused preparation",
 ];
 
 const messages = [
@@ -152,11 +152,11 @@ export default function ParentPartnership() {
             <div className="anim-divider w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             <p className="anim-desc font-rethink  text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#3d3128] max-w-[560px]">
-              At MMITE, teacher formation is deliberate and supervised. 
-              With a limited intake of 50 students per batch, mentorship 
-              remains focused and individualised. Academic progress is 
-              continuously monitored, and practical training is integrated 
-              throughout the course duration.
+              At MMITE, teacher formation is deliberate and supervised. With a
+              limited intake of 50 students per batch, mentorship remains
+              focused and individualised. Academic progress is continuously
+              monitored, and practical training is integrated throughout the
+              course duration.
             </p>
 
             <ul className="mt-6 space-y-3">
@@ -176,7 +176,7 @@ export default function ParentPartnership() {
             </p>
 
             <div className="mt-8 anim-btn">
-               <button
+              <button
                 className="font-rethink bg-[#ae1431] text-white text-[11px] sm:text-[12px] tracking-[0.14em] uppercase
                 px-7 py-4 flex items-center gap-3 cursor-pointer hover:bg-black transition-colors duration-200 rounded-[10px]"
               >

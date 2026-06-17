@@ -2,7 +2,7 @@
 
 import { memo, useRef } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
 
@@ -29,12 +29,17 @@ const CARD_TAGS = [
 ];
 
 const BG_WORDS = [
-  "Mentorship", "workshops", "initiatives",
-  "EVALUATion", " assessment", "committees", " Curriculum",
+  "Mentorship",
+  "workshops",
+  "initiatives",
+  "EVALUATion",
+  " assessment",
+  "committees",
+  " Curriculum",
 ];
 
 function SystemsThatSustainExcellence() {
-  const containerRef    = useRef(null);
+  const containerRef = useRef(null);
   const stackSectionRef = useRef(null);
 
   useGSAP(
@@ -46,7 +51,9 @@ function SystemsThatSustainExcellence() {
           ".systems-eyebrow-line-left",
           { scaleX: 0, transformOrigin: "left center" },
           {
-            scaleX: 1, duration: 0.8, ease: "power3.out",
+            scaleX: 1,
+            duration: 0.8,
+            ease: "power3.out",
             scrollTrigger: { trigger: containerRef.current, start: "top 78%" },
           },
         );
@@ -54,7 +61,9 @@ function SystemsThatSustainExcellence() {
           ".systems-eyebrow-line-right",
           { scaleX: 0, transformOrigin: "right center" },
           {
-            scaleX: 1, duration: 0.8, ease: "power3.out",
+            scaleX: 1,
+            duration: 0.8,
+            ease: "power3.out",
             scrollTrigger: { trigger: containerRef.current, start: "top 78%" },
           },
         );
@@ -62,7 +71,11 @@ function SystemsThatSustainExcellence() {
           ".systems-heading-word",
           { y: "105%", opacity: 0 },
           {
-            y: "0%", opacity: 1, duration: 0.85, stagger: 0.07, ease: "power4.out",
+            y: "0%",
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.07,
+            ease: "power4.out",
             scrollTrigger: { trigger: containerRef.current, start: "top 78%" },
           },
         );
@@ -70,7 +83,11 @@ function SystemsThatSustainExcellence() {
           ".systems-subtext",
           { y: 28, opacity: 0 },
           {
-            y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.3,
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            delay: 0.3,
             scrollTrigger: { trigger: containerRef.current, start: "top 78%" },
           },
         );
@@ -82,22 +99,33 @@ function SystemsThatSustainExcellence() {
           ".system-img-wrap",
           { scale: 0.93, opacity: 0, borderRadius: "40px" },
           {
-            scale: 1, opacity: 1, borderRadius: "26px", duration: 1.3, ease: "expo.out",
+            scale: 1,
+            opacity: 1,
+            borderRadius: "26px",
+            duration: 1.3,
+            ease: "expo.out",
             scrollTrigger: { trigger: ".system-img-wrap", start: "top 85%" },
           },
         );
         gsap.to(".system-img", {
-          yPercent: 10, ease: "none",
+          yPercent: 10,
+          ease: "none",
           scrollTrigger: {
-            trigger: ".system-img-wrap", start: "top bottom", end: "bottom top",
-            scrub: 1, fastScrollEnd: true,
+            trigger: ".system-img-wrap",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+            fastScrollEnd: true,
           },
         });
         gsap.fromTo(
           ".system-desc",
           { y: 30, opacity: 0 },
           {
-            y: 0, opacity: 1, duration: 1, ease: "power3.out",
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
             scrollTrigger: { trigger: ".system-img-wrap", start: "top 58%" },
           },
         );
@@ -109,21 +137,31 @@ function SystemsThatSustainExcellence() {
           ".system-img-wrap",
           { clipPath: "inset(100% 0% 0% 0% round 26px)", opacity: 1 },
           {
-            clipPath: "inset(0% 0% 0% 0% round 26px)", duration: 1.1, ease: "expo.out",
+            clipPath: "inset(0% 0% 0% 0% round 26px)",
+            duration: 1.1,
+            ease: "expo.out",
             scrollTrigger: { trigger: ".system-img-wrap", start: "top 88%" },
           },
         );
         gsap.to(".system-img", {
-          yPercent: 6, ease: "none",
+          yPercent: 6,
+          ease: "none",
           scrollTrigger: {
-            trigger: ".system-img-wrap", start: "top bottom", end: "bottom top", scrub: 2,
+            trigger: ".system-img-wrap",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
           },
         });
         gsap.fromTo(
           ".system-desc",
           { filter: "blur(6px)", opacity: 0, y: 16 },
           {
-            filter: "blur(0px)", opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+            filter: "blur(0px)",
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
             scrollTrigger: { trigger: ".system-img-wrap", start: "top 62%" },
           },
         );
@@ -137,8 +175,8 @@ function SystemsThatSustainExcellence() {
         const cards = gsap.utils.toArray<HTMLElement>(".stack-card");
         const total = cards.length; // 7
 
-        const Y_STEP     = 7;
-        const ROT_STEP   = 1.5;
+        const Y_STEP = 7;
+        const ROT_STEP = 1.5;
         const SCALE_STEP = 0.018;
 
         gsap.set(".stack-bg-word", { opacity: 0 });
@@ -159,12 +197,12 @@ function SystemsThatSustainExcellence() {
 
         const tl = gsap.timeline({
           scrollTrigger: {
-            trigger:       stackSection,
-            start:         "top top",
-            end:           `+=${scrollEndPx}`,
-            pin:           true,
-            pinSpacing:    true,
-            scrub:         1.8,
+            trigger: stackSection,
+            start: "top top",
+            end: `+=${scrollEndPx}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1.8,
             anticipatePin: 1,
           },
         });
@@ -176,23 +214,35 @@ function SystemsThatSustainExcellence() {
           tl.fromTo(
             cards[frontDOM],
             { y: 0, rotation: 0, scale: 1, opacity: 1 },
-            { y: -600, rotation: -12, scale: 0.92, opacity: 0, ease: "power2.inOut", duration: segDur },
+            {
+              y: -600,
+              rotation: -12,
+              scale: 0.92,
+              opacity: 0,
+              ease: "power2.inOut",
+              duration: segDur,
+            },
             segStart,
           );
 
           for (let d = 0; d < frontDOM; d++) {
             const depthBefore = frontDOM - d;
-            const depthAfter  = frontDOM - 1 - d;
+            const depthAfter = frontDOM - 1 - d;
             tl.fromTo(
               cards[d],
               {
-                y: depthBefore * Y_STEP, rotation: depthBefore * ROT_STEP,
-                scale: 1 - depthBefore * SCALE_STEP, opacity: 1,
+                y: depthBefore * Y_STEP,
+                rotation: depthBefore * ROT_STEP,
+                scale: 1 - depthBefore * SCALE_STEP,
+                opacity: 1,
               },
               {
-                y: depthAfter * Y_STEP, rotation: depthAfter * ROT_STEP,
-                scale: 1 - depthAfter * SCALE_STEP, opacity: 1,
-                ease: "power2.inOut", duration: segDur,
+                y: depthAfter * Y_STEP,
+                rotation: depthAfter * ROT_STEP,
+                scale: 1 - depthAfter * SCALE_STEP,
+                opacity: 1,
+                ease: "power2.inOut",
+                duration: segDur,
               },
               segStart,
             );
@@ -215,8 +265,12 @@ function SystemsThatSustainExcellence() {
         }
       };
 
-      mm.add("(min-width: 768px)", () => { buildStackTimeline(7 * 320); });
-      mm.add("(max-width: 767px)", () => { buildStackTimeline(7 * 100); });
+      mm.add("(min-width: 768px)", () => {
+        buildStackTimeline(7 * 320);
+      });
+      mm.add("(max-width: 767px)", () => {
+        buildStackTimeline(7 * 100);
+      });
 
       return () => mm.revert();
     },
@@ -225,14 +279,12 @@ function SystemsThatSustainExcellence() {
 
   return (
     <div ref={containerRef}>
-
       {/* ══════════════════════════════════════════
           SECTION 1 — Heading
       ══════════════════════════════════════════ */}
       <section className="bg-[#0f0f0f] overflow-hidden pt-10 pb-6 px-5 md:pt-14 md:pb-6 md:px-6">
         <div className="w-full md:max-w-[1100px] md:mx-auto">
           <div className="text-center max-w-[720px] mx-auto">
-
             <div className="flex items-center justify-center gap-3 mb-5">
               <div
                 className="systems-eyebrow-line-left h-px bg-black/30 w-10"
@@ -249,8 +301,13 @@ function SystemsThatSustainExcellence() {
 
             <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px] leading-tight text-[#F5EFE8] overflow-hidden">
               {["Systems", "That", "Sustain", "Excellence"].map((word, i) => (
-                <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
-                  <span className="systems-heading-word inline-block">{word}</span>
+                <span
+                  key={i}
+                  className="inline-block overflow-hidden mr-[0.25em] last:mr-0"
+                >
+                  <span className="systems-heading-word inline-block">
+                    {word}
+                  </span>
                 </span>
               ))}
             </h2>
@@ -260,7 +317,6 @@ function SystemsThatSustainExcellence() {
               development and institutional review mechanisms. ERAM integrates
               comprehensive academic systems, including:
             </p>
-
           </div>
         </div>
       </section>
@@ -302,7 +358,7 @@ function SystemsThatSustainExcellence() {
           <div
             className="relative"
             style={{
-              width:  "clamp(290px, 44vw, 400px)",
+              width: "clamp(290px, 44vw, 400px)",
               height: "clamp(360px, 50vw, 480px)",
             }}
           >
@@ -314,7 +370,8 @@ function SystemsThatSustainExcellence() {
                   className="stack-card absolute inset-0 rounded-[20px] md:rounded-[26px]"
                   style={{
                     background: "#DCE0EA",
-                    boxShadow: "0 18px 55px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+                    boxShadow:
+                      "0 18px 55px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
                     willChange: "transform, opacity",
                   }}
                 >
@@ -329,10 +386,10 @@ function SystemsThatSustainExcellence() {
                       <h3
                         className="font-black text-black uppercase mt-4 md:mt-5"
                         style={{
-                          fontSize:      "clamp(22px, 4vw, 40px)",
-                          lineHeight:    1.02,
+                          fontSize: "clamp(22px, 4vw, 40px)",
+                          lineHeight: 1.02,
                           letterSpacing: "-0.02em",
-                          whiteSpace:    "pre-line",
+                          whiteSpace: "pre-line",
                         }}
                       >
                         {item.title}
@@ -392,7 +449,6 @@ function SystemsThatSustainExcellence() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

@@ -14,7 +14,9 @@ interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
 
-export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+export default function SmoothScrollProvider({
+  children,
+}: SmoothScrollProviderProps) {
   const pathname = usePathname();
 
   useLayoutEffect(() => {

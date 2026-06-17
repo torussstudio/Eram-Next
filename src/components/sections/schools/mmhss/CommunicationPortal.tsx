@@ -164,9 +164,7 @@ export default function CommunicationPortal() {
             </div>
 
             <h1 className="font-display anim-heading text-4xl md:text-5xl leading-tight mb-6">
-              Centralised Access.
-              
-              Structured Communication.
+              Centralised Access. Structured Communication.
             </h1>
 
             <p className="font-rethink anim-body text-white/80 max-w-xl mb-4 text-[15.5px] md:text-[14.5px]">
@@ -180,7 +178,7 @@ export default function CommunicationPortal() {
               communication for every student, teacher, and parent.
             </p>
 
-           <br></br>
+            <br></br>
             <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
               Access the Parent Portal
               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />

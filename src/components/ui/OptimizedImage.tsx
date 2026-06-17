@@ -55,7 +55,9 @@ export default function OptimizedImage({
   const hasDimensions = width !== undefined && height !== undefined;
 
   return (
-    <div className={`relative ${hasDimensions ? "" : "w-full h-full"} overflow-hidden ${className}`}>
+    <div
+      className={`relative ${hasDimensions ? "" : "w-full h-full"} overflow-hidden ${className}`}
+    >
       <Image
         src={src}
         alt={alt}

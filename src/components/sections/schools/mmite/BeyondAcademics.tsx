@@ -84,12 +84,12 @@ export default function BeyondAcademics() {
       // ── Initial states ────────────────────────────────────────────────
       gsap.set(
         q(
-          ".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat"
+          ".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat",
         ),
         {
           opacity: 0,
           y: 28,
-        }
+        },
       );
 
       // ── Header animation ──────────────────────────────────────────────
@@ -116,7 +116,7 @@ export default function BeyondAcademics() {
       function revealScopedSection(
         triggerClass: string,
         labelClass: string,
-        cardsClass: string
+        cardsClass: string,
       ) {
         const triggerEl = q(triggerClass)[0];
         if (!triggerEl) return;
@@ -149,7 +149,7 @@ export default function BeyondAcademics() {
               duration: 0.65,
               stagger: 0.09,
             },
-            "-=0.15"
+            "-=0.15",
           );
         }
       }
@@ -158,30 +158,25 @@ export default function BeyondAcademics() {
       revealScopedSection(
         ".anim-bench-wrap",
         ".anim-bench-label",
-        ".anim-bench"
+        ".anim-bench",
       );
 
       revealScopedSection(
         ".anim-excel-wrap",
         ".anim-excel-label",
-        ".anim-excel"
+        ".anim-excel",
       );
 
-      revealScopedSection(
-        ".anim-stat-wrap",
-        ".anim-stat-label",
-        ".anim-stat"
-      );
+      revealScopedSection(".anim-stat-wrap", ".anim-stat-label", ".anim-stat");
     },
     {
       scope: containerRef,
-    }
+    },
   );
 
   return (
     <section ref={containerRef} className={`${shell} bg-[#F5EFE8]`}>
       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-14">
-
         {/* ── HEADER ── */}
         <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-14 lg:mb-16">
           <div className="anim-header">
@@ -193,9 +188,9 @@ export default function BeyondAcademics() {
           </div>
           <div className="anim-header flex items-end">
             <p className=" font-rethink text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
-              MMITE demonstrates strong qualification outcomes year after year
-              — a direct result of structured training, focused academic execution,
-              and individualised mentorship across every batch.
+              MMITE demonstrates strong qualification outcomes year after year —
+              a direct result of structured training, focused academic
+              execution, and individualised mentorship across every batch.
             </p>
           </div>
         </div>
@@ -239,22 +234,48 @@ export default function BeyondAcademics() {
             {excellence.map((card, i) => {
               const isRed = i === 0;
               const isDark = i === 1;
-              const bg = isRed ? "bg-[#ae1431]" : isDark ? "bg-[#1a1a1a]" : "bg-white border border-[#d4cbbf]";
-              const badge = isRed ? "bg-[#ae1431] text-white" : isDark ? "bg-[#2a2a2a] text-[#a09488]" : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
+              const bg = isRed
+                ? "bg-[#ae1431]"
+                : isDark
+                  ? "bg-[#1a1a1a]"
+                  : "bg-white border border-[#d4cbbf]";
+              const badge = isRed
+                ? "bg-[#ae1431] text-white"
+                : isDark
+                  ? "bg-[#2a2a2a] text-[#a09488]"
+                  : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
               const titleC = isRed || isDark ? "text-white" : "text-[#1a1209]";
-              const subC = isRed ? "text-white/50" : isDark ? "text-white/40" : "text-[#8a7d6e]";
-              const descC = isRed ? "text-white/80" : isDark ? "text-white/70" : "text-[#4a3f35]";
+              const subC = isRed
+                ? "text-white/50"
+                : isDark
+                  ? "text-white/40"
+                  : "text-[#8a7d6e]";
+              const descC = isRed
+                ? "text-white/80"
+                : isDark
+                  ? "text-white/70"
+                  : "text-[#4a3f35]";
 
               return (
                 <div key={i} className={`anim-excel p-7 ${bg}`}>
-                  <span className={`inline-block font-display text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6  ${badge}`}>
+                  <span
+                    className={`inline-block font-display text-[9px] tracking-[0.2em] uppercase px-3 py-1 mb-6  ${badge}`}
+                  >
                     {card.tag}
                   </span>
-                  <h3 className={` text-[22px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}>
+                  <h3
+                    className={` text-[22px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
+                  >
                     {card.title}
                   </h3>
-                  <p className={`text-[12px] font-rethink mb-5 ${subC}`}>{card.sub}</p>
-                  <p className={`text-[13px] font-rethink leading-[1.65] ${descC}`}>{card.desc}</p>
+                  <p className={`text-[12px] font-rethink mb-5 ${subC}`}>
+                    {card.sub}
+                  </p>
+                  <p
+                    className={`text-[13px] font-rethink leading-[1.65] ${descC}`}
+                  >
+                    {card.desc}
+                  </p>
                 </div>
               );
             })}
@@ -280,14 +301,15 @@ export default function BeyondAcademics() {
                     {stat.unit}
                   </span>
                 </div>
-                <p className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}>
+                <p
+                  className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}
+                >
                   {stat.label}
                 </p>
               </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

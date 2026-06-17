@@ -13,8 +13,8 @@ export default function ModelSection() {
 
   const carouselRef = useRef<HTMLDivElement>(null);
 
-const [canScrollLeft, setCanScrollLeft] = useState(false);
-const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const [shouldInit, setShouldInit] = useState(false);
 
@@ -29,7 +29,7 @@ const [canScrollRight, setCanScrollRight] = useState(true);
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
 
     observer.observe(el);
@@ -46,7 +46,10 @@ const [canScrollRight, setCanScrollRight] = useState(true);
           ".model-heading",
           { opacity: 0, y: 50 },
           {
-            opacity: 1, y: 0, duration: 1, ease: "power3.out",
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
             scrollTrigger: { trigger: ".model-heading", start: "top 85%" },
           },
         );
@@ -54,25 +57,39 @@ const [canScrollRight, setCanScrollRight] = useState(true);
           ".model-pillar",
           { opacity: 0, scale: 0.8, y: 20 },
           {
-            opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.15,
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
             ease: "back.out(1.5)",
-            scrollTrigger: { trigger: ".model-pillars-container", start: "top 85%" },
+            scrollTrigger: {
+              trigger: ".model-pillars-container",
+              start: "top 85%",
+            },
           },
         );
         gsap.fromTo(
           ".model-system",
           { opacity: 0, x: -30 },
           {
-            opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power2.out",
-            scrollTrigger: { trigger: ".model-systems-container", start: "top 80%" },
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".model-systems-container",
+              start: "top 80%",
+            },
           },
         );
       });
 
       mm.add("(max-width: 560px)", () => {
         gsap.set(".model-heading", { opacity: 1, y: 0 });
-        gsap.set(".model-pillar",  { opacity: 1, scale: 1, y: 0 });
-        gsap.set(".model-system",  { opacity: 1, x: 0 });
+        gsap.set(".model-pillar", { opacity: 1, scale: 1, y: 0 });
+        gsap.set(".model-system", { opacity: 1, x: 0 });
       });
 
       return () => mm.revert();
@@ -81,35 +98,33 @@ const [canScrollRight, setCanScrollRight] = useState(true);
   );
 
   const updateScrollButtons = () => {
-  const el = carouselRef.current;
-  if (!el) return;
+    const el = carouselRef.current;
+    if (!el) return;
 
-  setCanScrollLeft(el.scrollLeft > 5);
+    setCanScrollLeft(el.scrollLeft > 5);
 
-  setCanScrollRight(
-    el.scrollLeft < el.scrollWidth - el.clientWidth - 5
-  );
-};
-
-useEffect(() => {
-  const el = carouselRef.current;
-  if (!el) return;
-
-  updateScrollButtons();
-
-  el.addEventListener("scroll", updateScrollButtons);
-
-  return () => {
-    el.removeEventListener("scroll", updateScrollButtons);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
   };
-}, []);
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    updateScrollButtons();
+
+    el.addEventListener("scroll", updateScrollButtons);
+
+    return () => {
+      el.removeEventListener("scroll", updateScrollButtons);
+    };
+  }, []);
 
   const scrollCarousel = (dir: number) => {
-  carouselRef.current?.scrollBy({
-    left: dir * 300,
-    behavior: "smooth",
-  });
-};
+    carouselRef.current?.scrollBy({
+      left: dir * 300,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
@@ -129,14 +144,19 @@ useEffect(() => {
           max-[900px]:w-[55vw] max-[640px]:hidden
         "
       >
-        <video className="w-full h-full object-cover opacity-[0.9]" autoPlay muted loop playsInline>
+        <video
+          className="w-full h-full object-cover opacity-[0.9]"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
           <source src="/videos/model-video.mp4" type="video/mp4" />
         </video>
       </div>
 
       {/* Wrapper */}
       <div className="max-w-[1180px] mx-auto px-[24px] relative max-[640px]:flex max-[640px]:flex-col">
-
         {/* Heading block */}
         <div
           className="
@@ -177,7 +197,13 @@ useEffect(() => {
             w-full aspect-[4/3] overflow-hidden rounded-[20px] mt-[32px] mb-[40px]
           "
         >
-          <video className="w-full h-full object-cover opacity-[0.9]" autoPlay muted loop playsInline>
+          <video
+            className="w-full h-full object-cover opacity-[0.9]"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
             <source src="/videos/model-video.mp4" type="video/mp4" />
           </video>
         </div>
@@ -217,12 +243,11 @@ useEffect(() => {
           </h3>
 
           <div className="relative mt-[70px] max-[900px]:mt-[50px] max-[560px]:mt-[36px]">
-
             {/* Desktop Left Arrow */}
-           <button
-  onClick={() => scrollCarousel(-1)}
-  disabled={!canScrollLeft}
-  className={`
+            <button
+              onClick={() => scrollCarousel(-1)}
+              disabled={!canScrollLeft}
+              className={`
     group max-[560px]:hidden
     absolute left-0 bottom-13 -translate-y-1/2 -translate-x-16 z-10
     w-[42px] h-[42px] rounded-full border-2
@@ -233,16 +258,25 @@ useEffect(() => {
         : "border-[#f5efe8]/30 opacity-20 cursor-not-allowed"
     }
   `}
->
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f5efe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="#f5efe8"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M10 13L5 8L10 3" />
               </svg>
             </button>
 
             {/* Scrollable track */}
             <div
-  ref={carouselRef}
-  id="faculty-carousel"
+              ref={carouselRef}
+              id="faculty-carousel"
               className="
                 flex gap-[60px] overflow-x-auto scroll-smooth scrollbar-hide
                 px-[16px] max-[900px]:gap-[34px]
@@ -255,13 +289,20 @@ useEffect(() => {
                 el.style.cursor = "grabbing";
                 const startX = e.pageX - el.offsetLeft;
                 const scrollLeft = el.scrollLeft;
-                const onMove = (ev: any) => { el.scrollLeft = scrollLeft - (ev.pageX - el.offsetLeft - startX); };
-                const onUp = () => { el.style.cursor = "grab"; window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+                const onMove = (ev: any) => {
+                  el.scrollLeft =
+                    scrollLeft - (ev.pageX - el.offsetLeft - startX);
+                };
+                const onUp = () => {
+                  el.style.cursor = "grab";
+                  window.removeEventListener("mousemove", onMove);
+                  window.removeEventListener("mouseup", onUp);
+                };
                 window.addEventListener("mousemove", onMove);
                 window.addEventListener("mouseup", onUp);
               }}
             >
-               {facultySystems.map((item, i) => (
+              {facultySystems.map((item, i) => (
                 <div
                   key={i}
                   className="
@@ -288,10 +329,10 @@ useEffect(() => {
             </div>
 
             {/* Desktop Right Arrow */}
-              <button
-  onClick={() => scrollCarousel(1)}
-  disabled={!canScrollRight}
-  className={`
+            <button
+              onClick={() => scrollCarousel(1)}
+              disabled={!canScrollRight}
+              className={`
     group max-[560px]:hidden
     absolute right-0 bottom-13 -translate-y-1/2 translate-x-12 z-10
     w-[42px] h-[42px] rounded-full border-2
@@ -302,8 +343,17 @@ useEffect(() => {
         : "border-[#f5efe8]/30 opacity-40 cursor-not-allowed"
     }
   `}
->
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f5efe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="#f5efe8"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M6 3L11 8L6 13" />
               </svg>
             </button>
@@ -314,7 +364,16 @@ useEffect(() => {
                 onClick={() => scrollCarousel(-1)}
                 className="w-[40px] h-[40px] rounded-full border border-[#f5efe8]/40 bg-[#f5efe8]/10 flex items-center justify-center active:scale-95 transition-transform cursor-pointer"
               >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#f5efe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="#f5efe8"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M10 13L5 8L10 3" />
                 </svg>
               </button>
@@ -322,12 +381,20 @@ useEffect(() => {
                 onClick={() => scrollCarousel(1)}
                 className="w-[40px] h-[40px] rounded-full border border-[#f5efe8]/40 bg-[#f5efe8]/10 flex items-center justify-center active:scale-95 transition-transform cursor-pointer"
               >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#f5efe8" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="#f5efe8"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M6 3L11 8L6 13" />
                 </svg>
               </button>
             </div>
-
           </div>
         </div>
       </div>

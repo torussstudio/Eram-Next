@@ -24,9 +24,7 @@ export default function SectionIntro({
   const bodyClassName = dark
     ? "text-[rgba(255,255,255,0.68)] font-rethink"
     : "text-[#616161] font-rethink";
-  const titleClassName = dark
-    ? "text-white"
-    : "text-[#111111]";
+  const titleClassName = dark ? "text-white" : "text-[#111111]";
 
   return (
     <div className={wrapperClassName}>
@@ -35,7 +33,9 @@ export default function SectionIntro({
       >
         {eyebrow}
       </span>
-      <h2 className={`m-0 font-display text-[clamp(4rem,5vw,5.3rem)] font-bold leading-[0.91] tracking-[-0.015em] ${titleClassName} max-[640px]:text-[clamp(3rem,11vw,3.9rem)]`}>
+      <h2
+        className={`m-0 font-display text-[clamp(4rem,5vw,5.3rem)] font-bold leading-[0.91] tracking-[-0.015em] ${titleClassName} max-[640px]:text-[clamp(3rem,11vw,3.9rem)]`}
+      >
         {title}
       </h2>
       <p className={`mt-6 text-base leading-[1.75] ${bodyClassName}`}>

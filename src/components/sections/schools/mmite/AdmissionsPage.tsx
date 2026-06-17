@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const institutions = [
-   {
+  {
     type: "CBSE School",
     name: "EASE",
     desc: "ERAM Academy for Sports & Excellence",
@@ -23,7 +23,7 @@ const institutions = [
     desc: "Mariyumma Memorial Public School",
     path: "/mmps",
   },
-   {
+  {
     type: "Higher Secondary",
     name: "MMHSS",
     desc: "Mariyumma Memorial Hr. Sec. School",
@@ -46,15 +46,18 @@ const institutions = [
 export default function AdmissionsPage() {
   const containerRef = useRef(null);
   const pathname = usePathname();
-  const btn1Ref = useRef<HTMLButtonElement>(null); 
-const btn2Ref = useRef<HTMLButtonElement>(null);
+  const btn1Ref = useRef<HTMLButtonElement>(null);
+  const btn2Ref = useRef<HTMLButtonElement>(null);
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
       const q = gsap.utils.selector(containerRef);
 
-      gsap.set(q(".anim-top-bar"), { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(q(".anim-top-bar"), {
+        scaleX: 0,
+        transformOrigin: "left center",
+      });
       gsap.set(q(".anim-hero-tag"), { opacity: 0, y: 12 });
       gsap.set(q(".anim-hero-title"), { opacity: 0, y: 24 });
       gsap.set(q(".anim-hero-desc"), { opacity: 0, y: 16 });
@@ -64,9 +67,17 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
 
       const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
       hero
-        .to(q(".anim-top-bar"), { scaleX: 1, duration: 0.9, ease: "expo.inOut" })
+        .to(q(".anim-top-bar"), {
+          scaleX: 1,
+          duration: 0.9,
+          ease: "expo.inOut",
+        })
         .to(q(".anim-hero-tag"), { opacity: 1, y: 0, duration: 0.55 }, "-=0.25")
-        .to(q(".anim-hero-title"), { opacity: 1, y: 0, duration: 0.7 }, "-=0.15")
+        .to(
+          q(".anim-hero-title"),
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.15",
+        )
         .to(q(".anim-hero-desc"), { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
         .to(
           q(".anim-hero-btn"),
@@ -84,18 +95,16 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
             toggleActions: "play none none none",
           },
         });
-        inst
-          .to(q(".anim-inst-label"), { opacity: 1, duration: 0.5 })
-          .to(
-            q(".anim-inst-card"),
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.65,
-              stagger: { each: 0.08, ease: "power1.inOut" },
-            },
-            "-=0.2",
-          );
+        inst.to(q(".anim-inst-label"), { opacity: 1, duration: 0.5 }).to(
+          q(".anim-inst-card"),
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            stagger: { each: 0.08, ease: "power1.inOut" },
+          },
+          "-=0.2",
+        );
       }
     },
     { scope: containerRef },
@@ -132,28 +141,28 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
 
           {/* RIGHT — BUTTONS */}
           <div className="flex flex-col pt-[60px] gap-3 lg:min-w-[320px]">
-  <button
-    ref={btn1Ref}
-    className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
-  >
-    <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
+            <button
+              ref={btn1Ref}
+              className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
+            >
+              <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
 
-    <span className="font-rethink relative z-10">
-       Apply Now — D.EL.ED 2026-27
-    </span>
-  </button>
+              <span className="font-rethink relative z-10">
+                Apply Now — D.EL.ED 2026-27
+              </span>
+            </button>
 
-  <button
-    ref={btn2Ref}
-    className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
-  >
-    <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
+            <button
+              ref={btn2Ref}
+              className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden cursor-pointer"
+            >
+              <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
 
-    <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">
-      Book a Campus Visit
-    </span>
-  </button>
-</div>
+              <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">
+                Book a Campus Visit
+              </span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -182,7 +191,11 @@ const btn2Ref = useRef<HTMLButtonElement>(null);
                   key={i}
                   href={inst.path}
                   target={inst.path.startsWith("http") ? "_blank" : undefined}
-                  rel={inst.path.startsWith("http") ? "noopener noreferrer" : undefined}
+                  rel={
+                    inst.path.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   className="anim-inst-card bg-white p-6 cursor-pointer group hover:bg-[#1a1209] transition-colors duration-200 block text-current no-underline"
                 >
                   <p className="text-[10px] tracking-widest uppercase text-[#8a8278] group-hover:text-white/50 mb-3 transition-colors duration-200">

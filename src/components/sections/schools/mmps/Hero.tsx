@@ -6,7 +6,6 @@ import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
 import { Play } from "lucide-react";
 
-
 // ─── Data ────────────────────────────────────────────────────────────────────
 const QUICK_FACTS = [
   ["2004", "Year Established"],
@@ -18,8 +17,8 @@ const QUICK_FACTS = [
 const STATS = [
   { value: "14", desc: ["Consecutive Years", "100% Pass Rate"] },
   { value: "750+", desc: ["Students Currently", "Enrolled"] },
-  { value: "20+", desc: ["Years of" ,"Continuous Operation"] },
-  { value: "5+", desc: ["National & State Level","Sports Selections"] },
+  { value: "20+", desc: ["Years of", "Continuous Operation"] },
+  { value: "5+", desc: ["National & State Level", "Sports Selections"] },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -35,115 +34,118 @@ export default function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
 
-  useGSAP(() => {
-    /* ── 1. Hero entrance timeline ── */
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  useGSAP(
+    () => {
+      /* ── 1. Hero entrance timeline ── */
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    // Background overlay fades in first
-    if (overlayRef.current) {
-      tl.fromTo(
-        overlayRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.9 },
-      );
-    }
-
-    // Heading clip-path reveal (cinematic curtain up)
-    if (headingRef.current) {
-      tl.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 32 },
-        { opacity: 1, y: 0, duration: 0.9 },
-        "-=0.4",
-      );
-    }
-
-    // Badge slides in from left
-    if (badgeRef.current) {
-      tl.fromTo(
-        badgeRef.current,
-        { opacity: 0, x: -24 },
-        { opacity: 1, x: 0, duration: 0.7 },
-        "-=0.7",
-      );
-    }
-
-    // Subtext fades up
-    if (subtextRef.current) {
-      tl.fromTo(
-        subtextRef.current,
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        "-=0.4",
-      );
-    }
-
-    // Buttons rise up
-    if (btnsRef.current) {
-      tl.fromTo(
-        btnsRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        "-=0.35",
-      );
-    }
-
-    // Right panel slides in from right with slight scale
-    if (panelRef.current) {
-      tl.fromTo(
-        panelRef.current,
-        { opacity: 0, x: 36, scale: 0.98 },
-        { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: "power2.out" },
-        "-=0.7",
-      );
-    }
-
-    // Accent line draws from left
-    if (lineRef.current) {
-      tl.fromTo(
-        lineRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 0.5 },
-        "-=0.4",
-      );
-    }
-
-    // Quick-fact rows stagger in
-    if (factsRef.current) {
-      const factItems = factsRef.current.querySelectorAll(".fact-item");
-      if (factItems.length) {
+      // Background overlay fades in first
+      if (overlayRef.current) {
         tl.fromTo(
-          factItems,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 },
+          overlayRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.9 },
+        );
+      }
+
+      // Heading clip-path reveal (cinematic curtain up)
+      if (headingRef.current) {
+        tl.fromTo(
+          headingRef.current,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.9 },
+          "-=0.4",
+        );
+      }
+
+      // Badge slides in from left
+      if (badgeRef.current) {
+        tl.fromTo(
+          badgeRef.current,
+          { opacity: 0, x: -24 },
+          { opacity: 1, x: 0, duration: 0.7 },
+          "-=0.7",
+        );
+      }
+
+      // Subtext fades up
+      if (subtextRef.current) {
+        tl.fromTo(
+          subtextRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.4",
+        );
+      }
+
+      // Buttons rise up
+      if (btnsRef.current) {
+        tl.fromTo(
+          btnsRef.current,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6 },
           "-=0.35",
         );
       }
-    }
 
-    /* ── 3. Stats reveal on scroll ── */
-    if (statsRef.current) {
-      const statItems = statsRef.current.querySelectorAll(".stat-item");
-      if (statItems.length) {
-        gsap.fromTo(
-          statItems,
-          { y: 24, scale: 0.98 },
-          {
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: "top 92%",
-              toggleActions: "play none none none",
-            },
-          }
+      // Right panel slides in from right with slight scale
+      if (panelRef.current) {
+        tl.fromTo(
+          panelRef.current,
+          { opacity: 0, x: 36, scale: 0.98 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.85, ease: "power2.out" },
+          "-=0.7",
         );
       }
-    }
-  }, { scope: sectionRef });
+
+      // Accent line draws from left
+      if (lineRef.current) {
+        tl.fromTo(
+          lineRef.current,
+          { scaleX: 0, transformOrigin: "left center" },
+          { scaleX: 1, duration: 0.5 },
+          "-=0.4",
+        );
+      }
+
+      // Quick-fact rows stagger in
+      if (factsRef.current) {
+        const factItems = factsRef.current.querySelectorAll(".fact-item");
+        if (factItems.length) {
+          tl.fromTo(
+            factItems,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 },
+            "-=0.35",
+          );
+        }
+      }
+
+      /* ── 3. Stats reveal on scroll ── */
+      if (statsRef.current) {
+        const statItems = statsRef.current.querySelectorAll(".stat-item");
+        if (statItems.length) {
+          gsap.fromTo(
+            statItems,
+            { y: 24, scale: 0.98 },
+            {
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: statsRef.current,
+                start: "top 92%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        }
+      }
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
@@ -198,12 +200,14 @@ export default function Hero() {
                   20+ years of operation. 100% pass rate.
                 </span>
                 <br />
-              Over 750 students, built on structured academic systems, early competitive sports exposure, and consistent communication — achieving 100% pass results for 14 consecutive years.
+                Over 750 students, built on structured academic systems, early
+                competitive sports exposure, and consistent communication —
+                achieving 100% pass results for 14 consecutive years.
               </p>
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
                 <button
-  className="
+                  className="
     font-rethink bg-[#ae1431]
     px-5 md:px-7 py-2.5 md:py-3
     text-[10px] sm:text-[11px] md:text-[12px]
@@ -213,10 +217,10 @@ export default function Hero() {
     flex items-center hover:bg-black justify-center gap-2
     whitespace-nowrap
   "
->
-  <span>Admissions Open</span>
-  <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
-</button>
+                >
+                  <span>Admissions Open</span>
+                  <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
+                </button>
                 <button
                   className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase

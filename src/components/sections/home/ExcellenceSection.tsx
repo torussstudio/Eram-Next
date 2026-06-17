@@ -5,14 +5,22 @@ import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 
 /* ── Constants ──────────────────────────────────────────────────── */
-const CATEGORIES = [ "SPORTS", "CULTURAL", "SOCIAL","ACADEMIC"] as const;
+const CATEGORIES = ["SPORTS", "CULTURAL", "SOCIAL", "ACADEMIC"] as const;
 type Category = (typeof CATEGORIES)[number];
 
 export const excellenceDomains: Record<Category, { image: string }[]> = {
-  SPORTS:   Array.from({ length: 4 }, (_, i) => ({ image: `/images/sports${i + 1}.avif` })),
-  CULTURAL: Array.from({ length: 4 }, (_, i) => ({ image: `/images/cultural${i + 1}.avif` })),
-  SOCIAL:   Array.from({ length: 4 }, (_, i) => ({ image: `/images/pro${i + 1}.avif` })),
-  ACADEMIC: Array.from({ length: 4 }, (_, i) => ({ image: `/images/academic${i + 1}.avif` })),
+  SPORTS: Array.from({ length: 4 }, (_, i) => ({
+    image: `/images/sports${i + 1}.avif`,
+  })),
+  CULTURAL: Array.from({ length: 4 }, (_, i) => ({
+    image: `/images/cultural${i + 1}.avif`,
+  })),
+  SOCIAL: Array.from({ length: 4 }, (_, i) => ({
+    image: `/images/pro${i + 1}.avif`,
+  })),
+  ACADEMIC: Array.from({ length: 4 }, (_, i) => ({
+    image: `/images/academic${i + 1}.avif`,
+  })),
 };
 
 /* ── NavArrow ────────────────────────────────────────────────────── */
@@ -55,7 +63,9 @@ function ImageCard({
   className?: string;
 }) {
   return (
-    <div className={`group relative overflow-hidden rounded-[28px] ${className}`}>
+    <div
+      className={`group relative overflow-hidden rounded-[28px] ${className}`}
+    >
       <img
         src={src}
         loading={eager ? "eager" : "lazy"}
@@ -88,7 +98,7 @@ export default function ExcellenceSection() {
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -139,7 +149,7 @@ export default function ExcellenceSection() {
         });
       }
     },
-    [active]
+    [active],
   );
 
   /* ── Animate cards IN after active changes ───────────────────── */
@@ -159,7 +169,7 @@ export default function ExcellenceSection() {
           duration: 0.5,
           stagger: { amount: 0.3 },
           ease: "power3.out",
-        }
+        },
       );
     } else {
       gsap.fromTo(
@@ -172,7 +182,7 @@ export default function ExcellenceSection() {
           duration: 0.3,
           ease: "power3.out",
           clearProps: "all",
-        }
+        },
       );
     }
   }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -184,13 +194,13 @@ export default function ExcellenceSection() {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 900px)", () => {
-        gsap.set(".exc-heading",   { clipPath: "inset(0 100% 0 0)" });
+        gsap.set(".exc-heading", { clipPath: "inset(0 100% 0 0)" });
         gsap.set(".exc-menu-item", { x: -32, opacity: 0 });
-        gsap.set(".exc-card",      { opacity: 0, y: 28, scale: 0.95 });
-        gsap.set(".exc-btn",       { opacity: 0, y: 16 });
+        gsap.set(".exc-card", { opacity: 0, y: 28, scale: 0.95 });
+        gsap.set(".exc-btn", { opacity: 0, y: 16 });
 
         const t1 = { trigger: sectionRef.current, start: "top 78%" };
-        const t2 = { trigger: ".exc-grid",        start: "top 85%" };
+        const t2 = { trigger: ".exc-grid", start: "top 85%" };
 
         gsap.to(".exc-heading", {
           clipPath: "inset(0 0% 0 0)",
@@ -199,22 +209,28 @@ export default function ExcellenceSection() {
           scrollTrigger: t1,
         });
         gsap.to(".exc-menu-item", {
-          x: 0, opacity: 1,
+          x: 0,
+          opacity: 1,
           duration: 0.65,
           stagger: 0.09,
           ease: "power3.out",
           scrollTrigger: t1,
         });
         gsap.to(".exc-card", {
-          opacity: 1, y: 0, scale: 1,
+          opacity: 1,
+          y: 0,
+          scale: 1,
           duration: 0.7,
           stagger: { amount: 0.35 },
           ease: "power3.out",
           scrollTrigger: t2,
-          onComplete: () => { entranceDone.current = true; }, // ← unlock tab-switch animation
+          onComplete: () => {
+            entranceDone.current = true;
+          }, // ← unlock tab-switch animation
         });
         gsap.to(".exc-btn", {
-          opacity: 1, y: 0,
+          opacity: 1,
+          y: 0,
           duration: 0.6,
           ease: "power2.out",
           scrollTrigger: t2,
@@ -223,38 +239,44 @@ export default function ExcellenceSection() {
 
       mm.add("(max-width: 899px)", () => {
         gsap.set(".mob-exc-word", { y: "105%", opacity: 0 });
-        gsap.set(".mob-nav-row",  { y: 14,     opacity: 0 });
-        gsap.set(".mob-exc-card", { y: 40,     opacity: 0 });
-        gsap.set(".mob-exc-btn",  { y: 14,     opacity: 0 });
+        gsap.set(".mob-nav-row", { y: 14, opacity: 0 });
+        gsap.set(".mob-exc-card", { y: 40, opacity: 0 });
+        gsap.set(".mob-exc-btn", { y: 14, opacity: 0 });
 
         const t1 = { trigger: sectionRef.current, start: "top 82%" };
-        const t2 = { trigger: ".mob-exc-grid",    start: "top 88%" };
+        const t2 = { trigger: ".mob-exc-grid", start: "top 88%" };
 
         gsap.to(".mob-exc-word", {
-          y: "0%", opacity: 1,
+          y: "0%",
+          opacity: 1,
           duration: 0.65,
           stagger: 0.055,
           ease: "power4.out",
           scrollTrigger: t1,
         });
         gsap.to(".mob-nav-row", {
-          y: 0, opacity: 1,
+          y: 0,
+          opacity: 1,
           duration: 0.55,
           delay: 0.25,
           ease: "power3.out",
           scrollTrigger: t1,
         });
         gsap.to(".mob-exc-card", {
-          y: 0, opacity: 1,
+          y: 0,
+          opacity: 1,
           duration: 0.6,
           stagger: { amount: 0.3 },
           ease: "power3.out",
           clearProps: "all",
           scrollTrigger: t2,
-          onComplete: () => { entranceDone.current = true; }, // ← unlock tab-switch animation
+          onComplete: () => {
+            entranceDone.current = true;
+          }, // ← unlock tab-switch animation
         });
         gsap.to(".mob-exc-btn", {
-          y: 0, opacity: 1,
+          y: 0,
+          opacity: 1,
           duration: 0.5,
           delay: 0.15,
           ease: "power2.out",
@@ -264,7 +286,7 @@ export default function ExcellenceSection() {
 
       return () => mm.revert();
     },
-    { scope: sectionRef, dependencies: [visible] }
+    { scope: sectionRef, dependencies: [visible] },
   );
 
   return (

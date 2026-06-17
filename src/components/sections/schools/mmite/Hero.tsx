@@ -7,7 +7,6 @@ import { shell } from "../../../../constants/homeStyles";
 import { Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-
 // ─── Data ────────────────────────────────────────────────────────────────────
 const QUICK_FACTS = [
   ["D.El.Ed", "Diploma in Elementary Education · 2 Years"],
@@ -38,118 +37,121 @@ export default function Hero() {
 
   const router = useRouter();
 
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      defaults: { ease: "power3.out" },
-    });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+      });
 
-    if (overlayRef.current) {
-      tl.fromTo(
-        overlayRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.9 }
-      );
-    }
-
-    if (headingRef.current) {
-      tl.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 32 },
-        { opacity: 1, y: 0, duration: 0.9 },
-        "-=0.4"
-      );
-    }
-
-    if (badgeRef.current) {
-      tl.fromTo(
-        badgeRef.current,
-        { opacity: 0, x: -24 },
-        { opacity: 1, x: 0, duration: 0.7 },
-        "-=0.7"
-      );
-    }
-
-    if (subtextRef.current) {
-      tl.fromTo(
-        subtextRef.current,
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        "-=0.4"
-      );
-    }
-
-    if (btnsRef.current) {
-      tl.fromTo(
-        btnsRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        "-=0.35"
-      );
-    }
-
-    if (panelRef.current) {
-      tl.fromTo(
-        panelRef.current,
-        { opacity: 0, x: 36, scale: 0.98 },
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 0.85,
-          ease: "power2.out",
-        },
-        "-=0.7"
-      );
-    }
-
-    if (lineRef.current) {
-      tl.fromTo(
-        lineRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 0.5 },
-        "-=0.4"
-      );
-    }
-
-    if (factsRef.current) {
-      const factItems = factsRef.current.querySelectorAll(".fact-item");
-      if (factItems.length) {
+      if (overlayRef.current) {
         tl.fromTo(
-          factItems,
-          { opacity: 0, y: 12 },
+          overlayRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.9 },
+        );
+      }
+
+      if (headingRef.current) {
+        tl.fromTo(
+          headingRef.current,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.9 },
+          "-=0.4",
+        );
+      }
+
+      if (badgeRef.current) {
+        tl.fromTo(
+          badgeRef.current,
+          { opacity: 0, x: -24 },
+          { opacity: 1, x: 0, duration: 0.7 },
+          "-=0.7",
+        );
+      }
+
+      if (subtextRef.current) {
+        tl.fromTo(
+          subtextRef.current,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.4",
+        );
+      }
+
+      if (btnsRef.current) {
+        tl.fromTo(
+          btnsRef.current,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          "-=0.35",
+        );
+      }
+
+      if (panelRef.current) {
+        tl.fromTo(
+          panelRef.current,
+          { opacity: 0, x: 36, scale: 0.98 },
           {
             opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.12,
-          },
-          "-=0.35"
-        );
-      }
-    }
-
-    if (statsRef.current) {
-      const statItems = statsRef.current.querySelectorAll(".stat-item");
-      if (statItems.length) {
-        gsap.fromTo(
-          statItems,
-          { y: 24, scale: 0.98 },
-          {
-            y: 0,
+            x: 0,
             scale: 1,
-            duration: 0.6,
-            stagger: 0.1,
+            duration: 0.85,
             ease: "power2.out",
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: "top 92%",
-              toggleActions: "play none none none",
-            },
-          }
+          },
+          "-=0.7",
         );
       }
-    }
-  }, { scope: sectionRef });
+
+      if (lineRef.current) {
+        tl.fromTo(
+          lineRef.current,
+          { scaleX: 0, transformOrigin: "left center" },
+          { scaleX: 1, duration: 0.5 },
+          "-=0.4",
+        );
+      }
+
+      if (factsRef.current) {
+        const factItems = factsRef.current.querySelectorAll(".fact-item");
+        if (factItems.length) {
+          tl.fromTo(
+            factItems,
+            { opacity: 0, y: 12 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.12,
+            },
+            "-=0.35",
+          );
+        }
+      }
+
+      if (statsRef.current) {
+        const statItems = statsRef.current.querySelectorAll(".stat-item");
+        if (statItems.length) {
+          gsap.fromTo(
+            statItems,
+            { y: 24, scale: 0.98 },
+            {
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: statsRef.current,
+                start: "top 92%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        }
+      }
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
@@ -205,14 +207,14 @@ export default function Hero() {
                 </span>
                 <br />
                 Established in 2004, MMITE prepares aspiring teachers through
-                 structured academic formation, disciplined supervision, and 
-                 qualification-focused outcomes — shaping professionals who 
-                 step into classrooms with clarity and confidence.
+                structured academic formation, disciplined supervision, and
+                qualification-focused outcomes — shaping professionals who step
+                into classrooms with clarity and confidence.
               </p>
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
-                 <button
-  className="
+                <button
+                  className="
     font-rethink bg-[#ae1431]
     px-5 md:px-7 py-2.5 md:py-3
     text-[10px] sm:text-[11px] md:text-[12px]
@@ -222,11 +224,11 @@ export default function Hero() {
     flex items-center hover:bg-black justify-center gap-2
     whitespace-nowrap
   "
->
-  <span>Admissions Open</span>
-  <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
-</button>
-               <button
+                >
+                  <span>Admissions Open</span>
+                  <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
+                </button>
+                <button
                   onClick={() => router.push("/contact")}
                   className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
                     text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase

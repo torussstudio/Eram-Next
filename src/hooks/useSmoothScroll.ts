@@ -4,7 +4,7 @@ import { getLenis } from "../providers/SmoothScrollProvider";
 export const useSmoothScroll = () => {
   const scrollToElement = (
     target: string | RefObject<HTMLElement | null> | HTMLElement | null,
-    offset = 80
+    offset = 80,
   ) => {
     let el: HTMLElement | null = null;
 

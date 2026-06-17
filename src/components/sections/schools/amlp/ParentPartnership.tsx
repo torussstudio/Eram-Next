@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
@@ -64,12 +64,16 @@ export default function ParentPartnership() {
           ".anim-quote",
           ".anim-btn",
         ],
-        { opacity: 0, y: 20 }
+        { opacity: 0, y: 20 },
       );
-      gsap.set(".anim-divider",       { opacity: 0, scaleX: 0, transformOrigin: "left center" });
-      gsap.set(".anim-mockup",        { opacity: 0, y: 32 });
+      gsap.set(".anim-divider", {
+        opacity: 0,
+        scaleX: 0,
+        transformOrigin: "left center",
+      });
+      gsap.set(".anim-mockup", { opacity: 0, y: 32 });
       gsap.set(".anim-mockup-header", { opacity: 0 });
-      gsap.set(".anim-msg",           { opacity: 0, y: 14 });
+      gsap.set(".anim-msg", { opacity: 0, y: 14 });
 
       const trigger = {
         trigger: containerRef.current,
@@ -86,12 +90,20 @@ export default function ParentPartnership() {
 
       leftTl
         .to(".anim-subtitle", { opacity: 1, y: 0, duration: 0.45 })
-        .to(".anim-title",    { opacity: 1, y: 0, duration: 0.65 }, "-=0.15")
-        .to(".anim-divider",  { opacity: 1, scaleX: 1, duration: 0.55, ease: "power2.inOut" }, "-=0.2")
-        .to(".anim-desc",     { opacity: 1, y: 0, duration: 0.55 }, "-=0.25")
-        .to(".anim-bullet",   { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 }, "-=0.25")
-        .to(".anim-quote",    { opacity: 1, y: 0, duration: 0.5 }, "-=0.1")
-        .to(".anim-btn",      { opacity: 1, y: 0, duration: 0.45 }, "-=0.2");
+        .to(".anim-title", { opacity: 1, y: 0, duration: 0.65 }, "-=0.15")
+        .to(
+          ".anim-divider",
+          { opacity: 1, scaleX: 1, duration: 0.55, ease: "power2.inOut" },
+          "-=0.2",
+        )
+        .to(".anim-desc", { opacity: 1, y: 0, duration: 0.55 }, "-=0.25")
+        .to(
+          ".anim-bullet",
+          { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 },
+          "-=0.25",
+        )
+        .to(".anim-quote", { opacity: 1, y: 0, duration: 0.5 }, "-=0.1")
+        .to(".anim-btn", { opacity: 1, y: 0, duration: 0.45 }, "-=0.2");
 
       const rightTl = gsap.timeline({
         defaults: { ease: "power3.out" },
@@ -99,15 +111,20 @@ export default function ParentPartnership() {
       });
 
       rightTl
-        .to(".anim-mockup",        { opacity: 1, y: 0, duration: 0.7 }, 0.3)
-        .to(".anim-mockup-header", { opacity: 1, duration: 0.4 },       "-=0.2")
-        .to(".anim-msg", {
-            opacity: 1, y: 0,
+        .to(".anim-mockup", { opacity: 1, y: 0, duration: 0.7 }, 0.3)
+        .to(".anim-mockup-header", { opacity: 1, duration: 0.4 }, "-=0.2")
+        .to(
+          ".anim-msg",
+          {
+            opacity: 1,
+            y: 0,
             duration: 0.45,
-            stagger: 0.09,        // messages trickle like a live feed
-          }, "-=0.15");
+            stagger: 0.09, // messages trickle like a live feed
+          },
+          "-=0.15",
+        );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
@@ -117,7 +134,6 @@ export default function ParentPartnership() {
     >
       <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-2 md:pt-4 lg:pt-4 pb-8 md:pb-10 lg:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center">
-
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col">
             <div className="anim-subtitle flex items-center gap-3 mb-8">
@@ -126,19 +142,25 @@ export default function ParentPartnership() {
               </p>
             </div>
 
-            <h2 className="font-display anim-title text-[#1a1209] leading-[1.05] tracking-[-0.02em]
-              text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px]">
-              Enduring Legacy.<br/>Early Discipline.<br/>Structured Supervision.
+            <h2
+              className="font-display anim-title text-[#1a1209] leading-[1.05] tracking-[-0.02em]
+              text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px]"
+            >
+              Enduring Legacy.
+              <br />
+              Early Discipline.
+              <br />
+              Structured Supervision.
             </h2>
 
             <div className="anim-divider w-10 h-[2px] bg-[#ae1431] mt-6 mb-8" />
 
             <p className="anim-desc font-rethink  text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#3d3128] max-w-[560px]">
-              At the Lower Primary level, learning requires foundation, 
-              close supervision, and coordinated communication. 
-              AMLP maintains structured systems to support young learners
-               — ensuring early academic gaps are addressed promptly and
-                that learning habits are formed with discipline
+              At the Lower Primary level, learning requires foundation, close
+              supervision, and coordinated communication. AMLP maintains
+              structured systems to support young learners — ensuring early
+              academic gaps are addressed promptly and that learning habits are
+              formed with discipline
             </p>
 
             <ul className="mt-6 space-y-3">
@@ -187,14 +209,15 @@ export default function ParentPartnership() {
                   </p>
                   <p className="text-[13px] sm:text-[14px] text-[#c8c0b8] leading-[1.65]">
                     <span className="mr-1">{msg.emoji}</span>
-                    <span className="font-rethink text-white">{msg.tag}:</span>{" "}
+                    <span className="font-rethink text-white">
+                      {msg.tag}:
+                    </span>{" "}
                     {msg.text}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>

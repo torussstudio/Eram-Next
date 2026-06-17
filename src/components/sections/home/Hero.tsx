@@ -355,9 +355,9 @@ export default function Hero() {
                 flex flex-wrap gap-4
               "
             >
-             <button
-  onClick={() => smoothScrollTo("institutions")}
-  className="
+              <button
+                onClick={() => smoothScrollTo("institutions")}
+                className="
     font-rethink
     bg-[#ae1431]
     hover:bg-black
@@ -376,12 +376,12 @@ export default function Hero() {
     hover:-translate-y-1
     uppercase
   "
->
-  Explore Our Institutions
-</button>
+              >
+                Explore Our Institutions
+              </button>
               <button
-  onClick={() => router.push("/contact")}
-  className="
+                onClick={() => router.push("/contact")}
+                className="
     font-rethink
     cursor-pointer
     rounded-xl
@@ -402,9 +402,9 @@ export default function Hero() {
     hover:-translate-y-1
     hover:shadow-xl
   "
->
-  Admissions Open 2026–27
-</button>
+              >
+                Admissions Open 2026–27
+              </button>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { memo, useRef } from "react";
 import OptimizedImage from "../../ui/OptimizedImage";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
 
@@ -56,10 +56,7 @@ function SpacesDesignedForOpportunity() {
   );
 
   return (
-    <section
-      ref={containerRef}
-      className="bg-[#F5EFE8]  px-4 sm:px-6"
-    >
+    <section ref={containerRef} className="bg-[#F5EFE8]  px-4 sm:px-6">
       <div className="max-w-[1100px] mx-auto">
         {/* heading */}
         <div className="max-w-[720px]">
@@ -100,7 +97,6 @@ function SpacesDesignedForOpportunity() {
 
         {/* layout — always flex-row */}
         <div className="spaces-grid mt-8 md:mt-16 flex flex-row gap-3 md:gap-6">
-
           {/* LEFT CARD */}
           <div
             className="
@@ -161,7 +157,6 @@ function SpacesDesignedForOpportunity() {
 
           {/* RIGHT SIDE */}
           <div className="flex flex-col gap-3 md:gap-6 flex-1">
-
             {/* TOP WIDE */}
             <div
               className="
@@ -218,7 +213,6 @@ function SpacesDesignedForOpportunity() {
 
             {/* BOTTOM GRID — always flex-row */}
             <div className="flex flex-row gap-3 md:gap-6">
-
               {/* amphitheatre */}
               <div
                 className="

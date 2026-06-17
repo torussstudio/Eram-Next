@@ -31,7 +31,11 @@ const CARDS = [
     title: "Event-Ready\nIllumination",
     desc: "Equipped with a full floodlighting system, the Arena enables evening matches, large-scale programs, and extended event scheduling — transforming the venue into a fully functional day-to-night event space without interruption.",
     labels: ["Floodlight Poles", "LED Lights", "Operation"],
-    values: ["8 Poles (10m Height)", "38 High-Intensity Units", "Day to Night Capable"],
+    values: [
+      "8 Poles (10m Height)",
+      "38 High-Intensity Units",
+      "Day to Night Capable",
+    ],
     Icon: Lightbulb,
   },
   {
@@ -48,7 +52,7 @@ const BG_WORDS = ["ARENA", "COURTS", "LIGHTS", "SECURE"];
 
 /* ─── COMPONENT ──────────────────────────────────────────────── */
 function PerformanceSection() {
-  const containerRef    = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const stackSectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -61,7 +65,9 @@ function PerformanceSection() {
           ".perf-eyebrow-line",
           { scaleX: 0 },
           {
-            scaleX: 1, duration: 0.8, ease: "power3.out",
+            scaleX: 1,
+            duration: 0.8,
+            ease: "power3.out",
             scrollTrigger: { trigger: containerRef.current, start: "top 85%" },
           },
         );
@@ -69,7 +75,11 @@ function PerformanceSection() {
           ".perf-heading-word",
           { y: "110%", opacity: 0 },
           {
-            y: "0%", opacity: 1, duration: 0.9, stagger: 0.14, ease: "power4.out",
+            y: "0%",
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.14,
+            ease: "power4.out",
             scrollTrigger: { trigger: containerRef.current, start: "top 85%" },
           },
         );
@@ -77,7 +87,11 @@ function PerformanceSection() {
           ".perf-subtext",
           { y: 30, opacity: 0 },
           {
-            y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 0.6,
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            delay: 0.6,
             scrollTrigger: { trigger: containerRef.current, start: "top 85%" },
           },
         );
@@ -90,8 +104,8 @@ function PerformanceSection() {
         const cards = gsap.utils.toArray<HTMLElement>(".perf-stack-card");
         const total = cards.length; // 4
 
-        const Y_STEP     = 9;
-        const ROT_STEP   = 2;
+        const Y_STEP = 9;
+        const ROT_STEP = 2;
         const SCALE_STEP = 0.022;
 
         gsap.set(".perf-bg-word", { opacity: 0 });
@@ -112,12 +126,12 @@ function PerformanceSection() {
 
         const tl = gsap.timeline({
           scrollTrigger: {
-            trigger:       stackSection,
-            start:         "top top",
-            end:           `+=${scrollEndPx}`,
-            pin:           true,
-            pinSpacing:    true,
-            scrub:         1.2,
+            trigger: stackSection,
+            start: "top top",
+            end: `+=${scrollEndPx}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1.2,
             anticipatePin: 1,
           },
         });
@@ -129,13 +143,20 @@ function PerformanceSection() {
           tl.fromTo(
             cards[frontDOM],
             { y: 0, rotation: 0, scale: 1, opacity: 1 },
-            { y: -520, rotation: -14, scale: 0.90, opacity: 0, ease: "power2.inOut", duration: segDur },
+            {
+              y: -520,
+              rotation: -14,
+              scale: 0.9,
+              opacity: 0,
+              ease: "power2.inOut",
+              duration: segDur,
+            },
             segStart,
           );
 
           for (let d = 0; d < frontDOM; d++) {
             const depthBefore = frontDOM - d;
-            const depthAfter  = frontDOM - 1 - d;
+            const depthAfter = frontDOM - 1 - d;
             tl.fromTo(
               cards[d],
               {
@@ -160,7 +181,7 @@ function PerformanceSection() {
           tl.fromTo(
             `.perf-bg-word[data-index="${step}"]`,
             { opacity: 0 },
-            { opacity:0.04 , ease: "none", duration: segDur },
+            { opacity: 0.04, ease: "none", duration: segDur },
             segStart,
           );
           if (step > 0) {
@@ -175,14 +196,18 @@ function PerformanceSection() {
 
         tl.fromTo(
           `.perf-bg-word[data-index="${total - 1}"]`,
-          { opacity: 0.04},
+          { opacity: 0.04 },
           { opacity: 0, ease: "none", duration: segDur },
           (total - 1) * segDur,
         );
       };
 
-      mm.add("(min-width: 768px)", () => { buildStack(3 * window.innerHeight); });
-      mm.add("(max-width: 767px)", () => { buildStack(3 * window.innerHeight); });
+      mm.add("(min-width: 768px)", () => {
+        buildStack(3 * window.innerHeight);
+      });
+      mm.add("(max-width: 767px)", () => {
+        buildStack(3 * window.innerHeight);
+      });
 
       return () => {
         mm.revert();
@@ -193,14 +218,12 @@ function PerformanceSection() {
 
   return (
     <div ref={containerRef}>
-
       {/* ══════════════════════════════════════════
           SECTION 1 — Heading
       ══════════════════════════════════════════ */}
       <section className="bg-[#F5EFE8] overflow-hidden pt-10 pb-8 px-5 md:pt-14 md:pb-10 md:px-6">
         <div className="w-full md:max-w-[1100px] md:mx-auto">
           <div className="text-center max-w-[680px] mx-auto">
-
             {/* Eyebrow */}
             <div className="flex items-center justify-center gap-3 mb-5">
               <div
@@ -218,17 +241,24 @@ function PerformanceSection() {
 
             {/* Heading */}
             <h2 className="font-display text-[30px] sm:text-[38px] md:text-[48px] font-semibold leading-tight text-black">
-              {["Designed", "for", "Performance", "&", "Gathering"].map((word, i) => (
-                <span key={i} className="inline-block overflow-hidden mr-[0.28em] last:mr-0">
-                  <span className="perf-heading-word inline-block">{word}</span>
-                </span>
-              ))}
+              {["Designed", "for", "Performance", "&", "Gathering"].map(
+                (word, i) => (
+                  <span
+                    key={i}
+                    className="inline-block overflow-hidden mr-[0.28em] last:mr-0"
+                  >
+                    <span className="perf-heading-word inline-block">
+                      {word}
+                    </span>
+                  </span>
+                ),
+              )}
             </h2>
 
             <p className="font-rethink perf-subtext mt-5 text-[14.5px] md:text-[15.5px] text-black leading-relaxed max-w-[540px] mx-auto">
-              Built as a flagship infrastructure milestone within the ERAM ecosystem, the Arena
-              represents the Trust's expanding vision — where structured development meets
-              public-scale possibility.
+              Built as a flagship infrastructure milestone within the ERAM
+              ecosystem, the Arena represents the Trust's expanding vision —
+              where structured development meets public-scale possibility.
             </p>
           </div>
         </div>
@@ -271,7 +301,7 @@ function PerformanceSection() {
           <div
             className="relative"
             style={{
-              width:  "clamp(300px, 52vw, 500px)",
+              width: "clamp(300px, 52vw, 500px)",
               height: "clamp(480px, 62vw, 600px)",
             }}
           >
@@ -290,12 +320,15 @@ function PerformanceSection() {
                   }}
                 >
                   <div className="relative w-full h-full flex flex-col p-6 sm:p-8 md:p-9">
-
                     {/* ── Row 1: number + icon ── */}
                     <div className="flex items-center justify-between mb-5">
                       <span
                         className="font-mono tracking-[0.18em]"
-                        style={{ fontSize: "clamp(10px, 1.1vw, 11px)", color: text, opacity: 0.35 }}
+                        style={{
+                          fontSize: "clamp(10px, 1.1vw, 11px)",
+                          color: text,
+                          opacity: 0.35,
+                        }}
                       >
                         {card.no} / 04
                       </span>
@@ -315,11 +348,11 @@ function PerformanceSection() {
                     <h3
                       className="font-black uppercase"
                       style={{
-                        fontSize:      "clamp(22px, 4.2vw, 42px)",
-                        lineHeight:    1.0,
+                        fontSize: "clamp(22px, 4.2vw, 42px)",
+                        lineHeight: 1.0,
                         letterSpacing: "-0.025em",
-                        whiteSpace:    "pre-line",
-                        color:         text,
+                        whiteSpace: "pre-line",
+                        color: text,
                       }}
                     >
                       {card.title}
@@ -336,8 +369,8 @@ function PerformanceSection() {
                       className="font-rethink leading-relaxed flex-shrink-0"
                       style={{
                         fontSize: "clamp(14px, 1.35vw, 13px)",
-                        color:    text,
-                        opacity:  0.55,
+                        color: text,
+                        opacity: 0.55,
                         maxWidth: "90%",
                       }}
                     >
@@ -355,17 +388,19 @@ function PerformanceSection() {
                             key={label}
                             className="flex items-center justify-between"
                             style={{
-                              borderBottom: idx < card.labels.length - 1
-                                ? `1px dashed rgba(26,16,11,0.12)`
-                                : "none",
-                              paddingBottom: idx < card.labels.length - 1 ? "6px" : "0",
+                              borderBottom:
+                                idx < card.labels.length - 1
+                                  ? `1px dashed rgba(26,16,11,0.12)`
+                                  : "none",
+                              paddingBottom:
+                                idx < card.labels.length - 1 ? "6px" : "0",
                             }}
                           >
                             <span
                               style={{
                                 fontSize: "clamp(10px, 1.1vw, 11px)",
-                                color:    text,
-                                opacity:  0.4,
+                                color: text,
+                                opacity: 0.4,
                                 fontVariantNumeric: "tabular-nums",
                               }}
                             >
@@ -375,8 +410,8 @@ function PerformanceSection() {
                               className="font-semibold"
                               style={{
                                 fontSize: "clamp(10px, 1.1vw, 11px)",
-                                color:    text,
-                                opacity:  0.85,
+                                color: text,
+                                opacity: 0.85,
                                 textAlign: "right",
                               }}
                             >
@@ -386,7 +421,6 @@ function PerformanceSection() {
                         ))}
                       </div>
                     </div>
-
                   </div>
                 </div>
               );

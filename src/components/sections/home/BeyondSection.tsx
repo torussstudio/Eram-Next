@@ -492,8 +492,8 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
       {/* =========================
           CONTENT
       ========================= */}
-    <div
-  className="
+      <div
+        className="
     relative
     z-[3]
 
@@ -508,8 +508,7 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
     max-[640px]:px-[20px]
     max-[640px]:py-[18px]
   "
->
-
+      >
         <div>
           {/* title */}
           <div

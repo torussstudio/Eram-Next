@@ -156,27 +156,25 @@ const PillarHeader = ({
         <div className="flex items-center gap-6 mt-2">
           <span className="font-display text-[48px] text-black/10">{num}</span>
           <div>
-            <h2 className="font-display text-[32px]  leading-[1.2]">
-              {title}
-            </h2>
+            <h2 className="font-display text-[32px]  leading-[1.2]">{title}</h2>
             <p className="font-rethink text-[14.5px] text-black/60 mt-1">
               {subtitle}
             </p>
           </div>
         </div>
       </div>
-     <button
-  onClick={onClick}
-  className="mt-[18px] text-[58px] cursor-pointer select-none"
->
-  <span
-    className={`inline-block transition-all duration-300 ${
-      active ? "text-black rotate-45" : "text-black/10 rotate-0"
-    }`}
-  >
-    +
-  </span>
-</button>
+      <button
+        onClick={onClick}
+        className="mt-[18px] text-[58px] cursor-pointer select-none"
+      >
+        <span
+          className={`inline-block transition-all duration-300 ${
+            active ? "text-black rotate-45" : "text-black/10 rotate-0"
+          }`}
+        >
+          +
+        </span>
+      </button>
     </div>
     <div className="mt-5 border-t border-black/10" />
   </div>
@@ -321,7 +319,7 @@ const panels = [
           variant="dark"
           label="PALAKKAD DISTRICT"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="WHO-Certified Teacher Training Workshops"
           body="Recognising that institutional quality is sustained through faculty excellence, the Trust implemented structured teacher development programs including WHO-certified workshops — institutionalised as continuous professional development, not periodic compliance."
           list={[
@@ -342,7 +340,7 @@ const panels = [
           variant="red"
           label="4 YEARS · 30 PANCHAYATS"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="30 Medical Camps & 4,000+ Cataract Surgeries"
           meta={["Coverage: Ottapalam, Kongad, Nellyampathy Tribal Regions"]}
           body="In collaboration with Lions Club International, the Trust conducted 30 medical camps and completed more than 4,000 cataract surgeries across underserved communities — combining outreach with surgical follow-ups to ensure continuity of care."
@@ -352,7 +350,7 @@ const panels = [
           variant="white"
           label="2015 · MANKARA"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Maryumma Memorial Children's Clinic"
           meta={["Location: Mankara Government Hospital, Palakkad"]}
           body="A permanent children's clinic established within the Government Hospital, integrating private CSR investment into public health infrastructure with a child-friendly environment."
@@ -366,7 +364,7 @@ const panels = [
           variant="white"
           label="CRITICAL CARE ACCESS"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Dialysis Support Initiative"
           body="Addressing the growing prevalence of kidney-related illness, particularly in regions affected by sanitation challenges, the Trust provided dialysis machines and extended financial aid to patients requiring critical renal care — bridging access to life-sustaining treatment for economically disadvantaged families."
         />
@@ -375,7 +373,7 @@ const panels = [
         <Card
           variant="dark"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           label="PUBLIC SANITATION INNOVATION"
           title="eToilet – Sustainable Sanitation"
           body={[
@@ -387,7 +385,7 @@ const panels = [
           variant="white"
           label="5 PANCHAYATS · PALAKKAD"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Financial Aid for 242 BPL Families – Toilet Construction"
           meta={[
             "Impact: 242 toilets for BPL families",
@@ -410,7 +408,7 @@ const panels = [
         <Card
           variant="red"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           label="PERMANENT SHELTER"
           title="Housing Initiative – Shelter for the Homeless"
           meta={[
@@ -424,7 +422,7 @@ const panels = [
           variant="white"
           label="2013 · REPATRIATION"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Nitaqat Charter Flight Initiative"
           meta={[
             "Impact — 100+ Flight Tickets Sponsored",
@@ -438,7 +436,7 @@ const panels = [
           variant="dark"
           label="NORKA COLLABORATION"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Swapnasafalyam – Repatriation & Reintegration Support"
           body={[
             "For Malayali expatriates who had completed prison sentences abroad but lacked the means to return, the Trust partnered with NORKA to sponsor return travel and coordinate with authorities for safe, dignified repatriation.",
@@ -449,7 +447,7 @@ const panels = [
           variant="white"
           label="REHABILITATION SUPPORT"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Individual Rehabilitation & Livelihood Support"
           body={[
             "In cases of severe physical trauma resulting in limb loss, the Trust sponsored advanced prosthetic solutions — enabling individuals to regain mobility, continue education, and restore independence.",
@@ -468,7 +466,7 @@ const panels = [
           variant="red"
           label="NATIONAL SCHOOLS GAMES"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Athlete Support Program"
           meta={["Support — 36+ Athletes Supported"]}
           body="International-quality sports kits distributed to more than 36 athletes who qualified for the National Schools Games — reducing resource barriers that hinder competitive progression."
@@ -487,7 +485,7 @@ const panels = [
           variant="white"
           label="PROFESSIONAL SPORTS"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Support for Professional Athletes"
           body="The Trust extended support to Diljith T.S., Indian motor racing and karting champion — assisting his participation in competitive circuits and strengthening pathways from regional talent to national-level professional sport."
         />
@@ -495,7 +493,7 @@ const panels = [
           variant="dark"
           label="2015 · 2026 MILESTONE"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="EASE & The ERAM Sports Arena"
           body={[
             "In 2015, the ERAM Academy for Sports & Excellence (EASE) was established to integrate sports training within formal academics. In 2026, the Trust advances this vision further with the development of the ERAM Sports Arena.",
@@ -551,7 +549,7 @@ const panels = [
           variant="red"
           label="PALAKKAD REGION"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Drinking Water Infrastructure"
           body="A structured, end-to-end water infrastructure program ensuring sustained access to safe drinking water across rural Palakkad — from source creation to household-level connectivity."
           list={[
@@ -569,7 +567,7 @@ const panels = [
           variant="white"
           label="PALAKKAD REGION"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Multiple Check Dams Constructed"
           meta={["Impact — Strengthened water retention"]}
           body={[
@@ -589,7 +587,7 @@ const panels = [
           variant="white"
           label="PALAKKAD DISTRICT"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Ambulance Sponsorship Initiative"
           body={[
             "The Trust sponsored ambulances for deployment across panchayats and NGOs in Palakkad, strengthening emergency response systems and reducing response time to tertiary care facilities.",
@@ -600,7 +598,7 @@ const panels = [
           variant="red"
           label="KERALA ODF INITIATIVE"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Toilet Construction Aid – Sanitation Infrastructure"
           meta={[
             "Families — 242 BPL families supported",
@@ -613,7 +611,7 @@ const panels = [
           variant="dark"
           label="SOCIAL COHESION"
           image="/images/trust/workshop.jpg"
-  imageAlt="Teacher Training"
+          imageAlt="Teacher Training"
           title="Interreligious Harmony & Social Cohesion Initiatives"
           meta={["Format — Multi-community engagement platforms"]}
           body={[

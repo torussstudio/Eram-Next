@@ -12,10 +12,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const supportItems = [
-  ["Structured lesson execution aligned to State syllabus", "Disciplined early-stage supervision daily"],
-  ["Continuous formative assessment practice","Regular progressive evaluation cycles"],
-  ["Continuous classroom monitoring","Structured attendance supervision"],
-  ["Parent communication coordination","Teacher-guided foundational activity sessions"],
+  [
+    "Structured lesson execution aligned to State syllabus",
+    "Disciplined early-stage supervision daily",
+  ],
+  [
+    "Continuous formative assessment practice",
+    "Regular progressive evaluation cycles",
+  ],
+  ["Continuous classroom monitoring", "Structured attendance supervision"],
+  [
+    "Parent communication coordination",
+    "Teacher-guided foundational activity sessions",
+  ],
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -177,7 +186,7 @@ export default function AcademicStreams() {
       ref={sectionRef}
       className={`${shell} bg-[#F5EFE8] relative overflow-hidden`}
     >
-     <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
           {/* ══ LEFT COLUMN ═════════════════════════════════════ */}
           <div className="flex flex-col mt-5 lg:mt-11">
@@ -245,7 +254,7 @@ export default function AcademicStreams() {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
 
             {/* Static Content */}
-             <div
+            <div
               className="
     absolute bottom-0 left-0 w-full p-8 md:p-10 z-20
     transition-all duration-700
@@ -257,8 +266,7 @@ export default function AcademicStreams() {
               </p>
 
               <h2 className="font-display text-white text-[42px] md:text-[56px] leading-[0.95] tracking-[-0.03em]">
-                SUNITHA .
-                A
+                SUNITHA . A
               </h2>
 
               <p className="text-[#cbbfb4] mt-4 text-[14px]">

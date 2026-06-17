@@ -93,18 +93,40 @@ function AnimatedDivider({ dividerRef }: AnimatedDividerProps) {
     >
       <line
         className="arm-left"
-        x1="550" y1="12" x2="0" y2="12"
-        stroke="rgba(139,30,30,0.2)" strokeWidth="0.8"
-        strokeDasharray="550" strokeDashoffset="550"
+        x1="550"
+        y1="12"
+        x2="0"
+        y2="12"
+        stroke="rgba(139,30,30,0.2)"
+        strokeWidth="0.8"
+        strokeDasharray="550"
+        strokeDashoffset="550"
       />
       <line
         className="arm-right"
-        x1="550" y1="12" x2="1100" y2="12"
-        stroke="rgba(139,30,30,0.2)" strokeWidth="0.8"
-        strokeDasharray="550" strokeDashoffset="550"
+        x1="550"
+        y1="12"
+        x2="1100"
+        y2="12"
+        stroke="rgba(139,30,30,0.2)"
+        strokeWidth="0.8"
+        strokeDasharray="550"
+        strokeDashoffset="550"
       />
-      <circle className="dot-left"  cx="530" cy="12" r="1.5" fill="rgba(139,30,30,0.38)" />
-      <circle className="dot-right" cx="570" cy="12" r="1.5" fill="rgba(139,30,30,0.38)" />
+      <circle
+        className="dot-left"
+        cx="530"
+        cy="12"
+        r="1.5"
+        fill="rgba(139,30,30,0.38)"
+      />
+      <circle
+        className="dot-right"
+        cx="570"
+        cy="12"
+        r="1.5"
+        fill="rgba(139,30,30,0.38)"
+      />
       <circle className="dot-center" cx="550" cy="12" r="3.5" fill="#8B1E1E" />
     </svg>
   );
@@ -117,26 +139,28 @@ const PARAGRAPHS = [
 ];
 
 export default function CommitmentSection() {
-  const sectionRef  = useRef<HTMLElement>(null);
-  const labelRef    = useRef<HTMLDivElement>(null);
-  const headingRef  = useRef<HTMLHeadingElement>(null);
-  const quoteRef    = useRef<HTMLParagraphElement>(null);
-  const dividerRef  = useRef<SVGSVGElement>(null);
-  const para0Ref    = useRef<HTMLParagraphElement>(null);
-  const para1Ref    = useRef<HTMLParagraphElement>(null);
-  const para2Ref    = useRef<HTMLParagraphElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const quoteRef = useRef<HTMLParagraphElement>(null);
+  const dividerRef = useRef<SVGSVGElement>(null);
+  const para0Ref = useRef<HTMLParagraphElement>(null);
+  const para1Ref = useRef<HTMLParagraphElement>(null);
+  const para2Ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-
       if (labelRef.current) {
         gsap.fromTo(
           labelRef.current,
           { opacity: 0, x: -16 },
           {
-            opacity: 1, x: 0, duration: 0.7, ease: "power3.out",
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power3.out",
             scrollTrigger: { trigger: labelRef.current, start: "top 88%" },
-          }
+          },
         );
       }
 
@@ -147,9 +171,13 @@ export default function CommitmentSection() {
             words,
             { y: "115%", opacity: 0 },
             {
-              y: "0%", opacity: 1, duration: 1.05, ease: "expo.out", stagger: 0.055,
+              y: "0%",
+              opacity: 1,
+              duration: 1.05,
+              ease: "expo.out",
+              stagger: 0.055,
               scrollTrigger: { trigger: headingRef.current, start: "top 84%" },
-            }
+            },
           );
         }
       }
@@ -159,21 +187,33 @@ export default function CommitmentSection() {
           quoteRef.current,
           { opacity: 0, x: -12 },
           {
-            opacity: 1, x: 0, duration: 0.8, ease: "power3.out", delay: 0.1,
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: 0.1,
             scrollTrigger: { trigger: quoteRef.current, start: "top 88%" },
-          }
+          },
         );
       }
 
-      const paras = [para0Ref.current, para1Ref.current, para2Ref.current].filter(Boolean);
+      const paras = [
+        para0Ref.current,
+        para1Ref.current,
+        para2Ref.current,
+      ].filter(Boolean);
       if (paras.length) {
         gsap.fromTo(
           paras,
           { opacity: 0, y: 28 },
           {
-            opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.18,
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            stagger: 0.18,
             scrollTrigger: { trigger: paras[0], start: "top 86%" },
-          }
+          },
         );
       }
 
@@ -184,22 +224,27 @@ export default function CommitmentSection() {
         tl.fromTo(
           dividerRef.current.querySelectorAll(".arm-left, .arm-right"),
           { strokeDashoffset: 550 },
-          { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }
+          { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" },
         )
-        .fromTo(
-          dividerRef.current.querySelectorAll(".dot-left, .dot-right"),
-          { scale: 0, opacity: 0, transformOrigin: "center" },
-          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)", stagger: 0.08 },
-          "-=0.3"
-        )
-        .fromTo(
-          dividerRef.current.querySelector(".dot-center"),
-          { scale: 0, opacity: 0, transformOrigin: "center" },
-          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" },
-          "-=0.2"
-        );
+          .fromTo(
+            dividerRef.current.querySelectorAll(".dot-left, .dot-right"),
+            { scale: 0, opacity: 0, transformOrigin: "center" },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.5,
+              ease: "back.out(1.7)",
+              stagger: 0.08,
+            },
+            "-=0.3",
+          )
+          .fromTo(
+            dividerRef.current.querySelector(".dot-center"),
+            { scale: 0, opacity: 0, transformOrigin: "center" },
+            { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" },
+            "-=0.2",
+          );
       }
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -213,8 +258,14 @@ export default function CommitmentSection() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,400px),1fr))] gap-[clamp(2rem,5vw,5rem)]">
           <div>
             <SectionLabel labelRef={labelRef} />
-            <InkHeading text="Our Commitment To Structured Responsibility" headingRef={headingRef} />
-            <TypewriterQuote text='"Commitment Beyond Institutions"' quoteRef={quoteRef} />
+            <InkHeading
+              text="Our Commitment To Structured Responsibility"
+              headingRef={headingRef}
+            />
+            <TypewriterQuote
+              text='"Commitment Beyond Institutions"'
+              quoteRef={quoteRef}
+            />
           </div>
           <div className="flex flex-col gap-6">
             {PARAGRAPHS.map((text, i) => (

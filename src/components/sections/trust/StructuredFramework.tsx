@@ -19,7 +19,7 @@ export default function StructuredFramework({
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ✅ Guard: headerRef children null check
+      // Guard: headerRef children null check
       if (headerRef.current) {
         const kids = Array.from(headerRef.current.children);
         if (kids.length) {
@@ -39,7 +39,6 @@ export default function StructuredFramework({
         }
       }
 
-    
       const scan = sectionRef.current?.querySelector(".scan-line");
       if (scan) {
         gsap.fromTo(
@@ -65,13 +64,12 @@ export default function StructuredFramework({
           stagger: { amount: 0.5 },
           clearProps: "all",
           scrollTrigger: {
-            trigger: validCells[0], 
+            trigger: validCells[0],
             start: "top 85%",
           },
         });
       }
 
-      
       if (noteRef.current) {
         gsap.fromTo(
           noteRef.current,
@@ -94,35 +92,32 @@ export default function StructuredFramework({
   }, []);
 
   const handleCardClick = (id: string, index: number) => {
-  if (setActive) {
-    setActive(index);
-  }
+    if (setActive) {
+      setActive(index);
+    }
 
-  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const el = document.getElementById(id);
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id);
 
-      if (!el) return;
+        if (!el) return;
 
-      const offset = 90;
+        const offset = 90;
 
-      const top =
-        el.getBoundingClientRect().top +
-        window.scrollY -
-        offset;
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
 
-      window.scrollTo({
-        top,
-        behavior: "smooth",
+        window.scrollTo({
+          top,
+          behavior: "smooth",
+        });
       });
     });
-  });
-};
+  };
 
   return (
     <section
       ref={sectionRef}
-       className="bg-[#0f0f0f] text-white py-16 overflow-hidden"
+      className="bg-[#0f0f0f] text-white py-16 overflow-hidden"
     >
       <div className="max-w-[1120px] mx-auto px-[clamp(16px,5vw,40px)]">
         {/* ── HEADER ── */}

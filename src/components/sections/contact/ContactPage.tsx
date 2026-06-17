@@ -315,29 +315,29 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.65fr] gap-5 items-start">
           {/* ── Info card ── */}
           <div ref={infoCardRef} className="md:mt-0 lg:mt-22">
-  <div className="bg-black rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
-    {/* Top section — "Get in Touch" overlaid on dark card header */}
-    <div>
-      <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-white mb-4">
-        Get in
-        <br />
-        Touch
-      </p>
-      <p className="text-[13.5px] font-rethink leading-[1.75] text-white/55 max-w-xs">
-        For admissions, institutional enquiries, partnerships, or
-        sports Arena bookings, our team will guide you to the right
-        department.
-      </p>
-    </div>
+            <div className="bg-black rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
+              {/* Top section — "Get in Touch" overlaid on dark card header */}
+              <div>
+                <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-white mb-4">
+                  Get in
+                  <br />
+                  Touch
+                </p>
+                <p className="text-[13.5px] font-rethink leading-[1.75] text-white/55 max-w-xs">
+                  For admissions, institutional enquiries, partnerships, or
+                  sports Arena bookings, our team will guide you to the right
+                  department.
+                </p>
+              </div>
 
-    {/* Contact items */}
-    <div className="flex flex-col gap-4 sm:gap-5">
-      {CONTACT_ITEMS.map((item) => (
-        <ContactItem key={item.label} {...item} />
-      ))}
-    </div>
-  </div>
-</div>
+              {/* Contact items */}
+              <div className="flex flex-col gap-4 sm:gap-5">
+                {CONTACT_ITEMS.map((item) => (
+                  <ContactItem key={item.label} {...item} />
+                ))}
+              </div>
+            </div>
+          </div>
 
           {/* ── Form card ── */}
           <div ref={formCardRef}>

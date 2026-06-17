@@ -39,16 +39,16 @@ const milestones = [
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Journey() {
-  const sectionRef  = useRef<HTMLElement>(null);
-  const badgeRef    = useRef<HTMLDivElement>(null);
-  const headingRef  = useRef<HTMLHeadingElement>(null);
-  const dividerRef  = useRef<HTMLDivElement>(null);
-  const parasRef    = useRef<HTMLDivElement>(null);
-  const quoteRef    = useRef<HTMLQuoteElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
+  const parasRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLQuoteElement>(null);
   const lastParaRef = useRef<HTMLParagraphElement>(null);
   const subLabelRef = useRef<HTMLParagraphElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const spineRef    = useRef<HTMLDivElement>(null); // ← single absolute spine
+  const spineRef = useRef<HTMLDivElement>(null); // ← single absolute spine
 
   useEffect(() => {
     let resizeTimer: NodeJS.Timeout | number | undefined;
@@ -65,249 +65,314 @@ export default function Journey() {
       window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimer);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Extracted so both useEffects can call it
   const recalcSpine = () => {
-    const spine    = spineRef.current;
+    const spine = spineRef.current;
     const timeline = timelineRef.current;
     if (!spine || !timeline) return;
-    const allDots  = [...timeline.querySelectorAll(".ms-dot")];
+    const allDots = [...timeline.querySelectorAll(".ms-dot")];
     const firstDot = allDots[0];
-    const lastDot  = allDots[allDots.length - 1];
+    const lastDot = allDots[allDots.length - 1];
     if (!firstDot || !lastDot) return;
-    const tlRect    = timeline.getBoundingClientRect();
+    const tlRect = timeline.getBoundingClientRect();
     const firstRect = firstDot.getBoundingClientRect();
-    const lastRect  = lastDot.getBoundingClientRect();
-    const spineLeft      = firstRect.left  - tlRect.left  + firstRect.width  / 2;
-    const spineTopOffset = firstRect.top   - tlRect.top   + firstRect.height / 2;
+    const lastRect = lastDot.getBoundingClientRect();
+    const spineLeft = firstRect.left - tlRect.left + firstRect.width / 2;
+    const spineTopOffset = firstRect.top - tlRect.top + firstRect.height / 2;
     gsap.set(spine, { left: spineLeft, top: spineTopOffset, xPercent: -50 });
   };
 
-  useGSAP(() => {
-    const ease = "power3.out";
+  useGSAP(
+    () => {
+      const ease = "power3.out";
 
-    const st = (trigger: any, start = "top 82%") => ({
-      trigger,
-      start,
-      toggleActions: "play none none none",
-    });
+      const st = (trigger: any, start = "top 82%") => ({
+        trigger,
+        start,
+        toggleActions: "play none none none",
+      });
 
-    /* ── 1. LEFT COLUMN ── */
-    if (badgeRef.current) {
-      gsap.fromTo(badgeRef.current,
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.7, ease, scrollTrigger: st(badgeRef.current) }
-      );
-    }
-
-    if (headingRef.current) {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease,
-          scrollTrigger: st(headingRef.current, "top 85%"),
-        }
-      );
-    }
-
-    if (dividerRef.current) {
-      gsap.fromTo(dividerRef.current,
-        { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 0.6, ease: "power2.inOut",
-          scrollTrigger: st(dividerRef.current) }
-      );
-    }
-
-    if (parasRef.current) {
-      const paraItems = parasRef.current.querySelectorAll("p");
-      if (paraItems.length) {
-        gsap.fromTo(paraItems,
-          { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: 0.75, stagger: 0.18, ease,
-            scrollTrigger: st(parasRef.current) }
+      /* ── 1. LEFT COLUMN ── */
+      if (badgeRef.current) {
+        gsap.fromTo(
+          badgeRef.current,
+          { opacity: 0, x: -20 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease,
+            scrollTrigger: st(badgeRef.current),
+          },
         );
       }
-    }
 
-    if (quoteRef.current) {
-      gsap.fromTo(quoteRef.current,
-        { opacity: 0, x: -30, rotateZ: -0.6 },
-        { opacity: 1, x: 0, rotateZ: 0, duration: 0.9, ease,
-          scrollTrigger: st(quoteRef.current) }
-      );
-    }
-
-    if (lastParaRef.current) {
-      gsap.fromTo(lastParaRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7, ease,
-          scrollTrigger: st(lastParaRef.current) }
-      );
-    }
-
-    /* ── 2. RIGHT COLUMN sub-label ── */
-    if (subLabelRef.current) {
-      gsap.fromTo(subLabelRef.current,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.6, ease,
-          scrollTrigger: st(subLabelRef.current) }
-      );
-    }
-
-    /* ── 3. MILESTONE ROWS — year + content slide in on scroll ── */
-    if (timelineRef.current) {
-      const rows = timelineRef.current.querySelectorAll(".milestone-row");
-
-      if (rows.length) {
-        rows.forEach((row) => {
-          const year = row.querySelector(".ms-year");
-          const content = row.querySelector(".ms-content");
-          const dot = row.querySelector(".ms-dot");
-
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: row,
-              start: "top 84%",
-              toggleActions: "play none none none",
-            },
-          })
-          .fromTo(
-            year,
-            { opacity: 0, x: -14 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.45,
-              ease,
-            }
-          )
-          .fromTo(
-            dot,
-            {
-              opacity: 0,
-              scale: 0,
-              transformOrigin: "center center",
-            },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.35,
-              ease: "back.out(1.4)",
-            },
-            "-=0.2"
-          )
-          .fromTo(
-            content,
-            { opacity: 0, x: 18 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.5,
-              ease,
-            },
-            "-=0.2"
-          );
-        });
-      }
-    }
-
-    /* ── 4. SPINE — first dot center → last dot center ── */
-    const spine    = spineRef.current;
-    const timeline = timelineRef.current;
-    if (spine && timeline) {
-      const allDots  = [...timeline.querySelectorAll(".ms-dot")];
-      const firstDot = allDots[0];
-      const lastDot  = allDots[allDots.length - 1];
-
-      if (firstDot && lastDot) {
-        const tlRect    = timeline.getBoundingClientRect();
-        const firstRect = firstDot.getBoundingClientRect();
-        const lastRect  = lastDot.getBoundingClientRect();
-
-        const spineLeft      = firstRect.left - tlRect.left + firstRect.width / 2;
-        const spineTopOffset = firstRect.top  - tlRect.top  + firstRect.height / 2;
-        const spineFullH     = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
-
-        gsap.set(spine, { left: spineLeft, top: spineTopOffset, height: 0, xPercent: -50 });
-        gsap.set(spine, {
-          left: spineLeft,
-          top: spineTopOffset,
-          height: spineFullH,
-          scaleY: 0,
-          transformOrigin: "top center",
-          xPercent: -50,
-        });
-
-        gsap.to(spine, {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: timeline,
-            start: "top 75%",
-            end: "bottom 70%",
-            scrub: 0.6,
+      if (headingRef.current) {
+        gsap.fromTo(
+          headingRef.current,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease,
+            scrollTrigger: st(headingRef.current, "top 85%"),
           },
-        });
+        );
       }
-    }
-  }, { scope: sectionRef });
+
+      if (dividerRef.current) {
+        gsap.fromTo(
+          dividerRef.current,
+          { scaleX: 0, transformOrigin: "left center" },
+          {
+            scaleX: 1,
+            duration: 0.6,
+            ease: "power2.inOut",
+            scrollTrigger: st(dividerRef.current),
+          },
+        );
+      }
+
+      if (parasRef.current) {
+        const paraItems = parasRef.current.querySelectorAll("p");
+        if (paraItems.length) {
+          gsap.fromTo(
+            paraItems,
+            { opacity: 0, y: 22 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              stagger: 0.18,
+              ease,
+              scrollTrigger: st(parasRef.current),
+            },
+          );
+        }
+      }
+
+      if (quoteRef.current) {
+        gsap.fromTo(
+          quoteRef.current,
+          { opacity: 0, x: -30, rotateZ: -0.6 },
+          {
+            opacity: 1,
+            x: 0,
+            rotateZ: 0,
+            duration: 0.9,
+            ease,
+            scrollTrigger: st(quoteRef.current),
+          },
+        );
+      }
+
+      if (lastParaRef.current) {
+        gsap.fromTo(
+          lastParaRef.current,
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease,
+            scrollTrigger: st(lastParaRef.current),
+          },
+        );
+      }
+
+      /* ── 2. RIGHT COLUMN sub-label ── */
+      if (subLabelRef.current) {
+        gsap.fromTo(
+          subLabelRef.current,
+          { opacity: 0, y: -10 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease,
+            scrollTrigger: st(subLabelRef.current),
+          },
+        );
+      }
+
+      /* ── 3. MILESTONE ROWS — year + content slide in on scroll ── */
+      if (timelineRef.current) {
+        const rows = timelineRef.current.querySelectorAll(".milestone-row");
+
+        if (rows.length) {
+          rows.forEach((row) => {
+            const year = row.querySelector(".ms-year");
+            const content = row.querySelector(".ms-content");
+            const dot = row.querySelector(".ms-dot");
+
+            gsap
+              .timeline({
+                scrollTrigger: {
+                  trigger: row,
+                  start: "top 84%",
+                  toggleActions: "play none none none",
+                },
+              })
+              .fromTo(
+                year,
+                { opacity: 0, x: -14 },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.45,
+                  ease,
+                },
+              )
+              .fromTo(
+                dot,
+                {
+                  opacity: 0,
+                  scale: 0,
+                  transformOrigin: "center center",
+                },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.35,
+                  ease: "back.out(1.4)",
+                },
+                "-=0.2",
+              )
+              .fromTo(
+                content,
+                { opacity: 0, x: 18 },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.5,
+                  ease,
+                },
+                "-=0.2",
+              );
+          });
+        }
+      }
+
+      /* ── 4. SPINE — first dot center → last dot center ── */
+      const spine = spineRef.current;
+      const timeline = timelineRef.current;
+      if (spine && timeline) {
+        const allDots = [...timeline.querySelectorAll(".ms-dot")];
+        const firstDot = allDots[0];
+        const lastDot = allDots[allDots.length - 1];
+
+        if (firstDot && lastDot) {
+          const tlRect = timeline.getBoundingClientRect();
+          const firstRect = firstDot.getBoundingClientRect();
+          const lastRect = lastDot.getBoundingClientRect();
+
+          const spineLeft = firstRect.left - tlRect.left + firstRect.width / 2;
+          const spineTopOffset =
+            firstRect.top - tlRect.top + firstRect.height / 2;
+          const spineFullH =
+            lastRect.top +
+            lastRect.height / 2 -
+            (firstRect.top + firstRect.height / 2);
+
+          gsap.set(spine, {
+            left: spineLeft,
+            top: spineTopOffset,
+            height: 0,
+            xPercent: -50,
+          });
+          gsap.set(spine, {
+            left: spineLeft,
+            top: spineTopOffset,
+            height: spineFullH,
+            scaleY: 0,
+            transformOrigin: "top center",
+            xPercent: -50,
+          });
+
+          gsap.to(spine, {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: timeline,
+              start: "top 75%",
+              end: "bottom 70%",
+              scrub: 0.6,
+            },
+          });
+        }
+      }
+    },
+    { scope: sectionRef },
+  );
 
   return (
-   <section ref={sectionRef} className={`${shell} bg-[#F5EFE8]`}>
-     <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
+    <section ref={sectionRef} className={`${shell} bg-[#F5EFE8]`}>
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 xl:gap-20">
-
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col">
-            <div ref={badgeRef} className="flex items-center gap-3 mb-8 md:mb-10">
+            <div
+              ref={badgeRef}
+              className="flex items-center gap-3 mb-8 md:mb-10"
+            >
               <p className="font-rethink text-[10px] sm:text-[11px] tracking-[0.28em] text-[#ae1431] uppercase ">
                 Our Journey
               </p>
             </div>
 
-          <h2
-  ref={headingRef}
-  className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
+            <h2
+              ref={headingRef}
+              className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
   text-[32px] sm:text-[38px] md:text-[44px] lg:text-[50px] xl:text-[56px]
   max-w-none"
->
-  A Journey of Consistent Growth and Discipline
-</h2>
+            >
+              A Journey of Consistent Growth and Discipline
+            </h2>
 
-            <div ref={dividerRef} className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8" />
+            <div
+              ref={dividerRef}
+              className="w-12 h-[2px] bg-[#ae1431] mt-6 mb-8"
+            />
 
-            <div ref={parasRef} className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
+            <div
+              ref={parasRef}
+              className="font-rethink space-y-5 text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]"
+            >
               <p>
-               Established in 2004, MMPS was built to provide structured High School education
-                under the State syllabus. Over time, it evolved into one of the largest
-                 and most disciplined High School institutions in the region,
-                  today serving 750+ students
+                Established in 2004, MMPS was built to provide structured High
+                School education under the State syllabus. Over time, it evolved
+                into one of the largest and most disciplined High School
+                institutions in the region, today serving 750+ students
               </p>
               <p>
-                Over the years, the school has maintained 14 consecutive
-                 years of 100% result in the State Board examination,
-                  reflecting disciplined academic monitoring and
-                   structured execution.
+                Over the years, the school has maintained 14 consecutive years
+                of 100% result in the State Board examination, reflecting
+                disciplined academic monitoring and structured execution.
               </p>
             </div>
 
-            <blockquote ref={quoteRef} className="border-l-[3px] border-[#ae1431] pl-4 my-6">
+            <blockquote
+              ref={quoteRef}
+              className="border-l-[3px] border-[#ae1431] pl-4 my-6"
+            >
               <p className="font-rethink font-bold text-[#ae1431] text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65]">
-                "The journey of MMPS has never been limited to board results alone."
+                "The journey of MMPS has never been limited to board results
+                alone."
               </p>
             </blockquote>
 
-            <p ref={lastParaRef} className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]">
-              Parallel to academic consistency, the institution has steadily built a culture
-               of competitive exposure — especially in sports, where students are identified 
-               early, trained systematically, and encouraged to participate beyond
-               campus boundaries.
+            <p
+              ref={lastParaRef}
+              className="font-rethink text-[14.5px] md:text-[15px] leading-[1.85] text-[#3d3128]"
+            >
+              Parallel to academic consistency, the institution has steadily
+              built a culture of competitive exposure — especially in sports,
+              where students are identified early, trained systematically, and
+              encouraged to participate beyond campus boundaries.
             </p>
           </div>
 
@@ -322,7 +387,6 @@ export default function Journey() {
 
             {/* Timeline — relative container so the spine can be absolutely positioned */}
             <div ref={timelineRef} className="flex flex-col relative">
-
               <div
                 ref={spineRef}
                 className="absolute w-[1px] bg-[#ae1431]"
@@ -332,7 +396,6 @@ export default function Journey() {
 
               {milestones.map((item, i) => (
                 <div key={i} className="milestone-row flex min-h-0 relative">
-
                   {/* Year */}
                   <div className="ms-year w-[72px] flex-shrink-0 pt-[2px]">
                     <span className="text-[12px] sm:text-[13px] text-[#8a7d6e] tracking-[0.03em] tabular-nums">

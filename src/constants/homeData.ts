@@ -104,7 +104,7 @@ export const facultySystems: string[] = [
   "Observation<br/>based<br/>evaluation",
   "SQAAF /<br/>quality<br/>frameworks",
   "Improvement Committees",
-  "Curriculum alignment"
+  "Curriculum alignment",
 ];
 
 export const beyondCards: BeyondCard[] = [

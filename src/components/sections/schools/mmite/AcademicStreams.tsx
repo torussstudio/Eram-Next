@@ -177,7 +177,7 @@ export default function AcademicStreams() {
       ref={sectionRef}
       className={`${shell} bg-[#F5EFE8] relative overflow-hidden`}
     >
-     <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-8 md:pt-10 lg:pt-12 pb-16 md:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
           {/* ══ LEFT COLUMN ═════════════════════════════════════ */}
           <div className="flex flex-col mt-5 lg:mt-11">
@@ -257,8 +257,7 @@ export default function AcademicStreams() {
               </p>
 
               <h2 className="font-display text-white text-[42px] md:text-[56px] leading-[0.95] tracking-[-0.03em]">
-                VIGI
-                S
+                VIGI S
               </h2>
 
               <p className="text-[#e4dad2] mt-4 text-[14px]">
@@ -267,7 +266,7 @@ export default function AcademicStreams() {
             </div>
 
             {/* Hover Reveal */}
-           <div className="absolute inset-0 flex items-end p-8 md:p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 pointer-events-none">
+            <div className="absolute inset-0 flex items-end p-8 md:p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 pointer-events-none">
               <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-500">
                 <div className="w-12 h-[2px] bg-[#ae1431] mb-6" />
 

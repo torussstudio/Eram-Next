@@ -3,12 +3,11 @@
 export default function AnchoredSection() {
   return (
     <section className="bg-[#0f0f0f] text-white py-[80px] md:py-[110px] px-[16px] sm:px-[20px] md:px-[28px]">
-
       {/* OUTER CONTAINER */}
       <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
-
         {/* INNER */}
-        <div className="
+        <div
+          className="
           max-w-[1100px] mx-auto 
           px-[16px] sm:px-[20px] md:px-[28px]
 
@@ -17,11 +16,10 @@ export default function AnchoredSection() {
 
           gap-[40px] md:gap-[80px] 
           items-start
-        ">
-
+        "
+        >
           {/* LEFT */}
           <div className="max-w-full md:max-w-[600px]">
-
             {/* LABEL */}
             <div className="flex items-center gap-3 mb-[20px] md:mb-[28px]">
               {/* <span className="w-[24px] md:w-[28px] h-[1px] bg-[#ae1431]" /> */}
@@ -31,31 +29,40 @@ export default function AnchoredSection() {
             </div>
 
             {/* TITLE */}
-          <h2 className="
+            <h2
+              className="
   font-display
   text-[18px] sm:text-[28px] md:text-[36px] lg:text-[42px]
   leading-[1.15] md:leading-[1.1]
   tracking-[-0.02em]
   mb-[18px] md:mb-[26px]
   text-[#eae6df]
-">
-  Anchored In Structured<br />
-  sports Development
-</h2>
+"
+            >
+              Anchored In Structured
+              <br />
+              sports Development
+            </h2>
 
             {/* DESC */}
-            <p className="
+            <p
+              className="
               text-[14.5px] md:text-[15.5px]
               leading-[1.8] md:leading-[1.9]
               text-[#b8b2a8]
               mb-[22px] md:mb-[28px]
               font-rethink
-            ">
-              The Arena operates in alignment with the ERAM institutional ecosystem, reinforcing the Trust's long-standing commitment to youth development. It is not a standalone facility — it is the physical expression of a broader educational philosophy.
+            "
+            >
+              The Arena operates in alignment with the ERAM institutional
+              ecosystem, reinforcing the Trust's long-standing commitment to
+              youth development. It is not a standalone facility — it is the
+              physical expression of a broader educational philosophy.
             </p>
 
             {/* QUOTE */}
-            <p className="
+            <p
+              className="
             font-rethink
             font-bold
               text-[16px] md:text-[17px]
@@ -63,8 +70,10 @@ export default function AnchoredSection() {
               mb-[24px] md:mb-[30px]
               border-l border-[#ae1431]
               pl-[14px] md:pl-[16px]
-            ">
-              “The Arena transforms training into performance, and performance into opportunity.”
+            "
+            >
+              “The Arena transforms training into performance, and performance
+              into opportunity.”
             </p>
 
             {/* LIST */}
@@ -76,17 +85,15 @@ export default function AnchoredSection() {
                 </li>
               ))}
             </ul>
-
           </div>
 
           {/* RIGHT GRID */}
           <div className="overflow-hidden border border-[#2a2a2a] rounded-[28px]">
-  <div className="grid grid-cols-2">
-
-    {cards.map((card, i) => (
-      <div
-        key={i}
-        className={`
+            <div className="grid grid-cols-2">
+              {cards.map((card, i) => (
+                <div
+                  key={i}
+                  className={`
           p-[22px] sm:p-[26px] md:p-[32px]
           min-h-[140px] sm:min-h-[160px] md:min-h-[180px]
 
@@ -103,35 +110,34 @@ export default function AnchoredSection() {
           ${i === 2 ? "rounded-bl-[28px]" : ""}
           ${i === 3 ? "rounded-br-[28px]" : ""}
         `}
-      >
-        <h3
-          className="
+                >
+                  <h3
+                    className="
             font-rethink
             text-[24px] sm:text-[28px] md:text-[34px]
             mb-[4px] md:mb-[6px]
             text-[#f1eee8]
           "
-        >
-          {card.title}
-        </h3>
+                  >
+                    {card.title}
+                  </h3>
 
-        <p
-          className="
+                  <p
+                    className="
             font-rethink
             text-[13px] md:text-[14px]
             leading-[1.5] md:leading-[1.6]
             text-[#c5beb5]
             max-w-[200px] md:max-w-[220px]
           "
-        >
-          {card.desc}
-        </p>
-      </div>
-    ))}
-
-  </div>
-</div>
-</div>
+                  >
+                    {card.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
