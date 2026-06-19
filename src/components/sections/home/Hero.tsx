@@ -9,9 +9,6 @@ import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ───────────────── Slide Data ─────────────────
-   Ithil oro slide-inum image + content maatti
-   kodukkam. Buttons ellathilum same aanu. */
 const SLIDES = [
   {
     image: "/images/slide11.avif",
@@ -25,7 +22,6 @@ const SLIDES = [
     image: "/images/slide2.avif",
     titleLine1: "Multi-Institution.",
     titleLine2: "Educational Ecosystem.",
-    // subline: "Modern campuses built for focused, future-ready learning.",
     description:
       "ERAM operates an integrated educational ecosystem that supports learners across multiple stages of education.",
   },
@@ -33,7 +29,6 @@ const SLIDES = [
     image: "/images/slide3.avif",
     titleLine1: "India's First School with 100% CPR",
     titleLine2: "Trained Teachers & NSS Volunteers",
-    // subline: "Decades of commitment to academic and personal development.",
     description:
       "Under the SATYAM (WHO–AIIMS–CCET) School First Aid & CPR Project.",
   },
@@ -41,7 +36,16 @@ const SLIDES = [
     image: "/images/slide4.avif",
     titleLine1: "100% Financial",
     titleLine2: "Literacy Initiative",
-    subline: "In association with the State Bank of India",
+    subline: (
+    <span className="inline-flex items-center gap-2 flex-wrap">
+      In association with the State Bank of India
+      <img
+        src="/images/sbi-logo.avif"
+        alt="State Bank of India"
+        className="inline-block h-5 w-auto align-middle"
+      />
+    </span>
+  ),
     description:
       "My First Account in My Life – a 100% Financial Literacy Project",
   },
@@ -95,13 +99,8 @@ export default function Hero() {
   const goPrev = () =>
     goToSlide((activeIndex - 1 + SLIDES.length) % SLIDES.length);
 
-  /* ───────────────── Synced image + text transition ─────────────────
-     Image crossfade-um text fade-in-um ORE timeline-il, ORE start
-     point-il (position 0), ORE duration-il run aakunnu — athinaal
-     randum exact-aayi onnich maarum, oru bhaagam munpe varilla. */
+
   useEffect(() => {
-    // First mount-il ee effect skip cheyyanam, entrance animation
-    // (useGSAP) thanne first slide kaanikkum.
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
