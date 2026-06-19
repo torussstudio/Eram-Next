@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
    kodukkam. Buttons ellathilum same aanu. */
 const SLIDES = [
   {
-    image: "/images/slide1.avif",
+    image: "/images/slide11.avif",
     titleLine1: "Building Foundations.",
     titleLine2: "Shaping Futures.",
     subline: "Holistic, disciplined, and inclusive education for every child.",
