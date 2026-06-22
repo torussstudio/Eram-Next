@@ -37,15 +37,15 @@ const SLIDES = [
     titleLine1: "100% Financial",
     titleLine2: "Literacy Initiative",
     subline: (
-    <span className="inline-flex items-center gap-2 flex-wrap">
-      In association with the State Bank of India
-      <img
-        src="/images/sbi-logo.avif"
-        alt="State Bank of India"
-        className="inline-block h-5 w-auto align-middle"
-      />
-    </span>
-  ),
+      <span className="inline-flex items-center gap-2 flex-wrap">
+        In association with the State Bank of India
+        <img
+          src="/images/sbi-logo.avif"
+          alt="State Bank of India"
+          className="inline-block h-5 w-auto align-middle"
+        />
+      </span>
+    ),
     description:
       "My First Account in My Life – a 100% Financial Literacy Project",
   },
@@ -98,7 +98,6 @@ export default function Hero() {
   const goNext = () => goToSlide((activeIndex + 1) % SLIDES.length);
   const goPrev = () =>
     goToSlide((activeIndex - 1 + SLIDES.length) % SLIDES.length);
-
 
   useEffect(() => {
     if (isFirstRender.current) {
