@@ -69,7 +69,6 @@
 //   );
 // }
 
-
 "use client";
 
 import { useState } from "react";
@@ -91,39 +90,47 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        // "https://eram-backend-ejgy.onrender.com/api/auth/login",
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      // const res = await fetch(
+      //   // "https://eram-backend-ejgy.onrender.com/api/auth/login",
+      //   "http://localhost:5000/api/auth/login",
+      //   {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     credentials: "include",
+      //     body: JSON.stringify({ email, password }),
+      //   },
+      // );
+
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const res = await fetch(
+  `${API_URL}/api/auth/login`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ email, password }),
+  }
+);
 
       const data = await res.json();
+      if (data.success) {
+        const cookieRes = await fetch("/admin/auth", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: data.token,
+          }),
+        });
 
-     console.log("FULL RESPONSE", data);
-console.log("TOKEN", data.token);
-console.log("TOKEN TYPE", typeof data.token);
+        console.log(await cookieRes.json());
 
-if (data.success) {
-
-const cookieRes = await fetch("/admin/auth", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    token: data.token,
-  }),
-});
-
-console.log(await cookieRes.json());
-
-router.push("/admin/dashboard");
-} else {
+        router.push("/admin/dashboard");
+      } else {
         setError(data.message || "Invalid email or password.");
       }
     } catch (err) {
@@ -139,9 +146,7 @@ router.push("/admin/dashboard");
       {/* Left brand panel */}
       <div className="hidden lg:flex relative w-1/2 bg-[#ae1431] overflow-hidden flex-col justify-between p-12">
         {/* Ghost watermark */}
-        <span
-          className="absolute -left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none font-[Playfair_Display] text-[260px] font-bold leading-none text-white/[0.06]"
-        >
+        <span className="absolute -left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none font-[Playfair_Display] text-[260px] font-bold leading-none text-white/[0.06]">
           ERAM
         </span>
 
