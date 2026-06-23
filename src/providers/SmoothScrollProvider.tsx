@@ -29,6 +29,11 @@ export default function SmoothScrollProvider({
     // Disable on mobile
     if (window.innerWidth < 768) return;
 
+    // Disable scrolljacking and GSAP tickers on admin routes to eliminate UI lag
+    if (pathname.startsWith("/admin")) {
+      return;
+    }
+
     let lenis: Lenis | null = null;
     let observer: ResizeObserver | null = null;
     let initialRefreshTimeout: NodeJS.Timeout;
@@ -125,7 +130,7 @@ export default function SmoothScrollProvider({
         lenisInstance = null;
       }
     };
-  }, []);
+  }, [pathname]);
 
   return <>{children}</>;
 }
