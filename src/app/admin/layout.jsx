@@ -28,14 +28,26 @@ export default async function AdminLayout({
 
           <br />
 
-          <a href="/admin/admissions">
-            Admissions
+          <a href="/admin/home">
+            Home
           </a>
 
           <br />
 
-          <a href="/admin/contacts">
-            Contacts
+          <a href="/admin/portal">
+            parent-student portal
+          </a>
+
+          <br />
+
+            <a href="/admin/institutions">
+            Institutions
+          </a>
+
+          <br/>
+
+            <a href="/admin/sports-arena">
+            Sports Arena
           </a>
 
           <br />
