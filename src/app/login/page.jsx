@@ -103,21 +103,18 @@ export default function LoginPage() {
 
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const res = await fetch(
-  `${API_URL}/api/auth/login`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({ email, password }),
-  }
-);
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
 
       const data = await res.json();
       if (data.success) {
-        const cookieRes = await fetch("/admin/auth", {
+        const cookieRes = await fetch("/admin/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
