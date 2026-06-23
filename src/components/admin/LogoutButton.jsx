@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -7,14 +6,12 @@ export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await fetch("https://eram-backend-ejgy.onrender.com/api/auth/logout",
-       {
-         method: "POST",
-        credentials: "include",
-      }
-    );
+    await fetch("/admin/auth/logout", {
+      method: "POST",
+    });
 
     router.replace("/login");
+    router.refresh();
   };
 
   return (
