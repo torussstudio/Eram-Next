@@ -7,10 +7,9 @@ export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await fetch(
-      "http://localhost:5000/api/auth/logout",
-      {
-        method: "POST",
+    await fetch("https://eram-backend-ejgy.onrender.com/api/auth/logout",
+       {
+         method: "POST",
         credentials: "include",
       }
     );
