@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { section, shell } from "../../../constants/homeStyles";
+import { useRouter } from "next/navigation";
 
 /* ── Data ────────────────────────────────────────────────────────── */
 const impactItems = [
@@ -143,6 +144,8 @@ export default function ImpactSection() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
+  const router = useRouter();
+
   /* ── Read & update arrow state from any carousel el ─────────────── */
   const updateArrows = useCallback((el: HTMLDivElement) => {
     // If not yet laid out, scrollWidth will equal clientWidth — skip
@@ -248,7 +251,9 @@ export default function ImpactSection() {
             responsibility through targeted social initiatives supporting
             underprivileged communities.
           </p>
-          <button className="font-rethink h-[44px] cursor-pointer rounded-[10px] border border-[#f5efe8] bg-[#f5efe8] px-[22px] text-[13px] text-[#ae1431] transition hover:border-[#ae1431] hover:bg-black hover:text-white">
+          <button className="font-rethink h-[44px] cursor-pointer rounded-[10px] border border-[#f5efe8] bg-[#f5efe8] px-[22px] text-[13px] text-[#ae1431] transition hover:border-[#ae1431] hover:bg-black hover:text-white"
+          onClick={() => router.push("/the-trust")}
+          >
             EXPLORE STUDENT PATHWAYS
           </button>
         </div>
@@ -283,7 +288,9 @@ export default function ImpactSection() {
             responsibility through targeted social initiatives supporting
             underprivileged communities.
           </p>
-          <button className="mt-1 h-[44px] w-full cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#f5efe8] font-rethink text-[12px] tracking-[0.08em] text-[#ae1431] transition active:scale-[0.97]">
+          <button className="mt-1 h-[44px] w-full cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#f5efe8] font-rethink text-[12px] tracking-[0.08em] text-[#ae1431] transition active:scale-[0.97]"
+          onClick={() => router.push("/the-trust")}
+          >
             EXPLORE STUDENT PATHWAYS
           </button>
         </div>
@@ -305,7 +312,7 @@ export default function ImpactSection() {
           <div
             ref={desktopRefCallback}
             onScroll={handleScroll}
-            className="flex-1 min-w-0 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-5 cursor-pointer"
+            className="flex-1 min-w-0 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-5"
           >
             <div className="flex gap-5 px-8">
               {impactItems.map((item) => (

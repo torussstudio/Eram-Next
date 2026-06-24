@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { data } from "../../../constants/homeData";
@@ -17,7 +17,7 @@ export default function StructuredFramework({
   const noteRef = useRef<HTMLParagraphElement>(null);
   const cellRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Guard: headerRef children null check
       if (headerRef.current) {
@@ -62,7 +62,7 @@ export default function StructuredFramework({
           duration: 0.8,
           ease: "power4.out",
           stagger: { amount: 0.5 },
-          clearProps: "all",
+
           scrollTrigger: {
             trigger: validCells[0],
             start: "top 85%",
@@ -108,7 +108,7 @@ export default function StructuredFramework({
 
         window.scrollTo({
           top,
-          behavior: "smooth",
+          behavior: "auto",
         });
       });
     });

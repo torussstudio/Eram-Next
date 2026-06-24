@@ -535,7 +535,7 @@ export default function SystemsSection() {
                   ref={(el) => {
                     desktopCardRefs.current[i] = el;
                   }}
-                  className="will-change-transform group relative cursor-pointer flex flex-shrink-0 snap-start overflow-hidden rounded-[22px] p-[34px] bg-black"
+                  className="will-change-transform group relative flex flex-shrink-0 snap-start overflow-hidden rounded-[22px] p-[34px] bg-black"
                   style={{
                     width: config.fullWidth ? "calc(25% - 14px)" : "320px",
                     height: config.fullWidth ? "320px" : "220px",

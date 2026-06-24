@@ -186,7 +186,6 @@ function TrustHero() {
     sm:text-sm
     md:text-base
 
-    font-semibold
     uppercase
     tracking-[0.12em]
 

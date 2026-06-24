@@ -283,7 +283,7 @@ export default function ModelSection() {
                 max-[560px]:gap-[20px] max-[560px]:px-[4px]
                 max-[560px]:snap-x max-[560px]:snap-mandatory
               "
-              style={{ cursor: "grab" }}
+              
               onMouseDown={(e) => {
                 const el = e.currentTarget;
                 el.style.cursor = "grabbing";

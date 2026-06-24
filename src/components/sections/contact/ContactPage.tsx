@@ -172,10 +172,10 @@ function ContactItem({ icon, label, value, href }: ContactItemProps) {
         {icon}
       </div>
       <div className="min-w-0">
-        <p className="text-[10px] tracking-[0.1em] uppercase text-white/35 mb-0.5">
+        <p className="text-[10px] tracking-[0.1em] uppercase text-black mb-0.5">
           {label}
         </p>
-        <p className="text-[13px] text-white/80 leading-relaxed break-words font-rethink">
+        <p className="text-[13px] text-black leading-relaxed break-words font-rethink">
           {value}
         </p>
       </div>
@@ -285,8 +285,8 @@ export default function ContactPage() {
       {/* ── Page wrapper ── */}
       <div className="px-4 sm:px-7 lg:px-10 pb-16 sm:pb-20 max-w-[1400px] mx-auto w-full">
         {/* ── Hero ── */}
-        <div className="relative mt-8 sm:mt-12 lg:mt-16 overflow-hidden">
-          {/* Outline word */}
+        {/* <div className="relative mt-8 sm:mt-12 lg:mt-16 overflow-hidden">
+       
           <div
             ref={outlineRef}
             className="font-display leading-[0.88] tracking-[-0.045em] select-none pointer-events-none whitespace-nowrap"
@@ -303,7 +303,7 @@ export default function ContactPage() {
               </span>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* ── Divider ── */}
         <div
@@ -314,16 +314,16 @@ export default function ContactPage() {
         {/* ── Main grid: stacked on mobile/tablet, side-by-side on md+ ── */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.65fr] gap-5 items-start">
           {/* ── Info card ── */}
-          <div ref={infoCardRef} className="md:mt-0 lg:mt-22">
-            <div className="bg-black rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
+          <div ref={infoCardRef}>
+            <div className=" rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
               {/* Top section — "Get in Touch" overlaid on dark card header */}
               <div>
-                <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-white mb-4">
+                <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-black mb-4">
                   Get in
                   <br />
                   Touch
                 </p>
-                <p className="text-[13.5px] font-rethink leading-[1.75] text-white/55 max-w-xs">
+                <p className="text-[13.5px] font-rethink leading-[1.75] text-black max-w-xs">
                   For admissions, institutional enquiries, partnerships, or
                   sports Arena bookings, our team will guide you to the right
                   department.
@@ -331,7 +331,7 @@ export default function ContactPage() {
               </div>
 
               {/* Contact items */}
-              <div className="flex flex-col gap-4 sm:gap-5">
+              <div className="flex flex-col gap-4  sm:gap-5">
                 {CONTACT_ITEMS.map((item) => (
                   <ContactItem key={item.label} {...item} />
                 ))}

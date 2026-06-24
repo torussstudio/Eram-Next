@@ -546,20 +546,31 @@ const StudentParentPortal = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#F5EFE8] pb-16 pb-8 sm:pb-20 sm:pb-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl sm:text-4xl font-display text-black mb-3">
-            Ready to Get Started?
-          </h2>
-          <p className="text-black font-rethink sm:text-lg mb-7 max-w-xl mx-auto">
-            Access complete portal features for enhanced learning and
-            communication.
-          </p>
-          <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl  cursor-pointer">
-            Launch Full Portal <ChevronRight size={20} />
-          </button>
-        </div>
-      </section>
+      <section className="bg-[#F5EFE8] pb-16 sm:pb-20">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+    <h2 className="text-2xl sm:text-4xl font-display text-black mb-3">
+      Take the Next Step
+    </h2>
+
+    <p className="text-black font-rethink sm:text-lg mb-7 max-w-xl mx-auto">
+      Explore our institutions, meet our educators, and experience the
+      ERAM campus firsthand as you discover the learning environment
+      that's right for you.
+    </p>
+
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
+        Admissions Open 2026–27
+        <ChevronRight size={20} />
+      </button>
+
+      <button className="inline-flex items-center gap-2 px-8 py-3.5 border border-black text-black hover:bg-black hover:text-white text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
+        Plan a Campus Visit
+        <ChevronRight size={20} />
+      </button>
+    </div>
+  </div>
+</section>
     </div>
   );
 };

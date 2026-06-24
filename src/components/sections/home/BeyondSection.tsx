@@ -6,6 +6,8 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ActionButton from "../../ui/ActionButton";
 import { section } from "../../../constants/homeStyles";
+import { useRouter } from "next/navigation";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +40,8 @@ export default function BeyondSection() {
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const [shouldInit, setShouldInit] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -172,6 +176,7 @@ export default function BeyondSection() {
           <ActionButton
             variant="secondary"
             className="font-rethink text-white border-white max-[640px]:!w-auto cursor-pointer hover:bg-black hover:border-black hover:text-white"
+            onClick={() => router.push("/the-trust")}
           >
             Explore Student Pathways
           </ActionButton>
@@ -345,8 +350,7 @@ function BeyondCard({ card, isActive, onClick }: BeyondCardProps) {
         beyond-card
         group
         relative
-        cursor-pointer
-
+       
         flex-none
         snap-start
 

@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
+import PageTransition from "@/components/ui/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://eram.edu.in"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://eram.edu.in",
   ),
   title: {
     default: "ERAM Education | Building Foundations. Shaping Futures.",
@@ -60,7 +61,11 @@ export const metadata: Metadata = {
       { url: "/favicon/favicon.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      {
+        url: "/favicon/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
 
@@ -79,40 +84,42 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-     <head>
-  {/* Preconnect */}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossOrigin="anonymous"
-  />
+      <head>
+        {/* Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
 
-  {/* Fonts */}
-  <link
-    href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+        {/* Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800;900&family=Rethink+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
 
-  {/* Local Font */}
-  <link
-    rel="preload"
-    href="/fonts/Agency.woff2"
-    as="font"
-    type="font/woff2"
-    crossOrigin="anonymous"
-  />
+        {/* Local Font */}
+        <link
+          rel="preload"
+          href="/fonts/Agency.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
 
-  {/* SVG Logo */}
-  <link
-    rel="preload"
-    href="/education-1.svg"
-    as="image"
-    type="image/svg+xml"
-  />
-</head>
+        {/* SVG Logo */}
+        <link
+          rel="preload"
+          href="/education-1.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+      </head>
 
       <body className="antialiased">
+        <PageTransition />
+
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>

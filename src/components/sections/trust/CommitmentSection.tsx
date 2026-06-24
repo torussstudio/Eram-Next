@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 
@@ -20,7 +20,7 @@ function InkHeading({ text, headingRef }: InkHeadingProps) {
       className="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[1.1] text-[#1a1208] tracking-[-0.01em]"
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block mr-[0.2em]">
+        <span key={i} className="inline-block mr-[0.2em] overflow-hidden">
           <span className="ls-word inline-block">{word}</span>
         </span>
       ))}
@@ -35,7 +35,6 @@ interface SectionLabelProps {
 function SectionLabel({ labelRef }: SectionLabelProps) {
   return (
     <div ref={labelRef} className="flex items-center gap-3 mb-6">
-      <span className="block w-7 h-[1.5px] bg-[#8B1E1E]" />
       <span className="font-rethink text-[11px] tracking-[0.32em] uppercase text-[rgba(26,18,8,0.6)]">
         Our Commitment
       </span>
@@ -69,7 +68,7 @@ function RevealParagraph({ text, paraRef }: RevealParagraphProps) {
     <div className="overflow-hidden">
       <p
         ref={paraRef}
-        className="font-rethink text-[15px] leading-[1.88] text-[rgba(26,18,8,0.72)] font-light"
+        className="font-rethink text-[15px] leading-[1.88] text-[rgba(26,18,8,0.72)] "
       >
         {text}
       </p>
@@ -148,7 +147,11 @@ export default function CommitmentSection() {
   const para1Ref = useRef<HTMLParagraphElement>(null);
   const para2Ref = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    gsap.set(".ls-word", {
+      y: "115%",
+      opacity: 0,
+    });
     const ctx = gsap.context(() => {
       if (labelRef.current) {
         gsap.fromTo(
