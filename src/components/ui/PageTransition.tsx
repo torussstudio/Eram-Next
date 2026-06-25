@@ -5,6 +5,8 @@ import { useRouter, usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import Education1 from "@/components/icons/Education1";
 
+const FULL_WIDTH = 195.82; // matches viewBox width in Education1
+
 export default function PageTransition() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -30,15 +32,9 @@ export default function PageTransition() {
         transformOrigin: "center center",
       });
 
-      gsap.set(".eram-text", {
-        opacity: 0,
-        x: -40,
-      });
-
-      gsap.set(".education-text", {
-        opacity: 0,
-        x: -40,
-      });
+      // fill-reveal rects start at 0 width (text fully un-filled)
+      gsap.set(".eram-fill-rect", { attr: { width: 0 } });
+      gsap.set(".education-fill-rect", { attr: { width: 0 } });
 
       const tl = gsap.timeline();
 
@@ -53,25 +49,24 @@ export default function PageTransition() {
           ease: "expo.out",
         })
 
+        // classic ink-fill: eram text fills left -> right
         .to(
-          ".eram-text",
+          ".eram-fill-rect",
           {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: "power3.out",
+            attr: { width: FULL_WIDTH },
+            duration: 1.2,
+            ease: "power2.inOut",
           },
-          "-=0.05",
+          "-=0.1",
         )
 
-        .to({}, { duration: 0.15 })
-
-        .to(".education-text", {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power3.out",
+        // then education text fills left -> right
+        .to(".education-fill-rect", {
+          attr: { width: FULL_WIDTH },
+          duration: 1.3,
+          ease: "power2.inOut",
         })
+        // total fill phase above = 2.5s
 
         .to({}, { duration: 0.5 })
 
@@ -147,21 +142,15 @@ export default function PageTransition() {
 
       isTransitioningRef.current = true;
 
-      // Logo parts VISIBLE during the navbar-triggered transition
+      // Reset mark + text to their un-filled starting state so the
+      // same ink-fill sequence used on first load plays here too.
       gsap.set(".eram-mark", {
-        opacity: 1,
-        scale: 1,
+        opacity: 0,
+        scale: 0.5,
       });
 
-      gsap.set(".eram-text", {
-        opacity: 1,
-        x: 0,
-      });
-
-      gsap.set(".education-text", {
-        opacity: 1,
-        x: 0,
-      });
+      gsap.set(".eram-fill-rect", { attr: { width: 0 } });
+      gsap.set(".education-fill-rect", { attr: { width: 0 } });
 
       gsap.set(".logo-holder", {
         opacity: 1,
@@ -232,15 +221,43 @@ export default function PageTransition() {
         xPercent: 0,
         duration: 0.55,
         ease: "power3.inOut",
-      }).to(
-        ".right-panel",
-        {
-          xPercent: 0,
-          duration: 0.55,
-          ease: "power3.inOut",
-        },
-        "<",
-      );
+      })
+        .to(
+          ".right-panel",
+          {
+            xPercent: 0,
+            duration: 0.55,
+            ease: "power3.inOut",
+          },
+          "<",
+        )
+
+        // ── classic ink-fill, same sequence as first-load ──
+        .to(
+          ".eram-mark",
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.45,
+            ease: "expo.out",
+          },
+          "-=0.15",
+        )
+        .to(
+          ".eram-fill-rect",
+          {
+            attr: { width: FULL_WIDTH },
+            duration: 0.7,
+            ease: "power2.inOut",
+          },
+          "-=0.1",
+        )
+        .to(".education-fill-rect", {
+          attr: { width: FULL_WIDTH },
+          duration: 0.8,
+          ease: "power2.inOut",
+        });
+      // total time before navigate = 2.25s
     };
 
     window.addEventListener(
