@@ -51,7 +51,7 @@ export default function ScaleSection() {
           bg-[#141414]
           hover:bg-[#ae1431]
           transition-colors duration-300
-          cursor-pointer
+          
         `}
                 >
                   <p className="text-[9px] font-display sm:text-[10px] tracking-[0.2em] text-[#8f877d] uppercase mb-[10px]">

@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import emailjs from "@emailjs/browser";
 
 // ─── Static data ───────────────────────────────────────────────────────────────
 
@@ -222,6 +223,7 @@ export default function ContactPage() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [focused, setFocused] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useGSAP(
     () => {
@@ -266,9 +268,31 @@ export default function ContactPage() {
     setForm((p) => ({ ...p, subject: chip }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsLoading(true);
+
+    try {
+ await emailjs.send(
+  "service_aln8v84",
+  "template_jiqlrpq",
+  {
+    name: form.name,
+    email: form.email,
+    phone: form.phone,
+    subject: form.subject,
+    message: form.message,
+    title: form.subject,
+  },
+  "0NPwzq3JhrllHrIW_",
+);
+      setSubmitted(true);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const focusProps = (name: string) => ({
@@ -284,27 +308,6 @@ export default function ContactPage() {
     >
       {/* ── Page wrapper ── */}
       <div className="px-4 sm:px-7 lg:px-10 pb-16 sm:pb-20 max-w-[1400px] mx-auto w-full">
-        {/* ── Hero ── */}
-        {/* <div className="relative mt-8 sm:mt-12 lg:mt-16 overflow-hidden">
-       
-          <div
-            ref={outlineRef}
-            className="font-display leading-[0.88] tracking-[-0.045em] select-none pointer-events-none whitespace-nowrap"
-            style={{
-              fontFamily: "'Playfair Display'",
-              fontSize: "clamp(3.6rem, 16vw, 13rem)",
-              color: "transparent",
-              WebkitTextStroke: "1.5px rgba(0,0,0,0.18)",
-            }}
-          >
-            {"CONTACT".split("").map((l, i) => (
-              <span key={i} className=" align-bottom">
-                <span>{l}</span>
-              </span>
-            ))}
-          </div>
-        </div> */}
-
         {/* ── Divider ── */}
         <div
           ref={dividerRef}
@@ -323,7 +326,7 @@ export default function ContactPage() {
                   <br />
                   Touch
                 </p>
-                <p className="text-[13.5px] font-rethink leading-[1.75] text-black max-w-xs">
+                <p className="text-[14.5px] font-rethink leading-[1.75] text-black max-w-xs">
                   For admissions, institutional enquiries, partnerships, or
                   sports Arena bookings, our team will guide you to the right
                   department.
@@ -432,27 +435,34 @@ export default function ContactPage() {
                     {/* Submit */}
                     <button
                       type="submit"
-                      className="w-full flex items-center font-rethink justify-center gap-2
-                        px-8 py-4 min-h-[48px] rounded-xl border-none cursor-pointer
-                        bg-[#ae1431] hover:bg-[#8f1028] active:scale-[0.98]
-                        text-white text-sm tracking-[0.04em]
-                        transition-all duration-200 touch-manipulation "
+                      disabled={isLoading}
+                      className={`w-full flex items-center font-rethink justify-center gap-2
+    px-8 py-4 min-h-[48px] rounded-xl border-none cursor-pointer
+    text-white text-sm tracking-[0.04em]
+    transition-all duration-200 touch-manipulation
+    ${
+      isLoading
+        ? "bg-[#ae1431]/60 cursor-not-allowed"
+        : "bg-[#ae1431] hover:bg-[#8f1028] active:scale-[0.98]"
+    }`}
                     >
-                      Send Message
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                      >
-                        <path
-                          d="M2 8h12M9 4l4 4-4 4"
-                          stroke="white"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      {isLoading ? "Sending..." : "Send Message"}
+                      {!isLoading && (
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <path
+                            d="M2 8h12M9 4l4 4-4 4"
+                            stroke="white"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      )}
                     </button>
                   </form>
                 </>
