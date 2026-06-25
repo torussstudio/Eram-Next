@@ -8,7 +8,6 @@ import ActionButton from "../../ui/ActionButton";
 import { section } from "../../../constants/homeStyles";
 import { useRouter } from "next/navigation";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const BEYOND_CARDS = [
@@ -175,7 +174,7 @@ export default function BeyondSection() {
         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
           <ActionButton
             variant="secondary"
-            className="font-rethink text-white border-white max-[640px]:!w-auto cursor-pointer hover:bg-black hover:border-black hover:text-white"
+            className="font-rethink text-[#ae1431] bg-white border-white max-[640px]:!w-auto cursor-pointer hover:bg-black hover:border-black hover:text-white"
             onClick={() => router.push("/the-trust")}
           >
             Explore Student Pathways
