@@ -273,9 +273,9 @@ export default function ContactPage() {
     setIsLoading(true);
 
     try {
- await emailjs.send(
-  "service_aln8v84",
-  "template_jiqlrpq",
+await emailjs.send(
+  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
   {
     name: form.name,
     email: form.email,
@@ -284,7 +284,7 @@ export default function ContactPage() {
     message: form.message,
     title: form.subject,
   },
-  "0NPwzq3JhrllHrIW_",
+  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
 );
       setSubmitted(true);
     } catch (error) {
