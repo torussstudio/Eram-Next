@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import { getHero } from "@/services/heroService";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +18,15 @@ const SLIDES = [
     subline: "Holistic, disciplined, and inclusive education for every child.",
     description:
       "A disciplined educational ecosystem nurturing academic excellence, character, and opportunity.",
+  
+   primaryButton: {
+    text: "Explore Our Institutions",
+    link: "#institutions",
+  },
+  secondaryButton: {
+    text: "Admissions Open 2026–27",
+    link: "/contact",
+  },
   },
   {
     image: "/images/slide2.avif",
@@ -24,13 +34,33 @@ const SLIDES = [
     titleLine2: "Educational Ecosystem.",
     description:
       "ERAM operates an integrated educational ecosystem that supports learners across multiple stages of education.",
+ 
+   primaryButton: {
+    text: "Explore Our Institutions",
+    link: "#institutions",
   },
+
+  secondaryButton: {
+    text: "Admissions Open 2026–27",
+    link: "/contact",
+  },
+   },
   {
     image: "/images/slide3.avif",
     titleLine1: "India's First School with 100% CPR",
     titleLine2: "Trained Teachers & NSS Volunteers",
     description:
       "Under the SATYAM (WHO–AIIMS–CCET) School First Aid & CPR Project.",
+  
+   primaryButton: {
+    text: "Explore Our Institutions",
+    link: "#institutions",
+  },
+
+  secondaryButton: {
+    text: "Admissions Open 2026–27",
+    link: "/contact",
+  },
   },
   {
     image: "/images/slide4.avif",
@@ -48,6 +78,16 @@ const SLIDES = [
     ),
     description:
       "My First Account in My Life – a 100% Financial Literacy Project",
+  
+   primaryButton: {
+    text: "Explore Our Institutions",
+    link: "#institutions",
+  },
+
+  secondaryButton: {
+    text: "Admissions Open 2026–27",
+    link: "/contact",
+  },
   },
 ];
 
@@ -73,15 +113,34 @@ export default function Hero() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isFirstRender = useRef(true);
 
-  const slide = SLIDES[activeIndex];
+  const [slides, setSlides] = useState<typeof SLIDES>(SLIDES);
+
+  const slide = slides[activeIndex];
+  if (!slide) return null;
 
   /* ───────────────── Auto-slide ───────────────── */
   const startAutoSlide = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % SLIDES.length);
+      setActiveIndex((prev) => (prev + 1) % slides.length);
     }, SLIDE_DURATION);
-  }, []);
+ }, [slides.length]);
+
+  useEffect(() => {
+  const fetchHero = async () => {
+    try {
+      const res = await getHero();
+
+      if (res.success && res.data.slides?.length) {
+        setSlides(res.data.slides);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchHero();
+}, []);
 
   useEffect(() => {
     startAutoSlide();
@@ -95,9 +154,10 @@ export default function Hero() {
     startAutoSlide();
   };
 
-  const goNext = () => goToSlide((activeIndex + 1) % SLIDES.length);
+ const goNext = () =>
+  goToSlide((activeIndex + 1) % slides.length);
   const goPrev = () =>
-    goToSlide((activeIndex - 1 + SLIDES.length) % SLIDES.length);
+    goToSlide((activeIndex - 1 + slides.length) % slides.length);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -375,7 +435,7 @@ export default function Hero() {
       >
         {/* ───────────────── Background Image Slider ───────────────── */}
         <div className="absolute inset-0">
-          {SLIDES.map((s, i) => (
+          {slides.map((s, i) => (
             <div
               key={s.image}
               ref={(el) => {
@@ -491,10 +551,14 @@ export default function Hero() {
     uppercase
   "
               >
-                Explore Our Institutions
+               {slide.primaryButton?.text || "Explore Our Institutions"}
               </button>
               <button
-                onClick={() => router.push("/contact")}
+                onClick={() =>
+    slide.secondaryButton?.link
+      ? router.push(slide.secondaryButton.link)
+      : router.push("/contact")
+  }
                 className="
     font-rethink
     cursor-pointer
@@ -517,7 +581,7 @@ export default function Hero() {
     hover:shadow-xl
   "
               >
-                Admissions Open 2026–27
+                {slide.secondaryButton?.text || "Admissions Open 2026–27"}
               </button>
             </div>
           </div>
