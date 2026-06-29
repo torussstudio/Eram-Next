@@ -8,6 +8,12 @@ import { useRouter } from "next/navigation";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import { getHero } from "@/services/heroService";
 
+const resolveImageUrl = (url: string) => {
+  if (!url) return "";
+  if (url.startsWith("http")) return url;
+  return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
+};
+
 gsap.registerPlugin(ScrollTrigger);
 
 const SLIDES = [
@@ -18,15 +24,15 @@ const SLIDES = [
     subline: "Holistic, disciplined, and inclusive education for every child.",
     description:
       "A disciplined educational ecosystem nurturing academic excellence, character, and opportunity.",
-  
-   primaryButton: {
-    text: "Explore Our Institutions",
-    link: "#institutions",
-  },
-  secondaryButton: {
-    text: "Admissions Open 2026–27",
-    link: "/contact",
-  },
+
+    primaryButton: {
+      text: "Explore Our Institutions",
+      link: "#institutions",
+    },
+    secondaryButton: {
+      text: "Admissions Open 2026–27",
+      link: "/contact",
+    },
   },
   {
     image: "/images/slide2.avif",
@@ -34,33 +40,33 @@ const SLIDES = [
     titleLine2: "Educational Ecosystem.",
     description:
       "ERAM operates an integrated educational ecosystem that supports learners across multiple stages of education.",
- 
-   primaryButton: {
-    text: "Explore Our Institutions",
-    link: "#institutions",
-  },
 
-  secondaryButton: {
-    text: "Admissions Open 2026–27",
-    link: "/contact",
+    primaryButton: {
+      text: "Explore Our Institutions",
+      link: "#institutions",
+    },
+
+    secondaryButton: {
+      text: "Admissions Open 2026–27",
+      link: "/contact",
+    },
   },
-   },
   {
     image: "/images/slide3.avif",
     titleLine1: "India's First School with 100% CPR",
     titleLine2: "Trained Teachers & NSS Volunteers",
     description:
       "Under the SATYAM (WHO–AIIMS–CCET) School First Aid & CPR Project.",
-  
-   primaryButton: {
-    text: "Explore Our Institutions",
-    link: "#institutions",
-  },
 
-  secondaryButton: {
-    text: "Admissions Open 2026–27",
-    link: "/contact",
-  },
+    primaryButton: {
+      text: "Explore Our Institutions",
+      link: "#institutions",
+    },
+
+    secondaryButton: {
+      text: "Admissions Open 2026–27",
+      link: "/contact",
+    },
   },
   {
     image: "/images/slide4.avif",
@@ -78,16 +84,16 @@ const SLIDES = [
     ),
     description:
       "My First Account in My Life – a 100% Financial Literacy Project",
-  
-   primaryButton: {
-    text: "Explore Our Institutions",
-    link: "#institutions",
-  },
 
-  secondaryButton: {
-    text: "Admissions Open 2026–27",
-    link: "/contact",
-  },
+    primaryButton: {
+      text: "Explore Our Institutions",
+      link: "#institutions",
+    },
+
+    secondaryButton: {
+      text: "Admissions Open 2026–27",
+      link: "/contact",
+    },
   },
 ];
 
@@ -124,23 +130,23 @@ export default function Hero() {
     intervalRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % slides.length);
     }, SLIDE_DURATION);
- }, [slides.length]);
+  }, [slides.length]);
 
   useEffect(() => {
-  const fetchHero = async () => {
-    try {
-      const res = await getHero();
+    const fetchHero = async () => {
+      try {
+        const res = await getHero();
 
-      if (res.success && res.data.slides?.length) {
-        setSlides(res.data.slides);
+        if (res.success && res.data.slides?.length) {
+          setSlides(res.data.slides);
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    };
 
-  fetchHero();
-}, []);
+    fetchHero();
+  }, []);
 
   useEffect(() => {
     startAutoSlide();
@@ -154,8 +160,7 @@ export default function Hero() {
     startAutoSlide();
   };
 
- const goNext = () =>
-  goToSlide((activeIndex + 1) % slides.length);
+  const goNext = () => goToSlide((activeIndex + 1) % slides.length);
   const goPrev = () =>
     goToSlide((activeIndex - 1 + slides.length) % slides.length);
 
@@ -437,7 +442,7 @@ export default function Hero() {
         <div className="absolute inset-0">
           {slides.map((s, i) => (
             <div
-              key={s.image}
+              key={i}
               ref={(el) => {
                 imageRefs.current[i] = el;
               }}
@@ -445,8 +450,8 @@ export default function Hero() {
               style={{ opacity: i === 0 ? 1 : 0 }}
             >
               <img
-                src={s.image}
-                alt=""
+                src={resolveImageUrl(s.image)}
+                alt="picture"
                 className="absolute inset-0 h-full w-full object-cover will-change-transform"
               />
             </div>
@@ -551,14 +556,14 @@ export default function Hero() {
     uppercase
   "
               >
-               {slide.primaryButton?.text || "Explore Our Institutions"}
+                {slide.primaryButton?.text || "Explore Our Institutions"}
               </button>
               <button
                 onClick={() =>
-    slide.secondaryButton?.link
-      ? router.push(slide.secondaryButton.link)
-      : router.push("/contact")
-  }
+                  slide.secondaryButton?.link
+                    ? router.push(slide.secondaryButton.link)
+                    : router.push("/contact")
+                }
                 className="
     font-rethink
     cursor-pointer

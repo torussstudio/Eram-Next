@@ -157,63 +157,6 @@ export default function HeroSection() {
                   mt-7
                 "
               >
-                {/* PRIMARY BUTTON */}
-                {/* <button
-                  className="
-                    group
-                    font-rethink
-
-                    bg-[#ae1431]
-
-                    rounded-[10px]
-
-                    px-5
-                    md:px-7
-
-                    py-2.5
-                    md:py-3
-
-                    text-[11px]
-                    md:text-[12px]
-
-                    tracking-[0.12em]
-
-                    uppercase
-
-                    cursor-pointer
-
-                    text-white
-
-                    flex
-                    items-center
-                    justify-center
-
-                    gap-2
-
-                    transition-all
-                    duration-300
-
-                    hover:bg-[#97112a]
-                  "
-                >
-                  EXPLORE THE ARENA
-                  <span
-                    className="
-                      relative
-                      z-10
-
-                      inline-block
-
-                      transition-all
-                      duration-300
-
-                      group-hover:translate-x-[5px]
-                    "
-                  >
-                    →
-                  </span>
-                </button> */}
-
                 <button
                   className="
     group
@@ -259,49 +202,6 @@ export default function HeroSection() {
 
                   <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
-
-                {/* SECONDARY BUTTON */}
-                {/* <button
-                  className="
-                    font-rethink
-
-                    border
-                    border-white/30
-
-                    rounded-[10px]
-
-                    px-5
-                    md:px-7
-
-                    py-2.5
-                    md:py-3
-
-                    text-[11px]
-                    md:text-[12px]
-
-                    tracking-[0.12em]
-
-                    uppercase
-
-                    flex
-                    items-center
-                    justify-center
-
-                    gap-2
-
-                    cursor-pointer
-
-                    transition-all
-                    duration-300
-
-                    hover:bg-white
-                    hover:text-black
-                  "
-                >
-                  HOST AN EVENT
-                  <Calendar className="w-4 h-4 opacity-70" />
-                </button> */}
-
                 <button
                   className="
     font-rethink
@@ -375,9 +275,9 @@ export default function HeroSection() {
                 max-[1024px]:
                 max-w-[340px]
 
-                bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
+               
 
-                backdrop-blur-md
+             bg-[#0e0e0e]
 
                 border
                 border-white/10
