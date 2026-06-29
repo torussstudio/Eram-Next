@@ -37,7 +37,7 @@ const CARDS_DATA = [
       t: "Direct relationship with Principals & HODs",
       img: "/images/cardinfra3.webp",
     },
-    { n: "04", t: "Regular review meetings", img: "/images/cardinfra3.webp" },
+    { n: "04", t: "Regular review meetings", img: "/images/about3.webp" },
   ],
   [
     {

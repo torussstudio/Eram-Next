@@ -1,18 +1,30 @@
 "use client";
 
 import { useRef } from "react";
-import { Drama, PartyPopper, Droplet, HeartPulse } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryItems = [
-  { title: "CLASSROOM SESSIONS", icon: Drama },
-  { title: "RESIDENTIAL LEADERSHIP CAMP", icon: PartyPopper },
-  { title: "PRACTICE TEACHING", icon: Droplet },
-  { title: "INSTITUTE MAGAZINE", icon: HeartPulse },
+  {
+    title: "KALOTSAVAM",
+    image: "/images/mmitekalotsavam.avif ",
+  },
+   {
+    title: "INSTITUTE MAGAZINE",
+    image: "/images/magazines.avif",
+  },
+  {
+    title: "RESIDENTIAL LEADERSHIP CAMP",
+    image: "/images/residential-leadership-camp.jpg",
+  },
+  {
+    title: "PRACTICE TEACHING",
+    image: "/images/practice-teaching.jpg",
+  },
 ];
 
 export default function GalleryPage() {
@@ -83,24 +95,31 @@ export default function GalleryPage() {
           {/* GRID */}
           <div className="anim-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1 rounded-2xl overflow-hidden">
             {galleryItems.map((item, i) => {
-              const Icon = item.icon;
               return (
                 <div
                   key={i}
-                  className="anim-card relative h-[260px] border border-white/10 bg-[#2a2a2a]
-                    overflow-hidden group hover:scale-[1.02] transition-transform duration-300"
+                  className="anim-card relative h-[260px] border border-white/10 overflow-hidden group"
                 >
-                  {/* ICON */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-50">
-                    <Icon size={36} />
-                  </div>
+                  {/* Image */}
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
+                  />
 
-                  {/* GRADIENT */}
-                  <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/80 to-transparent" />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/35 transition-all duration-500 group-hover:bg-black/20" />
 
-                  {/* TITLE */}
-                  <div className="absolute font-rethink bottom-4 left-4 text-sm tracking-wide text-gray-300">
-                    {item.title}
+                  {/* Bottom Gradient */}
+                  <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-black via-black/60 to-transparent" />
+
+                  {/* Title */}
+                  <div className="absolute bottom-5 left-5 right-5 z-10">
+                    <h3 className="font-rethink text-sm tracking-[0.18em] uppercase text-white">
+                      {item.title}
+                    </h3>
                   </div>
                 </div>
               );

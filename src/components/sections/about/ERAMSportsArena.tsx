@@ -183,13 +183,6 @@ function ERAMSportsArena() {
 
         {/* ── CTA BLOCK ── */}
         <div className="arena-cta mt-8 sm:mt-10 md:mt-12 lg:mt-14">
-          {/*
-            KEY FIX: The outer wrapper has an explicit height at every breakpoint.
-            Previously only the <img> had height — if OptimizedImage renders
-            as position:absolute or fails to load, the `relative` parent collapses
-            to 0px and all `absolute inset-0` children (overlay + text) disappear.
-            Now the parent always has a defined height, so nothing can collapse.
-          */}
           <div
             className="
               relative

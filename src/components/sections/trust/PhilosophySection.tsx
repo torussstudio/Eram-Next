@@ -80,16 +80,19 @@ export default function PhilosophySection() {
     {
       no: "/02",
       title: "Strengthening Local Ecosystems",
+      src: "/images/philosaphy2.avif",
       desc: "Initiatives are designed to integrate into and reinforce existing community systems rather than creating dependency on external support.",
     },
     {
       no: "/03",
       title: "Enabling Self-Sufficiency",
+      src: "/images/philosaphy3.avif",
       desc: "The goal is always to create conditions where communities, families, and individuals can sustain themselves independently.",
     },
     {
       no: "/04",
       title: "Maintaining governance-backed continuity",
+      src: "/images/philosaphy4.avif",
       desc: "Every long-term initiative is anchored in institutional oversight — ensuring accountability, measurability, and continuity across leadership transitions.",
     },
   ];

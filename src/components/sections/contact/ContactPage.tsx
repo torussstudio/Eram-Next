@@ -322,9 +322,7 @@ await emailjs.send(
               {/* Top section — "Get in Touch" overlaid on dark card header */}
               <div>
                 <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-black mb-4">
-                  Get in
-                  <br />
-                  Touch
+                  Get in Touch
                 </p>
                 <p className="text-[14.5px] font-rethink leading-[1.75] text-black max-w-xs">
                   For admissions, institutional enquiries, partnerships, or

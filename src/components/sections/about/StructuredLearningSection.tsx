@@ -390,19 +390,19 @@ function StructuredLearningSection() {
     },
     {
       num: "/03",
-      img: "/images/student.avif",
+      img: "/images/about4.webp",
       alt: "class",
       text: "Continuous evaluation & improvement cycles",
     },
     {
       num: "/04",
-      img: "/images/student.avif",
+      img: "/images/sports-ground.webp",
       alt: "student",
       text: "Holistic integration of academics, sports, and culture",
     },
     {
       num: "/05",
-      img: "/images/teacher.avif",
+      img: "/images/about2.webp",
       alt: "teacher",
       text: "Exposure-driven learning beyond textbooks",
     },

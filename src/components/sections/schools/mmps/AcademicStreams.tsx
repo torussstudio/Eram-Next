@@ -244,11 +244,11 @@ export default function AcademicStreams() {
           {/* ══ RIGHT COLUMN ═══════════════════════════════════ */}
           <div
             ref={principalRef}
-            className="group relative overflow-hidden mt-6 lg:mt-12 rounded-[28px] h-[350px] md:h-[450px] border border-white/10"
+            className="group relative overflow-hidden mt-2 lg:mt-6 rounded-[28px] h-[450px] md:h-[500px] border border-white/10"
           >
             {/* Principal Image */}
             <img
-              src="/images/mmpsprincipal.avif"
+              src="/images/hm-mmps.avif"
               alt="Principal"
               className="w-full h-full object-cover opacity-[0.80] transition-all duration-700 group-hover:scale-105 group-hover:opacity-[0.28]"
             />
