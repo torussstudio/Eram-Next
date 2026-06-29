@@ -132,21 +132,32 @@ export default function Hero() {
     }, SLIDE_DURATION);
   }, [slides.length]);
 
-  useEffect(() => {
-    const fetchHero = async () => {
-      try {
-        const res = await getHero();
+ useEffect(() => {
+  const fetchHero = async () => {
+    try {
+      const res = await getHero();
 
-        if (res.success && res.data.slides?.length) {
-          setSlides(res.data.slides);
-        }
-      } catch (err) {
-        console.error(err);
+      if (res.success && res.data.slides?.length) {
+        setSlides((prev) =>
+          prev.map((localSlide, i) => {
+            const backendSlide = res.data.slides[i];
+            if (!backendSlide) return localSlide;
+            return {
+              ...localSlide,           
+              ...backendSlide,          
+              subline: backendSlide.subline || localSlide.subline, 
+              image: backendSlide.image || localSlide.image,      
+            };
+          })
+        );
       }
-    };
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    fetchHero();
-  }, []);
+  fetchHero();
+}, []);
 
   useEffect(() => {
     startAutoSlide();
