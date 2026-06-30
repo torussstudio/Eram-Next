@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
+import LatestSchoolGallery from "../LatestSchoolGallery";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,7 +40,6 @@ export default function GalleryPage() {
       // ── Initial states ────────────────────────────────────────────────
       gsap.set(q(".anim-tag"), { opacity: 0, y: 14, filter: "blur(6px)" });
       gsap.set(q(".anim-desc"), { opacity: 0, y: 10, filter: "blur(6px)" });
-      gsap.set(q(".anim-card"), { opacity: 0, y: 24, filter: "blur(8px)" });
 
       // ── Header ────────────────────────────────────────────────────────
       ScrollTrigger.create({
@@ -68,26 +67,6 @@ export default function GalleryPage() {
             );
         },
       });
-
-      // ── Cards ─────────────────────────────────────────────────────────
-      const gridEl = q(".anim-grid")[0];
-      if (gridEl) {
-        ScrollTrigger.create({
-          trigger: gridEl,
-          start: "top 84%",
-          toggleActions: "play none none none",
-          onEnter: () => {
-            gsap.to(q(".anim-card"), {
-              opacity: 1,
-              y: 0,
-              filter: "blur(0px)",
-              duration: 0.9,
-              ease: SMOOTH,
-              stagger: 0.1,
-            });
-          },
-        });
-      }
     },
     { scope: containerRef },
   );
@@ -110,39 +89,7 @@ export default function GalleryPage() {
           </div>
 
           {/* GRID */}
-          <div className="anim-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1 rounded-2xl overflow-hidden">
-            {galleryItems.map((item, i) => {
-              return (
-                <div
-                  key={i}
-                  className="anim-card relative h-[260px] border border-white/10 bg-[#2a2a2a]
-  overflow-hidden group"
-                >
-                  {/* IMAGE */}
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw"
-                  />
-
-                  {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-black/35 transition-colors duration-500 group-hover:bg-black/20" />
-
-                  {/* Gradient */}
-                  <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-                  {/* Title */}
-                  <div className="absolute bottom-5 left-5 z-10">
-                    <h3 className="font-rethink text-sm tracking-[0.18em] text-white">
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <LatestSchoolGallery category="mmhss" fallbackItems={galleryItems} />
         </div>
       </section>
     </div>

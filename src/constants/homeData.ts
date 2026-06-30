@@ -39,6 +39,7 @@ export const navItems: NavItem[] = [
   { label: "Institutions", path: "#institutions" },
   { label: "Sports Arena", path: "/explore-arena" },
   { label: "Contact", path: "/contact" },
+  { label: "GALLERY", path: "/gallery" },
 ];
 
 export const institutions: Institution[] = [

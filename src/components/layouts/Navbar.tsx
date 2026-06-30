@@ -487,7 +487,7 @@ const handleNavClick = (path: string, closeMobile = false) => {
         </Link>
 
         {/* ── DESKTOP NAV ── */}
-        <nav className="absolute top-6 left-1/2 -translate-x-1/2 hidden min-[920px]:flex items-center gap-12 lg:gap-12 xl:gap-16 font-rethink">
+        <nav className="absolute top-6 left-[47%] -translate-x-1/2 hidden min-[920px]:flex items-center gap-12 lg:gap-12 xl:gap-16 font-rethink">
           {renderNavItems()}
         </nav>
 

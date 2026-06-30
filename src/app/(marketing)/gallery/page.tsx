@@ -1,10 +1,5 @@
-import React from "react";
-import ExcellenceSection from "@/components/sections/home/ExcellenceSection";
+import GalleryClient from '@/components/sections/gallery/page';
 
 export default function GalleryPage() {
-  return (
-    <main>
-      <ExcellenceSection />
-    </main>
-  );
+  return <GalleryClient />;
 }
