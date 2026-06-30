@@ -1,16 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getHero, updateHero, uploadHeroImage } from "../../../../services/heroService";
+import {
+  getHero,
+  updateHero,
+  uploadHeroImage,
+} from "../../../../services/heroService";
 
 const MAX_IMAGE_SIZE = 500 * 1024; // 500KB
-const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+const ALLOWED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/avif",
+];
 
 const EMPTY_SLIDE = {
   image: "",
   titleLine1: "",
   titleLine2: "",
   subline: "",
+  sublineLogo: "",
   description: "",
   primaryButton: { text: "", link: "" },
   secondaryButton: { text: "", link: "" },
@@ -24,8 +34,14 @@ function normalizeSlides(slides) {
     result.push({
       ...EMPTY_SLIDE,
       ...existing,
-      primaryButton: { ...EMPTY_SLIDE.primaryButton, ...existing?.primaryButton },
-      secondaryButton: { ...EMPTY_SLIDE.secondaryButton, ...existing?.secondaryButton },
+      primaryButton: {
+        ...EMPTY_SLIDE.primaryButton,
+        ...existing?.primaryButton,
+      },
+      secondaryButton: {
+        ...EMPTY_SLIDE.secondaryButton,
+        ...existing?.secondaryButton,
+      },
       // local-only UI fields
       imageFile: null,
       previewUrl: existing?.image || "",
@@ -74,7 +90,10 @@ export default function Hero() {
   function updateActiveSlide(updater) {
     setSlides((prev) => {
       const next = [...prev];
-      next[activeIndex] = { ...next[activeIndex], ...updater(next[activeIndex]) };
+      next[activeIndex] = {
+        ...next[activeIndex],
+        ...updater(next[activeIndex]),
+      };
       return next;
     });
   }
@@ -96,7 +115,9 @@ export default function Hero() {
       return "Only JPG, PNG, WEBP, or AVIF images are allowed.";
     }
     if (file.size > MAX_IMAGE_SIZE) {
-      return `Image must be 500KB or smaller (selected file is ${(file.size / 1024).toFixed(0)}KB).`;
+      return `Image must be 500KB or smaller (selected file is ${(
+        file.size / 1024
+      ).toFixed(0)}KB).`;
     }
     return "";
   }
@@ -120,6 +141,43 @@ export default function Hero() {
     setSaveSuccess(false);
   }
 
+  async function handleSublineLogoChange(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const error = validateImage(file);
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    try {
+      const uploadResult = await uploadHeroImage(file);
+
+      const logoUrl =
+        uploadResult?.data?.image ||
+        uploadResult?.image ||
+        uploadResult?.url ||
+        uploadResult?.data?.url;
+
+      if (!logoUrl) {
+        throw new Error("Logo upload failed.");
+      }
+
+      updateActiveSlide(() => ({
+        sublineLogo: logoUrl,
+      }));
+
+      setSaveSuccess(false);
+    } catch (err) {
+      alert(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Failed to upload logo.",
+      );
+    }
+  }
+
   async function handleSaveAll() {
     setIsSaving(true);
     setSaveError("");
@@ -140,7 +198,9 @@ export default function Hero() {
             uploadResult?.url ||
             uploadResult?.data?.url;
           if (!imageUrl || typeof imageUrl !== "string") {
-            throw new Error(`Image upload for slide ${i + 1} did not return a valid URL.`);
+            throw new Error(
+              `Image upload for slide ${i + 1} did not return a valid URL.`,
+            );
           }
           updatedSlides[i] = { ...slide, image: imageUrl };
         }
@@ -148,7 +208,7 @@ export default function Hero() {
 
       // Strip local-only UI fields before sending to backend
       const payloadSlides = updatedSlides.map(
-        ({ imageFile, previewUrl, imageError, ...rest }) => rest
+        ({ imageFile, previewUrl, imageError, ...rest }) => rest,
       );
 
       await updateHero({ slides: payloadSlides });
@@ -160,14 +220,14 @@ export default function Hero() {
           imageFile: null,
           imageError: "",
           previewUrl: slide.image,
-        }))
+        })),
       );
       setSaveSuccess(true);
     } catch (err) {
       setSaveError(
         err?.response?.data?.message ||
           err?.message ||
-          "Something went wrong while saving. Please try again."
+          "Something went wrong while saving. Please try again.",
       );
     } finally {
       setIsSaving(false);
@@ -186,7 +246,7 @@ export default function Hero() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-semibold text-[#ae1431] mb-4">
+      <h1 className="text-2xl font-display text-[#ae1431] mb-4">
         Hero Section — Slides
       </h1>
 
@@ -197,7 +257,7 @@ export default function Hero() {
             key={i}
             type="button"
             onClick={() => setActiveIndex(i)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+            className={`px-4 py-2 text-sm font-rethink cursor-pointer border-b-2 transition-colors ${
               activeIndex === i
                 ? "border-[#ae1431] text-[#ae1431]"
                 : "border-transparent text-gray-500 hover:text-[#ae1431]"
@@ -212,7 +272,7 @@ export default function Hero() {
         <div className="space-y-6">
           {/* Image upload */}
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-sm font-rethink mb-2">
               Slide Image (max 500KB — JPG, PNG, WEBP, AVIF)
             </label>
             <div className="flex items-start gap-4">
@@ -237,12 +297,14 @@ export default function Hero() {
                 />
                 <label
                   htmlFor={`hero-image-input-${activeIndex}`}
-                  className="inline-block cursor-pointer px-4 py-2 rounded-md bg-[#ae1431] text-white text-sm font-medium hover:bg-[#8f1027] transition-colors"
+                  className="inline-block cursor-pointer px-4 py-2 rounded-md bg-[#ae1431] text-white text-sm font-rethink hover:bg-[#8f1027] transition-colors"
                 >
                   Choose Image
                 </label>
                 {activeSlide.imageError && (
-                  <p className="text-red-600 text-xs mt-2">{activeSlide.imageError}</p>
+                  <p className="text-red-600 text-xs mt-2">
+                    {activeSlide.imageError}
+                  </p>
                 )}
               </div>
             </div>
@@ -251,7 +313,9 @@ export default function Hero() {
           {/* Title lines */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Title Line 1</label>
+              <label className="block text-sm font-rethink mb-1">
+                Title Line 1
+              </label>
               <input
                 type="text"
                 value={activeSlide.titleLine1}
@@ -260,7 +324,9 @@ export default function Hero() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Title Line 2</label>
+              <label className="block text-sm font-rethink mb-1">
+                Title Line 2
+              </label>
               <input
                 type="text"
                 value={activeSlide.titleLine2}
@@ -270,9 +336,40 @@ export default function Hero() {
             </div>
           </div>
 
+          <div>
+            <label className="block text-sm font-rethink mb-2">
+              Subline Logo (Optional)
+            </label>
+
+            <div className="flex items-center gap-4">
+              {activeSlide.sublineLogo && (
+                <img
+                  src={activeSlide.sublineLogo}
+                  alt="Partner Logo"
+                  className="h-5 w-auto object-contain"
+                />
+              )}
+
+              <input
+                id={`subline-logo-${activeIndex}`}
+                type="file"
+                accept="image/*"
+                onChange={handleSublineLogoChange}
+                className="hidden"
+              />
+
+              <label
+                htmlFor={`subline-logo-${activeIndex}`}
+                className="cursor-pointer rounded-md bg-[#ae1431] px-4 py-2 text-white"
+              >
+                Choose Logo
+              </label>
+            </div>
+          </div>
+
           {/* Subline */}
           <div>
-            <label className="block text-sm font-medium mb-1">Subline</label>
+            <label className="block text-sm font-rethink mb-1">Subline</label>
             <input
               type="text"
               value={activeSlide.subline}
@@ -283,7 +380,9 @@ export default function Hero() {
 
           {/* Description / paragraph */}
           <div>
-            <label className="block text-sm font-medium mb-1">Description</label>
+            <label className="block text-sm font-rethink mb-1">
+              Description
+            </label>
             <textarea
               rows={4}
               value={activeSlide.description}
@@ -295,25 +394,29 @@ export default function Hero() {
           {/* Buttons */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border border-gray-200 rounded-md p-4">
-              <p className="text-sm font-semibold mb-3">Primary Button</p>
+              <p className="text-sm font-rethink mb-3">Primary Button</p>
               <label className="block text-xs text-gray-500 mb-1">Text</label>
               <input
                 type="text"
                 value={activeSlide.primaryButton.text}
-                onChange={(e) => handleButtonChange("primaryButton", "text", e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                onChange={(e) =>
+                  handleButtonChange("primaryButton", "text", e.target.value)
+                }
+                className="w-full border  border-gray-300 rounded-md px-3 py-2 text-sm"
               />
               {/* Link is intentionally not editable here — kept as-is from backend */}
             </div>
 
             <div className="border border-gray-200 rounded-md p-4">
-              <p className="text-sm font-semibold mb-3">Secondary Button</p>
+              <p className="text-sm font-rethink mb-3">Secondary Button</p>
               <label className="block text-xs text-gray-500 mb-1">Text</label>
               <input
                 type="text"
                 value={activeSlide.secondaryButton.text}
-                onChange={(e) => handleButtonChange("secondaryButton", "text", e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                onChange={(e) =>
+                  handleButtonChange("secondaryButton", "text", e.target.value)
+                }
+                className="w-full border  border-gray-300 rounded-md px-3 py-2 text-sm"
               />
               {/* Link is intentionally not editable here — kept as-is from backend */}
             </div>
@@ -324,7 +427,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setPreviewModalOpen(true)}
-              className="text-sm text-[#ae1431] underline"
+              className="text-sm text-[#ae1431] cursor-pointer underline"
             >
               Preview this slide
             </button>
@@ -338,10 +441,10 @@ export default function Hero() {
           type="button"
           onClick={handleSaveAll}
           disabled={isSaving}
-          className="px-6 py-2 rounded-md bg-[#ae1431] text-white text-sm font-medium hover:bg-[#8f1027] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-6 py-2 rounded-md cursor-pointer bg-[#ae1431] text-white text-sm font-rethink hover:bg-[#8f1027] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
         >
           {isSaving && (
-            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <span className="w-4 h-4 border-2 border-white  border-t-transparent rounded-full animate-spin" />
           )}
           {isSaving ? "Saving..." : "Save All Slides"}
         </button>
@@ -359,7 +462,7 @@ export default function Hero() {
           onClick={() => setPreviewModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-3xl mx-4 rounded-lg overflow-hidden bg-black"
+            className="relative w-full max-w-3xl mx-4  rounded-lg overflow-hidden bg-black"
             onClick={(e) => e.stopPropagation()}
           >
             <div
@@ -371,14 +474,24 @@ export default function Hero() {
               }}
             >
               <div className="bg-black/40 w-full h-full flex flex-col items-center justify-center text-center px-6 text-white">
-                <p className="font-[Playfair_Display] text-3xl md:text-5xl">
+                <p className="font-display text-3xl md:text-5xl">
                   {activeSlide.titleLine1}
                   <br />
                   {activeSlide.titleLine2}
                 </p>
-                <p className="mt-2 text-sm md:text-base text-[#F5EFE8]">
-                  {activeSlide.subline}
-                </p>
+                <div className="mt-2 flex items-center justify-center gap-2">
+                  <p className="text-sm md:text-base text-[#F5EFE8]">
+                    {activeSlide.subline}
+                  </p>
+
+                  {activeSlide.sublineLogo && (
+                    <img
+                      src={activeSlide.sublineLogo}
+                      alt="Partner Logo"
+                      className="h-5 w-auto object-contain"
+                    />
+                  )}
+                </div>
                 <p className="mt-2 max-w-xl text-xs md:text-sm text-[#F5EFE8]/80">
                   {activeSlide.description}
                 </p>
@@ -399,7 +512,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setPreviewModalOpen(false)}
-              className="absolute top-3 right-3 text-white bg-black/50 rounded-full w-8 h-8 flex items-center justify-center"
+              className="absolute top-3 right-3 text-white bg-black/50 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
             >
               ✕
             </button>

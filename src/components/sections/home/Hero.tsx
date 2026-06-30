@@ -24,7 +24,7 @@ const SLIDES = [
     subline: "Holistic, disciplined, and inclusive education for every child.",
     description:
       "A disciplined educational ecosystem nurturing academic excellence, character, and opportunity.",
-
+sublineLogo: "",
     primaryButton: {
       text: "Explore Our Institutions",
       link: "#institutions",
@@ -40,7 +40,7 @@ const SLIDES = [
     titleLine2: "Educational Ecosystem.",
     description:
       "ERAM operates an integrated educational ecosystem that supports learners across multiple stages of education.",
-
+sublineLogo: "",
     primaryButton: {
       text: "Explore Our Institutions",
       link: "#institutions",
@@ -57,7 +57,7 @@ const SLIDES = [
     titleLine2: "Trained Teachers & NSS Volunteers",
     description:
       "Under the SATYAM (WHO–AIIMS–CCET) School First Aid & CPR Project.",
-
+sublineLogo: "",
     primaryButton: {
       text: "Explore Our Institutions",
       link: "#institutions",
@@ -72,16 +72,7 @@ const SLIDES = [
     image: "/images/slide4.avif",
     titleLine1: "100% Financial",
     titleLine2: "Literacy Initiative",
-    subline: (
-      <span className="inline-flex items-center gap-2 flex-wrap">
-        In association with the State Bank of India
-        <img
-          src="/images/sbi-logo.avif"
-          alt="State Bank of India"
-          className="inline-block h-5 w-auto align-middle"
-        />
-      </span>
-    ),
+    sublineLogo: "",
     description:
       "My First Account in My Life – a 100% Financial Literacy Project",
 
@@ -105,8 +96,7 @@ export default function Hero() {
 
   const titleLine1Ref = useRef<HTMLSpanElement>(null);
   const titleLine2Ref = useRef<HTMLSpanElement>(null);
-
-  const sublineRef = useRef<HTMLParagraphElement>(null);
+const sublineRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
 
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -143,11 +133,13 @@ export default function Hero() {
             const backendSlide = res.data.slides[i];
             if (!backendSlide) return localSlide;
             return {
-              ...localSlide,           
-              ...backendSlide,          
-              subline: backendSlide.subline || localSlide.subline, 
-              image: backendSlide.image || localSlide.image,      
-            };
+  ...localSlide,
+  ...backendSlide,
+  image: backendSlide.image || localSlide.image,
+  subline: backendSlide.subline || localSlide.subline,
+  sublineLogo:
+    backendSlide.sublineLogo || localSlide.sublineLogo,
+};
           })
         );
       }
@@ -506,19 +498,38 @@ export default function Hero() {
             </h1>
 
             {/* Subline */}
-            <p
-              ref={sublineRef}
-              className="
-                mt-6
-                font-rethink
-                text-[1rem]
-                sm:text-[1.15rem]
-                md:text-[1.3rem]
-                text-white/95
-              "
-            >
-              {slide.subline}
-            </p>
+<div
+  ref={sublineRef}
+  className="
+    mt-6
+    flex
+    items-center
+    gap-3
+    flex-wrap
+    justify-center
+    xl:justify-start
+    text-white/95
+  "
+>
+  <span
+    className="
+      font-rethink
+      text-[1rem]
+      sm:text-[1.15rem]
+      md:text-[1.3rem]
+    "
+  >
+    {slide.subline}
+  </span>
+
+  {slide.sublineLogo && (
+    <img
+      src={resolveImageUrl(slide.sublineLogo)}
+      alt="Partner Logo"
+      className="h-8 w-auto object-contain"
+    />
+  )}
+</div>
 
             {/* Description */}
             <p

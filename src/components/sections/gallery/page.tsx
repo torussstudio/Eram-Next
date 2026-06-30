@@ -193,7 +193,7 @@ export default function GalleryClient() {
       >
         <button
           onClick={() => router.back()}
-          className="hero-reveal mb-8 inline-flex w-fit items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition-all duration-300 hover:border-[#ae1431] hover:bg-[#ae1431] hover:text-white cursor-pointer"
+          className="hero-reveal mb-8 inline-flex w-fit items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-sm font-rethink text-neutral-700 transition-all duration-300 hover:border-[#ae1431] hover:bg-[#ae1431] hover:text-white cursor-pointer"
         >
           <ChevronLeft size={18} />
           Back
@@ -201,14 +201,14 @@ export default function GalleryClient() {
 
         <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
-            <p className="hero-reveal text-xs md:text-sm font-semibold tracking-[0.25em] uppercase text-[#ae1431]">
+            <p className="hero-reveal text-xs md:text-sm font-display tracking-[0.25em] uppercase text-[#ae1431]">
               Moments &amp; Milestones
             </p>
             <h1 className="hero-reveal font-display mt-3 text-4xl leading-[1.02] text-[#ae1431] md:text-6xl lg:text-7xl">
               The ERAM Gallery
             </h1>
           </div>
-          <p className="hero-reveal max-w-md text-sm leading-relaxed text-neutral-700 md:text-base lg:justify-self-end lg:text-right">
+          <p className="hero-reveal max-w-md text-sm leading-relaxed text-neutral-700 font-rethink md:text-base lg:justify-self-end lg:text-right">
             A visual record of sport, culture, service, and scholarship across
             every institution in the ERAM ecosystem.
           </p>
@@ -311,7 +311,7 @@ export default function GalleryClient() {
                 <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#110508]/90 via-[#110508]/15 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <div className="flex items-end justify-between gap-2">
                     <div>
-                      <span className="mb-1 inline-block w-fit rounded-full bg-[#ae1431] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                      <span className="mb-1 inline-block w-fit rounded-full bg-[#ae1431] px-2.5 py-0.5 text-[10px] font-rethink uppercase tracking-wider text-white">
                         {TYPES.find((t) => t.id === item.type)?.label}
                       </span>
                       <p className="font-display text-lg text-white">
