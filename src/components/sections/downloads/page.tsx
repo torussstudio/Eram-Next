@@ -7,6 +7,8 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://eram-backend-ejgy.onrender.com";
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 type DownloadItem = {
@@ -19,136 +21,43 @@ type DownloadItem = {
   href: string;
 };
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+type RawDownload = {
+  _id: string;
+  title: string;
+  description: string;
+  category: "prospectus" | "forms" | "circulars" | "policies";
+  institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
+  fileType: string;
+  fileUrl: string;
+};
 
-const DOWNLOADS: DownloadItem[] = [
-  // Prospectus
-  {
-    id: "d01",
-    title: "ERAM Education Prospectus 2026–27",
-    description: "Complete institutional overview, admission criteria, and programme details across all five ERAM institutions.",
-    category: "Prospectus",
-    fileType: "PDF",
-    href: "/prospectus.pdf",
-  },
-  {
-    id: "d02",
-    title: "EASE (CBSE) School Prospectus",
-    description: "Admissions guide, curriculum structure, and fee schedule for the CBSE wing.",
-    category: "Prospectus",
-    institution: "EASE",
-    fileType: "PDF",
-    href: "/downloads/ease-prospectus.pdf",
-  },
-  {
-    id: "d03",
-    title: "MMHSS Higher Secondary Prospectus",
-    description: "Stream selection, subject combinations, and admission procedure for Plus One & Plus Two.",
-    category: "Prospectus",
-    institution: "MMHSS",
-    fileType: "PDF",
-    href: "/downloads/mmhss-prospectus.pdf",
-  },
-  {
-    id: "d04",
-    title: "MMITE Teacher Training Prospectus",
-    description: "D.El.Ed programme details, eligibility, and training curriculum for the 2026–27 batch.",
-    category: "Prospectus",
-    institution: "MMITE",
-    fileType: "PDF",
-    href: "/downloads/mmite-prospectus.pdf",
-  },
-  // Forms
-  {
-    id: "d05",
-    title: "General Admission Application Form",
-    description: "Unified admission application form applicable to MMHSS, MMPS, and AMLP institutions.",
-    category: "Forms",
-    fileType: "PDF",
-    href: "/downloads/admission-form.pdf",
-  },
-  {
-    id: "d06",
-    title: "EASE Admission Form 2026–27",
-    description: "Printable admission form for the CBSE school. Fill and submit at the admissions office.",
-    category: "Forms",
-    institution: "EASE",
-    fileType: "PDF",
-    href: "/downloads/ease-admission-form.pdf",
-  },
-  {
-    id: "d07",
-    title: "Transfer Certificate Request Form",
-    description: "Form for requesting a Transfer Certificate from the institution's administration office.",
-    category: "Forms",
-    fileType: "PDF",
-    href: "/downloads/tc-request-form.pdf",
-  },
-  {
-    id: "d08",
-    title: "Sports Arena Booking Form",
-    description: "Request form for booking the ERAM Sports Arena for events, tournaments, or group training sessions.",
-    category: "Forms",
-    fileType: "PDF",
-    href: "/downloads/sports-booking-form.pdf",
-  },
-  // Circulars
-  {
-    id: "d09",
-    title: "Academic Calendar 2026–27",
-    description: "Full-year academic calendar including exam schedules, holidays, and institutional events.",
-    category: "Circulars",
-    fileType: "PDF",
-    href: "/downloads/academic-calendar-2026.pdf",
-  },
-  {
-    id: "d10",
-    title: "Fee Structure — All Institutions",
-    description: "Consolidated fee structure for 2026–27 across EASE, MMHSS, MMPS, AMLP, and MMITE.",
-    category: "Circulars",
-    fileType: "PDF",
-    href: "/downloads/fee-structure-2026.pdf",
-  },
-  {
-    id: "d11",
-    title: "Uniform & Dress Code Policy",
-    description: "Official guidelines for student uniform, grooming standards, and dress code across institutions.",
-    category: "Circulars",
-    fileType: "PDF",
-    href: "/downloads/uniform-policy.pdf",
-  },
-  // Policies
-  {
-    id: "d12",
-    title: "Anti-Ragging Policy",
-    description: "Institutional anti-ragging framework, reporting procedures, and disciplinary provisions.",
-    category: "Policies",
-    fileType: "PDF",
-    href: "/downloads/anti-ragging-policy.pdf",
-  },
-  {
-    id: "d13",
-    title: "Student Safety Guidelines",
-    description: "Campus safety protocols, emergency procedures, and safeguarding responsibilities.",
-    category: "Policies",
-    fileType: "PDF",
-    href: "/downloads/safety-guidelines.pdf",
-  },
-  {
-    id: "d14",
-    title: "Privacy Policy",
-    description: "Data handling, student information privacy, and parent consent procedures.",
-    category: "Policies",
-    fileType: "PDF",
-    href: "/downloads/privacy-policy.pdf",
-  },
-];
+const CATEGORY_LABEL: Record<string, string> = {
+  prospectus: "Prospectus",
+  forms: "Forms",
+  circulars: "Circulars",
+  policies: "Policies",
+};
 
-const CATEGORIES = ["All", "Prospectus", "Forms", "Circulars", "Policies"] as const;
-type Category = (typeof CATEGORIES)[number];
+const INSTITUTION_LABEL: Record<string, string> = {
+  general: "General",
+  ease: "EASE",
+  mmhss: "MMHSS",
+  mmite: "MMITE",
+  mmps: "MMPS",
+  amlp: "AMLP",
+};
 
-const INSTITUTIONS = ["All Type", "General", "MMHSS", "AMLP", "MMITE", "MMPS"] as const;
-type Institution = (typeof INSTITUTIONS)[number];
+function mapDownload(d: RawDownload): DownloadItem {
+  return {
+    id: d._id,
+    title: d.title,
+    description: d.description,
+    category: CATEGORY_LABEL[d.category] || d.category,
+    institution: d.institution && d.institution !== "general" ? INSTITUTION_LABEL[d.institution] : undefined,
+    fileType: d.fileType || "PDF",
+    href: d.fileUrl,
+  };
+}
 
 // ─── Icons (Phosphor-style inline SVG — no hand-rolled illustration) ──────────
 
@@ -204,7 +113,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
         },
       }
     );
-  }, []);
+  }, [item.id]);
 
   return (
     <div
@@ -214,14 +123,12 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
       style={{ opacity: 0 }}
       className="group relative flex flex-col border border-white/[0.07] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.14] transition-all duration-300 cursor-pointer"
     >
-      {/* top stripe accent on hover */}
       <div
         className="absolute top-0 left-0 h-[2px] bg-[#ae1431] transition-all duration-500"
         style={{ width: hovered ? "100%" : "0%" }}
       />
 
       <div className="p-6 flex flex-col gap-4 flex-1">
-        {/* Meta row */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {item.institution && (
@@ -235,21 +142,20 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
           </div>
         </div>
 
-        {/* Title */}
         <h3 className="font-display text-[1.1rem] leading-snug text-white/90 group-hover:text-white transition-colors duration-200">
           {item.title}
         </h3>
 
-        {/* Description */}
         <p className="font-rethink text-sm text-white/40 leading-relaxed flex-1">
           {item.description}
         </p>
       </div>
 
-      {/* Download CTA */}
       <a
         href={item.href}
         download
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
         className="flex items-center justify-between px-6 py-4 border-t border-white/[0.06] group-hover:border-white/[0.1] transition-colors duration-300"
       >
@@ -268,8 +174,19 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function DownloadsPage() {
+  const [downloads, setDownloads] = useState<DownloadItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const CATEGORIES = ["All", "Prospectus", "Forms", "Circulars", "Policies"] as const;
+  type Category = (typeof CATEGORIES)[number];
+
+  const INSTITUTIONS = ["All Type", "General", "EASE", "MMHSS", "MMITE", "MMPS", "AMLP"] as const;
+  type Institution = (typeof INSTITUTIONS)[number];
+
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [activeInstitution, setActiveInstitution] = useState<Institution>("All Type");
+
   const heroRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -277,10 +194,39 @@ export default function DownloadsPage() {
   const filterRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
 
-  const matchesInstitution = (d: DownloadItem, inst: Institution) =>
-    inst === "All Type" || (inst === "General" ? !d.institution : d.institution === inst);
+  // ── Fetch downloads from backend ──
+  useEffect(() => {
+    const controller = new AbortController();
 
-  const filtered = DOWNLOADS.filter(
+    async function fetchDownloads() {
+      try {
+        setLoading(true);
+        setError(null);
+        const res = await fetch(`${BACKEND_URL}/api/downloads`, {
+          signal: controller.signal,
+          cache: "no-store",
+        });
+        if (!res.ok) throw new Error("Failed to fetch downloads");
+        const data: RawDownload[] = await res.json();
+        setDownloads(data.map(mapDownload));
+      } catch (err) {
+        if ((err as Error).name !== "AbortError") {
+          setError("Could not load documents. Please try again later.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchDownloads();
+    return () => controller.abort();
+  }, []);
+
+  const matchesInstitution = (d: DownloadItem, inst: Institution) =>
+    inst === "All Type" ||
+    (inst === "General" ? !d.institution : d.institution === inst);
+
+  const filtered = downloads.filter(
     (d) =>
       (activeCategory === "All" || d.category === activeCategory) &&
       matchesInstitution(d, activeInstitution)
@@ -314,12 +260,12 @@ export default function DownloadsPage() {
   }, []);
 
   const countPerCategory = (cat: Category) =>
-    DOWNLOADS.filter(
+    downloads.filter(
       (d) => (cat === "All" || d.category === cat) && matchesInstitution(d, activeInstitution)
     ).length;
 
   const countPerInstitution = (inst: Institution) =>
-    DOWNLOADS.filter(
+    downloads.filter(
       (d) =>
         (activeCategory === "All" || d.category === activeCategory) &&
         matchesInstitution(d, inst)
@@ -333,7 +279,6 @@ export default function DownloadsPage() {
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative pt-36 pb-16 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
 
-        {/* Eyebrow */}
         <div ref={eyebrowRef} className="flex items-center gap-4 mb-8" style={{ opacity: 0 }}>
           <span className="font-rethink text-[11px] tracking-[0.22em] uppercase text-white/30">
             Downloads
@@ -344,7 +289,6 @@ export default function DownloadsPage() {
           </span>
         </div>
 
-        {/* Headline */}
         <h1
           ref={headlineRef}
           className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] tracking-tight text-white overflow-hidden"
@@ -358,7 +302,6 @@ export default function DownloadsPage() {
           ))}
         </h1>
 
-        {/* Sub */}
         <p
           ref={subRef}
           className="font-rethink mt-6 text-base text-white/40 max-w-[520px] leading-relaxed"
@@ -367,7 +310,6 @@ export default function DownloadsPage() {
           Official documents, forms, prospectuses, and policy circulars from ERAM Education and its institutions. All files are provided as PDF downloads.
         </p>
 
-        {/* Divider */}
         <div
           ref={dividerRef}
           className="mt-12 h-px bg-white/[0.08] origin-left"
@@ -382,7 +324,6 @@ export default function DownloadsPage() {
           className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between"
           style={{ opacity: 0 }}
         >
-          {/* Category filters (left) */}
           <div className="flex items-center gap-0 overflow-x-auto scrollbar-none">
             {CATEGORIES.map((cat) => (
               <button
@@ -404,7 +345,6 @@ export default function DownloadsPage() {
             ))}
           </div>
 
-          {/* Institution filters (right) */}
           <div className="flex items-center gap-0 overflow-x-auto scrollbar-none border-t md:border-t-0 md:border-l border-white/[0.06]">
             {INSTITUTIONS.map((inst) => (
               <button
@@ -431,33 +371,59 @@ export default function DownloadsPage() {
       {/* ── Grid ─────────────────────────────────────────────── */}
       <section className="px-6 md:px-12 lg:px-20 py-16 max-w-[1400px] mx-auto">
 
-        {/* Category heading */}
         <div className="flex items-baseline justify-between mb-10">
           <div>
             <span className="font-rethink text-[11px] tracking-[0.2em] uppercase text-white/25">
               {activeCategory === "All" ? "All Resources" : activeCategory}
               {activeInstitution !== "All Type" ? ` · ${activeInstitution}` : ""}
             </span>
-            <span className="font-rethink ml-3 text-[11px] text-white/20">
-              — {filtered.length} {filtered.length === 1 ? "document" : "documents"}
-            </span>
+            {!loading && (
+              <span className="font-rethink ml-3 text-[11px] text-white/20">
+                — {filtered.length} {filtered.length === 1 ? "document" : "documents"}
+              </span>
+            )}
           </div>
         </div>
 
+        {/* Loading state */}
+        {loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.05]">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="bg-[#0a0a0a] p-6 h-[220px] animate-pulse">
+                <div className="h-3 w-16 bg-white/[0.06] mb-6" />
+                <div className="h-4 w-3/4 bg-white/[0.06] mb-3" />
+                <div className="h-3 w-full bg-white/[0.04] mb-2" />
+                <div className="h-3 w-2/3 bg-white/[0.04]" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Error state */}
+        {!loading && error && (
+          <div className="flex flex-col items-center justify-center py-24 text-center gap-4">
+            <p className="font-rethink text-white/30 text-sm tracking-widest uppercase">
+              {error}
+            </p>
+          </div>
+        )}
+
         {/* Cards grid */}
-        <div
-          key={`${activeCategory}-${activeInstitution}`}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.05]"
-        >
-          {filtered.map((item, i) => (
-            <div key={item.id} className="bg-[#0a0a0a]">
-              <DownloadCard item={item} index={i} />
-            </div>
-          ))}
-        </div>
+        {!loading && !error && (
+          <div
+            key={`${activeCategory}-${activeInstitution}`}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.05]"
+          >
+            {filtered.map((item, i) => (
+              <div key={item.id} className="bg-[#0a0a0a]">
+                <DownloadCard item={item} index={i} />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Empty state */}
-        {filtered.length === 0 && (
+        {!loading && !error && filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <p className="font-rethink text-white/20 text-sm tracking-widest uppercase">
               No documents in this category yet.

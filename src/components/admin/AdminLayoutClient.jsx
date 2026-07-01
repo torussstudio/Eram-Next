@@ -19,10 +19,9 @@ import {
   Settings,
   User,
   X,
-  Sparkles,
   Command,
   HelpCircle,
-  ShieldCheck
+  Download,
 } from "lucide-react";
 
 const navItems = [
@@ -32,6 +31,8 @@ const navItems = [
   { name: "Institutions", path: "/admin/institutions", icon: School },
   { name: "Sports Arena", path: "/admin/sports-arena", icon: Trophy },
   { name: "Gallery", path: "/admin/gallery", icon: ImageIcon },
+  { name: "Downloads", path: "/admin/downloads", icon: Download },
+
 ];
 
 // Simulated notifications
@@ -518,3 +519,4 @@ export default function AdminLayoutClient({ children }) {
     </div>
   );
 }
+
