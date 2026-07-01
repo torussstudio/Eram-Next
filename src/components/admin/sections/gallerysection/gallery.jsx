@@ -25,13 +25,6 @@ const MAX_WIDTH = 1920;
 const MAX_HEIGHT = 1920;
 const JPEG_QUALITY = 0.8;
 
-/**
- * Compresses an image file client-side using a canvas before upload.
- * - Resizes down to MAX_WIDTH/MAX_HEIGHT (keeps aspect ratio, never upscales)
- * - Re-encodes as JPEG at JPEG_QUALITY
- * Falls back to the original file if compression fails for any reason
- * (e.g. non-image file, browser quirk).
- */
 async function compressImage(file) {
   // Skip compression for non-image files or already-tiny files (<150KB)
   if (!file.type.startsWith('image/') || file.size < 150 * 1024) {

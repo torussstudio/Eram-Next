@@ -40,6 +40,7 @@ function InstitutionsDropdown({
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
   const T = "250ms cubic-bezier(0.4,0,0.2,1)";
   const pathname = usePathname();
 
@@ -52,8 +53,31 @@ function InstitutionsDropdown({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimer.current = setTimeout(() => setOpen(false), 150);
+  };
+
   return (
-    <div ref={ref} className="relative">
+     <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button
         onClick={() => setOpen((v) => !v)}
         style={{
@@ -142,10 +166,11 @@ function InstitutionsDropdown({
                 <span
                   className={`
     text-[0.85rem]
-    
+    ${isCurrentInstitution ? "font-display" : ""}
     tracking-[0.02em]
     flex-1
     transition-colors duration-200
+    cursor-pointer
     ${isCurrentInstitution ? "text-[#ae1431]" : "text-[#111]"}
   `}
                 >
@@ -323,7 +348,7 @@ export default function Navbar() {
     let current = 0;
     let rafId: number | null = null;
     let isCleanedUp = false;
-   let startTimer: NodeJS.Timeout | undefined;
+    let startTimer: NodeJS.Timeout | undefined;
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
@@ -363,36 +388,36 @@ export default function Navbar() {
   }, []);
 
   /* ── Nav click helper ─────────────────────────────────────────── */
-const handleNavClick = (path: string, closeMobile = false) => {
-  if (closeMobile) setOpen(false);
+  const handleNavClick = (path: string, closeMobile = false) => {
+    if (closeMobile) setOpen(false);
 
-  if (path.startsWith("http")) {
-    window.open(path, "_blank", "noopener,noreferrer");
-    return;
-  }
-
-  if (path.startsWith("#")) {
-    const targetId = path.replace("#", "");
-
-    if (isHome) {
-      smoothScrollTo(targetId);
-      setActiveSection(path);
-    } else {
-      router.push("/");
-
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          smoothScrollTo(targetId);
-          setActiveSection(path);
-        }, 100);
-      });
+    if (path.startsWith("http")) {
+      window.open(path, "_blank", "noopener,noreferrer");
+      return;
     }
 
-    return;
-  }
+    if (path.startsWith("#")) {
+      const targetId = path.replace("#", "");
 
-  startPageTransition(path);
-};
+      if (isHome) {
+        smoothScrollTo(targetId);
+        setActiveSection(path);
+      } else {
+        router.push("/");
+
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            smoothScrollTo(targetId);
+            setActiveSection(path);
+          }, 100);
+        });
+      }
+
+      return;
+    }
+
+    startPageTransition(path);
+  };
 
   /* ── Render desktop nav items ─────────────────────────────────── */
   const renderNavItems = () =>

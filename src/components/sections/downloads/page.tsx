@@ -16,7 +16,6 @@ type DownloadItem = {
   category: string;
   institution?: string;
   fileType: string;
-  fileSize: string;
   href: string;
 };
 
@@ -30,7 +29,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Complete institutional overview, admission criteria, and programme details across all five ERAM institutions.",
     category: "Prospectus",
     fileType: "PDF",
-    fileSize: "4.2 MB",
     href: "/prospectus.pdf",
   },
   {
@@ -40,7 +38,6 @@ const DOWNLOADS: DownloadItem[] = [
     category: "Prospectus",
     institution: "EASE",
     fileType: "PDF",
-    fileSize: "2.1 MB",
     href: "/downloads/ease-prospectus.pdf",
   },
   {
@@ -50,7 +47,6 @@ const DOWNLOADS: DownloadItem[] = [
     category: "Prospectus",
     institution: "MMHSS",
     fileType: "PDF",
-    fileSize: "1.8 MB",
     href: "/downloads/mmhss-prospectus.pdf",
   },
   {
@@ -60,7 +56,6 @@ const DOWNLOADS: DownloadItem[] = [
     category: "Prospectus",
     institution: "MMITE",
     fileType: "PDF",
-    fileSize: "1.5 MB",
     href: "/downloads/mmite-prospectus.pdf",
   },
   // Forms
@@ -70,7 +65,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Unified admission application form applicable to MMHSS, MMPS, and AMLP institutions.",
     category: "Forms",
     fileType: "PDF",
-    fileSize: "320 KB",
     href: "/downloads/admission-form.pdf",
   },
   {
@@ -80,7 +74,6 @@ const DOWNLOADS: DownloadItem[] = [
     category: "Forms",
     institution: "EASE",
     fileType: "PDF",
-    fileSize: "280 KB",
     href: "/downloads/ease-admission-form.pdf",
   },
   {
@@ -89,7 +82,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Form for requesting a Transfer Certificate from the institution's administration office.",
     category: "Forms",
     fileType: "PDF",
-    fileSize: "150 KB",
     href: "/downloads/tc-request-form.pdf",
   },
   {
@@ -98,7 +90,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Request form for booking the ERAM Sports Arena for events, tournaments, or group training sessions.",
     category: "Forms",
     fileType: "PDF",
-    fileSize: "190 KB",
     href: "/downloads/sports-booking-form.pdf",
   },
   // Circulars
@@ -108,7 +99,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Full-year academic calendar including exam schedules, holidays, and institutional events.",
     category: "Circulars",
     fileType: "PDF",
-    fileSize: "560 KB",
     href: "/downloads/academic-calendar-2026.pdf",
   },
   {
@@ -117,7 +107,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Consolidated fee structure for 2026–27 across EASE, MMHSS, MMPS, AMLP, and MMITE.",
     category: "Circulars",
     fileType: "PDF",
-    fileSize: "420 KB",
     href: "/downloads/fee-structure-2026.pdf",
   },
   {
@@ -126,7 +115,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Official guidelines for student uniform, grooming standards, and dress code across institutions.",
     category: "Circulars",
     fileType: "PDF",
-    fileSize: "250 KB",
     href: "/downloads/uniform-policy.pdf",
   },
   // Policies
@@ -136,7 +124,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Institutional anti-ragging framework, reporting procedures, and disciplinary provisions.",
     category: "Policies",
     fileType: "PDF",
-    fileSize: "310 KB",
     href: "/downloads/anti-ragging-policy.pdf",
   },
   {
@@ -145,7 +132,6 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Campus safety protocols, emergency procedures, and safeguarding responsibilities.",
     category: "Policies",
     fileType: "PDF",
-    fileSize: "380 KB",
     href: "/downloads/safety-guidelines.pdf",
   },
   {
@@ -154,13 +140,15 @@ const DOWNLOADS: DownloadItem[] = [
     description: "Data handling, student information privacy, and parent consent procedures.",
     category: "Policies",
     fileType: "PDF",
-    fileSize: "220 KB",
     href: "/downloads/privacy-policy.pdf",
   },
 ];
 
 const CATEGORIES = ["All", "Prospectus", "Forms", "Circulars", "Policies"] as const;
 type Category = (typeof CATEGORIES)[number];
+
+const INSTITUTIONS = ["All Type", "General", "MMHSS", "AMLP", "MMITE", "MMPS"] as const;
+type Institution = (typeof INSTITUTIONS)[number];
 
 // ─── Icons (Phosphor-style inline SVG — no hand-rolled illustration) ──────────
 
@@ -241,9 +229,6 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
                 {item.institution}
               </span>
             )}
-            <span className="font-rethink text-[10px] tracking-[0.16em] uppercase text-white/30">
-              {item.fileType} · {item.fileSize}
-            </span>
           </div>
           <div className="flex items-center gap-1 text-white/20 group-hover:text-[#ae1431] transition-colors duration-300">
             <IconFile className="opacity-60" />
@@ -284,6 +269,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
 
 export default function DownloadsPage() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [activeInstitution, setActiveInstitution] = useState<Institution>("All Type");
   const heroRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -291,8 +277,13 @@ export default function DownloadsPage() {
   const filterRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
 
+  const matchesInstitution = (d: DownloadItem, inst: Institution) =>
+    inst === "All Type" || (inst === "General" ? !d.institution : d.institution === inst);
+
   const filtered = DOWNLOADS.filter(
-    (d) => activeCategory === "All" || d.category === activeCategory
+    (d) =>
+      (activeCategory === "All" || d.category === activeCategory) &&
+      matchesInstitution(d, activeInstitution)
   );
 
   // Hero entrance
@@ -323,7 +314,16 @@ export default function DownloadsPage() {
   }, []);
 
   const countPerCategory = (cat: Category) =>
-    cat === "All" ? DOWNLOADS.length : DOWNLOADS.filter((d) => d.category === cat).length;
+    DOWNLOADS.filter(
+      (d) => (cat === "All" || d.category === cat) && matchesInstitution(d, activeInstitution)
+    ).length;
+
+  const countPerInstitution = (inst: Institution) =>
+    DOWNLOADS.filter(
+      (d) =>
+        (activeCategory === "All" || d.category === activeCategory) &&
+        matchesInstitution(d, inst)
+    ).length;
 
   const headlineWords = ["Resources &", "Downloads"];
 
@@ -379,27 +379,52 @@ export default function DownloadsPage() {
       <section className="sticky top-0 z-20 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/[0.06] px-6 md:px-12 lg:px-20">
         <div
           ref={filterRef}
-          className="max-w-[1400px] mx-auto flex items-center gap-0 overflow-x-auto scrollbar-none py-0"
+          className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between"
           style={{ opacity: 0 }}
         >
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`
-                font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
-                ${activeCategory === cat
-                  ? "text-white border-[#ae1431]"
-                  : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
-                }
-              `}
-            >
-              {cat}
-              <span className={`font-rethink text-[9px] transition-colors duration-200 ${activeCategory === cat ? "text-[#ae1431]" : "text-white/20"}`}>
-                {countPerCategory(cat)}
-              </span>
-            </button>
-          ))}
+          {/* Category filters (left) */}
+          <div className="flex items-center gap-0 overflow-x-auto scrollbar-none">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`
+                  font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
+                  ${activeCategory === cat
+                    ? "text-white border-[#ae1431]"
+                    : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
+                  }
+                `}
+              >
+                {cat}
+                <span className={`font-rethink text-[9px] transition-colors duration-200 ${activeCategory === cat ? "text-[#ae1431]" : "text-white/20"}`}>
+                  {countPerCategory(cat)}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Institution filters (right) */}
+          <div className="flex items-center gap-0 overflow-x-auto scrollbar-none border-t md:border-t-0 md:border-l border-white/[0.06]">
+            {INSTITUTIONS.map((inst) => (
+              <button
+                key={inst}
+                onClick={() => setActiveInstitution(inst)}
+                className={`
+                  font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
+                  ${activeInstitution === inst
+                    ? "text-white border-[#ae1431]"
+                    : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
+                  }
+                `}
+              >
+                {inst}
+                <span className={`font-rethink text-[9px] transition-colors duration-200 ${activeInstitution === inst ? "text-[#ae1431]" : "text-white/20"}`}>
+                  {countPerInstitution(inst)}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -411,6 +436,7 @@ export default function DownloadsPage() {
           <div>
             <span className="font-rethink text-[11px] tracking-[0.2em] uppercase text-white/25">
               {activeCategory === "All" ? "All Resources" : activeCategory}
+              {activeInstitution !== "All Type" ? ` · ${activeInstitution}` : ""}
             </span>
             <span className="font-rethink ml-3 text-[11px] text-white/20">
               — {filtered.length} {filtered.length === 1 ? "document" : "documents"}
@@ -420,7 +446,7 @@ export default function DownloadsPage() {
 
         {/* Cards grid */}
         <div
-          key={activeCategory}
+          key={`${activeCategory}-${activeInstitution}`}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.05]"
         >
           {filtered.map((item, i) => (
