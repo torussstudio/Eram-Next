@@ -8,7 +8,6 @@ import {
   Filter, 
   ChevronLeft, 
   ChevronRight, 
-  MoreVertical, 
   Eye, 
   Edit2, 
   Calendar,
@@ -20,11 +19,11 @@ export const PageHeader = memo(function PageHeader({ title, description, childre
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#F5EFE8] font-['Agency'] uppercase tracking-widest">
+        <h1 className="text-2xl md:text-3xl  tracking-tight text-[#F5EFE8] font-display uppercase tracking-widest">
           {title}
         </h1>
         {description && (
-          <p className="text-sm text-zinc-400 mt-1 font-light">
+          <p className="text-sm text-zinc-400 mt-1 font-rethink">
             {description}
           </p>
         )}
@@ -46,18 +45,18 @@ export const StatCard = memo(function StatCard({ title, value, change, changeTyp
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#c5a880]/5 to-transparent rounded-full blur-2xl group-hover:from-[#ae1431]/10 transition-[background-color] duration-500 pointer-events-none" />
       
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">{title}</span>
+        <span className=" uppercase tracking-wider text-zinc-500">{title}</span>
         <div className="p-2.5 rounded-xl bg-zinc-950/80 border border-[#c5a880]/15 text-[#c5a880] group-hover:text-[#F5EFE8] group-hover:bg-[#ae1431]/20 group-hover:border-[#ae1431]/30 transition-[colors,background-color] duration-300">
           <Icon size={18} />
         </div>
       </div>
       
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl md:text-3xl font-bold text-[#F5EFE8] tracking-tight">{value}</span>
+        <span className="text-2xl md:text-3xl  text-[#F5EFE8] tracking-tight">{value}</span>
       </div>
       
       <div className="flex items-center gap-1.5 mt-3">
-        <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-bold ${
+        <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] ${
           isPositive 
             ? "bg-[#c5a880]/10 text-[#c5a880]" 
             : "bg-[#ae1431]/10 text-[#ae1431]"
@@ -65,7 +64,7 @@ export const StatCard = memo(function StatCard({ title, value, change, changeTyp
           {isPositive ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
           {change}
         </span>
-        <span className="text-[11px] text-zinc-500 font-light">{timeRange}</span>
+        <span className="text-[11px] text-zinc-500 ">{timeRange}</span>
       </div>
     </div>
   );
@@ -78,11 +77,11 @@ export const ChartCard = memo(function ChartCard({ title, subtitle, type = "line
     <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-wider">{title}</h3>
-          {subtitle && <p className="text-xs text-zinc-500 mt-0.5">{subtitle}</p>}
+          <h3 className=" text-zinc-200 uppercase tracking-wider">{title}</h3>
+          {subtitle && <p className=" text-zinc-500 mt-0.5">{subtitle}</p>}
         </div>
         <div className="flex items-center gap-1.5 p-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[10px]">
-          <button className="px-2.5 py-1 rounded bg-zinc-900 text-zinc-300 font-medium transition-colors">1W</button>
+          <button className="px-2.5 py-1 rounded bg-zinc-900 text-zinc-300  transition-colors">1W</button>
           <button className="px-2.5 py-1 rounded text-zinc-500 hover:text-zinc-300 transition-colors">1M</button>
           <button className="px-2.5 py-1 rounded text-zinc-500 hover:text-zinc-300 transition-colors">1Y</button>
         </div>
@@ -131,7 +130,7 @@ export const ChartCard = memo(function ChartCard({ title, subtitle, type = "line
           </svg>
 
           {/* X Axis Labels */}
-          <div className="flex justify-between text-[9px] text-zinc-600 font-semibold tracking-wider mt-4">
+          <div className="flex justify-between text-[9px] text-zinc-600 tracking-wider mt-4">
             <span>MON</span>
             <span>TUE</span>
             <span>WED</span>
@@ -151,7 +150,7 @@ export const ChartCard = memo(function ChartCard({ title, subtitle, type = "line
                   className="w-full rounded-t-[4px] bg-gradient-to-t from-[#ae1431] to-[#c5a880] group-hover:brightness-125 transition-[filter,brightness] duration-300 shadow-[0_0_12px_rgba(174,20,49,0.2)]" 
                 />
               </div>
-              <span className="text-[9px] text-zinc-500 uppercase tracking-widest font-medium">{bar.label}</span>
+              <span className="text-[9px] text-zinc-500 uppercase tracking-widest">{bar.label}</span>
             </div>
           ))}
         </div>
@@ -218,7 +217,7 @@ export const DataTable = memo(function DataTable({ columns, data, searchField, f
             <div className="flex items-center gap-1.5 p-1 bg-zinc-950 border border-zinc-800 rounded-xl text-[10px]">
               <button
                 onClick={() => { setActiveFilter("all"); setCurrentPage(1); }}
-                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg transition-all ${
                   activeFilter === "all" 
                     ? "bg-zinc-900 text-[#c5a880]" 
                     : "text-zinc-500 hover:text-zinc-300"
@@ -230,7 +229,7 @@ export const DataTable = memo(function DataTable({ columns, data, searchField, f
                 <button
                   key={opt.value}
                   onClick={() => { setActiveFilter(opt.value); setCurrentPage(1); }}
-                  className={`px-3 py-1 rounded-lg font-semibold transition-all uppercase tracking-wider ${
+                  className={`px-3 py-1 rounded-lg transition-all uppercase tracking-wider ${
                     activeFilter === opt.value 
                       ? "bg-zinc-900 text-[#c5a880]" 
                       : "text-zinc-500 hover:text-zinc-300"
@@ -250,11 +249,11 @@ export const DataTable = memo(function DataTable({ columns, data, searchField, f
           <thead>
             <tr className="border-b border-[#c5a880]/10 bg-zinc-950/50">
               {columns.map((col, idx) => (
-                <th key={idx} className="px-6 py-4 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                <th key={idx} className="px-6 py-4 text-[10px] text-zinc-400 uppercase tracking-widest">
                   {col.header}
                 </th>
               ))}
-              <th className="px-6 py-4 text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-right">
+              <th className="px-6 py-4 text-[10px] text-zinc-400 uppercase tracking-widest text-right">
                 Actions
               </th>
             </tr>
@@ -264,7 +263,7 @@ export const DataTable = memo(function DataTable({ columns, data, searchField, f
               paginatedData.map((row, rIdx) => (
                 <tr key={rIdx} className="hover:bg-zinc-900/20 transition-colors duration-150">
                   {columns.map((col, cIdx) => (
-                    <td key={cIdx} className="px-6 py-4 text-xs font-medium text-zinc-300 whitespace-nowrap">
+                    <td key={cIdx} className="px-6 py-4 text-zinc-300 whitespace-nowrap">
                       {col.render ? col.render(row) : row[col.accessor]}
                     </td>
                   ))}
@@ -332,8 +331,8 @@ export const EmptyState = memo(function EmptyState({ title = "No data available"
       <div className="p-4 rounded-full bg-zinc-900 border border-[#c5a880]/15 text-[#c5a880] mb-4 shadow-[0_0_15px_rgba(197,168,128,0.1)]">
         <AlertCircle size={24} />
       </div>
-      <h4 className="text-sm font-bold text-zinc-300 uppercase tracking-wider">{title}</h4>
-      <p className="text-xs text-zinc-500 mt-1 max-w-xs leading-normal font-light">{description}</p>
+      <h4 className=" text-zinc-300 uppercase tracking-wider">{title}</h4>
+      <p className=" text-zinc-500 mt-1 max-w-xs leading-normal">{description}</p>
     </div>
   );
 });
@@ -342,7 +341,7 @@ export const EmptyState = memo(function EmptyState({ title = "No data available"
 export const ActivityFeed = memo(function ActivityFeed({ activities }) {
   return (
     <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
-      <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-wider mb-6 flex items-center gap-2">
+      <h3 className="text-sm text-zinc-200 uppercase tracking-wider mb-6 flex items-center gap-2">
         <span className="w-1.5 h-3 bg-[#ae1431] rounded-full shadow-[0_0_8px_#ae1431]" />
         Recent Logs & Activities
       </h3>
@@ -354,7 +353,7 @@ export const ActivityFeed = memo(function ActivityFeed({ activities }) {
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between gap-4">
-                <p className="text-xs font-semibold text-zinc-300 group-hover:text-zinc-100 transition-colors truncate">
+                <p className=" text-zinc-300 group-hover:text-zinc-100 transition-colors truncate">
                   {act.title}
                 </p>
                 <span className="text-[10px] text-zinc-500 whitespace-nowrap">{act.time}</span>

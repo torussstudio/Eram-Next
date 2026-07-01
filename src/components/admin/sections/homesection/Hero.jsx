@@ -257,7 +257,7 @@ export default function Hero() {
             key={i}
             type="button"
             onClick={() => setActiveIndex(i)}
-            className={`px-4 py-2 text-sm font-rethink cursor-pointer border-b-2 transition-colors ${
+            className={`px-4 py-2  font-rethink cursor-pointer border-b-2 transition-colors ${
               activeIndex === i
                 ? "border-[#ae1431] text-[#ae1431]"
                 : "border-transparent text-gray-500 hover:text-[#ae1431]"
@@ -272,7 +272,7 @@ export default function Hero() {
         <div className="space-y-6">
           {/* Image upload */}
           <div>
-            <label className="block text-sm font-rethink mb-2">
+            <label className="block font-rethink mb-2">
               Slide Image (max 500KB — JPG, PNG, WEBP, AVIF)
             </label>
             <div className="flex items-start gap-4">
@@ -284,7 +284,7 @@ export default function Hero() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <span className="text-xs text-gray-400">No image</span>
+                  <span className=" text-white">No image</span>
                 )}
               </div>
               <div>
@@ -297,12 +297,12 @@ export default function Hero() {
                 />
                 <label
                   htmlFor={`hero-image-input-${activeIndex}`}
-                  className="inline-block cursor-pointer px-4 py-2 rounded-md bg-[#ae1431] text-white text-sm font-rethink hover:bg-[#8f1027] transition-colors"
+                  className="inline-block cursor-pointer px-4 py-2 rounded-md bg-[#ae1431] text-white  font-rethink hover:bg-[#8f1027] transition-colors"
                 >
                   Choose Image
                 </label>
                 {activeSlide.imageError && (
-                  <p className="text-red-600 text-xs mt-2">
+                  <p className="text-red-600  mt-2">
                     {activeSlide.imageError}
                   </p>
                 )}
@@ -313,31 +313,31 @@ export default function Hero() {
           {/* Title lines */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-rethink mb-1">
+              <label className="block font-rethink mb-1">
                 Title Line 1
               </label>
               <input
                 type="text"
                 value={activeSlide.titleLine1}
                 onChange={(e) => handleTextChange("titleLine1", e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
             </div>
             <div>
-              <label className="block text-sm font-rethink mb-1">
+              <label className="block font-rethink mb-1">
                 Title Line 2
               </label>
               <input
                 type="text"
                 value={activeSlide.titleLine2}
                 onChange={(e) => handleTextChange("titleLine2", e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-rethink mb-2">
+            <label className="block font-rethink mb-2">
               Subline Logo (Optional)
             </label>
 
@@ -369,54 +369,54 @@ export default function Hero() {
 
           {/* Subline */}
           <div>
-            <label className="block text-sm font-rethink mb-1">Subline</label>
+            <label className="block font-rethink mb-1">Subline</label>
             <input
               type="text"
               value={activeSlide.subline}
               onChange={(e) => handleTextChange("subline", e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+              className="w-full border border-gray-300 rounded-md px-3 py-2"
             />
           </div>
 
           {/* Description / paragraph */}
           <div>
-            <label className="block text-sm font-rethink mb-1">
+            <label className="block font-rethink mb-1">
               Description
             </label>
             <textarea
               rows={4}
               value={activeSlide.description}
               onChange={(e) => handleTextChange("description", e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm resize-none"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 resize-none"
             />
           </div>
 
           {/* Buttons */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border border-gray-200 rounded-md p-4">
-              <p className="text-sm font-rethink mb-3">Primary Button</p>
-              <label className="block text-xs text-gray-500 mb-1">Text</label>
+              <p className="font-rethink mb-3">Primary Button</p>
+              <label className="block text-white mb-1">Text</label>
               <input
                 type="text"
                 value={activeSlide.primaryButton.text}
                 onChange={(e) =>
                   handleButtonChange("primaryButton", "text", e.target.value)
                 }
-                className="w-full border  border-gray-300 rounded-md px-3 py-2 text-sm"
+                className="w-full border  border-gray-300 rounded-md px-3 py-2"
               />
               {/* Link is intentionally not editable here — kept as-is from backend */}
             </div>
 
             <div className="border border-gray-200 rounded-md p-4">
-              <p className="text-sm font-rethink mb-3">Secondary Button</p>
-              <label className="block text-xs text-gray-500 mb-1">Text</label>
+              <p className="font-rethink mb-3">Secondary Button</p>
+              <label className="block  text-white mb-1">Text</label>
               <input
                 type="text"
                 value={activeSlide.secondaryButton.text}
                 onChange={(e) =>
                   handleButtonChange("secondaryButton", "text", e.target.value)
                 }
-                className="w-full border  border-gray-300 rounded-md px-3 py-2 text-sm"
+                className="w-full border  border-gray-300 rounded-md px-3 py-2"
               />
               {/* Link is intentionally not editable here — kept as-is from backend */}
             </div>
@@ -427,7 +427,7 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setPreviewModalOpen(true)}
-              className="text-sm text-[#ae1431] cursor-pointer underline"
+              className="text-[#ae1431] cursor-pointer underline"
             >
               Preview this slide
             </button>
@@ -441,7 +441,7 @@ export default function Hero() {
           type="button"
           onClick={handleSaveAll}
           disabled={isSaving}
-          className="px-6 py-2 rounded-md cursor-pointer bg-[#ae1431] text-white text-sm font-rethink hover:bg-[#8f1027] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-6 py-2 rounded-md cursor-pointer bg-[#ae1431] text-white font-rethink hover:bg-[#8f1027] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
         >
           {isSaving && (
             <span className="w-4 h-4 border-2 border-white  border-t-transparent rounded-full animate-spin" />
@@ -449,9 +449,9 @@ export default function Hero() {
           {isSaving ? "Saving..." : "Save All Slides"}
         </button>
 
-        {saveError && <p className="text-red-600 text-sm">{saveError}</p>}
+        {saveError && <p className="text-red-600">{saveError}</p>}
         {saveSuccess && !saveError && (
-          <p className="text-green-600 text-sm">Saved successfully.</p>
+          <p className="text-green-600">Saved successfully.</p>
         )}
       </div>
 
@@ -480,7 +480,7 @@ export default function Hero() {
                   {activeSlide.titleLine2}
                 </p>
                 <div className="mt-2 flex items-center justify-center gap-2">
-                  <p className="text-sm md:text-base text-[#F5EFE8]">
+                  <p className="md:text-base text-[#F5EFE8]">
                     {activeSlide.subline}
                   </p>
 

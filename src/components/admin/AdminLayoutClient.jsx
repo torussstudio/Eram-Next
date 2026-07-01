@@ -101,7 +101,7 @@ export default function AdminLayoutClient({ children }) {
   const activeItem = navItems.find((item) => pathname.startsWith(item.path)) || { name: "Admin" };
 
   return (
-    <div className="min-h-screen bg-[#070709] text-zinc-100 flex font-['Rethink_Sans'] selection:bg-[#ae1431]/30 selection:text-[#F5EFE8]">
+    <div className="min-h-screen bg-[#070709] text-zinc-100 flex font-rethink selection:bg-[#ae1431]/30 selection:text-[#F5EFE8]">
       {/* Sidebar - Desktop */}
       <aside
         className={`fixed top-0 left-0 h-screen z-30 bg-[#0c0c0f] border-r border-[#c5a880]/10 transition-[width] duration-300 ease-in-out hidden md:flex flex-col ${
@@ -112,12 +112,12 @@ export default function AdminLayoutClient({ children }) {
         <div className="h-20 flex items-center px-6 border-b border-[#c5a880]/10 justify-between">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#ae1431] flex items-center justify-center border border-[#c5a880]/20 shadow-[0_0_15px_rgba(174,20,49,0.3)]">
-              <span className="font-['Agency'] font-bold text-lg text-[#F5EFE8] tracking-widest">E</span>
+              <span className="font-display text-lg text-[#F5EFE8] tracking-widest">E</span>
             </div>
             {!isCollapsed && (
               <div className="flex flex-col leading-none animate-[fadeIn_0.2s_ease-out]">
-                <span className="font-['Agency'] font-bold text-xl tracking-widest text-[#F5EFE8]">ERAM</span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c5a880] font-semibold">ADMIN SYSTEM</span>
+                <span className="font-display text-xl tracking-widest text-[#F5EFE8]">ERAM</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c5a880] font-display">ADMIN SYSTEM</span>
               </div>
             )}
           </div>
@@ -139,10 +139,10 @@ export default function AdminLayoutClient({ children }) {
               <Link
                 key={item.path} 
                 href={item.path}
-                className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-[color,background-color,border-color] duration-200 group relative ${
+                className={`flex items-center font-display gap-3 px-3 py-3 rounded-xl transition-[color,background-color,border-color] duration-200 group relative ${
                   isActive
-                    ? "bg-gradient-to-r from-[#ae1431]/20 to-[#ae1431]/5 border border-[#ae1431]/40 text-[#F5EFE8] font-medium"
-                    : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60 border border-transparent"
+                    ? "bg-gradient-to-r from-[#ae1431]/20 to-[#ae1431]/5 border border-[#ae1431]/40 text-[#F5EFE8] "
+                    : "text-zinc-400 hover:text-zinc-100 font-rethink hover:bg-zinc-900/60 border border-transparent"
                 }`}
               >
                 <Icon
@@ -152,7 +152,7 @@ export default function AdminLayoutClient({ children }) {
                   }`}
                 />
                 {!isCollapsed && (
-                  <span className="text-sm font-medium tracking-wide leading-none select-none">
+                  <span className="tracking-wide leading-none select-none">
                     {item.name}
                   </span>
                 )}
@@ -176,16 +176,16 @@ export default function AdminLayoutClient({ children }) {
                   </div>
                 </div>
                 <div className="flex flex-col overflow-hidden">
-                  <span className="text-xs font-semibold text-zinc-200 truncate">Senior Administrator</span>
-                  <span className="text-[10px] text-zinc-500 truncate">admin@eram.edu.in</span>
+                  <span className="text-zinc-200 truncate">Senior Administrator</span>
+                  <span className="text-[12px] font-display text-zinc-500 truncate">admin@eram.com</span>
                 </div>
               </div>
               
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/80 hover:bg-[#ae1431]/10 border border-[#c5a880]/10 hover:border-[#ae1431]/40 text-zinc-400 hover:text-[#F5EFE8] text-xs font-medium transition-[color,background-color,border-color] duration-200 cursor-pointer"
+                className="w-full flex items-center font-display justify-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/80 hover:bg-[#ae1431]/10 border border-[#c5a880]/10 hover:border-[#ae1431]/40 text-zinc-400 hover:text-[#F5EFE8]  transition-[color,background-color,border-color] duration-200 cursor-pointer"
               >
-                <LogOut size={14} className="text-zinc-500 hover:text-[#ae1431]" />
+                <LogOut size={14} className="text-zinc-500  hover:text-[#ae1431]" />
                 Sign Out
               </button>
             </div>
@@ -221,11 +221,11 @@ export default function AdminLayoutClient({ children }) {
             <div className="h-20 flex items-center px-6 border-b border-[#c5a880]/10 justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-[#ae1431] flex items-center justify-center border border-[#c5a880]/20">
-                  <span className="font-['Agency'] font-bold text-lg text-[#F5EFE8] tracking-widest">E</span>
+                  <span className="font-display  text-lg text-[#F5EFE8] tracking-widest">E</span>
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="font-['Agency'] font-bold text-xl tracking-widest text-[#F5EFE8]">ERAM</span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#c5a880] font-semibold">ADMIN SYSTEM</span>
+                  <span className="font-display text-xl tracking-widest text-[#F5EFE8]">ERAM</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#c5a880]">ADMIN SYSTEM</span>
                 </div>
               </div>
               <button
@@ -247,12 +247,12 @@ export default function AdminLayoutClient({ children }) {
                     onClick={() => setIsMobileOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 ${
                       isActive
-                        ? "bg-[#ae1431]/20 border border-[#ae1431]/40 text-[#F5EFE8] font-medium"
+                        ? "bg-[#ae1431]/20 border border-[#ae1431]/40 text-[#F5EFE8] "
                         : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60 border border-transparent"
                     }`}
                   >
                     <Icon size={19} className={isActive ? "text-[#ae1431]" : "text-zinc-400"} />
-                    <span className="text-sm font-medium tracking-wide">{item.name}</span>
+                    <span className=" tracking-wide">{item.name}</span>
                   </Link>
                 );
               })}
@@ -265,8 +265,8 @@ export default function AdminLayoutClient({ children }) {
                 </div>
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="text-xs font-semibold text-zinc-200 truncate">Senior Admin</p>
-                <p className="text-[10px] text-zinc-500 truncate">admin@eram.edu.in</p>
+                <p className="text-zinc-200 truncate">Senior Admin</p>
+                <p className="text-[12px] font-display text-zinc-500 truncate">admin@eram.com</p>
               </div>
               <button
                 onClick={handleLogout}
@@ -294,12 +294,12 @@ export default function AdminLayoutClient({ children }) {
             </button>
 
             {/* Breadcrumbs */}
-            <div className="hidden sm:flex items-center gap-2 text-xs font-medium">
+            <div className="hidden sm:flex items-center gap-2">
               <span className="text-zinc-500">System</span>
               <span className="text-zinc-700">/</span>
               <span className="text-zinc-500">Admin</span>
               <span className="text-zinc-700">/</span>
-              <span className="text-[#c5a880] font-semibold">{activeItem.name}</span>
+              <span className="text-[#c5a880] font-display">{activeItem.name}</span>
             </div>
           </div>
 
@@ -313,7 +313,7 @@ export default function AdminLayoutClient({ children }) {
               >
                 <Search size={14} className="text-zinc-500" />
                 <span className="flex-1">Search portal...</span>
-                <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-sans text-zinc-400">⌘K</kbd>
+                <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px]  text-zinc-400">⌘K</kbd>
               </button>
               <button
                 onClick={() => setShowSearch(true)}
@@ -336,14 +336,14 @@ export default function AdminLayoutClient({ children }) {
               {showNotifications && (
                 <div className="absolute right-0 mt-3 w-80 bg-[#0c0c0f] border border-[#c5a880]/15 rounded-2xl shadow-xl z-30 py-2 animate-[fadeIn_0.2s_ease-out]">
                   <div className="px-4 py-2 border-b border-[#c5a880]/10 flex items-center justify-between">
-                    <span className="text-xs font-bold tracking-wider uppercase text-zinc-200">Alerts & Messages</span>
-                    <span className="text-[10px] text-[#ae1431] font-semibold bg-[#ae1431]/10 px-2 py-0.5 rounded">2 New</span>
+                    <span className=" tracking-wider uppercase text-zinc-200">Alerts & Messages</span>
+                    <span className="text-[10px] text-[#ae1431] bg-[#ae1431]/10 px-2 py-0.5 rounded">2 New</span>
                   </div>
                   <div className="max-h-64 overflow-y-auto divide-y divide-zinc-900">
                     {notifications.map((notif) => (
                       <div key={notif.id} className="p-3 hover:bg-zinc-900/40 transition-colors">
                         <div className="flex items-center justify-between mb-1">
-                          <span className={`text-xs font-semibold ${notif.read ? 'text-zinc-400' : 'text-[#c5a880]'}`}>
+                          <span className={` ${notif.read ? 'text-zinc-400' : 'text-[#c5a880]'}`}>
                             {notif.title}
                           </span>
                           <span className="text-[9px] text-zinc-500">{notif.time}</span>
@@ -353,7 +353,7 @@ export default function AdminLayoutClient({ children }) {
                     ))}
                   </div>
                   <div className="px-4 py-2 border-t border-[#c5a880]/10 text-center">
-                    <button className="text-[10px] text-zinc-400 hover:text-[#c5a880] transition-colors font-medium">
+                    <button className="text-[10px] text-zinc-400 hover:text-[#c5a880] transition-colors">
                       Clear all notifications
                     </button>
                   </div>
@@ -372,13 +372,13 @@ export default function AdminLayoutClient({ children }) {
                     <User size={13} className="text-[#c5a880]" />
                   </div>
                 </div>
-                <span className="text-xs font-medium hidden sm:inline text-zinc-300">Admin</span>
+                <span className=" hidden sm:inline text-zinc-300">Admin</span>
               </button>
 
               {showProfile && (
                 <div className="absolute right-0 mt-3 w-56 bg-[#0c0c0f] border border-[#c5a880]/15 rounded-2xl shadow-xl z-30 py-2 divide-y divide-zinc-900 animate-[fadeIn_0.2s_ease-out]">
                   <div className="px-4 py-2.5">
-                    <p className="text-xs font-bold text-zinc-200">System Root Admin</p>
+                    <p className=" text-zinc-200">System Root Admin</p>
                     <p className="text-[10px] text-zinc-500">Superuser Account</p>
                   </div>
                   <div className="py-1">
@@ -401,7 +401,7 @@ export default function AdminLayoutClient({ children }) {
                   <div className="py-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2 px-4 py-2 text-xs text-[#ae1431] hover:bg-[#ae1431]/10 text-left font-medium cursor-pointer"
+                      className="w-full flex items-center gap-2 px-4 py-2 text-xs text-[#ae1431] hover:bg-[#ae1431]/10 text-left cursor-pointer"
                     >
                       <LogOut size={13} />
                       Sign Out
@@ -425,7 +425,7 @@ export default function AdminLayoutClient({ children }) {
                 <input
                   type="text"
                   placeholder="Type a command or search word (e.g. portal, sports)..."
-                  className="flex-1 bg-transparent border-none text-zinc-100 placeholder:text-zinc-600 outline-none text-sm font-sans"
+                  className="flex-1 bg-transparent border-none text-zinc-100 placeholder:text-zinc-600 outline-none"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
@@ -440,7 +440,7 @@ export default function AdminLayoutClient({ children }) {
 
               {/* Suggestions / Results */}
               <div className="p-2 max-h-80 overflow-y-auto">
-                <div className="px-3 py-1.5 text-[10px] font-bold text-zinc-600 uppercase tracking-widest">
+                <div className="px-3 py-1.5 text-[10px] text-zinc-600 uppercase tracking-widest">
                   Quick Pages
                 </div>
                 <div className="space-y-0.5">
@@ -467,7 +467,7 @@ export default function AdminLayoutClient({ children }) {
                     })}
                 </div>
 
-                <div className="mt-2 px-3 py-1.5 border-t border-zinc-900/50 pt-2 text-[10px] font-bold text-zinc-600 uppercase tracking-widest">
+                <div className="mt-2 px-3 py-1.5 border-t border-zinc-900/50 pt-2 text-[10px] text-zinc-600 uppercase tracking-widest">
                   Actions
                 </div>
                 <div className="space-y-0.5">

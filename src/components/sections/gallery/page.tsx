@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 
 type CategoryId = "general" | "mmhss" | "mmps" | "amlp" | "mmite";
-type TypeId = "sports" | "cultural" | "social" | "academic";
+type TypeId = "general" | "sports" | "cultural" | "social" | "academic";
 
 interface GalleryItem {
   id: string;
@@ -27,6 +27,7 @@ const CATEGORIES: { id: CategoryId; label: string }[] = [
 ];
 
 const TYPES: { id: TypeId; label: string }[] = [
+  { id: "general", label: "General" },
   { id: "sports", label: "Sports" },
   { id: "cultural", label: "Cultural" },
   { id: "social", label: "Social" },

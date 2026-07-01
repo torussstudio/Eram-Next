@@ -2,13 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { 
-  School, 
-  Users, 
-  Trophy, 
+import {
+  School,
+  Users,
+  Trophy,
   Image as ImageIcon,
-  Plus, 
-  FileText, 
+  Plus,
+  FileText,
   Send,
   Calendar,
   Clock,
@@ -18,37 +18,46 @@ import {
   Cloud,
   CheckCircle2,
   Settings,
-  ShieldAlert
+  ShieldAlert,
 } from "lucide-react";
-import { PageHeader, StatCard, ChartCard, ActivityFeed } from "@/components/admin/DashboardComponents";
+import {
+  PageHeader,
+  StatCard,
+  ChartCard,
+  ActivityFeed,
+} from "@/components/admin/DashboardComponents";
 
 // Simulated activities
 const recentActivities = [
   {
     id: 1,
     title: "Admissions Update",
-    description: "Rahul V was added to MMHSS class XI-Science. Fee structure assigned.",
+    description:
+      "Rahul V was added to MMHSS class XI-Science. Fee structure assigned.",
     time: "10 mins ago",
     icon: Users,
   },
   {
     id: 2,
     title: "Institution Registry",
-    description: "New academic stream 'Artificial Intelligence' registered under MMITE.",
+    description:
+      "New academic stream 'Artificial Intelligence' registered under MMITE.",
     time: "1 hour ago",
     icon: School,
   },
   {
     id: 3,
     title: "Sports Program Created",
-    description: "Inter-school Athletics Championship event matches draft created.",
+    description:
+      "Inter-school Athletics Championship event matches draft created.",
     time: "4 hours ago",
     icon: Trophy,
   },
   {
     id: 4,
     title: "Gallery Sync Completed",
-    description: "Cloudflare CDN completed indexing of 45 high-resolution sports day media files.",
+    description:
+      "Cloudflare CDN completed indexing of 45 high-resolution sports day media files.",
     time: "1 day ago",
     icon: ImageIcon,
   },
@@ -56,10 +65,34 @@ const recentActivities = [
 
 // Upcoming events
 const upcomingEvents = [
-  { id: 1, title: "MMHSS Annual Admission Interview", date: "June 25, 2026", time: "09:00 AM", status: "Primary" },
-  { id: 2, title: "Inter-Institution Football Finals", date: "June 28, 2026", time: "04:30 PM", status: "Sports" },
-  { id: 3, title: "MMITE Term Examination Registration", date: "July 02, 2026", time: "11:59 PM", status: "Important" },
-  { id: 4, title: "Parent-Teacher Advisory Assembly", date: "July 05, 2026", time: "10:00 AM", status: "Advisory" },
+  {
+    id: 1,
+    title: "MMHSS Annual Admission Interview",
+    date: "June 25, 2026",
+    time: "09:00 AM",
+    status: "Primary",
+  },
+  {
+    id: 2,
+    title: "Inter-Institution Football Finals",
+    date: "June 28, 2026",
+    time: "04:30 PM",
+    status: "Sports",
+  },
+  {
+    id: 3,
+    title: "MMITE Term Examination Registration",
+    date: "July 02, 2026",
+    time: "11:59 PM",
+    status: "Important",
+  },
+  {
+    id: 4,
+    title: "Parent-Teacher Advisory Assembly",
+    date: "July 05, 2026",
+    time: "10:00 AM",
+    status: "Advisory",
+  },
 ];
 
 // Bar chart data (Performance)
@@ -82,7 +115,6 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8 animate-[fadeIn_0.4s_ease-out]">
-      
       {/* Welcome Banner */}
       <div className="relative overflow-hidden bg-gradient-to-r from-[#0c0c0f] to-[#141419] border border-[#c5a880]/15 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
         {/* Subtle glowing accents */}
@@ -90,32 +122,34 @@ export default function DashboardPage() {
         <div className="absolute -bottom-10 left-1/3 w-60 h-20 bg-[#c5a880]/5 rounded-full blur-[50px] pointer-events-none" />
 
         <div className="space-y-2 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c5a880]/10 border border-[#c5a880]/20 text-xs font-semibold text-[#c5a880] tracking-wide uppercase">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c5a880]/10 border border-[#c5a880]/20  text-[#c5a880] tracking-wide uppercase">
             <Sparkles size={11} />
             <span>Operational Console v2.6</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-[#F5EFE8] tracking-tight font-['Agency'] uppercase tracking-widest mt-2">
+          <h2 className="text-2xl md:text-3xl  text-[#F5EFE8] tracking-tight font-display uppercase tracking-widest mt-2">
             Welcome back, System Director
           </h2>
-          <p className="text-xs text-zinc-400 font-light flex items-center gap-2">
+          <p className=" text-zinc-400  flex items-center gap-2">
             <Clock size={12} className="text-[#c5a880]" />
             <span>Today is {today}</span>
             <span className="hidden sm:inline text-zinc-700">|</span>
-            <span className="hidden sm:inline text-emerald-500 font-medium">All core systems functional</span>
+            <span className="hidden sm:inline text-emerald-500 ">
+              All core systems functional
+            </span>
           </p>
         </div>
 
         {/* Quick Actions Buttons */}
         <div className="flex flex-wrap items-center gap-2 relative z-10">
-          <button className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-[#F5EFE8] bg-[#ae1431] hover:bg-[#ae1431]/80 rounded-xl transition-[transform,background-color] duration-200 shadow-[0_4px_15px_rgba(174,20,49,0.3)] hover:shadow-none cursor-pointer border border-[#ae1431]/20">
+          <button className="flex items-center gap-1.5 px-4 py-2  text-[#F5EFE8] bg-[#ae1431] hover:bg-[#ae1431]/80 rounded-xl transition-[transform,background-color] duration-200 shadow-[0_4px_15px_rgba(174,20,49,0.3)] hover:shadow-none cursor-pointer border border-[#ae1431]/20">
             <Plus size={13} />
             <span>New Admission</span>
           </button>
-          <button className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-[#c5a880] bg-zinc-950 border border-[#c5a880]/15 hover:border-[#c5a880]/30 hover:bg-zinc-900 rounded-xl transition-[background-color,border-color] duration-200 cursor-pointer">
+          <button className="flex items-center gap-1.5 px-4 py-2 text-[#c5a880] bg-zinc-950 border border-[#c5a880]/15 hover:border-[#c5a880]/30 hover:bg-zinc-900 rounded-xl transition-[background-color,border-color] duration-200 cursor-pointer">
             <FileText size={13} />
             <span>Log Report</span>
           </button>
-          <button className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-zinc-400 bg-zinc-900/60 border border-zinc-800 hover:text-zinc-200 hover:bg-zinc-800 rounded-xl transition-[color,background-color] duration-200 cursor-pointer">
+          <button className="flex items-center gap-1.5 px-4 py-2 text-zinc-400 bg-zinc-900/60 border border-zinc-800 hover:text-zinc-200 hover:bg-zinc-800 rounded-xl transition-[color,background-color] duration-200 cursor-pointer">
             <Send size={13} />
             <span>Broadcast</span>
           </button>
@@ -156,7 +190,6 @@ export default function DashboardPage() {
 
       {/* Analytics Charts & Events Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
         {/* Growth Analytics Chart */}
         <div className="lg:col-span-2 space-y-6">
           <ChartCard
@@ -179,7 +212,6 @@ export default function DashboardPage() {
 
       {/* Bottom Dashboard Grid: Logs, Events, Shortcuts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
         {/* Activity Logs Feed */}
         <div className="lg:col-span-2">
           <ActivityFeed activities={recentActivities} />
@@ -187,37 +219,43 @@ export default function DashboardPage() {
 
         {/* Sidebar Panel: Upcoming Events & System status */}
         <div className="space-y-6">
-          
           {/* Upcoming Schedule */}
           <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
-            <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-wider mb-5 flex items-center justify-between">
+            <h3 className=" text-zinc-200 uppercase tracking-wider mb-5 flex items-center justify-between">
               <span className="flex items-center gap-2">
                 <Calendar size={14} className="text-[#c5a880]" />
                 Upcoming Schedule
               </span>
-              <span className="text-[10px] text-zinc-500 font-semibold cursor-pointer hover:text-zinc-300">View All</span>
+              <span className="text-[10px] text-zinc-500  cursor-pointer hover:text-zinc-300">
+                View All
+              </span>
             </h3>
-            
+
             <div className="space-y-3.5">
               {upcomingEvents.map((evt) => (
-                <div key={evt.id} className="p-3 bg-zinc-950/50 border border-zinc-800/80 rounded-xl flex items-center justify-between hover:border-[#c5a880]/20 transition-[border-color] duration-200 group">
+                <div
+                  key={evt.id}
+                  className="p-3 bg-zinc-950/50 border border-zinc-800/80 rounded-xl flex items-center justify-between hover:border-[#c5a880]/20 transition-[border-color] duration-200 group"
+                >
                   <div className="space-y-1 min-w-0 pr-2">
-                    <p className="text-xs font-semibold text-zinc-300 group-hover:text-[#F5EFE8] transition-colors truncate">
+                    <p className=" text-zinc-300 group-hover:text-[#F5EFE8] transition-colors truncate">
                       {evt.title}
                     </p>
-                    <div className="flex items-center gap-2 text-[10px] text-zinc-500 font-light">
+                    <div className="flex items-center gap-2 text-[10px] text-zinc-500">
                       <span>{evt.date}</span>
                       <span>•</span>
                       <span>{evt.time}</span>
                     </div>
                   </div>
-                  <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
-                    evt.status === "Important" 
-                      ? "bg-[#ae1431]/20 text-[#ae1431] border border-[#ae1431]/30" 
-                      : evt.status === "Sports" 
-                      ? "bg-amber-500/10 text-amber-500 border border-amber-500/20"
-                      : "bg-[#c5a880]/10 text-[#c5a880] border border-[#c5a880]/20"
-                  }`}>
+                  <span
+                    className={`text-[9px] px-2 py-0.5 rounded uppercase tracking-wider ${
+                      evt.status === "Important"
+                        ? "bg-[#ae1431]/20 text-[#ae1431] border border-[#ae1431]/30"
+                        : evt.status === "Sports"
+                        ? "bg-amber-500/10 text-amber-500 border border-amber-500/20"
+                        : "bg-[#c5a880]/10 text-[#c5a880] border border-[#c5a880]/20"
+                    }`}
+                  >
                     {evt.status}
                   </span>
                 </div>
@@ -227,34 +265,62 @@ export default function DashboardPage() {
 
           {/* Quick Management Shortcuts */}
           <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
-            <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-wider mb-4 flex items-center gap-2">
+            <h3 className="text-zinc-200 uppercase tracking-wider mb-4 flex items-center gap-2">
               <Settings size={14} className="text-[#c5a880]" />
               Quick Shortcuts
             </h3>
-            
+
             <div className="grid grid-cols-2 gap-2">
-              <Link href="/admin/home" className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200">
-                <span className="block text-[11px] font-bold text-zinc-300">Frontpage CMS</span>
-                <span className="text-[9px] text-zinc-600 block mt-0.5">Hero & Sections</span>
+              <Link
+                href="/admin/home"
+                className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200"
+              >
+                <span className="block text-[11px] text-zinc-300">
+                  Frontpage CMS
+                </span>
+                <span className="text-[9px] text-zinc-600 block mt-0.5">
+                  Hero & Sections
+                </span>
               </Link>
-              <Link href="/admin/portal" className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200">
-                <span className="block text-[11px] font-bold text-zinc-300">Portal DB</span>
-                <span className="text-[9px] text-zinc-600 block mt-0.5">Accounts list</span>
+              <Link
+                href="/admin/portal"
+                className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200"
+              >
+                <span className="block text-[11px] text-zinc-300">
+                  Portal DB
+                </span>
+                <span className="text-[9px] text-zinc-600 block mt-0.5">
+                  Accounts list
+                </span>
               </Link>
-              <Link href="/admin/institutions" className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200">
-                <span className="block text-[11px] font-bold text-zinc-300">Institutions</span>
-                <span className="text-[9px] text-zinc-600 block mt-0.5">Edit 5 schools</span>
+              <Link
+                href="/admin/institutions"
+                className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200"
+              >
+                <span className="block text-[11px] text-zinc-300">
+                  Institutions
+                </span>
+                <span className="text-[9px] text-zinc-600 block mt-0.5">
+                  Edit 5 schools
+                </span>
               </Link>
-              <Link href="/admin/gallery" className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200">
-                <span className="block text-[11px] font-bold text-zinc-300">Media Center</span>
-                <span className="text-[9px] text-zinc-600 block mt-0.5">Upload photos</span>
+              <Link
+                href="/admin/gallery"
+                className="p-3 bg-zinc-950/60 hover:bg-zinc-900 border border-zinc-800 hover:border-[#c5a880]/20 rounded-xl text-center transition-[background-color,border-color] duration-200"
+              >
+                <span className="block text-[11px] text-zinc-300">
+                  Media Center
+                </span>
+                <span className="text-[9px] text-zinc-600 block mt-0.5">
+                  Upload photos
+                </span>
               </Link>
             </div>
           </div>
 
           {/* System Status Panel */}
           <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6 space-y-4">
-            <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-wider flex items-center justify-between">
+            <h3 className=" text-zinc-200 uppercase tracking-wider flex items-center justify-between">
               <span className="flex items-center gap-2">
                 <Server size={14} className="text-[#c5a880]" />
                 Network Health
@@ -263,33 +329,37 @@ export default function DashboardPage() {
             </h3>
 
             <div className="space-y-2.5">
-              <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-zinc-400">
                   <Cloud size={12} className="text-zinc-500" />
                   <span>Main Web Server</span>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">ONLINE</span>
+                <span className="text-[10px] text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">
+                  ONLINE
+                </span>
               </div>
-              <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-zinc-400">
                   <Database size={12} className="text-zinc-500" />
                   <span>MongoDB Replica-Set</span>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">SECURE</span>
+                <span className="text-[10px] text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">
+                  SECURE
+                </span>
               </div>
-              <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-zinc-400">
                   <CheckCircle2 size={12} className="text-zinc-500" />
                   <span>Cloudflare CDN Cache</span>
                 </div>
-                <span className="text-[10px] font-bold text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">98% HIT</span>
+                <span className="text-[10px] text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">
+                  98% HIT
+                </span>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      
     </div>
   );
 }
