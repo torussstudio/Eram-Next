@@ -95,6 +95,14 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
 
+  function getDownloadUrl(url: string) {
+  // Cloudinary URLs-il fl_attachment flag add cheyyuka, force download-inu vendi
+  if (url.includes("res.cloudinary.com")) {
+    return url.replace("/upload/", "/upload/fl_attachment/");
+  }
+  return url;
+}
+
   useGSAP(() => {
     if (!cardRef.current) return;
     gsap.fromTo(
@@ -152,7 +160,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
       </div>
 
       <a
-        href={item.href}
+         href={getDownloadUrl(item.href)}
         download
         target="_blank"
         rel="noopener noreferrer"
