@@ -196,7 +196,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
       </div>
 
       <a
-   href={item.href}
+  href={`${BACKEND_URL}/api/downloads/${item.id}/download`}
   download={`${item.title}.pdf`}
   target="_blank"
   rel="noopener noreferrer"
