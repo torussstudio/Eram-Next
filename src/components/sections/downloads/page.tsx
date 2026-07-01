@@ -196,7 +196,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
       </div>
 
       <a
-  href={getDownloadUrl(item.href, item.title)}
+   href={item.href}
   download={`${item.title}.pdf`}
   target="_blank"
   rel="noopener noreferrer"
