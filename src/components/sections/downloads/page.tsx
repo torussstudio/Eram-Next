@@ -7,7 +7,9 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://eram-backend-ejgy.onrender.com";
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://eram-backend-ejgy.onrender.com";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -53,7 +55,10 @@ function mapDownload(d: RawDownload): DownloadItem {
     title: d.title,
     description: d.description,
     category: CATEGORY_LABEL[d.category] || d.category,
-    institution: d.institution && d.institution !== "general" ? INSTITUTION_LABEL[d.institution] : undefined,
+    institution:
+      d.institution && d.institution !== "general"
+        ? INSTITUTION_LABEL[d.institution]
+        : undefined,
     fileType: d.fileType || "PDF",
     href: d.fileUrl,
   };
@@ -63,7 +68,17 @@ function mapDownload(d: RawDownload): DownloadItem {
 
 function IconDownload({ className }: { className?: string }) {
   return (
-    <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
       <polyline points="7 10 12 15 17 10" />
       <line x1="12" y1="15" x2="12" y2="3" />
@@ -73,7 +88,17 @@ function IconDownload({ className }: { className?: string }) {
 
 function IconFile({ className }: { className?: string }) {
   return (
-    <svg className={className} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <polyline points="14 2 14 8 20 8" />
     </svg>
@@ -82,7 +107,17 @@ function IconFile({ className }: { className?: string }) {
 
 function IconArrow({ className }: { className?: string }) {
   return (
-    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      className={className}
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <line x1="7" y1="17" x2="17" y2="7" />
       <polyline points="7 7 17 7 17 17" />
     </svg>
@@ -95,12 +130,13 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
 
-  function getDownloadUrl(url: string) {
-  // Cloudinary URLs-il fl_attachment flag add cheyyuka, force download-inu vendi
-  if (url.includes("res.cloudinary.com")) {
-    return url.replace("/upload/", "/upload/fl_attachment/");
-  }
-  return url;
+  function getDownloadUrl(url: string, title: string) {
+  if (!url.includes("res.cloudinary.com")) return url;
+
+  return url.replace(
+    "/upload/",
+    `/upload/fl_attachment:${encodeURIComponent(title)}.pdf/`
+  );
 }
 
   useGSAP(() => {
@@ -119,7 +155,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
           start: "top 88%",
           toggleActions: "play none none none",
         },
-      }
+      },
     );
   }, [item.id]);
 
@@ -160,13 +196,13 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
       </div>
 
       <a
-         href={getDownloadUrl(item.href)}
-        download
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
-        className="flex items-center justify-between px-6 py-4 border-t border-white/[0.06] group-hover:border-white/[0.1] transition-colors duration-300"
-      >
+  href={getDownloadUrl(item.href, item.title)}
+  download={`${item.title}.pdf`}
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={(e) => e.stopPropagation()}
+  className="flex items-center justify-between px-6 py-4 border-t border-white/[0.06] group-hover:border-white/[0.1] transition-colors duration-300"
+>
         <span className="font-rethink text-[11px] tracking-[0.16em] uppercase text-white/50 group-hover:text-white/80 transition-colors duration-200">
           Download
         </span>
@@ -186,14 +222,29 @@ export default function DownloadsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const CATEGORIES = ["All", "Prospectus", "Forms", "Circulars", "Policies"] as const;
+  const CATEGORIES = [
+    "All",
+    "Prospectus",
+    "Forms",
+    "Circulars",
+    "Policies",
+  ] as const;
   type Category = (typeof CATEGORIES)[number];
 
-  const INSTITUTIONS = ["All Type", "General", "EASE", "MMHSS", "MMITE", "MMPS", "AMLP"] as const;
+  const INSTITUTIONS = [
+    "All Type",
+    "General",
+    "EASE",
+    "MMHSS",
+    "MMITE",
+    "MMPS",
+    "AMLP",
+  ] as const;
   type Institution = (typeof INSTITUTIONS)[number];
 
   const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const [activeInstitution, setActiveInstitution] = useState<Institution>("All Type");
+  const [activeInstitution, setActiveInstitution] =
+    useState<Institution>("All Type");
 
   const heroRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
@@ -237,7 +288,7 @@ export default function DownloadsPage() {
   const filtered = downloads.filter(
     (d) =>
       (activeCategory === "All" || d.category === activeCategory) &&
-      matchesInstitution(d, activeInstitution)
+      matchesInstitution(d, activeInstitution),
   );
 
   // Hero entrance
@@ -245,7 +296,11 @@ export default function DownloadsPage() {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     if (eyebrowRef.current) {
-      tl.fromTo(eyebrowRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 });
+      tl.fromTo(
+        eyebrowRef.current,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6 },
+      );
     }
     if (headlineRef.current) {
       const words = headlineRef.current.querySelectorAll(".word");
@@ -253,41 +308,68 @@ export default function DownloadsPage() {
         words,
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 0.8, stagger: 0.06 },
-        "-=0.3"
+        "-=0.3",
       );
     }
     if (subRef.current) {
-      tl.fromTo(subRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
+      tl.fromTo(
+        subRef.current,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6 },
+        "-=0.4",
+      );
     }
     if (dividerRef.current) {
-      tl.fromTo(dividerRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1, ease: "power2.inOut", transformOrigin: "left center" }, "-=0.4");
+      tl.fromTo(
+        dividerRef.current,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1,
+          ease: "power2.inOut",
+          transformOrigin: "left center",
+        },
+        "-=0.4",
+      );
     }
     if (filterRef.current) {
-      tl.fromTo(filterRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.5");
+      tl.fromTo(
+        filterRef.current,
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.5",
+      );
     }
   }, []);
 
   const countPerCategory = (cat: Category) =>
     downloads.filter(
-      (d) => (cat === "All" || d.category === cat) && matchesInstitution(d, activeInstitution)
+      (d) =>
+        (cat === "All" || d.category === cat) &&
+        matchesInstitution(d, activeInstitution),
     ).length;
 
   const countPerInstitution = (inst: Institution) =>
     downloads.filter(
       (d) =>
         (activeCategory === "All" || d.category === activeCategory) &&
-        matchesInstitution(d, inst)
+        matchesInstitution(d, inst),
     ).length;
 
   const headlineWords = ["Resources &", "Downloads"];
 
   return (
     <main className="min-h-[100dvh] bg-[#0a0a0a] text-white">
-
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative pt-36 pb-16 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-
-        <div ref={eyebrowRef} className="flex items-center gap-4 mb-8" style={{ opacity: 0 }}>
+      <section
+        ref={heroRef}
+        className="relative pt-36 pb-16 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto"
+      >
+        <div
+          ref={eyebrowRef}
+          className="flex items-center gap-4 mb-8"
+          style={{ opacity: 0 }}
+        >
           <span className="font-rethink text-[11px] tracking-[0.22em] uppercase text-white/30">
             Downloads
           </span>
@@ -305,7 +387,9 @@ export default function DownloadsPage() {
             <span key={i} className="word inline-block mr-4 opacity-0">
               {i === 1 ? (
                 <em className="not-italic text-white/40">{word}</em>
-              ) : word}
+              ) : (
+                word
+              )}
             </span>
           ))}
         </h1>
@@ -315,7 +399,9 @@ export default function DownloadsPage() {
           className="font-rethink mt-6 text-base text-white/40 max-w-[520px] leading-relaxed"
           style={{ opacity: 0 }}
         >
-          Official documents, forms, prospectuses, and policy circulars from ERAM Education and its institutions. All files are provided as PDF downloads.
+          Official documents, forms, prospectuses, and policy circulars from
+          ERAM Education and its institutions. All files are provided as PDF
+          downloads.
         </p>
 
         <div
@@ -339,14 +425,19 @@ export default function DownloadsPage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`
                   font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
-                  ${activeCategory === cat
-                    ? "text-white border-[#ae1431]"
-                    : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
+                  ${
+                    activeCategory === cat
+                      ? "text-white border-[#ae1431]"
+                      : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
                   }
                 `}
               >
                 {cat}
-                <span className={`font-rethink text-[9px] transition-colors duration-200 ${activeCategory === cat ? "text-[#ae1431]" : "text-white/20"}`}>
+                <span
+                  className={`font-rethink text-[9px] transition-colors duration-200 ${
+                    activeCategory === cat ? "text-[#ae1431]" : "text-white/20"
+                  }`}
+                >
                   {countPerCategory(cat)}
                 </span>
               </button>
@@ -360,14 +451,21 @@ export default function DownloadsPage() {
                 onClick={() => setActiveInstitution(inst)}
                 className={`
                   font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
-                  ${activeInstitution === inst
-                    ? "text-white border-[#ae1431]"
-                    : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
+                  ${
+                    activeInstitution === inst
+                      ? "text-white border-[#ae1431]"
+                      : "text-white/35 border-transparent hover:text-white/60 hover:border-white/20"
                   }
                 `}
               >
                 {inst}
-                <span className={`font-rethink text-[9px] transition-colors duration-200 ${activeInstitution === inst ? "text-[#ae1431]" : "text-white/20"}`}>
+                <span
+                  className={`font-rethink text-[9px] transition-colors duration-200 ${
+                    activeInstitution === inst
+                      ? "text-[#ae1431]"
+                      : "text-white/20"
+                  }`}
+                >
                   {countPerInstitution(inst)}
                 </span>
               </button>
@@ -378,16 +476,18 @@ export default function DownloadsPage() {
 
       {/* ── Grid ─────────────────────────────────────────────── */}
       <section className="px-6 md:px-12 lg:px-20 py-16 max-w-[1400px] mx-auto">
-
         <div className="flex items-baseline justify-between mb-10">
           <div>
             <span className="font-rethink text-[11px] tracking-[0.2em] uppercase text-white/25">
               {activeCategory === "All" ? "All Resources" : activeCategory}
-              {activeInstitution !== "All Type" ? ` · ${activeInstitution}` : ""}
+              {activeInstitution !== "All Type"
+                ? ` · ${activeInstitution}`
+                : ""}
             </span>
             {!loading && (
               <span className="font-rethink ml-3 text-[11px] text-white/20">
-                — {filtered.length} {filtered.length === 1 ? "document" : "documents"}
+                — {filtered.length}{" "}
+                {filtered.length === 1 ? "document" : "documents"}
               </span>
             )}
           </div>
@@ -448,7 +548,8 @@ export default function DownloadsPage() {
               Can't find what you need?
             </p>
             <p className="font-rethink text-white/50 text-sm max-w-md leading-relaxed">
-              Contact the admissions office directly for institution-specific documents, custom certificates, or records requests.
+              Contact the admissions office directly for institution-specific
+              documents, custom certificates, or records requests.
             </p>
           </div>
           <a
@@ -460,7 +561,6 @@ export default function DownloadsPage() {
           </a>
         </div>
       </section>
-
     </main>
   );
 }
