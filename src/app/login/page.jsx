@@ -36,6 +36,7 @@ export default function LoginPage() {
         console.log(await cookieRes.json());
 
         router.push("/admin/dashboard");
+        router.refresh();
       } else {
         setError(data.message || "Invalid email or password.");
       }
