@@ -40,8 +40,10 @@ export default function LoginPage() {
         setError(data.message || "Invalid email or password.");
       }
     } catch (err) {
-      console.log(err);
-      setError("Something went wrong. Please try again.");
+      const message =
+        err.response?.data?.message ||
+        "Something went wrong. Please try again.";
+      setError(message);
     } finally {
       setLoading(false);
     }
