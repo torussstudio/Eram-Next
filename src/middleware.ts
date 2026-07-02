@@ -35,6 +35,8 @@ export async function middleware(request: NextRequest) {
       if (token) {
         response.cookies.delete("token");
       }
+          response.headers.set("x-debug-has-token", token ? "yes" : "no");
+    response.headers.set("x-debug-secret-len", String(process.env.JWT_SECRET?.length || 0))
       return response;
     }
   }
