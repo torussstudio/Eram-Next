@@ -13,18 +13,19 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   let isValid = false;
 
-  if (token) {
-    try {
-      const secret = new TextEncoder().encode(
-        process.env.JWT_SECRET || "my_super_secret_key_123"
-      );
-      await jwtVerify(token, secret);
-      isValid = true;
-    } catch (err) {
-      console.error("JWT validation failed in middleware:", err);
-      isValid = false;
+ if (token) {
+  try {
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET not configured");
     }
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    await jwtVerify(token, secret);
+    isValid = true;
+  } catch (err) {
+    console.error("JWT validation failed in middleware:", err);
+    isValid = false;
   }
+}
 
   // Protect admin paths
   if (pathname.startsWith("/admin")) {

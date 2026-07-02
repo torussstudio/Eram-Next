@@ -1,22 +1,22 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { Trash2, UploadCloud, FileText } from 'lucide-react';
-import api from '@/lib/api';
+"use client";
+import { useEffect, useState } from "react";
+import { Trash2, UploadCloud, FileText } from "lucide-react";
+import api from "@/lib/api";
 
 const CATEGORIES = [
-  { id: 'prospectus', label: 'Prospectus' },
-  { id: 'forms', label: 'Forms' },
-  { id: 'circulars', label: 'Circulars' },
-  { id: 'policies', label: 'Policies' },
+  { id: "prospectus", label: "Prospectus" },
+  { id: "forms", label: "Forms" },
+  { id: "circulars", label: "Circulars" },
+  { id: "policies", label: "Policies" },
 ];
 
 const INSTITUTIONS = [
-  { id: 'general', label: 'General' },
-  { id: 'ease', label: 'EASE' },
-  { id: 'mmhss', label: 'MMHSS' },
-  { id: 'mmite', label: 'MMITE' },
-  { id: 'mmps', label: 'MMPS' },
-  { id: 'amlp', label: 'AMLP' },
+  { id: "general", label: "General" },
+  { id: "ease", label: "EASE" },
+  { id: "mmhss", label: "MMHSS" },
+  { id: "mmite", label: "MMITE" },
+  { id: "mmps", label: "MMPS" },
+  { id: "amlp", label: "AMLP" },
 ];
 
 export default function AdminDownloadsPage() {
@@ -25,17 +25,18 @@ export default function AdminDownloadsPage() {
   const [uploading, setUploading] = useState(false);
 
   // upload form state
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('prospectus');
-  const [institution, setInstitution] = useState('general');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("prospectus");
+  const [institution, setInstitution] = useState("general");
   const [file, setFile] = useState(null);
 
   const fetchItems = () => {
     setLoading(true);
-    api.get('/downloads')
+    api
+      .get("/downloads")
       .then(({ data }) => setItems(data))
-      .catch((err) => console.error('Failed to fetch downloads:', err))
+      .catch((err) => console.error("Failed to fetch downloads:", err))
       .finally(() => setLoading(false));
   };
 
@@ -50,38 +51,38 @@ export default function AdminDownloadsPage() {
     setUploading(true);
 
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('category', category);
-    formData.append('institution', institution);
+    formData.append("file", file);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("institution", institution);
 
     try {
-      await api.post('/downloads', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      await api.post("/downloads", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
-      setTitle('');
-      setDescription('');
+      setTitle("");
+      setDescription("");
       setFile(null);
-      document.getElementById('download-file-input').value = '';
+      document.getElementById("download-file-input").value = "";
       fetchItems();
     } catch (err) {
       console.error(err);
-      alert('Upload failed. Try again.');
+      alert("Upload failed. Try again.");
     } finally {
       setUploading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Delete this document?')) return;
+    if (!confirm("Delete this document?")) return;
     try {
       await api.delete(`/downloads/${id}`);
       setItems((prev) => prev.filter((i) => i._id !== id));
     } catch (err) {
       console.error(err);
-      alert('Delete failed.');
+      alert("Delete failed.");
     }
   };
 
@@ -93,8 +94,12 @@ export default function AdminDownloadsPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">
-      <h1 className="text-2xl font-display text-[#ae1431]">Downloads Manager</h1>
-      <p className="mt-1 text-white">Upload documents and manage the resources library.</p>
+      <h1 className="text-2xl font-display text-[#ae1431]">
+        Downloads Manager
+      </h1>
+      <p className="mt-1 text-white">
+        Upload documents and manage the resources library.
+      </p>
 
       {/* Upload form */}
       <form
@@ -102,7 +107,9 @@ export default function AdminDownloadsPage() {
         className="mt-6 grid gap-4 rounded-lg border border-white bg-black p-5 sm:grid-cols-2"
       >
         <div className="sm:col-span-2">
-          <label className="font-rethink uppercase tracking-wide text-white">Title</label>
+          <label className="font-rethink uppercase tracking-wide text-white">
+            Title
+          </label>
           <input
             type="text"
             value={title}
@@ -114,7 +121,9 @@ export default function AdminDownloadsPage() {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="font-rethink uppercase tracking-wide text-white">Description</label>
+          <label className="font-rethink uppercase tracking-wide text-white">
+            Description
+          </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -126,37 +135,47 @@ export default function AdminDownloadsPage() {
         </div>
 
         <div>
-          <label className="font-rethink uppercase tracking-wide text-white">Category</label>
+          <label className="font-rethink uppercase tracking-wide text-white">
+            Category
+          </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="mt-1 w-full rounded-md border border-white px-3 py-2 text-white"
           >
             {CATEGORIES.map((c) => (
-              <option className="bg-black text-white" key={c.id} value={c.id}>{c.label}</option>
+              <option className="bg-black text-white" key={c.id} value={c.id}>
+                {c.label}
+              </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="font-rethink uppercase tracking-wide text-white">Institution</label>
+          <label className="font-rethink uppercase tracking-wide text-white">
+            Institution
+          </label>
           <select
             value={institution}
             onChange={(e) => setInstitution(e.target.value)}
             className="mt-1 w-full rounded-md border border-white px-3 py-2 text-white"
           >
             {INSTITUTIONS.map((i) => (
-              <option className="bg-black text-white" key={i.id} value={i.id}>{i.label}</option>
+              <option className="bg-black text-white" key={i.id} value={i.id}>
+                {i.label}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="sm:col-span-2">
-          <label className="font-rethink uppercase tracking-wide text-white">PDF File</label>
+          <label className="font-rethink uppercase tracking-wide text-white">
+            Document File
+          </label>
           <input
             id="download-file-input"
             type="file"
-            accept="application/pdf"
+            accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx"
             onChange={(e) => setFile(e.target.files?.[0] ?? null)}
             required
             className="mt-1 w-full text-white"
@@ -174,7 +193,7 @@ export default function AdminDownloadsPage() {
           className="sm:col-span-2 flex items-center justify-center cursor-pointer gap-2 rounded-md bg-[#ae1431] px-4 py-2 font-rethink text-white disabled:opacity-50"
         >
           <UploadCloud size={16} />
-          {uploading ? 'Uploading…' : 'Upload Document'}
+          {uploading ? "Uploading…" : "Upload Document"}
         </button>
       </form>
 
@@ -186,7 +205,8 @@ export default function AdminDownloadsPage() {
           grouped.map((group) => (
             <div key={group.id}>
               <h2 className="mb-3 font-display uppercase tracking-wide text-[#ae1431]">
-                {group.label} <span className="text-white">({group.items.length})</span>
+                {group.label}{" "}
+                <span className="text-white">({group.items.length})</span>
               </h2>
 
               {group.items.length === 0 ? (
@@ -212,7 +232,9 @@ export default function AdminDownloadsPage() {
                             </div>
                           </td>
                           <td className="px-4 py-2 text-white">{item.title}</td>
-                          <td className="px-4 py-2 capitalize text-white">{item.institution}</td>
+                          <td className="px-4 py-2 capitalize text-white">
+                            {item.institution}
+                          </td>
                           <td className="px-4 py-2 text-white">
                             {new Date(item.createdAt).toLocaleDateString()}
                           </td>
