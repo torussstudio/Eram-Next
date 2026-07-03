@@ -354,34 +354,34 @@ export default function DownloadsPage() {
   const headlineWords = ["Resources &", "Downloads"];
 
   return (
-    <main className="min-h-[100dvh] bg-[#0a0a0a] text-white">
+    <main className="min-h-[100dvh] bg-[#f5efe8] text-white">
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative pt-36 pb-16 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto"
+        className="relative pt-36 pb-10 px-5 md:px-12 lg:px-20 max-w-[1400px] mx-auto"
       >
         <div
           ref={eyebrowRef}
           className="flex items-center gap-4 mb-8"
           style={{ opacity: 0 }}
         >
-          <span className="font-rethink text-[11px] tracking-[0.22em] uppercase text-white/30">
+          <span className="font-rethink text-[11px] tracking-[0.22em] uppercase text-black">
             Downloads
           </span>
           <span className="h-px w-12 bg-[#ae1431]" />
-          <span className="font-rethink text-[11px] tracking-[0.22em] uppercase text-white/30">
+          <span className="font-rethink text-[11px] tracking-[0.22em] uppercase text-black">
             Resources
           </span>
         </div>
 
         <h1
           ref={headlineRef}
-          className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] tracking-tight text-white overflow-hidden"
+          className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] tracking-tight text-[#ae1431] overflow-hidden"
         >
           {headlineWords.map((word, i) => (
             <span key={i} className="word inline-block mr-4 opacity-0">
               {i === 1 ? (
-                <em className="not-italic text-white/40">{word}</em>
+                <em className="not-italic text-[#ae1431]">{word}</em>
               ) : (
                 word
               )}
@@ -391,7 +391,7 @@ export default function DownloadsPage() {
 
         <p
           ref={subRef}
-          className="font-rethink mt-6 text-base text-white/40 max-w-[520px] leading-relaxed"
+          className="font-rethink mt-6 text-base text-black max-w-[520px] leading-relaxed"
           style={{ opacity: 0 }}
         >
           Official documents, forms, prospectuses, and policy circulars from
@@ -418,7 +418,7 @@ export default function DownloadsPage() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`
-                  font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
+                  font-rethink relative flex cursor-pointer items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
                   ${
                     activeCategory === cat
                       ? "text-white border-[#ae1431]"
@@ -444,7 +444,7 @@ export default function DownloadsPage() {
                 key={inst}
                 onClick={() => setActiveInstitution(inst)}
                 className={`
-                  font-rethink relative flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
+                  font-rethink relative cursor-pointer flex items-center gap-2 px-5 py-4 text-[11px] tracking-[0.18em] uppercase transition-colors duration-200 whitespace-nowrap border-b-2
                   ${
                     activeInstitution === inst
                       ? "text-white border-[#ae1431]"
@@ -472,7 +472,7 @@ export default function DownloadsPage() {
       <section className="px-6 md:px-12 lg:px-20 py-16 max-w-[1400px] mx-auto">
         <div className="flex items-baseline justify-between mb-10">
           <div>
-            <span className="font-rethink text-[11px] tracking-[0.2em] uppercase text-white/25">
+            <span className="font-rethink text-[11px] tracking-[0.2em] uppercase text-black">
               {activeCategory === "All" ? "All Resources" : activeCategory}
               {activeInstitution !== "All Type"
                 ? ` · ${activeInstitution}`
@@ -504,7 +504,7 @@ export default function DownloadsPage() {
         {/* Error state */}
         {!loading && error && (
           <div className="flex flex-col items-center justify-center py-24 text-center gap-4">
-            <p className="font-rethink text-white/30 text-sm tracking-widest uppercase">
+            <p className="font-rethink text-black text-sm tracking-widest uppercase">
               {error}
             </p>
           </div>
@@ -527,7 +527,7 @@ export default function DownloadsPage() {
         {/* Empty state */}
         {!loading && !error && filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="font-rethink text-white/20 text-sm tracking-widest uppercase">
+            <p className="font-rethink text-black text-sm tracking-widest uppercase">
               No documents in this category yet.
             </p>
           </div>
@@ -538,17 +538,17 @@ export default function DownloadsPage() {
       <section className="border-t border-white/[0.06] px-6 md:px-12 lg:px-20 py-16">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <p className="font-rethink text-[11px] tracking-[0.2em] uppercase text-white/25 mb-2">
+            <p className="font-rethink text-[11px] tracking-[0.2em] uppercase text-black mb-2">
               Can't find what you need?
             </p>
-            <p className="font-rethink text-white/50 text-sm max-w-md leading-relaxed">
+            <p className="font-rethink text-black text-sm max-w-md leading-relaxed">
               Contact the admissions office directly for institution-specific
               documents, custom certificates, or records requests.
             </p>
           </div>
           <a
             href="/contact"
-            className="group flex items-center gap-3 border border-white/[0.12] hover:border-[#ae1431]/60 px-6 py-3.5 text-[11px] tracking-[0.18em] uppercase text-white/60 hover:text-white transition-all duration-300"
+            className="group flex items-center rounded-[12px] gap-3 border border-[#ae1431] bg-[#ae1431] hover:bg-black hover:border-black px-6 py-3.5 text-[12px] tracking-[0.18em] uppercase text-white hover:text-white transition-all duration-300"
           >
             <span className="font-rethink">Contact Us</span>
             <IconArrow className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
