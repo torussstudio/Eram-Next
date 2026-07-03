@@ -189,7 +189,7 @@ const handleDelete = async () => {
             className="mt-1 w-full text-white"
           />
           {file && (
-            <p className="mt-1 text-xs text-white/60">
+            <p className="mt-1 text-white/60">
               Selected: {(file.size / 1024).toFixed(0)} KB
             </p>
           )}
@@ -278,13 +278,13 @@ const handleDelete = async () => {
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="rounded-md border border-white/20 px-4 py-2 cursor-pointer font-rethink text-sm uppercase tracking-wide text-white hover:border-white/40"
+                className="rounded-md border border-white/20 px-4 py-2 cursor-pointer font-rethink uppercase tracking-wide text-white hover:border-white/40"
               >
                 No
               </button>
               <button
                 onClick={handleDelete}
-                className="rounded-md bg-[#ae1431] px-4 py-2 cursor-pointer font-rethink text-sm uppercase tracking-wide text-white hover:bg-[#c21938]"
+                className="rounded-md bg-[#ae1431] px-4 py-2 cursor-pointer font-rethink  uppercase tracking-wide text-white hover:bg-[#c21938]"
               >
                 Yes
               </button>

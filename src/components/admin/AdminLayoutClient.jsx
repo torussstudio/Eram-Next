@@ -405,7 +405,7 @@ export default function AdminLayoutClient({ children }) {
       )}
 
       {/* Main Layout Container */}
-      <div className={`flex-1 flex flex-col transition-[padding] duration-300 ${isCollapsed ? "md:pl-20" : "md:pl-64"}`}>
+      <div className={`flex-1 flex flex-col min-w-0 transition-[padding] duration-300 ${isCollapsed ? "md:pl-20" : "md:pl-64"}`}>
         
         {/* Navbar */}
         <header className="sticky top-0 z-20 h-20 bg-[#070709]/80 backdrop-blur-md border-b border-[#c5a880]/10 flex items-center px-4 md:px-8 justify-between">
@@ -434,7 +434,7 @@ export default function AdminLayoutClient({ children }) {
             <div className="relative">
               <button
                 onClick={() => setShowSearch(true)}
-                className="hidden lg:flex items-center gap-3 px-3 py-2 w-64 rounded-xl bg-zinc-900/50 hover:bg-zinc-900/90 border border-[#c5a880]/10 hover:border-[#c5a880]/20 text-zinc-500 hover:text-zinc-300 text-xs transition-[color,background-color,border-color] duration-200 text-left"
+                className="hidden lg:flex items-center gap-3 px-3 py-2 w-64 rounded-xl bg-zinc-900/50 hover:bg-zinc-900/90 border border-[#c5a880]/10 hover:border-[#c5a880]/20 text-zinc-500 hover:text-zinc-300  transition-[color,background-color,border-color] duration-200 text-left"
               >
                 <Search size={14} className="text-zinc-500" />
                 <span className="flex-1">Search portal...</span>
@@ -472,9 +472,9 @@ export default function AdminLayoutClient({ children }) {
                   </div>
                   <div className="max-h-64 overflow-y-auto divide-y divide-zinc-900">
                     {notifLoading ? (
-                      <p className="p-4 text-xs text-zinc-500">Loading…</p>
+                      <p className="p-4  text-zinc-500">Loading…</p>
                     ) : notifications.length === 0 ? (
-                      <p className="p-4 text-xs text-zinc-500">No notifications yet.</p>
+                      <p className="p-4  text-zinc-500">No notifications yet.</p>
                     ) : (
                       notifications.map((notif) => (
                       <div key={notif.id} className="p-3 hover:bg-zinc-900/40 transition-colors">
@@ -522,14 +522,14 @@ export default function AdminLayoutClient({ children }) {
                     <Link
                       href="/admin/dashboard"
                       onClick={() => setShowProfile(false)}
-                      className="flex items-center gap-2 px-4 py-2 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
+                      className="flex items-center gap-2 px-4 py-2  text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
                     >
                       <LayoutDashboard size={13} />
                       Dashboard
                     </Link>
                     <a
                       href="#"
-                      className="flex items-center gap-2 px-4 py-2 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
+                      className="flex items-center gap-2 px-4 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
                     >
                       <Settings size={13} />
                       System Settings
@@ -539,7 +539,7 @@ export default function AdminLayoutClient({ children }) {
                     <button
                       onClick={requestLogout}
                       disabled={loggingOut}
-                      className="w-full flex items-center gap-2 px-4 py-2 text-xs text-[#ae1431] hover:bg-[#ae1431]/10 text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full flex items-center gap-2 px-4 py-2 text-[#ae1431] hover:bg-[#ae1431]/10 text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <LogOut size={13} />
                       Sign Out
@@ -593,7 +593,7 @@ export default function AdminLayoutClient({ children }) {
                             router.push(item.path);
                             setShowSearch(false);
                           }}
-                          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-zinc-900/60 text-zinc-300 hover:text-[#F5EFE8] text-xs transition-colors text-left"
+                          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-zinc-900/60 text-zinc-300 hover:text-[#F5EFE8]  transition-colors text-left"
                         >
                           <div className="flex items-center gap-2">
                             <Icon size={14} className="text-[#c5a880]" />
@@ -612,7 +612,7 @@ export default function AdminLayoutClient({ children }) {
                   <button
                     onClick={requestLogout}
                     disabled={loggingOut}
-                    className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-[#ae1431]/10 text-[#ae1431] text-xs transition-colors text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-[#ae1431]/10 text-[#ae1431] transition-colors text-left disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <LogOut size={14} />
                     <span>Log Out Account</span>
@@ -644,21 +644,21 @@ export default function AdminLayoutClient({ children }) {
                 </div>
                 <h3 className="font-display text-lg text-[#F5EFE8]">Sign out?</h3>
               </div>
-              <p className="text-sm text-zinc-400 mb-6">
+              <p className=" text-zinc-400 mb-6">
                 You'll need to sign in again to access the admin dashboard.
               </p>
               <div className="flex justify-end gap-3">
                 <button
                   onClick={() => setShowLogoutConfirm(false)}
                   disabled={loggingOut}
-                  className="px-4 py-2 text-xs rounded-lg border border-[#c5a880]/15 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2  rounded-lg border border-[#c5a880]/15 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmLogout}
                   disabled={loggingOut}
-                  className="px-4 py-2 text-xs rounded-lg bg-[#ae1431] text-[#F5EFE8] hover:bg-[#ae1431]/90 transition-colors flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="px-4 py-2  rounded-lg bg-[#ae1431] text-[#F5EFE8] hover:bg-[#ae1431]/90 transition-colors flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {loggingOut && (
                     <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

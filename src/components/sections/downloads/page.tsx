@@ -187,7 +187,7 @@ function DownloadCard({ item, index }: { item: DownloadItem; index: number }) {
           {item.title}
         </h3>
 
-        <p className="font-rethink text-sm text-white/40 leading-relaxed flex-1">
+        <p className="font-rethink  text-white/40 leading-relaxed flex-1">
           {item.description}
         </p>
       </div>
@@ -504,7 +504,7 @@ export default function DownloadsPage() {
         {/* Error state */}
         {!loading && error && (
           <div className="flex flex-col items-center justify-center py-24 text-center gap-4">
-            <p className="font-rethink text-black text-sm tracking-widest uppercase">
+            <p className="font-rethink text-black tracking-widest uppercase">
               {error}
             </p>
           </div>
@@ -527,7 +527,7 @@ export default function DownloadsPage() {
         {/* Empty state */}
         {!loading && !error && filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="font-rethink text-black text-sm tracking-widest uppercase">
+            <p className="font-rethink text-black tracking-widest uppercase">
               No documents in this category yet.
             </p>
           </div>
@@ -541,7 +541,7 @@ export default function DownloadsPage() {
             <p className="font-rethink text-[11px] tracking-[0.2em] uppercase text-black mb-2">
               Can't find what you need?
             </p>
-            <p className="font-rethink text-black text-sm max-w-md leading-relaxed">
+            <p className="font-rethink text-black max-w-md leading-relaxed">
               Contact the admissions office directly for institution-specific
               documents, custom certificates, or records requests.
             </p>

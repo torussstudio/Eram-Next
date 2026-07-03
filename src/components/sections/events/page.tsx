@@ -29,6 +29,7 @@ interface EramEvent {
   tag?: string;
   isNew?: boolean;
   isPinned?: boolean;
+  image?: string;
 }
 
 type RawEvent = {
@@ -42,6 +43,7 @@ type RawEvent = {
   tag?: string;
   isNew?: boolean;
   isPinned?: boolean;
+  image?: string;
 };
 
 const INSTITUTION_LABEL: Record<string, string> = {
@@ -57,6 +59,15 @@ const MONTHS = [
   "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
   "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
 ];
+
+// Cloudinary URLs already start with http, so this passes through unchanged.
+// Only local/relative upload paths get the backend base prefixed.
+function resolveImageUrl(path?: string): string {
+  if (!path) return "";
+  if (path.startsWith("http")) return path;
+  const base = BACKEND_URL.replace(/\/api\/?$/, "");
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}
 
 function mapEvent(e: RawEvent): EramEvent {
   const d = new Date(e.date);
@@ -77,6 +88,7 @@ function mapEvent(e: RawEvent): EramEvent {
     tag: e.tag,
     isNew: e.isNew,
     isPinned: e.isPinned,
+    image: e.type === "event" ? e.image : undefined,
   };
 }
 
@@ -114,7 +126,15 @@ function TypePill({ type }: { type: EramEvent["type"] }) {
 
 // ─── EventCard ───────────────────────────────────────────────────────────────
 
-function EventCard({ ev, index }: { ev: EramEvent; index: number }) {
+function EventCard({
+  ev,
+  index,
+  onImageClick,
+}: {
+  ev: EramEvent;
+  index: number;
+  onImageClick: (url: string, title: string) => void;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -153,6 +173,26 @@ function EventCard({ ev, index }: { ev: EramEvent; index: number }) {
 
       <div className="hidden xs:block w-px bg-white/[0.08] self-stretch flex-shrink-0" />
 
+      {/* Desktop thumbnail — click to preview */}
+      {ev.image && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onImageClick(resolveImageUrl(ev.image), ev.title);
+          }}
+          className="hidden sm:block flex-shrink-0 w-20 h-20 overflow-hidden rounded-[12px] border border-white/10 cursor-zoom-in transition-opacity hover:opacity-80"
+          aria-label="Preview image"
+        >
+          <img
+            src={resolveImageUrl(ev.image)}
+            alt={ev.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </button>
+      )}
+
       <div className="flex-1 min-w-0">
         <div className="flex xs:hidden items-baseline gap-2 mb-2">
           <span className="text-base text-white/60 leading-none">
@@ -162,6 +202,26 @@ function EventCard({ ev, index }: { ev: EramEvent; index: number }) {
             {ev.month}
           </span>
         </div>
+
+        {/* Mobile full-width image — click to preview */}
+        {ev.image && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onImageClick(resolveImageUrl(ev.image), ev.title);
+            }}
+            className="sm:hidden mb-3 w-full h-32 overflow-hidden rounded-[12px] border border-white/10 cursor-zoom-in block"
+            aria-label="Preview image"
+          >
+            <img
+              src={resolveImageUrl(ev.image)}
+              alt={ev.title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </button>
+        )}
 
         <div className="flex items-center gap-2 mb-2.5 flex-wrap">
           <TypePill type={ev.type} />
@@ -193,7 +253,7 @@ function EventCard({ ev, index }: { ev: EramEvent; index: number }) {
           </p>
         )}
 
-        <p className="text-xs sm:text-sm text-white/38 leading-relaxed line-clamp-2">
+        <p className=" sm:text-sm text-white/38 leading-relaxed line-clamp-2">
           {ev.description}
         </p>
       </div>
@@ -213,12 +273,82 @@ function EventCard({ ev, index }: { ev: EramEvent; index: number }) {
   );
 }
 
+function ImageLightbox({
+  url,
+  title,
+  onClose,
+}: {
+  url: string;
+  title: string;
+  onClose: () => void;
+}) {
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!overlayRef.current) return;
+    gsap.fromTo(
+      overlayRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.25, ease: "power2.out" }
+    );
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      ref={overlayRef}
+      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm px-4 py-10"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close preview"
+        className="absolute top-5 right-5 sm:top-8 sm:right-8 text-white/60 hover:text-white transition-colors"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+
+      <img
+        src={url}
+        alt={title}
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[85vh] max-w-full sm:max-w-[85vw] object-contain rounded-[12px] border border-white/10"
+      />
+
+      <p
+        onClick={(e) => e.stopPropagation()}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.14em] uppercase text-white/40 max-w-[80vw] text-center truncate"
+      >
+        {title}
+      </p>
+    </div>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function EventsPage() {
   const [events, setEvents] = useState<EramEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+    const [lightbox, setLightbox] = useState<{ url: string; title: string } | null>(null);
+  const openLightbox = (url: string, title: string) => setLightbox({ url, title });
+  const closeLightbox = () => setLightbox(null);
 
   const [activeCategory, setActiveCategory] = useState<EventCategory>("ALL");
   const [activeType, setActiveType] = useState<EventType>("ALL");
@@ -230,7 +360,6 @@ export default function EventsPage() {
   const filterRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
-  // ── Fetch events from backend ──
   useEffect(() => {
     const controller = new AbortController();
 
@@ -258,7 +387,6 @@ export default function EventsPage() {
     return () => controller.abort();
   }, []);
 
-  // Hero entrance
   useGSAP(() => {
     if (!heroRef.current) return;
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -268,7 +396,6 @@ export default function EventsPage() {
       .fromTo(filterRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2");
   }, { scope: heroRef });
 
-  // Stats fade-in
   useGSAP(() => {
     if (!statsRef.current) return;
     gsap.fromTo(
@@ -295,8 +422,8 @@ export default function EventsPage() {
   const totalNotifs = events.filter((e) => e.type === "NOTIFICATION").length;
 
   return (
-    <main className="min-h-screen" style={{ background: "#0a0a0a", color: "#fff" }}>
-      {/* ── Hero ── */}
+      <>
+    <main className="min-h-screen bg-[#f5efe8]">
       <section
         ref={heroRef}
         className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 lg:px-20 border-b border-white/[0.07] overflow-hidden"
@@ -309,7 +436,7 @@ export default function EventsPage() {
         <div className="max-w-6xl mx-auto">
           <span
             ref={labelRef}
-            className="inline-block text-[10px] tracking-[0.25em] uppercase text-[#ae1431] mb-5 sm:mb-6 opacity-0"
+            className="inline-block font-rethink text-[12px] tracking-[0.25em] uppercase text-black mb-5 sm:mb-6 opacity-0"
           >
             ERAM EDUCATION
           </span>
@@ -317,15 +444,15 @@ export default function EventsPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-8">
             <h1
               ref={headingRef}
-              className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight opacity-0"
+              className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl text-[#ae1431] leading-[1.05] tracking-tight opacity-0"
             >
               Events &amp;
               <br />
-              <span className="text-white/30">Notifications</span>
+              <span className="text-[#ae1431]">Notifications</span>
             </h1>
             <p
               ref={subRef}
-              className="max-w-xs sm:max-w-sm text-xs sm:text-sm text-white/40 leading-relaxed md:text-right opacity-0"
+              className="max-w-xs sm:max-w-sm  sm:text-sm text-black font-rethink leading-relaxed md:text-right opacity-0"
             >
               Stay informed on upcoming events, academic circulars, and
               institutional announcements across all ERAM institutions.
@@ -339,10 +466,10 @@ export default function EventsPage() {
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
-                    className={`whitespace-nowrap px-3 py-2 sm:py-1.5 text-[10px] tracking-[0.15em] uppercase transition-all duration-200 ${
+                    className={`whitespace-nowrap rounded-[10px] px-3 py-2 sm:py-1.5 cursor-pointer font-rethink text-[12px] tracking-[0.15em] uppercase transition-all duration-200 ${
                       activeCategory === cat
                         ? "bg-[#ae1431] text-white"
-                        : "text-white/35 hover:text-white/70"
+                        : "text-black hover:text-[#ae1431]"
                     }`}
                   >
                     {CAT_LABEL[cat]}
@@ -358,10 +485,10 @@ export default function EventsPage() {
                     <button
                       key={t}
                       onClick={() => setActiveType(t)}
-                      className={`whitespace-nowrap px-3 py-2 sm:py-1.5 text-[10px] tracking-[0.12em] uppercase transition-all duration-200 ${
+                      className={`whitespace-nowrap px-3 py-2 cursor-pointer font-rethink text-[12px] rounded-[10px] sm:py-1.5 text-[10px] tracking-[0.12em] uppercase transition-all duration-200 ${
                         activeType === t
-                          ? "bg-white/10 text-white"
-                          : "text-white/30 hover:text-white/55"
+                          ? "bg-[#ae1431] text-white"
+                        : "text-black hover:text-[#ae1431]"
                       }`}
                     >
                       {t}
@@ -370,7 +497,7 @@ export default function EventsPage() {
                 </div>
               </div>
 
-              <span className="text-[10px] tracking-[0.14em] uppercase text-white/20 ml-auto shrink-0">
+              <span className="text-[12px] tracking-[0.14em] font-rethink uppercase text-black ml-auto shrink-0">
                 {filtered.length} RESULTS
               </span>
             </div>
@@ -378,7 +505,6 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ── Stats bar ── */}
       <div
         ref={statsRef}
         className="border-b border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 opacity-0"
@@ -390,10 +516,10 @@ export default function EventsPage() {
             { label: "Institutions", value: 5 },
           ].map((s) => (
             <div key={s.label} className="flex items-baseline gap-2">
-              <span className="text-xl sm:text-2xl text-white/80">
+              <span className="text-xl sm:text-2xl text-black">
                 {s.value}
               </span>
-              <span className="text-[9px] tracking-[0.14em] uppercase text-white/25 leading-none">
+              <span className="text-[12px] tracking-[0.14em] uppercase text-black font-rethink leading-none">
                 {s.label}
               </span>
             </div>
@@ -401,22 +527,19 @@ export default function EventsPage() {
         </div>
       </div>
 
-      {/* ── Content ── */}
       <section className="px-4 sm:px-6 md:px-12 lg:px-20 py-10 sm:py-14">
         <div className="max-w-6xl mx-auto">
-          {/* Loading */}
           {loading && (
             <div className="py-16 text-center">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-white/30">
+              <p className="text-[12px] tracking-[0.2em] uppercase text-black">
                 Loading…
               </p>
             </div>
           )}
 
-          {/* Error */}
           {!loading && error && (
             <div className="py-16 text-center">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-white/30">
+              <p className="text-[12px] tracking-[0.2em] uppercase text-red">
                 {error}
               </p>
             </div>
@@ -426,13 +549,13 @@ export default function EventsPage() {
             <>
               {pinned.length > 0 && (
                 <div className="mb-8 sm:mb-10">
-                  <p className="text-[9px] tracking-[0.22em] uppercase text-amber-400/60 mb-3 sm:mb-4">
+                  <p className="text-[9px] tracking-[0.22em] uppercase font-rethink text-amber-400/60 mb-3 sm:mb-4">
                     ◆ PINNED
                   </p>
                   <div className="border border-amber-500/10 bg-amber-500/[0.025] px-4 sm:px-6">
                     {pinned.map((ev, i) => (
-                      <EventCard key={ev.id} ev={ev} index={i} />
-                    ))}
+  <EventCard key={ev.id} ev={ev} index={i} onImageClick={openLightbox} />
+))}
                   </div>
                 </div>
               )}
@@ -440,20 +563,20 @@ export default function EventsPage() {
               {rest.length > 0 ? (
                 <div>
                   {pinned.length > 0 && (
-                    <p className="text-[9px] tracking-[0.22em] uppercase text-white/20 mb-3 sm:mb-4">
+                    <p className="text-[12px] tracking-[0.22em] uppercase text-black mb-3 sm:mb-4">
                       ALL UPDATES
                     </p>
                   )}
                   <div className="border-t border-white/[0.07]">
                     {rest.map((ev, i) => (
-                      <EventCard key={ev.id} ev={ev} index={i} />
-                    ))}
+  <EventCard key={ev.id} ev={ev} index={i} onImageClick={openLightbox} />
+))}
                   </div>
                 </div>
               ) : (
                 !pinned.length && (
                   <div className="py-16 sm:py-20 text-center">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/20">
+                    <p className="text-[12px] tracking-[0.2em] uppercase text-[#ae1431]">
                       No results found
                     </p>
                   </div>
@@ -464,14 +587,13 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ── Subscribe band ── */}
       <section className="border-t border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-16">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#ae1431] mb-3">
+            <p className="text-[12px] tracking-[0.2em] uppercase text-[#ae1431] mb-3">
               STAY UPDATED
             </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl text-white leading-snug">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl text-black leading-snug">
               Never miss an
               <br />
               announcement.
@@ -482,26 +604,33 @@ export default function EventsPage() {
             <input
               type="email"
               placeholder="your@email.com"
-              className="w-full sm:min-w-[200px] md:min-w-[220px] bg-transparent px-4 sm:px-5 py-3.5 text-sm text-white placeholder-white/25 outline-none border-b sm:border-b-0 sm:border-r border-white/[0.12]"
+              className="w-full sm:min-w-[200px] md:min-w-[220px] bg-transparent px-4 sm:px-5 py-3.5  text-white placeholder-white/25 outline-none border-b sm:border-b-0 sm:border-r border-white/[0.12]"
             />
-            <button className="bg-[#ae1431] px-6 py-3.5 text-[10px] tracking-[0.2em] uppercase text-white hover:bg-[#c4172a] transition-colors whitespace-nowrap">
+            <button className="bg-[#ae1431] hover:bg-black rounded-[11px] px-6 py-3.5 text-[12px] font-rethink tracking-[0.2em] uppercase text-white cursor-pointer transition-colors whitespace-nowrap">
               SUBSCRIBE
             </button>
           </div>
         </div>
       </section>
 
-      {/* ── Footer strip ── */}
       <div className="border-t border-white/[0.05] px-4 sm:px-6 md:px-12 lg:px-20 py-5 sm:py-6">
         <div className="max-w-6xl mx-auto flex flex-col xs:flex-row xs:items-center xs:justify-between gap-1.5 xs:gap-0">
-          <span className="text-[9px] tracking-[0.16em] uppercase text-white/15">
+          <span className="text-[12px] tracking-[0.16em] font-rethink uppercase text-black">
             ERAM EDUCATION — EVENTS & NOTIFICATIONS
           </span>
-          <span className="text-[9px] tracking-[0.14em] uppercase text-white/15">
+          <span className="text-[12px] tracking-[0.14em] font-rethink uppercase text-black">
             PALAKKAD, KERALA
           </span>
         </div>
       </div>
     </main>
+    {lightbox && (
+      <ImageLightbox
+        url={lightbox.url}
+        title={lightbox.title}
+        onClose={closeLightbox}
+      />
+    )}
+  </>
   );
 }

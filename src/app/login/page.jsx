@@ -55,7 +55,7 @@ export default function LoginPage() {
       {/* Left brand panel */}
       <div className="hidden lg:flex relative w-1/2 bg-[#ae1431] overflow-hidden flex-col justify-between p-12">
         {/* Ghost watermark */}
-        <span className="absolute -left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none font-[Playfair_Display] text-[260px] font-bold leading-none text-white/[0.06]">
+        <span className="absolute -left-10 top-1/2 -translate-y-1/2 select-none pointer-events-none font-display text-[260px]  leading-none text-white/[0.06]">
           ERAM
         </span>
 
@@ -70,18 +70,18 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10 max-w-md">
-          <h1 className="font-[Playfair_Display] text-4xl leading-tight text-white mb-4">
+          <h1 className="font-display text-4xl leading-tight text-white mb-4">
             Building Foundations.
             <br />
             Shaping Futures.
           </h1>
-          <p className="font-[Rethink_Sans] text-white/70 text-sm leading-relaxed">
+          <p className="font-rethink text-white/70  leading-relaxed">
             Admin access for managing admissions, academics, and institutional
             operations across the ERAM ecosystem.
           </p>
         </div>
 
-        <p className="relative z-10 font-[Rethink_Sans] text-white/40 text-xs">
+        <p className="relative z-10 font-rethink text-white/40">
           © Eram Education {new Date().getFullYear()}
         </p>
       </div>
@@ -98,18 +98,18 @@ export default function LoginPage() {
               height={80}
               className="bg-[#ae1431] rounded p-1"
             />
-            <span className="font-[Rethink_Sans] tracking-[0.2em] text-xs text-[#ae1431] uppercase">
+            <span className="font-rethink tracking-[0.2em] text-[#ae1431] uppercase">
               Eram Education
             </span>
           </div>
 
-          <p className="font-[Rethink_Sans] tracking-[0.25em] text-xs text-[#ae1431] uppercase mb-2">
+          <p className="font-rethink tracking-[0.25em] text-[#ae1431] uppercase mb-2">
             Admin Portal
           </p>
-          <h2 className="font-[Playfair_Display] text-3xl text-black mb-1">
+          <h2 className="font-display text-3xl text-black mb-1">
             Welcome back
           </h2>
-          <p className="font-[Rethink_Sans] text-sm text-black/50 mb-8">
+          <p className="font-rethink  text-black/50 mb-8">
             Sign in to continue to the dashboard.
           </p>
 
@@ -117,7 +117,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block font-[Rethink_Sans] text-xs font-medium text-black/70 mb-1.5"
+                className="block font-rethink text-black/70 mb-1.5"
               >
                 Email address
               </label>
@@ -127,7 +127,7 @@ export default function LoginPage() {
                 placeholder="you@eram.edu.in"
                 required
                 autoComplete="email"
-                className="w-full bg-white border border-black/10 rounded-lg px-4 py-3 text-sm font-[Rethink_Sans] text-black placeholder:text-black/30 outline-none transition focus:border-[#ae1431] focus:ring-2 focus:ring-[#ae1431]/15"
+                className="w-full bg-white border border-black/10 rounded-lg px-4 py-3 font-rethink text-black placeholder:text-black/30 outline-none transition focus:border-[#ae1431] focus:ring-2 focus:ring-[#ae1431]/15"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -136,7 +136,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block font-[Rethink_Sans] text-xs font-medium text-black/70 mb-1.5"
+                className="block font-rethink text-black/70 mb-1.5"
               >
                 Password
               </label>
@@ -147,14 +147,14 @@ export default function LoginPage() {
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
-                  className="w-full bg-white border border-black/10 rounded-lg px-4 py-3 pr-12 text-sm font-[Rethink_Sans] text-black placeholder:text-black/30 outline-none transition focus:border-[#ae1431] focus:ring-2 focus:ring-[#ae1431]/15"
+                  className="w-full bg-white border  border-black/10 rounded-lg px-4 py-3 pr-12 font-rethink text-black placeholder:text-black/30 outline-none transition focus:border-[#ae1431] focus:ring-2 focus:ring-[#ae1431]/15"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((s) => !s)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-[Rethink_Sans] text-black/40 hover:text-[#ae1431] transition"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer font-rethink text-black/40 hover:text-[#ae1431] transition"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -162,7 +162,7 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <p className="font-[Rethink_Sans] text-sm text-[#ae1431] bg-[#ae1431]/5 border border-[#ae1431]/20 rounded-lg px-3 py-2">
+              <p className="font-rethink  text-[#ae1431] bg-[#ae1431]/5 border border-[#ae1431]/20 rounded-lg px-3 py-2">
                 {error}
               </p>
             )}
@@ -170,7 +170,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer w-full bg-black text-white font-[Rethink_Sans] text-sm font-medium rounded-lg py-3 transition hover:bg-[#ae1431] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="cursor-pointer w-full bg-[#ae1431] text-white font-rethink   rounded-lg py-3 transition hover:bg-black disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading && (
                 <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

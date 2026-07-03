@@ -492,17 +492,17 @@ export default function Hero() {
                     />
                   )}
                 </div>
-                <p className="mt-2 max-w-xl text-xs md:text-sm text-[#F5EFE8]/80">
+                <p className="mt-2 max-w-xl md:text-sm text-[#F5EFE8]/80">
                   {activeSlide.description}
                 </p>
                 <div className="mt-4 flex gap-3">
                   {activeSlide.primaryButton.text && (
-                    <span className="px-4 py-2 bg-[#ae1431] rounded-md text-xs md:text-sm">
+                    <span className="px-4 py-2 bg-[#ae1431] rounded-md  md:text-sm">
                       {activeSlide.primaryButton.text}
                     </span>
                   )}
                   {activeSlide.secondaryButton.text && (
-                    <span className="px-4 py-2 border border-white rounded-md text-xs md:text-sm">
+                    <span className="px-4 py-2 border border-white rounded-md  md:text-sm">
                       {activeSlide.secondaryButton.text}
                     </span>
                   )}

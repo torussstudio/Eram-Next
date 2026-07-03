@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
-import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 
 type CategoryId = "general" | "mmhss" | "mmps" | "amlp" | "mmite";
@@ -49,8 +48,6 @@ export default function GalleryClient() {
   const gridRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
-
-  const router = useRouter();
 
   // Fetch from backend whenever filters change — server-side filtering
   // since the dataset is expected to grow past 100+ images.
@@ -192,14 +189,6 @@ export default function GalleryClient() {
         ref={heroRef}
         className="relative overflow-hidden px-6 pt-24 pb-16 md:px-12 lg:px-20 lg:pt-28 lg:pb-24"
       >
-        <button
-          onClick={() => router.back()}
-          className="hero-reveal mb-8 inline-flex w-fit items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-sm font-rethink text-neutral-700 transition-all duration-300 hover:border-[#ae1431] hover:bg-[#ae1431] hover:text-white cursor-pointer"
-        >
-          <ChevronLeft size={18} />
-          Back
-        </button>
-
         <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
             <p className="hero-reveal text-xs md:text-sm font-display tracking-[0.25em] uppercase text-[#ae1431]">
@@ -209,7 +198,7 @@ export default function GalleryClient() {
               The ERAM Gallery
             </h1>
           </div>
-          <p className="hero-reveal max-w-md text-sm leading-relaxed text-neutral-700 font-rethink md:text-base lg:justify-self-end lg:text-right">
+          <p className="hero-reveal max-w-md leading-relaxed text-black font-rethink md:text-base lg:justify-self-end lg:text-right">
             A visual record of sport, culture, service, and scholarship across
             every institution in the ERAM ecosystem.
           </p>
@@ -217,9 +206,9 @@ export default function GalleryClient() {
       </section>
 
       {/* Filters — unchanged */}
-      <section className="sticky top-0 z-30 border-y border-black/10 bg-[#F5EFE8]/85 px-6 py-4 backdrop-blur-md md:px-12 lg:px-20">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap gap-2">
+      <section className="sticky top-0 z-30  bg-[#F5EFE8] px-6 py-4 backdrop-blur-md md:px-12 lg:px-20">
+        <div className="flex flex-col  gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap  gap-2">
             <FilterPill
               label="All Schools"
               active={activeCategory === "all"}
@@ -257,7 +246,7 @@ export default function GalleryClient() {
 
       {/* Results count */}
       <div className="flex items-center justify-between px-6 pt-8 pb-2 md:px-12 lg:px-20">
-        <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+        <p className=" uppercase tracking-[0.2em] text-[12px] text-black font-rethink">
           {loading
             ? "Loading photographs…"
             : `Showing ${filteredItems.length} ${
@@ -273,7 +262,7 @@ export default function GalleryClient() {
             <p className="font-display text-2xl text-[#ae1431]">
               Couldn&apos;t load the gallery
             </p>
-            <p className="mt-2 max-w-sm text-sm text-neutral-600">
+            <p className="mt-2 max-w-sm text-neutral-600">
               Please refresh the page or try again shortly.
             </p>
           </div>
@@ -332,11 +321,11 @@ export default function GalleryClient() {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-black/15 py-24 text-center">
+          <div className="flex flex-col items-center justify-center rounded-[12px] border border-dashed border-black/15 py-24 text-center">
             <p className="font-display text-2xl text-[#ae1431]">
               No photographs here yet
             </p>
-            <p className="mt-2 max-w-sm text-sm text-neutral-600">
+            <p className="mt-2 max-w-sm text-black">
               Try a different school or event type — new moments are added to
               the gallery regularly.
             </p>
@@ -348,7 +337,7 @@ export default function GalleryClient() {
       {lightboxItem && (
         <div
           ref={lightboxRef}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#110508]/95 px-4 py-10 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#110508]/95 px-4 py-10 backdrop-blur-sm"
           onClick={closeLightbox}
         >
           <button
@@ -379,7 +368,7 @@ export default function GalleryClient() {
               e.stopPropagation();
               goNext();
             }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-white/60 transition-colors hover:bg-white/10 hover:text-white md:right-6"
+            className="absolute  right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-white/60 transition-colors hover:bg-white/10 hover:text-white md:right-6"
             aria-label="Next"
           >
             <ChevronRight size={28} />
@@ -412,7 +401,7 @@ export default function GalleryClient() {
                     e.stopPropagation();
                     setLightboxIndex(i);
                   }}
-                  className={`h-12 w-16 shrink-0 overflow-hidden rounded-sm transition-all duration-200 ${
+                  className={`h-12 w-16 shrink-0 overflow-hidden cursor-pointer rounded-sm transition-all duration-200 ${
                     i === lightboxIndex
                       ? "ring-2 ring-[#ae1431] opacity-100"
                       : "opacity-40 hover:opacity-70"
@@ -447,12 +436,12 @@ function FilterPill({
   return (
     <button
       onClick={onClick}
-      className={`relative rounded-full border px-4 py-1.5 text-xs uppercase tracking-wide transition-all duration-200 active:scale-[0.97] md:text-sm ${
+      className={`relative cursor-pointer rounded-full border px-4 py-1.5 text-xs uppercase tracking-wide transition-all duration-200 active:scale-[0.97] md:text-sm ${
         active
           ? "border-[#ae1431] bg-[#ae1431] text-white shadow-[0_8px_20px_-8px_rgba(174,20,49,0.6)]"
           : variant === "outline"
-          ? "border-black/15 bg-transparent text-neutral-700 hover:bg-black/5"
-          : "border-black/15 bg-white text-neutral-700 hover:bg-black/5"
+          ? "border-white hover:border-black bg-white text-[#ae1431] hover:bg-black hover:text-white"
+          : "border-white hover:border-black bg-white text-[#ae1431] hover:bg-black hover:text-white"
       }`}
     >
       {label}

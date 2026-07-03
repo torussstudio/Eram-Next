@@ -147,14 +147,14 @@ const handleDelete = async () => {
   }));
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-10">
-      <h1 className="text-2xl font-display text-[#ae1431]">Gallery Manager</h1>
-      <p className="mt-1  text-white">Upload photos and manage the master gallery.</p>
+    <div className="mx-auto w-full min-w-0 max-w-5xl px-4 sm:px-6 py-6 sm:py-10">
+      <h1 className="text-xl sm:text-2xl font-display text-[#ae1431]">Gallery Manager</h1>
+      <p className="mt-1 t sm:text-base text-white">Upload photos and manage the master gallery.</p>
 
       {/* Upload form */}
       <form
         onSubmit={handleUpload}
-        className="mt-6 grid gap-4 rounded-lg border border-white bg-black p-5 sm:grid-cols-2"
+        className="mt-6 grid gap-4 rounded-lg border border-white bg-black p-4 sm:p-5 grid-cols-1 sm:grid-cols-2"
       >
         <div className="sm:col-span-2">
           <label className=" font-rethink uppercase tracking-wide text-white">Title</label>
@@ -163,7 +163,7 @@ const handleDelete = async () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="mt-1 w-full rounded-md border border-white px-3 py-2 "
+            className="mt-1 w-full rounded-md border border-white px-3 py-2  sm:text-base"
             placeholder="e.g. Annual Sports Meet"
           />
         </div>
@@ -173,7 +173,7 @@ const handleDelete = async () => {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 w-full rounded-md border border-white px-3 py-2 "
+            className="mt-1 w-full rounded-md border border-white px-3 py-2  sm:text-base"
           >
             {CATEGORIES.map((c) => (
               <option className='bg-black text-white' key={c.id} value={c.id}>{c.label}</option>
@@ -186,7 +186,7 @@ const handleDelete = async () => {
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="mt-1 w-full rounded-md border border-white px-3 py-2 "
+            className="mt-1 w-full rounded-md border border-white px-3 py-2  sm:text-base"
           >
             {TYPES.map((t) => (
               <option className='bg-black text-white' key={t.id} value={t.id}>{t.label}</option>
@@ -195,7 +195,7 @@ const handleDelete = async () => {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="font-rethink uppercase tracking-wide text-white">Image</label>
+          <label className=" font-rethink uppercase tracking-wide text-white">Image</label>
           <input
             id="gallery-file-input"
             type="file"
@@ -205,7 +205,7 @@ const handleDelete = async () => {
             className="mt-1 w-full "
           />
           {file && (
-            <p className="mt-1 text-xs text-white/60">
+            <p className="mt-1  text-white/60 break-words">
               Selected: {(file.size / 1024).toFixed(0)} KB — will be auto-compressed before upload
             </p>
           )}
@@ -214,7 +214,7 @@ const handleDelete = async () => {
         <button
           type="submit"
           disabled={uploading}
-          className="sm:col-span-2 flex items-center justify-center cursor-pointer gap-2 rounded-md bg-[#ae1431] px-4 py-2  font-rethink text-white disabled:opacity-50"
+          className="sm:col-span-2 flex items-center justify-center cursor-pointer gap-2 rounded-md bg-[#ae1431] px-4 py-2  sm:text-base font-rethink text-white disabled:opacity-50"
         >
           <UploadCloud size={16} />
           {compressing ? 'Compressing…' : uploading ? 'Uploading…' : 'Upload Image'}
@@ -228,36 +228,36 @@ const handleDelete = async () => {
         ) : (
           grouped.map((group) => (
             <div key={group.id}>
-              <h2 className="mb-3 font-display uppercase tracking-wide text-[#ae1431]">
+              <h2 className="mb-3 font-display sm:text-base uppercase tracking-wide text-[#ae1431]">
                 {group.label} <span className="text-white">({group.items.length})</span>
               </h2>
 
               {group.items.length === 0 ? (
-                <p className=" text-white">No images yet.</p>
+                <p className=" sm:text-base text-white">No images yet.</p>
               ) : (
-                <div className="overflow-hidden rounded-md border border-black/10">
-                  <table className="w-full text-left ">
-                    <thead className="bg-black/[0.03]  uppercase tracking-wide text-white">
+                <div className="overflow-x-auto rounded-md border border-black/10">
+                  <table className="w-full min-w-[560px] text-left  sm:text-sm">
+                    <thead className="bg-black/[0.03] uppercase tracking-wide text-white">
                       <tr>
-                        <th className="px-4 py-2">Preview</th>
-                        <th className="px-4 py-2">Title</th>
-                        <th className="px-4 py-2">Type</th>
-                        <th className="px-4 py-2">Uploaded</th>
-                        <th className="px-4 py-2 text-right">Action</th>
+                        <th className="px-3 sm:px-4 py-2">Preview</th>
+                        <th className="px-3 sm:px-4 py-2">Title</th>
+                        <th className="px-3 sm:px-4 py-2">Type</th>
+                        <th className="px-3 sm:px-4 py-2">Uploaded</th>
+                        <th className="px-3 sm:px-4 py-2 text-right">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {group.items.map((item) => (
                         <tr key={item._id} className="border-t border-black/5">
-                          <td className="px-4 py-2">
-                            <img src={item.image} alt={item.title} className="h-12 w-16 rounded object-cover" />
+                          <td className="px-3 sm:px-4 py-2">
+                            <img src={item.image} alt={item.title} className="h-10 w-14 sm:h-12 sm:w-16 rounded object-cover" />
                           </td>
-                          <td className="px-4 py-2">{item.title}</td>
-                          <td className="px-4 py-2 capitalize text-white">{item.type}</td>
-                          <td className="px-4 py-2 text-white">
+                          <td className="px-3 sm:px-4 py-2">{item.title}</td>
+                          <td className="px-3 sm:px-4 py-2 capitalize text-white">{item.type}</td>
+                          <td className="px-3 sm:px-4 py-2 text-white whitespace-nowrap">
                             {new Date(item.createdAt).toLocaleDateString()}
                           </td>
-                          <td className="px-4 py-2 text-right">
+                          <td className="px-3 sm:px-4 py-2 text-right">
                             <button
                               onClick={() => confirmDelete(item._id)}
                               className="text-white cursor-pointer transition-colors hover:text-[#ae1431]"
@@ -282,19 +282,19 @@ const handleDelete = async () => {
             <h3 className="font-display text-lg text-white">
               Delete this image?
             </h3>
-            <p className="mt-2 text-sm text-white/60">
+            <p className="mt-2 text-white/60">
               This action cannot be undone.
             </p>
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="rounded-md border border-white/20 px-4 py-2 cursor-pointer font-rethink text-sm uppercase tracking-wide text-white hover:border-white/40"
+                className="rounded-md border border-white/20 px-4 py-2 cursor-pointer font-rethink uppercase tracking-wide text-white hover:border-white/40"
               >
                 No
               </button>
               <button
                 onClick={handleDelete}
-                className="rounded-md bg-[#ae1431] px-4 py-2 cursor-pointer font-rethink text-sm uppercase tracking-wide text-white hover:bg-[#c21938]"
+                className="rounded-md bg-[#ae1431] px-4 py-2 cursor-pointer font-rethink uppercase tracking-wide text-white hover:bg-[#c21938]"
               >
                 Yes
               </button>

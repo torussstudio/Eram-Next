@@ -23,7 +23,7 @@ export const PageHeader = memo(function PageHeader({ title, description, childre
           {title}
         </h1>
         {description && (
-          <p className="text-sm text-zinc-400 mt-1 font-rethink">
+          <p className=" text-zinc-400 mt-1 font-rethink">
             {description}
           </p>
         )}
@@ -201,7 +201,7 @@ export const DataTable = memo(function DataTable({ columns, data, searchField, f
           <input
             type="text"
             placeholder={`Search by ${searchField}...`}
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-950/80 border border-[#c5a880]/15 hover:border-[#c5a880]/30 focus:border-[#ae1431] focus:ring-1 focus:ring-[#ae1431]/20 outline-none text-xs text-zinc-200 placeholder:text-zinc-600 transition-colors duration-200"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-950/80 border border-[#c5a880]/15 hover:border-[#c5a880]/30 focus:border-[#ae1431] focus:ring-1 focus:ring-[#ae1431]/20 outline-none  text-zinc-200 placeholder:text-zinc-600 transition-colors duration-200"
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -298,7 +298,7 @@ export const DataTable = memo(function DataTable({ columns, data, searchField, f
 
       {/* Table Pagination */}
       {totalPages > 1 && (
-        <div className="px-6 py-4 border-t border-[#c5a880]/10 flex items-center justify-between text-xs text-zinc-500 bg-zinc-950/20">
+        <div className="px-6 py-4 border-t border-[#c5a880]/10 flex items-center justify-between text-zinc-500 bg-zinc-950/20">
           <span>
             Page <strong className="text-zinc-300">{currentPage}</strong> of <strong className="text-zinc-300">{totalPages}</strong>
           </span>
@@ -341,7 +341,7 @@ export const EmptyState = memo(function EmptyState({ title = "No data available"
 export const ActivityFeed = memo(function ActivityFeed({ activities }) {
   return (
     <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
-      <h3 className="text-sm text-zinc-200 uppercase tracking-wider mb-6 flex items-center gap-2">
+      <h3 className=" text-zinc-200 uppercase tracking-wider mb-6 flex items-center gap-2">
         <span className="w-1.5 h-3 bg-[#ae1431] rounded-full shadow-[0_0_8px_#ae1431]" />
         Recent Logs & Activities
       </h3>
