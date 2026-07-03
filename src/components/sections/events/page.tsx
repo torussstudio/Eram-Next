@@ -14,7 +14,7 @@ const BACKEND_URL =
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 type EventCategory = "ALL" | "ACADEMIC" | "SPORTS" | "CULTURAL" | "NOTICE";
-type EventType = "ALL" | "EVENT" | "NOTIFICATION" | "CIRCULAR";
+type EventType = "ALL" | "EVENT" | "NOTIFICATION";
 
 interface EramEvent {
   id: string;
@@ -102,7 +102,6 @@ function TypePill({ type }: { type: EramEvent["type"] }) {
   const colors: Record<EramEvent["type"], string> = {
     EVENT: "border-[#ae1431]/60 text-[#ae1431]",
     NOTIFICATION: "border-white/20 text-white/60",
-    CIRCULAR: "border-amber-500/40 text-amber-400/80",
   };
   return (
     <span
@@ -294,7 +293,6 @@ export default function EventsPage() {
 
   const totalEvents = events.filter((e) => e.type === "EVENT").length;
   const totalNotifs = events.filter((e) => e.type === "NOTIFICATION").length;
-  const totalCirculars = events.filter((e) => e.type === "CIRCULAR").length;
 
   return (
     <main className="min-h-screen" style={{ background: "#0a0a0a", color: "#fff" }}>
@@ -356,7 +354,7 @@ export default function EventsPage() {
             <div className="flex items-center gap-3 flex-wrap">
               <div className="overflow-x-auto pb-0.5 -mx-4 px-4 sm:mx-0 sm:px-0">
                 <div className="flex items-center gap-1 border border-white/[0.08] p-1 w-max">
-                  {(["ALL", "EVENT", "NOTIFICATION", "CIRCULAR"] as const).map((t) => (
+                  {(["ALL", "EVENT", "NOTIFICATION"] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setActiveType(t)}
@@ -389,7 +387,6 @@ export default function EventsPage() {
           {[
             { label: "Upcoming Events", value: totalEvents },
             { label: "Notifications", value: totalNotifs },
-            { label: "Circulars", value: totalCirculars },
             { label: "Institutions", value: 5 },
           ].map((s) => (
             <div key={s.label} className="flex items-baseline gap-2">

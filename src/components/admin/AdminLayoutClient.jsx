@@ -38,14 +38,6 @@ const navItems = [
 
 ];
 
-// Simulated notifications
-const notifications = [
-  { id: 1, title: "New Admission Request", body: "Rahul V has submitted an application for MMHSS.", time: "10m ago", read: false },
-  { id: 2, title: "Sports Arena Booking", body: "Football coaching booking request received.", time: "1h ago", read: false },
-  { id: 3, title: "Portal Update Success", body: "Parent portal system updates completed.", time: "4h ago", read: true },
-  { id: 4, title: "New Gallery Uploads", body: "Admin posted 5 new images in the Annual Day folder.", time: "1d ago", read: true }
-];
-
 export default function AdminLayoutClient({ children }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -57,10 +49,90 @@ export default function AdminLayoutClient({ children }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
+    const [notifications, setNotifications] = useState([]);
+  const [notifLoading, setNotifLoading] = useState(true);
 
   const searchRef = useRef(null);
   const notifRef = useRef(null);
   const profileRef = useRef(null);
+
+
+   const timeAgo = (dateStr) => {
+    const diffMs = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diffMs / 60000);
+    if (mins < 1) return "just now";
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    return `${days}d ago`;
+  };
+
+  // Fetch latest activity from events, downloads, gallery & home for the bell dropdown
+  useEffect(() => {
+    Promise.allSettled([
+      api.get("/events"),
+      api.get("/downloads"),
+      api.get("/gallery"),
+      api.get("/hero"),
+    ]).then((results) => {
+      const [eventsRes, downloadsRes, galleryRes, heroRes] = results;
+
+      const eventItems =
+        eventsRes.status === "fulfilled"
+          ? eventsRes.value.data.map((ev) => ({
+              id: `event-${ev._id}`,
+              title: ev.title,
+              body: ev.description,
+              date: ev.createdAt,
+              read: false,
+            }))
+          : [];
+
+      const downloadItems =
+        downloadsRes.status === "fulfilled"
+          ? downloadsRes.value.data.map((d) => ({
+              id: `download-${d._id}`,
+              title: `New Document: ${d.title}`,
+              body: d.description,
+              date: d.createdAt,
+              read: false,
+            }))
+          : [];
+
+      const galleryItems =
+        galleryRes.status === "fulfilled"
+          ? galleryRes.value.data.map((g) => ({
+              id: `gallery-${g._id}`,
+              title: `New Gallery Upload${g.title ? `: ${g.title}` : ""}`,
+              body: g.description || g.caption || "New image added to gallery.",
+              date: g.createdAt,
+              read: false,
+            }))
+          : [];
+
+      const heroItems =
+        heroRes.status === "fulfilled"
+          ? (Array.isArray(heroRes.value.data) ? heroRes.value.data : [heroRes.value.data])
+              .filter(Boolean)
+              .map((h) => ({
+                id: `home-${h._id}`,
+                title: `Home Page Updated${h.title ? `: ${h.title}` : ""}`,
+                body: h.description || h.subtitle || "Homepage content was updated.",
+                date: h.updatedAt || h.createdAt,
+                read: false,
+              }))
+          : [];
+
+      const merged = [...eventItems, ...downloadItems, ...galleryItems, ...heroItems]
+        .filter((n) => n.date)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 8)
+        .map((n) => ({ ...n, time: timeAgo(n.date) }));
+
+      setNotifications(merged);
+    }).finally(() => setNotifLoading(false));
+  }, []);
 
   // Close menus on click outside
   useEffect(() => {
@@ -90,6 +162,20 @@ export default function AdminLayoutClient({ children }) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  // Toggle dropdown; mark everything read the moment it's opened
+  const toggleNotifications = () => {
+    setShowNotifications((prev) => {
+      const next = !prev;
+      if (next) {
+        setNotifications((cur) => cur.map((n) => ({ ...n, read: true })));
+      }
+      return next;
+    });
+  };
+
 
   // Opens the confirmation modal instead of logging out immediately
   const requestLogout = () => {
@@ -364,22 +450,33 @@ export default function AdminLayoutClient({ children }) {
 
             {/* Notification Area */}
             <div className="relative" ref={notifRef}>
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
+             <button
+                onClick={toggleNotifications}
                 className="relative p-2.5 rounded-xl bg-zinc-900/50 hover:bg-zinc-900 border border-[#c5a880]/10 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
               >
                 <Bell size={16} />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#ae1431] rounded-full ring-2 ring-[#070709]" />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 flex items-center justify-center rounded-full bg-[#ae1431] text-[9px] font-semibold text-white ring-2 ring-[#070709]">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
               </button>
 
               {showNotifications && (
                 <div className="absolute right-0 mt-3 w-80 bg-[#0c0c0f] border border-[#c5a880]/15 rounded-2xl shadow-xl z-30 py-2 animate-[fadeIn_0.2s_ease-out]">
-                  <div className="px-4 py-2 border-b border-[#c5a880]/10 flex items-center justify-between">
+                 <div className="px-4 py-2 border-b border-[#c5a880]/10 flex items-center justify-between">
                     <span className=" tracking-wider uppercase text-zinc-200">Alerts & Messages</span>
-                    <span className="text-[10px] text-[#ae1431] bg-[#ae1431]/10 px-2 py-0.5 rounded">2 New</span>
+                    <span className="text-[10px] text-[#ae1431] bg-[#ae1431]/10 px-2 py-0.5 rounded">
+                      {unreadCount} New
+                    </span>
                   </div>
                   <div className="max-h-64 overflow-y-auto divide-y divide-zinc-900">
-                    {notifications.map((notif) => (
+                    {notifLoading ? (
+                      <p className="p-4 text-xs text-zinc-500">Loading…</p>
+                    ) : notifications.length === 0 ? (
+                      <p className="p-4 text-xs text-zinc-500">No notifications yet.</p>
+                    ) : (
+                      notifications.map((notif) => (
                       <div key={notif.id} className="p-3 hover:bg-zinc-900/40 transition-colors">
                         <div className="flex items-center justify-between mb-1">
                           <span className={` ${notif.read ? 'text-zinc-400' : 'text-[#c5a880]'}`}>
@@ -389,6 +486,7 @@ export default function AdminLayoutClient({ children }) {
                         </div>
                         <p className="text-[11px] text-zinc-400 leading-normal">{notif.body}</p>
                       </div>
+                      )
                     ))}
                   </div>
                   <div className="px-4 py-2 border-t border-[#c5a880]/10 text-center">
