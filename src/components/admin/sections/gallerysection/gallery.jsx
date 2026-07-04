@@ -9,6 +9,7 @@ const CATEGORIES = [
   { id: 'mmps', label: 'MMPS' },
   { id: 'amlp', label: 'AMLP' },
   { id: 'mmite', label: 'MMITE' },
+  { id: 'ease', label: 'EASE' },
 ];
 
 const TYPES = [

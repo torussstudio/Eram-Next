@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import api from "@/lib/api";
 
-type CategoryId = "general" | "mmhss" | "mmps" | "amlp" | "mmite";
+type CategoryId = "general" | "mmhss" | "mmps" | "amlp" | "mmite" | "ease";
 type TypeId = "general" | "sports" | "cultural" | "social" | "academic";
 
 interface GalleryItem {
@@ -23,6 +24,7 @@ const CATEGORIES: { id: CategoryId; label: string }[] = [
   { id: "mmps", label: "MMPS" },
   { id: "amlp", label: "AMLP" },
   { id: "mmite", label: "MMITE" },
+  { id: "ease", label: "EASE" },
 ];
 
 const TYPES: { id: TypeId; label: string }[] = [
@@ -33,15 +35,27 @@ const TYPES: { id: TypeId; label: string }[] = [
   { id: "academic", label: "Academic" },
 ];
 
+const PAGE_SIZE = 30;
+
+const VALID_CATEGORY_IDS = CATEGORIES.map((c) => c.id) as string[];
+
 export default function GalleryClient() {
+  const searchParams = useSearchParams();
+
   const [activeCategory, setActiveCategory] = useState<CategoryId | "all">(
-    "all",
+    () => {
+      const fromUrl = searchParams.get("category");
+      return fromUrl && VALID_CATEGORY_IDS.includes(fromUrl)
+        ? (fromUrl as CategoryId)
+        : "all";
+    },
   );
   const [activeType, setActiveType] = useState<TypeId | "all">("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({});
 
   const [filteredItems, setFilteredItems] = useState<GalleryItem[]>([]);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -74,6 +88,7 @@ export default function GalleryClient() {
           aspect: d.aspect || "landscape",
         }));
         setFilteredItems(mapped);
+        setVisibleCount(PAGE_SIZE); // reset pagination on every new filter fetch
       })
       .catch((err) => {
         console.error("Gallery fetch failed:", err);
@@ -87,6 +102,13 @@ export default function GalleryClient() {
       cancelled = true;
     };
   }, [activeCategory, activeType]);
+
+  const displayedItems = filteredItems.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredItems.length;
+
+  const handleShowMore = useCallback(() => {
+    setVisibleCount((c) => Math.min(c + PAGE_SIZE, filteredItems.length));
+  }, [filteredItems.length]);
 
   const lightboxItem =
     lightboxIndex !== null ? filteredItems[lightboxIndex] : null;
@@ -109,14 +131,20 @@ export default function GalleryClient() {
     { scope: heroRef },
   );
 
-  // Re-run entrance animation every time the filtered set changes
+  // Re-run entrance animation every time the visible set changes
+  // (initial filter load AND each "Show More" click) — only animate
+  // the newly appended cards, not the ones already on screen.
+  const prevVisibleCountRef = useRef(0);
   useGSAP(
     () => {
       if (!gridRef.current || loading) return;
       const cards = gridRef.current.querySelectorAll(".gallery-card");
+      const prevCount = prevVisibleCountRef.current;
+      const newCards = Array.from(cards).slice(prevCount);
+      const targets = newCards.length > 0 ? newCards : cards;
 
-      gsap.set(cards, { opacity: 0, y: 32, scale: 0.97 });
-      gsap.to(cards, {
+      gsap.set(targets, { opacity: 0, y: 32, scale: 0.97 });
+      gsap.to(targets, {
         opacity: 1,
         y: 0,
         scale: 1,
@@ -124,9 +152,17 @@ export default function GalleryClient() {
         ease: "power3.out",
         stagger: 0.04,
       });
+
+      prevVisibleCountRef.current = displayedItems.length;
     },
-    { scope: gridRef, dependencies: [filteredItems, loading] },
+    { scope: gridRef, dependencies: [displayedItems.length, loading] },
   );
+
+  // Reset the "previous count" tracker whenever the underlying filtered
+  // set changes (new search/filter), so the fresh batch animates fully.
+  useEffect(() => {
+    prevVisibleCountRef.current = 0;
+  }, [activeCategory, activeType]);
 
   // Lightbox open transition
   useGSAP(
@@ -249,7 +285,7 @@ export default function GalleryClient() {
         <p className=" uppercase tracking-[0.2em] text-[12px] text-black font-rethink">
           {loading
             ? "Loading photographs…"
-            : `Showing ${filteredItems.length} ${
+            : `Showing ${displayedItems.length} of ${filteredItems.length} ${
                 filteredItems.length === 1 ? "photograph" : "photographs"
               }`}
         </p>
@@ -276,50 +312,63 @@ export default function GalleryClient() {
             ))}
           </div>
         ) : filteredItems.length > 0 ? (
-          <div
-            ref={gridRef}
-            className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4 [column-fill:_balance]"
-          >
-            {filteredItems.map((item, i) => (
-              <button
-                key={item.id}
-                onClick={() => setLightboxIndex(i)}
-                className="gallery-card group relative mb-5 block w-full overflow-hidden rounded-md break-inside-avoid text-left ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-[0_24px_48px_-20px_rgba(17,5,8,0.25)]"
-              >
-                {!loadedMap[item.id] && (
-                  <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-black/5 via-black/[0.03] to-black/5" />
-                )}
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  onLoad={() =>
-                    setLoadedMap((m) => ({ ...m, [item.id]: true }))
-                  }
-                  className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                />
-                <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#110508]/90 via-[#110508]/15 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <div className="flex items-end justify-between gap-2">
-                    <div>
-                      <span className="mb-1 inline-block w-fit rounded-full bg-[#ae1431] px-2.5 py-0.5 text-[10px] font-rethink uppercase tracking-wider text-white">
-                        {TYPES.find((t) => t.id === item.type)?.label}
-                      </span>
-                      <p className="font-display text-lg text-white">
-                        {item.title}
-                      </p>
-                      <p className="text-xs uppercase tracking-wide text-white/70">
-                        {CATEGORIES.find((c) => c.id === item.category)?.label}
-                      </p>
+          <>
+            <div
+              ref={gridRef}
+              className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4 [column-fill:_balance]"
+            >
+              {displayedItems.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => setLightboxIndex(i)}
+                  className="gallery-card group relative mb-5 block w-full overflow-hidden rounded-md break-inside-avoid text-left ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-[0_24px_48px_-20px_rgba(17,5,8,0.25)]"
+                >
+                  {!loadedMap[item.id] && (
+                    <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-black/5 via-black/[0.03] to-black/5" />
+                  )}
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                    onLoad={() =>
+                      setLoadedMap((m) => ({ ...m, [item.id]: true }))
+                    }
+                    className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#110508]/90 via-[#110508]/15 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="flex items-end justify-between gap-2">
+                      <div>
+                        <span className="mb-1 inline-block w-fit rounded-full bg-[#ae1431] px-2.5 py-0.5 text-[10px] font-rethink uppercase tracking-wider text-white">
+                          {TYPES.find((t) => t.id === item.type)?.label}
+                        </span>
+                        <p className="font-display text-lg text-white">
+                          {item.title}
+                        </p>
+                        <p className="text-xs uppercase tracking-wide text-white/70">
+                          {CATEGORIES.find((c) => c.id === item.category)?.label}
+                        </p>
+                      </div>
+                      <ArrowUpRight
+                        size={18}
+                        className="mb-1 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
                     </div>
-                    <ArrowUpRight
-                      size={18}
-                      className="mb-1 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
                   </div>
-                </div>
-              </button>
-            ))}
-          </div>
+                </button>
+              ))}
+            </div>
+
+            {hasMore && (
+              <div className="mt-10 flex justify-center">
+                <button
+                  onClick={handleShowMore}
+                  className="cursor-pointer rounded-full border border-[#ae1431] bg-transparent px-8 py-2.5 text-xs uppercase tracking-[0.2em] text-[#ae1431] transition-all duration-200 hover:bg-[#ae1431] hover:text-white active:scale-[0.97] md:text-sm"
+                >
+                  Show More
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center rounded-[12px] border border-dashed border-black/15 py-24 text-center">
             <p className="font-display text-2xl text-[#ae1431]">

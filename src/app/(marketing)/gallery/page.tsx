@@ -1,5 +1,17 @@
-import GalleryClient from '@/components/sections/gallery/page';
+// import GalleryClient from '@/components/sections/gallery/page';
+
+// export default function GalleryPage() {
+//   return <GalleryClient />;
+// }
+
+
+import { Suspense } from "react";
+import GalleryClient from "@/components/sections/gallery/page";
 
 export default function GalleryPage() {
-  return <GalleryClient />;
+  return (
+    <Suspense fallback={null}>
+      <GalleryClient />
+    </Suspense>
+  );
 }

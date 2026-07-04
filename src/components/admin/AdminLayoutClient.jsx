@@ -38,6 +38,35 @@ const navItems = [
 
 ];
 
+// ── Notification read/cleared tracking ──────────────────────────────────
+// We track which notification ids the admin has already "seen" (readIds)
+// and which ones were explicitly cleared (clearedIds) so that:
+//   - the unread badge only ever counts genuinely new notifications
+//   - clearing removes them for good (they won't reappear on next fetch)
+//   - opening the bell marks everything currently visible as read
+const READ_IDS_KEY = "eram_admin_notif_read_ids";
+const CLEARED_IDS_KEY = "eram_admin_notif_cleared_ids";
+const NOTIF_POLL_INTERVAL_MS = 60000; // re-check for new notifications every 60s
+
+function loadIdSet(key) {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function saveIdSet(key, set) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(key, JSON.stringify([...set]));
+  } catch {
+    // ignore storage errors (private browsing, quota, etc.)
+  }
+}
+
 export default function AdminLayoutClient({ children }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -49,8 +78,10 @@ export default function AdminLayoutClient({ children }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
-    const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [notifLoading, setNotifLoading] = useState(true);
+  const [readIds, setReadIds] = useState(() => loadIdSet(READ_IDS_KEY));
+  const [clearedIds, setClearedIds] = useState(() => loadIdSet(CLEARED_IDS_KEY));
 
   const searchRef = useRef(null);
   const notifRef = useRef(null);
@@ -68,71 +99,95 @@ export default function AdminLayoutClient({ children }) {
     return `${days}d ago`;
   };
 
-  // Fetch latest activity from events, downloads, gallery & home for the bell dropdown
+  // Fetch latest activity from events, downloads, gallery & home for the bell dropdown.
+  // Runs on mount and then polls periodically so genuinely new notifications
+  // are picked up without a full page reload. Cleared notifications are
+  // filtered out here so they never reappear.
   useEffect(() => {
-    Promise.allSettled([
-      api.get("/events"),
-      api.get("/downloads"),
-      api.get("/gallery"),
-      api.get("/hero"),
-    ]).then((results) => {
-      const [eventsRes, downloadsRes, galleryRes, heroRes] = results;
+    let cancelled = false;
 
-      const eventItems =
-        eventsRes.status === "fulfilled"
-          ? eventsRes.value.data.map((ev) => ({
-              id: `event-${ev._id}`,
-              title: ev.title,
-              body: ev.description,
-              date: ev.createdAt,
-              read: false,
-            }))
-          : [];
+    const fetchNotifications = () => {
+      // Cache-bust so the browser/axios never serves a stale cached response
+      // for these repeated polling requests — without this, GET responses
+      // can get cached and only refresh on a hard page reload.
+      const bust = { _t: Date.now() };
+      const noCacheConfig = {
+        params: bust,
+        headers: { "Cache-Control": "no-cache", Pragma: "no-cache" },
+      };
 
-      const downloadItems =
-        downloadsRes.status === "fulfilled"
-          ? downloadsRes.value.data.map((d) => ({
-              id: `download-${d._id}`,
-              title: `New Document: ${d.title}`,
-              body: d.description,
-              date: d.createdAt,
-              read: false,
-            }))
-          : [];
+      Promise.allSettled([
+        api.get("/events", noCacheConfig),
+        api.get("/downloads", noCacheConfig),
+        api.get("/gallery", noCacheConfig),
+        api.get("/hero", noCacheConfig),
+      ]).then((results) => {
+        if (cancelled) return;
+        const [eventsRes, downloadsRes, galleryRes, heroRes] = results;
 
-      const galleryItems =
-        galleryRes.status === "fulfilled"
-          ? galleryRes.value.data.map((g) => ({
-              id: `gallery-${g._id}`,
-              title: `New Gallery Upload${g.title ? `: ${g.title}` : ""}`,
-              body: g.description || g.caption || "New image added to gallery.",
-              date: g.createdAt,
-              read: false,
-            }))
-          : [];
-
-      const heroItems =
-        heroRes.status === "fulfilled"
-          ? (Array.isArray(heroRes.value.data) ? heroRes.value.data : [heroRes.value.data])
-              .filter(Boolean)
-              .map((h) => ({
-                id: `home-${h._id}`,
-                title: `Home Page Updated${h.title ? `: ${h.title}` : ""}`,
-                body: h.description || h.subtitle || "Homepage content was updated.",
-                date: h.updatedAt || h.createdAt,
-                read: false,
+        const eventItems =
+          eventsRes.status === "fulfilled"
+            ? eventsRes.value.data.map((ev) => ({
+                id: `event-${ev._id}`,
+                title: ev.title,
+                body: ev.description,
+                date: ev.createdAt,
               }))
-          : [];
+            : [];
 
-      const merged = [...eventItems, ...downloadItems, ...galleryItems, ...heroItems]
-        .filter((n) => n.date)
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 8)
-        .map((n) => ({ ...n, time: timeAgo(n.date) }));
+        const downloadItems =
+          downloadsRes.status === "fulfilled"
+            ? downloadsRes.value.data.map((d) => ({
+                id: `download-${d._id}`,
+                title: `New Document: ${d.title}`,
+                body: d.description,
+                date: d.createdAt,
+              }))
+            : [];
 
-      setNotifications(merged);
-    }).finally(() => setNotifLoading(false));
-  }, []);
+        const galleryItems =
+          galleryRes.status === "fulfilled"
+            ? galleryRes.value.data.map((g) => ({
+                id: `gallery-${g._id}`,
+                title: `New Gallery Upload${g.title ? `: ${g.title}` : ""}`,
+                body: g.description || g.caption || "New image added to gallery.",
+                date: g.createdAt,
+              }))
+            : [];
+
+        const heroItems =
+          heroRes.status === "fulfilled"
+            ? (Array.isArray(heroRes.value.data) ? heroRes.value.data : [heroRes.value.data])
+                .filter(Boolean)
+                .map((h) => ({
+                  id: `home-${h._id}`,
+                  title: `Home Page Updated${h.title ? `: ${h.title}` : ""}`,
+                  body: h.description || h.subtitle || "Homepage content was updated.",
+                  date: h.updatedAt || h.createdAt,
+                }))
+            : [];
+
+        const merged = [...eventItems, ...downloadItems, ...galleryItems, ...heroItems]
+          .filter((n) => n.date)
+          .filter((n) => !clearedIds.has(n.id)) // never bring back cleared notifications
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 8)
+          .map((n) => ({ ...n, time: timeAgo(n.date) }));
+
+        setNotifications(merged);
+      }).finally(() => {
+        if (!cancelled) setNotifLoading(false);
+      });
+    };
+
+    fetchNotifications();
+    const interval = setInterval(fetchNotifications, NOTIF_POLL_INTERVAL_MS);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [clearedIds]);
 
   // Close menus on click outside
   useEffect(() => {
@@ -163,17 +218,44 @@ export default function AdminLayoutClient({ children }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  // Only notifications NOT in readIds count toward the badge — old/seen
+  // notifications never contribute again, only genuinely new ones do.
+  const unreadCount = notifications.filter((n) => !readIds.has(n.id)).length;
 
-  // Toggle dropdown; mark everything read the moment it's opened
+  // Toggle dropdown; mark everything currently visible as read the moment it's opened
   const toggleNotifications = () => {
     setShowNotifications((prev) => {
       const next = !prev;
       if (next) {
-        setNotifications((cur) => cur.map((n) => ({ ...n, read: true })));
+        setReadIds((prevRead) => {
+          const updated = new Set(prevRead);
+          notifications.forEach((n) => updated.add(n.id));
+          saveIdSet(READ_IDS_KEY, updated);
+          return updated;
+        });
       }
       return next;
     });
+  };
+
+  // "Clear all notifications" — fully empties the list and remembers the
+  // cleared ids so they don't come back on the next poll/fetch.
+  const handleClearAll = () => {
+    if (notifications.length === 0) return;
+
+    const idsToClear = new Set(clearedIds);
+    notifications.forEach((n) => idsToClear.add(n.id));
+    setClearedIds(idsToClear);
+    saveIdSet(CLEARED_IDS_KEY, idsToClear);
+
+    // Clean up readIds too, no need to keep tracking ids that are gone for good
+    setReadIds((prevRead) => {
+      const updated = new Set([...prevRead].filter((id) => !idsToClear.has(id)));
+      saveIdSet(READ_IDS_KEY, updated);
+      return updated;
+    });
+
+    setNotifications([]);
   };
 
 
@@ -466,9 +548,11 @@ export default function AdminLayoutClient({ children }) {
                 <div className="absolute right-0 mt-3 w-80 bg-[#0c0c0f] border border-[#c5a880]/15 rounded-2xl shadow-xl z-30 py-2 animate-[fadeIn_0.2s_ease-out]">
                  <div className="px-4 py-2 border-b border-[#c5a880]/10 flex items-center justify-between">
                     <span className=" tracking-wider uppercase text-zinc-200">Alerts & Messages</span>
-                    <span className="text-[10px] text-[#ae1431] bg-[#ae1431]/10 px-2 py-0.5 rounded">
-                      {unreadCount} New
-                    </span>
+                    {unreadCount > 0 && (
+                      <span className="text-[10px] text-[#ae1431] bg-[#ae1431]/10 px-2 py-0.5 rounded">
+                        {unreadCount} New
+                      </span>
+                    )}
                   </div>
                   <div className="max-h-64 overflow-y-auto divide-y divide-zinc-900">
                     {notifLoading ? (
@@ -479,7 +563,7 @@ export default function AdminLayoutClient({ children }) {
                       notifications.map((notif) => (
                       <div key={notif.id} className="p-3 hover:bg-zinc-900/40 transition-colors">
                         <div className="flex items-center justify-between mb-1">
-                          <span className={` ${notif.read ? 'text-zinc-400' : 'text-[#c5a880]'}`}>
+                          <span className={` ${readIds.has(notif.id) ? 'text-zinc-400' : 'text-[#c5a880]'}`}>
                             {notif.title}
                           </span>
                           <span className="text-[9px] text-zinc-500">{notif.time}</span>
@@ -490,7 +574,11 @@ export default function AdminLayoutClient({ children }) {
                     ))}
                   </div>
                   <div className="px-4 py-2 border-t border-[#c5a880]/10 text-center">
-                    <button className="text-[10px] text-zinc-400 hover:text-[#c5a880] transition-colors">
+                    <button
+                      onClick={handleClearAll}
+                      disabled={notifications.length === 0}
+                      className="text-[10px] text-zinc-400 hover:text-[#c5a880] transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
                       Clear all notifications
                     </button>
                   </div>
