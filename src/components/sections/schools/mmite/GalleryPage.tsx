@@ -118,17 +118,17 @@ export default function GalleryPage() {
   );
 
   return (
-    <div ref={containerRef} className="bg-[#1f1f1f] text-white overflow-hidden">
+    <div ref={containerRef} className="bg-[#F5EFE8] text-black overflow-hidden">
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           {/* HEADER */}
           <div className="mb-12">
             <div className="anim-tag flex items-center gap-3 mb-4">
-              <span className="font-rethink text-xs tracking-widest text-gray-400 uppercase">
+              <span className="font-rethink text-xs tracking-widest text-black uppercase">
                 Gallery
               </span>
             </div>
-            <p className="anim-desc font-rethink text-gray-400 max-w-xl">
+            <p className="anim-desc font-rethink text-black max-w-xl">
               Classroom sessions, practice teaching, residential camp, seminars,
               and campus life at MMITE.
             </p>
@@ -142,8 +142,8 @@ export default function GalleryPage() {
                 onClick={() => setActiveType(t.id)}
                 className={`font-rethink text-xs uppercase tracking-wide px-4 py-2 rounded-full border transition-colors cursor-pointer ${
                   activeType === t.id
-                    ? "bg-[#ae1431] border-[#ae1431] text-white"
-                    : "border-white/20 text-gray-400 hover:border-white/50 hover:text-white"
+                    ? "bg-[#ae1431] border-[#ae1431] text-black"
+                    : "border-white/20 text-black hover:border-white/50 hover:text-[#ae1431]"
                 }`}
               >
                 {t.label}
@@ -165,7 +165,7 @@ export default function GalleryPage() {
                 <button
                   key={item._id}
                   onClick={() => setLightboxItem(item)}
-                  className="gallery-card block w-full break-inside-avoid overflow-hidden rounded-lg group cursor-zoom-in"
+                  className="gallery-card relative block w-full break-inside-avoid overflow-hidden rounded-lg group cursor-zoom-in"
                 >
                   <img
                     src={item.image}
@@ -173,6 +173,24 @@ export default function GalleryPage() {
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
+
+                  {/* HOVER OVERLAY — category + title only, no school name */}
+                  <div
+                    className="absolute inset-0 flex flex-col justify-end p-4
+                               bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                               opacity-0 group-hover:opacity-100
+                               transition-opacity duration-300"
+                  >
+                    <span
+                      className="self-start mb-2 font-rethink text-[10px] uppercase tracking-widest
+                                 text-white bg-[#ae1431] px-2.5 py-1 rounded-full"
+                    >
+                      {item.type}
+                    </span>
+                    <p className="font-rethink text-sm text-white uppercase tracking-wide">
+                      {item.title}
+                    </p>
+                  </div>
                 </button>
               ))}
             </div>

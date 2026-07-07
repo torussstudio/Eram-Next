@@ -247,10 +247,10 @@ export default function AcademicsManager() {
   return (
     <div className="space-y-6 animate-[fadeIn_0.4s_ease-out]">
       <div>
-        <h2 className="font-display text-lg text-zinc-100 uppercase tracking-wider">
-          Academics — {schoolLabel || school}
+        <h2 className="font-display text-[20px] text-zinc-100 uppercase tracking-wider">
+          Academics — Eram 
         </h2>
-        <p className="text-[11px] text-zinc-500 font-rethink mt-0.5">
+        <p className="text-[13px] text-zinc-500 font-rethink mt-0.5">
           Manage institutional benchmarks, student excellence, and civic stats
         </p>
       </div>
@@ -261,7 +261,7 @@ export default function AcademicsManager() {
           <button
             key={s.value}
             onClick={() => setSchool(s.value)}
-            className={`px-3.5 py-1.5 rounded-lg text-[11px] transition-[color,background-color] duration-200 ${
+            className={`px-3.5 py-1.5 rounded-lg text-[13px] cursor-pointer transition-[color,background-color] duration-200 ${
               school === s.value
                 ? "bg-zinc-900 text-[#c5a880] border border-zinc-800"
                 : "text-zinc-500 hover:text-zinc-300"
@@ -280,7 +280,7 @@ export default function AcademicsManager() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[11px] transition-[color,background-color] duration-200 ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 cursor-pointer rounded-lg text-[13px] transition-[color,background-color] duration-200 ${
                 activeTab === tab.key
                   ? "bg-zinc-900 text-[#c5a880] border border-zinc-800"
                   : "text-zinc-500 hover:text-zinc-300"

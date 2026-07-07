@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ChevronRight,
   Search,
@@ -38,17 +38,77 @@ type Resource = {
 };
 
 type Notice = {
-  id: number;
+  id: string;
   title: string;
   date: string;
-  category: NoticeCategory;
+  category: string;
 };
+
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://eram-backend-ejgy.onrender.com";
+
+type RawEvent = {
+  _id: string;
+  title: string;
+  description: string;
+  category: "academic" | "sports" | "cultural" | "notice";
+  type: "event" | "notification" | "circular";
+  institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
+  date: string;
+  tag?: string;
+  isNew?: boolean;
+  isPinned?: boolean;
+  image?: string;
+};
+
+function toDisplayCategory(cat: RawEvent["category"]): string {
+  return cat.charAt(0).toUpperCase() + cat.slice(1);
+}
+
+function toDisplayDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 
 const StudentParentPortal = () => {
   const [selectedInstitution, setSelectedInstitution] =
-    useState<keyof typeof resources>("MMPS");
+    useState<InstitutionKey>("MMPS");
 
   const [searchQuery, setSearchQuery] = useState("");
+
+  const [rawEvents, setRawEvents] = useState<RawEvent[]>([]);
+  const [noticesLoading, setNoticesLoading] = useState(true);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function fetchEvents() {
+      try {
+        setNoticesLoading(true);
+        const res = await fetch(`${BACKEND_URL}/api/events`, {
+          signal: controller.signal,
+          cache: "no-store",
+        });
+        if (!res.ok) throw new Error("Failed to fetch events");
+        const data: RawEvent[] = await res.json();
+        setRawEvents(data);
+      } catch (err) {
+        if ((err as Error).name !== "AbortError") {
+          console.error("Failed to fetch events:", err);
+        }
+      } finally {
+        setNoticesLoading(false);
+      }
+    }
+
+    fetchEvents();
+    return () => controller.abort();
+  }, []);
 
   const institutions: {
     id: InstitutionKey;
@@ -62,108 +122,20 @@ const StudentParentPortal = () => {
     { id: "MMITE", name: "MMITE", full: "MMITE (Teacher Training)" },
   ];
 
-  const notices: Record<InstitutionKey, Notice[]> = {
-    AMLP: [
-      {
-        id: 1,
-        title: "Summer Vacation Schedule 2026-27",
-        date: "May 15, 2026",
-        category: "Academic",
-      },
-      {
-        id: 2,
-        title: "Annual Sports Day Registration Open",
-        date: "May 12, 2026",
-        category: "Events",
-      },
-      {
-        id: 3,
-        title: "New Library Resources Available",
-        date: "May 10, 2026",
-        category: "Academic",
-      },
-    ],
-    MMPS: [
-      {
-        id: 1,
-        title: "Final Exam Schedule Released",
-        date: "May 18, 2026",
-        category: "Examination",
-      },
-      {
-        id: 2,
-        title: "Science Fair - Project Submission Deadline",
-        date: "May 20, 2026",
-        category: "Events",
-      },
-      {
-        id: 3,
-        title: "Parent-Teacher Meeting Schedule",
-        date: "May 16, 2026",
-        category: "Administrative",
-      },
-    ],
-    MMHSS: [
-      {
-        id: 1,
-        title: "Board Exam Results Declaration",
-        date: "May 25, 2026",
-        category: "Examination",
-      },
-      {
-        id: 2,
-        title: "College Counseling Sessions Begin",
-        date: "May 19, 2026",
-        category: "Academics",
-      },
-      {
-        id: 3,
-        title: "Inter-School Cultural Competition",
-        date: "May 22, 2026",
-        category: "Events",
-      },
-    ],
-    EASE: [
-      {
-        id: 1,
-        title: "CBSE Unit Test Schedule",
-        date: "May 17, 2026",
-        category: "Examination",
-      },
-      {
-        id: 2,
-        title: "Field Trip - Science Museum Visit",
-        date: "May 21, 2026",
-        category: "Events",
-      },
-      {
-        id: 3,
-        title: "Mid-term Assessment Results",
-        date: "May 14, 2026",
-        category: "Academic",
-      },
-    ],
-    MMITE: [
-      {
-        id: 1,
-        title: "Teacher Training Module 3 Begins",
-        date: "May 20, 2026",
-        category: "Training",
-      },
-      {
-        id: 2,
-        title: "WHO Certification Workshop",
-        date: "May 23, 2026",
-        category: "Professional",
-      },
-      {
-        id: 3,
-        title: "Practicum Placement Schedules",
-        date: "May 16, 2026",
-        category: "Academic",
-      },
-    ],
-  };
+  const notices: Notice[] = rawEvents
+    .filter(
+      (e) =>
+        e.institution === selectedInstitution.toLowerCase() ||
+        e.institution === "general"
+    )
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 6)
+    .map((e) => ({
+      id: e._id,
+      title: e.title,
+      date: toDisplayDate(e.date),
+      category: toDisplayCategory(e.category),
+    }));
 
   const resources: Record<InstitutionKey, Resource[]> = {
     AMLP: [
@@ -286,7 +258,7 @@ const StudentParentPortal = () => {
       r.type.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const categoryColors = {
+  const categoryColors: Record<string, string> = {
     Academic: "bg-blue-50 text-blue-700 border border-blue-100",
     Examination: "bg-red-50 text-red-700 border border-red-100",
     Events: "bg-green-50 text-green-700 border border-green-100",
@@ -294,6 +266,9 @@ const StudentParentPortal = () => {
     Academics: "bg-blue-50 text-blue-700 border border-blue-100",
     Training: "bg-purple-50 text-purple-700 border border-purple-100",
     Professional: "bg-indigo-50 text-indigo-700 border border-indigo-100",
+    Sports: "bg-green-50 text-green-700 border border-green-100",
+    Cultural: "bg-purple-50 text-purple-700 border border-purple-100",
+    Notice: "bg-amber-50 text-amber-700 border border-amber-100",
   };
 
   const resourceIcons = {
@@ -437,27 +412,41 @@ const StudentParentPortal = () => {
             </span>
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {notices[selectedInstitution].map((notice) => (
-              <div
-                key={notice.id}
-                className="bg-white border font-rethink border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow cursor-pointer"
-              >
-                <span
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                    categoryColors[notice.category] ||
-                    "bg-gray-100 text-gray-700"
-                  }`}
+          {noticesLoading ? (
+            <div className="text-center py-10">
+              <p className="text-gray-400 font-rethink text-sm">
+                Loading notices…
+              </p>
+            </div>
+          ) : notices.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {notices.map((notice) => (
+                <div
+                  key={notice.id}
+                  className="bg-white border font-rethink border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow cursor-pointer"
                 >
-                  {notice.category}
-                </span>
-                <h4 className="text-gray-900 font-display text-sm leading-snug mt-3 mb-2">
-                  {notice.title}
-                </h4>
-                <p className="font-rethink text-gray-400">{notice.date}</p>
-              </div>
-            ))}
-          </div>
+                  <span
+                    className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
+                      categoryColors[notice.category] ||
+                      "bg-gray-100 text-gray-700"
+                    }`}
+                  >
+                    {notice.category}
+                  </span>
+                  <h4 className="text-gray-900 font-display text-sm leading-snug mt-3 mb-2">
+                    {notice.title}
+                  </h4>
+                  <p className="font-rethink text-gray-400">{notice.date}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-10 bg-white border border-gray-200 rounded-xl">
+              <p className="text-gray-600 font-rethink text-sm">
+                No notices available
+              </p>
+            </div>
+          )}
 
           <button className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 border-2 bg-[#ae1431] text-white border-[#ae1431] text-[#ae1431] hover:border-black text-sm font-rethink rounded-xl hover:bg-black transition-colors cursor-pointer">
             View All Notices <ChevronRight size={16} />
