@@ -173,7 +173,6 @@ export default function AcademicsManager() {
       if (!formData.title.trim()) newErrors.title = "Student name is required";
       if (!formData.sub.trim()) newErrors.sub = "Grade/class is required";
       if (!formData.desc.trim()) newErrors.desc = "Achievement line is required";
-      if (!imagePreview) newErrors.image = "Please upload a photo";
     }
 
     if (activeTab === "stat") {
@@ -243,7 +242,7 @@ export default function AcademicsManager() {
     }
   }
 
-  const isImageRequired = activeTab === "excellence";
+ const isImageRequired = false;
 
   return (
     <div className="space-y-6 animate-[fadeIn_0.4s_ease-out]">
