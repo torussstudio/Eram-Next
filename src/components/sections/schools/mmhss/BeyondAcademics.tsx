@@ -1,65 +1,103 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
 import Image from "next/image";
+import api from "@/lib/api";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const benchmarks = [
-  {
-    tag: "Academic Record",
-    title: "98% Pass Rate in Last Year’s Final Examination - 2026",
-    desc: "A sustained record of complete pass results across all streams, maintained through disciplined academic systems and structured student monitoring.",
-  },
-  {
-    tag: "District Ranking",
-    title: "10th Rank Among 150 Schools in Palakkad District",
-    desc: "Recognised among the top institutions in Palakkad for consistent academic output and institutional discipline across Higher Secondary streams.",
-  },
-];
+type School = "mmhss" | "mmps" | "amlp" | "mmite";
 
-const excellence = [
-  {
-    tag: "National Level · Sports",
-    title: "Diya Maryam",
-    sub: "Grade 11",
-    desc: "🥇 1st Place — National Level Wushu Championship, Hyderabad",
-    image: "/images/diyaa.avif",
-  },
-  {
-    tag: "State Level · Cultural",
-    title: "Farha Shirin",
-    sub: "Grade 11",
-    desc: "🥇 A Grade — State Level Kalotsavam 2026 (English Story Writing)",
-    image: "/images/farha.avif",
-  },
-];
+interface BenchmarkEntry {
+  _id: string;
+  tag?: string;
+  title?: string;
+  desc?: string;
+}
 
-const stats = [
-  {
-    value: "50",
-    unit: "+",
-    label: "Blood Donations Annually\nunder NSS Program",
-    bg: "bg-[#ae1431]",
-    valC: "text-white",
-    unitC: "text-white/60",
-    descC: "text-white/55",
-  },
-];
+interface ExcellenceEntry {
+  _id: string;
+  tag?: string;
+  title?: string;
+  sub?: string;
+  desc?: string;
+  image?: string;
+}
 
-export default function BeyondAcademics() {
+interface StatEntry {
+  _id: string;
+  value?: string;
+  unit?: string;
+  label?: string;
+}
+
+interface BeyondAcademicsProps {
+  school: School;
+}
+
+export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  const [benchmarks, setBenchmarks] = useState<BenchmarkEntry[]>([]);
+  const [excellence, setExcellence] = useState<ExcellenceEntry[]>([]);
+  const [stats, setStats] = useState<StatEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // ── Fetch data for this school ──────────────────────────────
+  useEffect(() => {
+    if (!school) {
+      setIsLoading(false);
+      setError("No school specified.");
+      return;
+    }
+
+    let cancelled = false;
+
+    async function fetchAll() {
+      setIsLoading(true);
+      setError("");
+      try {
+        const [benchRes, excelRes, statRes] = await Promise.all([
+          api.get<BenchmarkEntry[]>("/academics", {
+            params: { school, section: "benchmark" },
+          }),
+          api.get<ExcellenceEntry[]>("/academics", {
+            params: { school, section: "excellence" },
+          }),
+          api.get<StatEntry[]>("/academics", {
+            params: { school, section: "stat" },
+          }),
+        ]);
+
+        if (cancelled) return;
+        setBenchmarks(benchRes.data);
+        setExcellence(excelRes.data);
+        setStats(statRes.data);
+      } catch (err) {
+        if (!cancelled) setError("Could not load this section right now.");
+        console.error(err);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    }
+
+    fetchAll();
+    return () => {
+      cancelled = true;
+    };
+  }, [school]);
+
+  // ── GSAP animations — re-run once data has arrived ──────────
   useGSAP(
     () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || isLoading) return;
       const q = gsap.utils.selector(containerRef);
 
-      // ── Initial states ────────────────────────────────────────────────
       gsap.set(
         q(
           ".anim-header, .anim-bench-label, .anim-bench, .anim-excel-label, .anim-excel, .anim-stat-label, .anim-stat",
@@ -67,7 +105,6 @@ export default function BeyondAcademics() {
         { opacity: 0, y: 28 },
       );
 
-      // ── Header animation ──────────────────────────────────────────────
       const headerWrap = q(".anim-header-wrap")[0];
       if (headerWrap) {
         gsap
@@ -87,7 +124,6 @@ export default function BeyondAcademics() {
           });
       }
 
-      // ── Scoped reveal helper ──────────────────────────────────────────
       function revealScopedSection(
         triggerClass: string,
         labelClass: string,
@@ -120,7 +156,6 @@ export default function BeyondAcademics() {
         }
       }
 
-      // ── Section reveals ───────────────────────────────────────────────
       revealScopedSection(
         ".anim-bench-wrap",
         ".anim-bench-label",
@@ -133,7 +168,6 @@ export default function BeyondAcademics() {
       );
       revealScopedSection(".anim-stat-wrap", ".anim-stat-label", ".anim-stat");
 
-      // ── Counter animation ─────────────────────────────────────────────
       const statWrap = q(".anim-stat-wrap")[0];
       if (statWrap) {
         ScrollTrigger.create({
@@ -156,8 +190,31 @@ export default function BeyondAcademics() {
         });
       }
     },
-    { scope: containerRef },
+    {
+      scope: containerRef,
+      dependencies: [isLoading, benchmarks, excellence, stats],
+    },
   );
+
+  if (isLoading) {
+    return (
+      <section className={`${shell} bg-[#F5EFE8]`}>
+        <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 text-center">
+          <p className="font-rethink text-[#8a7d6e] text-sm">Loading...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className={`${shell} bg-[#F5EFE8]`}>
+        <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 text-center">
+          <p className="font-rethink text-[#ae1431] text-sm">{error}</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -186,157 +243,164 @@ export default function BeyondAcademics() {
         </div>
 
         {/* ── BENCHMARKS ─────────────────────────────────────── */}
-        <div className="anim-bench-wrap mb-12">
-          <p className="anim-bench-label font-display text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Institutional Benchmarks
-          </p>
+        {benchmarks.length > 0 && (
+          <div className="anim-bench-wrap mb-12">
+            <p className="anim-bench-label font-display text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
+              Institutional Benchmarks
+            </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-            {benchmarks.map((card, i) => (
-              <div
-                key={i}
-                className="anim-bench group relative p-8 bg-white border border-[#d4cbbf]
-                border-t-4 border-t-[#d4cbbf] hover:border-t-[#ae1431]
-                transition-colors duration-300 rounded-2xl overflow-hidden"
-              >
-                <span className="inline-block font-display bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
-                  {card.tag}
-                </span>
-
-                <h3 className=" text-[#1a1209] text-[20px] sm:text-[22px] leading-snug tracking-[-0.01em] mb-3">
-                  {card.title}
-                </h3>
-
-                <p className="text-[13px] font-rethink text-[#6b5f54] leading-[1.7] max-w-[480px]">
-                  {card.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── STUDENT EXCELLENCE ─────────────────────────────── */}
-        <div className="anim-excel-wrap mb-12">
-          <p className="anim-excel-label  font-display text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Student Excellence
-          </p>
-
-          <div
-            className={`grid gap-1 rounded-2xl overflow-hidden ${
-              excellence.length === 2
-                ? "grid-cols-1 sm:grid-cols-2"
-                : "grid-cols-1 sm:grid-cols-3"
-            }`}
-          >
-            {excellence.map((card, i) => {
-              const isRed = i === 0;
-              const isDark = i === 1;
-
-              const bg = isRed
-                ? "bg-[#ae1431]"
-                : isDark
-                  ? "bg-[#1a1a1a]"
-                  : "bg-white border border-[#d4cbbf]";
-
-              const badge = isRed
-                ? "bg-[#ae1431] text-white"
-                : isDark
-                  ? "bg-[#2a2a2a] text-[#a09488]"
-                  : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
-
-              const titleC = isRed || isDark ? "text-white" : "text-[#1a1209]";
-
-              const subC = isRed
-                ? "text-white/50"
-                : isDark
-                  ? "text-white/40"
-                  : "text-[#8a7d6e]";
-
-              const descC = isRed
-                ? "text-white/80"
-                : isDark
-                  ? "text-white/70"
-                  : "text-[#4a3f35]";
-
-              return (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+              {benchmarks.map((card) => (
                 <div
-                  key={i}
-                  className={`anim-excel overflow-hidden flex flex-col ${bg}`}
+                  key={card._id}
+                  className="anim-bench group relative p-8 bg-white border border-[#d4cbbf]
+                  border-t-4 border-t-[#d4cbbf] hover:border-t-[#ae1431]
+                  transition-colors duration-300 rounded-2xl overflow-hidden"
                 >
-                  <div className="p-7">
-                    <span
-                      className={`inline-block text-[12px] tracking-[0.2em] uppercase px-3 py-1 mb-6 ${badge}`}
-                    >
-                      {card.tag}
-                    </span>
+                  <span className="inline-block font-display bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
+                    {card.tag}
+                  </span>
 
-                    <div className="relative h-[460px] w-full rounded-2xl overflow-hidden">
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <br></br>
-                    <h3
-                      className={`text-[28px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
-                    >
-                      {card.title}
-                    </h3>
+                  <h3 className=" text-[#1a1209] text-[20px] sm:text-[22px] leading-snug tracking-[-0.01em] mb-3">
+                    {card.title}
+                  </h3>
 
-                    <p className={`text-[15px] font-rethink mb-5 ${subC}`}>
-                      {card.sub}
-                    </p>
-
-                    <p
-                      className={`text-[17px] font-rethink leading-[1.65] ${descC}`}
-                    >
-                      {card.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ── STATS ──────────────────────────────────────────── */}
-        <div className="anim-stat-wrap">
-          <p className="anim-stat-label font display text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
-            Civic Leadership &amp; NSS
-          </p>
-
-          <div className="max-w-md mx-auto">
-            <div className="grid grid-cols-1 rounded-2xl overflow-hidden">
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className={`anim-stat px-8 py-10 text-center ${stat.bg}`}
-                >
-                  <div className="flex items-baseline justify-center gap-1 mb-4">
-                    <span
-                      data-target={stat.value}
-                      className={`counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] ${stat.valC}`}
-                    >
-                      0
-                    </span>
-
-                    <span className={`text-[18px] font-display ${stat.unitC}`}>
-                      {stat.unit}
-                    </span>
-                  </div>
-
-                  <p
-                    className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${stat.descC}`}
-                  >
-                    {stat.label}
+                  <p className="text-[13px] font-rethink text-[#6b5f54] leading-[1.7] max-w-[480px]">
+                    {card.desc}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        )}
+
+        {/* ── STUDENT EXCELLENCE ─────────────────────────────── */}
+        {excellence.length > 0 && (
+          <div className="anim-excel-wrap mb-12">
+            <p className="anim-excel-label  font-display text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
+              Student Excellence
+            </p>
+
+            <div
+              className={`grid gap-1 rounded-2xl overflow-hidden ${
+                excellence.length === 2
+                  ? "grid-cols-1 sm:grid-cols-2"
+                  : "grid-cols-1 sm:grid-cols-3"
+              }`}
+            >
+              {excellence.map((card, i) => {
+                const isRed = i === 0;
+                const isDark = i === 1;
+
+                const bg = isRed
+                  ? "bg-[#ae1431]"
+                  : isDark
+                  ? "bg-[#1a1a1a]"
+                  : "bg-white border border-[#d4cbbf]";
+
+                const badge = isRed
+                  ? "bg-[#ae1431] text-white"
+                  : isDark
+                  ? "bg-[#2a2a2a] text-[#a09488]"
+                  : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
+
+                const titleC =
+                  isRed || isDark ? "text-white" : "text-[#1a1209]";
+
+                const subC = isRed
+                  ? "text-white/50"
+                  : isDark
+                  ? "text-white/40"
+                  : "text-[#8a7d6e]";
+
+                const descC = isRed
+                  ? "text-white/80"
+                  : isDark
+                  ? "text-white/70"
+                  : "text-[#4a3f35]";
+
+                return (
+                  <div
+                    key={card._id}
+                    className={`anim-excel overflow-hidden flex flex-col ${bg}`}
+                  >
+                    <div className="p-7">
+                      <span
+                        className={`inline-block text-[12px] tracking-[0.2em] uppercase px-3 py-1 mb-6 ${badge}`}
+                      >
+                        {card.tag}
+                      </span>
+
+                      <div className="relative h-[460px] w-full rounded-2xl overflow-hidden">
+                        {card.image && (
+                          <Image
+                            src={card.image}
+                            alt={card.title || ""}
+                            fill
+                            className="object-cover"
+                          />
+                        )}
+                      </div>
+                      <br />
+                      <h3
+                        className={`text-[28px] font-display sm:text-[24px] leading-tight mb-1 ${titleC}`}
+                      >
+                        {card.title}
+                      </h3>
+
+                      <p className={`text-[15px] font-rethink mb-5 ${subC}`}>
+                        {card.sub}
+                      </p>
+
+                      <p
+                        className={`text-[17px] font-rethink leading-[1.65] ${descC}`}
+                      >
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── STATS ──────────────────────────────────────────── */}
+        {stats.length > 0 && (
+          <div className="anim-stat-wrap">
+            <p className="anim-stat-label font display text-[11px] sm:text-[12px] tracking-[0.28em] text-[#8a7d6e] uppercase mb-4">
+              Civic Leadership &amp; NSS
+            </p>
+
+            <div className="max-w-md mx-auto">
+              <div className="grid grid-cols-1 rounded-2xl overflow-hidden">
+                {stats.map((stat) => (
+                  <div
+                    key={stat._id}
+                    className="anim-stat px-8 py-10 text-center bg-[#ae1431]"
+                  >
+                    <div className="flex items-baseline justify-center gap-1 mb-4">
+                      <span
+                        data-target={stat.value}
+                        className="counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] text-white"
+                      >
+                        0
+                      </span>
+
+                      <span className="text-[18px] font-display text-white/60">
+                        {stat.unit}
+                      </span>
+                    </div>
+
+                    <p className="text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line text-white/55">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

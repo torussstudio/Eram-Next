@@ -34,7 +34,7 @@ export default function MmpsPage() {
       <Streams/>
       <AcademicStreams />
       <ParentPartnership />
-      <BeyondAcademics />
+      <BeyondAcademics school="mmps" />
       <GalleryPage />
       <CommunicationPortal />
       <AdmissionsPage />

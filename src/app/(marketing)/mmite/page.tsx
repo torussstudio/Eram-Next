@@ -34,7 +34,7 @@ export default function MmitePage() {
       <Streams />
       <AcademicStreams />
       <ParentPartnership />
-      <BeyondAcademics />
+      <BeyondAcademics school="mmite" />
       <GalleryPage />
       <CommunicationPortal />
       <AdmissionsPage />

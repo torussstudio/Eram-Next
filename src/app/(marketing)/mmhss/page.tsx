@@ -34,7 +34,7 @@ export default function MmhssPage() {
       <Streams />
       <AcademicStreams />
       <ParentPartnership />
-      <BeyondAcademics />
+      <BeyondAcademics school="mmhss" />
       <GalleryPage />
       <CommunicationPortal />
       <AdmissionsPage />

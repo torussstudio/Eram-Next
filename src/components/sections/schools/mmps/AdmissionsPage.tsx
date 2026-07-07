@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { gsap } from "gsap";
