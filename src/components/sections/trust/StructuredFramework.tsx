@@ -131,7 +131,7 @@ export default function StructuredFramework({
             </span>
           </div>
 
-          <div className="flex flex-wrap items-start gap-[clamp(16px,4vw,56px)] justify-between">
+          <div className="flex flex-wrap items-center gap-[clamp(16px,4vw,56px)] justify-between">
             <h2 className="font-display text-[50px] leading-[1.12] max-w-[620px] m-0 tracking-[-0.01em]">
               A Structured Approach to Social Responsibility
             </h2>
