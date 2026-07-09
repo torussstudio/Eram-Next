@@ -434,13 +434,12 @@ const sublineRef = useRef<HTMLDivElement>(null);
       id="hero"
       className="bg-[#F5EFE8] py-9 px-3 md:px-6"
     >
-    <div
+ <div
   className="
     relative overflow-hidden rounded-[28px]
-    min-h-[460px]
-    sm:min-h-[520px]
-    md:min-h-[580px]
-    lg:min-h-[640px]
+    h-[85vh]
+    min-h-[560px]
+    max-h-[700px]
   "
 >
         {/* ───────────────── Background Image Slider ───────────────── */}

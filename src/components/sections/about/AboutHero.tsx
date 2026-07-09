@@ -80,7 +80,7 @@ function AboutHero() {
           start: "top top",
           end: "bottom top",
           scrub: true,
-          invalidateOnRefresh: true, // ✅ correct position
+          invalidateOnRefresh: true, 
         },
       });
     },
@@ -91,7 +91,7 @@ function AboutHero() {
     <section ref={containerRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       <div className="rounded-[28px] overflow-hidden shadow-sm">
         {/* HERO */}
-        <div className="relative min-h-[560px] sm:min-h-[620px] md:min-h-[660px] lg:min-h-[760px] w-full">
+        <div className="relative w-full min-h-[460px] sm:min-h-[520px] md:min-h-[580px] lg:min-h-[640px]">
           {/* IMAGE */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="hero-img absolute inset-0 scale-110">
@@ -155,7 +155,7 @@ function AboutHero() {
                   hero-content-fade mt-6
                   bg-white text-black
                   px-5 py-2.5 rounded-[12px]
-                  text-xs 
+                  text-sm 
                   flex items-center gap-2
                   hover:bg-gray-200
                   transition
