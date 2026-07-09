@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
+import { Play } from "lucide-react";
 
 /* ─── Constants ───────────────────────────────────────────────────────────── */
 const TABS = [
@@ -581,12 +582,13 @@ export default function SystemsSection() {
 
         {/* CTA */}
         <div className="desk-cta mt-[70px] flex justify-center px-[20px]">
-          <button
-            onClick={() => router.push("/about-us")}
-            className="font-rethink rounded-[8px] border border-white/70 px-[36px] py-[14px] text-[12px]  uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-[#a80c2d] cursor-pointer"
-          >
-            EXPLORE OUR SYSTEMS & STANDARDS
-          </button>
+         <button
+  onClick={() => router.push("/about-us")}
+  className="font-rethink rounded-[8px] border border-white/70 px-[36px] py-[14px] text-[12px] uppercase tracking-[0.16em] text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-[#a80c2d] cursor-pointer flex items-center justify-center gap-2"
+>
+  EXPLORE OUR SYSTEMS & STANDARDS
+  <Play className="w-5 h-5 transition-colors" />
+</button>
         </div>
       </div>
 

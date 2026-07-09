@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import MarqueeText from "../../ui/Marquee";
 import { useRouter } from "next/navigation";
 
+
 const institutions = [
   {
     title: "EASE (CBSE)",
@@ -279,16 +280,7 @@ export default function InstitutionsSection() {
           "
                 >
                   <span>View More</span>
-
-                  <span
-                    className="
-              transition-transform
-              duration-300
-              group-hover:translate-x-[2px]
-            "
-                  >
-                    →
-                  </span>
+              
                 </button>
               </div>
             </div>

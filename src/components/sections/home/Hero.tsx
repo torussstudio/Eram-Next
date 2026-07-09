@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import { getHero } from "@/services/heroService";
+import { Play } from "lucide-react";
 
 const resolveImageUrl = (url: string) => {
   if (!url) return "";
@@ -575,9 +576,9 @@ xl:px-24 xl:py-24
     xl:justify-start
   "
 >
-              <button
-                onClick={() => smoothScrollTo("institutions")}
-               className="
+           <button
+  onClick={() => smoothScrollTo("institutions")}
+  className="
     font-rethink
     bg-[#ae1431]
     hover:bg-black
@@ -598,10 +599,15 @@ xl:px-24 xl:py-24
     hover:shadow-xl
     hover:-translate-y-1
     uppercase
+    flex
+    items-center
+    justify-center
+    gap-2
   "
-              >
-                {slide.primaryButton?.text || "Explore Our Institutions"}
-              </button>
+>
+  {slide.primaryButton?.text || "Explore Our Institutions"}
+   <Play className="w-5 h-5 transition-colors" />
+</button>
               <button
                 onClick={() =>
                   slide.secondaryButton?.link

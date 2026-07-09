@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useSmoothScroll } from "../../../hooks/useSmoothScroll";
+import { Play } from "lucide-react";
 
 /* ─── Animation config ────────────────────────────────────────────────────── */
 const EASE = {
@@ -328,7 +329,9 @@ export default function AboutSection() {
     cursor-pointer
   "
               >
+                
                 Explore Our Institutions
+                <Play className="w-5 h-5 transition-colors" />
               </button>
             </div>
           </div>
