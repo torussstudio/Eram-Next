@@ -123,7 +123,7 @@ function PurposeSection() {
     "
       >
         {/* heading */}
-        <div className="max-w-[460px] md:max-w-[520px] lg:max-w-[660px]">
+        <div className="max-w-[520px] md:max-w-[580px] lg:max-w-[720px]">
           <h2 className="purpose-text opacity-0 translate-y-10 font-display text-[36px] md:text-[36px] lg:text-[44px]  leading-tight text-black">
             Purpose Led.
             <br />

@@ -281,6 +281,7 @@ xl:px-24 xl:py-24
 
   opacity-0
   translate-y-8
+  cursor-pointer
 "
                 >
                   <span>Explore Our Institutions</span>

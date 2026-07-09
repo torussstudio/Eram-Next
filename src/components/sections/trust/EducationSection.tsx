@@ -148,7 +148,10 @@ const PillarHeader = ({
   headerRef,
 }: PillarHeaderProps) => (
   <div className="mt-[20px] mb-[20px]" ref={headerRef}>
-    <div className="flex items-start justify-between">
+    <div
+      className="flex items-start justify-between cursor-pointer select-none"
+      onClick={onClick}
+    >
       <div>
         <span className="font-rethink text-[11px] tracking-[0.3em] uppercase text-[#ae1431]">
           {label}
@@ -164,7 +167,10 @@ const PillarHeader = ({
         </div>
       </div>
       <button
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
         className="mt-[18px] text-[58px] cursor-pointer select-none"
       >
         <span

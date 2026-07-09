@@ -182,7 +182,7 @@ function SpacesDesignedForOpportunity() {
                 />
               </div>
 
-              <div className="absolute inset-0 bg-black/35" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
 
               <p
                 className="

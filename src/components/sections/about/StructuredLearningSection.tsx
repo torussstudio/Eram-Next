@@ -378,7 +378,7 @@ function StructuredLearningSection() {
   const CARDS = [
     {
       num: "/01",
-      img: "/images/student.avif",
+      img: "/images/cbsee.avif",
       alt: "student",
       text: "Rigorous curriculum alignment (State & CBSE)",
     },
@@ -420,7 +420,7 @@ function StructuredLearningSection() {
         "Education is a powerful force that shapes intellect, character, and values. At ERAM, we are committed to providing value-based quality education to every student, irrespective of background. Through structured learning and strong moral principles, we aim to nurture disciplined, responsible individuals who strive for excellence and contribute meaningfully to society. May God Almighty bless us all!",
     },
     {
-      src: "/images/person2.png",
+      src: "/images/person222.png",
       alt: "Mr. Abdhussamad C K",
       objPos: "object-[60%_20%]",
       name: "Mr. ABDUSSAMAD C K",
@@ -1117,9 +1117,11 @@ function StructuredLearningSection() {
               md:opacity-0
               md:translate-y-5
 
-              text-[18px]
+               text-[30px]
 
-              md:text-[18px]
+              sm:text-[26px]
+
+              md:text-[32px]
 
              
 
@@ -1184,6 +1186,8 @@ function StructuredLearningSection() {
         {/* FINAL */}
         <h3
           className="
+
+          font-rethink
             structured-final
 
             md:opacity-0
