@@ -434,13 +434,15 @@ const sublineRef = useRef<HTMLDivElement>(null);
       id="hero"
       className="bg-[#F5EFE8] py-9 px-3 md:px-6"
     >
-      <div
-        className="
-          relative overflow-hidden rounded-[28px]
-          min-h-[560px] sm:min-h-[620px]
-          md:min-h-[680px] lg:min-h-[760px]
-        "
-      >
+    <div
+  className="
+    relative overflow-hidden rounded-[28px]
+    min-h-[460px]
+    sm:min-h-[520px]
+    md:min-h-[580px]
+    lg:min-h-[640px]
+  "
+>
         {/* ───────────────── Background Image Slider ───────────────── */}
         <div className="absolute inset-0">
           {slides.map((s, i) => (
@@ -466,8 +468,9 @@ const sublineRef = useRef<HTMLDivElement>(null);
 
         {/* ───────────────── Content ───────────────── */}
         <div
-          className="
-    relative z-10 flex min-h-[inherit] items-center
+  className="
+    absolute inset-0
+    z-10 flex items-center
     justify-center xl:justify-start
     text-center xl:text-left
 
@@ -477,7 +480,7 @@ const sublineRef = useRef<HTMLDivElement>(null);
     lg:px-20
     xl:px-28
   "
-        >
+>
           <div className="max-w-[720px] text-white mx-auto xl:mx-30">
             {/* Heading */}
             <h1
@@ -485,7 +488,7 @@ const sublineRef = useRef<HTMLDivElement>(null);
                 font-display
                 leading-[0.95]
                 tracking-[-0.04em]
-                text-[clamp(3.2rem,5vw,5.2rem)]
+                text-[60px]
               "
             >
               <span ref={titleLine1Ref} className="block">
@@ -567,8 +570,8 @@ const sublineRef = useRef<HTMLDivElement>(null);
     px-8
     py-4
     rounded-[12px]
-    text-lg
-    md:text-lg
+    text-sm
+    md:text-sm
     transition-all
     duration-300
     shadow-lg
@@ -586,26 +589,27 @@ const sublineRef = useRef<HTMLDivElement>(null);
                     ? router.push(slide.secondaryButton.link)
                     : router.push("/contact")
                 }
-                className="
+               className="
     font-rethink
-    cursor-pointer
-    rounded-xl
     border
-    border-white/70
+    border-white
+    hover:bg-white
+    hover:border-black
+    text-white
+    hover:text-[#ae1431]
+    cursor-pointer
     px-8
     py-4
+    rounded-[12px]
     text-sm
-    font-semibold
-    uppercase
-    tracking-[0.14em]
-    text-white
+    md:text-sm
     transition-all
     duration-300
-    hover:border-white
-    hover:bg-white
-    hover:text-[#a80c2d]
-    hover:-translate-y-1
+    shadow-lg
+    font-semibold
     hover:shadow-xl
+    hover:-translate-y-1
+    uppercase
   "
               >
                 {slide.secondaryButton?.text || "Admissions Open 2026–27"}
