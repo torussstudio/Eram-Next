@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import { shell } from "../../../../constants/homeStyles";
 import { useRouter } from "next/navigation";
 import { Play } from "lucide-react";
 
@@ -154,7 +153,10 @@ export default function Hero() {
   );
 
   return (
-    <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
+    <section
+  ref={sectionRef}
+  className="bg-[#F5EFE8] py-9 px-3 md:px-6"
+>
       {/* ── HERO CARD ── */}
       <div className="relative rounded-[28px] overflow-hidden text-white">
         {/* BACKGROUND */}
@@ -174,11 +176,35 @@ export default function Hero() {
         >
           {/* TOP SECTION */}
           <div
-            className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16
-              py-4 md:py-16 flex flex-col lg:flex-row gap-6 lg:gap-4 lg:items-center"
-          >
+  className="
+    w-full
+
+    px-5
+    sm:px-8
+    md:px-12
+
+    lg:pl-26
+    lg:pr-16
+
+    xl:pl-32
+    xl:pr-24
+
+    2xl:pl-36
+    2xl:pr-24
+
+    py-4
+    md:py-16
+
+    flex
+    flex-col
+    lg:flex-row
+    lg:items-center
+    gap-6
+    lg:gap-8
+  "
+>
             {/* LEFT */}
-            <div className="flex-1 max-w-[720px]">
+            <div className="flex-1 max-w-[700px]">
               <div
                 ref={badgeRef}
                 className="flex items-center gap-3 mb-4 sm:mb-5"
@@ -245,7 +271,8 @@ export default function Hero() {
               className="font-rethink w-full sm:w-[300px] lg:w-[280px]
                 bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
                border border-white/10 rounded-md p-5
-                lg:ml-auto lg:mr-8 mt-2 lg:mt-0 will-change-transform"
+                lg:ml-auto xl:mr-16
+2xl:mr-20 mt-2 lg:mt-0 will-change-transform"
             >
               <div className="flex items-center gap-3 mb-5">
                 <span

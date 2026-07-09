@@ -434,12 +434,21 @@ const sublineRef = useRef<HTMLDivElement>(null);
       id="hero"
       className="bg-[#F5EFE8] py-9 px-3 md:px-6"
     >
- <div
+<div
   className="
     relative overflow-hidden rounded-[28px]
-    h-[85vh]
-    min-h-[560px]
-    max-h-[700px]
+
+    h-[60vh]
+    sm:h-[65vh]
+    md:h-[70vh]
+    lg:h-[75vh]
+    xl:h-[85vh]
+
+    min-h-[460px]
+    sm:min-h-[520px]
+    md:min-h-[560px]
+
+    max-h-[760px]
   "
 >
         {/* ───────────────── Background Image Slider ───────────────── */}
@@ -473,11 +482,11 @@ const sublineRef = useRef<HTMLDivElement>(null);
     justify-center xl:justify-start
     text-center xl:text-left
 
-    px-6 py-24
-    sm:px-10
-    md:px-14
-    lg:px-20
-    xl:px-28
+    px-5 py-16
+sm:px-8 sm:py-20
+md:px-12 md:py-20
+lg:px-16 lg:py-24
+xl:px-24 xl:py-24
   "
 >
           <div className="max-w-[720px] text-white mx-auto xl:mx-30">
@@ -487,7 +496,7 @@ const sublineRef = useRef<HTMLDivElement>(null);
                 font-display
                 leading-[0.95]
                 tracking-[-0.04em]
-                text-[60px]
+                text-[clamp(2.4rem,6vw,3.75rem)]
               "
             >
               <span ref={titleLine1Ref} className="block">
@@ -551,23 +560,34 @@ const sublineRef = useRef<HTMLDivElement>(null);
             </p>
 
             {/* Buttons (same across all slides) */}
-            <div
-              ref={buttonsRef}
-              className="
-                mt-10
-                flex flex-wrap gap-4
-              "
-            >
+<div
+  ref={buttonsRef}
+  className="
+    mt-10
+    flex flex-col
+    items-center
+    gap-3
+
+    sm:flex-row
+    sm:flex-wrap
+    sm:justify-center
+
+    xl:justify-start
+  "
+>
               <button
                 onClick={() => smoothScrollTo("institutions")}
-                className="
+               className="
     font-rethink
     bg-[#ae1431]
     hover:bg-black
     text-white
     cursor-pointer
-    px-8
-    py-4
+    w-[170px]
+    sm:w-auto
+    px-5 py-3
+    sm:px-6 sm:py-3.5
+    md:px-8 md:py-4
     rounded-[12px]
     text-sm
     md:text-sm
@@ -588,17 +608,19 @@ const sublineRef = useRef<HTMLDivElement>(null);
                     ? router.push(slide.secondaryButton.link)
                     : router.push("/contact")
                 }
-               className="
+             className="
     font-rethink
     border
     border-white
     hover:bg-white
-    hover:border-black
     text-white
     hover:text-[#ae1431]
     cursor-pointer
-    px-8
-    py-4
+    w-[170px]
+    sm:w-auto
+    px-5 py-3
+    sm:px-6 sm:py-3.5
+    md:px-8 md:py-4
     rounded-[12px]
     text-sm
     md:text-sm
@@ -618,12 +640,16 @@ const sublineRef = useRef<HTMLDivElement>(null);
         </div>
 
         {/* ───────────────── Slide Arrows (bottom right) ───────────────── */}
-        <div className="absolute bottom-6 right-6 z-20 flex items-center gap-3">
+        <div className="absolute bottom-4 right-4
+sm:bottom-5 sm:right-5
+md:bottom-6 md:right-6 z-20 flex items-center gap-3">
           <button
             onClick={goPrev}
             aria-label="Previous slide"
             className="
-              flex h-11 w-11 items-center justify-center
+              flex h-9 w-9
+sm:h-10 sm:w-10
+md:h-11 md:w-11 items-center justify-center
               rounded-full border border-white/40
               text-white
               backdrop-blur-sm
@@ -650,7 +676,9 @@ const sublineRef = useRef<HTMLDivElement>(null);
             onClick={goNext}
             aria-label="Next slide"
             className="
-              flex h-11 w-11 items-center justify-center
+              flex  flex h-9 w-9
+sm:h-10 sm:w-10
+md:h-11 md:w-11 items-center justify-center
               rounded-full border border-white/40
               text-white
               backdrop-blur-sm

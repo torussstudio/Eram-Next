@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import { shell } from "../../../../constants/homeStyles";
 import { Play } from "lucide-react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -148,7 +147,10 @@ export default function Hero() {
   );
 
   return (
-    <section ref={sectionRef} className={`${shell} bg-[#F5EFE8] py-9`}>
+    <section
+  ref={sectionRef}
+  className="bg-[#F5EFE8] py-9 px-3 md:px-6"
+>
       {/* ── HERO CARD ── */}
       <div className="relative rounded-[28px] overflow-hidden text-white">
         {/* BACKGROUND */}

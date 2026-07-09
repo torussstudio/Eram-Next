@@ -438,12 +438,12 @@ export default function Navbar() {
           key={item.path}
           onClick={() => handleNavClick(item.path)}
           style={{
-            color: "#111111",
             transition: `color ${T}`,
             willChange: "color",
             WebkitFontSmoothing: "antialiased",
           }}
-          className={`relative pb-[5px] translate-z-0 backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap transition-all duration-300 ${
+          className={`relative pb-[5px] translate-z-0 text-[#111111]
+hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1rem] uppercase tracking-[0.035em] cursor-pointer whitespace-nowrap transition-all duration-300 ${
             isActive ? "font-bold" : "font-normal"
           }`}
         >

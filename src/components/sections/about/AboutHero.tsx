@@ -91,7 +91,23 @@ function AboutHero() {
     <section ref={containerRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       <div className="rounded-[28px] overflow-hidden shadow-sm">
         {/* HERO */}
-        <div className="relative w-full min-h-[460px] sm:min-h-[520px] md:min-h-[580px] lg:min-h-[640px]">
+     <div
+  className="
+  relative overflow-hidden rounded-[28px]
+
+  h-[85vh]
+  sm:h-[65vh]
+  md:h-[70vh]
+  lg:h-[75vh]
+  xl:h-[85vh]
+
+  min-h-[460px]
+  sm:min-h-[520px]
+  md:min-h-[560px]
+
+  max-h-[760px]
+"
+>
           {/* IMAGE */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="hero-img absolute inset-0 scale-110">
@@ -111,95 +127,75 @@ function AboutHero() {
           <div className="absolute inset-0 bg-black/40 sm:bg-black/35 md:bg-black/30" />
 
           {/* CONTENT */}
-          <div className="absolute inset-0 flex items-center md:items-center">
-            {/* MOBILE / TABLET */}
-            <div
-              className="
-                w-full flex flex-col items-center text-center text-white
-                px-6 pb-10 sm:px-12 sm:pb-14
-                md:hidden
-              "
-            >
-              <h1 className="font-display text-white  tracking-[-0.03em] leading-[0.95] text-[clamp(1.75rem,7vw,5.8rem)] -mt-16">
-                <span className="block overflow-hidden pb-1">
-                  <span ref={line0Ref} className="hero-heading-line block">
-                    Building Foundations.
-                  </span>
-                </span>
+<div
+  className="
+    absolute inset-0
+    z-10
+    flex items-center
+    justify-center xl:justify-start
 
-                <span className="block overflow-hidden pb-1">
-                  <span ref={line1Ref} className="hero-heading-line block">
-                    Shaping Futures.
-                  </span>
-                </span>
-              </h1>
+    text-center xl:text-left
 
-              <p
-                className="
-                font-rethink
-                  hero-content-fade mt-4
-                  text-[0.8rem] sm:text-[0.9rem]
-                  text-white/85 leading-[1.7]
-                  max-w-[300px] sm:max-w-[420px]
-                  opacity-0 translate-y-8
-                "
-              >
-                Founded under the CSR vision of the Eram Group, ERAM Educational
-                &amp; Welfare Trust was established to expand access to
-                disciplined, value-based education across its institutions.
-              </p>
-
-              <button
-                className="
-                font-rethink
-                  hero-content-fade mt-6
-                  bg-white text-black
-                  px-5 py-2.5 rounded-[12px]
-                  text-sm 
-                  flex items-center gap-2
-                  hover:bg-gray-200
-                  transition
-                  opacity-0 translate-y-8
-                  cursor-pointer
-                "
-              >
-                EXPLORE OUR INSTITUTIONS
-                <Play className="h-3.5 w-3.5" />
-              </button>
-            </div>
-
+    px-5 py-16
+    sm:px-8 sm:py-20
+    md:px-12 md:py-20
+   lg:pl-20 lg:pr-16 lg:py-24
+xl:pl-28 xl:pr-24 xl:py-24
+2xl:pl-32 2xl:pr-24
+  "
+>
             {/* DESKTOP */}
-            <div
-              className="
-                hidden md:block w-full text-white
-                ml-[115px] lg:ml-[180px] pr-8
-              "
-            >
-              <div className="max-w-[640px]">
-                <h1
-                  className="
-                    font-display
-                    leading-[1.05]
-                    text-[clamp(2.2rem,4vw,3.5rem)]
-                  "
-                >
-                  <span className="hero-heading-line">
-                    A Legacy of Structure.
-                  </span>
-                  <span className="hero-heading-line">
-                    A Future of Opportunity.
-                  </span>
-                </h1>
+ <div
+  className="
+    absolute inset-0
+    z-10 flex items-center
+    justify-center xl:justify-start
+    text-center xl:text-left
+
+    px-5 py-16
+sm:px-8 sm:py-20
+md:px-12 md:py-20
+lg:px-16 lg:py-24
+xl:px-24 xl:py-24
+  "
+>
+          <div className="max-w-[720px] text-white mx-auto xl:mx-30">
+             
+<h1
+  className="
+    font-display
+    leading-[0.95]
+    tracking-[-0.04em]
+    text-[clamp(2.4rem,6vw,3.75rem)]
+  "
+>
+  <span className="block ">
+    <span ref={line0Ref} className="hero-heading-line block">
+      A Legacy of Structure.
+    </span>
+  </span>
+
+  <span className="block ">
+    <span ref={line1Ref} className="hero-heading-line block">
+      A Future of Opportunity.
+    </span>
+  </span>
+</h1>
 
                 <p
-                  className="
-                    hero-content-fade mt-6
-                    text-[1.05rem]
-                    text-white/90
-                    leading-relaxed
-                    opacity-0 translate-y-8
-                    font-rethink
-                  "
+                 className="
+  hero-content-fade
+  mt-5
+  max-w-[650px]
+  font-rethink
+  text-[0.95rem]
+  leading-[1.8]
+  text-white/85
+  sm:text-[1rem]
+  md:text-[1.05rem]
+  opacity-0
+  translate-y-8
+"
                 >
                   Founded under the CSR vision of the Eram Group, ERAM
                   Educational &amp; Welfare Trust was established to expand
@@ -208,61 +204,25 @@ function AboutHero() {
                 </p>
 
                 <p
-                  className="
-                    hero-content-fade mt-4
-                    text-[1rem]
-                    text-white/90
-                    leading-relaxed
-                    opacity-0 translate-y-8
-                    font-rethink
-                  "
+                 className="
+  hero-content-fade
+  mt-5
+  max-w-[650px]
+  font-rethink
+  text-[0.95rem]
+  leading-[1.8]
+  text-white/85
+  sm:text-[1rem]
+  md:text-[1.05rem]
+  opacity-0
+  translate-y-8
+"
                 >
                   More than a network of schools, ERAM represents a structured
                   educational ecosystem where governance, mentorship, and
                   infrastructure work in alignment to shape future-ready
                   individuals.
                 </p>
-
-                {/* <button
-  type="button"
-  onClick={() => {
-    router.push("/");
-
-    setTimeout(() => {
-      const section = document.getElementById("institutions");
-
-      if (section) {
-        const yOffset = -90;
-
-        const y =
-          section.getBoundingClientRect().top +
-          window.pageYOffset +
-          yOffset;
-
-        window.scrollTo({
-          top: y,
-          behavior: "smooth",
-        });
-      }
-    }, 700);
-  }}
-  className="
-    hero-content-fade mt-8
-    bg-[#ae1431] text-white
-    px-6 py-3 rounded-[12px]
-    text-sm 
-    flex items-center gap-2
-    hover:bg-black hover:text-white
-    transition
-    opacity-0 translate-y-8
-    cursor-pointer group
-    font-rethink
-  "
->
-  EXPLORE OUR INSTITUTIONS
-
-   <Play className="w-4 h-4 transition-all duration-300" />
-</button> */}
 
                 <button
                   type="button"
@@ -287,45 +247,41 @@ function AboutHero() {
                       }
                     }, 700);
                   }}
-                  className="
-    hero-content-fade
-    mt-6 md:mt-8
+     className="
+  hero-content-fade
+  mt-8
 
-    inline-flex items-center gap-2
-    w-fit
+  inline-flex
+  items-center
+  gap-2
 
-    bg-[#ae1431]
-    text-white
+  bg-[#ae1431]
+  hover:bg-black
 
-    px-5 py-3
-    sm:px-6 sm:py-3.5
-    md:px-8 md:py-4
+  text-white
 
-    rounded-xl
+  px-5 py-3
+  sm:px-6 sm:py-3.5
+  md:px-8 md:py-4
 
-    text-xs
-    sm:text-sm
-    md:text-base
+  rounded-[12px]
 
-    font-semibold
-    font-rethink
-    uppercase
-    tracking-[0.12em]
+  text-sm
 
-    shadow-lg
-    transition-all
-    duration-300
+  transition-all
+  duration-300
 
-    hover:bg-black
-    hover:shadow-xl
-    hover:-translate-y-1
+  shadow-lg
+  font-semibold
+  font-rethink
+  uppercase
 
-    opacity-0
-    translate-y-8
+  hover:shadow-xl
+  hover:-translate-y-1
 
-    cursor-pointer
-    group
-  "
+  opacity-0
+  translate-y-8
+"
                 >
                   <span>Explore Our Institutions</span>
 
@@ -335,7 +291,7 @@ function AboutHero() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </section>
   );
 }

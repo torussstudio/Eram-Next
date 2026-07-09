@@ -146,35 +146,53 @@ export default function ImpactSection() {
 
   const router = useRouter();
 
-  /* ── Read & update arrow state from any carousel el ─────────────── */
-  const updateArrows = useCallback((el: HTMLDivElement) => {
-    // If not yet laid out, scrollWidth will equal clientWidth — skip
-    if (el.scrollWidth <= el.clientWidth) {
-      setCanScrollLeft(false);
-      setCanScrollRight(true); // assume scrollable, safer default
-      return;
-    }
-    const atStart = el.scrollLeft <= 0;
-    const atEnd = Math.ceil(el.scrollLeft + el.clientWidth) >= el.scrollWidth;
-    setCanScrollLeft(!atStart);
-    setCanScrollRight(!atEnd);
-  }, []);
+  /* ── IntersectionObserver-based arrow state (no pixel math) ─────── */
+  const setupObserver = useCallback(
+    (
+      el: HTMLDivElement,
+      setLeft: (v: boolean) => void,
+      setRight: (v: boolean) => void,
+    ) => {
+      const inner = el.firstElementChild as HTMLElement | null;
+      if (!inner) return null;
+      const first = inner.firstElementChild as HTMLElement | null;
+      const last = inner.lastElementChild as HTMLElement | null;
+      if (!first || !last) return null;
+
+      let firstVisible = true;
+      let lastVisible = false;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target === first) firstVisible = entry.isIntersecting;
+            if (entry.target === last) lastVisible = entry.isIntersecting;
+          });
+          setLeft(!firstVisible);
+          setRight(!lastVisible);
+        },
+        { root: el, threshold: 0.95 },
+      );
+
+      observer.observe(first);
+      observer.observe(last);
+      return observer;
+    },
+    [],
+  );
 
   /* ── Ref callbacks — fire the moment the div mounts ─────────────── */
-  // This is the key fix: ref callback runs after DOM paint,
-  // so el is guaranteed non-null. Read initial state right here.
   const desktopRefCallback = useCallback(
     (el: HTMLDivElement | null) => {
       desktopCarouselRef.current = el;
       if (!el) return;
-      // Wait for browser to finish layout before reading scrollWidth
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          updateArrows(el);
+          setupObserver(el, setCanScrollLeft, setCanScrollRight);
         });
       });
     },
-    [updateArrows],
+    [setupObserver],
   );
 
   const mobileRefCallback = useCallback(
@@ -183,19 +201,11 @@ export default function ImpactSection() {
       if (!el) return;
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          updateArrows(el);
+          setupObserver(el, setCanScrollLeft, setCanScrollRight);
         });
       });
     },
-    [updateArrows],
-  );
-
-  /* ── Scroll handler (inline onScroll on the div) ─────────────────── */
-  const handleScroll = useCallback(
-    (e: React.UIEvent<HTMLDivElement>) => {
-      updateArrows(e.currentTarget);
-    },
-    [updateArrows],
+    [setupObserver],
   );
 
   /* ── Scroll carousel ─────────────────────────────────────────────── */
@@ -251,8 +261,9 @@ export default function ImpactSection() {
             responsibility through targeted social initiatives supporting
             underprivileged communities.
           </p>
-          <button className="font-rethink h-[44px] cursor-pointer rounded-[10px] border border-[#f5efe8] bg-[#f5efe8] px-[22px] text-[13px] text-[#ae1431] transition hover:border-[#ae1431] hover:bg-black hover:text-white"
-          onClick={() => router.push("/the-trust")}
+          <button
+            className="font-rethink h-[44px] cursor-pointer rounded-[10px] border border-[#f5efe8] bg-[#f5efe8] px-[22px] text-[13px] text-[#ae1431] transition hover:border-[#ae1431] hover:bg-black hover:text-white"
+            onClick={() => router.push("/the-trust")}
           >
             EXPLORE STUDENT PATHWAYS
           </button>
@@ -288,8 +299,9 @@ export default function ImpactSection() {
             responsibility through targeted social initiatives supporting
             underprivileged communities.
           </p>
-          <button className="mt-1 h-[44px] w-full cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#f5efe8] font-rethink text-[12px] tracking-[0.08em] text-[#ae1431] transition active:scale-[0.97]"
-          onClick={() => router.push("/the-trust")}
+          <button
+            className="mt-1 h-[44px] w-full cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#f5efe8] font-rethink text-[12px] tracking-[0.08em] text-[#ae1431] transition active:scale-[0.97]"
+            onClick={() => router.push("/the-trust")}
           >
             EXPLORE STUDENT PATHWAYS
           </button>
@@ -311,7 +323,6 @@ export default function ImpactSection() {
           />
           <div
             ref={desktopRefCallback}
-            onScroll={handleScroll}
             className="flex-1 min-w-0 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-5"
           >
             <div className="flex gap-5 px-8">
@@ -319,7 +330,7 @@ export default function ImpactSection() {
                 <ImpactCard
                   key={item.code}
                   {...item}
-                  cardClass="
+                  cardClass=" font-rethink
                   impact-scroll-card flex-none snap-start
                   w-[350px] min-h-[120px] pl-[26px] pr-[26px]
                   [&_.card-line]:h-[185px]
@@ -341,7 +352,6 @@ export default function ImpactSection() {
         <div className="hidden max-[640px]:flex flex-col gap-[18px]">
           <div
             ref={mobileRefCallback}
-            onScroll={handleScroll}
             className="w-full overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2 cursor-pointer"
           >
             <div className="flex gap-4 px-4">

@@ -66,7 +66,23 @@ function TrustHero() {
   return (
     <section ref={containerRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       <div className="rounded-[28px] overflow-hidden shadow-sm max-w-[1520px] mx-auto">
-        <div className="relative h-[560px] sm:h-[620px] md:h-[660px] lg:h-[760px] w-full">
+         <div
+  className="
+  relative overflow-hidden rounded-[28px]
+
+  h-[85vh]
+  sm:h-[65vh]
+  md:h-[70vh]
+  lg:h-[75vh]
+  xl:h-[85vh]
+
+  min-h-[460px]
+  sm:min-h-[520px]
+  md:min-h-[560px]
+
+  max-h-[760px]
+"
+>
           {/* VIDEO */}
           <div className="absolute inset-0">
             <video
@@ -85,7 +101,23 @@ function TrustHero() {
           <div className="absolute inset-0 bg-black/45 md:bg-black/35" />
 
           {/* CONTENT */}
-          <div className="absolute inset-0 flex items-center md:items-center">
+<div
+  className="
+    absolute inset-0
+    z-10
+    flex items-center
+    justify-center xl:justify-start
+
+    text-center xl:text-left
+
+    px-5 py-16
+    sm:px-8 sm:py-20
+    md:px-12 md:py-20
+   lg:pl-20 lg:pr-16 lg:py-24
+xl:pl-28 xl:pr-24 xl:py-24
+2xl:pl-32 2xl:pr-24
+  "
+>
             {/* ── MOBILE ── */}
             <div className="w-full flex flex-col items-center text-center text-white px-6 pb-10 md:hidden">
               <span className="font-rethink hero-content-fade text-[10px] tracking-[0.25em] uppercase text-white mb-4">
@@ -122,15 +154,15 @@ function TrustHero() {
             </div>
 
             {/* ── DESKTOP ── */}
-            <div className="hidden md:block w-full text-white pl-[130px] pr-8 lg:pl-[180px]">
-              <div className="max-w-[640px]">
+            <div className="max-w-[720px] text-white mx-auto xl:mx-22">
+              <div className="max-w-[720px]">
                 <div className="hero-content-fade flex items-center gap-4 mb-6">
                   <span className="font-rethink text-[11px] tracking-[0.32em] uppercase text-white/80">
                     ERAM EDUCATIONAL & WELFARE TRUST
                   </span>
                 </div>
 
-                <h1 className="font-display leading-[1.05] text-[clamp(2.5rem,4vw,3.8rem)] ">
+                <h1 className="font-display leading-[1.05] text-[clamp(2.4rem,6vw,3.75rem)] ">
                   <span className="block ">
                     <span className="hero-heading-line block">
                       Purpose in Action.
@@ -159,48 +191,42 @@ function TrustHero() {
                   is guided by the principle: sustainable impact must be
                   deliberate, measurable, and accountable.
                 </p>
-
-                {/* <button className="font-rethink hero-content-fade mt-8 bg-[#ae1431] text-white px-6 py-3 rounded-[10px] text-sm tracking-wide hover:bg-black hover:text-white transition cursor-pointer inline-flex items-center gap-2 whitespace-nowrap">
-  VIEW OUR COMMUNITY INTERVENTIONS
-  <Play className="w-4 h-4 transition-all duration-300" />
-</button> */}
                 <button
-                  className="
-    font-rethink
-    hero-content-fade
-    mt-6 md:mt-8
+                className="
+  hero-content-fade
+  mt-8
 
-    inline-flex items-center gap-2
-    w-fit
+  inline-flex
+  items-center
+  gap-2
 
-    bg-[#ae1431]
-    text-white
+  bg-[#ae1431]
+  hover:bg-black
 
-    px-5 py-3
-    sm:px-6 sm:py-3.5
-    md:px-8 md:py-4
+  text-white
 
-    rounded-xl
+  px-5 py-3
+  sm:px-6 sm:py-3.5
+  md:px-8 md:py-4
 
-    text-xs
-    sm:text-sm
-    md:text-base
+  rounded-[12px]
 
-    uppercase
-    tracking-[0.12em]
+  text-sm
 
-    shadow-lg
-    transition-all
-    duration-300
+  transition-all
+  duration-300
 
-    hover:bg-black
-    hover:shadow-xl
-    hover:-translate-y-1
+  shadow-lg
+  font-semibold
+  font-rethink
+  uppercase
 
-    cursor-pointer
-    whitespace-nowrap
-    group
-  "
+  hover:shadow-xl
+  hover:-translate-y-1
+
+  opacity-0
+  translate-y-8
+"
                 >
                   <span>View Our Community Interventions</span>
 
