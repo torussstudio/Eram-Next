@@ -3,6 +3,7 @@
 import { useRef, useState, useCallback } from "react";
 import { section, shell } from "../../../constants/homeStyles";
 import { useRouter } from "next/navigation";
+import { Play } from "lucide-react";
 
 /* ── Data ────────────────────────────────────────────────────────── */
 const impactItems = [
@@ -261,12 +262,13 @@ export default function ImpactSection() {
             responsibility through targeted social initiatives supporting
             underprivileged communities.
           </p>
-          <button
-            className="font-rethink h-[44px] cursor-pointer rounded-[10px] border border-[#f5efe8] bg-[#f5efe8] px-[22px] text-[13px] text-[#ae1431] transition hover:border-[#ae1431] hover:bg-black hover:text-white"
-            onClick={() => router.push("/the-trust")}
-          >
-            EXPLORE STUDENT PATHWAYS
-          </button>
+         <button
+  className="font-rethink h-[44px] cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#ae1431] px-[22px] text-[16px] text-white transition hover:border-white hover:bg-white hover:text-[#ae1431] flex items-center justify-center gap-2"
+  onClick={() => router.push("/the-trust")}
+>
+  EXPLORE STUDENT PATHWAYS
+  <Play className="w-5 h-5 transition-colors" />
+</button>
         </div>
       </div>
 

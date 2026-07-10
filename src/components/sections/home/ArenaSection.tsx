@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { gsap, ScrollTrigger } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
+import { Play } from "lucide-react";
 
 const ARENA_WORDS = ["SPORTS", "ARENA"];
 
@@ -315,7 +316,7 @@ export default function ArenaSection() {
 
             <div ref={btnsRef} className="flex flex-wrap justify-start">
               <button
-                className="
+  className="
     font-rethink
     cursor-pointer
     text-white
@@ -324,11 +325,13 @@ export default function ArenaSection() {
     rounded-[12px]
     transition-all duration-300
     hover:bg-white hover:text-[#ae1431]
+    flex items-center justify-center gap-2
   "
-                onClick={() => router.push("/explore-arena")}
-              >
-                Explore The Arena
-              </button>
+  onClick={() => router.push("/explore-arena")}
+>
+  EXPLORE THE ARENA
+  <Play className="w-5 h-5 transition-colors" />
+</button>
             </div>
           </div>
         </div>

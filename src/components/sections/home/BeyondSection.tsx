@@ -4,9 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ActionButton from "../../ui/ActionButton";
 import { section } from "../../../constants/homeStyles";
 import { useRouter } from "next/navigation";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -172,13 +172,36 @@ export default function BeyondSection() {
 
         {/* CTA */}
         <div className="beyond-heading mb-[48px] max-[640px]:mb-[34px]">
-          <ActionButton
-            variant="secondary"
-            className="font-rethink text-[#ae1431] bg-white border-white max-[640px]:!w-auto cursor-pointer hover:bg-black hover:border-black hover:text-white"
-            onClick={() => router.push("/the-trust")}
-          >
-            Explore Student Pathways
-          </ActionButton>
+     <button
+  onClick={() => router.push("/the-trust")}
+  className="
+    font-rethink
+    mx-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-[#f5efe8]
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    transition-all
+    duration-200
+    hover:bg-white
+    hover:text-[#ae1431]
+    hover:border-white
+    flex
+    items-center
+    justify-center
+    gap-2
+  "
+>
+  Explore Excellence
+  <Play className="w-5 h-5 transition-colors" />
+</button>
         </div>
 
         {/* Cards + Arrow Buttons */}

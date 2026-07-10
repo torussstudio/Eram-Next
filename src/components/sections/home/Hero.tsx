@@ -490,24 +490,24 @@ lg:px-16 lg:py-24
 xl:px-24 xl:py-24
   "
 >
-          <div className="max-w-[720px] text-white mx-auto xl:mx-30">
-            {/* Heading */}
-            <h1
-              className="
-                font-display
-                leading-[0.95]
-                tracking-[-0.04em]
-                text-[clamp(2.4rem,6vw,3.75rem)]
-              "
-            >
-              <span ref={titleLine1Ref} className="block">
-                {slide.titleLine1}
-              </span>
+        <div className="max-w-[720px] xl:max-w-[900px] text-white mx-auto xl:mx-30">
+  {/* Heading */}
+  <h1
+    className="
+      font-display
+      leading-[0.95]
+      tracking-[-0.04em]
+      text-[clamp(2.2rem,5vw,3.35rem)]
+    "
+  >
+    <span ref={titleLine1Ref} className="block">
+      {slide.titleLine1}
+    </span>
 
-              <span ref={titleLine2Ref} className="block">
-                {slide.titleLine2}
-              </span>
-            </h1>
+    <span ref={titleLine2Ref} className="block">
+      {slide.titleLine2}
+    </span>
+  </h1>
 
             {/* Subline */}
 <div

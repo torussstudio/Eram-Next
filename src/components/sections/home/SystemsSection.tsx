@@ -550,7 +550,7 @@ export default function SystemsSection() {
                     className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/55 transition-all duration-500 group-hover:bg-black/35" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-black/10" />
                   <div className="relative z-10 flex h-full w-full flex-col justify-between">
                     <span
                       style={{
@@ -1098,6 +1098,7 @@ export default function SystemsSection() {
                 <br />
                 Systems & Standards
               </span>
+               <Play className="w-5 h-5 transition-colors" />
             </div>
 
             {/* RIGHT */}

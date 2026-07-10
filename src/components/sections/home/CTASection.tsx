@@ -5,6 +5,7 @@ import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { section, shell } from "../../../constants/homeStyles";
 import Link from "next/link";
+import { Play } from "lucide-react";
 
 export default function CTASection() {
   const ctaRef = useRef(null);
@@ -141,24 +142,26 @@ export default function CTASection() {
             {/* PRIMARY */}
             <Link href="/contact">
               <button
-                className="
-      h-[42px]
-      px-[22px]
-      text-[13px]
-      tracking-[0.04em]
-      rounded-[10px]
-      bg-[#ae1431]
-      text-white
-      hover:opacity-90
-      hover:bg-black
-      transition
-      max-[640px]:w-full
-      cursor-pointer
-      font-rethink
-    "
-              >
-                APPLY NOW
-              </button>
+  className="
+    h-[42px]
+    px-[22px]
+    text-[15px]
+    tracking-[0.04em]
+    rounded-[10px]
+    bg-[#ae1431]
+    text-white
+    hover:opacity-90
+    hover:bg-black
+    transition
+    max-[640px]:w-full
+    cursor-pointer
+    font-rethink
+    flex items-center justify-center gap-2
+  "
+>
+  APPLY NOW
+  <Play className="w-5 h-5 transition-colors" />
+</button>
             </Link>
 
             {/* SECONDARY */}
@@ -166,7 +169,7 @@ export default function CTASection() {
               className="
           h-[42px]
           px-[22px]
-          text-[13px]
+          text-[15px]
           tracking-[0.04em]
           rounded-[10px]
           border
