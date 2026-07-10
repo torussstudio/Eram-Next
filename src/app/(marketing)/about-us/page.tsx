@@ -1,6 +1,7 @@
 import dynamicImport from "next/dynamic";
 import AboutHero from "@/components/sections/about/AboutHero";
 import PurposeSection from "@/components/sections/about/PurposeSection";
+import EramJourneyTimeline from "@/components/sections/about/VisionPage";
 
 const StructuredLearningSection = dynamicImport(
   () => import("@/components/sections/about/StructuredLearningSection"),
@@ -70,7 +71,7 @@ export default function AboutPage() {
     <main className="relative overflow-hidden bg-white">
       <AboutHero />
       <PurposeSection />
-      
+      <EramJourneyTimeline />
       <StructuredLearningSection />
       <SystemsThatSustainExcellence />
       <SpacesDesignedForOpportunity />
