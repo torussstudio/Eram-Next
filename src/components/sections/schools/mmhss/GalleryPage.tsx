@@ -140,11 +140,11 @@ export default function GalleryPage() {
           {/* HEADER */}
           <div className="mb-12">
             <div className="anim-tag flex items-center gap-3 mb-4">
-              <span className="font-rethink text-xs tracking-widest text-black uppercase">
+              <span className="font-rethink text-[18px] text-[#ae1431] tracking-widest text-black uppercase">
                 Gallery
               </span>
             </div>
-            <p className="anim-desc font-rethink text-black max-w-xl">
+            <p className="anim-desc font-display text-[22px] text-black max-w-xl">
               Cultural programs, anti-drug, indipendance day, onam celebrations and campus
               life at MMHSS.
             </p>
@@ -156,9 +156,9 @@ export default function GalleryPage() {
               <button
                 key={t.id}
                 onClick={() => setActiveType(t.id)}
-                className={`font-rethink text-xs uppercase tracking-wide px-4 py-2 rounded-full border transition-colors cursor-pointer ${
+                className={`font-rethink text-[13px] uppercase tracking-wide px-4 py-2 rounded-full border transition-colors cursor-pointer ${
                   activeType === t.id
-                    ? "bg-[#ae1431] border-[#ae1431] text-black"
+                    ? "bg-[#ae1431] border-[#ae1431] text-white"
                     : "border-white/20 text-black hover:border-white/50 hover:text-[#ae1431]"
                 }`}
               >
@@ -203,7 +203,7 @@ export default function GalleryPage() {
                     >
                       {item.type}
                     </span>
-                    <p className="font-rethink text-sm text-white uppercase tracking-wide">
+                    <p className="self-start font-rethink text-sm text-white uppercase tracking-wide">
                       {item.title}
                     </p>
                   </div>
@@ -212,8 +212,6 @@ export default function GalleryPage() {
             </div>
           )}
 
-          {/* SHOW MORE — sends visitor to the main Gallery page,
-              pre-filtered to MMHSS so they see the full set. */}
           {!loading && totalCount > PREVIEW_LIMIT && (
             <div className="mt-12 flex justify-center">
               <Link

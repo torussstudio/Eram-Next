@@ -7,6 +7,7 @@ import React, {
   useLayoutEffect,
   useCallback,
 } from "react";
+import Image from "next/image";
 
 const SLIDE_DURATION_MS = 6000;
 
@@ -101,8 +102,6 @@ export default function EramJourneyTimeline(): React.JSX.Element {
     setRunId((id) => id + 1);
   }, []);
 
-  // Autoplay: advance to the next slide after SLIDE_DURATION_MS. Once the
-  // last slide is reached it loops back to the first, instead of stopping.
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
@@ -116,14 +115,6 @@ export default function EramJourneyTimeline(): React.JSX.Element {
     };
   }, [activeIndex, runId]);
 
-  // Measure the active tick's position and the bubble's own width. The
-  // bubble is centered under the active tick and clamped to stay fully
-  // inside the track. The tail's own left/right position within the
-  // bubble is then recomputed continuously so it always points exactly
-  // at the tick — sliding to the bubble's left edge when the tick is at
-  // the start, the middle when centered, and the right edge near the
-  // end — while staying clear of the bubble's rounded corners so it
-  // never visually detaches from the bubble.
   useLayoutEffect(() => {
     const measure = () => {
       const track = trackRef.current;
@@ -144,9 +135,6 @@ export default function EramJourneyTimeline(): React.JSX.Element {
       // Clamp so the bubble always stays fully inside the track.
       left = Math.max(0, Math.min(left, Math.max(0, trackWidth - bubbleWidth)));
 
-      // Tail position relative to the (possibly clamped) bubble left edge,
-      // clamped to stay clear of the rounded corners. On very narrow
-      // bubbles, shrink the padding rather than let the range invert.
       let tailLeft = tickCenter - left;
       const safePadding = Math.min(TAIL_EDGE_PADDING, bubbleWidth / 2 - 4);
       if (safePadding > 0) {
@@ -176,9 +164,16 @@ export default function EramJourneyTimeline(): React.JSX.Element {
           <div className="flex flex-col md:flex-row gap-8 md:gap-10">
             {/* Image placeholder */}
             <div
-              className="w-full md:w-[300px] lg:w-[340px] aspect-[4/5] md:aspect-auto md:h-[360px] rounded-2xl shrink-0 bg-[#ae1431]"
-              aria-hidden="true"
-            />
+  className="relative w-full md:w-[300px] lg:w-[340px] aspect-[4/5] md:aspect-auto md:h-[360px] rounded-2xl shrink-0 overflow-hidden"
+>
+  <Image
+    src="/images/vision.png"
+    alt="Description"
+    fill
+    className="object-cover"
+    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 300px, 340px"
+  />
+</div>
 
             <div className="flex-1 flex flex-col justify-center gap-8">
               <div>

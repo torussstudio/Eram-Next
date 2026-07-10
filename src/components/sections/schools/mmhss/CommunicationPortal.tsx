@@ -33,27 +33,27 @@ const features = [
 
 const feedItems = [
   {
-    color: "bg-green-400",
+
     text: "Grade 12 Biology — Crash Course Week 2 begins tomorrow.",
     meta: "Academic · 2 minutes ago",
   },
   {
-    color: "bg-yellow-400",
+
     text: "3 students flagged for attendance review in Commerce stream.",
     meta: "Attendance · 18 minutes ago",
   },
   {
-    color: "bg-blue-400",
+    
     text: "Internal Assessment scores updated for Grade 11 Comp. Science.",
     meta: "Assessment · 1 hour ago",
   },
   {
-    color: "bg-yellow-400",
+  
     text: "Parent-Teacher meeting scheduled for 12 May 2026, 10 AM.",
     meta: "Notice · 3 hours ago",
   },
   {
-    color: "bg-green-400",
+   
     text: "Monsoon disease prevention awareness drive — results shared.",
     meta: "NSS / Community · Yesterday",
   },
@@ -179,31 +179,30 @@ export default function CommunicationPortal() {
             </p>
 
             <br></br>
-            <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
+            <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
               Access the Parent Portal
               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
             </button>
           </div>
           {/* ── RIGHT — LIVE FEED ── */}
-          <div className="anim-feed-wrap lg:mt-0 mt-8">
-            <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
+          <div className="anim-feed-wrap lg:mt-0 mt-8 rounded-2xl overflow-hidden bg-[#7a1410] border border-white/10">
+            <div className="anim-feed-header  text-white/70 bg-[#5a0e0e] px-4 py-3">
               MMHSS — Live Communication Feed
             </div>
 
-            <div className="flex flex-col gap-[2px]">
+            <div className="flex flex-col">
               {feedItems.map((item, i) => (
                 <div
                   key={i}
-                  className="anim-feed-item bg-[#7a1410] py-4 px-3 flex gap-3
-                  border-l-2 border-transparent hover:border-white/40
-                  transition-colors duration-200 cursor-default rounded-[10px]"
+                  className="anim-feed-item py-4 px-4 flex gap-3
+      border-l-2 border-transparent hover:border-white/40
+      hover:bg-white/[0.03]
+      transition-colors duration-200 cursor-default"
                 >
-                  <span
-                    className={`w-2 h-2 mt-[6px] rounded-full shrink-0 ${item.color}`}
-                  />
+                  
                   <div>
                     <p className="font-rethink text-sm">{item.text}</p>
-                    <span className=" font-rethink text-xs text-white/50 block mt-1">
+                    <span className="font-rethink text-sm text-white/50 block mt-1">
                       {item.meta}
                     </span>
                   </div>
@@ -219,9 +218,11 @@ export default function CommunicationPortal() {
               key={i}
               className="anim-grid-item bg-[#7a1410] p-8 min-h-[180px] hover:bg-[#8f1712] transition-colors duration-200"
             >
-              <span className="text-xs text-white/50">{f.num}</span>
+              <span className=" text-white/50">{f.num}</span>
 
-              <h3 className="mt-3 text-white font-medium">{f.title}</h3>
+              <h3 className="mt-3 text-white font-rethink text-sm">
+                {f.title}
+              </h3>
 
               <p className="font-rethink text-sm text-white/70 mt-2">
                 {f.desc}

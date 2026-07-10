@@ -237,7 +237,7 @@ export default function AcademicStreams() {
               className="structured-btn inline-flex w-fit self-left mt-5 md:mt-6 border border-[#ae1431] hover:border-black px-4 py-2 rounded-lg bg-[#ae1431] text-white text-sm items-center gap-2 hover:bg-[#252525] hover:text-white transition-all duration-300 cursor-pointer font-rethink"
             >
               Explore
-              <Play className="text-xs transition-colors" />
+               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
             </button>
           </div>
 
@@ -282,11 +282,9 @@ export default function AcademicStreams() {
               <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-500">
                 <div className="w-12 h-[2px] bg-[#ae1431] mb-6" />
 
-                {/* <p className="text-[#e4dad2] text-[14px] leading-[1.9] max-w-[420px]">
-                  With decades of experience in academic leadership and student
-                  mentorship, he continues to shape MMHSS through discipline,
-                  innovation, and student-centered educational excellence.
-                </p> */}
+                <p className="text-[#e4dad2] text-[14px] leading-[1.9] max-w-[420px]">
+                  Believes education extends beyond classrooms, encouraging students to excel academically, compete confidently, and grow into responsible individuals.
+                </p>
               </div>
             </div>
           </div>

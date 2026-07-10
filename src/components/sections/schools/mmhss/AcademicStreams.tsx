@@ -234,7 +234,7 @@ export default function AcademicStreams() {
               className="structured-btn inline-flex w-fit self-left mt-5 bg-[#ae1431] text-white md:mt-6 border border-[#ae1431] px-4 py-2 rounded-lg text-sm items-center gap-2 hover:bg-black hover:border-black hover:text-white transition-all duration-300 cursor-pointer font-rethink"
             >
               Explore
-              <Play className="text-xs transition-colors" />
+              <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
             </button>
           </div>
 

@@ -372,33 +372,33 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
               Civic Leadership &amp; NSS
             </p>
 
-            <div className="max-w-md mx-auto">
-              <div className="grid grid-cols-1 rounded-2xl overflow-hidden">
-                {stats.map((stat) => (
-                  <div
-                    key={stat._id}
-                    className="anim-stat px-8 py-10 text-center bg-[#ae1431]"
-                  >
-                    <div className="flex items-baseline justify-center gap-1 mb-4">
-                      <span
-                        data-target={stat.value}
-                        className="counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] text-white"
-                      >
-                        0
-                      </span>
+            <div className="mx-auto max-w-5xl">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {stats.map((stat) => (
+      <div
+        key={stat._id}
+        className="anim-stat rounded-2xl bg-[#ae1431] px-8 py-10 text-center"
+      >
+        <div className="mb-4 flex items-baseline justify-center gap-1">
+          <span
+            data-target={stat.value}
+            className="counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] text-white"
+          >
+            0
+          </span>
 
-                      <span className="text-[18px] font-display text-white/60">
-                        {stat.unit}
-                      </span>
-                    </div>
+          <span className="font-display text-[18px] text-white/60">
+            {stat.unit}
+          </span>
+        </div>
 
-                    <p className="text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line text-white/55">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+        <p className="font-rethink whitespace-pre-line text-[12px] leading-[1.65] text-white/55 sm:text-[13px]">
+          {stat.label}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
           </div>
         )}
       </div>

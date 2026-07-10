@@ -124,11 +124,11 @@ export default function GalleryPage() {
           {/* HEADER */}
           <div className="mb-12">
             <div className="anim-tag flex items-center gap-3 mb-4">
-              <span className="font-rethink text-xs tracking-widest text-black uppercase">
+               <span className="font-rethink text-[18px] text-[#ae1431] tracking-widest text-black uppercase">
                 Gallery
               </span>
             </div>
-            <p className="anim-desc font-rethink text-black max-w-xl">
+            <p className="anim-desc font-display text-[22px] text-black max-w-xl">
               Classroom sessions, practice teaching, residential camp, seminars,
               and campus life at MMITE.
             </p>

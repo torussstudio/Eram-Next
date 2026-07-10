@@ -147,7 +147,7 @@ export default function AdmissionsPage() {
               <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
 
               <span className="font-rethink relative z-10">
-                Apply Now — 2026–27
+               APPLY NOW [2026-27]
               </span>
             </button>
 

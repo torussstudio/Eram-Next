@@ -6,8 +6,6 @@ import gsap from "gsap";
 import { X } from "lucide-react";
 import api from "@/lib/api";
 
-const ICONS = ["🏆", "🏅", "🎯", "⚡"];
-
 type SportsEvent = {
   _id: string;
   title: string;
@@ -114,7 +112,7 @@ export default function CommunitySection() {
     "
         >
           {/* TOP ROW — asymmetric split, left-heavy */}
-          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-[40px] lg:gap-[64px] items-end mb-[56px] md:mb-[72px]">
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-[40px] lg:gap-[64px] items-start mb-[56px] md:mb-[72px]">
             {/* LEFT: label + heading */}
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -140,8 +138,8 @@ export default function CommunitySection() {
               <p className="font-rethink text-[14.5px] text-[#4a433c] leading-[1.8] mb-7">
                 By positioning the campus as an accessible venue for sport,
                 culture, and community, the Arena strengthens ERAM's presence
-                within the wider region — as an institution that serves
-                beyond its walls.
+                within the wider region — as an institution that serves beyond
+                its walls.
               </p>
 
               <Link
@@ -275,12 +273,7 @@ export default function CommunitySection() {
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                           />
                         </button>
-                      ) : (
-                        <span className="text-[20px] md:text-[22px] shrink-0 transition-transform duration-300 group-hover:scale-110">
-                          {ICONS[i % ICONS.length]}
-                        </span>
-                      )}
-
+                      ) : null}
                       {/* title + desc */}
                       <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
                         <h3 className="font-display text-[16px] md:text-[18px] text-[#1a1a1a] group-hover:text-white transition-colors duration-300 whitespace-nowrap">

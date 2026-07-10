@@ -270,12 +270,14 @@ export default function Hero() {
             {/* RIGHT PANEL */}
             <div
               ref={panelRef}
-              className="font-rethink w-full sm:w-[300px] lg:w-[280px]
-                bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
-               border border-white/10 rounded-md p-5
-                lg:ml-auto xl:mr-16
-2xl:mr-20 mt-2 lg:mt-0 will-change-transform"
-            >
+             className="font-rethink w-full sm:w-[300px] lg:w-[280px]
+  bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
+  backdrop-blur-md
+  border border-white/10 rounded-md p-5
+  lg:ml-auto xl:mr-16
+  2xl:mr-20 mt-2 lg:mt-0 will-change-transform"
+>
+            
               <div className="flex items-center gap-3 mb-5">
                 <span
                   ref={lineRef}

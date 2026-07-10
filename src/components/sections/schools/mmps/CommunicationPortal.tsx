@@ -33,27 +33,22 @@ const features = [
 
 const feedItems = [
   {
-    color: "bg-green-400",
     text: "Grade 10 — Internal Assessment scores updated. Results shared with parents.",
     meta: "Academic · 5 minutes ago",
   },
   {
-    color: "bg-yellow-400",
     text: "Football practice schedule updated — Tue & Thu extended to 5:30 PM.",
     meta: "SPORTS· 22 minutes ago",
   },
   {
-    color: "bg-blue-400",
     text: "Shreshtta initiative — Grade 8 classroom review completed.",
     meta: "Academic · 1 hour ago",
   },
   {
-    color: "bg-yellow-400",
     text: "Scout & Guide activity scheduled for Saturday, 10 AM. Attendance mandatory.",
     meta: "Civic · 3 hours ago",
   },
   {
-    color: "bg-green-400",
     text: "Nalla Naalekkaayi programme — registration open for Grade 7 & 8 students.",
     meta: "Programme · Yesterday",
   },
@@ -178,32 +173,30 @@ export default function CommunicationPortal() {
           </div>
 
           {/* ── RIGHT — LIVE FEED ── */}
-          <div className="anim-feed-wrap lg:mt-0 mt-8">
-            <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3 mb-[2px]">
-              MMPS — Live Communication Feed
-            </div>
+         <div className="anim-feed-wrap lg:mt-0 mt-8 rounded-2xl overflow-hidden bg-[#7a1410] border border-white/10">
+  <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3">
+    MMPS — Live Communication Feed
+  </div>
 
-            <div className="flex flex-col gap-[2px]">
-              {feedItems.map((item, i) => (
-                <div
-                  key={i}
-                  className="anim-feed-item bg-[#7a1410] py-4 px-3 flex gap-3
-                  border-l-2 border-transparent hover:border-white/40
-                  transition-colors duration-200 cursor-default rounded-[10px]"
-                >
-                  <span
-                    className={`w-2 h-2 mt-[6px] rounded-full shrink-0 ${item.color}`}
-                  />
-                  <div>
-                    <p className="font-rethink text-sm">{item.text}</p>
-                    <span className=" font-rethink text-xs text-white/50 block mt-1">
-                      {item.meta}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+  <div className="flex flex-col">
+    {feedItems.map((item, i) => (
+      <div
+        key={i}
+        className="anim-feed-item py-4 px-3 flex gap-3
+        border-l-2 border-transparent hover:border-white/40
+        hover:bg-white/[0.03]
+        transition-colors duration-200 cursor-default"
+      >
+        <div>
+          <p className="font-rethink text-sm">{item.text}</p>
+          <span className="font-rethink text-xs text-white/50 block mt-1">
+            {item.meta}
+          </span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
         {/* FEATURE GRID */}
         <div className="anim-grid-wrap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px] rounded-2xl overflow-hidden mt-12">

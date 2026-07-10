@@ -247,11 +247,13 @@ export default function Hero() {
             {/* RIGHT PANEL */}
             <div
               ref={panelRef}
-              className="font-rethink w-full sm:w-[300px] lg:w-[280px]
-                bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
-               border border-white/10 rounded-md p-5
-                lg:ml-auto lg:mr-8 mt-2 lg:mt-0 will-change-transform"
-            >
+                   className="font-rethink w-full sm:w-[300px] lg:w-[280px]
+  bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
+  backdrop-blur-md
+  border border-white/10 rounded-md p-5
+  lg:ml-auto xl:mr-16
+  2xl:mr-20 mt-2 lg:mt-0 will-change-transform"
+>
               <div className="flex items-center gap-3 mb-5">
                 <span
                   ref={lineRef}
@@ -296,15 +298,15 @@ export default function Hero() {
           </div>
 
           {/* STATS */}
-          <div className="w-full border-t border-white/10 bg-[#0e0e0e] mt-auto">
-            <div className="max-w-[1400px] mx-auto">
+        <div className="w-full border-t border-white/10 bg-[#0e0e0e]">
+            <div className="max-w-[1400px] mx-auto ">
               <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4">
                 {STATS.map((item, i) => (
                   <div
                     key={i}
                     className={[
-                      "stat-item flex flex-col items-center font-rethink justify-center text-center",
-                      "py-10 sm:py-14 md:py-[40px] lg:py-[50px] px-4 sm:px-5",
+                      "stat-item flex flex-col items-center font-rethink justify-start text-center",
+                      "py-6 sm:py-8 md:py-[40px] lg:py-[50px] pb-[20px]",
                       i % 2 === 0 ? "border-r border-white/10" : "",
                       i < 2 ? "border-b border-white/10 md:border-b-0" : "",
                       i !== 3 ? "md:border-r md:border-white/10" : "",
@@ -312,19 +314,21 @@ export default function Hero() {
                       .filter(Boolean)
                       .join(" ")}
                   >
-                    <h3
-                      className=" text-[36px] sm:text-[44px] md:text-[56px] lg:text-[64px]
-                        text-[#eae6df] font-display  tracking-[-0.02em] leading-none"
-                    >
-                      {item.value}
-                    </h3>
-                    <p className="mt-3 sm:mt-[14px] font-rethink text-[12px] sm:text-[12px] md:text-[13px] text-[#8f877d] leading-[1.6]">
-                      {item.desc.map((line, idx) => (
-                        <span key={idx} className="block">
-                          {line}
-                        </span>
-                      ))}
-                    </p>
+                    <div className="-translate-y-0 md:-translate-y-1">
+                      <h3
+                        className="font-rethink text-[36px] sm:text-[44px] md:text-[56px] lg:text-[64px]
+                        text-[#eae6df] tracking-[-0.02em] leading-none"
+                      >
+                        {item.value}
+                      </h3>
+                      <p className="mt-3 sm:mt-[14px] text-[12px] sm:text-[12px] md:text-[13px] text-[#8f877d] leading-[1.6]">
+                        {item.desc.map((line, idx) => (
+                          <span key={idx} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
