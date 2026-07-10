@@ -100,13 +100,14 @@ function ERAMSportsArena() {
 
   return (
     <section
-      ref={containerRef}
-      className="
-        bg-[#F5EFE8]
-        px-4 xs:px-5 sm:px-6 md:px-8 lg:px-6
-        py-12 sm:py-16 md:py-20 lg:py-24
-      "
-    >
+  ref={containerRef}
+  className="
+    bg-[#F5EFE8]
+    px-4 xs:px-5 sm:px-6 md:px-8 lg:px-6
+    pt-12 sm:pt-16 md:pt-20 lg:pt-24
+    pb-6 sm:pb-8 md:pb-10 lg:pb-12
+  "
+>
       <div className="max-w-[1100px] mx-auto">
         {/* ── HEADER ── */}
         <h2
@@ -216,14 +217,14 @@ function ERAMSportsArena() {
         </div>
 
         {/* ── CTA ── */}
-        <div className="arena-cta mt-8 sm:mt-10 md:mt-12 flex justify-center">
+        <div className="arena-cta sm:mt-4 md:mt-6 flex justify-center">
          <button
   onClick={() => router.push("/the-trust")}
   className="
     structured-btn
 
-    mt-5
-    md:mt-6
+    mt-2
+    md:mt-3
 
     border
     border-[#ae1431]

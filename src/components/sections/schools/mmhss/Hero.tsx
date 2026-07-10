@@ -171,9 +171,9 @@ export default function Hero() {
 
         {/* CONTENT */}
         <div
-          className="relative z-10 flex flex-col justify-start pt-10 sm:pt-14 md:pt-[80px]
-            min-h-[520px] sm:min-h-[560px] md:min-h-[600px] lg:min-h-[680px]"
-        >
+  className="relative z-10 flex flex-col justify-start pt-6 sm:pt-8 md:pt-[48px]
+    min-h-[520px] sm:min-h-[560px] md:min-h-[600px] lg:min-h-[680px]"
+>
           {/* TOP SECTION */}
           <div
   className="
@@ -192,8 +192,10 @@ export default function Hero() {
     2xl:pl-36
     2xl:pr-24
 
-    py-4
-    md:py-16
+    pt-2
+    md:pt-8
+    pb-4
+    md:pb-16
 
     flex
     flex-col

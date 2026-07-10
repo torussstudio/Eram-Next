@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -164,9 +165,7 @@ export default function LegacySection() {
               <span className="font-rethink relative z-10">
                 Partner in Responsible Impact
               </span>
-              <span className="relative z-10 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-[5px]">
-                →
-              </span>
+              <Play className="relative z-10 text-xs transition-colors" />
             </button>
 
             <button
@@ -176,9 +175,6 @@ export default function LegacySection() {
               <span className="absolute inset-0 bg-[#111] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" />
               <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">
                 Discover Our Academic Framework
-              </span>
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300 transition-transform ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-[5px]">
-                →
               </span>
             </button>
           </div>
