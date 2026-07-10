@@ -292,6 +292,15 @@ export default function Journey() {
             xPercent: -50,
           });
 
+          // Position ratio (0 → 1) of each dot along the spine's length
+          const dotRatios = allDots.map((dot) => {
+            const dRect = dot.getBoundingClientRect();
+            const dCenter = dRect.top - tlRect.top + dRect.height / 2;
+            return spineFullH > 0
+              ? (dCenter - spineTopOffset) / spineFullH
+              : 0;
+          });
+
           gsap.to(spine, {
             scaleY: 1,
             ease: "none",
@@ -300,6 +309,13 @@ export default function Journey() {
               start: "top 75%",
               end: "bottom 70%",
               scrub: 0.6,
+              onUpdate: (self) => {
+                const progress = self.progress;
+                allDots.forEach((dot, idx) => {
+                  (dot as HTMLElement).style.backgroundColor =
+                    progress >= dotRatios[idx] ? "#ae1431" : "#c0b5a6";
+                });
+              },
             },
           });
         }
@@ -402,14 +418,9 @@ export default function Journey() {
 
                   {/* Dot column — no more per-segment spine segments */}
                   <div className="flex-shrink-0 flex flex-col items-center mr-7 sm:mr-8 self-stretch">
-                    <div
-                      className={[
-                        "ms-dot w-[7px] h-[7px] rounded-full flex-shrink-0 mt-[5px] relative z-10",
-                        i === milestones.length - 1
-                          ? "bg-[#ae1431]"
-                          : "bg-[#c0b5a6]",
-                      ].join(" ")}
-                    />
+                   <div
+  className="ms-dot w-[7px] h-[7px] rounded-full flex-shrink-0 mt-[5px] relative z-10 bg-[#c0b5a6]"
+/>
                   </div>
 
                   {/* Content */}
