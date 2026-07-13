@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar } from "lucide-react";
+import { Calendar, Play } from "lucide-react";
 
 export default function ClosingSection() {
   return (
@@ -45,10 +45,11 @@ export default function ClosingSection() {
             <div className="font-rethink flex flex-col items-start md:items-end gap-[14px] md:mt-[120px]">
               <button
                 className="
-    group relative overflow-hidden
+     relative overflow-hidden
 
     bg-[#ae1431]
     text-white
+    hover:bg-black
 
     px-[22px] md:px-[26px]
     py-[14px] md:py-[15px]
@@ -63,41 +64,19 @@ export default function ClosingSection() {
 
   "
               >
-                {/* hover overlay */}
-                <span
-                  className="
-    absolute inset-0 bg-black
-    scale-x-0 origin-left
-    group-hover:scale-x-100
-    transition-transform duration-[400ms]
-    ease-[cubic-bezier(0.22,1,0.36,1)]
-  "
-                />
-
-                {/* text */}
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                  Explore the ERAM Ecosystem
-                </span>
-
-                {/* arrow */}
-                <span
-                  className="
-    relative z-10
-    transition-all duration-300
-    group-hover:text-white
-    group-hover:translate-x-[5px]
-  "
-                >
-                  →
-                </span>
+                Explore the ERAM Ecosystem
+                <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
 
               <button
                 className="
-    group relative overflow-hidden
+     relative overflow-hidden
 
     border border-[#1a1a1a]
     text-[#111]
+    hover:bg-black
+    hover:text-white
+    
 
     px-[22px] md:px-[26px]
     py-[14px] md:py-[15px]
@@ -111,27 +90,12 @@ export default function ClosingSection() {
     rounded-[10px]
   "
               >
-                {/* hover overlay */}
-                <span
-                  className="
-    absolute inset-0 bg-[#111]
-    scale-x-0 origin-left
-    group-hover:scale-x-100
-    transition-transform duration-[400ms]
-    ease-[cubic-bezier(0.22,1,0.36,1)]
-  "
-                />
-
-                {/* text */}
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                  Host an Event
-                </span>
-
+                Host an Event
                 <Calendar
                   className="
     relative z-10 w-4 h-4 opacity-70
     transition-colors duration-300
-    group-hover:text-white
+  hover:text-white
   "
                 />
               </button>
@@ -145,8 +109,15 @@ export default function ClosingSection() {
           <p
             className="
           font-rethink
-          font-bold
-            text-[17px] md:text-[18px]
+         
+              text-[24px]
+
+            sm:text-[28px]
+
+            md:text-[40px]
+
+            lg:text-[48px]
+
             text-[#7a7268]
           "
           >

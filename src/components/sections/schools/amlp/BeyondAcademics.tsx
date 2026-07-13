@@ -234,7 +234,7 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
                   border-t-4 border-t-[#d4cbbf] hover:border-t-[#ae1431]
                   transition-colors duration-300 rounded-2xl overflow-hidden"
                 >
-                  <span className="inline-block font-display bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
+                  <span className="inline-block font-display rounded-[8px] bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
                     {card.tag}
                   </span>
                   <h3 className=" text-[#1a1209] font-display text-[20px] sm:text-[22px] leading-snug tracking-[-0.01em] mb-3">
@@ -259,16 +259,19 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
               {excellence.map((card, i) => {
                 const isRed = i % 3 === 0;
                 const isDark = i % 3 === 1;
-                const bg = isRed
+                
+               const bg = isRed
                   ? "bg-[#ae1431]"
                   : isDark
                     ? "bg-[#1a1a1a]"
-                    : "bg-white border border-[#d4cbbf]";
+                    : "bg-white  border  border-[#d4cbbf]";
+
                 const badge = isRed
-                  ? "bg-[#ae1431] text-white"
+                  ? "bg-[#ae1431] border border-[#d4cbbf] rounded -[12px] text-white"
                   : isDark
-                    ? "bg-[#2a2a2a] text-[#a09488]"
-                    : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
+                    ? "bg-[#2a2a2a] border border-[#d4cbbf]  rounded -[12px] text-[#a09488]"
+                    : "bg-[#fdf6ef] border border-[#d4cbbf] rounded-[4px]  text-[#ae1431]";
+
                 const titleC = isRed || isDark ? "text-white" : "text-[#1a1209]";
                 const subC = isRed
                   ? "text-white/50"
@@ -333,7 +336,7 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
                       >
                         {isNumeric ? 0 : stat.value}
                       </span>
-                      <span className={`text-[18px] font-display ${unitC}`}>{stat.unit}</span>
+                      <span className={`text-[40px] font-display ${unitC}`}>{stat.unit}</span>
                     </div>
                     <p className={`text-[12px] font-rethink sm:text-[13px] leading-[1.65] whitespace-pre-line ${descC}`}>
                       {stat.label}

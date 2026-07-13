@@ -257,7 +257,7 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
                   border-t-4 border-t-[#d4cbbf] hover:border-t-[#ae1431]
                   transition-colors duration-300 rounded-2xl overflow-hidden"
                 >
-                  <span className="inline-block font-display bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
+                  <span className="inline-block font-display rounded-[8px] bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
                     {card.tag}
                   </span>
 
@@ -295,14 +295,14 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
                 const bg = isRed
                   ? "bg-[#ae1431]"
                   : isDark
-                  ? "bg-[#1a1a1a]"
-                  : "bg-white border border-[#d4cbbf]";
+                    ? "bg-[#1a1a1a]"
+                    : "bg-white  border  border-[#d4cbbf]";
 
                 const badge = isRed
-                  ? "bg-[#ae1431] text-white"
+                  ? "bg-[#ae1431] border border-[#d4cbbf] rounded -[12px] text-white"
                   : isDark
-                  ? "bg-[#2a2a2a] text-[#a09488]"
-                  : "bg-[#fdf6ef] border border-[#d4cbbf] text-[#ae1431]";
+                    ? "bg-[#2a2a2a] border border-[#d4cbbf]  rounded -[12px] text-[#a09488]"
+                    : "bg-[#fdf6ef] border border-[#d4cbbf] rounded-[4px]  text-[#ae1431]";
 
                 const titleC =
                   isRed || isDark ? "text-white" : "text-[#1a1209]";
@@ -387,7 +387,7 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
             0
           </span>
 
-          <span className="font-display text-[18px] text-white/60">
+          <span className="font-display text-[40px] text-white/60">
             {stat.unit}
           </span>
         </div>

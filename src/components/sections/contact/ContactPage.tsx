@@ -447,26 +447,10 @@ await emailjs.send(
     ${
       isLoading
         ? "bg-[#ae1431]/60 cursor-not-allowed"
-        : "bg-[#ae1431] hover:bg-[#8f1028] active:scale-[0.98]"
+        : "bg-[#ae1431] hover:bg-black active:scale-[0.98]"
     }`}
                     >
                       {isLoading ? "Sending..." : "Send Message"}
-                      {!isLoading && (
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 8h12M9 4l4 4-4 4"
-                            stroke="white"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      )}
                     </button>
                   </form>
                 </>
