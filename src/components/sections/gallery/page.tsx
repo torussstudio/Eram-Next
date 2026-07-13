@@ -285,8 +285,10 @@ export default function GalleryClient() {
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="sticky top-0 z-30 bg-[#F5EFE8] px-6 py-5 backdrop-blur-md md:px-12 lg:px-20">
+      {/* Filters — sticks BELOW the fixed navbar, not under it.
+          Adjust top-16 / md:top-20 to match your navbar's actual height
+          (h-16 = 64px, h-20 = 80px). */}
+      <section className="sticky top-14 md:top-18 z-30 bg-[#F5EFE8] px-6 py-5 backdrop-blur-md md:px-12 lg:px-20">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           {/* Institution filter */}
           <div>
@@ -316,20 +318,6 @@ export default function GalleryClient() {
               <p className="mb-2 text-[11px] font-rethink uppercase tracking-[0.2em] text-gray-500">
                 Filter by Type
               </p>
-              {/* <select
-                value={activeType}
-                onChange={(e) =>
-                  setActiveType(e.target.value as TypeId | "all")
-                }
-                className="font-rethink text-[13px] uppercase tracking-wide px-4 py-2.5 rounded-full border border-black/15 bg-white text-[#ae1431] focus:outline-none focus:border-[#ae1431] cursor-pointer"
-              >
-                <option value="all">All Types</option>
-                {TYPES.map((type) => (
-                  <option key={type.id} value={type.id}>
-                    {type.label}
-                  </option>
-                ))}
-              </select> */}
                <div className="relative inline-block">
               <select
                  value={activeType}
