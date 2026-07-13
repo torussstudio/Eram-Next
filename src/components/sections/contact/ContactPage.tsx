@@ -9,7 +9,7 @@ import emailjs from "@emailjs/browser";
 
 interface ContactItemProps {
   label: string;
-  value: string;
+   value: React.ReactNode;
   href: string;
   icon: React.ReactNode;
 }
@@ -18,7 +18,13 @@ const CONTACT_ITEMS: ContactItemProps[] = [
   {
     label: "Address",
     value:
-      "Eram Education, Eram Nagar, Prabhapuram, Mannengode (PO), Palakkad — 679307",
+       (
+    <>
+      Eram Education, Eram Nagar, Prabhapuram,
+      <br />
+      Mannengode (PO), Palakkad — 679307
+    </>
+  ),
     href: "https://maps.google.com/?q=Eram+Education+Palakkad",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -318,7 +324,7 @@ await emailjs.send(
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.65fr] gap-5 items-start">
           {/* ── Info card ── */}
           <div ref={infoCardRef}>
-            <div className=" rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-7 md:gap-0 md:justify-between md:min-h-[480px]">
+            <div className=" rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-10 md:gap-12">
               {/* Top section — "Get in Touch" overlaid on dark card header */}
               <div>
                 <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-black mb-4">

@@ -4,12 +4,12 @@ import { Trash2, UploadCloud } from 'lucide-react';
 import api from '@/lib/api';
 
 const CATEGORIES = [
-  { id: 'general', label: 'General' },
+ { id: 'ease', label: 'EASE' },
   { id: 'mmhss', label: 'MMHSS' },
   { id: 'mmps', label: 'MMPS' },
   { id: 'amlp', label: 'AMLP' },
   { id: 'mmite', label: 'MMITE' },
-  { id: 'ease', label: 'EASE' },
+   { id: 'trust', label: 'TRUST' },
 ];
 
 const TYPES = [
@@ -20,8 +20,6 @@ const TYPES = [
   { id: 'academic', label: 'Academic' },
 ];
 
-// Max dimensions / quality for the compressed image sent to the backend.
-// Tweak these if you want smaller/larger uploads.
 const MAX_WIDTH = 1920;
 const MAX_HEIGHT = 1920;
 const JPEG_QUALITY = 0.8;
@@ -69,7 +67,7 @@ export default function AdminGalleryPage() {
 
   // upload form state
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('general');
+  const [category, setCategory] = useState('trust');
   const [type, setType] = useState('general');
   const [file, setFile] = useState(null);
 

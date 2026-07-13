@@ -236,7 +236,7 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
           <div className="anim-header flex items-end">
             <p className="font-rethink text-[14.5px] md:text-[15.5px] leading-[1.85] text-[#6b5f54] max-w-[520px]">
               Academic consistency is matched by active participation beyond the
-              classroom — ensuring competitive exposure and character
+              classroom , ensuring competitive exposure and character
               development remain central to the student experience.
             </p>
           </div>
