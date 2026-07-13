@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { X, ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import api from "@/lib/api";
 
 type CategoryId =  "mmhss" | "mmps" | "amlp" | "mmite" | "ease" | "trust" ;
@@ -256,7 +256,7 @@ export default function GalleryClient() {
         <div className="relative flex flex-col md:flex-row items-stretch overflow-hidden rounded-2xl bg-[#ae1431] min-h-[300px]">
           {/* Left: text content */}
           <div className="relative z-10 flex-1 flex flex-col justify-center px-8 py-10 md:px-12 md:py-12">
-            <p className="hero-reveal text-xs md:text-sm font-display tracking-[0.25em] uppercase text-[#f0c9a0]">
+            <p className="hero-reveal text-xs md:text-sm font-rethink tracking-[0.25em] uppercase text-[#f0c9a0]">
               Moments &amp; Milestones
             </p>
             <h1 className="hero-reveal font-display mt-3 text-4xl leading-[1.05] text-white md:text-5xl lg:text-6xl">
@@ -316,7 +316,7 @@ export default function GalleryClient() {
               <p className="mb-2 text-[11px] font-rethink uppercase tracking-[0.2em] text-gray-500">
                 Filter by Type
               </p>
-              <select
+              {/* <select
                 value={activeType}
                 onChange={(e) =>
                   setActiveType(e.target.value as TypeId | "all")
@@ -329,7 +329,27 @@ export default function GalleryClient() {
                     {type.label}
                   </option>
                 ))}
-              </select>
+              </select> */}
+               <div className="relative inline-block">
+              <select
+                 value={activeType}
+                  onChange={(e) =>
+                    setActiveType(e.target.value as TypeId | "all")
+                  }
+                  className="appearance-none font-rethink text-xs md:text-sm uppercase tracking-wide pl-4 pr-8 py-1.5 rounded-full border border-white bg-white text-[#ae1431] focus:outline-none focus:border-[#ae1431] cursor-pointer"
+                >
+                  <option value="all">All Types</option>
+                  {TYPES.map((type) => (
+                    <option key={type.id} value={type.id}>
+                      {type.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  size={14}
+                  className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[#ae1431]"
+                />
+              </div>
             </div>
 
             <button
