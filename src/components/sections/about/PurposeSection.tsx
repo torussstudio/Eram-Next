@@ -6,11 +6,13 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
 import { Play } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function PurposeSection() {
   const containerRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleLoad = () => {
@@ -256,6 +258,7 @@ function PurposeSection() {
             </div>
 
             <button
+            onClick={() => router.push("/the-trust")}
               className="
     purpose-btn
     opacity-0 translate-y-4
@@ -288,7 +291,7 @@ function PurposeSection() {
   "
             >
               EXPLORE MORE
-              <Play className="text-xs transition-all duration-300 group-hover:translate-x-1" />
+               <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
         </div>

@@ -34,7 +34,9 @@ export default function AmlpPage() {
       <Streams />
       <AcademicStreams />
       <ParentPartnership />
-      <BeyondAcademics school="amlp" />
+      <div className="mt-8 md:mt-12 lg:mt-16">
+        <BeyondAcademics school="amlp" />
+      </div>
       <GalleryPage />
       <CommunicationPortal />
       <AdmissionsPage />

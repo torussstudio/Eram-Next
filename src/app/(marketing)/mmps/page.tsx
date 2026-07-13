@@ -13,15 +13,30 @@ export const metadata: Metadata = {
   },
 };
 
-
-const Journey = dynamicImport(() => import("@/components/sections/schools/mmps/Journey"));
-const Streams = dynamicImport(() => import("@/components/sections/schools/mmps/Streams"));
-const AcademicStreams = dynamicImport(() => import("@/components/sections/schools/mmps/AcademicStreams"));
-const ParentPartnership = dynamicImport(() => import("@/components/sections/schools/mmps/ParentPartnership"));
-const BeyondAcademics = dynamicImport(() => import("@/components/sections/schools/mmps/BeyondAcademics"));
-const GalleryPage = dynamicImport(() => import("@/components/sections/schools/mmps/GalleryPage"));
-const CommunicationPortal = dynamicImport(() => import("@/components/sections/schools/mmps/CommunicationPortal"));
-const AdmissionsPage = dynamicImport(() => import("@/components/sections/schools/mmps/AdmissionsPage"));
+const Journey = dynamicImport(
+  () => import("@/components/sections/schools/mmps/Journey"),
+);
+const Streams = dynamicImport(
+  () => import("@/components/sections/schools/mmps/Streams"),
+);
+const AcademicStreams = dynamicImport(
+  () => import("@/components/sections/schools/mmps/AcademicStreams"),
+);
+const ParentPartnership = dynamicImport(
+  () => import("@/components/sections/schools/mmps/ParentPartnership"),
+);
+const BeyondAcademics = dynamicImport(
+  () => import("@/components/sections/schools/mmps/BeyondAcademics"),
+);
+const GalleryPage = dynamicImport(
+  () => import("@/components/sections/schools/mmps/GalleryPage"),
+);
+const CommunicationPortal = dynamicImport(
+  () => import("@/components/sections/schools/mmps/CommunicationPortal"),
+);
+const AdmissionsPage = dynamicImport(
+  () => import("@/components/sections/schools/mmps/AdmissionsPage"),
+);
 
 export default function MmpsPage() {
   return (
@@ -31,10 +46,12 @@ export default function MmpsPage() {
 
       {/* Deferred segments */}
       <Journey />
-      <Streams/>
+      <Streams />
       <AcademicStreams />
       <ParentPartnership />
-      <BeyondAcademics school="mmps" />
+      <div className="mt-8 md:mt-12 lg:mt-16">
+        <BeyondAcademics school="mmps" />
+      </div>
       <GalleryPage />
       <CommunicationPortal />
       <AdmissionsPage />

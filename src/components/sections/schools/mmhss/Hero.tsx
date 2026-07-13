@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
 import { Play } from "lucide-react";
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ─── Data ──────────────────────────────────────
 const QUICK_FACTS = [
   ["2005", "Year Established"],
   ["State Board", "Curriculum · English Medium"],
@@ -21,7 +21,7 @@ const STATS = [
   { value: "3", desc: ["Higher Secondary", "Academic Streams"] },
 ];
 
-// ─── Component ───────────────────────────────────────────────────────────────
+// ─── Component ─────────────────────────────────────────
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);

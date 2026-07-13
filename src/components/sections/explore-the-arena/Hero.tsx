@@ -19,23 +19,7 @@ export default function HeroSection() {
 
         {/* CONTENT */}
         <div
-          className="
-            relative z-10 flex flex-col justify-between
-
-            pt-[48px]
-
-            sm:pt-[60px]
-
-            md:pt-[80px]
-
-            min-h-[620px]
-
-            sm:min-h-[680px]
-
-            md:min-h-[660px]
-
-            lg:min-h-[760px]
-          "
+          className=" relative overflow-hidden rounded-[28px]      h-[60vh]   sm:h-[65vh]   md:h-[70vh]   lg:h-[75vh]   xl:h-[85vh]      min-h-[460px]   sm:min-h-[520px]   md:min-h-[560px]      max-h-[760px]"
         >
           {/* =========================
               TOP SECTION
@@ -322,114 +306,114 @@ export default function HeroSection() {
               ))}
             </div>
           </div>
-
-        {/* =========================
-    STATS
-========================= */}
-<div className="relative z-10 bg-[#F5EFE8] mt-[50px] md:mt-[70px]">
-  <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
-    <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[55px]">
-      {/* LABEL */}
-      <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">
-        <p
-          className="
-            font-rethink
-            text-[13px]
-            sm:text-[15px]
-            md:text-[18px]
-            tracking-[0.28em]
-            text-[#ae1431]
-            uppercase
-          "
-        >
-          Infrastructure at a glance
-        </p>
+        </div>
       </div>
 
-      {/* GRID */}
-      <div
-        className="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          md:grid-cols-4
-          border-t
-          border-black/10
-        "
-      >
-        {[
-          { value: "1,000", unit: "seats", desc: ["Open-air spectator", "capacity"] },
-          { value: "10,000", unit: "sq.ft.", desc: ["Total built-up", "infrastructure area"] },
-          { value: "47 × 22", unit: "m", desc: ["Primary multi-court", "playing surface"] },
-          { value: "8", unit: "poles", desc: ["10m floodlight poles", "with 38 LED lights"] },
-        ].map((item, i) => (
-          <div
-            key={i}
-            className={`
-              relative
-              py-[28px]
-              sm:py-[32px]
-              md:py-[42px]
-              px-[14px]
-              sm:px-[18px]
-              md:px-[28px]
-              ${i !== 3 ? "md:border-r" : ""}
-              border-black/10
-            `}
-          >
-            {/* RED TOP LINE */}
-            <span className="absolute top-0 left-0 w-[28px] h-[2px] bg-[#a32020]" />
-
-            {/* VALUE */}
-            <div className="flex items-baseline gap-[10px]">
-              <h3
+      {/* =========================
+          STATS
+      ========================= */}
+      <div className="relative z-10 bg-[#F5EFE8]">
+        <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
+          <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[55px]">
+            {/* LABEL */}
+            <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">
+              <p
                 className="
                   font-rethink
-                  text-[30px]
-                  md:text-[38px]
-                  text-[#2a1010]
-                  tracking-[-0.01em]
+                  text-[13px]
+                  sm:text-[15px]
+                  md:text-[18px]
+                  tracking-[0.28em]
+                  text-[#ae1431]
+                  uppercase
                 "
               >
-                {item.value}
-              </h3>
-
-              <span
-                className="
-                  text-[14px]
-                  md:text-[17px]
-                  text-[#4a3535]
-                  font-display
-                  relative
-                  top-[-2px]
-                "
-              >
-                {item.unit}
-              </span>
+                Infrastructure at a glance
+              </p>
             </div>
 
-            {/* DESCRIPTION */}
-            <p
+            {/* GRID */}
+            <div
               className="
-                mt-[12px]
-                text-[13px]
-                md:text-[14px]
-                text-[#6b5757]
-                leading-[1.7]
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                md:grid-cols-4
+                border-t
+                border-black/10
               "
             >
-              {item.desc.map((line, idx) => (
-                <span key={idx} className="block">
-                  {line}
-                </span>
+              {[
+                { value: "1,000", unit: "seats", desc: ["Open-air spectator", "capacity"] },
+                { value: "10,000", unit: "sq.ft.", desc: ["Total built-up", "infrastructure area"] },
+                { value: "47 × 22", unit: "m", desc: ["Primary multi-court", "playing surface"] },
+                { value: "8", unit: "poles", desc: ["10m floodlight poles", "with 38 LED lights"] },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`
+                    relative
+                    py-[28px]
+                    sm:py-[32px]
+                    md:py-[42px]
+                    px-[14px]
+                    sm:px-[18px]
+                    md:px-[28px]
+                    ${i !== 3 ? "md:border-r" : ""}
+                    border-black/10
+                  `}
+                >
+                  {/* RED TOP LINE */}
+                  <span className="absolute top-0 left-0 w-[28px] h-[2px] bg-[#a32020]" />
+
+                  {/* VALUE */}
+                  <div className="flex items-baseline gap-[10px]">
+                    <h3
+                      className="
+                        font-rethink
+                        text-[30px]
+                        md:text-[38px]
+                        text-[#2a1010]
+                        tracking-[-0.01em]
+                      "
+                    >
+                      {item.value}
+                    </h3>
+
+                    <span
+                      className="
+                        text-[14px]
+                        md:text-[17px]
+                        text-[#4a3535]
+                        font-display
+                        relative
+                        top-[-2px]
+                      "
+                    >
+                      {item.unit}
+                    </span>
+                  </div>
+
+                  {/* DESCRIPTION */}
+                  <p
+                    className="
+                      mt-[12px]
+                      text-[13px]
+                      md:text-[14px]
+                      text-[#6b5757]
+                      leading-[1.7]
+                    "
+                  >
+                    {item.desc.map((line, idx) => (
+                      <span key={idx} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                </div>
               ))}
-            </p>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
         </div>
       </div>
     </section>

@@ -296,7 +296,7 @@ export default function Hero() {
           </div>
 
           {/* STATS */}
-          <div className="w-full border-t border-white/10 bg-[#0e0e0e] mt-auto">
+         <div className="w-full border-t border-white/10 bg-[#0e0e0e] mt-auto">
             <div className="max-w-[1400px] mx-auto">
               <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4">
                 {STATS.map((item, i) => (
@@ -313,7 +313,7 @@ export default function Hero() {
                       .join(" ")}
                   >
                     <h3
-                      className=" text-[36px] sm:text-[44px] md:text-[56px] lg:text-[64px]
+                      className="font-rethink text-[36px] sm:text-[44px] md:text-[56px] lg:text-[64px]
                         text-[#eae6df] font-display tracking-[-0.02em] leading-none"
                     >
                       {item.value}

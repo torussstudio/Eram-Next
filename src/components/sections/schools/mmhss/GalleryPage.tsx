@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -135,19 +137,20 @@ export default function GalleryPage() {
 
   return (
     <div ref={containerRef} className="bg-[#F5EFE8] text-black overflow-hidden">
-      <section className="py-16 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-6 pb-16 px-6">
+        <div className="max-w-6xl mx-auto">
           {/* HEADER */}
-          <div className="mb-12">
-            <div className="anim-tag flex items-center gap-3 mb-4">
-              <span className="font-rethink text-[18px] text-[#ae1431] tracking-widest text-black uppercase">
+          <div className="mb-8">
+            <div className="anim-hero-tag flex items-center gap-3 mb-6">
+              <span className="font-rethink text-[12px] tracking-widest uppercase text-[#ae1431] ">
                 Gallery
               </span>
             </div>
-            <p className="anim-desc font-display text-[22px] text-black max-w-xl">
-              Cultural programs, anti-drug, indipendance day, onam celebrations and campus
-              life at MMHSS.
-            </p>
+
+            <h1 className="font-display anim-hero-title text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-[-0.02em] mb-8">
+             Moments and milestones that <br/>shape every learner and define <br/>the ERAM community.
+            </h1>
+
           </div>
 
           {/* TYPE FILTER PILLS */}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { X } from "lucide-react";
+import { Play, X } from "lucide-react";
 import api from "@/lib/api";
 
 type SportsEvent = {
@@ -164,9 +164,7 @@ export default function CommunitySection() {
   "
               >
                 Enquire About Hosting
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
+               <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>

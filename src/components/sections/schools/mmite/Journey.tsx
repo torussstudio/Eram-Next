@@ -345,8 +345,7 @@ export default function Journey() {
               className="font-display text-[#1a1209] leading-[1.0] tracking-[-0.02em]
                 text-[38px] sm:text-[46px] md:text-[54px] lg:text-[58px] xl:text-[64px]"
             >
-              Two Decades of
-              <br />
+              Two Decades <br /> of
               Teacher Preparation
             </h2>
 
