@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ─── Data ────────────────────────────────────────────
 const QUICK_FACTS = [
   ["1924", "Year Established"],
   ["Govt. Aided", "State Board | Malayalam"],

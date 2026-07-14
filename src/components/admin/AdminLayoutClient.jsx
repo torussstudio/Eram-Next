@@ -29,7 +29,6 @@ import {
 const navItems = [
   { name: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Home", path: "/admin/home", icon: Home },
-  { name: "Parent-Student Portal", path: "/admin/portal", icon: Users },
   { name: "Institutions", path: "/admin/institutions", icon: School },
   { name: "Sports Arena", path: "/admin/sports-arena", icon: Trophy },
   { name: "Gallery", path: "/admin/gallery", icon: ImageIcon },
@@ -38,12 +37,6 @@ const navItems = [
 
 ];
 
-// ── Notification read/cleared tracking ──────────────────────────────────
-// We track which notification ids the admin has already "seen" (readIds)
-// and which ones were explicitly cleared (clearedIds) so that:
-//   - the unread badge only ever counts genuinely new notifications
-//   - clearing removes them for good (they won't reappear on next fetch)
-//   - opening the bell marks everything currently visible as read
 const READ_IDS_KEY = "eram_admin_notif_read_ids";
 const CLEARED_IDS_KEY = "eram_admin_notif_cleared_ids";
 const NOTIF_POLL_INTERVAL_MS = 60000; // re-check for new notifications every 60s

@@ -60,8 +60,6 @@ const MONTHS = [
   "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
 ];
 
-// Cloudinary URLs already start with http, so this passes through unchanged.
-// Only local/relative upload paths get the backend base prefixed.
 function resolveImageUrl(path?: string): string {
   if (!path) return "";
   if (path.startsWith("http")) return path;
@@ -113,7 +111,7 @@ const CAT_LABEL: Record<EventCategory, string> = {
 function TypePill({ type }: { type: EramEvent["type"] }) {
   const colors: Record<EramEvent["type"], string> = {
     EVENT: "border-[#ae1431]/60 text-[#ae1431]",
-    NOTIFICATION: "border-white/20 text-white/60",
+    NOTIFICATION: "border-black text-black",
   };
   return (
     <span
@@ -166,7 +164,7 @@ function EventCard({
         <span className="text-xl sm:text-2xl leading-none text-white">
           {ev.day}
         </span>
-        <span className="mt-0.5 text-[8px] tracking-[0.18em] uppercase text-white/30">
+        <span className="mt-0.5 text-[8px] tracking-[0.18em] uppercase text-black">
           {ev.month}
         </span>
       </div>
@@ -195,10 +193,10 @@ function EventCard({
 
       <div className="flex-1 min-w-0">
         <div className="flex xs:hidden items-baseline gap-2 mb-2">
-          <span className="text-base text-white/60 leading-none">
+          <span className="text-base text-black leading-none">
             {ev.day}
           </span>
-          <span className="text-[9px] tracking-[0.16em] uppercase text-white/25">
+          <span className="text-[9px] tracking-[0.16em] uppercase text-black">
             {ev.month}
           </span>
         </div>
@@ -226,7 +224,7 @@ function EventCard({
         <div className="flex items-center gap-2 mb-2.5 flex-wrap">
           <TypePill type={ev.type} />
           {ev.tag && (
-            <span className="text-[9px] tracking-[0.14em] uppercase text-white/25 hidden sm:inline">
+            <span className="text-[9px] tracking-[0.14em] uppercase text-black hidden sm:inline">
               {ev.tag}
             </span>
           )}
@@ -237,13 +235,13 @@ function EventCard({
             </span>
           )}
           {ev.isPinned && (
-            <span className="text-[9px] tracking-[0.14em] uppercase text-amber-400/70">
+            <span className="text-[9px] tracking-[0.14em] uppercase text-amber-400/60">
               PINNED
             </span>
           )}
         </div>
 
-        <h3 className="text-base sm:text-lg md:text-xl text-white/90 leading-snug mb-1.5 group-hover:text-white transition-colors">
+        <h3 className="text-base sm:text-lg md:text-xl text-black leading-snug mb-1.5 group-hover:text-[#ae1431] transition-colors">
           {ev.title}
         </h3>
 
@@ -253,7 +251,7 @@ function EventCard({
           </p>
         )}
 
-        <p className=" sm:text-sm text-white/38 leading-relaxed line-clamp-2">
+        <p className=" sm:text-sm text-black leading-relaxed line-clamp-2">
           {ev.description}
         </p>
       </div>
@@ -423,7 +421,7 @@ export default function EventsPage() {
 
   return (
       <>
-    <main className="min-h-screen bg-[#f5efe8]">
+    <main className="min-h-screen bg-[#F5EFE8]">
       <section
         ref={heroRef}
         className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 lg:px-20 border-b border-white/[0.07] overflow-hidden"
@@ -448,7 +446,7 @@ export default function EventsPage() {
             >
               Events &amp;
               <br />
-              <span className="text-[#ae1431]">Notifications</span>
+              Notifications
             </h1>
             <p
               ref={subRef}
@@ -590,10 +588,10 @@ export default function EventsPage() {
       <section className="border-t border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-16">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>
-            <p className="text-[12px] tracking-[0.2em] uppercase text-[#ae1431] mb-3">
+            <p className="text-[12px] font-rethink tracking-[0.2em] uppercase text-[#ae1431] mb-3">
               STAY UPDATED
             </p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl text-black leading-snug">
+            <h2 className="text-2xl font-display sm:text-3xl md:text-4xl text-black leading-snug">
               Never miss an
               <br />
               announcement.

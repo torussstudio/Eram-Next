@@ -96,6 +96,15 @@ function toDisplayDate(dateStr: string): string {
   });
 }
 
+function toDisplayTime(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleTimeString("en-GB", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
 function getNoticeIcon(category: string) {
   const c = category.toLowerCase();
   if (c.includes("academic"))
@@ -225,38 +234,70 @@ const StudentParentPortal = () => {
       r.fileType.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
+  // Latest pinned/general notice used for hero banner
+  const heroNotice = rawEvents
+    .slice()
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .find((e) => e.isPinned) || rawEvents[0];
+
   return (
     <div className="min-h-screen bg-[#F5EFE8] ">
       {/* ── Hero ── */}
       <section className="py-10 sm:py-14">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <p className="text-xs font-rethink tracking-widest text-[#ae1431] uppercase mb-3">
-                ERAM Group of Institutions
-              </p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display text-gray-900 leading-tight mb-3">
-                Student &amp; Parent Portal
-              </h1>
-              <p className="text-base sm:text-lg font-medium text-gray-700 mb-3">
-                Structured Access. Centralised Communication.
-              </p>
-              <p className="text-sm font-rethink sm:text-base text-gray-600 leading-relaxed mb-6">
-                Centralised access for fees, academic updates, institutional
-                resources, and administrative information for students and
-                parents across the ERAM ecosystem.
-              </p>
-              <button className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl  active:scale-95 transition-all">
-                Proceed to Full Portal <ChevronRight size={18} />
-              </button>
-            </div>
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <p className="text-xs font-rethink tracking-widest text-[#ae1431] uppercase mb-3">
+              ERAM Group of Institutions
+            </p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display text-gray-900 leading-tight mb-3">
+              Student Parent Portal
+            </h1>
+            <p className="text-sm font-rethink sm:text-base text-gray-600 leading-relaxed mb-6">
+              Access institutional updates, the fee portal, study resources,
+              and important academic information across the ERAM
+              educational ecosystem.
+            </p>
+            <button className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl active:scale-95 transition-all">
+              Proceed to Full Portal <ChevronRight size={18} />
+            </button>
+          </div>
 
-            {/* Hero visual placeholder */}
-            <div className="hidden md:flex bg-white/60 border border-gray-200 h-64 lg:h-80 rounded-2xl items-center justify-center shadow-sm">
-              <div className="text-center text-gray-400">
-                <FileText size={56} className="mx-auto mb-3 opacity-25" />
-                <p className="text-sm opacity-40">Portal Hero Image</p>
+          {/* Hero banner */}
+          <div
+            className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center"
+            style={
+              heroNotice?.image
+                ? { backgroundImage: `url(${heroNotice.image})` }
+                : undefined
+            }
+          >
+            {!heroNotice?.image && (
+              <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                <div className="text-center">
+                  <FileText size={48} className="mx-auto mb-3 opacity-25" />
+                  <p className="text-sm opacity-40">Portal Hero Image</p>
+                </div>
               </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6 sm:p-10 max-w-xl">
+              <span className="inline-block text-[10px] font-rethink tracking-widest uppercase text-white/70 mb-2">
+                {heroNotice ? toDisplayCategory(heroNotice.category) : "Featured"}
+              </span>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-display text-white leading-snug mb-3">
+                {heroNotice?.title || "ERAM Group of Institutions"}
+              </h2>
+              <div className="flex flex-col gap-1 mb-3 text-white/80 text-xs sm:text-sm font-rethink">
+                <span>
+                  {heroNotice
+                    ? `${toDisplayDate(heroNotice.date)} · ${toDisplayTime(heroNotice.date)}`
+                    : ""}
+                </span>
+              </div>
+              <p className="text-white/70 text-xs sm:text-sm font-rethink mb-4 max-w-md line-clamp-2">
+                {heroNotice?.description ||
+                  "Structured access and centralised communication for students and parents."}
+              </p>
             </div>
           </div>
         </div>
