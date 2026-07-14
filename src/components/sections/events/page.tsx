@@ -24,6 +24,7 @@ interface EramEvent {
   date: string;
   month: string;
   day: string;
+  time?: string;
   institution?: string;
   description: string;
   tag?: string;
@@ -38,8 +39,9 @@ type RawEvent = {
   description: string;
   category: "academic" | "sports" | "cultural" | "notice";
   type: "event" | "notification" | "circular";
-  institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
+institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
   date: string;
+  time?: string;
   tag?: string;
   isNew?: boolean;
   isPinned?: boolean;
@@ -80,8 +82,9 @@ function mapEvent(e: RawEvent): EramEvent {
       day: "numeric",
       year: "numeric",
     }),
-    month: MONTHS[d.getMonth()],
+month: MONTHS[d.getMonth()],
     day: String(d.getDate()).padStart(2, "0"),
+    time: e.type === "event" ? e.time : undefined,
     institution: INSTITUTION_LABEL[e.institution] || e.institution,
     tag: e.tag,
     isNew: e.isNew,
@@ -245,9 +248,11 @@ function EventCard({
           {ev.title}
         </h3>
 
-        {ev.institution && (
+       {(ev.institution || ev.time) && (
           <p className="text-[10px] tracking-[0.14em] uppercase text-[#ae1431]/70 mb-2">
             {ev.institution}
+            {ev.institution && ev.time ? " · " : ""}
+            {ev.time}
           </p>
         )}
 

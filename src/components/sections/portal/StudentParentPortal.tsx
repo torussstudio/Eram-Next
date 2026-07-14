@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import {
   ChevronRight,
+  ChevronLeft,
   Search,
   Download,
   FileText,
@@ -132,6 +133,7 @@ const StudentParentPortal = () => {
     useState<InstitutionKey>("MMPS");
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [heroIndex, setHeroIndex] = useState(0);
 
   const [rawEvents, setRawEvents] = useState<RawEvent[]>([]);
   const [noticesLoading, setNoticesLoading] = useState(true);
@@ -235,10 +237,23 @@ const StudentParentPortal = () => {
   );
 
   // Latest pinned/general notice used for hero banner
-  const heroNotice = rawEvents
+ // Latest 4 events for the hero carousel
+  const heroSlides = rawEvents
     .slice()
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .find((e) => e.isPinned) || rawEvents[0];
+    .slice(0, 4);
+
+  const heroNotice = heroSlides[heroIndex];
+
+  const handlePrevHero = () => {
+    if (heroSlides.length === 0) return;
+    setHeroIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const handleNextHero = () => {
+    if (heroSlides.length === 0) return;
+    setHeroIndex((prev) => (prev + 1) % heroSlides.length);
+  };
 
   return (
     <div className="min-h-screen bg-[#F5EFE8] ">
@@ -263,8 +278,10 @@ const StudentParentPortal = () => {
           </div>
 
           {/* Hero banner */}
+         {/* Hero banner */}
           <div
-            className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center"
+            key={heroNotice?.id}
+            className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center transition-all duration-500"
             style={
               heroNotice?.image
                 ? { backgroundImage: `url(${heroNotice.image})` }
@@ -299,6 +316,28 @@ const StudentParentPortal = () => {
                   "Structured access and centralised communication for students and parents."}
               </p>
             </div>
+
+            {/* Carousel arrows */}
+            {heroSlides.length > 1 && (
+              <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrevHero}
+                  aria-label="Previous notice"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/15 hover:bg-[#ae1431] backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-colors active:scale-95 cursor-pointer"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextHero}
+                  aria-label="Next notice"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/15 hover:bg-[#ae1431] backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-colors active:scale-95 cursor-pointer"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>

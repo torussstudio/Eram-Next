@@ -34,7 +34,8 @@ export default function AdminEventsPage() {
   const [category, setCategory] = useState("academic");
   const [type, setType] = useState("notification");
   const [institution, setInstitution] = useState("general");
-  const [date, setDate] = useState("");
+ const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [tag, setTag] = useState("");
   const [isPinned, setIsPinned] = useState(false);
 
@@ -64,17 +65,19 @@ export default function AdminEventsPage() {
     setType("notification");
     setInstitution("general");
     setDate("");
+    setTime("");
     setTag("");
     setIsPinned(false);
     setImageFile(null);
     setImagePreview("");
   };
 
-  const handleTypeChange = (val) => {
+const handleTypeChange = (val) => {
     setType(val);
     if (val === "notification") {
       setImageFile(null);
       setImagePreview("");
+      setTime("");
     }
   };
 
@@ -131,7 +134,7 @@ export default function AdminEventsPage() {
         date,
         tag,
         isPinned,
-        ...(type === "event" ? { image: imageUrl, publicId } : {}),
+        ...(type === "event" ? { image: imageUrl, publicId, time } : {}),
       });
       resetForm();
       fetchItems();
@@ -280,6 +283,21 @@ export default function AdminEventsPage() {
           />
         </div>
 
+        {/* Time — only for "event" type */}
+        {type === "event" && (
+          <div>
+            <label className="font-rethink uppercase tracking-wide text-white">
+              Time <span className="text-white/40 normal-case">(optional)</span>
+            </label>
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="mt-1 w-full rounded-md border border-white px-3 py-2 text-white"
+            />
+          </div>
+        )}
+
         {/* Image upload — only for "event" type */}
         {type === "event" && (
           <div className="sm:col-span-2">
@@ -421,6 +439,7 @@ export default function AdminEventsPage() {
                           </td>
                           <td className="px-4 py-2 text-white">
                             {new Date(item.date).toLocaleDateString()}
+                            {item.type === "event" && item.time ? ` · ${item.time}` : ""}
                           </td>
                           <td className="px-4 py-2 text-right">
                             <div className="flex items-center justify-end gap-3">
