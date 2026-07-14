@@ -277,10 +277,9 @@ const StudentParentPortal = () => {
             </button>
           </div>
 
-          {/* Hero banner */}
          {/* Hero banner */}
           <div
-            key={heroNotice?.id}
+            key={heroNotice?._id}
             className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center transition-all duration-500"
             style={
               heroNotice?.image
