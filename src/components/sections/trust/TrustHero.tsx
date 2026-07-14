@@ -248,7 +248,6 @@
 "use client";
 
 import { memo, useRef, useEffect } from "react";
-import OptimizedImage from "../../ui/OptimizedImage";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
@@ -406,6 +405,9 @@ xl:px-24 xl:py-24
   "
 >
           <div className="max-w-[720px] text-white mx-auto xl:mx-30">
+          <span className="block font-rethink text-[13px] tracking-[0.25em] uppercase text-white mb-4">
+    ERAM EDUCATIONAL & WELFARE TRUST
+  </span>
              
 <h1
   className="

@@ -54,7 +54,7 @@ export default function ScaleSection() {
           
         `}
                 >
-                  <p className="text-[9px] font-display sm:text-[10px] tracking-[0.2em] text-[#8f877d] uppercase mb-[10px]">
+                  <p className="text-[9px] font-rethink sm:text-[10px] tracking-[0.2em] text-white uppercase mb-[10px]">
                     {card.label}
                   </p>
 

@@ -709,3 +709,6 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
     </div>
   );
 }
+
+
+
