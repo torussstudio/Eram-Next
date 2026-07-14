@@ -236,9 +236,9 @@ const StudentParentPortal = () => {
       r.fileType.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  // Latest pinned/general notice used for hero banner
- // Latest 4 events for the hero carousel
+  // Latest 4 EVENTS (not notifications) for the hero carousel
   const heroSlides = rawEvents
+    .filter((e) => e.type === "event")
     .slice()
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 4);
@@ -280,8 +280,7 @@ const StudentParentPortal = () => {
          {/* Hero banner */}
           <div
             key={heroNotice?._id}
-            className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center transition-all duration-500"
-            style={
+className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center transition-all duration-500"            style={
               heroNotice?.image
                 ? { backgroundImage: `url(${heroNotice.image})` }
                 : undefined

@@ -466,7 +466,7 @@ const sublineRef = useRef<HTMLDivElement>(null);
               <img
                 src={resolveImageUrl(s.image)}
                 alt="picture"
-                className="absolute inset-0 h-full w-full object-cover will-change-transform"
+                className="absolute inset-0 h-full w-full object-cover object-center will-change-transform"
               />
             </div>
           ))}

@@ -61,7 +61,7 @@ export default function LoginPage() {
 
         <div className="relative z-10 flex items-center gap-3">
           <Image
-            src="education-1.svg"
+            src="/eramwhite.webp"
             alt="ERAM"
             width={120}
             height={120}
