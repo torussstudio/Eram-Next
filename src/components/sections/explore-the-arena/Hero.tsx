@@ -6,51 +6,67 @@ export default function HeroSection() {
   return (
     <section className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       {/* HERO CARD */}
-      <div className="relative rounded-[28px] overflow-hidden text-white max-w-[1600px] mx-auto">
-        {/* BACKGROUND */}
-        <img
-          src="/images/sports-ground.webp"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover "
-        />
-
-        {/* OVERLAY */}
-        <div className="absolute inset-0 bg-black/70" />
-
-        {/* CONTENT */}
+      <div className="rounded-[28px] overflow-hidden shadow-sm max-w-[1600px] mx-auto">
         <div
-          className=" relative overflow-hidden rounded-[28px]      h-[60vh]   sm:h-[65vh]   md:h-[70vh]   lg:h-[75vh]   xl:h-[85vh]      min-h-[460px]   sm:min-h-[520px]   md:min-h-[560px]      max-h-[760px]"
+          className="
+            relative overflow-hidden rounded-[28px]
+            text-white
+
+            h-[85vh]
+            sm:h-[65vh]
+            md:h-[70vh]
+            lg:h-[75vh]
+            xl:h-[85vh]
+
+            min-h-[460px]
+            sm:min-h-[520px]
+            md:min-h-[560px]
+
+            max-h-[760px]
+          "
         >
-          {/* =========================
-              TOP SECTION
-          ========================= */}
+          {/* IMAGE */}
+          <div className="absolute inset-0">
+            <img
+              src="/images/sports-ground.webp"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+
+          {/* OVERLAY */}
+          <div className="absolute inset-0 bg-black/70" />
+
+          {/* CONTENT */}
           <div
             className="
+              relative z-10
+              h-full
+              overflow-y-auto
+
               w-full
               max-w-[1370px]
-
               ml-auto
 
               px-[20px]
-
               sm:px-[28px]
-
               md:px-14
-
               lg:px-20
 
-              py-6
-              md:py-16
+              pt-16
+              pb-6
+              md:pt-24
+              md:pb-16
 
               flex
               flex-col
-
               lg:flex-row
 
+              justify-center
+              lg:items-center
+
               gap-[34px]
-
               md:gap-[52px]
-
               lg:gap-40
             "
           >
@@ -61,15 +77,10 @@ export default function HeroSection() {
                 <p
                   className="
                     font-rethink
-
                     text-[13px]
-
                     sm:text-[13px]
-
                     tracking-[0.28em]
-
                     text-white
-
                     uppercase
                   "
                 >
@@ -81,41 +92,28 @@ export default function HeroSection() {
               <h1
                 className="
                   font-display
-
                   leading-[1]
-
                   tracking-[-0.02em]
-
                   text-[40px]
-
                   sm:text-[56px]
-
                   md:text-[72px]
-
                   lg:text-[88px]
                 "
               >
                 A New Stage <br />
-                of <span className=" text-white/60">Scale.</span>
+                of <span className="text-white/60">Scale.</span>
               </h1>
 
               {/* description */}
               <p
                 className="
                   font-rethink
-
                   mt-5
-
                   max-w-[560px]
-
                   text-[14px]
-
                   sm:text-[15px]
-
                   md:text-[16px]
-
                   leading-[1.8]
-
                   text-white/70
                 "
               >
@@ -130,115 +128,97 @@ export default function HeroSection() {
                 className="
                   flex
                   flex-col
-
                   sm:flex-row
                   sm:flex-wrap
-
                   gap-3
-
                   md:gap-6
-
                   mt-7
                 "
               >
                 <button
                   className="
-    group
-    font-rethink
+                    group
+                    font-rethink
+                    inline-flex
+                    items-center
+                    justify-center
+                    gap-2
 
-    inline-flex
-    items-center
-    justify-center
-    gap-2
+                    bg-[#ae1431]
+                    text-white
 
-    bg-[#ae1431]
-    text-white
+                    px-6
+                    sm:px-7
+                    md:px-8
 
-    px-6
-    sm:px-7
-    md:px-8
+                    py-3
+                    md:py-4
 
-    py-3
-    md:py-4
+                    rounded-xl
 
-    rounded-xl
+                    text-xs
+                    sm:text-sm
 
-    text-xs
-    sm:text-sm
+                    font-semibold
+                    uppercase
+                    tracking-[0.12em]
 
-    font-semibold
-    uppercase
-    tracking-[0.12em]
+                    cursor-pointer
+                    shadow-lg
 
-    cursor-pointer
+                    transition-all
+                    duration-300
 
-    shadow-lg
-
-    transition-all
-    duration-300
-
-    hover:bg-black
-    hover:shadow-xl
-    hover:-translate-y-1
-  "
+                    hover:bg-black
+                    hover:shadow-xl
+                    hover:-translate-y-1
+                  "
                 >
                   <span>Explore the Arena</span>
-
                   <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
+
                 <button
                   className="
-    font-rethink
+                    font-rethink
+                    inline-flex
+                    items-center
+                    justify-center
+                    gap-2
 
-    inline-flex
-    items-center
-    justify-center
-    gap-2
+                    border
+                    border-white/40
 
-    border
-    border-white/40
+                    px-6
+                    sm:px-7
+                    md:px-8
 
-    px-6
-    sm:px-7
-    md:px-8
+                    py-3
+                    md:py-4
 
-    py-3
-    md:py-4
+                    rounded-xl
 
-    rounded-xl
+                    text-xs
+                    sm:text-sm
 
-    text-xs
-    sm:text-sm
+                    font-semibold
+                    uppercase
+                    tracking-[0.12em]
 
-    font-semibold
-    uppercase
-    tracking-[0.12em]
+                    text-white
+                    cursor-pointer
 
-    text-white
+                    transition-all
+                    duration-300
 
-    cursor-pointer
-
-    transition-all
-    duration-300
-
-    hover:bg-white
-    hover:text-[#ae1431]
-    hover:border-white
-    hover:-translate-y-1
-  "
+                    hover:bg-white
+                    hover:text-[#ae1431]
+                    hover:border-white
+                    hover:-translate-y-1
+                  "
                 >
                   <span>Host an Event</span>
-
-                  <Calendar
-                    className="
-      w-4 h-4
-      md:w-5 md:h-5
-      opacity-70
-      transition-all
-      duration-300
-      group-hover:opacity-100
-    "
-                  />
+                  <Calendar className="w-4 h-4 md:w-5 md:h-5 opacity-70 transition-all duration-300 group-hover:opacity-100" />
                 </button>
               </div>
             </div>
@@ -246,35 +226,31 @@ export default function HeroSection() {
             {/* RIGHT PANEL */}
             <div
               className="
-  mt-2
-  md:mt-0
-  w-full
-  sm:w-[300px]
-  lg:w-[280px]
-  max-[1024px]:max-w-[340px]
-  bg-[#0e0e0e]/60
-  backdrop-blur-md
-  border
-  border-white/10
-  rounded-md
-  p-5
-  lg:self-start
-  lg:ml-0
-  font-rethink
-"
+                mt-2
+                md:mt-0
+                w-full
+                sm:w-[300px]
+                lg:w-[280px]
+                max-[1024px]:max-w-[340px]
+                bg-[#0e0e0e]/60
+                backdrop-blur-md
+                border
+                border-white/10
+                rounded-md
+                p-5
+                lg:self-start
+                lg:ml-0
+                font-rethink
+              "
             >
               {/* top label */}
               <div className="flex items-center gap-3 mb-5">
                 <span className="w-5 h-[1px] bg-[#ae1431]" />
-
                 <p
                   className="
                     text-[10px]
-
                     tracking-[0.28em]
-
                     text-[#ae1431]
-
                     uppercase
                   "
                 >
@@ -295,10 +271,9 @@ export default function HeroSection() {
                     i !== 3 ? "border-b border-white/10" : ""
                   }`}
                 >
-                  <h3 className="text-[20px] font-rethink  md:text-[22px] ">
+                  <h3 className="text-[20px] font-rethink md:text-[22px]">
                     {title}
                   </h3>
-
                   <p className="text-[12px] font-display text-white/60 mt-1">
                     {desc}
                   </p>
@@ -379,7 +354,6 @@ export default function HeroSection() {
                     >
                       {item.value}
                     </h3>
-
                     <span
                       className="
                         text-[14px]

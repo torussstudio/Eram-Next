@@ -91,28 +91,28 @@ export default function StructuredFramework({
     return () => ctx.revert();
   }, []);
 
-  const handleCardClick = (id: string, index: number) => {
-    if (setActive) {
-      setActive(index);
-    }
+ const handleCardClick = (id: string, index: number) => {
+  if (setActive) {
+    setActive(index);
+  }
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const el = document.getElementById(id);
+  // Wait for the AnimatedPanel expand animation (in EducationSection)
+  // to finish growing before calculating scroll position — otherwise
+  // the target's height is still 0/mid-animation and the scroll lands
+  // in the wrong place.
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-        if (!el) return;
+    const offset = 90;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
 
-        const offset = 90;
-
-        const top = el.getBoundingClientRect().top + window.scrollY - offset;
-
-        window.scrollTo({
-          top,
-          behavior: "auto",
-        });
-      });
+    window.scrollTo({
+      top,
+      behavior: "smooth",
     });
-  };
+  }, 600); // slightly more than AnimatedPanel's 550ms expand duration
+};
 
   return (
     <section

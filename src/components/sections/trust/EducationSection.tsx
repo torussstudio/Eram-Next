@@ -197,15 +197,12 @@ const AnimatedPanel = ({ children, visible }: AnimatedPanelProps) => {
   const innerRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-  // On mount: measure natural height once content is rendered
   useEffect(() => {
     if (!wrapperRef.current || !innerRef.current) return;
 
-    // Kill any running tween
     if (tweenRef.current) tweenRef.current.kill();
 
     if (visible) {
-      // Reveal: animate from 0 to natural height
       const naturalH = innerRef.current.scrollHeight;
       tweenRef.current = gsap.fromTo(
         wrapperRef.current,
@@ -216,13 +213,11 @@ const AnimatedPanel = ({ children, visible }: AnimatedPanelProps) => {
           duration: 0.55,
           ease: "power3.out",
           onComplete: () => {
-            // Let it reflow freely after open (handles dynamic resize)
             if (wrapperRef.current) wrapperRef.current.style.height = "auto";
           },
         },
       );
 
-      // Stagger cards inside
       const cards = innerRef.current.querySelectorAll(
         ".rounded-2xl, .rounded-xl",
       );
@@ -239,7 +234,6 @@ const AnimatedPanel = ({ children, visible }: AnimatedPanelProps) => {
         },
       );
     } else {
-      // Collapse
       const currentH = wrapperRef.current.offsetHeight;
       tweenRef.current = gsap.fromTo(
         wrapperRef.current,
@@ -678,6 +672,69 @@ export default function EducationSection({
 }) {
   const headerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
+  const pinFrameRef = useRef<number | null>(null);
+
+  const pinHeaderDuringAnimation = (i: number, durationMs = 950) => {
+    if (pinFrameRef.current) {
+      cancelAnimationFrame(pinFrameRef.current);
+      pinFrameRef.current = null;
+    }
+
+    const navOffset = 100; // adjust to match sticky navbar height + spacing
+    const startTime = performance.now();
+
+    const step = () => {
+      const el = headerRefs.current[i];
+      if (!el) return;
+
+      const rectTop = el.getBoundingClientRect().top;
+      const diff = rectTop - navOffset;
+
+      // Only correct meaningful drift, avoids micro-jitter
+      if (Math.abs(diff) > 1) {
+        window.scrollTo({ top: window.scrollY + diff, behavior: "auto" });
+      }
+
+      const elapsed = performance.now() - startTime;
+      if (elapsed < durationMs) {
+        pinFrameRef.current = requestAnimationFrame(step);
+      } else {
+        pinFrameRef.current = null;
+      }
+    };
+
+    pinFrameRef.current = requestAnimationFrame(step);
+  };
+
+  const handlePillarClick = (i: number) => {
+    if (pinFrameRef.current) {
+      cancelAnimationFrame(pinFrameRef.current);
+      pinFrameRef.current = null;
+    }
+
+    if (active === i) {
+      // Closing the currently open pillar — no pin needed
+      setActive(null);
+      return;
+    }
+
+
+    const el = headerRefs.current[i];
+    if (el) {
+      const navOffset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+
+    setActive(i);
+    pinHeaderDuringAnimation(i);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (pinFrameRef.current) cancelAnimationFrame(pinFrameRef.current);
+    };
+  }, []);
 
   // ScrollTrigger: fade + slide each pillar header in as it enters viewport
   useEffect(() => {
@@ -722,7 +779,7 @@ export default function EducationSection({
               <PillarHeader
                 {...p}
                 active={isActive}
-                onClick={() => setActive(isActive ? null : i)}
+                onClick={() => handlePillarClick(i)}
                 headerRef={(el) => {
                   headerRefs.current[i] = el;
                 }}
@@ -737,5 +794,3 @@ export default function EducationSection({
     </section>
   );
 }
-
-

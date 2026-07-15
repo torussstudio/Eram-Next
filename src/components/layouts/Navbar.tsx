@@ -511,26 +511,26 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
           </span>
         </Link>
 
-        {/* ── DESKTOP NAV ── */}
-        <nav className="absolute top-6 left-[47%] -translate-x-1/2 hidden min-[920px]:flex items-center gap-12 lg:gap-12 xl:gap-16 font-rethink">
-          {renderNavItems()}
-        </nav>
+  {/* ── DESKTOP NAV ── */}
+<nav className="hidden min-[920px]:flex flex-1 items-center justify-center gap-4 min-[1024px]:gap-8 min-[1200px]:gap-12 min-[1400px]:gap-16 font-rethink px-2 min-[1200px]:px-4">
+  {renderNavItems()}
+</nav>
 
-        {/* ── STUDENT-PARENT PORTAL BUTTON ── */}
-        <div className="ml-auto shrink-0 hidden min-[920px]:flex font-rethink">
-          <button
-            onClick={() => handleNavClick("/portal")}
-            style={{
-              backgroundColor: btnBg,
-              color: btnText,
-              borderColor: btnBorder,
-              transition: `background-color ${T}, color ${T}, border-color ${T}`,
-            }}
-            className="font-rethink  px-6 py-[11px] text-[0.95rem] tracking-[0.03em] rounded-[10px] border cursor-pointer whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
-          >
-            Student-Parent Portal
-          </button>
-        </div>
+{/* ── STUDENT-PARENT PORTAL BUTTON ── */}
+<div className="shrink-0 hidden min-[920px]:flex font-rethink">
+  <button
+    onClick={() => handleNavClick("/portal")}
+    style={{
+      backgroundColor: btnBg,
+      color: btnText,
+      borderColor: btnBorder,
+      transition: `background-color ${T}, color ${T}, border-color ${T}`,
+    }}
+    className="font-rethink px-3 min-[1200px]:px-6 py-[11px] text-[0.8rem] min-[1200px]:text-[0.95rem] tracking-[0.03em] rounded-[10px] border cursor-pointer whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
+  >
+    Student-Parent Portal
+  </button>
+</div>
 
         {/* ── MOBILE HAMBURGER ── */}
         <div className="ml-auto min-[920px]:hidden relative h-[42px] w-[42px] shrink-0">
