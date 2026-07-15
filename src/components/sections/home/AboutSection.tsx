@@ -5,6 +5,7 @@ import { gsap } from "../../../lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useSmoothScroll } from "../../../hooks/useSmoothScroll";
 import { Play } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 /* ─── Animation config ────────────────────────────────────────────────────── */
 const EASE = {
@@ -22,6 +23,8 @@ const imgCls =
 export default function AboutSection() {
   const smoothScrollTo = useSmoothScroll();
   const sectionRef = useRef<HTMLElement | null>(null);
+
+  const router = useRouter();
 
   // Desktop refs
   const dLabelRef = useRef(null);
@@ -303,34 +306,35 @@ export default function AboutSection() {
 
             <div className="beyond-heading pt-[30px] max-[640px]:mb-[15px]">
               <button
-                onClick={() => smoothScrollTo("institutions")}
+                onClick={() => router.push("/about-us")}
                 className="
     font-rethink
-    inline-flex
-    items-center
-    gap-2
-
-    bg-[#ae1431]
-    text-white
-
-    px-5
-    py-2.5
-
-    rounded-lg
-
-    text-[18px]
-    font-medium
-
-    transition-colors
-    duration-300
-
-    hover:bg-black
-
+    w-full
+    sm:w-auto
     cursor-pointer
+    rounded-[12px]
+    border
+    border-[#ae1431]
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-black
+    hover:text-white
+    hover:border-black
+    flex
+    items-center
+    justify-center
+    gap-2
   "
               >
-                
-                Explore Our Institutions
+                Explore More
                 <Play className="w-5 h-5 transition-colors" />
               </button>
             </div>

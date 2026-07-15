@@ -71,6 +71,12 @@ export default function GalleryClient() {
   const heroRef = useRef<HTMLDivElement>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
 
+  // Ensure this page always opens scrolled to the top, regardless of the
+  // scroll position on the page we navigated from (e.g. ExcellenceSection).
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Fetch from backend whenever filters change — server-side filtering
   // since the dataset is expected to grow past 100+ images.
   useEffect(() => {

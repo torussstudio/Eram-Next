@@ -578,27 +578,27 @@ xl:px-24 xl:py-24
 >
            <button
   onClick={() => smoothScrollTo("institutions")}
-  className="
+   className="
     font-rethink
-    bg-[#ae1431]
-    hover:bg-black
-    text-white
-    cursor-pointer
-    w-[170px]
+    w-full
     sm:w-auto
-    px-5 py-3
-    sm:px-6 sm:py-3.5
-    md:px-8 md:py-4
+    cursor-pointer
     rounded-[12px]
-    text-sm
-    md:text-sm
-    transition-all
-    duration-300
-    shadow-lg
-    font-semibold
-    hover:shadow-xl
-    hover:-translate-y-1
+    border
+    border-[#ae1431]
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
     uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-black
+    hover:text-white
+    hover:border-black
     flex
     items-center
     justify-center
@@ -606,7 +606,7 @@ xl:px-24 xl:py-24
   "
 >
   {slide.primaryButton?.text || "Explore Our Institutions"}
-   <Play className="w-5 h-5 transition-colors" />
+   <Play className="w-5 h-5 transition-colors shrink-0" />
 </button>
               <button
                 onClick={() =>
@@ -614,29 +614,29 @@ xl:px-24 xl:py-24
                     ? router.push(slide.secondaryButton.link)
                     : router.push("/contact")
                 }
-             className="
+        className="
     font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
     border
     border-white
-    hover:bg-white
-    text-white
-    hover:text-[#ae1431]
-    cursor-pointer
-    w-[170px]
-    sm:w-auto
-    px-5 py-3
-    sm:px-6 sm:py-3.5
-    md:px-8 md:py-4
-    rounded-[12px]
-    text-sm
-    md:text-sm
-    transition-all
-    duration-300
-    shadow-lg
-    font-semibold
-    hover:shadow-xl
-    hover:-translate-y-1
+    px-7
+    py-3
+    text-[13px]
     uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-white
+    hover:text-[#ae1431]
+    hover:border-white
+    flex
+    items-center
+    justify-center
   "
               >
                 {slide.secondaryButton?.text || "Admissions Open 2026–27"}

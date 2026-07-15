@@ -263,7 +263,32 @@ export default function ImpactSection() {
             underprivileged communities.
           </p>
          <button
-  className="font-rethink h-[44px] cursor-pointer rounded-[12px] border border-[#f5efe8] bg-[#ae1431] px-[22px] text-[16px] text-white transition hover:border-white hover:bg-white hover:text-[#ae1431] flex items-center justify-center gap-2"
+ className="
+    font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-white
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-white
+    hover:text-[#ae1431]
+    hover:border-black
+    flex
+    items-center
+    justify-center
+    gap-2
+  "
   onClick={() => router.push("/the-trust")}
 >
   EXPLORE STUDENT PATHWAYS

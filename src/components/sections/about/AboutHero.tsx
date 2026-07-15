@@ -80,7 +80,7 @@ function AboutHero() {
           start: "top top",
           end: "bottom top",
           scrub: true,
-          invalidateOnRefresh: true, 
+          invalidateOnRefresh: true,
         },
       });
     },
@@ -91,8 +91,8 @@ function AboutHero() {
     <section ref={containerRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       <div className="rounded-[28px] overflow-hidden shadow-sm">
         {/* HERO */}
-     <div
-  className="
+        <div
+          className="
   relative overflow-hidden rounded-[28px]
 
   h-[85vh]
@@ -107,7 +107,7 @@ function AboutHero() {
 
   max-h-[760px]
 "
->
+        >
           {/* IMAGE */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="hero-img absolute inset-0 scale-110">
@@ -127,8 +127,8 @@ function AboutHero() {
           <div className="absolute inset-0 bg-black/40 sm:bg-black/35 md:bg-black/30" />
 
           {/* CONTENT */}
-<div
-  className="
+          <div
+            className="
     absolute inset-0
     z-10
     flex items-center
@@ -143,10 +143,10 @@ function AboutHero() {
 xl:pl-28 xl:pr-24 xl:py-24
 2xl:pl-32 2xl:pr-24
   "
->
+          >
             {/* DESKTOP */}
- <div
-  className="
+            <div
+              className="
     absolute inset-0
     z-10 flex items-center
     justify-center xl:justify-start
@@ -158,32 +158,31 @@ md:px-12 md:py-20
 lg:px-16 lg:py-24
 xl:px-24 xl:py-24
   "
->
-          <div className="max-w-[720px] text-white mx-auto xl:mx-30">
-             
-<h1
-  className="
+            >
+              <div className="max-w-[720px] text-white mx-auto xl:mx-30">
+                <h1
+                  className="
     font-display
     leading-[0.95]
     tracking-[-0.04em]
     text-[clamp(2.4rem,6vw,3.75rem)]
   "
->
-  <span className="block ">
-    <span ref={line0Ref} className="hero-heading-line block">
-      A Legacy of Structure.
-    </span>
-  </span>
+                >
+                  <span className="block ">
+                    <span ref={line0Ref} className="hero-heading-line block">
+                      A Legacy of Structure.
+                    </span>
+                  </span>
 
-  <span className="block ">
-    <span ref={line1Ref} className="hero-heading-line block">
-      A Future of Opportunity.
-    </span>
-  </span>
-</h1>
+                  <span className="block ">
+                    <span ref={line1Ref} className="hero-heading-line block">
+                      A Future of Opportunity.
+                    </span>
+                  </span>
+                </h1>
 
                 <p
-                 className="
+                  className="
   hero-content-fade
   mt-5
   max-w-[650px]
@@ -204,7 +203,7 @@ xl:px-24 xl:py-24
                 </p>
 
                 <p
-                 className="
+                  className="
   hero-content-fade
   mt-5
   max-w-[650px]
@@ -229,12 +228,11 @@ xl:px-24 xl:py-24
                   onClick={() => {
                     router.push("/");
 
-                    setTimeout(() => {
+                    const scrollToInstitutions = (attempts = 0) => {
                       const section = document.getElementById("institutions");
 
                       if (section) {
                         const yOffset = -90;
-
                         const y =
                           section.getBoundingClientRect().top +
                           window.pageYOffset +
@@ -244,45 +242,54 @@ xl:px-24 xl:py-24
                           top: y,
                           behavior: "smooth",
                         });
+                      } else if (attempts < 30) {
+                        // element illa enkil, ippozhum 3 seconds vare (30 x 100ms) retry cheyyum
+                        setTimeout(
+                          () => scrollToInstitutions(attempts + 1),
+                          100,
+                        );
                       }
-                    }, 700);
+                    };
+
+                    // navigation start aavan oru chെriya head-start kodukkunnu, pinne poll cheyyunnu
+                    setTimeout(() => scrollToInstitutions(), 300);
                   }}
-     className="
-  hero-content-fade
-  mt-8
+                  className="
+    hero-content-fade
+    mt-8
 
-  inline-flex
-  items-center
-  gap-2
+    inline-flex
+    items-center
+    gap-2
 
-  bg-[#ae1431]
-  hover:bg-black
+    bg-[#ae1431]
+    hover:bg-black
 
-  text-white
+    text-white
 
-  px-5 py-3
-  sm:px-6 sm:py-3.5
-  md:px-8 md:py-4
+    px-5 py-3
+    sm:px-6 sm:py-3.5
+    md:px-8 md:py-4
 
-  rounded-[12px]
+    rounded-[12px]
 
-  text-sm
+    text-sm
 
-  transition-all
-  duration-300
+    transition-all
+    duration-300
 
-  shadow-lg
-  font-semibold
-  font-rethink
-  uppercase
+    shadow-lg
+    font-semibold
+    font-rethink
+    uppercase
 
-  hover:shadow-xl
-  hover:-translate-y-1
+    hover:shadow-xl
+    hover:-translate-y-1
 
-  opacity-0
-  translate-y-8
-  cursor-pointer
-"
+    opacity-0
+    translate-y-8
+    cursor-pointer
+  "
                 >
                   <span>Explore Our Institutions</span>
 
@@ -292,7 +299,7 @@ xl:px-24 xl:py-24
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </section>
   );
 }

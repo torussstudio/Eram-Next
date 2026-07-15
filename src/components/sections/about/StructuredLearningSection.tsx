@@ -7,9 +7,13 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 function StructuredLearningSection() {
+
+
+
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -443,6 +447,7 @@ function StructuredLearningSection() {
   return (
     <section
       ref={containerRef}
+      id="structured-learning"
       className="
         bg-[#ae1431]
         text-white

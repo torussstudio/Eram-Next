@@ -343,7 +343,7 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
       {/* ── Fees Portal ── */}
       <section className="pb-10 sm:pb-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-2xl p-6 sm:p-10">
+          <div className=" rounded-2xl p-6 sm:p-10">
             <h2 className="text-2xl sm:text-3xl font-display text-gray-900 mb-1">
               Fees Portal
             </h2>

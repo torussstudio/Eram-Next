@@ -239,12 +239,12 @@ export default function ExcellenceSection() {
     }
   }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /* ── Explore Excellence → navigate to gallery filtered by category ─ */
-  const handleExploreClick = useCallback(() => {
-    const type = CATEGORIES[active].toLowerCase();
-    router.push(`/gallery?type=${type}`);
-  }, [active, router]);
-
+ /* ── Explore Excellence → navigate to gallery filtered by category ─ */
+const handleExploreClick = useCallback(() => {
+  const type = CATEGORIES[active].toLowerCase();
+  window.scrollTo({ top: 0, behavior: "instant" });
+  router.push(`/gallery?type=${type}`);
+}, [active, router]);
   /* ── Scroll-entrance animations ──────────────────────────────── */
   useGSAP(
     () => {
