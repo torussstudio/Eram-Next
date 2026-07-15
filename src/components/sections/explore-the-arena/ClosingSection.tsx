@@ -1,8 +1,11 @@
 "use client";
 
 import { Calendar, Play } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ClosingSection() {
+  const router = useRouter();
+
   return (
     <section className="bg-[#e9e3d8] text-[#1a1a1a] pt-[50px] md:pt-[75px] pb-[80px] md:pb-[110px] px-[16px] sm:px-[20px] md:px-[28px]">
       {/* SAME CONTAINER SYSTEM */}
@@ -43,30 +46,29 @@ export default function ClosingSection() {
 
             {/* RIGHT */}
             <div className="font-rethink flex flex-col items-start md:items-end gap-[14px] md:mt-[120px]">
-              <button
-                className="
-     relative overflow-hidden
-
-    bg-[#ae1431]
-    text-white
-    hover:bg-black
-
-    px-[22px] md:px-[26px]
-    py-[14px] md:py-[15px]
-
-    text-[12px]
-    tracking-[0.18em]
-    uppercase
-
-    flex items-center gap-3
-    cursor-pointer
-    rounded-[10px]
-
-  "
-              >
-                Explore the ERAM Ecosystem
-                <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+                <button
+     onClick={() => {
+  router.push("/gallery?type=sports");
+  window.scrollTo({ top: 0, behavior: "instant" });
+}}
+      className="
+        relative overflow-hidden
+        bg-[#ae1431]
+        text-white
+        hover:bg-black
+        px-[22px] md:px-[26px]
+        py-[14px] md:py-[15px]
+        text-[12px]
+        tracking-[0.18em]
+        uppercase
+        flex items-center gap-3
+        cursor-pointer
+        rounded-[10px]
+      "
+    >
+      Explore the ERAM Ecosystem
+      <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+    </button>
 
               <button
                 className="

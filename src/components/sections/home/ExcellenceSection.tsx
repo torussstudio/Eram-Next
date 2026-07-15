@@ -407,7 +407,7 @@ const handleExploreClick = useCallback(() => {
               className="exc-btn font-rethink cursor-pointer rounded-[10px] border border-[#ae1431] px-7 bg-[#ae1431] py-3 text-[13px] uppercase tracking-[0.16em] text-white transition-all duration-200 hover:bg-black hover:text-white hover:border-white flex items-center justify-center gap-2"
             >
               Explore Excellence
-              <Play className="w-5 h-5 transition-colors" />
+              <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
         </div>
@@ -511,7 +511,7 @@ const handleExploreClick = useCallback(() => {
           className="mob-exc-btn font-rethink w-full cursor-pointer rounded-[12px] border border-[#ae1431] bg-[#ae1431] py-[15px] text-[11px] uppercase tracking-[0.18em] text-white transition-all duration-200 active:border-[#111] active:bg-[#111] active:text-white flex items-center justify-center gap-2"
         >
           Explore Excellence
-          <Play className="w-5 h-5 transition-colors" />
+          <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
     </section>

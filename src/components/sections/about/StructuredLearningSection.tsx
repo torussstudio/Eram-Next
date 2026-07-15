@@ -6,13 +6,13 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "@/lib/gsap";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 function StructuredLearningSection() {
-
-
+const router = useRouter()
 
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -472,6 +472,18 @@ function StructuredLearningSection() {
         "
       >
         {/* LEADERSHIP SECTION */}
+        <div
+  className="
+    leadership-text
+    md:opacity-0
+    md:translate-y-8
+    flex items-center gap-2 mb-4
+  "
+>
+  <span className="font-rethink text-xs  md:ml-[90px] sm:text-sm uppercase tracking-[0.2em] text-white">
+    Our Leadership & Governance
+  </span>
+</div>
         <div
           className="
             leadership-container
@@ -960,6 +972,18 @@ function StructuredLearningSection() {
         >
           {/* LEFT */}
           <div className="w-full md:max-w-[420px] -mb-12">
+             <div
+    className="
+      structured-text
+      md:opacity-0
+      md:translate-y-8
+      flex items-center gap-2 mb-4
+    "
+  >
+    <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-white">
+      Educational Philosophy
+    </span>
+  </div>
             <h2
               className="
                 structured-text
@@ -1007,6 +1031,33 @@ function StructuredLearningSection() {
             </p>
 
             <button 
+              type="button"
+                  onClick={() => {
+                    router.push("/");
+
+                    const scrollToInstitutions = (attempts = 0) => {
+                      const section = document.getElementById("institutions");
+
+                      if (section) {
+                        const yOffset = -90;
+                        const y =
+                          section.getBoundingClientRect().top +
+                          window.pageYOffset +
+                          yOffset;
+
+                        window.scrollTo({
+                          top: y,
+                          behavior: "smooth",
+                        });
+                      } else if (attempts < 30) {
+                        setTimeout(
+                          () => scrollToInstitutions(attempts + 1),
+                          100,
+                        );
+                      }
+                    };
+                    setTimeout(() => scrollToInstitutions(), 300);
+                  }}
               className="
                 structured-btn
 

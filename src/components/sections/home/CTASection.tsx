@@ -140,29 +140,32 @@ export default function CTASection() {
       "
           >
             {/* PRIMARY */}
-            <Link href="/contact">
-              <button
-  className="
-    h-[42px]
-    px-[22px]
-    text-[15px]
-    tracking-[0.04em]
-    rounded-[10px]
-    bg-[#ae1431]
-    text-white
-    hover:opacity-90
-    hover:bg-black
-    transition
-    max-[640px]:w-full
-    cursor-pointer
-    font-rethink
-    flex items-center justify-center gap-2
-  "
+          <Link
+  href="/contact"
+  onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
 >
-  APPLY NOW
-  <Play className="w-5 h-5 transition-colors" />
-</button>
-            </Link>
+  <button
+    className="
+      h-[42px]
+      px-[22px]
+      text-[15px]
+      tracking-[0.04em]
+      rounded-[10px]
+      bg-[#ae1431]
+      text-white
+      hover:opacity-90
+      hover:bg-black
+      transition
+      max-[640px]:w-full
+      cursor-pointer
+      font-rethink
+      flex items-center justify-center gap-2
+    "
+  >
+    APPLY NOW
+    <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+  </button>
+</Link>
 
             {/* SECONDARY */}
             <button

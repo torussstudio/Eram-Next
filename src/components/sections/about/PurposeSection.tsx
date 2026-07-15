@@ -126,6 +126,11 @@ function PurposeSection() {
       >
         {/* heading */}
         <div className="max-w-[520px] md:max-w-[580px] lg:max-w-[720px]">
+          <div className="purpose-text opacity-0 translate-y-10 flex items-center gap-2 mb-4">
+    <span className="font-rethink text-xs md:text-sm  uppercase tracking-[0.2em] text-[#ae1431]">
+      Our Origin & Purpose
+    </span>
+  </div>
           <h2 className="purpose-text opacity-0 translate-y-10 font-display text-[36px] md:text-[36px] lg:text-[44px]  leading-tight text-black">
             Purpose Led.
             <br />

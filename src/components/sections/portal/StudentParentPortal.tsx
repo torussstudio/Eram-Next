@@ -18,6 +18,7 @@ import {
   Megaphone,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type InstitutionKey = "AMLP" | "MMPS" | "MMHSS" | "EASE" | "MMITE";
 
@@ -129,6 +130,7 @@ function getResourceIcon(fileType: string) {
 }
 
 const StudentParentPortal = () => {
+  const router = useRouter();
   const [selectedInstitution, setSelectedInstitution] =
     useState<InstitutionKey>("MMPS");
 
@@ -620,7 +622,8 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
     </p>
 
     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
+      <button 
+        onClick={()=>router.push("/contact")} className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
         Admissions Open 2026–27
         <ChevronRight size={20} />
       </button>

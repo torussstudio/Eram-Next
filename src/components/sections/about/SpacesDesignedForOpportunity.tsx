@@ -60,6 +60,11 @@ function SpacesDesignedForOpportunity() {
       <div className="max-w-[1100px] mx-auto">
         {/* heading */}
         <div className="max-w-[720px]">
+          <div className="spaces-text opacity-0 translate-y-8 flex items-center gap-2 mb-4">
+    <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
+      Infrastructure & Institutional Planning
+    </span>
+  </div>
           <h2
             className="
               spaces-text

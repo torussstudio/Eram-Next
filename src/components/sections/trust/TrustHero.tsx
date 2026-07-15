@@ -201,48 +201,63 @@ xl:px-24 xl:py-24
                   Across communities, ERAM Educational & Welfare Trust implements long-term initiatives designed to strengthen access, equity, and opportunity.
 Founded under the CSR vision of the Eram Group, the Trust advances structured community initiatives focused on education, healthcare, sanitation, and social equity. Its work is guided by the principle: sustainable impact must be deliberate, measurable, and accountable.
                 </p>
-                    <button
-                 className="
-   hero-content-fade
-   mt-8
+                <br></br>
+                   <button
+  onClick={() => {
+    router.push("the-trust");
 
-   inline-flex
-   items-center
-   gap-2
+    const scrollToSection = (attempts = 0) => {
+      const section = document.getElementById("community-impact");
 
-   bg-[#ae1431]
-   hover:bg-black
+      if (section) {
+        const yOffset = -90;
+        const y =
+          section.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
 
-   text-white
+        window.scrollTo({
+          top: y,
+          behavior: "smooth",
+        });
+      } else if (attempts < 30) {
+        setTimeout(() => scrollToSection(attempts + 1), 100);
+      }
+    };
 
-   px-5 py-3
-   sm:px-6 sm:py-3.5
-   md:px-8 md:py-4
-
-   rounded-[12px]
-
-   text-sm
-
-   transition-all
-   duration-300
-
-   shadow-lg
-   font-semibold
-   font-rethink
-   uppercase
-
-   hover:shadow-xl
-   hover:-translate-y-1
-
-   opacity-0
-   translate-y-8
-   cursor-pointer
- "
-                 >
-                   <span>View Our Community Interventions</span>
-
-                 <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300" />
-                 </button>
+    setTimeout(() => scrollToSection(), 300);
+  }}
+  className="
+                  hero-content-fade
+    font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-[#ae1431]
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-black
+    hover:text-white
+    hover:border-black
+    flex
+    items-center
+    justify-center
+    gap-2
+  "
+>
+  <span>View Our Community Interventions</span>
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+</button>
               </div>
             </div>
           </div>

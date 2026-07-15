@@ -606,7 +606,7 @@ xl:px-24 xl:py-24
   "
 >
   {slide.primaryButton?.text || "Explore Our Institutions"}
-   <Play className="w-5 h-5 transition-colors shrink-0" />
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
 </button>
               <button
                 onClick={() =>

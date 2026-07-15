@@ -768,7 +768,7 @@ export default function EducationSection({
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#F5EFE8] pt-[80px] pb-[80px]">
+    <section ref={sectionRef} id="community-impact" className="bg-[#F5EFE8] pt-[80px] pb-[80px]">
       <div className="max-w-[1100px] mx-auto px-[20px]">
         {pillars.map((p, i) => {
           const Panel = panels[i];

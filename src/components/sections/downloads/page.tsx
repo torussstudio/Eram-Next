@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -622,10 +623,10 @@ export default function DownloadsPage() {
           </div>
           <a
             href="/contact"
-            className="group flex items-center gap-3 border border-[#ae1431] bg-[#ae1431] hover:bg-transparent px-6 py-3.5 text-[12px] tracking-[0.18em] uppercase text-white hover:text-[#ae1431] transition-all duration-300"
+            className="group flex items-center gap-3 border rounded-[12px] border-[#ae1431] bg-[#ae1431] hover:bg-black px-6 py-3.5 text-[12px] tracking-[0.18em] uppercase text-white  transition-all duration-300"
           >
             <span className="font-rethink">Contact Us</span>
-            <IconDownload className="rotate-[-90deg] group-hover:translate-x-1 transition-transform duration-200" />
+            <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
       </section>

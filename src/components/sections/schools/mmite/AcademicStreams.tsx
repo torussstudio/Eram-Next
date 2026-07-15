@@ -221,12 +221,20 @@ export default function AcademicStreams() {
               ))}
             </div>
             <button
-              onClick={() => scrollTo("academics")}
-              className="structured-btn inline-flex w-fit self-left mt-5 md:mt-6 border bg-[#ae1431] text-white border-[#ae1431] px-4 py-2 rounded-lg text-sm items-center gap-2 hover:bg-black hover:border-black transition-all duration-300 cursor-pointer font-rethink"
-            >
-              Explore
-               <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
-            </button>
+  onClick={() => {
+    const section = document.getElementById("gallery");
+    if (section) {
+      const yOffset = -90;
+      const y =
+        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }}
+  className="structured-btn inline-flex w-fit self-left mt-5 bg-[#ae1431] text-white md:mt-6 border border-[#ae1431] px-4 py-2 rounded-lg text-sm items-center gap-2 hover:bg-black hover:border-black hover:text-white transition-all duration-300 cursor-pointer font-rethink"
+>
+  Explore
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+</button>
           </div>
 
           {/* ══ RIGHT COLUMN ═══════════════════════════════════ */}

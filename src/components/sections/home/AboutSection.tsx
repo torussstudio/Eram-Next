@@ -335,7 +335,7 @@ export default function AboutSection() {
   "
               >
                 Explore More
-                <Play className="w-5 h-5 transition-colors" />
+                <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </div>
           </div>

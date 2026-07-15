@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
@@ -44,6 +44,7 @@ const institutions = [
 ];
 
 export default function AdmissionsPage() {
+  const router = useRouter()
   const containerRef = useRef(null);
   const pathname = usePathname();
   const btn1Ref = useRef<HTMLButtonElement>(null);
@@ -142,6 +143,7 @@ export default function AdmissionsPage() {
           {/* RIGHT — BUTTONS */}
           <div className="flex flex-col pt-[60px] gap-3 lg:min-w-[320px]">
             <button
+              onClick={()=>router.push("/contact")}
               ref={btn1Ref}
               className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden hover:bg-black transition-all duration-300  cursor-pointer"
             >
@@ -151,6 +153,7 @@ export default function AdmissionsPage() {
             </button>
 
             <button
+              onClick={()=>router.push("/contact")}
               ref={btn2Ref}
               className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden hover:bg-black transition-all duration-300 cursor-pointer"
             >

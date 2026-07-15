@@ -219,7 +219,7 @@ function ERAMSportsArena() {
         {/* ── CTA ── */}
         <div className="arena-cta sm:mt-4 md:mt-6 flex justify-center">
          <button
-  onClick={() => router.push("/the-trust")}
+  onClick={() => router.push("/explore-arena")}
   className="
     structured-btn
 
@@ -254,7 +254,7 @@ function ERAMSportsArena() {
   "
 >
   EXPLORE MORE
-  <Play className="text-xs transition-colors" />
+ <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
 </button>
         </div>
       </div>

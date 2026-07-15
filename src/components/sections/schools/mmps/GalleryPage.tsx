@@ -119,7 +119,7 @@ export default function GalleryPage() {
 
   return (
     <div ref={containerRef} className="bg-[#F5EFE8] text-black overflow-hidden">
-      <section className="pt-6 pb-16 px-6">
+      <section id="gallery" className="pt-6 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* HEADER */}
           <div className="mb-8">

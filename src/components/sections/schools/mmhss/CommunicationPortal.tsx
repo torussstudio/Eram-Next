@@ -5,6 +5,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,6 +62,8 @@ const feedItems = [
 
 export default function CommunicationPortal() {
   const containerRef = useRef(null);
+
+  const router = useRouter()
 
   useGSAP(
     () => {
@@ -179,10 +182,16 @@ export default function CommunicationPortal() {
             </p>
 
             <br></br>
-            <button className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
-              Access the Parent Portal
-              <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
-            </button>
+            <button
+  onClick={() => {
+    router.push("/portal");
+    window.scrollTo(0, 0);
+  }}
+  className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10"
+>
+  Access the Parent Portal
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+</button>
           </div>
           {/* ── RIGHT — LIVE FEED ── */}
           <div className="anim-feed-wrap lg:mt-0 mt-8 rounded-2xl overflow-hidden bg-[#7a1410] border border-white/10">

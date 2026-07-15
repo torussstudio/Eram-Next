@@ -158,8 +158,13 @@ export default function EramJourneyTimeline(): React.JSX.Element {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#f5efe8] px-4 py-10 sm:px-8 sm:py-14">
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-5xl">
         {/* ===== Vision / Mission card ===== */}
+        <div className="flex items-center gap-2 mb-6">
+  <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
+    Vision & Mission
+  </span>
+</div>
         <div className="rounded-[28px] bg-white shadow-sm px-6 py-8 sm:px-10 sm:py-10">
           <div className="flex flex-col md:flex-row gap-8 md:gap-10">
             {/* Image placeholder */}
@@ -222,12 +227,18 @@ export default function EramJourneyTimeline(): React.JSX.Element {
 
         {/* ===== Timeline section ===== */}
         <div className="mt-12 sm:mt-16">
-          <div className="flex items-center gap-3 mb-8">
-            <span className="w-[3px] h-6 rounded-full bg-[#ae1431]" aria-hidden="true" />
-            <h3 className="text-xl sm:text-2xl font-display tracking-tight text-neutral-950">
-              The Journey of ERAM
-            </h3>
-          </div>
+          <div className="flex items-center gap-2 mb-3">
+    <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
+      Timeline
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3 mb-8">
+    <span className="w-[3px] h-6 rounded-full bg-[#ae1431]" aria-hidden="true" />
+    <h3 className="text-xl sm:text-2xl font-display tracking-tight text-neutral-950">
+      The Journey of ERAM
+    </h3>
+  </div>
 
           {/* speech bubble */}
           <div className="relative h-24 sm:h-20">

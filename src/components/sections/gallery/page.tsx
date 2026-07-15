@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { X, ChevronLeft, ChevronRight, ArrowUpRight, ChevronDown } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowUpRight, ChevronDown, Check } from "lucide-react";
 import api from "@/lib/api";
 
 type CategoryId =  "mmhss" | "mmps" | "amlp" | "mmite" | "ease" | "trust" ;
@@ -320,26 +320,7 @@ export default function GalleryClient() {
               <p className="mb-2 text-[11px] font-rethink uppercase tracking-[0.2em] text-gray-500">
                 Filter by Type
               </p>
-               <div className="relative inline-block">
-              <select
-                 value={activeType}
-                  onChange={(e) =>
-                    setActiveType(e.target.value as TypeId | "all")
-                  }
-                  className="appearance-none font-rethink text-xs md:text-sm uppercase tracking-wide pl-4 pr-8 py-1.5 rounded-full border border-white bg-white text-[#ae1431] focus:outline-none focus:border-[#ae1431] cursor-pointer"
-                >
-                  <option value="all">All Types</option>
-                  {TYPES.map((type) => (
-                    <option key={type.id} value={type.id}>
-                      {type.label}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown
-                  size={14}
-                  className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[#ae1431]"
-                />
-              </div>
+              <TypeDropdown value={activeType} onChange={setActiveType} />
             </div>
 
             <button
@@ -568,5 +549,133 @@ function FilterPill({
     >
       {label}
     </button>
+  );
+}
+
+/**
+ * Custom "Filter by Type" dropdown — replaces the native <select>.
+ * Matches the pill-based filter aesthetic (white bg, brand-red text/border,
+ * rounded-full trigger) with an animated floating panel instead of the
+ * default browser dropdown UI.
+ */
+function TypeDropdown({
+  value,
+  onChange,
+}: {
+  value: TypeId | "all";
+  onChange: (val: TypeId | "all") => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const options: { id: TypeId | "all"; label: string }[] = [
+    { id: "all", label: "All Types" },
+    ...TYPES,
+  ];
+  const selected = options.find((o) => o.id === value) ?? options[0];
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Open/close panel animation
+  useGSAP(
+    () => {
+      if (!panelRef.current) return;
+      if (open) {
+        gsap.set(panelRef.current, { display: "block" });
+        gsap.fromTo(
+          panelRef.current,
+          { opacity: 0, y: -6, scale: 0.98 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: "power2.out" },
+        );
+      } else {
+        gsap.to(panelRef.current, {
+          opacity: 0,
+          y: -6,
+          scale: 0.98,
+          duration: 0.12,
+          ease: "power2.in",
+          onComplete: () => {
+            if (panelRef.current) panelRef.current.style.display = "none";
+          },
+        });
+      }
+    },
+    { dependencies: [open] },
+  );
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className={`flex items-center gap-2 cursor-pointer rounded-full border px-4 py-1.5 text-xs md:text-sm font-rethink uppercase tracking-wide transition-colors duration-200 ${
+          open
+            ? "border-[#ae1431] bg-[#ae1431] text-white"
+            : "border-white bg-white text-[#ae1431] hover:border-[#ae1431]/40"
+        }`}
+      >
+        {selected.label}
+        <ChevronDown
+          size={14}
+          className={`transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      <div
+        ref={panelRef}
+        role="listbox"
+        style={{ display: "none" }}
+        className="absolute left-0 top-[calc(100%+8px)] z-40 w-44 origin-top overflow-hidden rounded-xl border border-black/10 bg-white p-1.5 shadow-[0_20px_40px_-12px_rgba(17,5,8,0.25)]"
+      >
+        {options.map((opt) => {
+          const isActive = opt.id === value;
+          return (
+            <button
+              key={opt.id}
+              type="button"
+              role="option"
+              aria-selected={isActive}
+              onClick={() => {
+                onChange(opt.id);
+                setOpen(false);
+              }}
+              className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-xs md:text-sm font-rethink uppercase tracking-wide transition-colors duration-150 ${
+                isActive
+                  ? "bg-[#ae1431] text-white"
+                  : "text-neutral-700 hover:bg-[#ae1431]/8 hover:text-[#ae1431]"
+              }`}
+            >
+              {opt.label}
+              {isActive && <Check size={14} />}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }

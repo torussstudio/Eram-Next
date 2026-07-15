@@ -136,6 +136,15 @@ export default function HeroSection() {
                 "
               >
                 <button
+  onClick={() => {
+    const section = document.getElementById("scale");
+    if (section) {
+      const yOffset = -90;
+      const y =
+        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }}
                   className="
                     group
                     font-rethink

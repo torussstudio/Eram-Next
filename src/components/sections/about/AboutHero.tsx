@@ -222,7 +222,7 @@ xl:px-24 xl:py-24
                   infrastructure work in alignment to shape future-ready
                   individuals.
                 </p>
-
+<br></br>
                 <button
                   type="button"
                   onClick={() => {
@@ -254,41 +254,31 @@ xl:px-24 xl:py-24
                     // navigation start aavan oru chെriya head-start kodukkunnu, pinne poll cheyyunnu
                     setTimeout(() => scrollToInstitutions(), 300);
                   }}
-                  className="
-    hero-content-fade
-    mt-8
-
-    inline-flex
-    items-center
-    gap-2
-
-    bg-[#ae1431]
-    hover:bg-black
-
-    text-white
-
-    px-5 py-3
-    sm:px-6 sm:py-3.5
-    md:px-8 md:py-4
-
-    rounded-[12px]
-
-    text-sm
-
-    transition-all
-    duration-300
-
-    shadow-lg
-    font-semibold
+                 className="
     font-rethink
-    uppercase
-
-    hover:shadow-xl
-    hover:-translate-y-1
-
-    opacity-0
-    translate-y-8
+    w-full
+    sm:w-auto
     cursor-pointer
+    rounded-[12px]
+    border
+    border-[#ae1431]
+    px-5
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-black
+    hover:text-white
+    hover:border-black
+    flex
+    items-center
+    justify-center
+    gap-2
   "
                 >
                   <span>Explore Our Institutions</span>

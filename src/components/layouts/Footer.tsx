@@ -1,9 +1,72 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import { Phone, MapPin, Mail } from "lucide-react";
+import { Phone, MapPin, Mail, ChevronDown } from "lucide-react";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import Link from "next/link";
 import { IoLogoYoutube } from "react-icons/io";
+
+interface AcademicsItem {
+  title: string;
+  href: string;
+}
+
+
+const academicsLinks: AcademicsItem[] = [
+  { title: "EASE (CBSE)", href: "https://ease.edu.in/" },
+  { title: "MMHSS (Hr. Sec)", href: "/mmhss/academics" },
+  { title: "MMPS (HS)", href: "/mmps/academics" },
+  { title: "AMLP (LP)", href: "/amlp/academics" },
+  { title: "MMITE (D. El. Edc)", href: "/mmite/academics" },
+  
+];
+
+function AcademicsAccordionItem() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-2 hover:underline cursor-pointer"
+      >
+        Institutions
+        <ChevronDown
+          className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      <div
+        style={{
+          maxHeight: open ? "220px" : "0px",
+          transition: "max-height 300ms cubic-bezier(0.4,0,0.2,1)",
+          overflow: "hidden",
+        }}
+      >
+        <ul className="mt-2 flex flex-col gap-1.5 border-l border-white/30 pl-3">
+          {academicsLinks.map((item) => {
+            const isExternal = item.href.startsWith("http");
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="text-white/80 hover:text-white hover:underline text-[13px]"
+                >
+                  {item.title}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </li>
+  );
+}
 
 export default function Footer() {
   return (
@@ -82,14 +145,10 @@ export default function Footer() {
                 </Link>
               </li>
 
-              <li>
-                <Link href="/academics" className="hover:underline">
-                  Academics
-                </Link>
-              </li>
+              <AcademicsAccordionItem />
 
               <li>
-                <Link href="/facilities" className="hover:underline">
+                <Link href="/about-us" className="hover:underline">
                   Facilities
                 </Link>
               </li>
@@ -107,14 +166,13 @@ export default function Footer() {
               </li>
 
               <li>
-                <a href="/prospectus.pdf" download className="hover:underline">
+                <a href="/downloads" download className="hover:underline">
                   Download Prospectus
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* RESOURCES */}
           {/* RESOURCES */}
           <div>
             <h4 className="font-semibold tracking-wide relative inline-block mb-6 uppercase text-sm">
@@ -136,13 +194,13 @@ export default function Footer() {
               </li>
 
               <li>
-                <Link href="/news" className="hover:underline">
+                <Link href="/events" className="hover:underline">
                   News and Updates
                 </Link>
               </li>
 
               <li>
-                <Link href="/parent-portal" className="hover:underline">
+                <Link href="/portal" className="hover:underline">
                   Parent Portal
                 </Link>
               </li>

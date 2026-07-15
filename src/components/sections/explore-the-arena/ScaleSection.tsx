@@ -2,7 +2,7 @@
 
 export default function ScaleSection() {
   return (
-    <section className="bg-[#0d0d0d] text-white pt-[55px] md:pt-[75px] pb-[90px] md:pb-[110px] px-[16px] sm:px-[20px] md:px-[28px]">
+    <section id="scale" className="bg-[#0d0d0d] text-white pt-[55px] md:pt-[75px] pb-[90px] md:pb-[110px] px-[16px] sm:px-[20px] md:px-[28px]">
       {/* SAME CONTAINER SYSTEM */}
       <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
         <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px]">

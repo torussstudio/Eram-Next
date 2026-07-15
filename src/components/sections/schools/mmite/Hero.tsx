@@ -216,6 +216,7 @@ export default function Hero() {
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
                 <button
+                  onClick={()=>router.push("/contact")}
                   className="
     font-rethink bg-[#ae1431]
     px-5 md:px-7 py-2.5 md:py-3
@@ -228,7 +229,7 @@ export default function Hero() {
   "
                 >
                   <span>Admissions Open</span>
-                  <Play className="w-4 h-4 shrink-0 transition-all duration-300" />
+                  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
                 <button
                   onClick={() => router.push("/contact")}

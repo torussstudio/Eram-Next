@@ -291,12 +291,8 @@ function SystemsThatSustainExcellence() {
                 style={{ transformOrigin: "left center" }}
               />
               <span className="font-rethink text-[14px] uppercase tracking-[0.2em] text-[#F5EFE8] ">
-                Academic Systems
+                Academic Systems & Faculty Development
               </span>
-              <div
-                className="systems-eyebrow-line-right h-px bg-[#F5EFE8] w-10"
-                style={{ transformOrigin: "right center" }}
-              />
             </div>
 
             <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px] leading-tight text-[#F5EFE8] overflow-hidden">
