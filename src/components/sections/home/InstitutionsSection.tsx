@@ -102,8 +102,8 @@ export default function InstitutionsSection() {
       id="institutions"
       className="content-visibility-auto bg-[#f5efe8] pt-10 pb-28"
     >
-      <div className="mx-auto max-w-[1180px] px-6 sm:px-4">
-        <MarqueeText />
+     <div className="mx-auto max-w-[1180px] px-6 sm:px-4 -mt-4 sm:mt-0">
+  <MarqueeText />
 
         {/* ── Heading ── */}
         <div className="mx-auto mt-10 w-full max-w-[980px] px-[20px] text-center">
@@ -134,7 +134,7 @@ export default function InstitutionsSection() {
           </p>
         </div>
         {/* ── Cards ── */}
-        <div className="inst-grid mt-[78px] grid grid-cols-6 gap-9 sm:mt-12 sm:gap-5 max-[1100px]:grid-cols-4 max-[900px]:grid-cols-2 max-[500px]:grid-cols-1">
+        <div className="inst-grid mt-[78px] grid grid-cols-6 gap-9 sm:mt-12 sm:gap-5 max-[1100px]:grid-cols-4 max-[900px]:grid-cols-2 max-[500px]:grid-cols-1 max-[500px]:mt-[30px]">
           {institutions.map((item, i) => (
             <div
               key={i}

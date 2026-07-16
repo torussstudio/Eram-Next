@@ -226,11 +226,11 @@ export default function ImpactSection() {
 
   /* ── JSX ─────────────────────────────────────────────────────────── */
   return (
-    <section
-      ref={sectionRef}
-      className={`${section} bg-[#ae1431] !pt-[0px] !pb-[52px] max-[640px]:!pt-[20px] max-[640px]:!pb-[36px]`}
-      id="impact"
-    >
+   <section
+  ref={sectionRef}
+  className={`${section} bg-[#ae1431] !pt-[0px] !pb-[52px] -mt-[30px] max-[640px]:!pt-[20px] max-[640px]:!pb-[36px] max-[640px]:-mt-[24px]`}
+  id="impact"
+>
       {/* ── Desktop top layout ─────────────────────────────────── */}
       <div
         className={`${shell} grid grid-cols-[1.05fr_0.95fr] max-[1100px]:grid-cols-1 max-[640px]:hidden`}
@@ -299,18 +299,18 @@ export default function ImpactSection() {
 
       {/* ── Mobile top layout ──────────────────────────────────── */}
       <div className="hidden max-[640px]:flex flex-col gap-5 px-5">
-        <div className="flex w-full items-end gap-3">
-          <ImpactImage
-            src="/images/impact1.webp"
-            alt="Students"
-            className="h-[150px] flex-1 rounded-[18px]"
-          />
-          <ImpactImage
-            src="/images/impact2.webp"
-            alt="Campus"
-            className="h-[185px] flex-1 rounded-[18px]"
-          />
-        </div>
+           <div className="flex flex-col gap-3">
+  <ImpactImage
+    src="/images/impact1.webp"
+    alt="Students"
+    className="h-[170px] w-full rounded-[18px]"
+  />
+  <ImpactImage
+    src="/images/impact2.webp"
+    alt="Campus"
+    className="h-[170px] w-full rounded-[18px]"
+  />
+</div>
         <div className="flex flex-col gap-3">
           <SplitHeading
             text="In Service Of Society"
@@ -336,81 +336,81 @@ export default function ImpactSection() {
       </div>
 
       {/* ── Cards ─────────────────────────────────────────────── */}
-      <div className="mt-[56px] max-[640px]:mt-[32px]">
-        <p className="mb-[36px] text-center text-[28px] uppercase tracking-[0.18em] text-[#f5efe8] max-[900px]:text-[24px] max-[640px]:mb-5 max-[640px]:px-5 max-[640px]:text-[13px] max-[640px]:tracking-[0.22em]">
-          Key Areas Of Impact Include:
-        </p>
+     <div className="mt-[56px] max-[640px]:mt-[48px]">
+  <p className="mb-[36px] text-center text-[28px] uppercase tracking-[0.18em] text-[#f5efe8] max-[900px]:text-[24px] max-[640px]:mb-5 max-[640px]:px-5 max-[640px]:text-[13px] max-[640px]:tracking-[0.22em]">
+    Key Areas Of Impact Include:
+  </p>
 
-        {/* ── Desktop ── */}
-        <div className="mx-auto flex items-center gap-[14px] w-[min(1100px,calc(100vw-160px))] max-[640px]:hidden">
-          <CarouselArrow
-            direction="left"
-            onClick={() => scrollCarousel("left")}
-            disabled={!canScrollLeft}
+  {/* ── Desktop ── */}
+  <div className="mx-auto flex items-center gap-[14px] w-[min(1100px,calc(100vw-160px))] max-[640px]:hidden">
+    <CarouselArrow
+      direction="left"
+      onClick={() => scrollCarousel("left")}
+      disabled={!canScrollLeft}
+    />
+    <div
+      ref={desktopRefCallback}
+      className="flex-1 min-w-0 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-5"
+    >
+      <div className="flex gap-5 px-8">
+        {impactItems.map((item) => (
+          <ImpactCard
+            key={item.code}
+            {...item}
+            cardClass=" font-rethink
+            impact-scroll-card flex-none snap-start
+            w-[350px] min-h-[120px] pl-[26px] pr-[26px]
+            [&_.card-line]:h-[185px]
+            [&_.card-code]:text-[25px] [&_.card-code]:mb-[15px]
+            [&_.card-title]:text-[25px] [&_.card-title]:mt-[50px]
+          "
           />
-          <div
-            ref={desktopRefCallback}
-            className="flex-1 min-w-0 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-5"
-          >
-            <div className="flex gap-5 px-8">
-              {impactItems.map((item) => (
-                <ImpactCard
-                  key={item.code}
-                  {...item}
-                  cardClass=" font-rethink
-                  impact-scroll-card flex-none snap-start
-                  w-[350px] min-h-[120px] pl-[26px] pr-[26px]
-                  [&_.card-line]:h-[185px]
-                  [&_.card-code]:text-[25px] [&_.card-code]:mb-[15px]
-                  [&_.card-title]:text-[25px] [&_.card-title]:mt-[50px]
-                "
-                />
-              ))}
-            </div>
-          </div>
-          <CarouselArrow
-            direction="right"
-            onClick={() => scrollCarousel("right")}
-            disabled={!canScrollRight}
-          />
-        </div>
-
-        {/* ── Mobile ── */}
-        <div className="hidden max-[640px]:flex flex-col gap-[18px]">
-          <div
-            ref={mobileRefCallback}
-            className="w-full overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2 cursor-pointer"
-          >
-            <div className="flex gap-4 px-4">
-              {impactItems.map((item) => (
-                <ImpactCard
-                  key={item.code}
-                  {...item}
-                  cardClass="
-                  flex-none snap-start
-                  w-[190px] min-h-[170px] pl-5 pr-3 pb-1
-                  [&_.card-line]:h-[170px]
-                  [&_.card-code]:text-[15px] [&_.card-code]:mb-[40px]
-                  [&_.card-title]:text-[15px] [&_.card-title]:mt-6
-                "
-                />
-              ))}
-            </div>
-          </div>
-          <div className="flex items-center justify-center gap-[16px]">
-            <CarouselArrow
-              direction="left"
-              onClick={() => scrollCarousel("left")}
-              disabled={!canScrollLeft}
-            />
-            <CarouselArrow
-              direction="right"
-              onClick={() => scrollCarousel("right")}
-              disabled={!canScrollRight}
-            />
-          </div>
-        </div>
+        ))}
       </div>
+    </div>
+    <CarouselArrow
+      direction="right"
+      onClick={() => scrollCarousel("right")}
+      disabled={!canScrollRight}
+    />
+  </div>
+
+  {/* ── Mobile ── */}
+  <div className="hidden max-[640px]:flex flex-col gap-[18px]">
+    <div
+      ref={mobileRefCallback}
+      className="w-full overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2 cursor-pointer"
+    >
+      <div className="flex gap-4 pl-8 pr-4">
+        {impactItems.map((item) => (
+          <ImpactCard
+            key={item.code}
+            {...item}
+            cardClass="
+            flex-none snap-start
+            w-[190px] min-h-[170px] pl-10 pr-10 pb-1
+            [&_.card-line]:h-[170px]
+            [&_.card-code]:text-[15px] [&_.card-code]:mb-[40px]
+            [&_.card-title]:text-[15px] [&_.card-title]:mt-6
+          "
+          />
+        ))}
+      </div>
+    </div>
+    <div className="flex items-center justify-center gap-[16px]">
+      <CarouselArrow
+        direction="left"
+        onClick={() => scrollCarousel("left")}
+        disabled={!canScrollLeft}
+      />
+      <CarouselArrow
+        direction="right"
+        onClick={() => scrollCarousel("right")}
+        disabled={!canScrollRight}
+      />
+    </div>
+  </div>
+</div>
     </section>
   );
 }

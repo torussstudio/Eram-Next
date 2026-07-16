@@ -645,16 +645,16 @@ xl:px-24 xl:py-24
           </div>
         </div>
 
-        {/* ───────────────── Slide Arrows (bottom right) ───────────────── */}
-        <div className="absolute bottom-4 right-4
-sm:bottom-5 sm:right-5
-md:bottom-6 md:right-6 z-20 flex items-center gap-3">
+
+       {/* ───────────────── Slide Arrows (same on all phones, centered; bottom-right on tablet/desktop) ───────────────── */}
+<div className="absolute bottom-4 left-1/2 -translate-x-1/2
+md:bottom-6 md:left-auto md:translate-x-0 md:right-6 z-20 flex items-center gap-3">
           <button
             onClick={goPrev}
             aria-label="Previous slide"
             className="
               flex h-9 w-9
-sm:h-10 sm:w-10
+
 md:h-11 md:w-11 items-center justify-center
               rounded-full border border-white/40
               text-white
@@ -683,7 +683,6 @@ md:h-11 md:w-11 items-center justify-center
             aria-label="Next slide"
             className="
               flex  flex h-9 w-9
-sm:h-10 sm:w-10
 md:h-11 md:w-11 items-center justify-center
               rounded-full border border-white/40
               text-white

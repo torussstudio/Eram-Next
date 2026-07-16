@@ -44,6 +44,10 @@ function SystemsThatSustainExcellence() {
 
   useGSAP(
     () => {
+      // Prevent pinned sections from jumping when the mobile browser's
+      // address bar shows/hides mid-scroll.
+      ScrollTrigger.config({ ignoreMobileResize: true });
+
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 0px)", () => {
@@ -168,7 +172,7 @@ function SystemsThatSustainExcellence() {
       });
 
       // ── STACKED CARDS — shared builder ─────────────────────────────
-      const buildStackTimeline = (scrollEndPx: number) => {
+      const buildStackTimeline = (scrollEndPx: number, scrubValue: number = 1.8) => {
         const stackSection = stackSectionRef.current;
         if (!stackSection) return;
 
@@ -269,7 +273,7 @@ function SystemsThatSustainExcellence() {
         buildStackTimeline(7 * 320);
       });
       mm.add("(max-width: 767px)", () => {
-        buildStackTimeline(7 * 100);
+        buildStackTimeline(7 * 220);
       });
 
       return () => mm.revert();
@@ -285,14 +289,18 @@ function SystemsThatSustainExcellence() {
       <section className="bg-[#0f0f0f] overflow-hidden pt-10 pb-6 px-5 md:pt-14 md:pb-6 md:px-6">
         <div className="w-full md:max-w-[1100px] md:mx-auto">
           <div className="text-center max-w-[720px] mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-5">
               <div
-                className="systems-eyebrow-line-left h-px bg-black/30 w-10"
+                className="systems-eyebrow-line-left h-px bg-black/30 w-6 sm:w-10 shrink-0"
                 style={{ transformOrigin: "left center" }}
               />
-              <span className="font-rethink text-[14px] uppercase tracking-[0.2em] text-[#F5EFE8] ">
+              <span className="font-rethink text-[10px] sm:text-[12px] md:text-[14px] uppercase tracking-[0.12em] md:tracking-[0.2em] text-[#F5EFE8] ">
                 Academic Systems & Faculty Development
               </span>
+              <div
+                className="systems-eyebrow-line-right h-px bg-black/30 w-6 sm:w-10 shrink-0"
+                style={{ transformOrigin: "right center" }}
+              />
             </div>
 
             <h2 className="font-display text-[30px] sm:text-[36px] md:text-[44px] leading-tight text-[#F5EFE8] overflow-hidden">
@@ -322,8 +330,7 @@ function SystemsThatSustainExcellence() {
       ══════════════════════════════════════════ */}
       <section
         ref={stackSectionRef}
-        className="relative bg-[#0f0f0f]"
-        style={{ minHeight: "100vh" }}
+        className="relative bg-[#0f0f0f] min-h-[100svh] md:min-h-screen"
       >
         {/* Background giant words */}
         <div
@@ -333,11 +340,9 @@ function SystemsThatSustainExcellence() {
           {BG_WORDS.map((word, i) => (
             <span
               key={i}
-              className="stack-bg-word uppercase absolute font-black text-[#F5EFE8] leading-none whitespace-nowrap"
+              className="stack-bg-word uppercase absolute font-black text-[#F5EFE8] leading-none whitespace-nowrap text-[clamp(38px,13vw,150px)] md:text-[clamp(70px,15vw,185px)] tracking-[-0.04em]"
               data-index={i}
               style={{
-                fontSize: "clamp(70px, 15vw, 185px)",
-                letterSpacing: "-0.04em",
                 opacity: 0,
               }}
             >
@@ -347,16 +352,9 @@ function SystemsThatSustainExcellence() {
         </div>
 
         {/* Card stack */}
-        <div
-          className="relative z-10 flex items-center justify-center"
-          style={{ minHeight: "100vh" }}
-        >
+        <div className="relative z-10 flex items-center justify-center min-h-[100svh] md:min-h-screen">
           <div
-            className="relative"
-            style={{
-              width: "clamp(290px, 44vw, 400px)",
-              height: "clamp(360px, 50vw, 480px)",
-            }}
+            className="relative w-[clamp(260px,80vw,400px)] h-[clamp(340px,95vw,480px)] md:w-[clamp(290px,44vw,400px)] md:h-[clamp(360px,50vw,480px)]"
           >
             {[...ITEMS].reverse().map((item, reversedDOMIndex) => {
               const originalItemIndex = ITEMS.length - 1 - reversedDOMIndex;

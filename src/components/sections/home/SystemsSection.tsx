@@ -149,8 +149,7 @@ export default function SystemsSection() {
 
   /* ── shared: navigate to about-us then scroll to #structured-learning ── */
   const goToStructuredLearning = useCallback(() => {
-    // scroll: false stops Next.js from auto-scrolling to top on route change,
-    // which was overriding our manual scroll below
+
     router.push("/about-us", { scroll: false });
 
     const scrollToStructured = (attempts = 0) => {
@@ -163,11 +162,6 @@ export default function SystemsSection() {
         return;
       }
 
-      // Sections above (timeline, excellence, etc.) can lazy-load images and
-      // shift page height AFTER we scroll, leaving us short of the target.
-      // Just WAIT (no scrolling) until page height stops changing — calling
-      // smoothScrollTo repeatedly interrupts its own animation and leaves it
-      // stuck mid-way. Scroll exactly once, after layout has settled.
       let lastHeight = document.body.scrollHeight;
       let stableCount = 0;
 
@@ -649,7 +643,7 @@ export default function SystemsSection() {
         {/* =========================
       HEADER
   ========================= */}
-        <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111] px-[22px] pt-[26px] pb-[28px] mb-[18px]">
+        <div className="relative overflow-hidden rounded-[28px] border border-white/10  px-[22px] pt-[26px] pb-[28px] mb-[18px]">
           {/* glow */}
           <div className="absolute top-[-120px] right-[-60px] w-[220px] h-[220px] rounded-full bg-[#ae1431]/20 blur-[90px]" />
 
@@ -753,8 +747,8 @@ export default function SystemsSection() {
             ${isActive ? "scale-[1]" : "scale-[0.985]"}
           `}
                 style={{
-                  backgroundColor: isActive ? "#ae1431" : "#111",
-                  borderColor: isActive ? "#ae1431" : "#262626",
+                  backgroundColor:  "#ae1431" ,
+                  borderColor:  "#ae1431" ,
                 }}
               >
                 {/* pattern */}
@@ -795,7 +789,7 @@ export default function SystemsSection() {
               tracking-[0.2em]
               transition-colors
               duration-300
-              ${isActive ? "text-white/55" : "text-[#777]"}
+              text-white
             `}
                 >
                   0{i + 1}
@@ -806,14 +800,14 @@ export default function SystemsSection() {
                   className={`
               relative
               z-[2]
-              text-[11px]
+              text-[12px]
               font-rethink
               leading-[1.35]
               tracking-[0.04em]
               text-left
               transition-colors
               duration-300
-              ${isActive ? "text-white" : "text-[#d1d1d1]"}
+              ${isActive ? "text-white" : "text-white/50"}
             `}
                 >
                   {label}
@@ -825,7 +819,7 @@ export default function SystemsSection() {
               absolute
               left-[16px]
               bottom-0
-              h-[2px]
+              h-[3px]
               rounded-full
               bg-white
 
@@ -883,8 +877,8 @@ export default function SystemsSection() {
             ${isActive ? "scale-[1]" : "scale-[0.992]"}
           `}
                 style={{
-                  backgroundColor: isActive ? "#ae1431" : "#111",
-                  borderColor: isActive ? "#ae1431" : "#202020",
+                  backgroundColor: "white" ,
+                  borderColor: "white"
                 }}
               >
                 {/* grid pattern */}
@@ -930,7 +924,7 @@ export default function SystemsSection() {
                   transition-colors
                   duration-300
 
-                  ${isActive ? "text-white/45" : "text-[#8e8e8e]"}
+                  text-black
                 `}
                     >
                       /{card.n}
@@ -948,54 +942,12 @@ export default function SystemsSection() {
                     transition-colors
                     duration-300
 
-                    ${isActive ? "text-white" : "text-[#f5f5f5]"}
+                    text-black
                   `}
                       >
                         {card.t}
                       </span>
-
-                      <span
-                        className={`
-                    block
-                    mt-[4px]
-                    text-[10px]
-                    uppercase
-                    tracking-[0.18em]
-
-                    transition-colors
-                    duration-300
-
-                    ${isActive ? "text-white/50" : "text-[#666]"}
-                  `}
-                      >
-                        Institutional Standard
-                      </span>
                     </div>
-                  </div>
-
-                  {/* RIGHT */}
-                  <div
-                    className={`
-                flex-shrink-0
-                w-[38px]
-                h-[38px]
-                rounded-full
-                flex
-                items-center
-                justify-center
-
-                transition-[background-color,border-color,transform]
-                duration-300
-                ease-out
-
-                ${
-                  isActive
-                    ? "bg-white/15 border border-white/10"
-                    : "bg-[#1b1b1b] border border-[#2a2a2a]"
-                }
-              `}
-                  >
-                    <ArrowIcon active={isActive} />
                   </div>
                 </div>
               </div>
@@ -1006,224 +958,37 @@ export default function SystemsSection() {
         {/* =========================
       CTA
   ========================= */}
-        <button
-          onClick={goToStructuredLearning}
-          className="
-    group
-    relative
-    overflow-hidden
-    isolate
-
+      <button
+  onClick={goToStructuredLearning}
+  className="
+    font-rethink
     w-full
-
-    rounded-[24px]
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
     border
-    border-white/[0.08]
-
-    bg-[#0d0d0d]
-
-    px-[20px]
-    py-[20px]
-
-    transform-gpu
-    will-change-transform
-
+    border-white
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
     transition-all
-    duration-500
-    ease-out
+    duration-200
+    mt-4
 
-    active:scale-[0.985]
+    flex
+    items-center
+    justify-center
+    gap-2
   "
-        >
-          {/* =========================
-      MAIN GRADIENT
-  ========================= */}
-          <div
-            className="
-      absolute
-      inset-0
-      opacity-100
-      transition-opacity
-      duration-500
-    "
-          >
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,#ae1431_0%,#8f0f29_45%,#5a0818_100%)]" />
-
-            {/* radial highlight */}
-            <div className="absolute top-[-120px] right-[-80px] w-[240px] h-[240px] rounded-full bg-white/10 blur-[80px]" />
-
-            {/* secondary glow */}
-            <div className="absolute bottom-[-100px] left-[-80px] w-[180px] h-[180px] rounded-full bg-[#ff6a85]/10 blur-[70px]" />
-          </div>
-
-          {/* =========================
-      GRID PATTERN
-  ========================= */}
-          <div
-            className="
-      absolute
-      inset-0
-      opacity-[0.045]
-      pointer-events-none
-    "
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)",
-              backgroundSize: "22px 22px",
-            }}
-          />
-
-          {/* =========================
-      TOP BORDER GLOW
-  ========================= */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-
-          {/* =========================
-      HOVER SHINE
-  ========================= */}
-          <div
-            className="
-      absolute
-      inset-0
-      opacity-0
-      group-hover:opacity-100
-      transition-opacity
-      duration-700
-    "
-          >
-            <div
-              className="
-        absolute
-        top-0
-        left-[-120%]
-        h-full
-        w-[60%]
-        rotate-[18deg]
-        bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.16),transparent)]
-
-        group-hover:left-[140%]
-        transition-all
-        duration-[1200ms]
-        ease-out
-      "
-            />
-          </div>
-
-          {/* =========================
-      CONTENT
-  ========================= */}
-          <div className="relative z-[2] flex items-center justify-between">
-            {/* LEFT */}
-            <div className="text-left">
-              {/* small label */}
-              <div className="flex items-center gap-[8px] mb-[10px]">
-                <span className="w-[24px] h-px bg-white/40" />
-
-                <span
-                  className="
-            text-[10px]
-            tracking-[0.26em]
-            uppercase
-            text-white/50
-            font-rethink
-          "
-                >
-                  Learn More
-                </span>
-              </div>
-
-              {/* title */}
-              <span
-                className="
-          block
-          text-[12px]
-          
-          uppercase
-          tracking-[0.18em]
-          leading-[1.5]
-          text-white
-          font-rethink
-          max-w-[220px]
-        "
-              >
-                Explore Our
-                <br />
-                Systems & Standards
-              </span>
-               <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </div>
-
-            {/* RIGHT */}
-            <div
-              className="
-        relative
-        w-[48px]
-        h-[48px]
-        rounded-full
-
-        flex
-        items-center
-        justify-center
-
-        border
-        border-white/10
-
-        bg-white/[0.08]
-        backdrop-blur-[8px]
-
-        transition-all
-        duration-500
-
-        group-hover:scale-[1.08]
-        group-hover:bg-white/[0.14]
-      "
-            >
-              {/* glow */}
-              <div className="absolute inset-0 rounded-full bg-white/10 blur-[16px]" />
-
-              {/* rotating ring */}
-              <div
-                className="
-          absolute
-          inset-[-2px]
-          rounded-full
-          border
-          border-white/10
-
-          group-hover:rotate-180
-          transition-transform
-          duration-[1200ms]
-          ease-out
-        "
-              />
-
-              <div className="relative z-[2]">
-                <ArrowIcon active />
-              </div>
-            </div>
-          </div>
-
-          {/* =========================
-      BOTTOM PROGRESS LINE
-  ========================= */}
-          <div
-            className="
-      absolute
-      left-0
-      bottom-0
-      h-[2px]
-      w-0
-
-      bg-white/70
-
-      group-hover:w-full
-
-      transition-all
-      duration-700
-      ease-out
-    "
-          />
-        </button>
+>
+  Explore Our Systems & Standards
+ <Play className="w-8 h-8 md:w-9 md:h-9" />
+</button>
       </div>
     </section>
   );

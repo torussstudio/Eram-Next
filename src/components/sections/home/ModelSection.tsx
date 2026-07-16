@@ -283,7 +283,6 @@ export default function ModelSection() {
                 max-[560px]:gap-[20px] max-[560px]:px-[4px]
                 max-[560px]:snap-x max-[560px]:snap-mandatory
               "
-              
               onMouseDown={(e) => {
                 const el = e.currentTarget;
                 el.style.cursor = "grabbing";
@@ -318,10 +317,14 @@ export default function ModelSection() {
                   </div>
                   <p
                     className={`
-                      font-rethink mt-[65px] text-[26px] leading-[1.15] text-[#f5efe8]
-                      max-[900px]:mt-[40px] max-[900px]:text-[22px]
-                      max-[560px]:mt-[22px] max-[560px]:text-[15px] max-[560px]:leading-[1.4]
-                        ${i >= 4 ? "mt-[93px]" : "mt-[50px]"}`}
+    font-rethink mt-[65px] text-[26px] leading-[1.15] text-[#f5efe8]
+    max-[900px]:mt-[40px] max-[900px]:text-[22px]
+    max-[560px]:text-[15px] max-[560px]:leading-[1.4]
+    ${
+      i >= 4
+        ? "mt-[93px] max-[560px]:mt-[41px] max-[560px]:max-w-[130px]"
+        : "mt-[50px] max-[560px]:mt-[22px]"
+    }`}
                     dangerouslySetInnerHTML={{ __html: item }}
                   />
                 </div>
@@ -359,10 +362,19 @@ export default function ModelSection() {
             </button>
 
             {/* Mobile arrows — below carousel, centered */}
-            <div className="hidden max-[560px]:flex items-center justify-center gap-4 mt-8">
+            <div className="hidden max-[560px]:flex items-center justify-center gap-4 mt-12">
               <button
                 onClick={() => scrollCarousel(-1)}
-                className="w-[40px] h-[40px] rounded-full border border-[#f5efe8]/40 bg-[#f5efe8]/10 flex items-center justify-center active:scale-95 transition-transform cursor-pointer"
+                disabled={!canScrollLeft}
+                className={`
+      w-[40px] h-[40px] rounded-full border-2 bg-[#f5efe8]/10
+      flex items-center justify-center transition-all duration-300 active:scale-95
+      ${
+        canScrollLeft
+          ? "border-[#f5efe8] cursor-pointer"
+          : "border-[#f5efe8]/30 opacity-20 cursor-not-allowed"
+      }
+    `}
               >
                 <svg
                   width="14"
@@ -379,7 +391,16 @@ export default function ModelSection() {
               </button>
               <button
                 onClick={() => scrollCarousel(1)}
-                className="w-[40px] h-[40px] rounded-full border border-[#f5efe8]/40 bg-[#f5efe8]/10 flex items-center justify-center active:scale-95 transition-transform cursor-pointer"
+                disabled={!canScrollRight}
+                className={`
+      w-[40px] h-[40px] rounded-full border-2 bg-[#f5efe8]/10
+      flex items-center justify-center transition-all duration-300 active:scale-95
+      ${
+        canScrollRight
+          ? "border-[#f5efe8] cursor-pointer"
+          : "border-[#f5efe8]/30 opacity-40 cursor-not-allowed"
+      }
+    `}
               >
                 <svg
                   width="14"

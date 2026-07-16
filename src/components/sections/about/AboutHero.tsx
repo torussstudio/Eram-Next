@@ -95,13 +95,13 @@ function AboutHero() {
           className="
   relative overflow-hidden rounded-[28px]
 
-  h-[85vh]
+  h-[62vh]
   sm:h-[65vh]
   md:h-[70vh]
   lg:h-[75vh]
   xl:h-[85vh]
 
-  min-h-[460px]
+  min-h-[400px]
   sm:min-h-[520px]
   md:min-h-[560px]
 
@@ -163,9 +163,14 @@ xl:px-24 xl:py-24
                 <h1
                   className="
     font-display
-    leading-[0.95]
+    leading-[1.05]
+    sm:leading-[0.95]
     tracking-[-0.04em]
-    text-[clamp(2.4rem,6vw,3.75rem)]
+    text-[1.85rem]
+    sm:text-[2.5rem]
+    md:text-[3rem]
+    lg:text-[3.4rem]
+    xl:text-[3.75rem]
   "
                 >
                   <span className="block ">
@@ -222,7 +227,7 @@ xl:px-24 xl:py-24
                   infrastructure work in alignment to shape future-ready
                   individuals.
                 </p>
-<br></br>
+                <br></br>
                 <button
                   type="button"
                   onClick={() => {
@@ -254,7 +259,7 @@ xl:px-24 xl:py-24
                     // navigation start aavan oru chെriya head-start kodukkunnu, pinne poll cheyyunnu
                     setTimeout(() => scrollToInstitutions(), 300);
                   }}
-                 className="
+                  className="
     font-rethink
     w-full
     sm:w-auto

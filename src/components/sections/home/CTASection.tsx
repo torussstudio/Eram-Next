@@ -55,7 +55,7 @@ export default function CTASection() {
   return (
     <section
       id="contact"
-      className={`${section} pt-[80px] max-[640px]:pt-[60px] pb-[110px] bg-[#F5EFE8]`}
+      className={`${section} pt-[80px] max-[640px]:pt-[60px] pb-[110px] bg-white`}
     >
       <div
         ref={ctaRef}
@@ -170,21 +170,16 @@ export default function CTASection() {
             {/* SECONDARY */}
             <button
               className="
-          h-[42px]
-          px-[22px]
-          text-[15px]
-          tracking-[0.04em]
-          rounded-[10px]
-          border
-          border-white/40
-          text-white
-          hover:bg-white
-          hover:text-[#ae1431]
-          transition
-          max-[640px]:w-full
-          cursor-pointer
-          font-rethink
-        "
+                  font-rethink
+                  cursor-pointer
+                  text-white
+                  border border-white
+                  px-6 py-3
+                  rounded-[12px]
+                  transition-all duration-300
+                  hover:bg-white hover:text-[#ae1431]
+                  flex items-center justify-center gap-2
+                "
             >
               BOOK A CAMPUS VISIT
             </button>

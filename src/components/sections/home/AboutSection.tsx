@@ -447,15 +447,11 @@ export default function AboutSection() {
             ref={mQuoteRef}
             className="mb-[52px] border-l-[3px] border-black/20 pl-[22px]"
           >
-            <p className="font-display text-[26px] leading-[1.3] text-[#111111] max-[480px]:text-[22px]">
-              Committed
-              <br />
-              to Access.
-              <br />
-              Dedicated to
-              <br />
-              Excellence
-            </p>
+           <p className="font-display text-[26px] leading-[1.3] text-[#111111] max-[480px]:text-[22px]">
+  Committed to Access.
+  <br />
+  Dedicated to Excellence
+</p>
           </div>
         </div>
 
