@@ -116,7 +116,6 @@ export default function CommunitySection() {
             {/* LEFT: label + heading */}
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <span className="w-8 h-[1px] bg-[#ae1431]"></span>
                 <p className="font-rethink text-[12px] tracking-[0.25em] text-[#ae1431] uppercase">
                   A venue for the wider community
                 </p>

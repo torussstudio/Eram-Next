@@ -6,6 +6,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { Play } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,30 +17,29 @@ const institutions = [
     desc: "ERAM Academy for Sports & Excellence",
     path: "https://ease.edu.in/",
   },
-  {
-    type: "High School",
-    name: "MMPS",
-    desc: "Mariyumma Memorial Public School",
-    path: "/mmps",
-  },
-
-  {
+    {
     type: "Higher Secondary",
     name: "MMHSS",
     desc: "Mariyumma Memorial Hr. Sec. School",
     path: "/mmhss",
   },
   {
-    type: "Teacher Training",
-    name: "MMITE",
-    desc: "Mariyumma Memorial Institute of Teacher Ed.",
-    path: "/mmite",
+    type: "High School",
+    name: "MMPS",
+    desc: "Mariyumma Memorial Public School",
+    path: "/mmps",
   },
-  {
+   {
     type: "LP School",
     name: "AMLP",
     desc: "Aided Mappila LP School",
     path: "/amlp",
+  },
+  {
+    type: "Teacher Training",
+    name: "MMITE",
+    desc: "Mariyumma Memorial Institute of Teacher Ed.",
+    path: "/mmite",
   },
 ];
 
@@ -141,21 +141,21 @@ export default function AdmissionsPage() {
           </div>
 
           {/* RIGHT — BUTTONS */}
-          <div className="flex flex-col pt-[60px] gap-3 lg:min-w-[320px]">
+           <div className="flex flex-col items-start pt-4 lg:pt-[60px] gap-3 lg:min-w-[320px]">
             <button
               onClick={()=>router.push("/contact")}
               ref={btn1Ref}
-              className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden hover:bg-black transition-all duration-300  cursor-pointer"
-            >
+               className="group relative bg-[#ae1431] text-white px-[clamp(14px,1.8vw,20px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] rounded-[12px] uppercase flex items-center justify-center gap-3 overflow-hidden w-auto self-start md:self-auto hover:bg-black transition-all duration-300 cursor-pointer">
               <span className="font-rethink relative z-10">
                APPLY NOW [2026-27]
               </span>
+                             <Play className="relative z-10 w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
             <button
               onClick={()=>router.push("/contact")}
               ref={btn2Ref}
-              className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden hover:bg-black transition-all duration-300 cursor-pointer"
+               className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(14px,1.8vw,20px)] py-[clamp(12px,1.5vw,15px)] text-[13px] tracking-[0.18em] uppercase flex items-center justify-center gap-3 overflow-hidden w-auto self-start md:self-auto hover:bg-black hover:text-white transition-all duration-300 cursor-pointer"
             >
               <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">
                 Book a Campus Visit
@@ -166,7 +166,7 @@ export default function AdmissionsPage() {
       </section>
 
       {/* INSTITUTIONS */}
-      <section className="anim-inst-wrap bg-[#F5EFE8] px-6 py-8">
+      <section className="anim-inst-wrap bg-[#F5EFE8] px-6 pt-2 pb-8">
         <div className="max-w-7xl mx-auto">
           <p className="anim-inst-label text-[12px] tracking-widest uppercase text-[#6b6256] mb-6">
             Explore All ERAM Institutions

@@ -184,9 +184,9 @@ export default function StructuredFramework({
                     {item.desc}
                   </p>
                 </div>
-                <span className="relative z-[2] text-white/25 text-[18px] mt-[clamp(14px,2.5vw,22px)] inline-block opacity-0 translate-x-[-4px] translate-y-[4px] scale-[0.8] transition-[transform,color,opacity] duration-[400ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]">
-                  ↗
-                </span>
+                <span className="sm:hidden absolute bottom-3 right-3 z-[2] font-rethink text-[10px] tracking-[0.08em] text-white/35">
+                  Click here
+               </span>
               </div>
             </div>
           ))}

@@ -590,15 +590,32 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
             open ? "translate-x-0" : "translate-x-full"
           } min-[920px]:hidden`}
         >
-          <div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
-            <span className="font-display  text-xl text-[#ae1431]">ERAM.</span>
-            <button
-              onClick={() => setOpen(false)}
-              className="h-9 w-9 flex items-center justify-center rounded-full bg-black/5 text-[#111]"
-            >
-              ✕
-            </button>
-          </div>
+         <div className="flex items-center justify-between px-6 py-5 border-b border-black/10">
+  <Link
+    href="/"
+    onClick={() => setOpen(false)}
+    className="flex items-center"
+  >
+    <div className="relative w-[110px] h-[28px]">
+      <Image
+        src="/education-1.svg"
+        alt="ERAM Education"
+        fill
+        sizes="110px"
+        style={{
+          objectFit: "contain",
+          objectPosition: "left",
+        }}
+      />
+    </div>
+  </Link>
+  <button
+    onClick={() => setOpen(false)}
+    className="h-9 w-9 flex items-center justify-center rounded-full bg-black/5 text-[#111]"
+  >
+    ✕
+  </button>
+</div>
 
           <nav className="flex flex-col px-7 py-8 overflow-y-auto">
             {navItems.map((item) => {

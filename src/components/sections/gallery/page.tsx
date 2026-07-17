@@ -127,7 +127,29 @@ export default function GalleryClient() {
   const lightboxItem =
     lightboxIndex !== null ? filteredItems[lightboxIndex] : null;
 
-  const heroImage = filteredItems[0]?.image;
+  // Hero image cycles randomly through the gallery every 5s instead of
+  // always showing the first item.
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  // Cycle hero image every 5s, picking a random image from the filtered set
+  useEffect(() => {
+    if (filteredItems.length <= 1) return;
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => {
+        let next = Math.floor(Math.random() * filteredItems.length);
+        if (next === prev) next = (next + 1) % filteredItems.length;
+        return next;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [filteredItems.length]);
+
+  // Reset to the first image whenever filters change (new fetch)
+  useEffect(() => {
+    setHeroIndex(0);
+  }, [activeCategory, activeType]);
+
+  const heroImage = filteredItems[heroIndex]?.image;
 
   const isFiltered = activeCategory !== "all" || activeType !== "all";
   const clearFilters = useCallback(() => {
@@ -163,6 +185,21 @@ export default function GalleryClient() {
       }
     },
     { scope: heroRef },
+  );
+
+  // Crossfade the hero image whenever it cycles to a new random photo
+  useGSAP(
+    () => {
+      if (!heroImage || !heroRef.current) return;
+      const imgEl = heroRef.current.querySelector(".hero-reveal-img img");
+      if (!imgEl) return;
+      gsap.fromTo(
+        imgEl,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: "power2.out" },
+      );
+    },
+    { dependencies: [heroImage], scope: heroRef },
   );
 
   // Re-run entrance animation every time the visible set changes
@@ -279,9 +316,10 @@ export default function GalleryClient() {
           <div className="hero-reveal-img relative flex-1 min-h-[220px] md:min-h-0">
             {heroImage ? (
               <img
+                key={heroImage}
                 src={heroImage}
                 alt="ERAM Gallery"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
             ) : (
               <div className="absolute inset-0 bg-[#8f0f28]" />
@@ -297,7 +335,18 @@ export default function GalleryClient() {
             <p className="mb-2 text-[11px] font-rethink uppercase tracking-[0.2em] text-gray-500">
               Filter by Institution
             </p>
-            <div className="flex flex-wrap gap-2">
+
+            {/* Mobile: dropdown */}
+            <div className="md:hidden">
+              <Dropdown
+                value={activeCategory}
+                onChange={setActiveCategory}
+                options={[{ id: "all", label: "All Schools" }, ...CATEGORIES]}
+              />
+            </div>
+
+            {/* Desktop: pills */}
+            <div className="hidden md:flex flex-wrap gap-2">
               <FilterPill
                 label="All Schools"
                 active={activeCategory === "all"}
@@ -316,17 +365,21 @@ export default function GalleryClient() {
 
           {/* Type filter + clear */}
           <div className="flex items-end gap-3">
-            <div>
+            <div className="flex-1 md:flex-initial">
               <p className="mb-2 text-[11px] font-rethink uppercase tracking-[0.2em] text-gray-500">
                 Filter by Type
               </p>
-              <TypeDropdown value={activeType} onChange={setActiveType} />
+              <Dropdown
+                value={activeType}
+                onChange={setActiveType}
+                options={[{ id: "all", label: "All Types" }, ...TYPES]}
+              />
             </div>
 
             <button
               onClick={clearFilters}
               disabled={!isFiltered}
-              className="font-rethink text-[12px] uppercase tracking-widest px-5 py-2.5 rounded-full border border-[#ae1431]/40 text-[#ae1431] hover:bg-[#ae1431] hover:text-white transition-colors duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-[#ae1431] flex items-center gap-2"
+              className="font-rethink text-[12px] uppercase tracking-widest px-5 py-2.5 rounded-full border border-[#ae1431]/40 text-[#ae1431] hover:bg-[#ae1431] hover:text-white transition-colors duration-200 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-[#ae1431] flex items-center gap-2 shrink-0"
             >
               Clear Filter ↻
             </button>
@@ -553,26 +606,28 @@ function FilterPill({
 }
 
 /**
- * Custom "Filter by Type" dropdown — replaces the native <select>.
+ * Generic "select" dropdown — replaces the native <select>.
  * Matches the pill-based filter aesthetic (white bg, brand-red text/border,
  * rounded-full trigger) with an animated floating panel instead of the
  * default browser dropdown UI.
+ *
+ * Used for:
+ *  - "Filter by Type" (all breakpoints)
+ *  - "Filter by Institution" (mobile only — desktop uses <FilterPill> list)
  */
-function TypeDropdown({
+function Dropdown<T extends string>({
   value,
   onChange,
+  options,
 }: {
-  value: TypeId | "all";
-  onChange: (val: TypeId | "all") => void;
+  value: T | "all";
+  onChange: (val: T | "all") => void;
+  options: { id: T | "all"; label: string }[];
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  const options: { id: TypeId | "all"; label: string }[] = [
-    { id: "all", label: "All Types" },
-    ...TYPES,
-  ];
   const selected = options.find((o) => o.id === value) ?? options[0];
 
   // Close on outside click
@@ -631,7 +686,7 @@ function TypeDropdown({
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className={`flex items-center gap-2 cursor-pointer rounded-full border px-4 py-1.5 text-xs md:text-sm font-rethink uppercase tracking-wide transition-colors duration-200 ${
+        className={`flex w-full items-center justify-between gap-2 cursor-pointer rounded-full border px-4 py-1.5 text-xs md:text-sm font-rethink uppercase tracking-wide transition-colors duration-200 md:w-auto ${
           open
             ? "border-[#ae1431] bg-[#ae1431] text-white"
             : "border-white bg-white text-[#ae1431] hover:border-[#ae1431]/40"
@@ -640,7 +695,7 @@ function TypeDropdown({
         {selected.label}
         <ChevronDown
           size={14}
-          className={`transition-transform duration-200 ${
+          className={`shrink-0 transition-transform duration-200 ${
             open ? "rotate-180" : ""
           }`}
         />
@@ -650,7 +705,7 @@ function TypeDropdown({
         ref={panelRef}
         role="listbox"
         style={{ display: "none" }}
-        className="absolute left-0 top-[calc(100%+8px)] z-40 w-44 origin-top overflow-hidden rounded-xl border border-black/10 bg-white p-1.5 shadow-[0_20px_40px_-12px_rgba(17,5,8,0.25)]"
+        className="absolute left-0 top-[calc(100%+8px)] z-40 w-full md:w-44 origin-top overflow-hidden rounded-xl border border-black/10 bg-white p-1.5 shadow-[0_20px_40px_-12px_rgba(17,5,8,0.25)]"
       >
         {options.map((opt) => {
           const isActive = opt.id === value;

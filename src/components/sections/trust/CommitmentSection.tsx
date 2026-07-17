@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, Fragment } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 
@@ -9,9 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 interface InkHeadingProps {
   text: string;
   headingRef: React.RefObject<HTMLHeadingElement | null>;
+   mobileBreakAfter?: number[];
 }
 
-function InkHeading({ text, headingRef }: InkHeadingProps) {
+function InkHeading({ text, headingRef, mobileBreakAfter = [] }: InkHeadingProps) {
   const words = text.split(" ");
 
   return (
@@ -20,9 +21,14 @@ function InkHeading({ text, headingRef }: InkHeadingProps) {
       className="font-display text-[clamp(2.2rem,3.4vw,3.5rem)] leading-[1.1] text-[#1a1208] tracking-[-0.01em]"
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block mr-[0.2em] overflow-hidden">
-          <span className="ls-word inline-block">{word}</span>
-        </span>
+          <Fragment key={i}>
+          <span className="inline-block mr-[0.2em] overflow-hidden">
+            <span className="ls-word inline-block">{word}</span>
+          </span>
+          {mobileBreakAfter.includes(i) && (
+            <span className="block w-full h-0 sm:hidden" aria-hidden="true" />
+          )}
+       </Fragment>
       ))}
     </h2>
   );
@@ -264,6 +270,7 @@ export default function CommitmentSection() {
             <InkHeading
               text="Our Commitment To Structured Responsibility"
               headingRef={headingRef}
+              mobileBreakAfter={[1, 3]}
             />
             <TypewriterQuote
               text='"Commitment Beyond Institutions"'

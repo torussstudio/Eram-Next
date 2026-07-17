@@ -7,6 +7,8 @@ import { useGSAP } from "@gsap/react";
 import { shell } from "../../../../constants/homeStyles";
 import { Play } from "lucide-react";
 import { useSmoothScroll } from "../../../../hooks/useSmoothScroll";
+import { useState } from "react";
+import { ArrowUp, ArrowDown } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +26,7 @@ export default function AcademicStreams() {
   const subLabelRef = useRef<HTMLParagraphElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const principalRef = useRef<HTMLDivElement>(null);
+   const [showInfo, setShowInfo] = useState(false);
 
   const scrollTo = useSmoothScroll();
 
@@ -251,14 +254,21 @@ export default function AcademicStreams() {
 
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-black/10" />
-
+ <button
+              onClick={() => setShowInfo((prev) => !prev)}
+              className="absolute bottom-4 right-4 z-40 lg:hidden w-10 h-10 rounded-full bg-[#ae1431] text-white flex items-center justify-center shadow-lg"
+              aria-label="Toggle principal info"
+            >
+              {showInfo ? <ArrowDown size={18} /> : <ArrowUp size={18} />}
+            </button>
             {/* Static Content */}
             <div
-              className="
-    absolute bottom-0 left-0 w-full p-8 md:p-10 z-20
+           className={`
+    absolute left-0 w-full p-8 md:p-10 z-20
     transition-all duration-700
-    group-hover:bottom-30
-  "
+    ${showInfo ? "bottom-40" : "bottom-0"}
+    lg:bottom-0 lg:group-hover:bottom-40
+  `}
             >
               <p className="font-rethink text-[11px] tracking-[0.28em] text-white uppercase mb-6">
                 Our Principal
@@ -274,8 +284,16 @@ export default function AcademicStreams() {
             </div>
 
             {/* Hover Reveal */}
-            <div className="absolute inset-0 flex items-end p-8 md:p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 pointer-events-none">
-              <div className="translate-y-10 group-hover:translate-y-0 transition-all duration-500">
+               <div
+              className={`absolute inset-0 flex items-end p-8 md:p-10 transition-all duration-500 z-30
+                ${showInfo ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+                lg:opacity-0 lg:group-hover:opacity-100 lg:pointer-events-none lg:group-hover:pointer-events-auto`}
+            >
+              <div
+                className={`transition-all duration-500
+                  ${showInfo ? "translate-y-0" : "translate-y-10"}
+                  lg:translate-y-10 lg:group-hover:translate-y-0`}
+              >
                 <div className="w-12 h-[2px] bg-[#ae1431] mb-6" />
 
                 <p className="text-[#e4dad2] text-[14px] leading-[1.9] max-w-[420px]">

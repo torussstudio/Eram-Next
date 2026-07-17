@@ -153,10 +153,7 @@ export default function Hero() {
   );
 
   return (
-    <section
-  ref={sectionRef}
-  className="bg-[#F5EFE8] py-9 px-3 md:px-6"
->
+    <section ref={sectionRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       {/* ── HERO CARD ── */}
       <div className="relative rounded-[28px] overflow-hidden text-white">
         {/* BACKGROUND */}
@@ -171,12 +168,12 @@ export default function Hero() {
 
         {/* CONTENT */}
         <div
-  className="relative z-10 flex flex-col justify-start pt-6 sm:pt-8 md:pt-[48px]
+          className="relative z-10 flex flex-col justify-start pt-6 sm:pt-8 md:pt-[48px]
     min-h-[520px] sm:min-h-[560px] md:min-h-[600px] lg:min-h-[680px]"
->
+        >
           {/* TOP SECTION */}
           <div
-  className="
+            className="
     w-full
 
     px-5
@@ -204,7 +201,7 @@ export default function Hero() {
     gap-6
     lg:gap-8
   "
->
+          >
             {/* LEFT */}
             <div className="flex-1 max-w-[700px]">
               <div
@@ -241,27 +238,63 @@ export default function Hero() {
 
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
                 <button
-                onClick={() => router.push("/contact")}
+                  onClick={() => router.push("/contact")}
                   className="
-    font-rethink bg-[#ae1431]
-    px-5 md:px-7 py-2.5 md:py-3
-    text-[10px] sm:text-[11px] md:text-[12px]
-    tracking-[0.12em] uppercase
-    cursor-pointer active:scale-[0.98]
-    transition-transform rounded-[12px]
-    flex items-center hover:bg-black justify-center gap-2
+    font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-[#ae1431]
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
     whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-black
+    hover:text-white
+    hover:border-black
+    flex
+    items-center
+    justify-center
+    gap-2
   "
                 >
                   <span>Admissions Open</span>
-                <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
                 <button
                   onClick={() => router.push("/contact")}
-                  className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
-                    text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
-                    flex items-center gap-2 cursor-pointer 
-                    active:scale-[0.98] transition-transform hover:bg-white hover:text-[#ae1431] rounded-[12px]"
+                  className="
+    font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-white
+    px-7
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-white
+    hover:text-[#ae1431]
+    hover:border-white
+    flex
+    items-center
+    justify-center
+  "
                 >
                   Enquire Now
                 </button>
@@ -271,14 +304,13 @@ export default function Hero() {
             {/* RIGHT PANEL */}
             <div
               ref={panelRef}
-             className="font-rethink w-full sm:w-[300px] lg:w-[280px]
+              className="font-rethink w-full sm:w-[300px] lg:w-[280px]
   bg-[linear-gradient(180deg,rgba(0,0,0,0.55),rgba(0,0,0,0.35))]
   backdrop-blur-md
   border border-white/10 rounded-md p-5
   lg:ml-auto xl:mr-16
   2xl:mr-20 mt-2 lg:mt-0 will-change-transform"
->
-            
+            >
               <div className="flex items-center gap-3 mb-5">
                 <span
                   ref={lineRef}

@@ -441,12 +441,12 @@ export default function AcademicStreams() {
         aria-hidden="true"
       />
 
-      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-16 md:py-20 lg:py-24">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 py-6 sm:py-14 md:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24">
           {/* ══ LEFT COLUMN ══════════════════════════════════════════════════ */}
-          <div className="relative w-full min-h-[500px] lg:min-h-[720px] overflow-hidden rounded-[24px]">
+          <div className="relative w-full min-h-[350px] lg:min-h-[720px]  rounded-[24px]">
             {/* Top Logo Section */}
-            <div className="relative h-[42%] w-full overflow-hidden bg-[#111] flex items-center justify-center p-6">
+            <div className="relative rounded-t-[12px] h-[42%] w-full overflow-hidden bg-[#111] flex items-center justify-center p-6">
               <img
                 src="/images/mmhsss.avif"
                 alt="Logo Background"
@@ -457,7 +457,7 @@ export default function AcademicStreams() {
             </div>
 
             {/* Bottom School Image */}
-            <div className="relative h-[58%] w-full overflow-hidden">
+            <div className="relative rounded-b-[12px] h-[58%] w-full overflow-hidden">
               <img
                 src="/images/mmhss.avif"
                 alt="Academic Structure"

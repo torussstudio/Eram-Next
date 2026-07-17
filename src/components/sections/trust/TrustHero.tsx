@@ -94,13 +94,13 @@ function AboutHero() {
   className="
   relative overflow-hidden rounded-[28px]
 
-  h-[85vh]
+  h-[62vh]
   sm:h-[65vh]
   md:h-[70vh]
   lg:h-[75vh]
   xl:h-[85vh]
 
-  min-h-[460px]
+  min-h-[400px]
   sm:min-h-[520px]
   md:min-h-[560px]
 
@@ -255,7 +255,8 @@ Founded under the CSR vision of the Eram Group, the Trust advances structured co
     gap-2
   "
 >
-  <span>View Our Community Interventions</span>
+ <span className="sm:hidden">View Our Interventions</span>
+ <span className="hidden sm:inline">View Our Community Interventions</span>
   <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
 </button>
               </div>

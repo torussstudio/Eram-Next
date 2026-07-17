@@ -163,8 +163,7 @@ export default function LegacySection() {
             <button
             onClick={() => router.push("/contact")}
               ref={btn1Ref}
-              className="group relative bg-[#ae1431] text-white px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] rounded-[12px] uppercase flex items-center gap-3 overflow-hidden w-full sm:w-auto hover:bg-black transition-all duration-300 cursor-pointer"
-            >
+            className="group relative bg-[#ae1431] text-white px-[clamp(14px,1.8vw,20px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] rounded-[12px] uppercase flex items-center justify-center gap-3 overflow-hidden w-auto self-start md:self-auto hover:bg-black transition-all duration-300 cursor-pointer">
               <span className="font-rethink relative z-10">
                 Partner in Responsible Impact
               </span>
@@ -200,7 +199,7 @@ export default function LegacySection() {
                     setTimeout(() => scrollToInstitutions(), 300);
                   }}
               ref={btn2Ref}
-              className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(20px,2.5vw,30px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center gap-3 overflow-hidden w-full sm:w-auto hover:bg-black hover:text-white transition-all duration-300 cursor-pointer"
+               className="group relative border rounded-[12px] border-black/35 text-[#111] px-[clamp(14px,1.8vw,20px)] py-[clamp(12px,1.5vw,15px)] text-[11px] tracking-[0.18em] uppercase flex items-center justify-center gap-3 overflow-hidden w-auto self-start md:self-auto hover:bg-black hover:text-white transition-all duration-300 cursor-pointer"
             >
               <span className="font-rethink relative z-10 group-hover:text-white transition-colors duration-300">
                 Discover Our Academic Framework

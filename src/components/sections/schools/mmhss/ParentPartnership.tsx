@@ -95,8 +95,13 @@ function AcademicFocusSection() {
       <div className="mx-auto w-full max-w-[1200px]">
         {/* Heading */}
         <h2 className="font-display text-[28px] sm:text-[36px] lg:text-[42px] leading-[1.15] text-neutral-900">
-          Academic Discipline. Coordinated <br /> Oversight. Sustained Growth.
-        </h2>
+  <span className="sm:hidden">
+    Academic Discipline.<br /> Coordinated Oversight.<br /> Sustained Growth.
+  </span>
+  <span className="hidden sm:inline">
+    Academic Discipline. Coordinated <br /> Oversight. Sustained Growth.
+  </span>
+</h2>
 
         {/* Intro paragraph */}
         <p className="font-rethink mt-5 max-w-2xl text-[13px] sm:text-[14px] leading-relaxed text-neutral-600">
@@ -108,8 +113,30 @@ function AcademicFocusSection() {
         </p>
 
         {/* Tabs */}
-        <div className="mt-10 flex items-end justify-between gap-6 border-b border-neutral-900/10">
-          <div className="flex flex-wrap gap-x-14 gap-y-3">
+        <div className="mt-10 flex items-end justify-between gap-6 sm:border-b sm:border-neutral-900/10">
+          {/* Mobile pill scroller */}
+          <div className="flex w-full gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden">
+            {TABS.map((tab) => {
+              const isActive = tab.key === activeTab;
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={[
+                    "shrink-0 cursor-pointer whitespace-nowrap rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.15em] transition-all duration-200 border",
+                    isActive
+                      ? "bg-[#ae1431] border-[#ae1431] text-white font-display shadow-sm"
+                      : "bg-white/70 border-neutral-900/10 text-neutral-600 font-rethink",
+                  ].join(" ")}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop tabs */}
+          <div className="hidden flex-wrap gap-x-14 gap-y-3 sm:flex">
             {TABS.map((tab) => {
               const isActive = tab.key === activeTab;
               return (
@@ -209,6 +236,44 @@ function AcademicFocusSection() {
               canScrollRight ? "opacity-100" : "opacity-0",
             ].join(" ")}
           />
+        </div>
+
+        {/* Mobile carousel arrows */}
+        <div className="mt-6 flex items-center justify-center gap-3 sm:hidden">
+          <button
+            type="button"
+            aria-label="Previous"
+            disabled={!canScrollLeft}
+            onClick={() => scrollByCard(-1)}
+            className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 active:border-[#ae1431] active:text-[#ae1431]"
+          >
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path
+                d="M6 1L1 6L6 11"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Next"
+            disabled={!canScrollRight}
+            onClick={() => scrollByCard(1)}
+            className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 active:border-[#ae1431] active:text-[#ae1431]"
+          >
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path
+                d="M1 1L6 6L1 11"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

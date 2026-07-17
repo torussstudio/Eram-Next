@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import api from "@/lib/api";
+import { ChevronDown, Check } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +25,131 @@ interface GalleryItem {
 }
 
 type TypeFilter = "all" | "general" | "sports" | "cultural" | "social" | "academic";
+
+// ─── Dropdown (same component/style as Events page) ─────────────────────────
+
+function Dropdown<T extends string>({
+  value,
+  onChange,
+  options,
+  align = "left",
+}: {
+  value: T;
+  onChange: (val: T) => void;
+  options: { id: T; label: string }[];
+  align?: "left" | "right";
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const selected = options.find((o) => o.id === value) ?? options[0];
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useGSAP(
+    () => {
+      if (!panelRef.current) return;
+      if (open) {
+        gsap.set(panelRef.current, { display: "block" });
+        gsap.fromTo(
+          panelRef.current,
+          { opacity: 0, y: -6, scale: 0.98 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: "power2.out" },
+        );
+      } else {
+        gsap.to(panelRef.current, {
+          opacity: 0,
+          y: -6,
+          scale: 0.98,
+          duration: 0.12,
+          ease: "power2.in",
+          onComplete: () => {
+            if (panelRef.current) panelRef.current.style.display = "none";
+          },
+        });
+      }
+    },
+    { dependencies: [open] },
+  );
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className={`flex items-center gap-2 cursor-pointer rounded-full border px-5 py-2.5 md:px-5 md:py-2 text-sm md:text-sm font-rethink uppercase tracking-wide transition-colors duration-200 whitespace-nowrap ${
+          open
+            ? "border-[#ae1431] bg-[#ae1431] text-white"
+            : "border-black/15 bg-white text-[#ae1431] hover:border-[#ae1431]/40"
+        }`}
+      >
+        {selected.label}
+        <ChevronDown
+          size={14}
+          className={`shrink-0 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      <div
+        ref={panelRef}
+        role="listbox"
+        style={{ display: "none" }}
+        className={`absolute top-[calc(100%+8px)] z-40 w-48 origin-top overflow-hidden rounded-xl border border-black/10 bg-white p-1.5 shadow-[0_20px_40px_-12px_rgba(17,5,8,0.25)] ${
+          align === "right" ? "right-0" : "left-0"
+        }`}
+      >
+        {options.map((opt) => {
+          const isActive = opt.id === value;
+          return (
+            <button
+              key={opt.id}
+              type="button"
+              role="option"
+              aria-selected={isActive}
+              onClick={() => {
+                onChange(opt.id);
+                setOpen(false);
+              }}
+              className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-4 py-2.5 text-left text-sm md:text-base font-rethink uppercase tracking-wide transition-colors duration-150 ${
+                isActive
+                  ? "bg-[#ae1431] text-white"
+                  : "text-neutral-700 hover:bg-[#ae1431]/8 hover:text-[#ae1431]"
+              }`}
+            >
+              {opt.label}
+              {isActive && <Check size={16} />}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function GalleryPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -136,38 +260,40 @@ export default function GalleryPage() {
   );
 
   return (
-    <div ref={containerRef} className="bg-[#F5EFE8] text-black overflow-hidden">
+    <div ref={containerRef} className="bg-[#F5EFE8] text-black">
       <section id="gallery" className="pt-6 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* HEADER */}
           <div className="mb-8">
-            <div className="anim-hero-tag flex items-center gap-3 mb-6">
+            <div className="anim-hero-tag flex items-center gap-3 mb-6 justify-center sm:justify-start">
               <span className="font-rethink text-[12px] tracking-widest uppercase text-[#ae1431] ">
                 Gallery
               </span>
             </div>
 
-            <h1 className="font-display anim-hero-title text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-[-0.02em] mb-8">
-             Moments and milestones that <br/>shape every learner and define <br/>the ERAM community.
+            <h1 className="font-display anim-hero-title text-[#1a1209] text-3xl md:text-4xl lg:text-5xl leading-[1.15] tracking-[-0.02em] mb-8 text-center sm:text-left">
+              <span className="sm:hidden">
+                Moments and milestones that shape every learner and define the ERAM community.
+              </span>
+              <span className="hidden sm:inline">
+                Moments and milestones that <br/>shape every learner and define <br/>the ERAM community.
+              </span>
             </h1>
 
           </div>
 
-          {/* TYPE FILTER PILLS */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {types.map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setActiveType(t.id)}
-                className={`font-rethink text-[13px] uppercase tracking-wide px-4 py-2 rounded-full border transition-colors cursor-pointer ${
-                  activeType === t.id
-                    ? "bg-[#ae1431] border-[#ae1431] text-white"
-                    : "border-white/20 text-black hover:border-white/50 hover:text-[#ae1431]"
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
+          {/* TYPE FILTER — same dropdown component as Events page, on all screens */}
+          <div className="mb-10 flex items-center justify-between gap-3">
+            <Dropdown
+              value={activeType}
+              onChange={setActiveType}
+              align="left"
+              options={types}
+            />
+
+            <span className="font-rethink text-[12px] tracking-[0.14em] uppercase text-black text-right">
+              {filteredItems.length} RESULTS
+            </span>
           </div>
 
           {/* GRID */}

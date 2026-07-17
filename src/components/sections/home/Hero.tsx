@@ -25,7 +25,7 @@ const SLIDES = [
     subline: "Holistic, disciplined, and inclusive education for every child.",
     description:
       "A disciplined educational ecosystem nurturing academic excellence, character, and opportunity.",
-sublineLogo: "",
+    sublineLogo: "",
     primaryButton: {
       text: "Explore Our Institutions",
       link: "#institutions",
@@ -41,7 +41,7 @@ sublineLogo: "",
     titleLine2: "Educational Ecosystem.",
     description:
       "ERAM operates an integrated educational ecosystem that supports learners across multiple stages of education.",
-sublineLogo: "",
+    sublineLogo: "",
     primaryButton: {
       text: "Explore Our Institutions",
       link: "#institutions",
@@ -58,7 +58,7 @@ sublineLogo: "",
     titleLine2: "Trained Teachers & NSS Volunteers",
     description:
       "Under the SATYAM (WHO–AIIMS–CCET) School First Aid & CPR Project.",
-sublineLogo: "",
+    sublineLogo: "",
     primaryButton: {
       text: "Explore Our Institutions",
       link: "#institutions",
@@ -97,7 +97,7 @@ export default function Hero() {
 
   const titleLine1Ref = useRef<HTMLSpanElement>(null);
   const titleLine2Ref = useRef<HTMLSpanElement>(null);
-const sublineRef = useRef<HTMLDivElement>(null);
+  const sublineRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
 
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -123,34 +123,33 @@ const sublineRef = useRef<HTMLDivElement>(null);
     }, SLIDE_DURATION);
   }, [slides.length]);
 
- useEffect(() => {
-  const fetchHero = async () => {
-    try {
-      const res = await getHero();
+  useEffect(() => {
+    const fetchHero = async () => {
+      try {
+        const res = await getHero();
 
-      if (res.success && res.data.slides?.length) {
-        setSlides((prev) =>
-          prev.map((localSlide, i) => {
-            const backendSlide = res.data.slides[i];
-            if (!backendSlide) return localSlide;
-            return {
-  ...localSlide,
-  ...backendSlide,
-  image: backendSlide.image || localSlide.image,
-  subline: backendSlide.subline || localSlide.subline,
-  sublineLogo:
-    backendSlide.sublineLogo || localSlide.sublineLogo,
-};
-          })
-        );
+        if (res.success && res.data.slides?.length) {
+          setSlides((prev) =>
+            prev.map((localSlide, i) => {
+              const backendSlide = res.data.slides[i];
+              if (!backendSlide) return localSlide;
+              return {
+                ...localSlide,
+                ...backendSlide,
+                image: backendSlide.image || localSlide.image,
+                subline: backendSlide.subline || localSlide.subline,
+                sublineLogo: backendSlide.sublineLogo || localSlide.sublineLogo,
+              };
+            }),
+          );
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    };
 
-  fetchHero();
-}, []);
+    fetchHero();
+  }, []);
 
   useEffect(() => {
     startAutoSlide();
@@ -435,8 +434,8 @@ const sublineRef = useRef<HTMLDivElement>(null);
       id="hero"
       className="bg-[#F5EFE8] py-9 px-3 md:px-6"
     >
-<div
-  className="
+      <div
+        className="
     relative overflow-hidden rounded-[28px]
 
     h-[60vh]
@@ -451,7 +450,7 @@ const sublineRef = useRef<HTMLDivElement>(null);
 
     max-h-[760px]
   "
->
+      >
         {/* ───────────────── Background Image Slider ───────────────── */}
         <div className="absolute inset-0">
           {slides.map((s, i) => (
@@ -477,7 +476,7 @@ const sublineRef = useRef<HTMLDivElement>(null);
 
         {/* ───────────────── Content ───────────────── */}
         <div
-  className="
+          className="
     absolute inset-0
     z-10 flex items-center
     justify-center xl:justify-start
@@ -489,30 +488,30 @@ md:px-12 md:py-20
 lg:px-16 lg:py-24
 xl:px-24 xl:py-24
   "
->
-        <div className="max-w-[720px] xl:max-w-[900px] text-white mx-auto xl:mx-30">
-  {/* Heading */}
-  <h1
-    className="
+        >
+          <div className="max-w-[720px] xl:max-w-[900px] text-white mx-auto xl:mx-30">
+            {/* Heading */}
+            <h1
+              className="
       font-display
       leading-[0.95]
       tracking-[-0.04em]
       text-[clamp(2.2rem,5vw,3.35rem)]
     "
-  >
-    <span ref={titleLine1Ref} className="block">
-      {slide.titleLine1}
-    </span>
+            >
+              <span ref={titleLine1Ref} className="block">
+                {slide.titleLine1}
+              </span>
 
-    <span ref={titleLine2Ref} className="block">
-      {slide.titleLine2}
-    </span>
-  </h1>
+              <span ref={titleLine2Ref} className="block">
+                {slide.titleLine2}
+              </span>
+            </h1>
 
             {/* Subline */}
-<div
-  ref={sublineRef}
-  className="
+            <div
+              ref={sublineRef}
+              className="
     mt-6
     flex
     items-center
@@ -522,26 +521,26 @@ xl:px-24 xl:py-24
     xl:justify-start
     text-white/95
   "
->
-  <span
-    className="
+            >
+              <span
+                className="
       font-rethink
       text-[1rem]
       sm:text-[1.15rem]
       md:text-[1.3rem]
     "
-  >
-    {slide.subline}
-  </span>
+              >
+                {slide.subline}
+              </span>
 
-  {slide.sublineLogo && (
-    <img
-      src={resolveImageUrl(slide.sublineLogo)}
-      alt="Partner Logo"
-      className="h-8 w-auto object-contain"
-    />
-  )}
-</div>
+              {slide.sublineLogo && (
+                <img
+                  src={resolveImageUrl(slide.sublineLogo)}
+                  alt="Partner Logo"
+                  className="h-8 w-auto object-contain"
+                />
+              )}
+            </div>
 
             {/* Description */}
             <p
@@ -561,9 +560,9 @@ xl:px-24 xl:py-24
             </p>
 
             {/* Buttons (same across all slides) */}
-<div
-  ref={buttonsRef}
-  className="
+            <div
+              ref={buttonsRef}
+              className="
     mt-10
     flex flex-col
     items-center
@@ -575,10 +574,10 @@ xl:px-24 xl:py-24
 
     xl:justify-start
   "
->
-           <button
-  onClick={() => smoothScrollTo("institutions")}
-   className="
+            >
+              <button
+                onClick={() => smoothScrollTo("institutions")}
+                className="
     font-rethink
     w-full
     sm:w-auto
@@ -604,17 +603,17 @@ xl:px-24 xl:py-24
     justify-center
     gap-2
   "
->
-  {slide.primaryButton?.text || "Explore Our Institutions"}
-  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-</button>
+              >
+                {slide.primaryButton?.text || "Explore Our Institutions"}
+                <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
               <button
                 onClick={() =>
                   slide.secondaryButton?.link
                     ? router.push(slide.secondaryButton.link)
                     : router.push("/contact")
                 }
-        className="
+                className="
     font-rethink
     w-full
     sm:w-auto
@@ -645,10 +644,11 @@ xl:px-24 xl:py-24
           </div>
         </div>
 
-
-       {/* ───────────────── Slide Arrows (same on all phones, centered; bottom-right on tablet/desktop) ───────────────── */}
-<div className="absolute bottom-4 left-1/2 -translate-x-1/2
-md:bottom-6 md:left-auto md:translate-x-0 md:right-6 z-20 flex items-center gap-3">
+        {/* ───────────────── Slide Arrows (same on all phones, centered; bottom-right on tablet/desktop) ───────────────── */}
+        <div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2
+md:bottom-6 md:left-auto md:translate-x-0 md:right-6 z-20 flex items-center gap-3"
+        >
           <button
             onClick={goPrev}
             aria-label="Previous slide"

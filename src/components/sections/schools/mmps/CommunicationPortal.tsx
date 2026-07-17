@@ -177,7 +177,7 @@ export default function CommunicationPortal() {
           </div>
 
           {/* ── RIGHT — LIVE FEED ── */}
-         <div className="anim-feed-wrap lg:mt-0 mt-8 rounded-2xl overflow-hidden bg-[#7a1410] border border-white/10">
+         <div className="anim-feed-wrap lg:mt-0 -mt-7 rounded-2xl overflow-hidden bg-[#7a1410] border border-white/10">
   <div className="anim-feed-header text-sm text-white/70 bg-[#5a0e0e] px-4 py-3">
     MMPS — Live Communication Feed
   </div>

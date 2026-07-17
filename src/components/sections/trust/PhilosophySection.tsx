@@ -118,14 +118,19 @@ export default function PhilosophySection() {
             className="block"
             style={{ opacity: 0, transform: "translateY(60px)" }}
           >
-            The Philosophy
+            <span className="block sm:inline">The</span>
+            <span className="hidden sm:inline"> </span>
+            <span className="block sm:inline">
+              Philosophy<span className="sm:hidden"> of</span>
+            </span>
           </span>
           <span
             ref={headLine2Ref}
             className="block"
             style={{ opacity: 0, transform: "translateY(60px)" }}
           >
-            Of Sustainability
+             <span className="hidden sm:inline">Of </span>
+           Sustainability
           </span>
         </h2>
 

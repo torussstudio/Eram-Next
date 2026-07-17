@@ -16,6 +16,7 @@ import {
   Trophy,
   Palette,
   Megaphone,
+  Play,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -275,7 +276,7 @@ const StudentParentPortal = () => {
               educational ecosystem.
             </p>
             <button className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl active:scale-95 transition-all">
-              Proceed to Full Portal <ChevronRight size={18} />
+              Proceed to Full Portal <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
 
@@ -391,222 +392,226 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
             </div>
 
             <button className=" cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl hover:bg-black active:scale-95 transition-all ">
-              Proceed to Fees Portal <ChevronRight size={18} />
+              Proceed to Fees Portal <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
         </div>
       </section>
 
       {/* ── Institution Selection ── */}
-      <section className="pb-4">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <p className="text-gray-500 text-2xl font-rethink text-center mb-6">
-            Select Your Institution
-          </p>
-          {/* Tab strip */}
-          <div className="flex w-full border-b-[0.5px] border-gray-200 overflow-x-auto scrollbar-hide">
-            {institutions.map((inst) => (
-              <button
-                key={inst.id}
-                onClick={() => setSelectedInstitution(inst.id)}
-                className={`relative flex-1 py-2.5 text-[20px] whitespace-nowrap text-center 
+     <section className="pb-4">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <p className="text-gray-500 text-2xl font-rethink text-center mb-6">
+      Select Your Institution
+    </p>
+    {/* Tab strip */}
+    <div className="flex w-full border-b-[0.5px] border-gray-200 overflow-x-auto scrollbar-hide">
+      {institutions.map((inst) => (
+        <button
+          key={inst.id}
+          onClick={() => setSelectedInstitution(inst.id)}
+          className={`relative flex-1 py-2.5 text-[14px] sm:text-[20px] whitespace-nowrap text-center 
         cursor-pointer transition-colors bg-transparent border-none
         after:absolute after:bottom-[-0.9px] after:left-0 after:right-0 
         after:h-[3.5px] after:rounded-t-sm after:transition-colors
         ${
           selectedInstitution === inst.id
-            ? "text-[#ae1431] font-medium after:bg-[#ae1431]"
+            ? "text-[#ae1431] font-medium font-rethink after:bg-[#ae1431]"
             : "text-gray-500 hover:text-gray-800 after:bg-transparent"
         }`}
-              >
-                {inst.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+        >
+          {inst.name}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ── Notices card ── */}
-      <section className="pb-6 sm:pb-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <h3 className="text-lg sm:text-xl font-display text-gray-900">
-                  Institutional Notices &amp; Updates
-                </h3>
-                <span className="text-[#ae1431] font-rethink text-sm">
-                  {institutions.find((i) => i.id === selectedInstitution)?.full}
-                </span>
-              </div>
-              <Link
-  href="/events"
-  className="hidden sm:inline-flex shrink-0 items-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
->
-  View All Notices
-  <ChevronRight size={16} />
-</Link>
-            </div>
-
-            {noticesLoading ? (
-              <div className="text-center py-10">
-                <p className="text-gray-400 font-rethink text-sm">
-                  Loading notices…
-                </p>
-              </div>
-            ) : notices.length > 0 ? (
-              <div className="divide-y divide-gray-100">
-                {notices.map((notice) => (
-                  <div
-                    key={notice.id}
-                    className="flex items-center gap-4 py-4 first:pt-0 last:pb-0 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition-colors cursor-pointer"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-                      {getNoticeIcon(notice.category)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-gray-900 font-display text-sm leading-snug truncate">
-                        {notice.title}
-                      </h4>
-                      <p className="font-rethink text-gray-400 text-xs truncate mt-0.5">
-                        {notice.description}
-                      </p>
-                    </div>
-                    <span className="text-xs text-gray-400 font-rethink shrink-0">
-                      {notice.date}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-10">
-                <p className="text-gray-600 font-rethink text-sm">
-                  No notices available
-                </p>
-              </div>
-            )}
-
-               <Link
-  href="/events"
-  className="hidden sm:inline-flex shrink-0 items-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
->
-  View All Notices
-  <ChevronRight size={16} />
-</Link>
-          </div>
+     <section className="pb-6 sm:pb-8">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <h3 className="text-lg sm:text-xl font-display text-gray-900">
+            Institutional Notices &amp; Updates
+          </h3>
+          <span className="text-[#ae1431] font-rethink text-sm">
+            {institutions.find((i) => i.id === selectedInstitution)?.full}
+          </span>
         </div>
-      </section>
+        {/* Desktop-only link in header */}
+        <Link
+          href="/events"
+          className="hidden sm:inline-flex shrink-0 items-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
+        >
+          View All Notices
+          <ChevronRight size={16} />
+        </Link>
+      </div>
+
+      {noticesLoading ? (
+        <div className="text-center py-10">
+          <p className="text-gray-400 font-rethink text-sm">
+            Loading notices…
+          </p>
+        </div>
+      ) : notices.length > 0 ? (
+        <div className="divide-y divide-gray-100">
+          {notices.map((notice) => (
+            <div
+              key={notice.id}
+              className="flex items-center gap-4 py-4 first:pt-0 last:pb-0 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition-colors cursor-pointer"
+            >
+              <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                {getNoticeIcon(notice.category)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4 className="text-gray-900 font-display text-sm leading-snug truncate">
+                  {notice.title}
+                </h4>
+                <p className="font-rethink text-gray-400 text-xs truncate mt-0.5">
+                  {notice.description}
+                </p>
+              </div>
+              <span className="text-xs text-gray-400 font-rethink shrink-0">
+                {notice.date}
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-10">
+          <p className="text-gray-600 font-rethink text-sm">
+            No notices available
+          </p>
+        </div>
+      )}
+
+      {/* Mobile-only link at bottom */}
+      <Link
+        href="/events"
+        className="sm:hidden mt-4 flex items-center justify-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
+      >
+        View All Notices
+        <ChevronRight size={16} />
+      </Link>
+    </div>
+  </div>
+</section>
 
       {/* ── Download Centre card ── */}
-      <section className="pb-10 sm:pb-14">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <h3 className="text-lg sm:text-xl font-display text-gray-900">
-                  Download Centre
-                </h3>
-                <span className="text-[#ae1431] font-rethink text-sm">
-                  Academic Resources
-                </span>
-              </div>
-             <Link
-  href="/downloads"
-  className="hidden sm:inline-flex shrink-0 items-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
->
-  View All Resources
-  <ChevronRight size={16} />
-</Link>
-            </div>
+     <section className="pb-10 sm:pb-14">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <h3 className="text-lg sm:text-xl font-display text-gray-900">
+            Download Centre
+          </h3>
+          <span className="text-[#ae1431] font-rethink text-sm">
+            Academic Resources
+          </span>
+        </div>
+        {/* Desktop-only link in header */}
+        <Link
+          href="/downloads"
+          className="hidden sm:inline-flex shrink-0 items-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
+        >
+          View All Resources
+          <ChevronRight size={16} />
+        </Link>
+      </div>
 
-            {/* Search */}
-            <div className="relative mb-5">
-              <Search
-                className="absolute left-3.5 top-3.5 text-gray-400"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search study materials, question papers, assignments..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 border font-rethink border-gray-300 rounded-xl text-sm bg-white focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-100 transition"
-              />
-            </div>
+      {/* Search */}
+      <div className="relative mb-5">
+        <Search
+          className="absolute left-3.5 top-3.5 text-gray-400"
+          size={18}
+        />
+        <input
+          type="text"
+          placeholder="Search study materials, question papers, assignments..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full pl-11 pr-4 py-3 border font-rethink border-gray-300 rounded-xl text-sm bg-white focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-100 transition"
+        />
+      </div>
 
-            {/* Resources list */}
-            {downloadsLoading ? (
-              <div className="text-center py-10">
-                <p className="text-gray-400 font-rethink text-sm">
-                  Loading resources…
-                </p>
-              </div>
-            ) : (
-              <div className="divide-y divide-gray-100">
-                {filteredResources.length > 0 ? (
-                  filteredResources.map((resource) => {
-                    const { icon, bg } = getResourceIcon(resource.fileType);
-                    return (
-                      <div
-                        key={resource.id}
-                        className="flex items-center gap-4 py-4 first:pt-0 last:pb-0"
-                      >
-                        <div
-                          className={`w-10 h-10 rounded-lg ${bg} flex items-center justify-center shrink-0`}
-                        >
-                          {icon}
-                        </div>
+      {/* Resources list */}
+      {downloadsLoading ? (
+        <div className="text-center py-10">
+          <p className="text-gray-400 font-rethink text-sm">
+            Loading resources…
+          </p>
+        </div>
+      ) : (
+        <div className="divide-y divide-gray-100">
+          {filteredResources.length > 0 ? (
+            filteredResources.map((resource) => {
+              const { icon, bg } = getResourceIcon(resource.fileType);
+              return (
+                <div
+                  key={resource.id}
+                  className="flex items-center gap-4 py-4 first:pt-0 last:pb-0"
+                >
+                  <div
+                    className={`w-10 h-10 rounded-lg ${bg} flex items-center justify-center shrink-0`}
+                  >
+                    {icon}
+                  </div>
 
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-display text-sm text-gray-900 truncate">
-                            {resource.title}
-                          </h4>
-                          <p className="text-xs text-gray-400 font-rethink mt-0.5">
-                            {resource.category} &middot; {resource.fileType}
-                          </p>
-                        </div>
-
-                        <a
-                          href={`${BACKEND_URL}/api/downloads/${resource.id}/download`}
-                          download={`${resource.title}${resource.fileExtension}`}
-                          className="shrink-0 p-2.5 bg-[#ae1431] text-white rounded-lg hover:bg-black active:scale-95 transition-all"
-                        >
-                          <Download size={18} />
-                        </a>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-14">
-                    <Search size={40} className="mx-auto text-gray-300 mb-3" />
-                    <p className="text-gray-600 font-rethink text-sm">
-                      No resources found
-                    </p>
-                    <p className="text-gray-400 font-rethink mt-1">
-                      Try a different search term
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-display text-sm text-gray-900 truncate">
+                      {resource.title}
+                    </h4>
+                    <p className="text-xs text-gray-400 font-rethink mt-0.5">
+                      {resource.category} &middot; {resource.fileType}
                     </p>
                   </div>
-                )}
-              </div>
-            )}
 
-            {!downloadsLoading && filteredResources.length > 0 && (
-              <p className="text-center text-xs text-gray-400 mt-5">
-                Showing {filteredResources.length} resource
-                {filteredResources.length !== 1 ? "s" : ""}
+                  <a
+                    href={`${BACKEND_URL}/api/downloads/${resource.id}/download`}
+                    download={`${resource.title}${resource.fileExtension}`}
+                    className="shrink-0 p-2.5 bg-[#ae1431] text-white rounded-lg hover:bg-black active:scale-95 transition-all"
+                  >
+                    <Download size={18} />
+                  </a>
+                </div>
+              );
+            })
+          ) : (
+            <div className="text-center py-14">
+              <Search size={40} className="mx-auto text-gray-300 mb-3" />
+              <p className="text-gray-600 font-rethink text-sm">
+                No resources found
               </p>
-            )}
-
-                 <Link
-  href="/downloads"
-  className="hidden sm:inline-flex shrink-0 items-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
->
-  View All Resources
-  <ChevronRight size={16} />
-</Link>
-          </div>
+              <p className="text-gray-400 font-rethink mt-1">
+                Try a different search term
+              </p>
+            </div>
+          )}
         </div>
-      </section>
+      )}
+
+      {!downloadsLoading && filteredResources.length > 0 && (
+        <p className="text-center text-xs text-gray-400 mt-5">
+          Showing {filteredResources.length} resource
+          {filteredResources.length !== 1 ? "s" : ""}
+        </p>
+      )}
+
+      {/* Mobile-only link at bottom */}
+      <Link
+        href="/downloads"
+        className="sm:hidden mt-4 flex items-center justify-center gap-1 text-[#ae1431] text-sm font-rethink hover:text-black transition-colors cursor-pointer"
+      >
+        View All Resources
+        <ChevronRight size={16} />
+      </Link>
+    </div>
+  </div>
+</section>
 
       {/* ── CTA ── */}
       <section className="bg-[#F5EFE8] pb-16 sm:pb-20">
@@ -625,12 +630,11 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
       <button 
         onClick={()=>router.push("/contact")} className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
         Admissions Open 2026–27
-        <ChevronRight size={20} />
+        <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
       </button>
 
       <button className="inline-flex items-center gap-2 px-8 py-3.5 border border-black text-black hover:bg-black hover:text-white text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
         Plan a Campus Visit
-        <ChevronRight size={20} />
       </button>
     </div>
   </div>

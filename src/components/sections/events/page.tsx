@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChevronDown, Check } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,7 +40,7 @@ type RawEvent = {
   description: string;
   category: "academic" | "sports" | "cultural" | "notice";
   type: "event" | "notification" | "circular";
-institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
+  institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
   date: string;
   time?: string;
   tag?: string;
@@ -82,7 +83,7 @@ function mapEvent(e: RawEvent): EramEvent {
       day: "numeric",
       year: "numeric",
     }),
-month: MONTHS[d.getMonth()],
+    month: MONTHS[d.getMonth()],
     day: String(d.getDate()).padStart(2, "0"),
     time: e.type === "event" ? e.time : undefined,
     institution: INSTITUTION_LABEL[e.institution] || e.institution,
@@ -109,19 +110,132 @@ const CAT_LABEL: Record<EventCategory, string> = {
   NOTICE: "Notices",
 };
 
-// ─── TypePill ────────────────────────────────────────────────────────────────
+const TYPE_OPTIONS: { id: EventType; label: string }[] = [
+  { id: "ALL", label: "All Types" },
+  { id: "EVENT", label: "Event" },
+  { id: "NOTIFICATION", label: "Notification" },
+];
 
-function TypePill({ type }: { type: EramEvent["type"] }) {
-  const colors: Record<EramEvent["type"], string> = {
-    EVENT: "border-[#ae1431]/60 text-[#ae1431]",
-    NOTIFICATION: "border-black text-black",
-  };
+// ─── Dropdown (gallery-style filter dropdown) ────────────────────────────────
+
+function Dropdown<T extends string>({
+  value,
+  onChange,
+  options,
+  align = "left",
+}: {
+  value: T;
+  onChange: (val: T) => void;
+  options: { id: T; label: string }[];
+  align?: "left" | "right";
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const selected = options.find((o) => o.id === value) ?? options[0];
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useGSAP(
+    () => {
+      if (!panelRef.current) return;
+      if (open) {
+        gsap.set(panelRef.current, { display: "block" });
+        gsap.fromTo(
+          panelRef.current,
+          { opacity: 0, y: -6, scale: 0.98 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: "power2.out" },
+        );
+      } else {
+        gsap.to(panelRef.current, {
+          opacity: 0,
+          y: -6,
+          scale: 0.98,
+          duration: 0.12,
+          ease: "power2.in",
+          onComplete: () => {
+            if (panelRef.current) panelRef.current.style.display = "none";
+          },
+        });
+      }
+    },
+    { dependencies: [open] },
+  );
+
   return (
-    <span
-      className={`inline-block shrink-0 border px-2 py-0.5 text-[9px] tracking-[0.15em] uppercase ${colors[type]}`}
-    >
-      {type}
-    </span>
+    <div ref={rootRef} className="relative">
+      <button
+  type="button"
+  onClick={() => setOpen((o) => !o)}
+  aria-haspopup="listbox"
+  aria-expanded={open}
+  className={`flex items-center gap-2 cursor-pointer rounded-full border px-5 py-2.5 md:px-5 md:py-2 text-sm md:text-sm font-rethink uppercase tracking-wide transition-colors duration-200 whitespace-nowrap ${
+    open
+      ? "border-[#ae1431] bg-[#ae1431] text-white"
+      : "border-black/15 bg-white text-[#ae1431] hover:border-[#ae1431]/40"
+  }`}
+>
+  {selected.label}
+  <ChevronDown
+    size={14}
+    className={`shrink-0 transition-transform duration-200 ${
+      open ? "rotate-180" : ""
+    }`}
+  />
+</button>
+
+      <div
+  ref={panelRef}
+  role="listbox"
+  style={{ display: "none" }}
+  className={`absolute top-[calc(100%+8px)] z-40 w-48 origin-top overflow-hidden rounded-xl border border-black/10 bg-white p-1.5 shadow-[0_20px_40px_-12px_rgba(17,5,8,0.25)] ${
+    align === "right" ? "right-0" : "left-0"
+  }`}
+>
+  {options.map((opt) => {
+    const isActive = opt.id === value;
+    return (
+      <button
+        key={opt.id}
+        type="button"
+        role="option"
+        aria-selected={isActive}
+        onClick={() => {
+          onChange(opt.id);
+          setOpen(false);
+        }}
+        className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-4 py-2.5 text-left text-sm md:text-base font-rethink uppercase tracking-wide transition-colors duration-150 ${
+          isActive
+            ? "bg-[#ae1431] text-white"
+            : "text-neutral-700 hover:bg-[#ae1431]/8 hover:text-[#ae1431]"
+        }`}
+      >
+        {opt.label}
+        {isActive && <Check size={16} />}
+      </button>
+    );
+  })}
+</div>
+    </div>
   );
 }
 
@@ -164,10 +278,10 @@ function EventCard({
       className="group relative flex gap-4 sm:gap-5 border-b border-white/[0.07] py-6 sm:py-7 opacity-0 transition-colors hover:bg-white/[0.025]"
     >
       <div className="hidden xs:flex flex-shrink-0 w-11 sm:w-14 flex-col items-center pt-0.5">
-        <span className="text-xl sm:text-2xl leading-none text-white">
+        <span className="font-rethink text-xl sm:text-2xl leading-none text-white">
           {ev.day}
         </span>
-        <span className="mt-0.5 text-[8px] tracking-[0.18em] uppercase text-black">
+        <span className="font-rethink mt-0.5 text-[8px] tracking-[0.18em] uppercase text-black">
           {ev.month}
         </span>
       </div>
@@ -196,10 +310,10 @@ function EventCard({
 
       <div className="flex-1 min-w-0">
         <div className="flex xs:hidden items-baseline gap-2 mb-2">
-          <span className="text-base text-black leading-none">
+          <span className="font-rethink text-base text-black leading-none">
             {ev.day}
           </span>
-          <span className="text-[9px] tracking-[0.16em] uppercase text-black">
+          <span className="font-rethink text-[9px] tracking-[0.16em] uppercase text-black">
             {ev.month}
           </span>
         </div>
@@ -227,36 +341,36 @@ function EventCard({
         <div className="flex items-center gap-2 mb-2.5 flex-wrap">
           <TypePill type={ev.type} />
           {ev.tag && (
-            <span className="text-[9px] tracking-[0.14em] uppercase text-black hidden sm:inline">
+            <span className="font-rethink text-[9px] tracking-[0.14em] uppercase text-black hidden sm:inline">
               {ev.tag}
             </span>
           )}
           {ev.isNew && (
-            <span className="inline-flex items-center gap-1 text-[9px] tracking-[0.14em] uppercase text-[#ae1431]">
+            <span className="font-rethink inline-flex items-center gap-1 text-[9px] tracking-[0.14em] uppercase text-[#ae1431]">
               <span className="inline-block w-1 h-1 rounded-full bg-[#ae1431] animate-pulse" />
               NEW
             </span>
           )}
           {ev.isPinned && (
-            <span className="text-[9px] tracking-[0.14em] uppercase text-amber-400/60">
+            <span className="font-rethink text-[9px] tracking-[0.14em] uppercase text-amber-400/60">
               PINNED
             </span>
           )}
         </div>
 
-        <h3 className="text-base sm:text-lg md:text-xl text-black leading-snug mb-1.5 group-hover:text-[#ae1431] transition-colors">
+        <h3 className="font-display text-base sm:text-lg md:text-xl text-black leading-snug mb-1.5 group-hover:text-[#ae1431] transition-colors">
           {ev.title}
         </h3>
 
-       {(ev.institution || ev.time) && (
-          <p className="text-[10px] tracking-[0.14em] uppercase text-[#ae1431]/70 mb-2">
+        {(ev.institution || ev.time) && (
+          <p className="font-rethink text-[10px] tracking-[0.14em] uppercase text-[#ae1431]/70 mb-2">
             {ev.institution}
             {ev.institution && ev.time ? " · " : ""}
             {ev.time}
           </p>
         )}
 
-        <p className=" sm:text-sm text-black leading-relaxed line-clamp-2">
+        <p className="font-rethink sm:text-sm text-black leading-relaxed line-clamp-2">
           {ev.description}
         </p>
       </div>
@@ -273,6 +387,20 @@ function EventCard({
         </svg>
       </div>
     </div>
+  );
+}
+
+function TypePill({ type }: { type: EramEvent["type"] }) {
+  const colors: Record<EramEvent["type"], string> = {
+    EVENT: "border-[#ae1431]/60 text-[#ae1431]",
+    NOTIFICATION: "border-black text-black",
+  };
+  return (
+    <span
+      className={`font-rethink inline-block shrink-0 border px-2 py-0.5 text-[9px] tracking-[0.15em] uppercase ${colors[type]}`}
+    >
+      {type}
+    </span>
   );
 }
 
@@ -334,7 +462,7 @@ function ImageLightbox({
 
       <p
         onClick={(e) => e.stopPropagation()}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.14em] uppercase text-white/40 max-w-[80vw] text-center truncate"
+        className="font-rethink absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.14em] uppercase text-white/40 max-w-[80vw] text-center truncate"
       >
         {title}
       </p>
@@ -349,7 +477,7 @@ export default function EventsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    const [lightbox, setLightbox] = useState<{ url: string; title: string } | null>(null);
+  const [lightbox, setLightbox] = useState<{ url: string; title: string } | null>(null);
   const openLightbox = (url: string, title: string) => setLightbox({ url, title });
   const closeLightbox = () => setLightbox(null);
 
@@ -425,215 +553,198 @@ export default function EventsPage() {
   const totalNotifs = events.filter((e) => e.type === "NOTIFICATION").length;
 
   return (
-      <>
-    <main className="min-h-screen bg-[#F5EFE8]">
-      <section
-        ref={heroRef}
-        className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 lg:px-20 border-b border-white/[0.07] overflow-hidden"
-      >
-        <div
-          className="pointer-events-none absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.06]"
-          style={{ background: "radial-gradient(circle, #ae1431 0%, transparent 70%)" }}
-        />
+    <>
+      <main className="min-h-screen bg-[#F5EFE8]">
+        <section
+  ref={heroRef}
+  className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 lg:px-20 border-b border-white/[0.07]"
+>
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.06]"
+      style={{ background: "radial-gradient(circle, #ae1431 0%, transparent 70%)" }}
+    />
+  </div>
 
-        <div className="max-w-6xl mx-auto">
-          <span
-            ref={labelRef}
-            className="inline-block font-rethink text-[12px] tracking-[0.25em] uppercase text-black mb-5 sm:mb-6 opacity-0"
-          >
-            ERAM EDUCATION
-          </span>
-
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-8">
-            <h1
-              ref={headingRef}
-              className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl text-[#ae1431] leading-[1.05] tracking-tight opacity-0"
+  <div className="max-w-6xl mx-auto">
+            <span
+              ref={labelRef}
+              className="inline-block font-rethink text-[12px] tracking-[0.25em] uppercase text-black mb-5 sm:mb-6 opacity-0"
             >
-              Events &amp;
-              <br />
-              Notifications
-            </h1>
-            <p
-              ref={subRef}
-              className="max-w-xs sm:max-w-sm  sm:text-sm text-black font-rethink leading-relaxed md:text-right opacity-0"
-            >
-              Stay informed on upcoming events, academic circulars, and
-              institutional announcements across all ERAM institutions.
-            </p>
-          </div>
+              ERAM EDUCATION
+            </span>
 
-          <div ref={filterRef} className="mt-8 sm:mt-10 flex flex-col gap-3 opacity-0">
-            <div className="overflow-x-auto pb-0.5 -mx-4 px-4 sm:mx-0 sm:px-0">
-              <div className="flex items-center gap-1 border border-white/[0.08] p-1 w-max sm:w-auto">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`whitespace-nowrap rounded-[10px] px-3 py-2 sm:py-1.5 cursor-pointer font-rethink text-[12px] tracking-[0.15em] uppercase transition-all duration-200 ${
-                      activeCategory === cat
-                        ? "bg-[#ae1431] text-white"
-                        : "text-black hover:text-[#ae1431]"
-                    }`}
-                  >
-                    {CAT_LABEL[cat]}
-                  </button>
-                ))}
-              </div>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-8">
+              <h1
+                ref={headingRef}
+                className="font-display text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl text-[#ae1431] leading-[1.05] tracking-tight opacity-0"
+              >
+                Events &amp;
+                <br />
+                Notifications
+              </h1>
+              <p
+                ref={subRef}
+                className="max-w-xs sm:max-w-sm sm:text-sm text-black font-rethink leading-relaxed md:text-right opacity-0"
+              >
+                Stay informed on upcoming events, academic circulars, and
+                institutional announcements across all ERAM institutions.
+              </p>
             </div>
 
-            <div className="flex items-center gap-3 flex-wrap">
-              <div className="overflow-x-auto pb-0.5 -mx-4 px-4 sm:mx-0 sm:px-0">
-                <div className="flex items-center gap-1 border border-white/[0.08] p-1 w-max">
-                  {(["ALL", "EVENT", "NOTIFICATION"] as const).map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setActiveType(t)}
-                      className={`whitespace-nowrap px-3 py-2 cursor-pointer font-rethink text-[12px] rounded-[10px] sm:py-1.5 text-[10px] tracking-[0.12em] uppercase transition-all duration-200 ${
-                        activeType === t
-                          ? "bg-[#ae1431] text-white"
-                        : "text-black hover:text-[#ae1431]"
-                      }`}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div>
+            {/* Filters — dropdowns, left/right aligned, same style on mobile & desktop */}
+            <div ref={filterRef} className="mt-8 sm:mt-10 flex flex-col gap-3 opacity-0">
+              <div className="flex items-center justify-between gap-3">
+                <Dropdown
+                  value={activeCategory}
+                  onChange={setActiveCategory}
+                  align="left"
+                  options={CATEGORIES.map((cat) => ({
+                    id: cat,
+                    label: CAT_LABEL[cat],
+                  }))}
+                />
+                <Dropdown
+                  value={activeType}
+                  onChange={setActiveType}
+                  align="right"
+                  options={TYPE_OPTIONS}
+                />
               </div>
 
-              <span className="text-[12px] tracking-[0.14em] font-rethink uppercase text-black ml-auto shrink-0">
+              <span className="font-rethink text-[12px] tracking-[0.14em] uppercase text-black text-right">
                 {filtered.length} RESULTS
               </span>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div
-        ref={statsRef}
-        className="border-b border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 opacity-0"
-      >
-        <div className="max-w-6xl mx-auto py-4 sm:py-5 grid grid-cols-2 sm:flex sm:flex-wrap gap-x-8 sm:gap-x-10 gap-y-3">
-          {[
-            { label: "Upcoming Events", value: totalEvents },
-            { label: "Notifications", value: totalNotifs },
-            { label: "Institutions", value: 5 },
-          ].map((s) => (
-            <div key={s.label} className="flex items-baseline gap-2">
-              <span className="text-xl sm:text-2xl text-black">
-                {s.value}
-              </span>
-              <span className="text-[12px] tracking-[0.14em] uppercase text-black font-rethink leading-none">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <section className="px-4 sm:px-6 md:px-12 lg:px-20 py-10 sm:py-14">
-        <div className="max-w-6xl mx-auto">
-          {loading && (
-            <div className="py-16 text-center">
-              <p className="text-[12px] tracking-[0.2em] uppercase text-black">
-                Loading…
-              </p>
-            </div>
-          )}
-
-          {!loading && error && (
-            <div className="py-16 text-center">
-              <p className="text-[12px] tracking-[0.2em] uppercase text-red">
-                {error}
-              </p>
-            </div>
-          )}
-
-          {!loading && !error && (
-            <>
-              {pinned.length > 0 && (
-                <div className="mb-8 sm:mb-10">
-                  <p className="text-[9px] tracking-[0.22em] uppercase font-rethink text-amber-400/60 mb-3 sm:mb-4">
-                    ◆ PINNED
-                  </p>
-                  <div className="border border-amber-500/10 bg-amber-500/[0.025] px-4 sm:px-6">
-                    {pinned.map((ev, i) => (
-  <EventCard key={ev.id} ev={ev} index={i} onImageClick={openLightbox} />
-))}
-                  </div>
-                </div>
-              )}
-
-              {rest.length > 0 ? (
-                <div>
-                  {pinned.length > 0 && (
-                    <p className="text-[12px] tracking-[0.22em] uppercase text-black mb-3 sm:mb-4">
-                      ALL UPDATES
-                    </p>
-                  )}
-                  <div className="border-t border-white/[0.07]">
-                    {rest.map((ev, i) => (
-  <EventCard key={ev.id} ev={ev} index={i} onImageClick={openLightbox} />
-))}
-                  </div>
-                </div>
-              ) : (
-                !pinned.length && (
-                  <div className="py-16 sm:py-20 text-center">
-                    <p className="text-[12px] tracking-[0.2em] uppercase text-[#ae1431]">
-                      No results found
-                    </p>
-                  </div>
-                )
-              )}
-            </>
-          )}
-        </div>
-      </section>
-
-      <section className="border-t border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <p className="text-[12px] font-rethink tracking-[0.2em] uppercase text-[#ae1431] mb-3">
-              STAY UPDATED
-            </p>
-            <h2 className="text-2xl font-display sm:text-3xl md:text-4xl text-black leading-snug">
-              Never miss an
-              <br />
-              announcement.
-            </h2>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-stretch w-full md:w-auto border border-white/[0.12]">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="w-full sm:min-w-[200px] md:min-w-[220px] bg-transparent px-4 sm:px-5 py-3.5  text-white placeholder-white/25 outline-none border-b sm:border-b-0 sm:border-r border-white/[0.12]"
-            />
-            <button className="bg-[#ae1431] hover:bg-black rounded-[11px] px-6 py-3.5 text-[12px] font-rethink tracking-[0.2em] uppercase text-white cursor-pointer transition-colors whitespace-nowrap">
-              SUBSCRIBE
-            </button>
+        <div
+          ref={statsRef}
+          className="border-b border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 opacity-0"
+        >
+          <div className="max-w-6xl mx-auto py-4 sm:py-5 grid grid-cols-2 sm:flex sm:flex-wrap gap-x-8 sm:gap-x-10 gap-y-3">
+            {[
+              { label: "Upcoming Events", value: totalEvents },
+              { label: "Notifications", value: totalNotifs },
+              { label: "Institutions", value: 5 },
+            ].map((s) => (
+              <div key={s.label} className="flex items-baseline gap-2">
+                <span className="font-rethink text-xl sm:text-2xl text-black">
+                  {s.value}
+                </span>
+                <span className="font-rethink text-[12px] tracking-[0.14em] uppercase text-black leading-none">
+                  {s.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
 
-      <div className="border-t border-white/[0.05] px-4 sm:px-6 md:px-12 lg:px-20 py-5 sm:py-6">
-        <div className="max-w-6xl mx-auto flex flex-col xs:flex-row xs:items-center xs:justify-between gap-1.5 xs:gap-0">
-          <span className="text-[12px] tracking-[0.16em] font-rethink uppercase text-black">
-            ERAM EDUCATION — EVENTS & NOTIFICATIONS
-          </span>
-          <span className="text-[12px] tracking-[0.14em] font-rethink uppercase text-black">
-            PALAKKAD, KERALA
-          </span>
+        <section className="px-4 sm:px-6 md:px-12 lg:px-20 py-10 sm:py-14">
+          <div className="max-w-6xl mx-auto">
+            {loading && (
+              <div className="py-16 text-center">
+                <p className="font-rethink text-[12px] tracking-[0.2em] uppercase text-black">
+                  Loading…
+                </p>
+              </div>
+            )}
+
+            {!loading && error && (
+              <div className="py-16 text-center">
+                <p className="font-rethink text-[12px] tracking-[0.2em] uppercase text-red">
+                  {error}
+                </p>
+              </div>
+            )}
+
+            {!loading && !error && (
+              <>
+                {pinned.length > 0 && (
+                  <div className="mb-8 sm:mb-10">
+                    <p className="font-rethink text-[9px] tracking-[0.22em] uppercase text-amber-400/60 mb-3 sm:mb-4">
+                      ◆ PINNED
+                    </p>
+                    <div className="border border-amber-500/10 bg-amber-500/[0.025] px-4 sm:px-6">
+                      {pinned.map((ev, i) => (
+                        <EventCard key={ev.id} ev={ev} index={i} onImageClick={openLightbox} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {rest.length > 0 ? (
+                  <div>
+                    {pinned.length > 0 && (
+                      <p className="font-rethink text-[12px] tracking-[0.22em] uppercase text-black mb-3 sm:mb-4">
+                        ALL UPDATES
+                      </p>
+                    )}
+                    <div className="border-t border-white/[0.07]">
+                      {rest.map((ev, i) => (
+                        <EventCard key={ev.id} ev={ev} index={i} onImageClick={openLightbox} />
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  !pinned.length && (
+                    <div className="py-16 sm:py-20 text-center">
+                      <p className="font-rethink text-[12px] tracking-[0.2em] uppercase text-[#ae1431]">
+                        No results found
+                      </p>
+                    </div>
+                  )
+                )}
+              </>
+            )}
+          </div>
+        </section>
+
+        <section className="border-t border-white/[0.07] px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-16">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div>
+              <p className="font-rethink text-[12px] tracking-[0.2em] uppercase text-[#ae1431] mb-3">
+                STAY UPDATED
+              </p>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-black leading-snug">
+                Never miss an
+                <br />
+                announcement.
+              </h2>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch w-full md:w-auto border border-white/[0.12]">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="font-rethink w-full sm:min-w-[200px] md:min-w-[220px] bg-transparent px-4 sm:px-5 py-3.5 text-white placeholder-white/25 outline-none border-b sm:border-b-0 sm:border-r border-white/[0.12]"
+              />
+              <button className="font-rethink bg-[#ae1431] hover:bg-black rounded-[11px] px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase text-white cursor-pointer transition-colors whitespace-nowrap">
+                SUBSCRIBE
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div className="border-t border-white/[0.05] px-4 sm:px-6 md:px-12 lg:px-20 py-5 sm:py-6">
+          <div className="max-w-6xl mx-auto flex flex-col xs:flex-row xs:items-center xs:justify-between gap-1.5 xs:gap-0">
+            <span className="font-rethink text-[12px] tracking-[0.16em] uppercase text-black">
+              ERAM EDUCATION — EVENTS & NOTIFICATIONS
+            </span>
+            <span className="font-rethink text-[12px] tracking-[0.14em] uppercase text-black">
+              PALAKKAD, KERALA
+            </span>
+          </div>
         </div>
-      </div>
-    </main>
-    {lightbox && (
-      <ImageLightbox
-        url={lightbox.url}
-        title={lightbox.title}
-        onClose={closeLightbox}
-      />
-    )}
-  </>
+      </main>
+      {lightbox && (
+        <ImageLightbox
+          url={lightbox.url}
+          title={lightbox.title}
+          onClose={closeLightbox}
+        />
+      )}
+    </>
   );
 }

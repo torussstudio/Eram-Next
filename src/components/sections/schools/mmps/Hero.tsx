@@ -219,17 +219,31 @@ export default function Hero() {
               <div ref={btnsRef} className="flex flex-wrap gap-3 mt-6 sm:mt-7">
                 <button
                   onClick={()=>router.push("/contact")}
-                  className="
-    font-rethink bg-[#ae1431]
-    px-5 md:px-7 py-2.5 md:py-3
-    text-[10px] sm:text-[11px] md:text-[12px]
-    tracking-[0.12em] uppercase
-    cursor-pointer active:scale-[0.98]
-    transition-transform rounded-[12px]
-    flex items-center hover:bg-black justify-center gap-2
+                className="
+    font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-[#ae1431]
+    px-7
+    bg-[#ae1431]
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
     whitespace-nowrap
-    transition-transform 
-    duration-300
+    transition-all
+    duration-200
+    hover:bg-black
+    hover:text-white
+    hover:border-black
+    flex
+    items-center
+    justify-center
+    gap-2
   "
                 >
                   <span>Admissions Open</span>
@@ -237,10 +251,30 @@ export default function Hero() {
                 </button>
                 <button
                   onClick={()=>router.push("/contact")}
-                  className="font-rethink border border-white/30 px-5 md:px-7 py-2.5 md:py-3
-                    text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.12em] uppercase
-                    flex items-center gap-2 cursor-pointer 
-                    active:scale-[0.98] transition-transform rounded-[12px] hover:bg-white hover:text-[#ae1431] transition-transform duration-300"
+                  className="
+    font-rethink
+    w-full
+    sm:w-auto
+    cursor-pointer
+    rounded-[12px]
+    border
+    border-white
+    px-7
+    py-3
+    text-[13px]
+    uppercase
+    tracking-[0.16em]
+    text-white
+    whitespace-nowrap
+    transition-all
+    duration-200
+    hover:bg-white
+    hover:text-[#ae1431]
+    hover:border-white
+    flex
+    items-center
+    justify-center
+  "
                 >
                   Enquire Now
                 </button>

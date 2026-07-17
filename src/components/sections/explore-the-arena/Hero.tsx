@@ -233,14 +233,16 @@ export default function HeroSection() {
             </div>
 
             {/* RIGHT PANEL */}
-            <div
+          <div
               className="
                 mt-2
-                md:mt-0
-                w-full
+                md:mt-5
+                w-[80%]
                 sm:w-[300px]
                 lg:w-[280px]
                 max-[1024px]:max-w-[340px]
+                mx-auto
+                sm:mx-0
                 bg-[#0e0e0e]/60
                 backdrop-blur-md
                 border
@@ -296,11 +298,11 @@ export default function HeroSection() {
       {/* =========================
           STATS
       ========================= */}
-      <div className="relative z-10 bg-[#F5EFE8]">
+    <div className="relative z-10 bg-[#F5EFE8]">
         <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
           <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[55px]">
             {/* LABEL */}
-            <div className="flex items-center gap-3 mb-[40px] md:mb-[50px]">
+            <div className="flex items-center justify-center sm:justify-start gap-3 mb-[40px] md:mb-[50px]">
               <p
                 className="
                   font-rethink
@@ -343,15 +345,17 @@ export default function HeroSection() {
                     px-[14px]
                     sm:px-[18px]
                     md:px-[28px]
+                    text-center
+                    sm:text-left
                     ${i !== 3 ? "md:border-r" : ""}
                     border-black/10
                   `}
                 >
                   {/* RED TOP LINE */}
-                  <span className="absolute top-0 left-0 w-[28px] h-[2px] bg-[#a32020]" />
+                  <span className="absolute top-0 left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 w-[28px] h-[2px] bg-[#a32020]" />
 
                   {/* VALUE */}
-                  <div className="flex items-baseline gap-[10px]">
+                  <div className="flex items-baseline justify-center sm:justify-start gap-[10px]">
                     <h3
                       className="
                         font-rethink
