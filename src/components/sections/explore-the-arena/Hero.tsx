@@ -1,10 +1,165 @@
 "use client";
 
+import { useRef } from "react";
 import { Calendar, Play } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+
+// Splits text into per-letter spans wrapped in overflow-hidden containers,
+// so a y-translate reveal has individual letters to animate against.
+function AnimatedHeading({
+  text,
+  className = "",
+}: {
+  text: string;
+  className?: string;
+}) {
+  return (
+    <span className={`inline-block ${className}`} aria-label={text}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block overflow-hidden align-top"
+          style={{ paddingBottom: "0.06em" }}
+        >
+          <span className="hero-letter inline-block will-change-transform">
+            {char === " " ? "\u00A0" : char}
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+const GLANCE_STATS = [
+  ["1,000", "Seating Capacity"],
+  ["10,000", "sq. ft. Built-Up Area"],
+  ["Open-Air", "Amphitheatre Design"],
+  ["38", "High-Intensity LED Floodlights"],
+];
+
+const INFRA_STATS = [
+  { value: "1,000", unit: "seats", desc: ["Open-air spectator", "capacity"] },
+  {
+    value: "10,000",
+    unit: "sq.ft.",
+    desc: ["Total built-up", "infrastructure area"],
+  },
+  { value: "47 × 22", unit: "m", desc: ["Primary multi-court", "playing surface"] },
+  { value: "8", unit: "poles", desc: ["10m floodlight poles", "with 38 LED lights"] },
+];
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const infraGridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      // ── 1. Hero load-in timeline ────────────────────────────────
+      const letters = headingRef.current?.querySelectorAll(".hero-letter");
+      const statRows = panelRef.current?.querySelectorAll(".glance-row");
+      const buttons = buttonsRef.current?.querySelectorAll("button");
+
+      gsap.set(imageRef.current, { scale: 1.12 });
+      gsap.set(overlayRef.current, { opacity: 0 });
+      gsap.set(labelRef.current, { opacity: 0, y: 12 });
+      gsap.set(descRef.current, { opacity: 0, y: 16 });
+      gsap.set(panelRef.current, { opacity: 0, x: 24 });
+      if (buttons?.length) gsap.set(buttons, { opacity: 0, y: 18 });
+      if (statRows?.length) gsap.set(statRows, { opacity: 0, y: 10 });
+
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      tl.to(overlayRef.current, { opacity: 1, duration: 0.8 }, 0)
+        .to(imageRef.current, { scale: 1, duration: 1.6, ease: "power2.out" }, 0)
+        .to(labelRef.current, { opacity: 1, y: 0, duration: 0.55 }, 0.25);
+
+      if (letters?.length) {
+        gsap.set(letters, { y: "115%", skewX: 4 });
+        tl.to(
+          letters,
+          { y: "0%", skewX: 0, duration: 0.85, stagger: { each: 0.028 } },
+          0.35,
+        );
+      }
+
+      tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.75);
+
+      if (buttons?.length) {
+        tl.to(
+          buttons,
+          { opacity: 1, y: 0, duration: 0.55, stagger: 0.1 },
+          0.85,
+        );
+      }
+
+      tl.to(panelRef.current, { opacity: 1, x: 0, duration: 0.7 }, 0.6);
+
+      if (statRows?.length) {
+        tl.to(
+          statRows,
+          { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 },
+          0.9,
+        );
+      }
+
+      // ── 2. Scroll-triggered reveal for the infra stats grid ─────
+      const infraCards = gsap.utils.toArray<HTMLElement>(".infra-card");
+      if (infraCards.length > 0) {
+        gsap.set(infraCards, { opacity: 0, y: 30 });
+        gsap.set(".infra-topline", { scaleX: 0, transformOrigin: "left center" });
+
+        const infraTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: infraGridRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        infraTl
+          .to(infraCards, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.12,
+          })
+          .to(
+            ".infra-topline",
+            { scaleX: 1, duration: 0.5, ease: "expo.out", stagger: 0.12 },
+            "<0.1",
+          );
+      }
+
+      // ── 3. Gentle parallax on the hero image while scrolling ────
+      gsap.to(imageRef.current, {
+        yPercent: 8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6,
+        },
+      });
+
+      return () => {
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+      };
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="bg-[#F5EFE8] py-9 px-3 md:px-6">
+    <section ref={sectionRef} className="bg-[#F5EFE8] py-9 px-3 md:px-6">
       {/* HERO CARD */}
       <div className="rounded-[28px] overflow-hidden shadow-sm max-w-[1600px] mx-auto">
         <div
@@ -26,7 +181,7 @@ export default function HeroSection() {
           "
         >
           {/* IMAGE */}
-          <div className="absolute inset-0">
+          <div ref={imageRef} className="absolute inset-0 will-change-transform">
             <img
               src="/images/sports-ground.webp"
               alt=""
@@ -35,7 +190,7 @@ export default function HeroSection() {
           </div>
 
           {/* OVERLAY */}
-          <div className="absolute inset-0 bg-black/70" />
+          <div ref={overlayRef} className="absolute inset-0 bg-black/70" />
 
           {/* CONTENT */}
           <div
@@ -73,7 +228,7 @@ export default function HeroSection() {
             {/* LEFT */}
             <div className="flex-1 max-w-[620px]">
               {/* label */}
-              <div className="flex items-center gap-3 mb-5">
+              <div ref={labelRef} className="flex items-center gap-3 mb-5">
                 <p
                   className="
                     font-rethink
@@ -90,6 +245,7 @@ export default function HeroSection() {
 
               {/* heading */}
               <h1
+                ref={headingRef}
                 className="
                   font-display
                   leading-[1]
@@ -100,12 +256,14 @@ export default function HeroSection() {
                   lg:text-[88px]
                 "
               >
-                A New Stage <br />
-                of <span className="text-white/60">Scale.</span>
+                <AnimatedHeading text="A New Stage" /> <br />
+                <AnimatedHeading text="of " />
+                <AnimatedHeading text="Scale." className="text-white/60" />
               </h1>
 
               {/* description */}
               <p
+                ref={descRef}
                 className="
                   font-rethink
                   mt-5
@@ -125,6 +283,7 @@ export default function HeroSection() {
 
               {/* buttons */}
               <div
+                ref={buttonsRef}
                 className="
                   flex
                   flex-col
@@ -136,15 +295,17 @@ export default function HeroSection() {
                 "
               >
                 <button
-  onClick={() => {
-    const section = document.getElementById("scale");
-    if (section) {
-      const yOffset = -90;
-      const y =
-        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  }}
+                  onClick={() => {
+                    const section = document.getElementById("scale");
+                    if (section) {
+                      const yOffset = -90;
+                      const y =
+                        section.getBoundingClientRect().top +
+                        window.pageYOffset +
+                        yOffset;
+                      window.scrollTo({ top: y, behavior: "smooth" });
+                    }
+                  }}
                   className="
                     group
                     font-rethink
@@ -189,6 +350,7 @@ export default function HeroSection() {
 
                 <button
                   className="
+                    group
                     font-rethink
                     inline-flex
                     items-center
@@ -233,7 +395,8 @@ export default function HeroSection() {
             </div>
 
             {/* RIGHT PANEL */}
-          <div
+            <div
+              ref={panelRef}
               className="
                 mt-2
                 md:mt-5
@@ -270,15 +433,10 @@ export default function HeroSection() {
               </div>
 
               {/* stats */}
-              {[
-                ["1,000", "Seating Capacity"],
-                ["10,000", "sq. ft. Built-Up Area"],
-                ["Open-Air", "Amphitheatre Design"],
-                ["38", "High-Intensity LED Floodlights"],
-              ].map(([title, desc], i) => (
+              {GLANCE_STATS.map(([title, desc], i) => (
                 <div
                   key={i}
-                  className={`py-3 ${
+                  className={`glance-row py-3 ${
                     i !== 3 ? "border-b border-white/10" : ""
                   }`}
                 >
@@ -298,7 +456,7 @@ export default function HeroSection() {
       {/* =========================
           STATS
       ========================= */}
-    <div className="relative z-10 bg-[#F5EFE8]">
+      <div className="relative z-10 bg-[#F5EFE8]">
         <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
           <div className="max-w-[1100px] mx-auto px-[16px] sm:px-[20px] md:px-[28px] py-[40px] md:py-[55px]">
             {/* LABEL */}
@@ -320,6 +478,7 @@ export default function HeroSection() {
 
             {/* GRID */}
             <div
+              ref={infraGridRef}
               className="
                 grid
                 grid-cols-1
@@ -329,15 +488,11 @@ export default function HeroSection() {
                 border-black/10
               "
             >
-              {[
-                { value: "1,000", unit: "seats", desc: ["Open-air spectator", "capacity"] },
-                { value: "10,000", unit: "sq.ft.", desc: ["Total built-up", "infrastructure area"] },
-                { value: "47 × 22", unit: "m", desc: ["Primary multi-court", "playing surface"] },
-                { value: "8", unit: "poles", desc: ["10m floodlight poles", "with 38 LED lights"] },
-              ].map((item, i) => (
+              {INFRA_STATS.map((item, i) => (
                 <div
                   key={i}
                   className={`
+                    infra-card
                     relative
                     py-[28px]
                     sm:py-[32px]
@@ -352,7 +507,7 @@ export default function HeroSection() {
                   `}
                 >
                   {/* RED TOP LINE */}
-                  <span className="absolute top-0 left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 w-[28px] h-[2px] bg-[#a32020]" />
+                  <span className="infra-topline absolute top-0 left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 w-[28px] h-[2px] bg-[#a32020]" />
 
                   {/* VALUE */}
                   <div className="flex items-baseline justify-center sm:justify-start gap-[10px]">

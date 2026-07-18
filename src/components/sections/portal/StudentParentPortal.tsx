@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ChevronRight,
   ChevronLeft,
@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 type InstitutionKey = "AMLP" | "MMPS" | "MMHSS" | "EASE" | "MMITE";
 
@@ -144,6 +145,31 @@ const StudentParentPortal = () => {
   const [rawDownloads, setRawDownloads] = useState<RawDownload[]>([]);
   const [downloadsLoading, setDownloadsLoading] = useState(true);
 
+  // ===== GSAP refs =====
+  const pageRef = useRef<HTMLDivElement | null>(null);
+  const heroKickerRef = useRef<HTMLParagraphElement | null>(null);
+  const heroTitleRef = useRef<HTMLHeadingElement | null>(null);
+  const heroCopyRef = useRef<HTMLParagraphElement | null>(null);
+  const heroBtnRef = useRef<HTMLButtonElement | null>(null);
+  const heroBannerRef = useRef<HTMLDivElement | null>(null);
+
+  const feesSectionRef = useRef<HTMLDivElement | null>(null);
+  const feesHeadingRef = useRef<HTMLHeadingElement | null>(null);
+  const feesCardsRef = useRef<HTMLDivElement | null>(null);
+  const feesBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  const instSectionRef = useRef<HTMLDivElement | null>(null);
+  const instTitleRef = useRef<HTMLParagraphElement | null>(null);
+  const instTabsRef = useRef<HTMLDivElement | null>(null);
+
+  const noticesCardRef = useRef<HTMLDivElement | null>(null);
+  const downloadsCardRef = useRef<HTMLDivElement | null>(null);
+
+  const ctaSectionRef = useRef<HTMLDivElement | null>(null);
+  const ctaHeadingRef = useRef<HTMLHeadingElement | null>(null);
+  const ctaCopyRef = useRef<HTMLParagraphElement | null>(null);
+  const ctaBtnsRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -258,30 +284,199 @@ const StudentParentPortal = () => {
     setHeroIndex((prev) => (prev + 1) % heroSlides.length);
   };
 
+  // ===== GSAP scroll-in entrance animations =====
+  // Scoped to pageRef so cleanup never touches anything outside this
+  // component. Every ScrollTrigger uses once: true — a single reveal per
+  // section, never a repeating scrub, so it can't fight the hero
+  // carousel's own key-based re-render or any other section's timing.
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const feesCards = feesCardsRef.current
+        ? Array.from(feesCardsRef.current.children)
+        : [];
+      const ctaBtns = ctaBtnsRef.current
+        ? Array.from(ctaBtnsRef.current.children)
+        : [];
+
+      // --- Hero (runs on mount, not scroll — it's above the fold) ---
+      gsap.set(
+        [
+          heroKickerRef.current,
+          heroTitleRef.current,
+          heroCopyRef.current,
+          heroBtnRef.current,
+        ],
+        { autoAlpha: 0, y: 24 }
+      );
+      gsap.set(heroBannerRef.current, { autoAlpha: 0, y: 32 });
+
+      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      heroTl
+        .to(heroKickerRef.current, { autoAlpha: 1, y: 0, duration: 0.5 })
+        .to(
+          heroTitleRef.current,
+          { autoAlpha: 1, y: 0, duration: 0.7 },
+          "-=0.3"
+        )
+        .to(
+          heroCopyRef.current,
+          { autoAlpha: 1, y: 0, duration: 0.6 },
+          "-=0.4"
+        )
+        .to(
+          heroBtnRef.current,
+          { autoAlpha: 1, y: 0, duration: 0.5 },
+          "-=0.35"
+        )
+        .to(
+          heroBannerRef.current,
+          { autoAlpha: 1, y: 0, duration: 0.8 },
+          "-=0.35"
+        );
+
+      // --- Fees portal ---
+      gsap.set(feesHeadingRef.current, { autoAlpha: 0, y: 20 });
+      gsap.set(feesCards, { autoAlpha: 0, y: 20 });
+      gsap.set(feesBtnRef.current, { autoAlpha: 0, y: 16 });
+
+      ScrollTrigger.create({
+        trigger: feesSectionRef.current,
+        start: "top 82%",
+        once: true,
+        onEnter: () => {
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+          tl.to(feesHeadingRef.current, { autoAlpha: 1, y: 0, duration: 0.6 })
+            .to(
+              feesCards,
+              { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1 },
+              "-=0.3"
+            )
+            .to(
+              feesBtnRef.current,
+              { autoAlpha: 1, y: 0, duration: 0.4 },
+              "-=0.2"
+            );
+        },
+      });
+
+      // --- Institution selector ---
+      gsap.set(instTitleRef.current, { autoAlpha: 0, y: 16 });
+      gsap.set(instTabsRef.current, { autoAlpha: 0, y: 12 });
+
+      ScrollTrigger.create({
+        trigger: instSectionRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+          tl.to(instTitleRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }).to(
+            instTabsRef.current,
+            { autoAlpha: 1, y: 0, duration: 0.5 },
+            "-=0.25"
+          );
+        },
+      });
+
+      // --- Notices card ---
+      gsap.set(noticesCardRef.current, { autoAlpha: 0, y: 28 });
+      ScrollTrigger.create({
+        trigger: noticesCardRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(noticesCardRef.current, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+          });
+        },
+      });
+
+      // --- Downloads card ---
+      gsap.set(downloadsCardRef.current, { autoAlpha: 0, y: 28 });
+      ScrollTrigger.create({
+        trigger: downloadsCardRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(downloadsCardRef.current, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+          });
+        },
+      });
+
+      // --- CTA ---
+      gsap.set([ctaHeadingRef.current, ctaCopyRef.current], {
+        autoAlpha: 0,
+        y: 20,
+      });
+      gsap.set(ctaBtns, { autoAlpha: 0, y: 16 });
+
+      ScrollTrigger.create({
+        trigger: ctaSectionRef.current,
+        start: "top 82%",
+        once: true,
+        onEnter: () => {
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+          tl.to(ctaHeadingRef.current, { autoAlpha: 1, y: 0, duration: 0.6 })
+            .to(
+              ctaCopyRef.current,
+              { autoAlpha: 1, y: 0, duration: 0.5 },
+              "-=0.35"
+            )
+            .to(
+              ctaBtns,
+              { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.12 },
+              "-=0.25"
+            );
+        },
+      });
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#F5EFE8] ">
+    <div ref={pageRef} className="min-h-screen bg-[#F5EFE8] ">
       {/* ── Hero ── */}
       <section className="py-10 sm:py-14">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <p className="text-xs font-rethink tracking-widest text-[#ae1431] uppercase mb-3">
+            <p
+              ref={heroKickerRef}
+              className="text-xs font-rethink tracking-widest text-[#ae1431] uppercase mb-3"
+            >
               ERAM Group of Institutions
             </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display text-gray-900 leading-tight mb-3">
+            <h1
+              ref={heroTitleRef}
+              className="text-3xl sm:text-4xl lg:text-5xl font-display text-gray-900 leading-tight mb-3"
+            >
               Student Parent Portal
             </h1>
-            <p className="text-sm font-rethink sm:text-base text-gray-600 leading-relaxed mb-6">
+            <p
+              ref={heroCopyRef}
+              className="text-sm font-rethink sm:text-base text-gray-600 leading-relaxed mb-6"
+            >
               Access institutional updates, the fee portal, study resources,
               and important academic information across the ERAM
               educational ecosystem.
             </p>
-            <button className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl active:scale-95 transition-all">
+            <button
+              ref={heroBtnRef}
+              className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl active:scale-95 transition-all"
+            >
               Proceed to Full Portal <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
 
          {/* Hero banner */}
           <div
+            ref={heroBannerRef}
             key={heroNotice?._id}
 className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shadow-sm bg-gray-900 bg-cover bg-center transition-all duration-500"            style={
               heroNotice?.image
@@ -344,17 +539,23 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
       </section>
 
       {/* ── Fees Portal ── */}
-      <section className="pb-10 sm:pb-12">
+      <section ref={feesSectionRef} className="pb-10 sm:pb-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className=" rounded-2xl p-6 sm:p-10">
-            <h2 className="text-2xl sm:text-3xl font-display text-gray-900 mb-1">
+            <h2
+              ref={feesHeadingRef}
+              className="text-2xl sm:text-3xl font-display text-gray-900 mb-1"
+            >
               Fees Portal
             </h2>
             <p className="text-red-700 text-base font-rethink mb-6">
               Online Payment &amp; Records
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
+            <div
+              ref={feesCardsRef}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6"
+            >
               {[
                 {
                   icon: <CreditCard size={20} />,
@@ -391,7 +592,10 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
               ))}
             </div>
 
-            <button className=" cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl hover:bg-black active:scale-95 transition-all ">
+            <button
+              ref={feesBtnRef}
+              className=" cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white text-sm font-rethink uppercase tracking-wide rounded-xl hover:bg-black active:scale-95 transition-all "
+            >
               Proceed to Fees Portal <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
@@ -399,13 +603,19 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
       </section>
 
       {/* ── Institution Selection ── */}
-     <section className="pb-4">
+     <section ref={instSectionRef} className="pb-4">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
-    <p className="text-gray-500 text-2xl font-rethink text-center mb-6">
+    <p
+      ref={instTitleRef}
+      className="text-gray-500 text-2xl font-rethink text-center mb-6"
+    >
       Select Your Institution
     </p>
     {/* Tab strip */}
-    <div className="flex w-full border-b-[0.5px] border-gray-200 overflow-x-auto scrollbar-hide">
+    <div
+      ref={instTabsRef}
+      className="flex w-full border-b-[0.5px] border-gray-200 overflow-x-auto scrollbar-hide"
+    >
       {institutions.map((inst) => (
         <button
           key={inst.id}
@@ -430,7 +640,10 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
       {/* ── Notices card ── */}
      <section className="pb-6 sm:pb-8">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
-    <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
+    <div
+      ref={noticesCardRef}
+      className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8"
+    >
       <div className="flex items-center justify-between mb-5">
         <div>
           <h3 className="text-lg sm:text-xl font-display text-gray-900">
@@ -458,27 +671,28 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
         </div>
       ) : notices.length > 0 ? (
         <div className="divide-y divide-gray-100">
-          {notices.map((notice) => (
-            <div
-              key={notice.id}
-              className="flex items-center gap-4 py-4 first:pt-0 last:pb-0 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition-colors cursor-pointer"
-            >
-              <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-                {getNoticeIcon(notice.category)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="text-gray-900 font-display text-sm leading-snug truncate">
-                  {notice.title}
-                </h4>
-                <p className="font-rethink text-gray-400 text-xs truncate mt-0.5">
-                  {notice.description}
-                </p>
-              </div>
-              <span className="text-xs text-gray-400 font-rethink shrink-0">
-                {notice.date}
-              </span>
-            </div>
-          ))}
+         {notices.map((notice) => (
+  <Link
+    key={notice.id}
+    href="/events"
+    className="flex items-center gap-4 py-4 first:pt-0 last:pb-0 hover:bg-gray-50 -mx-2 px-2 rounded-lg transition-colors cursor-pointer"
+  >
+    <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+      {getNoticeIcon(notice.category)}
+    </div>
+    <div className="flex-1 min-w-0">
+      <h4 className="text-gray-900 font-display text-sm leading-snug truncate">
+        {notice.title}
+      </h4>
+      <p className="font-rethink text-gray-400 text-xs truncate mt-0.5">
+        {notice.description}
+      </p>
+    </div>
+    <span className="text-xs text-gray-400 font-rethink shrink-0">
+      {notice.date}
+    </span>
+  </Link>
+))}
         </div>
       ) : (
         <div className="text-center py-10">
@@ -503,7 +717,10 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
       {/* ── Download Centre card ── */}
      <section className="pb-10 sm:pb-14">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
-    <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8">
+    <div
+      ref={downloadsCardRef}
+      className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8"
+    >
       <div className="flex items-center justify-between mb-5">
         <div>
           <h3 className="text-lg sm:text-xl font-display text-gray-900">
@@ -614,20 +831,29 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
 </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#F5EFE8] pb-16 sm:pb-20">
+      <section ref={ctaSectionRef} className="bg-[#F5EFE8] pb-16 sm:pb-20">
   <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-    <h2 className="text-2xl sm:text-4xl font-display text-black mb-3">
+    <h2
+      ref={ctaHeadingRef}
+      className="text-2xl sm:text-4xl font-display text-black mb-3"
+    >
       Take the Next Step
     </h2>
 
-    <p className="text-black font-rethink sm:text-lg mb-7 max-w-xl mx-auto">
+    <p
+      ref={ctaCopyRef}
+      className="text-black font-rethink sm:text-lg mb-7 max-w-xl mx-auto"
+    >
       Explore our institutions, meet our educators, and experience the
       ERAM campus firsthand as you discover the learning environment
       that's right for you.
     </p>
 
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <button 
+    <div
+      ref={ctaBtnsRef}
+      className="flex flex-col sm:flex-row items-center justify-center gap-4"
+    >
+      <button
         onClick={()=>router.push("/contact")} className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl cursor-pointer transition-colors">
         Admissions Open 2026–27
         <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />

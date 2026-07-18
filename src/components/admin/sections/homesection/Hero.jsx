@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   getHero,
   updateHero,
@@ -55,10 +55,25 @@ export default function Hero() {
   const [slides, setSlides] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveError, setSaveError] = useState("");
-  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [savingIndex, setSavingIndex] = useState(null); // index of slide currently saving, or null
+  const [loadError, setLoadError] = useState("");
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
+
+  // --- Toast state ---
+  const [toasts, setToasts] = useState([]);
+  const toastIdRef = useRef(0);
+
+  function showToast(message, type = "error") {
+    const id = ++toastIdRef.current;
+    setToasts((prev) => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 4000);
+  }
+
+  function dismissToast(id) {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -74,7 +89,7 @@ export default function Hero() {
         }
       } catch (err) {
         if (isMounted) {
-          setSaveError("Failed to load hero data. Please refresh the page.");
+          setLoadError("Failed to load hero data. Please refresh the page.");
         }
       } finally {
         if (isMounted) setIsLoading(false);
@@ -100,14 +115,12 @@ export default function Hero() {
 
   function handleTextChange(field, value) {
     updateActiveSlide(() => ({ [field]: value }));
-    setSaveSuccess(false);
   }
 
   function handleButtonChange(buttonKey, field, value) {
     updateActiveSlide((slide) => ({
       [buttonKey]: { ...slide[buttonKey], [field]: value },
     }));
-    setSaveSuccess(false);
   }
 
   function validateImage(file) {
@@ -138,7 +151,6 @@ export default function Hero() {
       previewUrl,
       imageError: "",
     }));
-    setSaveSuccess(false);
   }
 
   async function handleSublineLogoChange(e) {
@@ -147,7 +159,7 @@ export default function Hero() {
 
     const error = validateImage(file);
     if (error) {
-      alert(error);
+      showToast(error, "error");
       return;
     }
 
@@ -168,42 +180,43 @@ export default function Hero() {
         sublineLogo: logoUrl,
       }));
 
-      setSaveSuccess(false);
+      showToast("Logo uploaded successfully.", "success");
     } catch (err) {
-      alert(
+      showToast(
         err?.response?.data?.message ||
           err?.message ||
           "Failed to upload logo.",
+        "error",
       );
     }
   }
 
-  async function handleSaveAll() {
-    setIsSaving(true);
-    setSaveError("");
-    setSaveSuccess(false);
+  async function handleSaveSlide(index) {
+    setSavingIndex(index);
 
     try {
-      // Upload any newly selected images first, slide by slide
+      // The backend only exposes a full-list update endpoint, so we still
+      // send every slide — but only the targeted slide's image is uploaded
+      // and only that slide's button/loading state reacts to this call.
       const updatedSlides = [...slides];
+      const slide = updatedSlides[index];
 
-      for (let i = 0; i < updatedSlides.length; i++) {
-        const slide = updatedSlides[i];
-        if (slide.imageFile) {
-          const uploadResult = await uploadHeroImage(slide.imageFile);
-          // API responds as { success, message, data: { image: url } }
-          const imageUrl =
-            uploadResult?.data?.image ||
-            uploadResult?.image ||
-            uploadResult?.url ||
-            uploadResult?.data?.url;
-          if (!imageUrl || typeof imageUrl !== "string") {
-            throw new Error(
-              `Image upload for slide ${i + 1} did not return a valid URL.`,
-            );
-          }
-          updatedSlides[i] = { ...slide, image: imageUrl };
+      let finalSlide = slide;
+      if (slide.imageFile) {
+        const uploadResult = await uploadHeroImage(slide.imageFile);
+        // API responds as { success, message, data: { image: url } }
+        const imageUrl =
+          uploadResult?.data?.image ||
+          uploadResult?.image ||
+          uploadResult?.url ||
+          uploadResult?.data?.url;
+        if (!imageUrl || typeof imageUrl !== "string") {
+          throw new Error(
+            `Image upload for slide ${index + 1} did not return a valid URL.`,
+          );
         }
+        finalSlide = { ...slide, image: imageUrl };
+        updatedSlides[index] = finalSlide;
       }
 
       // Strip local-only UI fields before sending to backend
@@ -213,24 +226,27 @@ export default function Hero() {
 
       await updateHero({ slides: payloadSlides });
 
-      // Reflect uploaded image URLs back into state, clear file/error state
-      setSlides(
-        updatedSlides.map((slide) => ({
-          ...slide,
+      // Reflect the uploaded image URL back into state for this slide only
+      setSlides((prev) => {
+        const next = [...prev];
+        next[index] = {
+          ...finalSlide,
           imageFile: null,
           imageError: "",
-          previewUrl: slide.image,
-        })),
-      );
-      setSaveSuccess(true);
+          previewUrl: finalSlide.image,
+        };
+        return next;
+      });
+
+      showToast(`Slide ${index + 1} saved successfully.`, "success");
     } catch (err) {
-      setSaveError(
+      const message =
         err?.response?.data?.message ||
-          err?.message ||
-          "Something went wrong while saving. Please try again.",
-      );
+        err?.message ||
+        `Something went wrong while saving slide ${index + 1}. Please try again.`;
+      showToast(message, "error");
     } finally {
-      setIsSaving(false);
+      setSavingIndex(null);
     }
   }
 
@@ -238,6 +254,14 @@ export default function Hero() {
     return (
       <div className="min-h-screen bg-[#F5EFE8] flex items-center justify-center">
         <p className="font-rethink text-sm text-[#8a7f6f]">Loading hero slides...</p>
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="min-h-screen bg-[#F5EFE8] flex items-center justify-center">
+        <p className="font-rethink text-sm text-[#ae1431]">{loadError}</p>
       </div>
     );
   }
@@ -434,8 +458,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Preview toggle */}
-            <div>
+            {/* Preview + Save */}
+            <div className="flex items-center justify-between pt-2 border-t border-[#e3d6c3]">
               <button
                 type="button"
                 onClick={() => setPreviewModalOpen(true)}
@@ -443,29 +467,23 @@ export default function Hero() {
               >
                 Preview this slide
               </button>
+
+              <button
+                type="button"
+                onClick={() => handleSaveSlide(activeIndex)}
+                disabled={savingIndex !== null}
+                className="px-5 py-2 rounded-md cursor-pointer bg-[#ae1431] text-white text-sm font-rethink font-medium hover:bg-[#9a1129] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+              >
+                {savingIndex === activeIndex && (
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                )}
+                {savingIndex === activeIndex
+                  ? "Saving..."
+                  : `Save Slide ${activeIndex + 1}`}
+              </button>
             </div>
           </div>
         )}
-
-        {/* Save bar */}
-        <div className="mt-6 flex items-center gap-4 sticky bottom-0 py-4 bg-[#F5EFE8]/95 backdrop-blur-sm border-t border-[#e3d6c3]">
-          <button
-            type="button"
-            onClick={handleSaveAll}
-            disabled={isSaving}
-            className="px-6 py-2 rounded-md cursor-pointer bg-[#ae1431] text-white text-sm font-rethink font-medium hover:bg-[#9a1129] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
-          >
-            {isSaving && (
-              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            )}
-            {isSaving ? "Saving..." : "Save All Slides"}
-          </button>
-
-          {saveError && <p className="text-[#ae1431] text-sm font-rethink">{saveError}</p>}
-          {saveSuccess && !saveError && (
-            <p className="text-[#3f6b52] text-sm font-rethink">Saved successfully.</p>
-          )}
-        </div>
       </div>
 
       {/* Preview modal — intentionally dark, simulates the actual live hero banner */}
@@ -532,6 +550,37 @@ export default function Hero() {
           </div>
         </div>
       )}
+
+      {/* Toast notifications */}
+      <div className="fixed bottom-6 right-6 z-[9999] flex flex-col gap-2 items-end">
+        {toasts.map((t) => (
+          <div
+            key={t.id}
+            className="flex items-center gap-3 px-4 py-3 rounded-md shadow-[0_4px_12px_rgba(43,38,32,0.15)] font-rethink text-sm text-white min-w-[240px] max-w-sm animate-[toast-in_0.2s_ease-out] bg-[#ae1431]"
+          >
+            <span className="flex-1">{t.message}</span>
+            <button
+              type="button"
+              onClick={() => dismissToast(t.id)}
+              className="cursor-pointer text-white/80 hover:text-white shrink-0"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+      <style jsx global>{`
+        @keyframes toast-in {
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }

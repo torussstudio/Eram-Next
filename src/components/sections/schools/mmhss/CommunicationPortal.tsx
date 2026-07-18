@@ -184,7 +184,7 @@ export default function CommunicationPortal() {
             <br></br>
             <button
   onClick={() => {
-    router.push("/portal");
+    router.push("/student-parent-portal");
     window.scrollTo(0, 0);
   }}
   className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10"

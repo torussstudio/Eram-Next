@@ -200,7 +200,7 @@ export default function Footer() {
               </li>
 
               <li>
-                <Link href="/portal" className="hover:underline">
+                <Link href="/student-parent-portal" className="hover:underline">
                   Parent Portal
                 </Link>
               </li>

@@ -242,7 +242,7 @@ export default function Navbar() {
         router.prefetch(inst.path);
       }
     });
-    router.prefetch("/portal");
+    router.prefetch("/student-parent-portal");
   }, [router]);
 
   useEffect(() => {
@@ -519,7 +519,7 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
 {/* ── STUDENT-PARENT PORTAL BUTTON ── */}
 <div className="shrink-0 hidden min-[920px]:flex font-rethink">
   <button
-    onClick={() => handleNavClick("/portal")}
+    onClick={() => handleNavClick("/student-parent-portal")}
     style={{
       backgroundColor: btnBg,
       color: btnText,
@@ -715,7 +715,7 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
 
           <div className="px-7 pb-10 mt-auto border-t border-black/10 pt-5">
             <button
-              onClick={() => handleNavClick("/portal", true)}
+              onClick={() => handleNavClick("/student-parent-portal", true)}
               className="w-full bg-[#ae1431] text-white rounded-[10px] py-[14px] font-rethink text-[0.85rem] tracking-[0.04em]"
             >
               Student-Parent Portal

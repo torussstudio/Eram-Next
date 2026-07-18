@@ -270,11 +270,11 @@ function SystemsThatSustainExcellence() {
       };
 
       mm.add("(min-width: 768px)", () => {
-        buildStackTimeline(7 * 320);
-      });
-      mm.add("(max-width: 767px)", () => {
-        buildStackTimeline(7 * 220);
-      });
+  buildStackTimeline(7 * 320);   // fixed 2240px, screen size adapt aavilla
+});
+mm.add("(max-width: 767px)", () => {
+  buildStackTimeline(7 * 220);   // fixed 1540px
+});
 
       return () => mm.revert();
     },

@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { Play, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Play, X, ArrowUpRight } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import api from "@/lib/api";
 
 type SportsEvent = {
@@ -21,6 +23,7 @@ type SportsEvent = {
 };
 
 export default function CommunitySection() {
+  const router = useRouter();
   const [sportsEvents, setSportsEvents] = useState<SportsEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,6 +31,12 @@ export default function CommunitySection() {
   const [previewItem, setPreviewItem] = useState<SportsEvent | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const listWrapRef = useRef<HTMLDivElement>(null);
 
   const openPreview = (item: SportsEvent) => setPreviewItem(item);
   const closePreview = () => {
@@ -102,8 +111,64 @@ export default function CommunitySection() {
     };
   }, []);
 
+  // ── Header entrance (label, heading, copy) — scroll-triggered ──────
+  useGSAP(
+    () => {
+      gsap.set(labelRef.current, { opacity: 0, y: 12 });
+      gsap.set(headingRef.current, { opacity: 0, y: 22 });
+      gsap.set(copyRef.current, { opacity: 0, y: 18 });
+
+      gsap.timeline({
+        defaults: { ease: "power3.out" },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      })
+        .to(labelRef.current, { opacity: 1, y: 0, duration: 0.5 }, 0)
+        .to(headingRef.current, { opacity: 1, y: 0, duration: 0.65 }, 0.1)
+        .to(copyRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.25);
+
+      return () => {
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+      };
+    },
+    { scope: sectionRef },
+  );
+
+  // ── Events list stagger reveal — re-runs once data arrives ─────────
+  useGSAP(
+    () => {
+      if (loading || sportsEvents.length === 0) return;
+
+      const rows = listWrapRef.current?.querySelectorAll(".event-row");
+      if (!rows || rows.length === 0) return;
+
+      gsap.set(rows, { opacity: 0, y: 16 });
+
+      gsap.to(rows, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+        stagger: 0.09,
+        scrollTrigger: {
+          trigger: listWrapRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // Layout height changed once real rows replaced the skeleton —
+      // let ScrollTrigger recompute trigger positions.
+      ScrollTrigger.refresh();
+    },
+    { scope: sectionRef, dependencies: [loading, sportsEvents] },
+  );
+
   return (
-    <section className="bg-[#F5EFE8] py-[80px] md:py-[100px] px-[16px] sm:px-[20px] md:px-[28px]">
+    <section ref={sectionRef} className="bg-[#F5EFE8] py-[80px] md:py-[100px] px-[16px] sm:px-[20px] md:px-[28px]">
       <div className="max-w-[1500px] mx-auto px-[10px] md:px-[12px]">
         <div
           className="
@@ -115,19 +180,19 @@ export default function CommunitySection() {
           <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-[40px] lg:gap-[64px] items-start mb-[56px] md:mb-[72px]">
             {/* LEFT: label + heading */}
             <div>
-              <div className="flex items-center gap-3 mb-6">
+              <div ref={labelRef} className="flex items-center gap-3 mb-6">
                 <p className="font-rethink text-[12px] tracking-[0.25em] text-[#ae1431] uppercase">
                   A venue for the wider community
                 </p>
               </div>
 
-              <h2 className="font-display text-[34px] sm:text-[42px] md:text-[56px] leading-[1.1] text-[#1a1a1a]">
+              <h2 ref={headingRef} className="font-display text-[34px] sm:text-[42px] md:text-[56px] leading-[1.1] text-[#1a1a1a]">
                 Open Beyond <br /> the Campus.
               </h2>
             </div>
 
             {/* RIGHT: paragraphs, bottom-aligned to heading baseline */}
-            <div className="lg:pb-[6px]">
+            <div ref={copyRef} className="lg:pb-[6px]">
               <p className="font-rethink text-[14.5px] text-[#4a433c] leading-[1.8] mb-5">
                 The ERAM Sports Arena extends beyond institutional use. It is
                 open for external bookings, welcoming a wide range of
@@ -169,7 +234,7 @@ export default function CommunitySection() {
           </div>
 
           {/* BOTTOM ROW — divider list instead of boxed card grid */}
-          <div>
+          <div ref={listWrapRef}>
             <div className="flex items-center justify-between mb-2">
               <p className="text-[12px] tracking-[0.25em] text-[#7d746c] uppercase">
                 Events We Welcome
@@ -203,10 +268,12 @@ export default function CommunitySection() {
                 {sportsEvents.map((item: SportsEvent, i: number) => (
                   <div
                     key={item._id}
+                    onClick={() => router.push("/events")}
                     className="
+                    event-row
                     group relative overflow-hidden
                     border-b border-[#cfc6bb]
-                    px-[6px] md:px-[8px]
+                    px-[6px] md:px-[8px] 
                   "
                   >
                     {/* sliding fill */}
@@ -262,7 +329,7 @@ export default function CommunitySection() {
                             openPreview(item);
                           }}
                           aria-label={`Preview image for ${item.title}`}
-                          className="relative w-[40px] h-[40px] md:w-[46px] md:h-[46px] shrink-0 overflow-hidden rounded-[8px] ring-1 ring-black/10 group-hover:ring-white/30 transition-all duration-300 cursor-zoom-in"
+                          className=" cursor-pointer relative w-[40px] h-[40px] md:w-[46px] md:h-[46px] shrink-0 overflow-hidden rounded-[8px] ring-1 ring-black/10 group-hover:ring-white/30 transition-all duration-300 cursor-zoom-in"
                         >
                           <img
                             src={item.image}
@@ -281,18 +348,21 @@ export default function CommunitySection() {
                         </p>
                       </div>
 
-                      {/* arrow */}
-                      <span
-                        className="
-                        font-rethink text-[#ae1431] group-hover:text-white
-                        transition-all duration-300
-                        opacity-0 -translate-x-2
-                        group-hover:opacity-100 group-hover:translate-x-0
-                        shrink-0
-                      "
-                      >
-                        →
-                      </span>
+                      
+                      {/* prominent nav icon */}
+<span
+  className="
+  flex items-center justify-center
+  w-[34px] h-[34px] md:w-[38px] md:h-[38px]
+  rounded-full shrink-0
+  bg-[#ae1431]/10 text-[#ae1431]
+  group-hover:bg-white group-hover:text-[#ae1431]
+  transition-all duration-300
+  group-hover:scale-110
+"
+>
+  <ArrowUpRight size={18} strokeWidth={2.5} />
+</span>
                     </div>
                   </div>
                 ))}

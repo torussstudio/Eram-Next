@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -37,10 +37,21 @@ const TYPES: { id: TypeId; label: string }[] = [
   { id: "academic", label: "Academic" },
 ];
 
-const PAGE_SIZE = 30;
+// 20 images per batch — Show More reveals the next 20 (20 -> 40 -> 60 ...)
+const PAGE_SIZE = 20;
 
 const VALID_CATEGORY_IDS = CATEGORIES.map((c) => c.id) as string[];
 const VALID_TYPE_IDS = TYPES.map((t) => t.id) as string[];
+
+// Responsive column counts — mirrors the old Tailwind `columns-*` breakpoints
+// (1 / sm:2 / lg:3 / xl:4). Computed in JS so we can build a STABLE masonry
+// (see comment above `columns` memo below).
+function getColumnCount(width: number) {
+  if (width >= 1280) return 4; // xl
+  if (width >= 1024) return 3; // lg
+  if (width >= 640) return 2; // sm
+  return 1;
+}
 
 export default function GalleryClient() {
   const searchParams = useSearchParams();
@@ -131,6 +142,14 @@ export default function GalleryClient() {
   // always showing the first item.
   const [heroIndex, setHeroIndex] = useState(0);
 
+  // Tracks the last image that finished loading/animating in, so we can
+  // keep it rendered as a base layer underneath the incoming image and
+  // crossfade between the two — this avoids the container's background
+  // color flashing through during the switch (the old "blink" bug).
+  const [prevHeroImage, setPrevHeroImage] = useState<string | undefined>(
+    undefined,
+  );
+
   // Cycle hero image every 5s, picking a random image from the filtered set
   useEffect(() => {
     if (filteredItems.length <= 1) return;
@@ -157,6 +176,23 @@ export default function GalleryClient() {
     setActiveType("all");
   }, []);
 
+
+  const [numColumns, setNumColumns] = useState(1);
+  useEffect(() => {
+    const update = () => setNumColumns(getColumnCount(window.innerWidth));
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const columns = useMemo(() => {
+    const cols: GalleryItem[][] = Array.from({ length: numColumns }, () => []);
+    displayedItems.forEach((item, i) => {
+      cols[i % numColumns].push(item);
+    });
+    return cols;
+  }, [displayedItems, numColumns]);
+
   // Hero entrance
   useGSAP(
     () => {
@@ -172,7 +208,7 @@ export default function GalleryClient() {
         delay: 0.1,
       });
 
-      const img = heroRef.current.querySelector(".hero-reveal-img");
+      const img = heroRef.current.querySelector(".hero-current-img");
       if (img) {
         gsap.set(img, { opacity: 0, scale: 1.04 });
         gsap.to(img, {
@@ -181,38 +217,54 @@ export default function GalleryClient() {
           duration: 0.9,
           ease: "power3.out",
           delay: 0.15,
+          onComplete: () => setPrevHeroImage(heroImage),
         });
       }
     },
     { scope: heroRef },
   );
 
-  // Crossfade the hero image whenever it cycles to a new random photo
+  // Crossfade the hero image whenever it cycles to a new random photo.
+  // The incoming image (.hero-current-img) fades in from opacity 0 to 1
+  // while the PREVIOUS image stays rendered underneath (see JSX below),
+  // so there's never a moment where raw background color shows through.
   useGSAP(
     () => {
       if (!heroImage || !heroRef.current) return;
-      const imgEl = heroRef.current.querySelector(".hero-reveal-img img");
+      const imgEl = heroRef.current.querySelector(".hero-current-img");
       if (!imgEl) return;
       gsap.fromTo(
         imgEl,
         { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: "power2.out" },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          onComplete: () => setPrevHeroImage(heroImage),
+        },
       );
     },
     { dependencies: [heroImage], scope: heroRef },
   );
 
-  // Re-run entrance animation every time the visible set changes
-  // (initial filter load AND each "Show More" click) — only animate
-  // the newly appended cards, not the ones already on screen.
-  const prevVisibleCountRef = useRef(0);
+  // Re-run entrance animation only for genuinely NEW cards (tracked by item
+  // id, not by a flat count) — every "Show More" click, and the initial
+  // filter load. Tracking by id keeps this correct even though items are
+  // now split across separate column containers instead of one flat list.
+  const animatedIdsRef = useRef<Set<string>>(new Set());
   useGSAP(
     () => {
       if (!gridRef.current || loading) return;
-      const cards = gridRef.current.querySelectorAll(".gallery-card");
-      const prevCount = prevVisibleCountRef.current;
-      const newCards = Array.from(cards).slice(prevCount);
-      const targets = newCards.length > 0 ? newCards : cards;
+      const newItems = displayedItems.filter(
+        (it) => !animatedIdsRef.current.has(it.id),
+      );
+      if (newItems.length === 0) return;
+
+      const targets = newItems
+        .map((it) =>
+          gridRef.current!.querySelector(`[data-card-id="${it.id}"]`),
+        )
+        .filter(Boolean) as Element[];
 
       gsap.set(targets, { opacity: 0, y: 32, scale: 0.97 });
       gsap.to(targets, {
@@ -224,15 +276,15 @@ export default function GalleryClient() {
         stagger: 0.04,
       });
 
-      prevVisibleCountRef.current = displayedItems.length;
+      newItems.forEach((it) => animatedIdsRef.current.add(it.id));
     },
-    { scope: gridRef, dependencies: [displayedItems.length, loading] },
+    { scope: gridRef, dependencies: [displayedItems.length, loading, numColumns] },
   );
 
-  // Reset the "previous count" tracker whenever the underlying filtered
+  // Reset the "already animated" tracker whenever the underlying filtered
   // set changes (new search/filter), so the fresh batch animates fully.
   useEffect(() => {
-    prevVisibleCountRef.current = 0;
+    animatedIdsRef.current = new Set();
   }, [activeCategory, activeType]);
 
   // Lightbox open transition
@@ -298,7 +350,7 @@ export default function GalleryClient() {
       >
         <div className="relative flex flex-col md:flex-row items-stretch overflow-hidden rounded-2xl bg-[#ae1431] min-h-[300px]">
           {/* Left: text content */}
-          <div className="relative z-10 flex-1 flex flex-col justify-center px-8 py-10 md:px-12 md:py-12">
+         <div className="relative z-10 flex-1 md:flex-[0.8] flex flex-col justify-center px-8 py-10 md:px-12 md:py-12">
             <p className="hero-reveal text-xs md:text-sm font-rethink tracking-[0.25em] uppercase text-[#f0c9a0]">
               Moments &amp; Milestones
             </p>
@@ -313,19 +365,27 @@ export default function GalleryClient() {
           </div>
 
           {/* Right: hero image */}
-          <div className="hero-reveal-img relative flex-1 min-h-[220px] md:min-h-0">
-            {heroImage ? (
+          <div className="hero-reveal-img relative flex-1 md:flex-[1.4] min-h-[220px] md:min-h-0 bg-[#8f0f28]">
+            {prevHeroImage && (
+              <img
+                src={prevHeroImage}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
+            )}
+            {heroImage && (
               <img
                 key={heroImage}
                 src={heroImage}
                 alt="ERAM Gallery"
-                className="absolute inset-0 w-full h-full object-cover object-center"
+                className="hero-current-img absolute inset-0 w-full h-full object-cover object-center opacity-0"
               />
-            ) : (
-              <div className="absolute inset-0 bg-[#8f0f28]" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#ae1431] via-[#ae1431]/40 to-transparent md:block hidden" />
-          </div>
+
+            {/* Short fade only right at the seam between text panel and
+                image — the rest of the image stays fully clear/visible. */}
+<div className="absolute inset-0 bg-gradient-to-r from-[#ae1431] from-0% via-[#ae1431]/70 via-[6%] via-[#ae1431]/40 via-[12%] via-[#ae1431]/18 via-[18%] via-[#ae1431]/6 via-[24%] to-transparent to-[30%] md:block hidden" />          </div>
         </div>
       </section>
       <section className="sticky top-14 md:top-18 z-30 bg-[#F5EFE8] px-6 py-5 backdrop-blur-md md:px-12 lg:px-20">
@@ -420,48 +480,52 @@ export default function GalleryClient() {
           </div>
         ) : filteredItems.length > 0 ? (
           <>
-            <div
-              ref={gridRef}
-              className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4 [column-fill:_balance]"
-            >
-              {displayedItems.map((item, i) => (
-                <button
-                  key={item.id}
-                  onClick={() => setLightboxIndex(i)}
-                  className="gallery-card group relative mb-5 block w-full overflow-hidden rounded-md break-inside-avoid text-left ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-[0_24px_48px_-20px_rgba(17,5,8,0.25)]"
-                >
-                  {!loadedMap[item.id] && (
-                    <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-black/5 via-black/[0.03] to-black/5" />
-                  )}
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    onLoad={() =>
-                      setLoadedMap((m) => ({ ...m, [item.id]: true }))
-                    }
-                    className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  />
-                  <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#110508]/90 via-[#110508]/15 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="flex items-end justify-between gap-2">
-                      <div>
-                        <span className="mb-1 inline-block w-fit rounded-full bg-[#ae1431] px-2.5 py-0.5 text-[10px] font-rethink uppercase tracking-wider text-white">
-                          {TYPES.find((t) => t.id === item.type)?.label}
-                        </span>
-                        <p className="font-display text-lg text-white">
-                          {item.title}
-                        </p>
-                        <p className="text-xs uppercase tracking-wide text-white/70">
-                          {CATEGORIES.find((c) => c.id === item.category)?.label}
-                        </p>
-                      </div>
-                      <ArrowUpRight
-                        size={18}
-                        className="mb-1 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            <div ref={gridRef} className="flex gap-5 items-start">
+              {columns.map((col, ci) => (
+                <div key={ci} className="flex flex-1 flex-col gap-5 min-w-0">
+                  {col.map((item) => (
+                    <button
+                      key={item.id}
+                      data-card-id={item.id}
+                      onClick={() =>
+                        setLightboxIndex(filteredItems.findIndex((f) => f.id === item.id))
+                      }
+                      className="gallery-card group relative block w-full overflow-hidden rounded-md text-left ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-[0_24px_48px_-20px_rgba(17,5,8,0.25)]"
+                    >
+                      {!loadedMap[item.id] && (
+                        <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-black/5 via-black/[0.03] to-black/5" />
+                      )}
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        loading="lazy"
+                        onLoad={() =>
+                          setLoadedMap((m) => ({ ...m, [item.id]: true }))
+                        }
+                        className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       />
-                    </div>
-                  </div>
-                </button>
+                      <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#110508]/90 via-[#110508]/15 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <div className="flex items-end justify-between gap-2">
+                          <div>
+                            <span className="mb-1 inline-block w-fit rounded-full bg-[#ae1431] px-2.5 py-0.5 text-[10px] font-rethink uppercase tracking-wider text-white">
+                              {TYPES.find((t) => t.id === item.type)?.label}
+                            </span>
+                            <p className="font-display text-lg text-white">
+                              {item.title}
+                            </p>
+                            <p className="text-xs uppercase tracking-wide text-white/70">
+                              {CATEGORIES.find((c) => c.id === item.category)?.label}
+                            </p>
+                          </div>
+                          <ArrowUpRight
+                            size={18}
+                            className="mb-1 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
               ))}
             </div>
 

@@ -37,7 +37,7 @@ export const navItems: NavItem[] = [
   { label: "About Us", path: "/about-us" },
   { label: "The Trust", path: "/the-trust" },
   { label: "Institutions", path: "#institutions" },
-  { label: "Sports Arena", path: "/explore-arena" },
+  { label: "Sports Arena", path: "/sports-arena" },
   { label: "Contact", path: "/contact" },
   { label: "GALLERY", path: "/gallery" },
 ];

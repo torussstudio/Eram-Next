@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import emailjs from "@emailjs/browser";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 // ─── Static data ───────────────────────────────────────────────────────────────
 
 interface ContactItemProps {
   label: string;
-   value: React.ReactNode;
+  value: React.ReactNode;
   href: string;
   icon: React.ReactNode;
 }
@@ -17,14 +17,13 @@ interface ContactItemProps {
 const CONTACT_ITEMS: ContactItemProps[] = [
   {
     label: "Address",
-    value:
-       (
-    <>
-      Eram Education, Eram Nagar, Prabhapuram,
-      <br />
-      Mannengode (PO), Palakkad — 679307
-    </>
-  ),
+    value: (
+      <>
+        Eram Education, Eram Nagar, Prabhapuram,
+        <br />
+        Mannengode (PO), Palakkad — 679307
+      </>
+    ),
     href: "https://maps.google.com/?q=Eram+Education+Palakkad",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -35,7 +34,6 @@ const CONTACT_ITEMS: ContactItemProps[] = [
       </svg>
     ),
   },
-
   {
     label: "Phone",
     value: "+91 9048166313",
@@ -49,7 +47,6 @@ const CONTACT_ITEMS: ContactItemProps[] = [
       </svg>
     ),
   },
-
   {
     label: "Email",
     value: "manager@eram.edu.in",
@@ -118,6 +115,32 @@ const INITIAL_FORM: FormState = {
   subject: "",
 };
 
+// Splits a heading string into per-letter spans wrapped with overflow-hidden,
+// so a GSAP y-translate reveal actually has letters to animate.
+function AnimatedHeading({
+  text,
+  className = "",
+}: {
+  text: string;
+  className?: string;
+}) {
+  return (
+    <span className={`inline-block ${className}`} aria-label={text}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block overflow-hidden align-top"
+          style={{ paddingBottom: "0.08em" }}
+        >
+          <span className="c-letter inline-block will-change-transform">
+            {char === " " ? "\u00A0" : char}
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
 interface FieldProps extends FieldData {
@@ -142,7 +165,7 @@ function Field({
   className = "",
 }: FieldProps) {
   return (
-    <div className={className}>
+    <div className={`field-item ${className}`}>
       <label className="block text-[11px] tracking-[0.09em] uppercase text-black/40 mb-2 font-rethink">
         {label}
       </label>
@@ -173,9 +196,9 @@ function ContactItem({ icon, label, value, href }: ContactItemProps) {
       href={href}
       target={label === "Address" ? "_blank" : undefined}
       rel={label === "Address" ? "noopener noreferrer" : undefined}
-      className="flex gap-3.5 items-start group"
+      className="contact-item flex gap-3.5 items-start group"
     >
-      <div className="w-9 h-9 min-w-[36px] rounded-[10px] bg-white/[0.07] flex items-center justify-center text-[#ae1431] shrink-0">
+      <div className="w-9 h-9 min-w-[36px] rounded-[10px] bg-white/[0.07] flex items-center justify-center text-[#ae1431] shrink-0 transition-transform duration-300 group-hover:scale-110">
         {icon}
       </div>
       <div className="min-w-0">
@@ -191,9 +214,27 @@ function ContactItem({ icon, label, value, href }: ContactItemProps) {
 }
 
 function SuccessState() {
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      gsap.set(".success-icon", { scale: 0, rotate: -30 });
+      gsap.set(".success-text", { opacity: 0, y: 12 });
+
+      tl.to(".success-icon", {
+        scale: 1,
+        rotate: 0,
+        duration: 0.55,
+        ease: "back.out(2)",
+      }).to(".success-text", { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 }, 0.2);
+    },
+    { scope: successRef },
+  );
+
   return (
-    <div className="text-center py-16">
-      <div className="w-16 h-16 rounded-full bg-[#ae1431] flex items-center justify-center mx-auto mb-6">
+    <div ref={successRef} className="text-center py-16">
+      <div className="success-icon w-16 h-16 rounded-full bg-[#ae1431] flex items-center justify-center mx-auto mb-6">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
           <path
             d="M6 14l6 6 10-10"
@@ -204,10 +245,10 @@ function SuccessState() {
           />
         </svg>
       </div>
-      <h3 className="font-rethink text-[1.8rem]  text-[#1a1a1a] mb-3 tracking-tight">
+      <h3 className="success-text font-rethink text-[1.8rem]  text-[#1a1a1a] mb-3 tracking-tight">
         Message Received
       </h3>
-      <p className="text-sm text-black/45 leading-relaxed font-rethink">
+      <p className="success-text text-sm text-black/45 leading-relaxed font-rethink">
         Thank you for reaching out. Our team will
         <br />
         get back to you within 24 hours.
@@ -233,12 +274,9 @@ export default function ContactPage() {
 
   useGSAP(
     () => {
+      // ── 1. Page-load entrance timeline ─────────────────────────────
       const letters = outlineRef.current?.querySelectorAll(".c-letter");
-      if (!letters || letters.length === 0) return;
 
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-      gsap.set(letters, { y: "110%", skewX: 4 });
       gsap.set(taglineRef.current, { opacity: 0, y: 18 });
       gsap.set(formCardRef.current, { opacity: 0, y: 40 });
       gsap.set(infoCardRef.current, { opacity: 0, y: 40 });
@@ -247,12 +285,18 @@ export default function ContactPage() {
         transformOrigin: "left center",
       });
 
-      tl.to(
-        letters || [],
-        { y: "0%", skewX: 0, duration: 0.9, stagger: { each: 0.045 } },
-        0,
-      )
-        .to(taglineRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.45)
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      if (letters && letters.length > 0) {
+        gsap.set(letters, { y: "110%", skewX: 4 });
+        tl.to(
+          letters,
+          { y: "0%", skewX: 0, duration: 0.9, stagger: { each: 0.045 } },
+          0,
+        );
+      }
+
+      tl.to(taglineRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.45)
         .to(
           dividerRef.current,
           { scaleX: 1, duration: 0.7, ease: "expo.out" },
@@ -260,6 +304,58 @@ export default function ContactPage() {
         )
         .to(infoCardRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.62)
         .to(formCardRef.current, { opacity: 1, y: 0, duration: 0.6 }, 0.72);
+
+      // ── 2. Scroll-triggered stagger for contact items ──────────────
+      const contactItems = gsap.utils.toArray<HTMLElement>(".contact-item");
+      if (contactItems.length > 0) {
+        gsap.set(contactItems, { opacity: 0, x: -16 });
+        gsap.to(contactItems, {
+          opacity: 1,
+          x: 0,
+          duration: 0.55,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: infoCardRef.current,
+            start: "top 82%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+
+      // ── 3. Scroll-triggered stagger for form fields ────────────────
+      const fieldItems = gsap.utils.toArray<HTMLElement>(".field-item");
+      if (fieldItems.length > 0) {
+        gsap.set(fieldItems, { opacity: 0, y: 14 });
+        gsap.to(fieldItems, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+          stagger: 0.06,
+          scrollTrigger: {
+            trigger: formCardRef.current,
+            start: "top 78%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+
+      // ── 4. Subtle parallax on the divider as page scrolls ──────────
+      gsap.to(dividerRef.current, {
+        scaleX: 1.04,
+        ease: "none",
+        scrollTrigger: {
+          trigger: pageRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6,
+        },
+      });
+
+      return () => {
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+      };
     },
     { scope: pageRef },
   );
@@ -279,19 +375,19 @@ export default function ContactPage() {
     setIsLoading(true);
 
     try {
-await emailjs.send(
-  process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-  process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-  {
-    name: form.name,
-    email: form.email,
-    phone: form.phone,
-    subject: form.subject,
-    message: form.message,
-    title: form.subject,
-  },
-  process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-);
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: form.subject,
+          message: form.message,
+          title: form.subject,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      );
       setSubmitted(true);
     } catch (error) {
       console.error("EmailJS error:", error);
@@ -326,15 +422,17 @@ await emailjs.send(
           <div ref={infoCardRef}>
             <div className=" rounded-2xl lg:rounded-[28px] p-6 sm:p-9 lg:p-11 text-white relative overflow-hidden flex flex-col gap-10 md:gap-12">
               {/* Top section — "Get in Touch" overlaid on dark card header */}
-              <div>
+              <div ref={outlineRef}>
                 <p className="font-display text-[2.2rem] lg:text-[3rem] leading-[0.9] tracking-[-0.04em] text-black mb-4">
-                  Get in Touch
+                  <AnimatedHeading text="Get in Touch" />
                 </p>
-                <p className="text-[14.5px] font-rethink leading-[1.75] text-black max-w-xs">
-                  For admissions, institutional enquiries, partnerships, or
-                  sports Arena bookings, our team will guide you to the right
-                  department.
-                </p>
+                <div ref={taglineRef}>
+                  <p className="text-[14.5px] font-rethink leading-[1.75] text-black max-w-xs">
+                    For admissions, institutional enquiries, partnerships, or
+                    sports Arena bookings, our team will guide you to the
+                    right department.
+                  </p>
+                </div>
               </div>
 
               {/* Contact items */}
@@ -359,8 +457,8 @@ await emailjs.send(
                       Send us an Enquiry
                     </h3>
                     <p className="text-[13.5px] font-rethink text-black/45 leading-relaxed">
-                      Fill in the form and the relevant department will respond
-                      at the earliest.
+                      Fill in the form and the relevant department will
+                      respond at the earliest.
                     </p>
                   </div>
 
@@ -387,7 +485,7 @@ await emailjs.send(
                     />
 
                     {/* Subject chips */}
-                    <div>
+                    <div className="field-item">
                       <p className="block text-[11px] tracking-[0.09em] uppercase text-black/40 mb-2 font-rethink">
                         Regarding
                       </p>
@@ -413,7 +511,7 @@ await emailjs.send(
                     </div>
 
                     {/* Message */}
-                    <div>
+                    <div className="field-item">
                       <label className="block text-[11px] tracking-[0.09em] uppercase text-black/40 mb-2 font-rethink">
                         Message
                       </label>

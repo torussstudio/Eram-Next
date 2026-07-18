@@ -2,11 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { ChevronDown, Check } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL ||

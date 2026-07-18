@@ -369,7 +369,7 @@ export default function AdminLayoutClient({ children }) {
               <button
                 onClick={requestLogout}
                 disabled={loggingOut}
-                className="w-full flex items-center font-display justify-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/80 hover:bg-[#ae1431]/10 border border-[#c5a880]/10 hover:border-[#ae1431]/40 text-zinc-400 hover:text-[#F5EFE8] transition-[color,background-color,border-color] duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center cursor-pointer font-display justify-center gap-2 px-3 py-2 rounded-lg bg-zinc-900/80 hover:bg-[#ae1431]/10 border border-[#c5a880]/10 hover:border-[#ae1431]/40 text-zinc-400 hover:text-[#F5EFE8] transition-[color,background-color,border-color] duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loggingOut ? (
                   <span className="h-3.5 w-3.5 border-2 border-zinc-500/30 border-t-zinc-300 rounded-full animate-spin" />
@@ -390,7 +390,7 @@ export default function AdminLayoutClient({ children }) {
                 onClick={requestLogout}
                 disabled={loggingOut}
                 title="Sign Out"
-                className="p-2 rounded-lg hover:bg-[#ae1431]/10 text-zinc-500 hover:text-[#ae1431] border border-transparent hover:border-[#ae1431]/20 transition-[color,background-color,border-color] duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 rounded-lg cursor-pointer hover:bg-[#ae1431]/10 text-zinc-500 hover:text-[#ae1431] border border-transparent hover:border-[#ae1431]/20 transition-[color,background-color,border-color] duration-200  disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loggingOut ? (
                   <span className="h-4 w-4 border-2 border-zinc-500/30 border-t-zinc-300 rounded-full animate-spin block" />
@@ -732,14 +732,14 @@ export default function AdminLayoutClient({ children }) {
                 <button
                   onClick={() => setShowLogoutConfirm(false)}
                   disabled={loggingOut}
-                  className="px-4 py-2  rounded-lg border border-[#c5a880]/15 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2  rounded-lg border border-[#c5a880]/15 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmLogout}
                   disabled={loggingOut}
-                  className="px-4 py-2  rounded-lg bg-[#ae1431] text-[#F5EFE8] hover:bg-[#ae1431]/90 transition-colors flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="px-4 py-2  rounded-lg bg-[#ae1431] text-[#F5EFE8] hover:bg-[#ae1431]/90 transition-colors flex cursor-pointer items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {loggingOut && (
                     <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

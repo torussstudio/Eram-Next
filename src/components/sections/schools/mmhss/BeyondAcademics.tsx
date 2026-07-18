@@ -17,6 +17,7 @@ interface BenchmarkEntry {
   tag?: string;
   title?: string;
   desc?: string;
+  image?: string;
 }
 
 interface ExcellenceEntry {
@@ -33,6 +34,7 @@ interface StatEntry {
   value?: string;
   unit?: string;
   label?: string;
+   image?: string;
 }
 
 interface BeyondAcademicsProps {
@@ -249,31 +251,43 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
               Institutional Benchmarks
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-              {benchmarks.map((card) => (
-                <div
-                  key={card._id}
-                  className="anim-bench group relative p-8 bg-white border border-[#d4cbbf]
-                  border-t-4 border-t-[#d4cbbf] hover:border-t-[#ae1431]
-                  transition-colors duration-300 rounded-2xl overflow-hidden"
-                >
-                  <span className="inline-block font-display rounded-[8px] bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 ">
-                    {card.tag}
-                  </span>
+           
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+  {benchmarks.map((card) => (
+    <div
+      key={card._id}
+      className="anim-bench group relative p-8 bg-white border border-[#d4cbbf]
+      border-t-4 border-t-[#d4cbbf] hover:border-t-[#ae1431]
+      transition-colors duration-300 rounded-2xl overflow-hidden
+      flex flex-col"
+    >
+      <span className="inline-block font-display rounded-[8px] bg-[#fdf6ef] text-[#ae1431] text-[9px] tracking-[0.22em] uppercase px-3 py-1 mb-6 w-fit">
+        {card.tag}
+      </span>
 
-                  <h3 className=" text-[#1a1209] text-[20px] sm:text-[22px] leading-snug tracking-[-0.01em] mb-3">
-                    {card.title}
-                  </h3>
+      {card.image && (
+        <div className="relative h-[200px] sm:h-[240px] w-full mb-6 rounded-xl overflow-hidden">
+          <Image
+            src={card.image}
+            alt={card.title || ""}
+            fill
+            className="object-cover"
+          />
+        </div>
+      )}
 
-                  <p className="text-[13px] font-rethink text-[#6b5f54] leading-[1.7] max-w-[480px]">
-                    {card.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+      <h3 className="text-[#1a1209] text-[20px] sm:text-[22px] leading-snug tracking-[-0.01em] mb-3">
+        {card.title}
+      </h3>
+
+      <p className="text-[13px] font-rethink text-[#6b5f54] leading-[1.7] max-w-[480px]">
+        {card.desc}
+      </p>
+    </div>
+  ))}
+</div>
+  </div>
         )}
-
         {/* ── STUDENT EXCELLENCE ─────────────────────────────── */}
         {excellence.length > 0 && (
           <div className="anim-excel-wrap mb-12">
@@ -374,29 +388,40 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
 
             <div className="mx-auto max-w-5xl">
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {stats.map((stat) => (
-      <div
-        key={stat._id}
-        className="anim-stat rounded-2xl bg-[#ae1431] px-8 py-10 text-center"
-      >
-        <div className="mb-4 flex items-baseline justify-center gap-1">
-          <span
-            data-target={stat.value}
-            className="counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] text-white"
-          >
-            0
-          </span>
-
-          <span className="font-display text-[40px] text-white/60">
-            {stat.unit}
-          </span>
-        </div>
-
-        <p className="font-rethink whitespace-pre-line text-[12px] leading-[1.65] text-white/55 sm:text-[13px]">
-          {stat.label}
-        </p>
+ {stats.map((stat) => (
+  <div
+    key={stat._id}
+    className="anim-stat rounded-2xl bg-[#ae1431] px-8 py-10 text-center flex flex-col items-center justify-center"
+  >
+    {stat.image && (
+      <div className="relative h-[200px] sm:h-[240px] w-full mb-6 rounded-xl overflow-hidden">
+        <Image
+          src={stat.image}
+          alt={stat.label || ""}
+          fill
+          className="object-cover"
+        />
       </div>
-    ))}
+    )}
+
+    <div className="mb-4 flex items-baseline justify-center gap-1">
+      <span
+        data-target={stat.value}
+        className="counter-num text-[56px] sm:text-[64px] leading-none tracking-[-0.02em] text-white"
+      >
+        0
+      </span>
+
+      <span className="font-display text-[40px] text-white/60">
+        {stat.unit}
+      </span>
+    </div>
+
+    <p className="font-rethink whitespace-pre-line text-[12px] leading-[1.65] text-white/55 sm:text-[13px]">
+      {stat.label}
+    </p>
+  </div>
+))}
   </div>
 </div>
           </div>

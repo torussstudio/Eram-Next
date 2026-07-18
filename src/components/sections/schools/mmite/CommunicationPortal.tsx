@@ -163,7 +163,7 @@ export default function CommunicationPortal() {
               interface.
             </p>
             <br></br>
-            <button   onClick={()=>router.push("/portal")} className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
+            <button   onClick={()=>router.push("/student-parent-portal")} className="font-rethink  anim-btn bg-[#ae1431] text-white border border-white px-6 py-3 text-sm tracking-widest uppercase flex items-center gap-2 hover:bg-white hover:text-[#ae1431] cursor-pointer rounded-[10px] mb-10">
               Access the Parent Portal
               <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>

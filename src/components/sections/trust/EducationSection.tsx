@@ -51,14 +51,14 @@ const Card = ({
   return (
     <div className={styles[variant]}>
       {image && (
-        <div className="relative mb-6 overflow-hidden rounded-xl">
-          <img
-            src={image}
-            alt={imageAlt || title || "Card image"}
-            className="h-[240px] w-full object-cover"
-          />
-        </div>
-      )}
+  <div className="relative mb-6 h-[320px] w-full overflow-hidden rounded-xl">
+    <img
+      src={image}
+      alt={imageAlt || title || "Card image"}
+      className="absolute inset-0 h-full w-full object-cover object-center"
+    />
+  </div>
+)}
 
       {label && (
         <span
@@ -68,8 +68,8 @@ const Card = ({
               variant === "white"
                 ? "[#ae1431]"
                 : variant === "dark"
-                  ? "rgba(255,255,255,0.6)"
-                  : "rgba(255,255,255,0.7)",
+                ? "rgba(255,255,255,0.6)"
+                : "rgba(255,255,255,0.7)",
           }}
         >
           {label}
@@ -116,7 +116,9 @@ const Card = ({
         >
           <p className="text-[14px] ">{badge.value}</p>
           <p
-            className={`text-[12px] ${variant === "white" ? "text-white/80" : "text-white/70"}`}
+            className={`text-[12px] ${
+              variant === "white" ? "text-white/80" : "text-white/70"
+            }`}
           >
             {badge.label}
           </p>
@@ -318,7 +320,7 @@ const panels = [
         <Card
           variant="dark"
           label="PALAKKAD DISTRICT"
-          image="/images/trust/workshop.jpg"
+          image="/images/teachertraining.png"
           imageAlt="Teacher Training"
           title="WHO-Certified Teacher Training Workshops"
           body="Recognising that institutional quality is sustained through faculty excellence, the Trust implemented structured teacher development programs including WHO-certified workshops — institutionalised as continuous professional development, not periodic compliance."
@@ -339,7 +341,7 @@ const panels = [
         <Card
           variant="red"
           label="4 YEARS · 30 PANCHAYATS"
-          image="/images/trust/workshop.jpg"
+          image="/images/medical.png"
           imageAlt="Teacher Training"
           title="30 Medical Camps & 4,000+ Cataract Surgeries"
           meta={["Coverage: Ottapalam, Kongad, Nellyampathy Tribal Regions"]}
@@ -349,7 +351,7 @@ const panels = [
         <Card
           variant="white"
           label="2015 · MANKARA"
-          image="/images/trust/workshop.jpg"
+          image="/images/clinicc.jpg"
           imageAlt="Teacher Training"
           title="Maryumma Memorial Children's Clinic"
           meta={["Location: Mankara Government Hospital, Palakkad"]}
@@ -363,7 +365,7 @@ const panels = [
         <Card
           variant="white"
           label="CRITICAL CARE ACCESS"
-          image="/images/trust/workshop.jpg"
+          image="/images/dialisis.png"
           imageAlt="Teacher Training"
           title="Dialysis Support Initiative"
           body="Addressing the growing prevalence of kidney-related illness, particularly in regions affected by sanitation challenges, the Trust provided dialysis machines and extended financial aid to patients requiring critical renal care — bridging access to life-sustaining treatment for economically disadvantaged families."
@@ -372,7 +374,7 @@ const panels = [
       <div className="grid md:grid-cols-2 gap-[20px]">
         <Card
           variant="dark"
-          image="/images/trust/workshop.jpg"
+          image="/images/etoilet.png"
           imageAlt="Teacher Training"
           label="PUBLIC SANITATION INNOVATION"
           title="eToilet – Sustainable Sanitation"
@@ -384,7 +386,7 @@ const panels = [
         <Card
           variant="white"
           label="5 PANCHAYATS · PALAKKAD"
-          image="/images/trust/workshop.jpg"
+          image="/images/aid.png"
           imageAlt="Teacher Training"
           title="Financial Aid for 242 BPL Families – Toilet Construction"
           meta={[
@@ -407,7 +409,7 @@ const panels = [
       <div className="grid md:grid-cols-2 gap-[20px] mb-[20px]">
         <Card
           variant="red"
-          image="/images/trust/workshop.jpg"
+          image="/images/shelter.png"
           imageAlt="Teacher Training"
           label="PERMANENT SHELTER"
           title="Housing Initiative – Shelter for the Homeless"
@@ -421,7 +423,7 @@ const panels = [
         <Card
           variant="white"
           label="2013 · REPATRIATION"
-          image="/images/trust/workshop.jpg"
+          image="/images/nitaqat.png"
           imageAlt="Teacher Training"
           title="Nitaqat Charter Flight Initiative"
           meta={[
@@ -435,7 +437,7 @@ const panels = [
         <Card
           variant="dark"
           label="NORKA COLLABORATION"
-          image="/images/trust/workshop.jpg"
+          image="/images/norka.png"
           imageAlt="Teacher Training"
           title="Swapnasafalyam – Repatriation & Reintegration Support"
           body={[
@@ -446,7 +448,7 @@ const panels = [
         <Card
           variant="white"
           label="REHABILITATION SUPPORT"
-          image="/images/trust/workshop.jpg"
+          image="/images/rehabilitation.png"
           imageAlt="Teacher Training"
           title="Individual Rehabilitation & Livelihood Support"
           body={[
@@ -465,7 +467,7 @@ const panels = [
         <Card
           variant="red"
           label="NATIONAL SCHOOLS GAMES"
-          image="/images/trust/workshop.jpg"
+          image="/images/athlete.png"
           imageAlt="Teacher Training"
           title="Athlete Support Program"
           meta={["Support — 36+ Athletes Supported"]}
@@ -484,7 +486,7 @@ const panels = [
         <Card
           variant="white"
           label="PROFESSIONAL SPORTS"
-          image="/images/trust/workshop.jpg"
+          image="/images/support.png"
           imageAlt="Teacher Training"
           title="Support for Professional Athletes"
           body="The Trust extended support to Diljith T.S., Indian motor racing and karting champion — assisting his participation in competitive circuits and strengthening pathways from regional talent to national-level professional sport."
@@ -492,7 +494,7 @@ const panels = [
         <Card
           variant="dark"
           label="2015 · 2026 MILESTONE"
-          image="/images/trust/workshop.jpg"
+          image="/images/sports-arena-court.jpeg"
           imageAlt="Teacher Training"
           title="EASE & The ERAM Sports Arena"
           body={[
@@ -548,7 +550,7 @@ const panels = [
         <Card
           variant="red"
           label="PALAKKAD REGION"
-          image="/images/trust/workshop.jpg"
+          image="/images/water.png"
           imageAlt="Teacher Training"
           title="Drinking Water Infrastructure"
           body="A structured, end-to-end water infrastructure program ensuring sustained access to safe drinking water across rural Palakkad — from source creation to household-level connectivity."
@@ -566,7 +568,7 @@ const panels = [
         <Card
           variant="white"
           label="PALAKKAD REGION"
-          image="/images/trust/workshop.jpg"
+          image="/images/dams.png"
           imageAlt="Teacher Training"
           title="Multiple Check Dams Constructed"
           meta={["Impact — Strengthened water retention"]}
@@ -586,7 +588,7 @@ const panels = [
         <Card
           variant="white"
           label="PALAKKAD DISTRICT"
-          image="/images/trust/workshop.jpg"
+          image="/images/ambulance.png"
           imageAlt="Teacher Training"
           title="Ambulance Sponsorship Initiative"
           body={[
@@ -597,7 +599,7 @@ const panels = [
         <Card
           variant="red"
           label="KERALA ODF INITIATIVE"
-          image="/images/trust/workshop.jpg"
+          image="/images/toilets.png"
           imageAlt="Teacher Training"
           title="Toilet Construction Aid – Sanitation Infrastructure"
           meta={[
@@ -610,7 +612,7 @@ const panels = [
         <Card
           variant="dark"
           label="SOCIAL COHESION"
-          image="/images/trust/workshop.jpg"
+          image="/images/social.png"
           imageAlt="Teacher Training"
           title="Interreligious Harmony & Social Cohesion Initiatives"
           meta={["Format — Multi-community engagement platforms"]}
@@ -718,7 +720,6 @@ export default function EducationSection({
       return;
     }
 
-
     const el = headerRefs.current[i];
     if (el) {
       const navOffset = 100;
@@ -768,7 +769,11 @@ export default function EducationSection({
   }, []);
 
   return (
-    <section ref={sectionRef} id="community-impact" className="bg-[#F5EFE8] pt-[80px] pb-[80px]">
+    <section
+      ref={sectionRef}
+      id="community-impact"
+      className="bg-[#F5EFE8] pt-[80px] pb-[80px]"
+    >
       <div className="max-w-[1100px] mx-auto px-[20px]">
         {pillars.map((p, i) => {
           const Panel = panels[i];

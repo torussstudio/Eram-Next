@@ -7,11 +7,13 @@ import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import api from "@/lib/api";
 import { ChevronDown, Check } from "lucide-react";
+import { useSearchParams } from 'next/navigation';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const SCHOOL_CATEGORY = "mmhss";
-const PREVIEW_LIMIT = 15;
+const PREVIEW_LIMIT = 12;
 
 interface GalleryItem {
   _id: string;
@@ -161,6 +163,14 @@ export default function GalleryPage() {
   const [activeType, setActiveType] = useState<TypeFilter>("all");
   const [lightboxItem, setLightboxItem] = useState<GalleryItem | null>(null);
 
+  
+
+   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [searchParams]);
+
   useEffect(() => {
     setLoading(true);
     api
@@ -283,6 +293,9 @@ export default function GalleryPage() {
           </div>
 
           {/* TYPE FILTER — same dropdown component as Events page, on all screens */}
+              <p className="font-rethink text-xs uppercase tracking-widest text-gray-400 mb-3">
+  Explore our moments
+</p>
           <div className="mb-10 flex items-center justify-between gap-3">
             <Dropdown
               value={activeType}
@@ -343,12 +356,14 @@ export default function GalleryPage() {
 
           {!loading && totalCount > PREVIEW_LIMIT && (
             <div className="mt-12 flex justify-center">
-              <Link
-                href="/gallery?category=mmhss"
-                className="font-rethink text-xs uppercase tracking-widest px-6 py-2.5 rounded-full border border-white/25 text-gray-300 hover:border-[#ae1431] hover:text-white hover:bg-[#ae1431] transition-colors duration-200 cursor-pointer"
-              >
-                Show More
-              </Link>
+             <Link
+  href="/gallery?category=mmhss"
+  scroll={true}
+  onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+  className="font-rethink text-xs uppercase tracking-widest px-6 py-2.5 rounded-full border border-white/25 text-gray-300 border-[#ae1431] text-white bg-[#ae1431] hover:bg-black hover:border-black transition-colors duration-200 cursor-pointer"
+>
+  Show More
+</Link>
             </div>
           )}
         </div>
