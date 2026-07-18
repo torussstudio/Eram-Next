@@ -467,11 +467,20 @@ const StudentParentPortal = () => {
               educational ecosystem.
             </p>
             <button
-              ref={heroBtnRef}
-              className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl active:scale-95 transition-all"
-            >
-              Proceed to Full Portal <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
+  ref={heroBtnRef}
+  onClick={() => {
+    const yOffset = -90;
+    const y =
+      instSectionRef.current!.getBoundingClientRect().top +
+      window.pageYOffset +
+      yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }}
+  className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 bg-[#ae1431] text-white hover:bg-black text-sm font-rethink uppercase tracking-wide rounded-xl active:scale-95 transition-all"
+>
+  Proceed to Full Portal <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+</button>
           </div>
 
          {/* Hero banner */}

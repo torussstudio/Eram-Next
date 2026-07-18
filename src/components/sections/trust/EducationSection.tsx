@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
+import { getLenis } from "@/providers/SmoothScrollProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -674,97 +675,78 @@ export default function EducationSection({
 }) {
   const headerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
-  const pinFrameRef = useRef<number | null>(null);
 
-  const pinHeaderDuringAnimation = (i: number, durationMs = 950) => {
-    if (pinFrameRef.current) {
-      cancelAnimationFrame(pinFrameRef.current);
-      pinFrameRef.current = null;
-    }
 
-    const navOffset = 100; // adjust to match sticky navbar height + spacing
-    const startTime = performance.now();
 
-    const step = () => {
-      const el = headerRefs.current[i];
-      if (!el) return;
-
-      const rectTop = el.getBoundingClientRect().top;
-      const diff = rectTop - navOffset;
-
-      // Only correct meaningful drift, avoids micro-jitter
-      if (Math.abs(diff) > 1) {
-        window.scrollTo({ top: window.scrollY + diff, behavior: "auto" });
-      }
-
-      const elapsed = performance.now() - startTime;
-      if (elapsed < durationMs) {
-        pinFrameRef.current = requestAnimationFrame(step);
-      } else {
-        pinFrameRef.current = null;
-      }
-    };
-
-    pinFrameRef.current = requestAnimationFrame(step);
-  };
-
-  const handlePillarClick = (i: number) => {
-    if (pinFrameRef.current) {
-      cancelAnimationFrame(pinFrameRef.current);
-      pinFrameRef.current = null;
-    }
-
+ const handlePillarClick = (i: number) => {
     if (active === i) {
-      // Closing the currently open pillar — no pin needed
+      // Closing the currently open pillar — no scroll needed
       setActive(null);
       return;
     }
 
     const el = headerRefs.current[i];
+    const navOffset = 100;
+
     if (el) {
-      const navOffset = 100;
       const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
-      window.scrollTo({ top, behavior: "smooth" });
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(top, { duration: 0.6 });
+      } else {
+        window.scrollTo({ top, behavior: "smooth" });
+      }
     }
 
     setActive(i);
-    pinHeaderDuringAnimation(i);
+
+    // AnimatedPanel-ന്റെ open animation (0.55s duration) കഴിഞ്ഞ ശേഷം
+    // content height മാറിയത് കൊണ്ടുള്ള drift ഒരു single correction കൊണ്ട് fix ചെയ്യുക
+    setTimeout(() => {
+      const headerEl = headerRefs.current[i];
+      if (!headerEl) return;
+      const correctedTop =
+        headerEl.getBoundingClientRect().top + window.scrollY - navOffset;
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(correctedTop, { duration: 0.4 });
+      } else {
+        window.scrollTo({ top: correctedTop, behavior: "smooth" });
+      }
+    }, 600);
   };
 
-  useEffect(() => {
-    return () => {
-      if (pinFrameRef.current) cancelAnimationFrame(pinFrameRef.current);
-    };
-  }, []);
 
   // ScrollTrigger: fade + slide each pillar header in as it enters viewport
+// ScrollTrigger: fade + slide each pillar header in as it enters viewport
   useEffect(() => {
-    const triggers: ScrollTrigger[] = [];
+    const validEls = headerRefs.current.filter(
+      (el): el is HTMLDivElement => el !== null,
+    );
 
-    headerRefs.current.forEach((el) => {
-      if (!el) return;
+    if (validEls.length === 0) return;
 
-      gsap.set(el, { opacity: 0, y: 28 });
+    // എല്ലാ writes ഒരുമിച്ച് ആദ്യം ചെയ്യുക — read/write interleave ഒഴിവാക്കാൻ
+    gsap.set(validEls, { opacity: 0, y: 28 });
 
-      const st = ScrollTrigger.create({
-        trigger: el,
-        start: "top 88%",
-        once: true,
-        onEnter: () => {
-          gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power3.out",
-          });
-        },
-      });
-
-      triggers.push(st);
+    // batch() എല്ലാ elements-ന്റെയും measurements ഒരുമിച്ച് ചെയ്യും,
+    // ഓരോന്നിനും വേറെ വേറെ ScrollTrigger.create ചെയ്യുന്നതിന് പകരം
+    const batch = ScrollTrigger.batch(validEls, {
+      start: "top 88%",
+      once: true,
+      onEnter: (elements) => {
+        gsap.to(elements, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.05,
+        });
+      },
     });
 
     return () => {
-      triggers.forEach((t) => t.kill());
+      batch.forEach((st) => st.kill());
     };
   }, []);
 

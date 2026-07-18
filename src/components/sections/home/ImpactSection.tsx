@@ -283,7 +283,6 @@ export default function ImpactSection() {
     duration-200
     hover:bg-white
     hover:text-[#ae1431]
-    hover:border-black
     flex
     items-center
     justify-center

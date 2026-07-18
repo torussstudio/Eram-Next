@@ -166,7 +166,7 @@ export default function Footer() {
               </li>
 
               <li>
-                <a href="/downloads" download className="hover:underline">
+                <a href="/downloads" className="hover:underline">
                   Download Prospectus
                 </a>
               </li>

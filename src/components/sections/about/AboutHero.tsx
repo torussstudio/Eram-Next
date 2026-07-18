@@ -228,38 +228,66 @@ xl:px-24 xl:py-24
                   individuals.
                 </p>
                 <br></br>
-                <button
-                  type="button"
-                  onClick={() => {
-                    router.push("/");
+               <button
+  type="button"
+  onClick={() => {
+    router.push("/");
 
-                    const scrollToInstitutions = (attempts = 0) => {
-                      const section = document.getElementById("institutions");
+    const scrollToInstitutions = () => {
+      let findAttempts = 0;
+      const maxFindAttempts = 30;
 
-                      if (section) {
-                        const yOffset = -90;
-                        const y =
-                          section.getBoundingClientRect().top +
-                          window.pageYOffset +
-                          yOffset;
+      const findSection = () => {
+        const section = document.getElementById("institutions");
 
-                        window.scrollTo({
-                          top: y,
-                          behavior: "smooth",
-                        });
-                      } else if (attempts < 30) {
-                        // element illa enkil, ippozhum 3 seconds vare (30 x 100ms) retry cheyyum
-                        setTimeout(
-                          () => scrollToInstitutions(attempts + 1),
-                          100,
-                        );
-                      }
-                    };
+        if (!section) {
+          if (findAttempts++ < maxFindAttempts) {
+            setTimeout(findSection, 100);
+          }
+          return;
+        }
 
-                    // navigation start aavan oru chെriya head-start kodukkunnu, pinne poll cheyyunnu
-                    setTimeout(() => scrollToInstitutions(), 300);
-                  }}
-                  className="
+        // section kitti, pakshe images load aakumbo layout maarum
+        // athukondu position "stable" aavunna vare wait cheyyunnu
+        let lastY = -1;
+        let stableCount = 0;
+        let stabilizeAttempts = 0;
+        const maxStabilizeAttempts = 60; // ~1s at 60fps as a safety cap
+
+        const waitForStable = () => {
+          const yOffset = -90;
+          const y =
+            section.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+
+          if (Math.abs(y - lastY) < 2) {
+            stableCount++;
+          } else {
+            stableCount = 0;
+          }
+          lastY = y;
+
+          const isStable = stableCount >= 4; // same position for 4 frames in a row
+          const timedOut = stabilizeAttempts++ >= maxStabilizeAttempts;
+
+          if (isStable || timedOut) {
+            window.scrollTo({ top: y, behavior: "smooth" });
+          } else {
+            requestAnimationFrame(waitForStable);
+          }
+        };
+
+        requestAnimationFrame(waitForStable);
+      };
+
+      findSection();
+    };
+
+    // navigation start aavan oru small head-start, pinne poll cheyyunnu
+    setTimeout(() => scrollToInstitutions(), 300);
+  }}
+  className="
     font-rethink
     w-full
     sm:w-auto
@@ -285,11 +313,10 @@ xl:px-24 xl:py-24
     justify-center
     gap-2
   "
-                >
-                  <span>Explore Our Institutions</span>
-
-                  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
+>
+  <span>Explore Our Institutions</span>
+  <Play className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+</button>
               </div>
             </div>
           </div>

@@ -342,15 +342,20 @@ export default function Navbar() {
     };
   }, [isHome, pathname]);
 
-  /* ── Lerped Mobile scroll Progress Ring ────────────────────────── */
+ /* ── Lerped Mobile scroll Progress Ring ────────────────────────── */
   useEffect(() => {
     let target = 0;
     let current = 0;
     let rafId: number | null = null;
     let isCleanedUp = false;
     let startTimer: NodeJS.Timeout | undefined;
+    let docHeight = 0;
 
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    const measure = () => {
+      docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    };
 
     const tick = () => {
       if (isCleanedUp) return;
@@ -365,15 +370,18 @@ export default function Navbar() {
     };
 
     const handleScroll = () => {
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
       target = docHeight > 0 ? window.scrollY / docHeight : 0;
       if (!rafId) rafId = requestAnimationFrame(tick);
     };
 
+    const ro = new ResizeObserver(() => measure());
+
     const startListener = () => {
       if (isCleanedUp) return;
+      measure();
+      ro.observe(document.documentElement);
       window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener("resize", measure, { passive: true });
     };
 
     // Defer scroll registration
@@ -383,6 +391,8 @@ export default function Navbar() {
       isCleanedUp = true;
       if (startTimer) clearTimeout(startTimer);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", measure);
+      ro.disconnect();
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
