@@ -1,369 +1,480 @@
 "use client";
 
-import React, { useState, useMemo, memo } from "react";
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  Search, 
-  Filter, 
-  ChevronLeft, 
-  ChevronRight, 
-  Eye, 
-  Edit2, 
-  Calendar,
-  AlertCircle
+import { useEffect, useState, useMemo } from "react";
+import {
+  Image as ImageIcon,
+  CalendarDays,
+  FileDown,
+  GraduationCap,
+  ArrowUpRight,
+  Clock,
+  Pin,
+  Sparkles,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
+import api from "@/lib/api";
 
-// PageHeader
-export const PageHeader = memo(function PageHeader({ title, description, children }) {
+
+const INSTITUTIONS = [
+  { id: "ease", label: "EASE", initial: "E", accent: "#8b6f3f" },
+  { id: "mmhss", label: "MMHSS", initial: "H", accent: "#3f6b52" },
+  { id: "mmps", label: "MMPS", initial: "P", accent: "#6b4f8b" },
+  { id: "amlp", label: "AMLP", initial: "A", accent: "#ae1431" },
+  { id: "mmite", label: "MMITE", initial: "T", accent: "#a15c2e" },
+];
+
+const ACADEMIC_SCHOOLS = ["mmhss", "mmps", "amlp", "mmite"];
+
+const MODULE_META = {
+  gallery: { label: "Gallery", icon: ImageIcon, accent: "#6b4f8b" },
+  event: { label: "Event", icon: CalendarDays, accent: "#ae1431" },
+  notification: { label: "Notice", icon: CalendarDays, accent: "#8b6f3f" },
+  download: { label: "Download", icon: FileDown, accent: "#3f5f8b" },
+  academics: { label: "Academics", icon: GraduationCap, accent: "#3f6b52" },
+};
+
+const GOLD = "#b3862c";
+
+function timeAgo(dateStr) {
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  if (days < 7) return `${days}d ago`;
+  return new Date(dateStr).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+}
+
+function dayLabel(date) {
+  return date.toLocaleDateString("en-IN", { weekday: "short" }).toUpperCase();
+}
+
+/* Small radial-progress medallion, styled like a registrar's seal.
+   Ring fill = pct, initial sits in the center, count sits below. */
+function SealMedallion({ p }) {
+  const size = 84;
+  const stroke = 4;
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const dash = (p.pct / 100) * c;
+
   return (
-    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-      <div>
-        <h1 className="text-2xl md:text-3xl  tracking-tight text-[#F5EFE8] font-display uppercase tracking-widest">
-          {title}
-        </h1>
-        {description && (
-          <p className=" text-zinc-400 mt-1 font-rethink">
-            {description}
-          </p>
-        )}
+    <div className="flex flex-col items-center gap-2.5">
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg width={size} height={size} className="-rotate-90">
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#EDE3D3" strokeWidth={stroke} />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={r}
+            fill="none"
+            stroke={p.accent}
+            strokeWidth={stroke}
+            strokeLinecap="round"
+            strokeDasharray={`${dash} ${c - dash}`}
+            className="transition-[stroke-dasharray] duration-700 ease-out"
+          />
+        </svg>
+        <div className="absolute inset-[7px] rounded-full border border-dashed flex items-center justify-center" style={{ borderColor: `${p.accent}35` }}>
+          <span className="font-display text-lg" style={{ color: p.accent }}>
+            {p.initial}
+          </span>
+        </div>
       </div>
-      <div className="flex items-center gap-3">
-        {children}
+      <div className="text-center leading-tight">
+        <p className="font-rethink text-[11px] font-medium tracking-wide text-[#2b2620]">{p.label}</p>
+        <p className="font-display text-sm tabular-nums" style={{ color: p.accent }}>
+          {p.count}
+        </p>
       </div>
     </div>
   );
-});
+}
 
-// StatCard
-export const StatCard = memo(function StatCard({ title, value, change, changeType, icon: Icon, timeRange = "vs last month" }) {
-  const isPositive = changeType === "increase";
-  
-  return (
-    <div className="relative group overflow-hidden bg-zinc-900/40 border border-[#c5a880]/10 hover:border-[#c5a880]/30 rounded-2xl p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)] will-change-transform">
-      {/* Background radial glow */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#c5a880]/5 to-transparent rounded-full blur-2xl group-hover:from-[#ae1431]/10 transition-[background-color] duration-500 pointer-events-none" />
-      
-      <div className="flex items-center justify-between mb-4">
-        <span className=" uppercase tracking-wider text-zinc-500">{title}</span>
-        <div className="p-2.5 rounded-xl bg-zinc-950/80 border border-[#c5a880]/15 text-[#c5a880] group-hover:text-[#F5EFE8] group-hover:bg-[#ae1431]/20 group-hover:border-[#ae1431]/30 transition-[colors,background-color] duration-300">
-          <Icon size={18} />
-        </div>
-      </div>
-      
-      <div className="flex items-baseline gap-2">
-        <span className="text-2xl md:text-3xl  text-[#F5EFE8] tracking-tight">{value}</span>
-      </div>
-      
-      <div className="flex items-center gap-1.5 mt-3">
-        <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] ${
-          isPositive 
-            ? "bg-[#c5a880]/10 text-[#c5a880]" 
-            : "bg-[#ae1431]/10 text-[#ae1431]"
-        }`}>
-          {isPositive ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
-          {change}
-        </span>
-        <span className="text-[11px] text-zinc-500 ">{timeRange}</span>
-      </div>
-    </div>
+export default function AdminDashboard() {
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  const [gallery, setGallery] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [downloads, setDownloads] = useState([]);
+  const [academics, setAcademics] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadAll() {
+      setLoading(true);
+      setLoadError("");
+      try {
+        const academicsRequests = ACADEMIC_SCHOOLS.map((school) =>
+          api.get("/academics", { params: { school } }).catch(() => ({ data: [] }))
+        );
+
+        const [galleryRes, eventsRes, downloadsRes, ...academicsRes] = await Promise.all([
+          api.get("/gallery").catch(() => ({ data: [] })),
+          api.get("/events").catch(() => ({ data: [] })),
+          api.get("/downloads").catch(() => ({ data: [] })),
+          ...academicsRequests,
+        ]);
+
+        if (!isMounted) return;
+
+        setGallery(galleryRes.data || []);
+        setEvents(eventsRes.data || []);
+        setDownloads(downloadsRes.data || []);
+        setAcademics(academicsRes.flatMap((r) => r.data || []));
+      } catch (err) {
+        if (isMounted) setLoadError("Couldn't load dashboard data. Please refresh.");
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    loadAll();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  /* ── Derived stats ─────────────────────────────────────── */
+  const stats = useMemo(
+    () => [
+      { key: "gallery", label: "Gallery Images", value: gallery.length, icon: ImageIcon, accent: "#6b4f8b" },
+      { key: "events", label: "Events & Notices", value: events.length, icon: CalendarDays, accent: "#ae1431" },
+      { key: "downloads", label: "Downloads", value: downloads.length, icon: FileDown, accent: "#3f5f8b" },
+      { key: "academics", label: "Academic Entries", value: academics.length, icon: GraduationCap, accent: "#3f6b52" },
+    ],
+    [gallery, events, downloads, academics]
   );
-});
 
-// ChartCard
-export const ChartCard = memo(function ChartCard({ title, subtitle, type = "line", data = [] }) {
-  // Simple responsive SVG Chart
-  return (
-    <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className=" text-zinc-200 uppercase tracking-wider">{title}</h3>
-          {subtitle && <p className=" text-zinc-500 mt-0.5">{subtitle}</p>}
-        </div>
-        <div className="flex items-center gap-1.5 p-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[10px]">
-          <button className="px-2.5 py-1 rounded bg-zinc-900 text-zinc-300  transition-colors">1W</button>
-          <button className="px-2.5 py-1 rounded text-zinc-500 hover:text-zinc-300 transition-colors">1M</button>
-          <button className="px-2.5 py-1 rounded text-zinc-500 hover:text-zinc-300 transition-colors">1Y</button>
+  /* ── Institution Pulse — activity per school, gallery-driven ── */
+  const pulse = useMemo(() => {
+    const counts = INSTITUTIONS.map((inst) => ({
+      ...inst,
+      count: gallery.filter((g) => g.category === inst.id).length +
+        events.filter((e) => e.institution === inst.id).length,
+    }));
+    const max = Math.max(1, ...counts.map((c) => c.count));
+    return counts.map((c) => ({ ...c, pct: Math.round((c.count / max) * 100) }));
+  }, [gallery, events]);
+
+  /* ── 7-day activity trend, combined across content types ── */
+  const trend = useMemo(() => {
+    const days = Array.from({ length: 7 }).map((_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - (6 - i));
+      d.setHours(0, 0, 0, 0);
+      return d;
+    });
+
+    const allDated = [
+      ...gallery.map((g) => g.createdAt),
+      ...events.map((e) => e.createdAt || e.date),
+      ...downloads.map((d) => d.createdAt),
+    ];
+
+    return days.map((day) => {
+      const next = new Date(day);
+      next.setDate(next.getDate() + 1);
+      const count = allDated.filter((dt) => {
+        if (!dt) return false;
+        const t = new Date(dt).getTime();
+        return t >= day.getTime() && t < next.getTime();
+      }).length;
+      return { label: dayLabel(day), count };
+    });
+  }, [gallery, events, downloads]);
+
+  const maxTrend = Math.max(1, ...trend.map((t) => t.count));
+
+  /* SVG path points for the ledger-style trend line */
+  const trendPoints = useMemo(() => {
+    const w = 600;
+    const h = 120;
+    const step = w / (trend.length - 1 || 1);
+    return trend.map((t, i) => {
+      const x = i * step;
+      const y = h - (t.count / maxTrend) * (h - 16) - 4;
+      return { x, y, ...t };
+    });
+  }, [trend, maxTrend]);
+
+  const linePath = trendPoints
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+    .join(" ");
+  const areaPath = trendPoints.length
+    ? `${linePath} L ${trendPoints[trendPoints.length - 1].x.toFixed(1)} 120 L 0 120 Z`
+    : "";
+
+  /* ── Unified recent activity feed ─────────────────────── */
+  const activity = useMemo(() => {
+    const items = [
+      ...gallery.map((g) => ({
+        type: "gallery",
+        title: g.title,
+        sub: INSTITUTIONS.find((i) => i.id === g.category)?.label || g.category,
+        date: g.createdAt,
+        pinned: false,
+      })),
+      ...events.map((e) => ({
+        type: e.type === "event" ? "event" : "notification",
+        title: e.title,
+        sub: e.institution,
+        date: e.createdAt || e.date,
+        pinned: e.isPinned,
+      })),
+      ...downloads.map((d) => ({
+        type: "download",
+        title: d.title,
+        sub: d.category,
+        date: d.createdAt,
+        pinned: false,
+      })),
+      ...academics.map((a) => ({
+        type: "academics",
+        title: a.title || a.label || "Academic entry",
+        sub: a.section,
+        date: a.createdAt,
+        pinned: false,
+      })),
+    ].filter((i) => i.date);
+
+    return items
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 8);
+  }, [gallery, events, downloads, academics]);
+
+  const today = new Date().toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#F5EFE8] flex items-center justify-center">
+        <div className="flex items-center gap-2 font-rethink text-sm text-[#8a7f6f]">
+          <Loader2 size={16} className="animate-spin" />
+          Loading dashboard…
         </div>
       </div>
+    );
+  }
 
-      {type === "line" ? (
-        <div className="h-64 w-full relative">
-          <svg className="w-full h-full" viewBox="0 0 500 200" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#ae1431" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#ae1431" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#ae1431" />
-                <stop offset="50%" stopColor="#c5a880" />
-                <stop offset="100%" stopColor="#ae1431" />
-              </linearGradient>
-            </defs>
-            {/* Grid Lines */}
-            <line x1="0" y1="50" x2="500" y2="50" stroke="#1d1d22" strokeWidth="0.5" strokeDasharray="3" />
-            <line x1="0" y1="100" x2="500" y2="100" stroke="#1d1d22" strokeWidth="0.5" strokeDasharray="3" />
-            <line x1="0" y1="150" x2="500" y2="150" stroke="#1d1d22" strokeWidth="0.5" strokeDasharray="3" />
+  if (loadError) {
+    return (
+      <div className="min-h-screen bg-[#F5EFE8] flex items-center justify-center">
+        <div className="flex items-center gap-2 font-rethink text-sm text-[#ae1431]">
+          <AlertCircle size={16} />
+          {loadError}
+        </div>
+      </div>
+    );
+  }
 
-            {/* Filled Area */}
-            <path
-              d="M 0,200 L 0,150 L 80,120 L 160,160 L 240,80 L 320,110 L 400,60 L 500,30 L 500,200 Z"
-              fill="url(#chartGradient)"
-            />
-
-            {/* Line Path */}
-            <path
-              d="M 0,150 L 80,120 L 160,160 L 240,80 L 320,110 L 400,60 L 500,30"
-              fill="none"
-              stroke="url(#lineGrad)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-
-            {/* Dots */}
-            <circle cx="80" cy="120" r="4" className="fill-[#c5a880] stroke-[#0c0c0f] stroke-2" />
-            <circle cx="240" cy="80" r="4" className="fill-[#ae1431] stroke-[#0c0c0f] stroke-2" />
-            <circle cx="400" cy="60" r="4" className="fill-[#c5a880] stroke-[#0c0c0f] stroke-2" />
-            <circle cx="500" cy="30" r="4" className="fill-[#ae1431] stroke-[#0c0c0f] stroke-2" />
-          </svg>
-
-          {/* X Axis Labels */}
-          <div className="flex justify-between text-[9px] text-zinc-600 tracking-wider mt-4">
-            <span>MON</span>
-            <span>TUE</span>
-            <span>WED</span>
-            <span>THU</span>
-            <span>FRI</span>
-            <span>SAT</span>
-            <span>SUN</span>
+  return (
+    <div className="min-h-screen bg-[#F5EFE8]">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:py-12">
+        {/* ── Header — a letterhead, not a title bar ────────── */}
+        <div className="pb-7" style={{ borderBottom: `2px solid ${GOLD}` }}>
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="h-px w-6" style={{ backgroundColor: GOLD }} />
+                <span className="font-rethink text-[11px] uppercase tracking-[0.28em]" style={{ color: GOLD }}>
+                  ERAM Trust · Registrar's Overview
+                </span>
+              </div>
+              <h1 className="mt-2 font-display text-4xl sm:text-[2.75rem] leading-none text-[#2b2620]">
+                Dashboard
+              </h1>
+              <p className="mt-2 font-rethink text-sm text-[#8a7f6f] max-w-md">
+                A live record of content across every ERAM institution.
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="font-rethink text-[10px] uppercase tracking-[0.2em] text-[#b5aa98]">Today</p>
+              <p className="font-display text-sm text-[#2b2620] mt-0.5">{today}</p>
+            </div>
           </div>
         </div>
-      ) : (
-        <div className="h-64 flex items-end justify-between gap-3 pt-6">
-          {data.map((bar, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-              <div className="w-full relative bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden h-48 flex items-end">
-                <div 
-                  style={{ height: `${bar.value}%` }}
-                  className="w-full rounded-t-[4px] bg-gradient-to-t from-[#ae1431] to-[#c5a880] group-hover:brightness-125 transition-[filter,brightness] duration-300 shadow-[0_0_12px_rgba(174,20,49,0.2)]" 
-                />
+
+        {/* ── Stat cards ──────────────────────────────────── */}
+        <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {stats.map((s) => (
+            <div
+              key={s.key}
+              className="group relative overflow-hidden rounded-2xl border border-[#e3d6c3] bg-white p-5 shadow-[0_1px_2px_rgba(43,38,32,0.04)] transition-all hover:shadow-[0_10px_28px_rgba(43,38,32,0.08)] hover:-translate-y-0.5"
+            >
+              <div
+                className="absolute -right-4 -top-4 h-20 w-20 rounded-full blur-2xl opacity-[0.14] transition-opacity group-hover:opacity-[0.22]"
+                style={{ backgroundColor: s.accent }}
+              />
+              <div className="flex items-start justify-between">
+                <div
+                  className="flex h-9 w-9 items-center justify-center rounded-xl"
+                  style={{ backgroundColor: `${s.accent}14`, color: s.accent }}
+                >
+                  <s.icon size={16} />
+                </div>
+                <span className="font-rethink text-[9px] uppercase tracking-widest text-[#d8cdb8]">Total</span>
               </div>
-              <span className="text-[9px] text-zinc-500 uppercase tracking-widest">{bar.label}</span>
+              <p className="mt-4 font-display text-3xl tabular-nums text-[#2b2620]">{s.value}</p>
+              <p className="mt-1 font-rethink text-xs uppercase tracking-wide text-[#8a7f6f]">
+                {s.label}
+              </p>
             </div>
           ))}
         </div>
-      )}
-    </div>
-  );
-});
 
-// DataTable
-export const DataTable = memo(function DataTable({ columns, data, searchField, filterOptions = [] }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-
-  // Filter & Search Logic memoized
-  const filteredData = useMemo(() => {
-    return data.filter((row) => {
-      const matchesSearch = row[searchField]
-        ?.toString()
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      
-      const matchesFilter = activeFilter === "all" || !row.status || row.status.toLowerCase() === activeFilter.toLowerCase();
-      
-      return matchesSearch && matchesFilter;
-    });
-  }, [data, searchField, searchTerm, activeFilter]);
-
-  const totalPages = useMemo(() => {
-    return Math.ceil(filteredData.length / itemsPerPage) || 1;
-  }, [filteredData.length, itemsPerPage]);
-
-  const paginatedData = useMemo(() => {
-    return filteredData.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-    );
-  }, [filteredData, currentPage, itemsPerPage]);
-
-  return (
-    <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl overflow-hidden">
-      {/* Table Toolbar */}
-      <div className="p-4 md:p-6 border-b border-[#c5a880]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        {/* Search */}
-        <div className="relative max-w-xs w-full">
-          <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
-          <input
-            type="text"
-            placeholder={`Search by ${searchField}...`}
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-950/80 border border-[#c5a880]/15 hover:border-[#c5a880]/30 focus:border-[#ae1431] focus:ring-1 focus:ring-[#ae1431]/20 outline-none  text-zinc-200 placeholder:text-zinc-600 transition-colors duration-200"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }}
-          />
-        </div>
-
-        {/* Filters */}
-        {filterOptions.length > 0 && (
-          <div className="flex items-center gap-2">
-            <Filter size={12} className="text-zinc-500" />
-            <div className="flex items-center gap-1.5 p-1 bg-zinc-950 border border-zinc-800 rounded-xl text-[10px]">
-              <button
-                onClick={() => { setActiveFilter("all"); setCurrentPage(1); }}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  activeFilter === "all" 
-                    ? "bg-zinc-900 text-[#c5a880]" 
-                    : "text-zinc-500 hover:text-zinc-300"
-                }`}
-              >
-                All
-              </button>
-              {filterOptions.map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => { setActiveFilter(opt.value); setCurrentPage(1); }}
-                  className={`px-3 py-1 rounded-lg transition-all uppercase tracking-wider ${
-                    activeFilter === opt.value 
-                      ? "bg-zinc-900 text-[#c5a880]" 
-                      : "text-zinc-500 hover:text-zinc-300"
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
+        {/* ── Institution Pulse (signature element) ──────────
+            Five registrar's seals — one per institution. Ring
+            fill and count together read as a stamp of activity,
+            not just a bar chart. */}
+        <div className="mt-6 rounded-2xl border border-[#e3d6c3] bg-white p-6 shadow-[0_1px_2px_rgba(43,38,32,0.04)]">
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles size={15} style={{ color: GOLD }} />
+            <h2 className="font-display text-base text-[#2b2620]">Institution Pulse</h2>
+            <span className="font-rethink text-xs text-[#b5aa98]">— content activity by school</span>
           </div>
-        )}
-      </div>
-
-      {/* Table Element */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="border-b border-[#c5a880]/10 bg-zinc-950/50">
-              {columns.map((col, idx) => (
-                <th key={idx} className="px-6 py-4 text-[10px] text-zinc-400 uppercase tracking-widest">
-                  {col.header}
-                </th>
-              ))}
-              <th className="px-6 py-4 text-[10px] text-zinc-400 uppercase tracking-widest text-right">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#c5a880]/5">
-            {paginatedData.length > 0 ? (
-              paginatedData.map((row, rIdx) => (
-                <tr key={rIdx} className="hover:bg-zinc-900/20 transition-colors duration-150">
-                  {columns.map((col, cIdx) => (
-                    <td key={cIdx} className="px-6 py-4 text-zinc-300 whitespace-nowrap">
-                      {col.render ? col.render(row) : row[col.accessor]}
-                    </td>
-                  ))}
-                  <td className="px-6 py-4 text-right whitespace-nowrap">
-                    <div className="inline-flex items-center gap-1.5">
-                      <button 
-                        title="Preview Details"
-                        className="p-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-[#c5a880] border border-zinc-800 transition-colors duration-200"
-                      >
-                        <Eye size={12} />
-                      </button>
-                      <button 
-                        title="Edit Row"
-                        className="p-1.5 rounded-lg bg-zinc-900 hover:bg-[#ae1431]/20 text-zinc-400 hover:text-[#ae1431] border border-zinc-800 hover:border-[#ae1431]/30 transition-colors duration-200"
-                      >
-                        <Edit2 size={12} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={columns.length + 1} className="py-12">
-                  <EmptyState title="No match found" description="Try modifying your search or filter options" />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Table Pagination */}
-      {totalPages > 1 && (
-        <div className="px-6 py-4 border-t border-[#c5a880]/10 flex items-center justify-between text-zinc-500 bg-zinc-950/20">
-          <span>
-            Page <strong className="text-zinc-300">{currentPage}</strong> of <strong className="text-zinc-300">{totalPages}</strong>
-          </span>
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              className="p-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:text-zinc-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronLeft size={13} />
-            </button>
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              className="p-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:text-zinc-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronRight size={13} />
-            </button>
+          <div className="flex flex-wrap items-start justify-around gap-y-6">
+            {pulse.map((p) => (
+              <SealMedallion key={p.id} p={p} />
+            ))}
           </div>
         </div>
-      )}
-    </div>
-  );
-});
 
-// EmptyState
-export const EmptyState = memo(function EmptyState({ title = "No data available", description = "There are no records to show at this moment." }) {
-  return (
-    <div className="flex flex-col items-center justify-center p-8 text-center">
-      <div className="p-4 rounded-full bg-zinc-900 border border-[#c5a880]/15 text-[#c5a880] mb-4 shadow-[0_0_15px_rgba(197,168,128,0.1)]">
-        <AlertCircle size={24} />
-      </div>
-      <h4 className=" text-zinc-300 uppercase tracking-wider">{title}</h4>
-      <p className=" text-zinc-500 mt-1 max-w-xs leading-normal">{description}</p>
-    </div>
-  );
-});
-
-// ActivityFeed
-export const ActivityFeed = memo(function ActivityFeed({ activities }) {
-  return (
-    <div className="bg-zinc-900/40 border border-[#c5a880]/10 rounded-2xl p-6">
-      <h3 className=" text-zinc-200 uppercase tracking-wider mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-3 bg-[#ae1431] rounded-full shadow-[0_0_8px_#ae1431]" />
-        Recent Logs & Activities
-      </h3>
-      <div className="space-y-4 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[1px] before:bg-zinc-800">
-        {activities.map((act) => (
-          <div key={act.id} className="flex gap-4 relative group">
-            <div className="relative z-10 flex-shrink-0 w-6.5 h-6.5 rounded-full bg-zinc-950 border border-[#c5a880]/20 flex items-center justify-center text-[10px] text-[#c5a880] group-hover:border-[#ae1431] group-hover:text-[#ae1431] transition-[border-color,color] duration-200">
-              {act.icon ? <act.icon size={11} /> : <Calendar size={11} />}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between gap-4">
-                <p className=" text-zinc-300 group-hover:text-zinc-100 transition-colors truncate">
-                  {act.title}
-                </p>
-                <span className="text-[10px] text-zinc-500 whitespace-nowrap">{act.time}</span>
+        {/* ── Trend chart + Activity feed ─────────────────── */}
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
+          {/* Weekly trend — a ledger line, not a bar chart */}
+          <div className="rounded-2xl border border-[#e3d6c3] bg-white p-6 shadow-[0_1px_2px_rgba(43,38,32,0.04)]">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="font-display text-base text-[#2b2620]">Content Activity</h2>
+                <p className="font-rethink text-xs text-[#8a7f6f] mt-0.5">Uploads &amp; posts, last 7 days</p>
               </div>
-              <p className="text-[11px] text-zinc-500 mt-0.5 leading-relaxed">{act.description}</p>
+              <span className="rounded-full border border-[#e3d6c3] px-2.5 py-1 font-rethink text-[10px] uppercase tracking-wide text-[#8a7f6f]">
+                All institutions
+              </span>
+            </div>
+
+            <svg viewBox="0 0 600 120" className="w-full h-32" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#ae1431" stopOpacity="0.18" />
+                  <stop offset="100%" stopColor="#ae1431" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              {areaPath && <path d={areaPath} fill="url(#trendFill)" />}
+              {linePath && (
+                <path
+                  d={linePath}
+                  fill="none"
+                  stroke="#ae1431"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              )}
+              {trendPoints.map((p, i) => (
+                <circle key={i} cx={p.x} cy={p.y} r={p.count > 0 ? 3.5 : 2} fill="#ae1431" />
+              ))}
+            </svg>
+            <div className="flex justify-between mt-1">
+              {trend.map((t, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                  <span className="font-display text-xs tabular-nums text-[#2b2620]">{t.count}</span>
+                  <span className="font-rethink text-[10px] uppercase tracking-widest text-[#b5aa98]">
+                    {t.label}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+
+          {/* Activity feed */}
+          <div className="rounded-2xl border border-[#e3d6c3] bg-white p-6 shadow-[0_1px_2px_rgba(43,38,32,0.04)]">
+            <h2 className="font-display text-base text-[#2b2620] mb-5">Recent Activity</h2>
+
+            {activity.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-2 py-10 text-center">
+                <Clock size={18} className="text-[#b5aa98]" />
+                <p className="font-rethink text-sm text-[#8a7f6f]">Nothing published yet.</p>
+              </div>
+            ) : (
+              <div className="space-y-4 relative before:absolute before:left-[15px] before:top-1 before:bottom-1 before:w-px before:bg-[#e3d6c3]">
+                {activity.map((a, i) => {
+                  const meta = MODULE_META[a.type] || MODULE_META.gallery;
+                  const Icon = meta.icon;
+                  return (
+                    <div key={i} className="flex gap-3.5 relative">
+                      <div
+                        className="relative z-10 flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-full bg-white border"
+                        style={{ borderColor: `${meta.accent}40`, color: meta.accent }}
+                      >
+                        <Icon size={12} />
+                      </div>
+                      <div className="min-w-0 flex-1 pb-0.5">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="font-rethink text-sm text-[#2b2620] truncate flex items-center gap-1.5">
+                            {a.title}
+                            {a.pinned && <Pin size={10} className="text-amber-500 shrink-0" />}
+                          </p>
+                          <span className="font-rethink text-[10px] text-[#b5aa98] whitespace-nowrap">
+                            {timeAgo(a.date)}
+                          </span>
+                        </div>
+                        <p className="font-rethink text-[11px] text-[#8a7f6f] mt-0.5 capitalize">
+                          {meta.label} {a.sub ? `· ${a.sub}` : ""}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── Quick links to each module ──────────────────── */}
+        <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { href: "/admin/gallery", label: "Manage Gallery", icon: ImageIcon, accent: "#6b4f8b" },
+            { href: "/admin/events", label: "Manage Events", icon: CalendarDays, accent: "#ae1431" },
+            { href: "/admin/downloads", label: "Manage Downloads", icon: FileDown, accent: "#3f5f8b" },
+            { href: "/admin/institutions", label: "Manage Academics", icon: GraduationCap, accent: "#3f6b52" },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="group relative flex items-center justify-between overflow-hidden rounded-2xl border border-[#e3d6c3] bg-white p-4 shadow-[0_1px_2px_rgba(43,38,32,0.04)] transition-all hover:shadow-[0_10px_28px_rgba(43,38,32,0.08)] hover:-translate-y-0.5"
+            >
+              <span
+                className="absolute left-0 top-0 h-full w-0.5 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-300"
+                style={{ backgroundColor: link.accent }}
+              />
+              <div className="flex items-center gap-3">
+                <div
+                  className="flex h-9 w-9 items-center justify-center rounded-xl"
+                  style={{ backgroundColor: `${link.accent}14`, color: link.accent }}
+                >
+                  <link.icon size={16} />
+                </div>
+                <span className="font-rethink text-sm font-medium text-[#2b2620]">{link.label}</span>
+              </div>
+              <ArrowUpRight
+                size={15}
+                className="text-[#b5aa98] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#ae1431]"
+              />
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
-});
-
+}
