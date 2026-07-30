@@ -359,6 +359,7 @@ export default function CommunitySection() {
   group-hover:bg-white group-hover:text-[#ae1431]
   transition-all duration-300
   group-hover:scale-110
+  cursor-pointer
 "
 >
   <ArrowUpRight size={18} strokeWidth={2.5} />

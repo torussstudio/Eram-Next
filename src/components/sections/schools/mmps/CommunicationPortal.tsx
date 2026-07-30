@@ -1,13 +1,17 @@
 "use client";
 
-import { useRef } from "react";
-import { ArrowRight, Play } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Play } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://eram-backend-ejgy.onrender.com";
 
 const features = [
   {
@@ -32,43 +36,119 @@ const features = [
   },
 ];
 
-const feedItems = [
-  {
-    text: "Grade 10 — Internal Assessment scores updated. Results shared with parents.",
-    meta: "Academic · 5 minutes ago",
-  },
-  {
-    text: "Football practice schedule updated — Tue & Thu extended to 5:30 PM.",
-    meta: "SPORTS· 22 minutes ago",
-  },
-  {
-    text: "Shreshtta initiative — Grade 8 classroom review completed.",
-    meta: "Academic · 1 hour ago",
-  },
-  {
-    text: "Scout & Guide activity scheduled for Saturday, 10 AM. Attendance mandatory.",
-    meta: "Civic · 3 hours ago",
-  },
-  {
-    text: "Nalla Naalekkaayi programme — registration open for Grade 7 & 8 students.",
-    meta: "Programme · Yesterday",
-  },
-];
+// ─── Types (mirrors EventsPage.tsx) ─────────────────────────────────────────
+
+type RawEvent = {
+  _id: string;
+  title: string;
+  description: string;
+  category: "academic" | "sports" | "cultural" | "notice";
+  type: "event" | "notification" | "circular";
+  institution: "general" | "ease" | "mmhss" | "mmite" | "mmps" | "amlp";
+  date: string;
+  time?: string;
+  tag?: string;
+  isNew?: boolean;
+  isPinned?: boolean;
+  image?: string;
+  createdAt?: string;
+};
+
+interface FeedItem {
+  id: string;
+  text: string;
+  meta: string;
+}
+
+const CATEGORY_LABEL: Record<RawEvent["category"], string> = {
+  academic: "Academic",
+  sports: "Sports",
+  cultural: "Cultural",
+  notice: "Notice",
+};
+
+function timeAgo(dateStr?: string): string {
+  if (!dateStr) return "";
+  const then = new Date(dateStr).getTime();
+  if (Number.isNaN(then)) return "";
+  const diffMs = Date.now() - then;
+  const mins = Math.floor(diffMs / 60000);
+
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins} minute${mins === 1 ? "" : "s"} ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+  const days = Math.floor(hours / 24);
+  if (days === 1) return "Yesterday";
+  if (days < 7) return `${days} days ago`;
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function mapToFeedItem(e: RawEvent): FeedItem {
+  return {
+    id: e._id,
+    text: e.title || e.description,
+    meta: `${CATEGORY_LABEL[e.category] ?? "Update"} · ${timeAgo(
+      e.createdAt || e.date,
+    )}`,
+  };
+}
 
 export default function CommunicationPortal() {
   const containerRef = useRef(null);
   const router = useRouter();
 
+  const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
+  const [loadingFeed, setLoadingFeed] = useState(true);
+
+  // ── Fetch live MMPS feed from backend ───────────────────────────────────
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function fetchFeed() {
+      try {
+        setLoadingFeed(true);
+        const res = await fetch(`${BACKEND_URL}/api/events`, {
+          signal: controller.signal,
+          cache: "no-store",
+        });
+        if (!res.ok) throw new Error("Failed to fetch events");
+        const data: RawEvent[] = await res.json();
+
+        const relevant = data
+          .filter((e) => e.institution === "mmps")
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt || b.date).getTime() -
+              new Date(a.createdAt || a.date).getTime(),
+          )
+          .slice(0, 5);
+
+        setFeedItems(relevant.map(mapToFeedItem));
+      } catch (err) {
+        if ((err as Error).name !== "AbortError") {
+          setFeedItems([]);
+        }
+      } finally {
+        setLoadingFeed(false);
+      }
+    }
+
+    fetchFeed();
+    return () => controller.abort();
+  }, []);
+
+  // ── Left side scroll-triggered intro animation (unchanged) ─────────────
   useGSAP(
     () => {
       if (!containerRef.current) return;
       const q = gsap.utils.selector(containerRef);
 
-      // ── Set all initial states before first paint ─────────────────────
       gsap.set(
-        q(
-          ".anim-tag, .anim-heading, .anim-body, .anim-grid-item, .anim-btn, .anim-feed-header, .anim-feed-item",
-        ),
+        q(".anim-tag, .anim-heading, .anim-body, .anim-grid-item, .anim-btn"),
         { opacity: 0, y: 20 },
       );
 
@@ -100,41 +180,40 @@ export default function CommunicationPortal() {
           "-=0.2",
         )
         .to(q(".anim-btn"), { opacity: 1, y: 0, duration: 0.45 }, "-=0.1");
-
-      gsap.set(q(".anim-feed-header, .anim-feed-item"), { x: 16 });
-
-      const feedWrap = q(".anim-feed-wrap")[0];
-      if (feedWrap) {
-        const feedTl = gsap.timeline({
-          defaults: { ease: "power3.out" },
-          scrollTrigger: {
-            trigger: feedWrap,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        });
-
-        feedTl
-          .to(q(".anim-feed-header"), {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            duration: 0.45,
-          })
-          .to(
-            q(".anim-feed-item"),
-            {
-              opacity: 1,
-              x: 0,
-              y: 0,
-              duration: 0.5,
-              stagger: 0.07, // fast enough to feel live, slow enough to read
-            },
-            "-=0.15",
-          );
-      }
     },
     { scope: containerRef },
+  );
+
+  // ── Feed reveal — runs once real data has loaded (data arrives async,
+  //    so it can't rely on a scroll trigger set at mount before items exist) ──
+  useGSAP(
+    () => {
+      if (!containerRef.current || loadingFeed) return;
+      const q = gsap.utils.selector(containerRef);
+
+      const header = q(".anim-feed-header");
+      const items = q(".anim-feed-item");
+      if (!items.length) return;
+
+      gsap.fromTo(
+        header,
+        { opacity: 0, x: 16 },
+        { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" },
+      );
+      gsap.fromTo(
+        items,
+        { opacity: 0, x: 16 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.07,
+          ease: "power3.out",
+          delay: 0.1,
+        },
+      );
+    },
+    { scope: containerRef, dependencies: [loadingFeed, feedItems] },
   );
 
   return (
@@ -183,22 +262,39 @@ export default function CommunicationPortal() {
   </div>
 
   <div className="flex flex-col">
-    {feedItems.map((item, i) => (
-      <div
-        key={i}
-        className="anim-feed-item py-4 px-3 flex gap-3
+    {loadingFeed && (
+      <div className="py-8 px-3">
+        <p className="font-rethink text-sm text-white/50">
+          Loading updates…
+        </p>
+      </div>
+    )}
+
+    {!loadingFeed && feedItems.length === 0 && (
+      <div className="py-8 px-3">
+        <p className="font-rethink text-sm text-white/50">
+          No recent updates.
+        </p>
+      </div>
+    )}
+
+    {!loadingFeed &&
+      feedItems.map((item) => (
+        <div
+          key={item.id}
+          className="anim-feed-item py-4 px-3 flex gap-3
         border-l-2 border-transparent hover:border-white/40
         hover:bg-white/[0.03]
         transition-colors duration-200 cursor-default"
-      >
-        <div>
-          <p className="font-rethink text-sm">{item.text}</p>
-          <span className="font-rethink text-xs text-white/50 block mt-1">
-            {item.meta}
-          </span>
+        >
+          <div>
+            <p className="font-rethink text-sm">{item.text}</p>
+            <span className="font-rethink text-xs text-white/50 block mt-1">
+              {item.meta}
+            </span>
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
   </div>
 </div>
         </div>

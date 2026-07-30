@@ -97,7 +97,7 @@ export default function Footer() {
 
             <div className="mt-4 flex items-center gap-5">
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/eramacademy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-transform duration-300 hover:scale-110"
@@ -106,7 +106,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.linkedin.com/"
+                href="https://in.linkedin.com/in/eram-academy-838ba5376"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-transform duration-300 hover:scale-110"
@@ -115,7 +115,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.youtube.com/"
+                href="https://www.youtube.com/@eramacademyforsportsandexc3764"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-transform duration-300 hover:scale-110"

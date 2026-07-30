@@ -164,7 +164,6 @@ export default function AdminLayoutClient({ children }) {
           .filter((n) => n.date)
           .filter((n) => !clearedIds.has(n.id)) // never bring back cleared notifications
           .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 8)
           .map((n) => ({ ...n, time: timeAgo(n.date) }));
 
         setNotifications(merged);
@@ -309,7 +308,7 @@ export default function AdminLayoutClient({ children }) {
           
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden md:flex p-1.5 rounded-lg bg-zinc-900/60 hover:bg-zinc-800 border border-[#c5a880]/10 text-zinc-400 hover:text-zinc-100 transition-colors duration-200"
+            className="hidden cursor-pointer md:flex p-1.5 rounded-lg bg-zinc-900/60 hover:bg-zinc-800 border border-[#c5a880]/10 text-zinc-400 hover:text-zinc-100 transition-colors duration-200"
           >
             {isCollapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
           </button>
@@ -532,7 +531,7 @@ export default function AdminLayoutClient({ children }) {
                 <Bell size={16} />
                 {unreadCount > 0 && (
                   <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 flex items-center justify-center rounded-full bg-[#ae1431] text-[9px] font-semibold text-white ring-2 ring-[#070709]">
-                    {unreadCount > 9 ? "9+" : unreadCount}
+                   {unreadCount > 20 ? "20+" : unreadCount}
                   </span>
                 )}
               </button>
@@ -608,13 +607,6 @@ export default function AdminLayoutClient({ children }) {
                       <LayoutDashboard size={13} />
                       Dashboard
                     </Link>
-                    <a
-                      href="#"
-                      className="flex items-center gap-2 px-4 py-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900"
-                    >
-                      <Settings size={13} />
-                      System Settings
-                    </a>
                   </div>
                   <div className="py-1">
                     <button
