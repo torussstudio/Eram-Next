@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Calendar, Play } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import HostEventModal from "@/components/sections/explore-the-arena/Hosteventmodal";
 
 // Splits text into per-letter spans wrapped in overflow-hidden containers,
 // so a y-translate reveal has individual letters to animate against.
@@ -59,6 +60,8 @@ export default function HeroSection() {
   const buttonsRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const infraGridRef = useRef<HTMLDivElement>(null);
+
+  const [isHostModalOpen, setIsHostModalOpen] = useState(false);
 
   useGSAP(
     () => {
@@ -349,6 +352,7 @@ export default function HeroSection() {
                 </button>
 
                 <button
+                  onClick={() => setIsHostModalOpen(true)}
                   className="
                     group
                     font-rethink
@@ -558,6 +562,11 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      <HostEventModal
+        isOpen={isHostModalOpen}
+        onClose={() => setIsHostModalOpen(false)}
+      />
     </section>
   );
 }
