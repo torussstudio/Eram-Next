@@ -104,7 +104,7 @@ function AcademicFocusSection() {
 </h2>
 
         {/* Intro paragraph */}
-        <p className="font-rethink mt-5 max-w-2xl text-[13px] sm:text-[14px] leading-relaxed text-neutral-600">
+        <p className="font-rethink mt-5 max-w-2xl text-[13px] sm:text-[15px] leading-relaxed text-neutral-600">
           At the institution, academic progress cannot function in isolation. It
           requires continuous monitoring, clarity, and coordination. MMHSS
           maintains coordinated systems that ensure transparency among faculty,
@@ -113,7 +113,7 @@ function AcademicFocusSection() {
         </p>
 
         {/* Tabs */}
-        <div className="mt-10 flex items-end justify-between gap-6 sm:border-b sm:border-neutral-900/10">
+        <div className="mt-10 flex items-end gap-6 sm:border-b sm:border-neutral-900/10">
           {/* Mobile pill scroller */}
           <div className="flex w-full gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden">
             {TABS.map((tab) => {
@@ -162,44 +162,6 @@ function AcademicFocusSection() {
               );
             })}
           </div>
-
-          {/* Carousel arrows */}
-          <div className="hidden shrink-0 items-center gap-2 pb-4 sm:flex">
-            <button
-              type="button"
-              aria-label="Previous"
-              disabled={!canScrollLeft}
-              onClick={() => scrollByCard(-1)}
-              className="flex h-8 w-8 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 hover:enabled:border-[#ae1431] hover:enabled:text-[#ae1431]"
-            >
-              <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
-                <path
-                  d="M6 1L1 6L6 11"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <button
-              type="button"
-              aria-label="Next"
-              disabled={!canScrollRight}
-              onClick={() => scrollByCard(1)}
-              className="flex h-8 w-8 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 hover:enabled:border-[#ae1431] hover:enabled:text-[#ae1431]"
-            >
-              <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
-                <path
-                  d="M1 1L6 6L1 11"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
 
         {/* Items carousel */}
@@ -218,11 +180,11 @@ function AcademicFocusSection() {
                   <span className="absolute left-0 top-0 h-28 w-px bg-neutral-900/10" />
                 )}
 
-                <span className="font-rethink block text-[15px] text-black">
+                <span className="font-rethink block text-[16px] text-black">
                   /{String(idx + 1).padStart(2, "0")}
                 </span>
 
-                <h3 className="font-rethink mt-15 pr-2 text-[15px] sm:text-[18px]  leading-snug text-neutral-900">
+                <h3 className="font-rethink mt-15 pr-2 text-[15px] sm:text-[20px]  leading-snug text-neutral-900">
                   {item.title}
                 </h3>
               </div>
@@ -238,14 +200,14 @@ function AcademicFocusSection() {
           />
         </div>
 
-        {/* Mobile carousel arrows */}
-        <div className="mt-6 flex items-center justify-center gap-3 sm:hidden">
+        {/* Carousel arrows — bottom right, under the last card */}
+        <div className="mt-6 flex items-center justify-center gap-3 sm:justify-end">
           <button
             type="button"
             aria-label="Previous"
             disabled={!canScrollLeft}
             onClick={() => scrollByCard(-1)}
-            className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 active:border-[#ae1431] active:text-[#ae1431]"
+            className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 hover:enabled:border-[#ae1431] hover:enabled:text-[#ae1431]"
           >
             <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
               <path
@@ -262,7 +224,7 @@ function AcademicFocusSection() {
             aria-label="Next"
             disabled={!canScrollRight}
             onClick={() => scrollByCard(1)}
-            className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 active:border-[#ae1431] active:text-[#ae1431]"
+            className="flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-900/15 text-neutral-700 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-30 hover:enabled:border-[#ae1431] hover:enabled:text-[#ae1431]"
           >
             <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
               <path

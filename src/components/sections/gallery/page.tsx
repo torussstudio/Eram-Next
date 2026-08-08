@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { X, ChevronLeft, ChevronRight, ArrowUpRight, ChevronDown, Check } from "lucide-react";
 import api from "@/lib/api";
 
-type CategoryId =  "mmhss" | "mmps" | "amlp" | "mmite" | "ease" | "trust" ;
+type CategoryId = "mmhss" | "mmps" | "amlp" | "mmite" | "ease" | "trust" | "sportsarena";
 type TypeId = "general" | "sports" | "cultural" | "social" | "academic";
 
 interface GalleryItem {
@@ -20,12 +20,12 @@ interface GalleryItem {
 }
 
 const CATEGORIES: { id: CategoryId; label: string }[] = [
-  
   { id: "mmhss", label: "MMHSS" },
   { id: "mmps", label: "MMPS" },
   { id: "amlp", label: "AMLP" },
   { id: "mmite", label: "MMITE" },
   { id: "ease", label: "EASE" },
+  { id: "sportsarena", label: "SPORTS ARENA" },
   { id: "trust", label: "TRUST" },
 ];
 

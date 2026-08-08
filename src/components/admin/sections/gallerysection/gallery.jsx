@@ -1,33 +1,41 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { Trash2, UploadCloud, ImageOff, CheckCircle2, AlertCircle } from 'lucide-react';
-import api from '@/lib/api';
+import { useEffect, useState, useRef, useCallback } from "react";
+import {
+  Trash2,
+  UploadCloud,
+  ImageOff,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
+import api from "@/lib/api";
 
 const CATEGORIES = [
-  { id: 'ease', label: 'EASE' },
-  { id: 'mmhss', label: 'MMHSS' },
-  { id: 'mmps', label: 'MMPS' },
-  { id: 'amlp', label: 'AMLP' },
-  { id: 'mmite', label: 'MMITE' },
-  { id: 'trust', label: 'TRUST' },
+  { id: "ease", label: "EASE" },
+  { id: "mmhss", label: "MMHSS" },
+  { id: "mmps", label: "MMPS" },
+  { id: "amlp", label: "AMLP" },
+  { id: "mmite", label: "MMITE" },
+  { id: "sportsarena", label: "SPORTS ARENA" },
+  { id: "trust", label: "TRUST" },
 ];
 
 const CATEGORY_COLORS = {
-  ease: '#8b6f3f',
-  mmhss: '#3f6b52',
-  mmps: '#6b4f8b',
-  amlp: '#ae1431',
-  mmite: '#a15c2e',
-  trust: '#3f5f8b',
+  ease: "#8b6f3f",
+  mmhss: "#3f6b52",
+  mmps: "#6b4f8b",
+  amlp: "#ae1431",
+  mmite: "#a15c2e",
+  sportsarena: "#2e7d6b",
+  trust: "#3f5f8b",
 };
 
 const TYPES = [
-  { id: 'general', label: 'General' },
-  { id: 'sports', label: 'Sports' },
-  { id: 'cultural', label: 'Cultural' },
-  { id: 'social', label: 'Social' },
-  { id: 'academic', label: 'Academic' },
+  { id: "general", label: "General" },
+  { id: "sports", label: "Sports" },
+  { id: "cultural", label: "Cultural" },
+  { id: "social", label: "Social" },
+  { id: "academic", label: "Academic" },
 ];
 
 const MAX_WIDTH = 1920;
@@ -36,7 +44,7 @@ const JPEG_QUALITY = 0.8;
 
 async function compressImage(file) {
   // Skip compression for non-image files or already-tiny files (<150KB)
-  if (!file.type.startsWith('image/') || file.size < 150 * 1024) {
+  if (!file.type.startsWith("image/") || file.size < 150 * 1024) {
     return file;
   }
 
@@ -48,23 +56,23 @@ async function compressImage(file) {
     width = Math.round(width * scale);
     height = Math.round(height * scale);
 
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     ctx.drawImage(bitmap, 0, 0, width, height);
 
     const blob = await new Promise((resolve) =>
-      canvas.toBlob(resolve, 'image/jpeg', JPEG_QUALITY)
+      canvas.toBlob(resolve, "image/jpeg", JPEG_QUALITY),
     );
 
     if (!blob) return file; // toBlob failed, fall back
 
     // Rename with .jpg since we re-encoded as JPEG
-    const newName = file.name.replace(/\.[^.]+$/, '') + '.jpg';
-    return new File([blob], newName, { type: 'image/jpeg' });
+    const newName = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+    return new File([blob], newName, { type: "image/jpeg" });
   } catch (err) {
-    console.error('Image compression failed, using original file:', err);
+    console.error("Image compression failed, using original file:", err);
     return file;
   }
 }
@@ -76,21 +84,21 @@ export default function AdminGalleryPage() {
   const [compressing, setCompressing] = useState(false);
 
   // upload form state
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('trust');
-  const [type, setType] = useState('general');
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("trust");
+  const [type, setType] = useState("general");
   const [file, setFile] = useState(null);
 
   const [deleteTarget, setDeleteTarget] = useState(null);
 
   // browse filter state
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState("all");
 
   // ── Toast state ──────────────────────────────────────────────
   const [toasts, setToasts] = useState([]);
   const toastIdRef = useRef(0);
 
-  const showToast = useCallback((message, type = 'success') => {
+  const showToast = useCallback((message, type = "success") => {
     const id = ++toastIdRef.current;
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
@@ -104,9 +112,10 @@ export default function AdminGalleryPage() {
 
   const fetchItems = () => {
     setLoading(true);
-    api.get('/gallery')
+    api
+      .get("/gallery")
       .then(({ data }) => setItems(data))
-      .catch((err) => console.error('Failed to fetch gallery items:', err))
+      .catch((err) => console.error("Failed to fetch gallery items:", err))
       .finally(() => setLoading(false));
   };
 
@@ -129,24 +138,24 @@ export default function AdminGalleryPage() {
     }
 
     const formData = new FormData();
-    formData.append('image', uploadFile);
-    formData.append('title', title);
-    formData.append('category', category);
-    formData.append('type', type);
+    formData.append("image", uploadFile);
+    formData.append("title", title);
+    formData.append("category", category);
+    formData.append("type", type);
 
     try {
-      await api.post('/gallery', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      await api.post("/gallery", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
-      setTitle('');
+      setTitle("");
       setFile(null);
-      document.getElementById('gallery-file-input').value = '';
+      document.getElementById("gallery-file-input").value = "";
       fetchItems();
-      showToast('Image uploaded successfully', 'success');
+      showToast("Image uploaded successfully", "success");
     } catch (err) {
       console.error(err);
-      showToast('Upload failed. Try again.', 'error');
+      showToast("Upload failed. Try again.", "error");
     } finally {
       setUploading(false);
     }
@@ -161,10 +170,10 @@ export default function AdminGalleryPage() {
     try {
       await api.delete(`/gallery/${deleteTarget}`);
       setItems((prev) => prev.filter((i) => i._id !== deleteTarget));
-      showToast('Image deleted successfully', 'success');
+      showToast("Image deleted successfully", "success");
     } catch (err) {
       console.error(err);
-      showToast('Delete failed. Try again.', 'error');
+      showToast("Delete failed. Try again.", "error");
     } finally {
       setDeleteTarget(null);
     }
@@ -177,12 +186,14 @@ export default function AdminGalleryPage() {
   }, {});
 
   const visibleItems =
-    activeTab === 'all' ? items : items.filter((i) => i.category === activeTab);
+    activeTab === "all" ? items : items.filter((i) => i.category === activeTab);
 
   return (
     <div className="min-h-screen bg-[#F5EFE8]">
       <div className="mx-auto w-full min-w-0 max-w-6xl px-4 sm:px-6 py-8 sm:py-10">
-        <h1 className="text-2xl sm:text-3xl font-display text-[#2b2620]">Gallery Manager</h1>
+        <h1 className="text-2xl sm:text-3xl font-display text-[#2b2620]">
+          Gallery Manager
+        </h1>
         <p className="mt-1 text-sm sm:text-base font-rethink text-[#8a7f6f]">
           Upload photos and manage the master gallery.
         </p>
@@ -193,7 +204,9 @@ export default function AdminGalleryPage() {
             onSubmit={handleUpload}
             className="lg:sticky lg:top-8 rounded-xl border border-[#e3d6c3] bg-white p-5 sm:p-6 shadow-[0_1px_2px_rgba(43,38,32,0.04)]"
           >
-            <h2 className="font-display text-lg text-[#2b2620]">Upload Image</h2>
+            <h2 className="font-display text-lg text-[#2b2620]">
+              Upload Image
+            </h2>
 
             <div className="mt-5 space-y-5">
               <div>
@@ -224,10 +237,14 @@ export default function AdminGalleryPage() {
                         onClick={() => setCategory(c.id)}
                         className={`rounded-md border px-2 py-1.5 text-xs font-rethink cursor-pointer font-medium transition-colors ${
                           active
-                            ? 'border-transparent text-white'
-                            : 'border-[#e3d6c3] text-[#8a7f6f] hover:border-[#ae1431]/40 hover:text-[#2b2620]'
+                            ? "border-transparent text-white"
+                            : "border-[#e3d6c3] text-[#8a7f6f] hover:border-[#ae1431]/40 hover:text-[#2b2620]"
                         }`}
-                        style={active ? { backgroundColor: CATEGORY_COLORS[c.id] } : undefined}
+                        style={
+                          active
+                            ? { backgroundColor: CATEGORY_COLORS[c.id] }
+                            : undefined
+                        }
                       >
                         {c.label}
                       </button>
@@ -250,8 +267,8 @@ export default function AdminGalleryPage() {
                         onClick={() => setType(t.id)}
                         className={`rounded-full border px-3 cursor-pointer py-1.5 text-xs font-rethink font-medium transition-colors ${
                           active
-                            ? 'border-[#ae1431] bg-[#ae1431] text-white'
-                            : 'border-[#e3d6c3] text-[#8a7f6f] hover:border-[#ae1431]/40 hover:text-[#2b2620]'
+                            ? "border-[#ae1431] bg-[#ae1431] text-white"
+                            : "border-[#e3d6c3] text-[#8a7f6f] hover:border-[#ae1431]/40 hover:text-[#2b2620]"
                         }`}
                       >
                         {t.label}
@@ -271,11 +288,12 @@ export default function AdminGalleryPage() {
                 >
                   <UploadCloud size={20} className="text-[#8a7f6f]" />
                   <span className="font-rethink text-sm text-[#2b2620] break-all">
-                    {file ? file.name : 'Click to select an image'}
+                    {file ? file.name : "Click to select an image"}
                   </span>
                   {file && (
                     <span className="font-rethink text-xs text-[#8a7f6f]">
-                      {(file.size / 1024).toFixed(0)} KB — will be auto-compressed
+                      {(file.size / 1024).toFixed(0)} KB — will be
+                      auto-compressed
                     </span>
                   )}
                 </label>
@@ -295,20 +313,24 @@ export default function AdminGalleryPage() {
                 className="flex w-full items-center cursor-pointer justify-center gap-2 rounded-md bg-[#ae1431] px-4 py-2.5 text-sm font-rethink font-medium text-white transition-colors hover:bg-[#9a1129] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <UploadCloud size={16} />
-                {compressing ? 'Compressing…' : uploading ? 'Uploading…' : 'Upload Image'}
+                {compressing
+                  ? "Compressing…"
+                  : uploading
+                  ? "Uploading…"
+                  : "Upload Image"}
               </button>
             </div>
           </form>
 
           {/* Browse — tabs + card grid */}
-          <div>
+          <div className="min-w-0">
             <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none]">
               <button
-                onClick={() => setActiveTab('all')}
+                onClick={() => setActiveTab("all")}
                 className={`shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-rethink font-medium transition-colors ${
-                  activeTab === 'all'
-                    ? 'border-[#2b2620] bg-[#2b2620] text-white'
-                    : 'border-[#e3d6c3] bg-white text-[#8a7f6f] hover:border-[#2b2620]/30 hover:text-[#2b2620]'
+                  activeTab === "all"
+                    ? "border-[#2b2620] bg-[#2b2620] text-white"
+                    : "border-[#e3d6c3] bg-white text-[#8a7f6f] hover:border-[#2b2620]/30 hover:text-[#2b2620]"
                 }`}
               >
                 All <span className="opacity-70">({items.length})</span>
@@ -321,20 +343,25 @@ export default function AdminGalleryPage() {
                     onClick={() => setActiveTab(c.id)}
                     className={`shrink-0 flex items-center cursor-pointer gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-rethink font-medium transition-colors ${
                       active
-                        ? 'border-transparent text-white'
-                        : 'border-[#e3d6c3] bg-white text-[#8a7f6f] hover:text-[#2b2620]'
+                        ? "border-transparent text-white"
+                        : "border-[#e3d6c3] bg-white text-[#8a7f6f] hover:text-[#2b2620]"
                     }`}
                     style={
                       active
                         ? { backgroundColor: CATEGORY_COLORS[c.id] }
-                        : { borderColor: '#e3d6c3' }
+                        : { borderColor: "#e3d6c3" }
                     }
                   >
                     <span
                       className="h-1.5 w-1.5 rounded-full"
-                      style={{ backgroundColor: active ? '#fff' : CATEGORY_COLORS[c.id] }}
+                      style={{
+                        backgroundColor: active
+                          ? "#fff"
+                          : CATEGORY_COLORS[c.id],
+                      }}
                     />
-                    {c.label} <span className="opacity-70">({counts[c.id]})</span>
+                    {c.label}{" "}
+                    <span className="opacity-70">({counts[c.id]})</span>
                   </button>
                 );
               })}
@@ -342,11 +369,15 @@ export default function AdminGalleryPage() {
 
             <div className="mt-5">
               {loading ? (
-                <p className="font-rethink text-sm text-[#8a7f6f]">Loading gallery…</p>
+                <p className="font-rethink text-sm text-[#8a7f6f]">
+                  Loading gallery…
+                </p>
               ) : visibleItems.length === 0 ? (
                 <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-[#e3d6c3] bg-white/50 py-16 text-center">
                   <ImageOff size={22} className="text-[#b5aa98]" />
-                  <p className="font-rethink text-sm text-[#8a7f6f]">No images in this category yet.</p>
+                  <p className="font-rethink text-sm text-[#8a7f6f]">
+                    No images in this category yet.
+                  </p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -370,7 +401,9 @@ export default function AdminGalleryPage() {
                         </button>
                         <span
                           className="absolute left-2 top-2 rounded-full px-2 py-0.5 text-[10px] font-rethink font-semibold uppercase tracking-wide text-white"
-                          style={{ backgroundColor: CATEGORY_COLORS[item.category] }}
+                          style={{
+                            backgroundColor: CATEGORY_COLORS[item.category],
+                          }}
                         >
                           {item.category}
                         </span>
@@ -401,7 +434,9 @@ export default function AdminGalleryPage() {
       {deleteTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#2b2620]/50 backdrop-blur-sm px-6">
           <div className="w-full max-w-sm rounded-xl border border-[#e3d6c3] bg-white p-6 shadow-[0_8px_24px_rgba(43,38,32,0.12)]">
-            <h3 className="font-display text-lg text-[#2b2620]">Delete this image?</h3>
+            <h3 className="font-display text-lg text-[#2b2620]">
+              Delete this image?
+            </h3>
             <p className="mt-2 font-rethink text-sm text-[#8a7f6f]">
               This action cannot be undone.
             </p>
@@ -430,14 +465,16 @@ export default function AdminGalleryPage() {
             key={t.id}
             onClick={() => dismissToast(t.id)}
             className="pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-[0_10px_30px_rgba(43,38,32,0.25)] cursor-pointer animate-[fadeIn_0.25s_ease-out] max-w-xs"
-            style={{ backgroundColor: '#ae1431', color: '#ffffff' }}
+            style={{ backgroundColor: "#ae1431", color: "#ffffff" }}
           >
-            {t.type === 'error' ? (
+            {t.type === "error" ? (
               <AlertCircle size={16} className="shrink-0" />
             ) : (
               <CheckCircle2 size={16} className="shrink-0" />
             )}
-            <span className="text-[13px] font-rethink font-medium leading-snug">{t.message}</span>
+            <span className="text-[13px] font-rethink font-medium leading-snug">
+              {t.message}
+            </span>
           </div>
         ))}
       </div>

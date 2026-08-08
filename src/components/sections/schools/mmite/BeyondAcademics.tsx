@@ -224,7 +224,7 @@ export default function BeyondAcademics({ school }: BeyondAcademicsProps) {
       ref={containerRef}
       className={`${shell}  bg-[#F5EFE8]`}
     >
-      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-6 pb-10 md:pt-8 md:pb-12 lg:pt-10 lg:pb-14">
+      <div className="w-full max-w-[1300px] mx-auto px-5 sm:px-8 md:px-10 lg:px-16 pt-2 pb-10 md:pt-3 md:pb-12 lg:pt-4 lg:pb-14">
         {/* ── HEADER ───────────────────────────────────────────── */}
         <div className="anim-header-wrap grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 mb-6 lg:mb-8">
           <div className="anim-header">
