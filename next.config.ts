@@ -3,12 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
- // ── Image optimization ──────────────────────────────────────────────────────
+  // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+
     remotePatterns: [
       {
         protocol: "http",
@@ -23,23 +24,28 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "https://eram-backend-ejgy.onrender.com", // ningalude actual Render backend domain ideel
+        hostname: "eram-backend-ejgy.onrender.com",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "api.eram.edu.in",
         pathname: "/uploads/**",
       },
     ],
   },
 
-  // ── Compiler optimizations ──────────────────────────────────────────────────
+  // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
-  // ── Experimental ───────────────────────────────────────────────────────────
+  // Experimental
   experimental: {
     optimizePackageImports: ["gsap", "lucide-react"],
   },
 
-  // ── Headers for security + performance ─────────────────────────────────────
+  // Security + performance headers
   async headers() {
     return [
       {
@@ -64,7 +70,6 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Cache static assets aggressively
         source: "/fonts/(.*)",
         headers: [
           {
