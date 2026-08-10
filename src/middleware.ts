@@ -32,11 +32,11 @@ export async function middleware(request: NextRequest) {
     if (!isValid) {
       const loginUrl = new URL("/login", request.url);
       const response = NextResponse.redirect(loginUrl);
+
       if (token) {
         response.cookies.delete("token");
       }
-          response.headers.set("x-debug-has-token", token ? "yes" : "no");
-    response.headers.set("x-debug-secret-len", String(process.env.JWT_SECRET?.length || 0))
+       
       return response;
     }
   }
