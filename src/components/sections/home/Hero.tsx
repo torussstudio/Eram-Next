@@ -11,7 +11,18 @@ import { Play } from "lucide-react";
 
 const resolveImageUrl = (url: string) => {
   if (!url) return "";
-  if (url.startsWith("http")) return url;
+
+  // Frontend public images
+  if (url.startsWith("/images/")) {
+    return url;
+  }
+
+  // Already absolute URL
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+
+  // Backend assets
   return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
 };
 
