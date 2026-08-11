@@ -26,7 +26,7 @@ type InstitutionKey = "AMLP" | "MMPS" | "MMHSS" | "EASE" | "MMITE";
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://eram-backend-ejgy.onrender.com";
+ "https://api.eram.edu.in";
 
 type RawEvent = {
   _id: string;
