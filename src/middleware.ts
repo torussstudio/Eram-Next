@@ -32,18 +32,11 @@ export async function middleware(request: NextRequest) {
     if (!isValid) {
       const loginUrl = new URL("/login", request.url);
       const response = NextResponse.redirect(loginUrl);
-<<<<<<< HEAD
 
       if (token) {
         response.cookies.delete("token");
       }
        
-=======
-      
-      if (token) {
-        response.cookies.delete("token");
-      }
->>>>>>> 7bea033 (map added in contact page)
       return response;
     }
   }
