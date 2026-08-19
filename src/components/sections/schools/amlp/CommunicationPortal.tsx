@@ -9,9 +9,7 @@ import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://api.eram.edu.in";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const features = [
   {
@@ -111,7 +109,7 @@ export default function CommunicationPortal() {
     async function fetchFeed() {
       try {
         setLoadingFeed(true);
-        const res = await fetch(`${BACKEND_URL}/api/events`, {
+        const res = await fetch(`${API_URL}/events`, {
           signal: controller.signal,
           cache: "no-store",
         });

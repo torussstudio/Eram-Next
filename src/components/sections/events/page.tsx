@@ -5,9 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { ChevronDown, Check } from "lucide-react";
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://api.eram.edu.in";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -63,7 +61,7 @@ const MONTHS = [
 function resolveImageUrl(path?: string): string {
   if (!path) return "";
   if (path.startsWith("http")) return path;
-  const base = BACKEND_URL.replace(/\/api\/?$/, "");
+  const base = API_URL?.replace(/\/api\/?$/, "") || "";
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
@@ -495,7 +493,7 @@ export default function EventsPage() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch(`${BACKEND_URL}/api/events`, {
+        const res = await fetch(`${API_URL}/events`, {
           signal: controller.signal,
           cache: "no-store",
         });

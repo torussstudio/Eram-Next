@@ -8,9 +8,7 @@ import { Play, ChevronDown, Check } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
-  "https://api.eram.edu.in";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -339,7 +337,7 @@ function DownloadRow({
 
       {/* action */}
       <a
-        href={`${BACKEND_URL}/api/downloads/${item.id}/download`}
+        href={`${API_URL}/downloads/${item.id}/download`}
         download={`${item.title}${item.fileExtension}`}
         onClick={(e) => e.stopPropagation()}
         aria-label={`Download ${item.title}`}
@@ -401,7 +399,7 @@ export default function DownloadsPage() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch(`${BACKEND_URL}/api/downloads`, {
+       const res = await fetch(`${API_URL}/downloads`, {
           signal: controller.signal,
           cache: "no-store",
         });

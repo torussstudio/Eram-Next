@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, {
   useState,
@@ -63,8 +63,8 @@ const TIMELINE: TimelineItem[] = [
 const TAIL_EDGE_PADDING = 32;
 
 interface BubbleBox {
-  left: number; // px, bubble's left edge relative to the track container
-  tailLeft: number; // px, tail's center relative to the bubble's own left edge
+  left: number;
+  tailLeft: number;
   ready: boolean;
 }
 
@@ -154,7 +154,7 @@ export default function EramJourneyTimeline(): React.JSX.Element {
       if (safePadding > 0) {
         tailLeft = Math.max(
           safePadding,
-          Math.min(tailLeft, bubbleWidth - safePadding)
+          Math.min(tailLeft, bubbleWidth - safePadding),
         );
       } else {
         tailLeft = bubbleWidth / 2;
@@ -182,28 +182,12 @@ export default function EramJourneyTimeline(): React.JSX.Element {
     };
   }, [activeIndex]);
 
-  // On mobile, smoothly scroll the row so the active item slides into view.
-  //
-  // IMPORTANT: we deliberately do NOT use `item.scrollIntoView()` here.
-  // scrollIntoView() can move the *whole page's* vertical scroll position
-  // (even with block: "nearest") if this component is only partially
-  // visible or has scrolled out of the viewport when the 6s auto-advance
-  // timer fires. That was causing a random, mobile-only vertical scroll
-  // "jump" while the user was reading a completely different section
-  // further down the page.
-  //
-  // Instead we manually scroll ONLY the horizontal track container
-  // (trackRef), which can never touch the page's vertical scroll.
   useEffect(() => {
     const item = itemRefs.current[activeIndex];
     const track = trackRef.current;
     if (!item || !track) return;
     if (!window.matchMedia("(max-width: 639px)").matches) return;
 
-    // Only auto-scroll the horizontal strip if this timeline is actually
-    // visible on screen right now. If the user has scrolled away from
-    // this section, skip it silently — the strip will just catch up
-    // next time activeIndex changes while it's visible.
     const trackVisibleRect = track.getBoundingClientRect();
     const isTrackInViewport =
       trackVisibleRect.top < window.innerHeight && trackVisibleRect.bottom > 0;
@@ -221,11 +205,6 @@ export default function EramJourneyTimeline(): React.JSX.Element {
     });
   }, [activeIndex]);
 
-  // ===== GSAP scroll-in entrance animations =====
-  // Scoped to sectionRef so cleanup never touches anything outside this
-  // component. All ScrollTriggers use once: true — this is a one-time
-  // reveal, not a repeating scrub, so it can never interfere with the
-  // horizontal track scroll or the page's vertical scroll position above.
   useEffect(() => {
     const ctx = gsap.context(() => {
       const missionItems = missionItemsRef.current
@@ -241,10 +220,10 @@ export default function EramJourneyTimeline(): React.JSX.Element {
         y: 20,
       });
       gsap.set(missionItems, { autoAlpha: 0, y: 16 });
-      gsap.set(
-        [timelineLabelRef.current, timelineHeadingRef.current],
-        { autoAlpha: 0, y: 16 }
-      );
+      gsap.set([timelineLabelRef.current, timelineHeadingRef.current], {
+        autoAlpha: 0,
+        y: 16,
+      });
       gsap.set(bubbleWrapRef.current, { autoAlpha: 0, y: 12 });
       gsap.set(ticks, { autoAlpha: 0, y: 10 });
       gsap.set(arrowsRef.current, { autoAlpha: 0, y: 10 });
@@ -260,17 +239,17 @@ export default function EramJourneyTimeline(): React.JSX.Element {
             .to(
               visionHeadingRef.current,
               { autoAlpha: 1, y: 0, duration: 0.6 },
-              "-=0.5"
+              "-=0.5",
             )
             .to(
               missionHeadingRef.current,
               { autoAlpha: 1, y: 0, duration: 0.6 },
-              "-=0.3"
+              "-=0.3",
             )
             .to(
               missionItems,
               { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1 },
-              "-=0.3"
+              "-=0.3",
             );
         },
       });
@@ -286,22 +265,22 @@ export default function EramJourneyTimeline(): React.JSX.Element {
             .to(
               timelineHeadingRef.current,
               { autoAlpha: 1, y: 0, duration: 0.5 },
-              "-=0.3"
+              "-=0.3",
             )
             .to(
               bubbleWrapRef.current,
               { autoAlpha: 1, y: 0, duration: 0.5 },
-              "-=0.2"
+              "-=0.2",
             )
             .to(
               ticks,
               { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.06 },
-              "-=0.3"
+              "-=0.3",
             )
             .to(
               arrowsRef.current,
               { autoAlpha: 1, y: 0, duration: 0.4 },
-              "-=0.2"
+              "-=0.2",
             );
         },
       });
@@ -319,75 +298,132 @@ export default function EramJourneyTimeline(): React.JSX.Element {
     >
       <div className="w-full max-w-5xl">
         {/* ===== Vision / Mission card ===== */}
-      <div className="flex items-center gap-2 mb-6 ml-4 sm:ml-0">
-  <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
-    Vision & Mission
-  </span>
-</div>
+        <div className="flex items-center gap-2 mb-6 ml-4 sm:ml-0">
+          <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
+            Vision & Mission
+          </span>
+        </div>
+
         <div className="rounded-[28px] bg-white shadow-sm px-6 py-8 sm:px-10 sm:py-10">
           <div className="flex flex-col md:flex-row gap-8 md:gap-10">
-            {/* Image placeholder */}
+            {/* IMAGE */}
             <div
-  ref={visionImageRef}
-  className="relative w-full md:w-[300px] lg:w-[340px] aspect-[4/5] md:aspect-auto md:h-[360px] rounded-2xl shrink-0 overflow-hidden"
->
-  <Image
-    src="/images/vision.png"
-    alt="Description"
-    fill
-    className="object-cover"
-    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 300px, 340px"
-  />
-</div>
+              ref={visionImageRef}
+              className="
+        relative
+        w-full
+        md:w-[300px]
+        lg:w-[340px]
+        aspect-[4/5]
+        md:aspect-auto
+        md:h-[360px]
+        rounded-2xl
+        shrink-0
+        overflow-hidden
+      "
+            >
+              <Image
+                src="/images/vision.png"
+                alt="ERAM Vision and Mission"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 300px, 340px"
+                className="object-cover"
+              />
+            </div>
 
-            <div className="flex-1 flex flex-col justify-center gap-8">
+            {/* CONTENT */}
+            <div className="flex-1 flex flex-col justify-center">
+              {/* ================= VISION ================= */}
               <div>
                 <h2
                   ref={visionHeadingRef}
-                  className="text-3xl sm:text-[34px] font-display tracking-tight text-neutral-950 mb-3"
+                  className="
+            text-3xl
+            sm:text-[34px]
+            leading-none
+            font-display
+            tracking-tight
+            text-neutral-950
+            mb-4
+          "
                 >
                   Vision
                 </h2>
+
                 <div className="flex gap-3">
                   <span
-                    className="w-[3px] shrink-0 rounded-full bg-[#ae1431]"
+                    className="
+              w-[3px]
+              shrink-0
+              rounded-full
+              bg-[#ae1431]
+            "
                     aria-hidden="true"
                   />
-                  <p className="text-[13.5px] font-rethink leading-relaxed text-neutral-700 max-w-xl">
-                    To build disciplined, inclusive, and future-ready
-                    educational institutions that expand opportunity while
-                    maintaining academic excellence.
+
+                  <p
+                    className="
+              text-[13px]
+              sm:text-[13.5px]
+              leading-[1.35]
+              font-display
+              text-neutral-700
+              max-w-[650px]
+            "
+                  >
+                    To empower and excel students to acquire value based quality
+                    education providing an equal nurturing grounds for the
+                    overall growth and development of our students. To provide
+                    the window of opportunity that every child deserves to help
+                    him/her to become a successful human being and an asset to
+                    the society.
                   </p>
                 </div>
               </div>
 
-              <div>
+              {/* ================= MISSION ================= */}
+              <div className="mt-8">
                 <h2
                   ref={missionHeadingRef}
-                  className="text-3xl sm:text-[34px] font-display tracking-tight text-neutral-950 mb-4"
+                  className="
+            text-3xl
+            sm:text-[34px]
+            leading-none
+            font-display
+            tracking-tight
+            text-neutral-950
+            mb-4
+          "
                 >
                   Mission
                 </h2>
-                <div
-                  ref={missionItemsRef}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5"
-                >
-                  {[
-                    "To deliver structured, value-based education aligned with national academic standards.",
-                    "To strengthen institutional systems through continuous evaluation and faculty development.",
-                    "To integrate sports, culture, and exposure-based learning into formal academics.",
-                    "To serve communities through responsible and sustainable educational initiatives.",
-                  ].map((text, i) => (
-                    <div key={i} className="flex gap-3">
-                      <span
-                        className="w-[3px] shrink-0 rounded-full bg-[#ae1431]"
-                        aria-hidden="true"
-                      />
-                      <p className="text-[13.5px] font-rethink leading-relaxed text-neutral-700">
-                        {text}
-                      </p>
-                    </div>
-                  ))}
+
+                <div ref={missionItemsRef} className="flex gap-3">
+                  <span
+                    className="
+              w-[3px]
+              shrink-0
+              rounded-full
+              bg-[#ae1431]
+            "
+                    aria-hidden="true"
+                  />
+
+                  <p
+                    className="
+              text-[13px]
+              sm:text-[13.5px]
+              leading-[1.35]
+              font-display
+              text-neutral-700
+              max-w-[650px]
+            "
+                  >
+                    Design and implement activity centered learning to achieve
+                    holistic development and academic excellence. Cultivate
+                    intra-interpersonal skills by encouraging social
+                    responsibility.
+                  </p>
                 </div>
               </div>
             </div>
@@ -396,18 +432,27 @@ export default function EramJourneyTimeline(): React.JSX.Element {
 
         {/* ===== Timeline section ===== */}
         <div className="mt-12 sm:mt-16">
-          <div ref={timelineLabelRef} className="flex items-center gap-2 mb-6 ml-4 sm:ml-0">
-  <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
-   Timeline
-  </span>
-</div>
+          <div
+            ref={timelineLabelRef}
+            className="flex items-center gap-2 mb-6 ml-4 sm:ml-0"
+          >
+            <span className="font-rethink text-xs sm:text-sm uppercase tracking-[0.2em] text-[#ae1431]">
+              Timeline
+            </span>
+          </div>
 
-  <div ref={timelineHeadingRef} className="flex items-center gap-3 mb-8">
-    <span className="w-[3px] h-6 rounded-full ml-4 bg-[#ae1431]" aria-hidden="true" />
-    <h3 className="text-xl sm:text-2xl  font-display tracking-tight text-neutral-950">
-      The Journey of ERAM
-    </h3>
-  </div>
+          <div
+            ref={timelineHeadingRef}
+            className="flex items-center gap-3 mb-8"
+          >
+            <span
+              className="w-[3px] h-6 rounded-full ml-4 bg-[#ae1431]"
+              aria-hidden="true"
+            />
+            <h3 className="text-xl sm:text-2xl  font-display tracking-tight text-neutral-950">
+              The Journey of ERAM
+            </h3>
+          </div>
 
           {/* speech bubble */}
           <div ref={bubbleWrapRef} className="relative h-24 sm:h-20">
@@ -425,7 +470,10 @@ export default function EramJourneyTimeline(): React.JSX.Element {
                 </p>
                 <div
                   className="absolute -bottom-[10px] w-4 h-4 rotate-45 bg-[#ae1431] transition-[left] duration-300 ease-out"
-                  style={{ left: bubbleBox.tailLeft, transform: "translateX(-50%) rotate(90deg)" }}
+                  style={{
+                    left: bubbleBox.tailLeft,
+                    transform: "translateX(-50%) rotate(90deg)",
+                  }}
                   aria-hidden="true"
                 />
               </div>
@@ -478,7 +526,10 @@ export default function EramJourneyTimeline(): React.JSX.Element {
           </div>
 
           {/* arrows */}
-          <div ref={arrowsRef} className="flex items-center justify-center gap-4 mt-8">
+          <div
+            ref={arrowsRef}
+            className="flex items-center justify-center gap-4 mt-8"
+          >
             <button
               type="button"
               onClick={goPrev}

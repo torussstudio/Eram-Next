@@ -24,9 +24,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 type InstitutionKey = "AMLP" | "MMPS" | "MMHSS" | "EASE" | "MMITE";
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
- "https://api.eram.edu.in";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 type RawEvent = {
   _id: string;
@@ -176,7 +174,7 @@ const StudentParentPortal = () => {
     async function fetchEvents() {
       try {
         setNoticesLoading(true);
-        const res = await fetch(`${BACKEND_URL}/api/events`, {
+        const res = await fetch(`${API_URL}/events`, {
           signal: controller.signal,
           cache: "no-store",
         });
@@ -202,7 +200,7 @@ const StudentParentPortal = () => {
     async function fetchDownloads() {
       try {
         setDownloadsLoading(true);
-        const res = await fetch(`${BACKEND_URL}/api/downloads`, {
+        const res = await fetch(`${API_URL}/downloads`, {
           signal: controller.signal,
           cache: "no-store",
         });
@@ -797,7 +795,7 @@ className="relative w-full h-55 sm:h-70 md:h-65 rounded-2xl overflow-hidden shad
                   </div>
 
                   <a
-                    href={`${BACKEND_URL}/api/downloads/${resource.id}/download`}
+                    href={`${API_URL}/downloads/${resource.id}/download`}
                     download={`${resource.title}${resource.fileExtension}`}
                     className="shrink-0 p-2.5 bg-[#ae1431] text-white rounded-lg hover:bg-black active:scale-95 transition-all"
                   >
