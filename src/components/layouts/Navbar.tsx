@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { navItems } from "@/constants/homeData";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import { startPageTransition } from "@/lib/pageTransition";
+import NotificationBell from "./NotificationBell";
 
 interface InstitutionItem {
   title: string;
@@ -527,7 +528,8 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
 </nav>
 
 {/* ── STUDENT-PARENT PORTAL BUTTON ── */}
-<div className="shrink-0 hidden min-[920px]:flex font-rethink">
+<div className="shrink-0 hidden min-[920px]:flex items-center gap-3 font-rethink">
+  <NotificationBell />
   <button
     onClick={() => handleNavClick("/student-parent-portal")}
     style={{
@@ -544,6 +546,8 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
 
         {/* ── MOBILE HAMBURGER ── */}
         <div className="ml-auto min-[920px]:hidden relative h-[42px] w-[42px] shrink-0">
+          <NotificationBell />
+  <div className="relative h-[42px] w-[42px] shrink-0">
           {/* Scroll progress ring */}
           <svg
             className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
@@ -582,6 +586,7 @@ hover:text-[#ae1431] backface-hidden text-[0.92rem] lg:text-[0.97rem] xl:text-[1
               <span className="block h-[2px] w-[19px] bg-black" />
             </div>
           </button>
+        </div>
         </div>
 
         {/* ── OVERLAY ── */}

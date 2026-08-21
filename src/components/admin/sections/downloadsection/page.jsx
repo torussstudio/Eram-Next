@@ -37,7 +37,7 @@ function CustomSelect({ value, onChange, options }) {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`flex w-full items-center justify-between rounded-lg border bg-white px-3 py-2.5 font-rethink text-sm text-[#2b2620] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ae1431]/10 ${
+        className={`cursor-pointer flex w-full items-center justify-between rounded-lg border bg-white px-3 py-2.5 font-rethink text-sm text-[#2b2620] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ae1431]/10 ${
           open ? "border-[#ae1431]" : "border-[#e3d6c3] hover:border-[#ae1431]/40"
         }`}
       >
@@ -60,7 +60,7 @@ function CustomSelect({ value, onChange, options }) {
                   onChange(opt.id);
                   setOpen(false);
                 }}
-                className={`flex w-full items-center px-3.5 py-2.5 text-left font-rethink text-sm transition-colors cursor-pointer ${
+                className={`cursor-pointer flex w-full items-center px-3.5 py-2.5 text-left font-rethink text-sm transition-colors cursor-pointer ${
                   active ? "text-white" : "text-[#2b2620] hover:bg-[#F5EFE8]"
                 }`}
                 style={active ? { backgroundColor: "#ae1431" } : undefined}
@@ -322,7 +322,7 @@ export default function AdminDownloadsPage() {
                       {isDragging ? "Drop it here" : "Click to upload or drag & drop"}
                     </span>
                     <p className="mt-0.5 font-rethink text-[11px] text-[#b5aa98]">
-                      PDF, DOC, XLS, or image — max recommended 10MB
+                      PDF, DOC, XLS, or image
                     </p>
                   </div>
                   <input
